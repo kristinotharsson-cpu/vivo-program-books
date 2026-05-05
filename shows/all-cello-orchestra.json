@@ -1,0 +1,153 @@
+{
+  "slug": "all-cello-orchestra",
+  "cover": {
+    "eyebrow": "Vivo Performing Arts presents",
+    "title": "All-Cello Orchestra: Pablo Casals 150th Birthday Tribute (Eugene Friesen, conductor)",
+    "subtitle": "Classical",
+    "date": "SUN NOV 08",
+    "time": "3PM",
+    "venue": "Roxbury Community College",
+    "accent": "green",
+    "brush": "harmony",
+    "photoCaption": "All-Cello Orchestra",
+    "calloutLabel": "A note from President and Executive Director",
+    "calloutName": "Gary Dunning",
+    "presentedBy": "",
+    "footerSponsor": null
+  },
+  "sections": [
+    {
+      "id": "welcome",
+      "title": "Welcome",
+      "kind": "welcome",
+      "eyebrow": "From the Artistic Director",
+      "quote": "Welcome to Vivo Performing Arts.",
+      "body": [
+        "Tonight, All-Cello Orchestra — Eugene Friesen conducts. Works by Casals, Villa-Lobos, and other favorites.",
+        "We are delighted to share this program with you. Thank you for being here."
+      ],
+      "signature": {
+        "name": "Gary Dunning",
+        "role": "President and Executive Director, Vivo Performing Arts"
+      }
+    },
+    {
+      "id": "performance-sponsor",
+      "title": "Performance Sponsor",
+      "kind": "performance-sponsor",
+      "eyebrow": "Tonight's Performance",
+      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
+      "blocks": [
+        {
+          "label": "Performance Supporter",
+          "name": "Performance Sponsor Name",
+          "statement": "This performance is generously supported by [Sponsor Name]."
+        }
+      ],
+      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
+      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+    },
+    {
+      "id": "program",
+      "title": "Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "Eugene Friesen conducts. Works by Casals, Villa-Lobos, and other favorites.",
+      "pieces": [
+        {
+          "composer": "Program details",
+          "work": "To be announced from the stage.",
+          "meta": ""
+        }
+      ]
+    },
+    {
+      "id": "artist",
+      "title": "Cast & Creative",
+      "kind": "cast",
+      "eyebrow": "On Stage Tonight",
+      "cast": [
+        {
+          "role": "ensemble",
+          "name": "All-Cello Orchestra"
+        },
+        {
+          "role": "conductor",
+          "name": "Eugene Friesen"
+        }
+      ],
+      "creative": []
+    },
+    {
+      "id": "bios",
+      "title": "Artist Bios",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "all-cello-orchestra",
+          "name": "All-Cello Orchestra",
+          "role": "ensemble",
+          "initials": "AO",
+          "photoSrc": "",
+          "body": [
+            "Eugene Friesen conducts. Works by Casals, Villa-Lobos, and other favorites."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "vivo",
+      "kind": "vivo",
+      "title": "About Vivo Performing Arts",
+      "eyebrow": "Audience Information · Staff · Supporters"
+    },
+    {
+      "id": "info",
+      "title": "Hall Info",
+      "kind": "info",
+      "eyebrow": "Visitor Info",
+      "sections": [
+        {
+          "h": "Venue",
+          "body": [
+            "Roxbury Community College."
+          ]
+        },
+        {
+          "h": "Land Acknowledgment",
+          "body": [
+            "Vivo Performing Arts gathers and performs on the unceded ancestral lands of the Massachusett, Pawtucket, and Wampanoag peoples."
+          ]
+        },
+        {
+          "h": "Accessibility",
+          "body": [
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+          ]
+        },
+        {
+          "h": "Contact",
+          "body": [
+            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+          ]
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "iso": "2026-11-08",
+    "genre": "Classical",
+    "venueName": "Roxbury Community College",
+    "leadArtist": "All-Cello Orchestra",
+    "socialLinks": [
+      {
+        "label": "Artist website",
+        "url": "https://paucasals.org/en"
+      }
+    ],
+    "ensembleCount": 2
+  }
+}

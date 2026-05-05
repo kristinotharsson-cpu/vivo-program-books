@@ -1,0 +1,151 @@
+{
+  "slug": "gravity-and-other-myths",
+  "cover": {
+    "eyebrow": "Vivo Performing Arts presents",
+    "title": "Gravity & Other Myths",
+    "subtitle": "Ten Thousand Hours",
+    "date": "Friday, Oct. 23, 2026",
+    "time": "8 p.m. / Saturday, Oct. 24, 2026",
+    "venue": "Boston Arts Academy Theater",
+    "accent": "purple",
+    "brush": "motion",
+    "photoCaption": "Gravity & Other Myths",
+    "calloutLabel": "A note from President and Executive Director",
+    "calloutName": "Gary Dunning",
+    "presentedBy": "",
+    "footerSponsor": null,
+    "artistWebsite": "https://www.gravityandothermyths.com",
+    "pressQuote": "Visually stunning and emotionally profound. PBS"
+  },
+  "sections": [
+    {
+      "id": "welcome",
+      "title": "Welcome",
+      "kind": "welcome",
+      "eyebrow": "From the Artistic Director",
+      "quote": "Contemporary circus company Gravity & Other Myths goes beyond jaw-dropping feats to weave a tale of impassioned dedication. Eight acrobats and one musician share a peek behind the curtain of one of Australia's most celebrated circuses.",
+      "body": [
+        "In Ten Thousand Hours, contemporary circus company Gravity & Other Myths goes beyond jaw-dropping feats to weave a tale of impassioned dedication. Calling the show an \"ode to the countless hours needed to achieve great things,\" eight acrobats and one musician share a peek behind the curtain: dazzling insight into the journey of dedication and persistence that has made Gravity & Other Myths one of Australia's best loved and most decorated contemporary circuses."
+      ],
+      "signature": {
+        "name": "Gary Dunning",
+        "role": "President and Executive Director, Vivo Performing Arts"
+      }
+    },
+    {
+      "id": "performance-sponsor",
+      "title": "Performance Sponsor",
+      "kind": "performance-sponsor",
+      "eyebrow": "Tonight's Performance",
+      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
+      "blocks": [
+        {
+          "label": "Performance Supporter",
+          "name": "Performance Sponsor Name",
+          "statement": "This performance is generously supported by [Sponsor Name]."
+        }
+      ],
+      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
+      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+    },
+    {
+      "id": "program",
+      "title": "Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "3 performances: OCT 23 8PM; OCT 24 2PM & 8PM. 8 acrobats + 1 musician. All ages (4+). 60 min.",
+      "pieces": [
+        {
+          "composer": "Program details",
+          "work": "To be announced from the stage.",
+          "meta": ""
+        }
+      ]
+    },
+    {
+      "id": "artist",
+      "title": "Cast & Creative",
+      "kind": "cast",
+      "eyebrow": "On Stage Tonight",
+      "cast": [
+        {
+          "role": "contemporary circus",
+          "name": "Gravity & Other Myths"
+        }
+      ],
+      "creative": []
+    },
+    {
+      "id": "bios",
+      "title": "Artist Bios",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "gravity-and-other-myths",
+          "name": "Gravity & Other Myths",
+          "role": "contemporary circus",
+          "initials": "G&O",
+          "photoSrc": "",
+          "body": [
+            "In Ten Thousand Hours, contemporary circus company Gravity & Other Myths goes beyond jaw-dropping feats to weave a tale of impassioned dedication. Calling the show an \"ode to the countless hours needed to achieve great things,\" eight acrobats and one musician share a peek behind the curtain: dazzling insight into the journey of dedication and persistence that has made Gravity & Other Myths one of Australia's best loved and most decorated contemporary circuses."
+          ],
+          "website": "https://www.gravityandothermyths.com"
+        }
+      ]
+    },
+    {
+      "id": "vivo",
+      "kind": "vivo",
+      "title": "About Vivo Performing Arts",
+      "eyebrow": "Audience Information · Staff · Supporters"
+    },
+    {
+      "id": "info",
+      "title": "Hall Info",
+      "kind": "info",
+      "eyebrow": "Visitor Info",
+      "sections": [
+        {
+          "h": "Venue",
+          "body": [
+            "Boston Arts Academy Theater."
+          ]
+        },
+        {
+          "h": "Land Acknowledgment",
+          "body": [
+            "Vivo Performing Arts gathers and performs on the unceded ancestral lands of the Massachusett, Pawtucket, and Wampanoag peoples."
+          ]
+        },
+        {
+          "h": "Accessibility",
+          "body": [
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+          ]
+        },
+        {
+          "h": "Contact",
+          "body": [
+            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+          ]
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "iso": "2026-10-23",
+    "genre": "Dance",
+    "venueName": "Boston Arts Academy Theater",
+    "leadArtist": "Gravity & Other Myths",
+    "socialLinks": [
+      {
+        "label": "Artist website",
+        "url": "https://gravityandothermyths.com"
+      }
+    ],
+    "ensembleCount": 1
+  }
+}

@@ -1,0 +1,160 @@
+{
+  "slug": "charles-yang",
+  "cover": {
+    "eyebrow": "Vivo Performing Arts presents",
+    "title": "/Billing:",
+    "date": "Friday, Feb. 19, 2027",
+    "time": "8 p.m.",
+    "venue": "Crystal Ballroom",
+    "accent": "green",
+    "brush": "harmony",
+    "photoCaption": "Charles Yang",
+    "calloutLabel": "A note from President and Executive Director",
+    "calloutName": "Gary Dunning",
+    "presentedBy": "",
+    "footerSponsor": null,
+    "genre": "Stave Title/Billing: Charles Yang",
+    "artistWebsite": "https://www.charlesyangmusic.com/",
+    "pressQuote": "Mr. Yang is a true crossover artist, a pioneer who can hop between classical and popular music and bring fresh ideas to fans of both genres. Rather than maintaining an insular focus and simply assuming that an audience for classical music will always exist, he wants to actively create that audience, to persuade and seduce others into enjoying a type of music as passionately as he does. Texas Observer",
+    "pressQuoteURL": "https://www.youtube.com/watch?v=xjAk67c3KPY"
+  },
+  "sections": [
+    {
+      "id": "welcome",
+      "title": "Welcome",
+      "kind": "welcome",
+      "eyebrow": "From the Artistic Director",
+      "quote": "Welcome to Vivo Performing Arts.",
+      "body": [
+        "Grammy Award-winning violinist and vocalist Charles Yang—best known as a member of the genre-defying trio Time for Three—returns to Boston in support of his forthcoming album. Described by The Boston Globe as playing “classical violin with the charisma of a rockstar,” Yang fuses countless musical influences—from Rachmaninoff and Brahms to The Beatles and B.B. King—into one multifaceted musical experience. Full of virtuosity and heart, Yang shares the songs that shaped his journey and musical vision in a moving, deeply original show that celebrates creativity and the limitless possibilities of music."
+      ],
+      "signature": {
+        "name": "Gary Dunning",
+        "role": "President and Executive Director, Vivo Performing Arts"
+      }
+    },
+    {
+      "id": "performance-sponsor",
+      "title": "Performance Sponsor",
+      "kind": "performance-sponsor",
+      "eyebrow": "Tonight's Performance",
+      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
+      "blocks": [
+        {
+          "label": "Performance Supporter",
+          "name": "Performance Sponsor Name",
+          "statement": "This performance is generously supported by [Sponsor Name]."
+        }
+      ],
+      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
+      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+    },
+    {
+      "id": "program",
+      "title": "Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "Solo show in support of forthcoming album. Rachmaninoff to Brahms to Beatles to B.B. King.",
+      "pieces": [
+        {
+          "composer": "Program details",
+          "work": "To be announced from the stage.",
+          "meta": ""
+        }
+      ]
+    },
+    {
+      "id": "artist",
+      "title": "Cast & Creative",
+      "kind": "cast",
+      "eyebrow": "On Stage Tonight",
+      "cast": [
+        {
+          "role": "violin / vocals",
+          "name": "Charles Yang"
+        }
+      ],
+      "creative": []
+    },
+    {
+      "id": "bios",
+      "title": "Artist Bios",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "charles-yang",
+          "name": "Charles Yang",
+          "role": "violin / vocals",
+          "initials": "CY",
+          "photoSrc": "",
+          "body": [
+            "Grammy Award-winning violinist and vocalist Charles Yang—best known as a member of the genre-defying trio Time for Three—returns to Boston in support of his forthcoming album. Described by The Boston Globe as playing “classical violin with the charisma of a rockstar,” Yang fuses countless musical influences—from Rachmaninoff and Brahms to The Beatles and B.B. King—into one multifaceted musical experience. Full of virtuosity and heart, Yang shares the songs that shaped his journey and musical vision in a moving, deeply original show that celebrates creativity and the limitless possibilities of music."
+          ],
+          "website": "https://www.charlesyangmusic.com/"
+        }
+      ]
+    },
+    {
+      "id": "vivo",
+      "kind": "vivo",
+      "title": "About Vivo Performing Arts",
+      "eyebrow": "Audience Information · Staff · Supporters"
+    },
+    {
+      "id": "info",
+      "title": "Hall Info",
+      "kind": "info",
+      "eyebrow": "Visitor Info",
+      "sections": [
+        {
+          "h": "Venue",
+          "body": [
+            "Crystal Ballroom at Somerville Theatre."
+          ]
+        },
+        {
+          "h": "Land Acknowledgment",
+          "body": [
+            "Vivo Performing Arts gathers and performs on the unceded ancestral lands of the Massachusett, Pawtucket, and Wampanoag peoples."
+          ]
+        },
+        {
+          "h": "Accessibility",
+          "body": [
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+          ]
+        },
+        {
+          "h": "Contact",
+          "body": [
+            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+          ]
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "iso": "2027-02-19",
+    "genre": "Classical",
+    "venueName": "Crystal Ballroom at Somerville Theatre",
+    "leadArtist": "Charles Yang",
+    "socialLinks": [
+      {
+        "label": "Artist website",
+        "url": "https://charlesyangmusic.com"
+      },
+      {
+        "label": "Instagram @chazzviolin",
+        "url": "https://instagram.com/chazzviolin"
+      },
+      {
+        "label": "Facebook/charlesyangmusic",
+        "url": "https://facebook.com/charlesyangmusic"
+      }
+    ],
+    "ensembleCount": 1
+  }
+}
