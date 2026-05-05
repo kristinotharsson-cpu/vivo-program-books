@@ -1,0 +1,174 @@
+{
+  "slug": "lukas-sternath-piano",
+  "cover": {
+    "eyebrow": "Vivo Performing Arts presents",
+    "title": "Lukas Sternath, piano",
+    "subtitle": "Debut Series",
+    "date": "Thursday, Jan. 28, 2027",
+    "time": "7:30 p.m.",
+    "venue": "Longy's Pickman Hall",
+    "accent": "green",
+    "brush": "harmony",
+    "photoCaption": "Lukas Sternath",
+    "calloutLabel": "A note from President and Executive Director",
+    "calloutName": "Gary Dunning",
+    "presentedBy": "",
+    "footerSponsor": null,
+    "artistWebsite": "https://lukassternath.com",
+    "pressQuote": "[Sternath] nevertheless has his teacher’s [Igor Levit’s] uncanny gift of communicating through the piano as if it were a tuneful cello. His thoughts, mature and considered, couldn’t have been more vividly expressed. The New York Times"
+  },
+  "sections": [
+    {
+      "id": "welcome",
+      "title": "Welcome",
+      "kind": "welcome",
+      "eyebrow": "From the Artistic Director",
+      "quote": "Austrian pianist Lukas Sternath makes his Boston debut with a program built around Liszt's intimate transcriptions of Schubert Lieder—his playing praised for its vocal, singing qualities that summon deep reserves of emotion without sentimentality.",
+      "body": [
+        "\"A young man comes on stage and plays the stars from the sky for you,\" wrote a reviewer in Frankfurt, Germany, about Austrian pianist Lukas Sternath. It's a lovely, arresting image that speaks to Sternath's reputation as a soloist with a chamber-music sensibility: he's committed to making the cosmic personal, to you. In his Boston debut program, built around Liszt's intimate transcriptions of Schubert Lieder, his playing—praised for its vocal, singing qualities—summons deep reserves of emotion without sentimentality, each feeling earned."
+      ],
+      "signature": {
+        "name": "Gary Dunning",
+        "role": "President and Executive Director, Vivo Performing Arts"
+      }
+    },
+    {
+      "id": "performance-sponsor",
+      "title": "Performance Sponsor",
+      "kind": "performance-sponsor",
+      "eyebrow": "Tonight's Performance",
+      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
+      "blocks": [
+        {
+          "label": "Performance Supporter",
+          "name": "Performance Sponsor Name",
+          "statement": "This performance is generously supported by [Sponsor Name]."
+        }
+      ],
+      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
+      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+    },
+    {
+      "id": "program",
+      "title": "Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "Austrian pianist, Boston debut. Liszt transcriptions of Schubert Lieder + Schubert Wanderer Fantasy D. 760 + Liszt Années de pèlerinage, Italie.",
+      "pieces": [
+        {
+          "composer": "FRANZ LISZT",
+          "work": "\"Der Wanderer\" from 12 Lieder von Franz Schubert"
+        },
+        {
+          "composer": "LISZT",
+          "work": "\"Frühlingsglaube\" from 12 Lieder von Franz Schubert"
+        },
+        {
+          "composer": "LISZT",
+          "work": "\"Auf dem Wasser zu singen\" from 12 Lieder von Franz Schubert"
+        },
+        {
+          "composer": "LISZT",
+          "work": "\"Litaney\" from Franz Schuberts geistliche Lieder"
+        },
+        {
+          "composer": "LISZT",
+          "work": "\"Der Müller und der Bach\" from Müllerlieder von Franz Schubert"
+        },
+        {
+          "composer": "FRANZ SCHUBERT",
+          "work": "Fantasy in C Major, D. 760, \"Wanderer Fantasy\""
+        },
+        {
+          "composer": "LISZT",
+          "work": "Années de pèlerinage, deuxième année: Italie"
+        }
+      ]
+    },
+    {
+      "id": "artist",
+      "title": "Cast & Creative",
+      "kind": "cast",
+      "eyebrow": "On Stage Tonight",
+      "cast": [
+        {
+          "role": "piano",
+          "name": "Lukas Sternath"
+        }
+      ],
+      "creative": []
+    },
+    {
+      "id": "bios",
+      "title": "Artist Bios",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "lukas-sternath",
+          "name": "Lukas Sternath",
+          "role": "piano",
+          "initials": "LS",
+          "photoSrc": "",
+          "body": [
+            "\"A young man comes on stage and plays the stars from the sky for you,\" wrote a reviewer in Frankfurt, Germany, about Austrian pianist Lukas Sternath. It's a lovely, arresting image that speaks to Sternath's reputation as a soloist with a chamber-music sensibility: he's committed to making the cosmic personal, to you. In his Boston debut program, built around Liszt's intimate transcriptions of Schubert Lieder, his playing—praised for its vocal, singing qualities—summons deep reserves of emotion without sentimentality, each feeling earned."
+          ],
+          "website": "https://lukassternath.com"
+        }
+      ]
+    },
+    {
+      "id": "vivo",
+      "kind": "vivo",
+      "title": "About Vivo Performing Arts",
+      "eyebrow": "Audience Information · Staff · Supporters"
+    },
+    {
+      "id": "info",
+      "title": "Hall Info",
+      "kind": "info",
+      "eyebrow": "Visitor Info",
+      "sections": [
+        {
+          "h": "Venue",
+          "body": [
+            "Longy's Pickman Hall."
+          ]
+        },
+        {
+          "h": "Land Acknowledgment",
+          "body": [
+            "Vivo Performing Arts gathers and performs on the unceded ancestral lands of the Massachusett, Pawtucket, and Wampanoag peoples."
+          ]
+        },
+        {
+          "h": "Accessibility",
+          "body": [
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+          ]
+        },
+        {
+          "h": "Contact",
+          "body": [
+            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+          ]
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "iso": "2027-01-28",
+    "genre": "Pianist",
+    "venueName": "Longy's Pickman Hall",
+    "leadArtist": "Lukas Sternath",
+    "socialLinks": [
+      {
+        "label": "Artist website",
+        "url": "https://lukassternath.com"
+      }
+    ],
+    "ensembleCount": 1
+  }
+}

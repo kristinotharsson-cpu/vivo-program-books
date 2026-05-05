@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Vivo Program Book — Mobile Preview</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    html, body { margin: 0; padding: 0; height: 100%; background: #f4f1ec; }
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 12px 64px;
+      box-sizing: border-box;
+      font-family: -apple-system, "SF Pro", system-ui, sans-serif;
+      color: #2a2a2a;
+      min-height: 100%;
+    }
+    .preview-header {
+      width: 100%; max-width: 760px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; padding: 0 6px;
+    }
+    .preview-header h1 {
+      margin: 0; font-size: 16px; font-weight: 700;
+      letter-spacing: 0.04em; text-transform: uppercase;
+    }
+    .preview-header .sub {
+      font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.55;
+    }
+    .preview-actions a {
+      font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
+      text-decoration: none; color: #2a2a2a;
+      border: 1px solid currentColor; padding: 6px 10px;
+    }
+    .preview-actions a:hover { background: #2a2a2a; color: #f4f1ec; }
+    /* Tweak controls */
+    .ctrls {
+      width: 100%; max-width: 760px;
+      display: flex; flex-wrap: wrap; gap: 8px;
+      padding: 0 6px;
+    }
+    .ctrls details {
+      border: 1px solid #2a2a2a;
+      background: #fff;
+    }
+    .ctrls summary {
+      list-style: none;
+      padding: 8px 12px;
+      font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
+      cursor: pointer; user-select: none;
+      display: inline-flex; align-items: center; gap: 8px;
+      font-weight: 700;
+    }
+    .ctrls summary::-webkit-details-marker { display: none; }
+    .ctrls summary::after {
+      content: "▾"; font-size: 10px; opacity: 0.5;
+    }
+    .ctrls details[open] summary::after { transform: rotate(180deg); }
+    .ctrls .panel {
+      border-top: 1px solid #ddd;
+      padding: 10px 12px;
+      display: flex; flex-direction: column; gap: 6px;
+      max-height: 320px; overflow: auto;
+      min-width: 220px;
+    }
+    .ctrls .panel button {
+      appearance: none; border: 0; background: transparent;
+      font: inherit; text-align: left; padding: 6px 8px;
+      cursor: pointer; font-size: 13px;
+    }
+    .ctrls .panel button:hover { background: #f4f1ec; }
+    .ctrls .panel button[aria-pressed="true"] {
+      background: #2a2a2a; color: #f4f1ec; font-weight: 700;
+    }
+    .ctrls .toggle {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 12px; border: 1px solid #2a2a2a; background: #fff;
+      cursor: pointer; font-size: 12px; letter-spacing: 0.06em;
+      text-transform: uppercase; font-weight: 700;
+    }
+    .ctrls .toggle[aria-pressed="true"] { background: #2a2a2a; color: #f4f1ec; }
+    .frame-wrap { display: flex; align-items: flex-start; justify-content: center; flex: 0 0 auto; }
+    iframe.book {
+      border: 0; width: 100%; height: 100%; display: block; background: #f4f1ec;
+    }
+  </style>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script type="text/babel" src="ios-frame.jsx"></script>
+</head>
+<body>
+  <div class="preview-header">
+    <div>
+      <h1>Vivo · Program Book</h1>
+      <div class="sub">Mobile preview · scrolls inside the phone</div>
+    </div>
+    <div class="preview-actions">
+      <a href="Program Book.html" id="open-full">Open full size →</a>
+    </div>
+  </div>
+
+  <div id="ctrls-mount" class="ctrls"></div>
+  <div id="device-mount" class="frame-wrap"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+
+    const DEVICES = [
+      { id: "iphone-15-pro",   label: "iPhone 15 Pro",   w: 393, h: 852 },
+      { id: "iphone-15-plus",  label: "iPhone 15 Plus",  w: 430, h: 932 },
+      { id: "iphone-se",       label: "iPhone SE",       w: 375, h: 667 },
+      { id: "pixel-8",         label: "Pixel 8",         w: 412, h: 915 },
+      { id: "galaxy-s24",      label: "Galaxy S24",      w: 384, h: 854 },
+    ];
+
+    function Preview() {
+      const [device, setDevice] = useState(DEVICES[0]);
+      const [dark, setDark] = useState(false);
+      const [shows, setShows] = useState([]);
+      const [slug, setSlug] = useState("");
+      const iframeRef = useRef(null);
+
+      useEffect(() => {
+        fetch("shows/manifest.json")
+          .then(r => r.ok ? r.json() : [])
+          .then(list => setShows(Array.isArray(list) ? list : []))
+          .catch(() => setShows([]));
+      }, []);
+
+      const src = "Program Book.html" + (slug ? "?show=" + encodeURIComponent(slug) : "");
+
+      // Render device + controls into separate mounts
+      return (
+        <>
+          <Controls
+            device={device} setDevice={setDevice}
+            dark={dark} setDark={setDark}
+            shows={shows} slug={slug} setSlug={setSlug}
+          />
+          <Device device={device} dark={dark} src={src} iframeRef={iframeRef} />
+        </>
+      );
+    }
+
+    function Controls({ device, setDevice, dark, setDark, shows, slug, setSlug }) {
+      // Update "Open full size" link to track current slug
+      useEffect(() => {
+        const a = document.getElementById("open-full");
+        if (a) a.href = "Program Book.html" + (slug ? "?show=" + encodeURIComponent(slug) : "");
+      }, [slug]);
+      return (
+        <>
+          <details>
+            <summary>Show: {slug ? (shows.find(s => s.slug === slug)?.title || slug) : "Sample (Víkingur)"}</summary>
+            <div className="panel">
+              <button aria-pressed={!slug} onClick={() => setSlug("")}>Sample (Víkingur)</button>
+              {shows.map(s => (
+                <button key={s.slug} aria-pressed={slug === s.slug} onClick={() => setSlug(s.slug)}>
+                  {s.title}
+                </button>
+              ))}
+            </div>
+          </details>
+          <details>
+            <summary>Device: {device.label}</summary>
+            <div className="panel">
+              {DEVICES.map(d => (
+                <button key={d.id} aria-pressed={device.id === d.id} onClick={() => setDevice(d)}>
+                  {d.label} <span style={{opacity:0.5, fontSize:11, marginLeft:6}}>{d.w}×{d.h}</span>
+                </button>
+              ))}
+            </div>
+          </details>
+          <button className="toggle" aria-pressed={dark} onClick={() => setDark(v => !v)}>
+            {dark ? "🌙 Dark" : "☀ Light"}
+          </button>
+        </>
+      );
+    }
+
+    function Device({ device, dark, src, iframeRef }) {
+      return (
+        <window.IOSDevice width={device.w} height={device.h} dark={dark}>
+          <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
+            <div style={{ height: 50, flex: "0 0 auto" }} />
+            <iframe
+              ref={iframeRef}
+              className="book"
+              src={src}
+              title="Vivo Program Book"
+              allow="clipboard-write; web-share"
+              style={{ flex: 1 }}
+            />
+          </div>
+        </window.IOSDevice>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("ctrls-mount")).render(null);
+    // Render the whole app in the device mount; controls portal up via fragment using a small bridge
+    function App() {
+      return <Preview />;
+    }
+    // Render to a single root so state is shared across controls + device.
+    // We split visually via portals.
+    function Root() {
+      const [device, setDevice] = useState(DEVICES[0]);
+      const [dark, setDark] = useState(false);
+      const [shows, setShows] = useState([]);
+      const [slug, setSlug] = useState("");
+
+      useEffect(() => {
+        fetch("shows/manifest.json")
+          .then(r => r.ok ? r.json() : [])
+          .then(list => setShows(Array.isArray(list) ? list : []))
+          .catch(() => setShows([]));
+      }, []);
+
+      const src = "Program Book.html" + (slug ? "?show=" + encodeURIComponent(slug) : "");
+      const ctrlsHost = document.getElementById("ctrls-mount");
+
+      return (
+        <>
+          {ReactDOM.createPortal(
+            <Controls
+              device={device} setDevice={setDevice}
+              dark={dark} setDark={setDark}
+              shows={shows} slug={slug} setSlug={setSlug}
+            />,
+            ctrlsHost
+          )}
+          <Device device={device} dark={dark} src={src} iframeRef={null} />
+        </>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("device-mount")).render(<Root />);
+  </script>
+</body>
+</html>

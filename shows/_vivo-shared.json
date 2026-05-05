@@ -1,0 +1,680 @@
+{
+  "_note": "Vivo institutional content — referenced by every program book. Edit here once; updates everywhere.",
+  "audienceInfo": [
+    {
+      "id": "accessibility",
+      "title": "Accessibility",
+      "body": [
+        "Vivo Performing Arts is committed to making every performance welcoming to all patrons. Assistive listening devices are available at every venue. ASL interpretation, audio description, and large-print or braille program books are available on request — please email access@vivoperformingarts.org at least one week in advance.",
+        "Wheelchair-accessible seating is available at every venue. Companion seating may be requested at the time of booking. Service animals are welcome. For questions about a specific venue's accessibility features, contact (617) 482-2595."
+      ]
+    },
+    {
+      "id": "code-of-conduct",
+      "title": "Patron Code of Conduct",
+      "body": [
+        "Please arrive on time. Late seating is at the discretion of house management and may be held until a suitable break in the program.",
+        "Silence all electronic devices before the performance begins. The use of cell phones, smart watches, or other devices that emit light or sound is disruptive to artists and fellow audience members.",
+        "Vivo Performing Arts is committed to providing a respectful environment for all patrons, artists, and staff. Disruptive or harmful behavior may result in removal from the venue."
+      ]
+    },
+    {
+      "id": "no-photos",
+      "title": "No Photos or Recording During Performance",
+      "body": [
+        "Photography, audio recording, and video recording of any kind are prohibited during the performance. This includes phone cameras and screen captures.",
+        "You are welcome to take photos in the lobby, at intermission, and after the curtain call — please tag @vivoperformingarts when you share."
+      ]
+    }
+  ],
+  "staff": {
+    "departments": [
+      {
+        "name": "Administration",
+        "members": [
+          {
+            "name": "Gary Dunning",
+            "title": "President and Executive Director"
+          }
+        ]
+      },
+      {
+        "name": "Advancement",
+        "members": [
+          {
+            "name": "Emily Borababy",
+            "title": "Chief Advancement Officer",
+            "email": "eborababy@vivoperformingarts.org"
+          },
+          {
+            "name": "Sara Brookner",
+            "title": "Senior Associate Director of Institutional Giving and Impact",
+            "email": "sbrookner@vivoperformingarts.org"
+          },
+          {
+            "name": "Sarah Spinella",
+            "title": "Associate Director of Leadership Giving",
+            "email": "sspinella@vivoperformingarts.org"
+          },
+          {
+            "name": "Sean Meyers",
+            "title": "Associate Director of Annual Giving and Operations",
+            "email": "smeyers@vivoperformingarts.org"
+          },
+          {
+            "name": "Anya Hess",
+            "title": "Senior Manager of Events and Donor Relations",
+            "email": "ahess@vivoperformingarts.org"
+          },
+          {
+            "name": "Miranda McLean",
+            "title": "Manager of Advancement Operations",
+            "email": "mmclean@vivoperformingarts.org"
+          },
+          {
+            "name": "Mia Straccia",
+            "title": "Assistant Manager of Annual Giving and Membership",
+            "email": "mstraccia@vivoperformingarts.org"
+          },
+          {
+            "name": "Zoé Ducroux",
+            "title": "Advancement Coordinator",
+            "email": "zducroux@vivoperformingarts.org"
+          }
+        ]
+      },
+      {
+        "name": "Finance and Administration",
+        "members": [
+          {
+            "name": "Heather Clark",
+            "title": "Chief Financial Officer"
+          },
+          {
+            "name": "Colleen Murray",
+            "title": "Associate Director, Finance and Administration"
+          },
+          {
+            "name": "Hailey Stebner",
+            "title": "Executive Support Manager"
+          },
+          {
+            "name": "Tibria J. Brown",
+            "title": "Business Manager"
+          }
+        ]
+      },
+      {
+        "name": "Marketing and Audience Services",
+        "members": [
+          {
+            "name": "Courtney A. Burke",
+            "title": "Chief Marketing Officer"
+          },
+          {
+            "name": "Ellen Rogoz",
+            "title": "Associate Director of Marketing"
+          },
+          {
+            "name": "Vawnya Nichols",
+            "title": "Associate Director, Ticketing and Audience Services"
+          },
+          {
+            "name": "Gillian Morrison",
+            "title": "Associate Director, Communications and Digital"
+          },
+          {
+            "name": "Robert Torres",
+            "title": "Senior Graphic Designer and Photographer"
+          },
+          {
+            "name": "Kristín Otharsson",
+            "title": "Senior Manager, Multimedia and Design"
+          },
+          {
+            "name": "Angela Flores",
+            "title": "Manager of Digital Communications"
+          },
+          {
+            "name": "Nicole Putnam",
+            "title": "Audience Services Manager"
+          },
+          {
+            "name": "Lilli Samman",
+            "title": "Group Sales and Marketing Event Manager"
+          },
+          {
+            "name": "Patrick Smith",
+            "title": "Marketing Analytics and CRM Manager"
+          },
+          {
+            "name": "Emily Vath",
+            "title": "Assistant Manager of Audience Services"
+          },
+          {
+            "name": "Susanna Bonta",
+            "title": "Program Book Associate"
+          },
+          {
+            "name": "Lisa Feingold",
+            "title": "Senior Audience Services Representative"
+          },
+          {
+            "name": "Constance Cifelli",
+            "title": "Audience Services Representative"
+          },
+          {
+            "name": "Dillon Rodgers",
+            "title": "Audience Services Representative"
+          }
+        ]
+      },
+      {
+        "name": "Performance Operations and Community Engagement",
+        "members": [
+          {
+            "name": "Karen Brown",
+            "title": "Chief Operating Officer"
+          },
+          {
+            "name": "Liz Rosenthal",
+            "title": "Senior Associate Director of Performance Operations"
+          },
+          {
+            "name": "Robin Baker",
+            "title": "Associate Director of Community Engagement"
+          },
+          {
+            "name": "Elizabeth Kracunas",
+            "title": "Senior Manager of Performance Operations"
+          },
+          {
+            "name": "Walter Yee",
+            "title": "Manager of Performance Operations"
+          },
+          {
+            "name": "Aneesh Kumar",
+            "title": "Manager of Community Concerts"
+          },
+          {
+            "name": "Carmen Hernandez",
+            "title": "Community Partnerships Liaison"
+          },
+          {
+            "name": "Hope Aubrey",
+            "title": "Programming Administrator"
+          },
+          {
+            "name": "Evan DelGaudio",
+            "title": "Dance Production Manager"
+          }
+        ]
+      },
+      {
+        "name": "Ushers",
+        "inline": "Estrella Alves, Zoe Chau, Jubilee Chen, Robert Faulkner, Molly Hitt, Ana Ospina, Kahdeem Ralph, Declan Rockett, Nicoleta Savvidou, Anne Sergi, Sarah Stephenson, Jeff Wang"
+      },
+      {
+        "name": "Professional Services",
+        "members": [
+          {
+            "name": "Stephanie Janes PR",
+            "title": "Media Relations"
+          },
+          {
+            "name": "John Michael Kennedy — JMKPR",
+            "title": "Media Relations for Dance Performances"
+          },
+          {
+            "name": "AAFCPAs",
+            "title": "Audit Firm"
+          },
+          {
+            "name": "BernsteinShur",
+            "title": "Law Firm"
+          },
+          {
+            "name": "JPMorganChase",
+            "title": "Banking"
+          },
+          {
+            "name": "Boston Common Asset Management",
+            "title": "Wealth Management Advisors"
+          }
+        ]
+      }
+    ],
+    "credits": [
+      "Vivo Performing Arts name and brand developed by Colossus Creative Co.",
+      "Website development and Vivo Performing Arts update by Fastspot."
+    ]
+  },
+  "boards": {
+    "_note": "Placeholder — replace with the official Board of Directors and Advisors roster.",
+    "directors": [
+      {
+        "name": "Board Chair Name",
+        "title": "Chair"
+      },
+      {
+        "name": "Vice Chair Name",
+        "title": "Vice Chair"
+      },
+      {
+        "name": "Treasurer Name",
+        "title": "Treasurer"
+      },
+      {
+        "name": "Secretary Name",
+        "title": "Secretary"
+      },
+      {
+        "name": "Director Name",
+        "title": "Director"
+      },
+      {
+        "name": "Director Name",
+        "title": "Director"
+      }
+    ],
+    "advisors": [
+      {
+        "name": "Advisor Name",
+        "title": "Advisory Board"
+      },
+      {
+        "name": "Advisor Name",
+        "title": "Advisory Board"
+      }
+    ]
+  },
+  "supporters": {
+    "categories": [
+      {
+        "id": "corporate-foundation-government",
+        "title": "Corporate, Foundation, and Government Partners",
+        "accent": "tangerine",
+        "brush": "tempo",
+        "intro": "Vivo Performing Arts thanks the corporations, foundations, and government agencies whose institutional support makes every season possible.",
+        "tiers": [
+          {
+            "label": "Principal Institutional Producers",
+            "donors": [
+              "Anonymous",
+              "Barr Foundation",
+              "Crescendo Donor Advised Fund",
+              "Google",
+              "Liberty Mutual Foundation",
+              "Richard K. Lubin Family Foundation",
+              "Mass Cultural Council",
+              "Susanne Marcus Collins Foundation"
+            ]
+          },
+          {
+            "label": "Producing Partners",
+            "donors": [
+              "Bank of America",
+              "Boston Cultural Council",
+              "The Klarman Family Foundation",
+              "Linde Family Foundation",
+              "MFS Investment Management",
+              "National Endowment for the Arts"
+            ]
+          },
+          {
+            "label": "Major Sponsors",
+            "donors": [
+              "Eastern Bank Foundation",
+              "Fish & Richardson",
+              "Goulston & Storrs",
+              "Hancock Lumber",
+              "JPMorganChase",
+              "Nutter, McClennen & Fish",
+              "Putnam Investments",
+              "WGBH"
+            ]
+          },
+          {
+            "label": "Supporters",
+            "donors": [
+              "Boston Common Asset Management",
+              "Boston Magazine",
+              "Cabot Family Charitable Trust",
+              "Edwards Wildman Palmer",
+              "Highland Street Foundation",
+              "Massachusetts Cultural Council",
+              "Mintz",
+              "Ropes & Gray",
+              "WBUR"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "dress-circle",
+        "title": "Dress Circle Members",
+        "accent": "magenta",
+        "brush": "rhythm",
+        "intro": "Dress Circle members are individual contributors whose annual gifts of $2,500 or more sustain Vivo Performing Arts.",
+        "tiers": [
+          {
+            "label": "Producer's Circle ($25,000+)",
+            "donors": [
+              "Anonymous",
+              "Susan & Michael Thonis",
+              "Linda & Stephen Zaref",
+              "Anonymous"
+            ]
+          },
+          {
+            "label": "Director's Circle ($10,000–$24,999)",
+            "donors": [
+              "Christine & Andrew Berkeley",
+              "Margaret M. Cunningham",
+              "Henry & Frances Donaldson",
+              "Estate of Helen J. Forman",
+              "Anonymous",
+              "Lisa & Mark Goldman",
+              "James & Susan Levitan",
+              "Mary Ellen & Sandy McKenzie",
+              "Anne & Joseph O'Connell",
+              "Cynthia Strauss & Jonathan Klein"
+            ]
+          },
+          {
+            "label": "Patron's Circle ($5,000–$9,999)",
+            "donors": [
+              "Anonymous (3)",
+              "Roberta & Stephen R. Weiner",
+              "The Bernstein Family",
+              "Diane M. Capstaff",
+              "Joan & Edward Cohen",
+              "Linda Cabot Black",
+              "Carolyn & Peter Lynch",
+              "Joyce & Jack Rosenthal",
+              "Edith & Roy Steele",
+              "Constance V. R. White",
+              "Eleanor & Frank Williams"
+            ]
+          },
+          {
+            "label": "Sustainer's Circle ($2,500–$4,999)",
+            "donors": [
+              "Anonymous (5)",
+              "Joan & David Ablon",
+              "Margaret & James Boyd",
+              "Mary Ann & Robert Eisenstein",
+              "Suzanne & Easton Jordan",
+              "Susan B. Kaplan",
+              "Stephen & Ellen Lewis",
+              "Doris S. Manley",
+              "Patricia & James McNulty",
+              "Marie & Charles Robinson",
+              "Helen & Stephen Spinetto",
+              "Beverly L. Tucker"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "endowment",
+        "title": "Endowment Fund Supporters",
+        "accent": "violet",
+        "brush": "harmony",
+        "intro": "The Vivo Performing Arts Endowment Fund secures the long-term future of our mission. We extend our deepest gratitude to those whose endowment gifts ensure live performance for generations to come.",
+        "tiers": [
+          {
+            "label": "Founders' Society ($100,000+)",
+            "donors": [
+              "Anonymous",
+              "The Boger Family",
+              "Crescendo Donor Advised Fund",
+              "Susan & Michael Thonis",
+              "Anonymous"
+            ]
+          },
+          {
+            "label": "Endowment Patrons ($25,000–$99,999)",
+            "donors": [
+              "Anonymous (2)",
+              "The Bernstein Family Charitable Foundation",
+              "Margaret M. Cunningham",
+              "Estate of Helen J. Forman",
+              "Lisa & Mark Goldman",
+              "James & Susan Levitan",
+              "Cynthia Strauss & Jonathan Klein",
+              "Linda & Stephen Zaref"
+            ]
+          },
+          {
+            "label": "Endowment Sponsors ($10,000–$24,999)",
+            "donors": [
+              "Christine & Andrew Berkeley",
+              "Henry & Frances Donaldson",
+              "Mary Ellen & Sandy McKenzie",
+              "Anne & Joseph O'Connell",
+              "Roberta & Stephen R. Weiner",
+              "Estate of Eleanor Williams"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "boger-innovation",
+        "title": "Amy & Joshua Boger Innovation Fund Supporters",
+        "accent": "magenta",
+        "brush": "dynamics",
+        "intro": "The Amy & Joshua Boger Innovation Fund seeds adventurous programming, new commissions, and the artistic risk-taking that defines Vivo Performing Arts.",
+        "tiers": [
+          {
+            "label": "Innovation Champions",
+            "donors": [
+              "Amy & Joshua Boger",
+              "Anonymous",
+              "The Bernstein Family Charitable Foundation",
+              "Linda Cabot Black"
+            ]
+          },
+          {
+            "label": "Innovation Partners",
+            "donors": [
+              "Margaret & James Boyd",
+              "Diane M. Capstaff",
+              "Joan & Edward Cohen",
+              "Henry & Frances Donaldson",
+              "Lisa & Mark Goldman",
+              "Carolyn & Peter Lynch",
+              "Anne & Joseph O'Connell",
+              "Susan & Michael Thonis"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "shine-gala",
+        "title": "2026 SHINE! Gala Supporters",
+        "accent": "magenta",
+        "brush": "rhythm",
+        "intro": "Thank you to the underwriters, sponsors, and donors whose generosity made the 2026 SHINE! Gala a celebration of artistry and community.",
+        "tiers": [
+          {
+            "label": "Gala Underwriters",
+            "donors": [
+              "Crescendo Donor Advised Fund",
+              "Susan & Michael Thonis",
+              "The Boger Family",
+              "Linda & Stephen Zaref"
+            ]
+          },
+          {
+            "label": "Lead Sponsors",
+            "donors": [
+              "Bank of America",
+              "Goulston & Storrs",
+              "Liberty Mutual Foundation",
+              "MFS Investment Management",
+              "Nutter, McClennen & Fish"
+            ]
+          },
+          {
+            "label": "Gala Patrons",
+            "donors": [
+              "Anonymous (4)",
+              "The Bernstein Family",
+              "Diane M. Capstaff",
+              "Margaret M. Cunningham",
+              "Henry & Frances Donaldson",
+              "Lisa & Mark Goldman",
+              "Mary Ellen & Sandy McKenzie",
+              "Anne & Joseph O'Connell",
+              "Cynthia Strauss & Jonathan Klein",
+              "Roberta & Stephen R. Weiner"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "con-vivo",
+        "title": "Con Vivo Supporters",
+        "accent": "tangerine",
+        "brush": "tempo",
+        "intro": "Con Vivo recognizes patrons whose annual gifts of $1,000 or more provide vital support across the season.",
+        "tiers": [
+          {
+            "label": "Con Vivo Members",
+            "donors": [
+              "Anonymous (8)",
+              "Joan & David Ablon",
+              "Mary & James Akins",
+              "Patricia Bauman",
+              "Christine & Andrew Berkeley",
+              "Linda Cabot Black",
+              "Margaret & James Boyd",
+              "Diane M. Capstaff",
+              "Joan & Edward Cohen",
+              "Margaret M. Cunningham",
+              "Henry & Frances Donaldson",
+              "Mary Ann & Robert Eisenstein",
+              "Lisa & Mark Goldman",
+              "Suzanne & Easton Jordan",
+              "Susan B. Kaplan",
+              "James & Susan Levitan",
+              "Stephen & Ellen Lewis",
+              "Carolyn & Peter Lynch",
+              "Doris S. Manley",
+              "Mary Ellen & Sandy McKenzie",
+              "Patricia & James McNulty",
+              "Anne & Joseph O'Connell",
+              "Marie & Charles Robinson",
+              "Joyce & Jack Rosenthal",
+              "Helen & Stephen Spinetto",
+              "Edith & Roy Steele",
+              "Cynthia Strauss & Jonathan Klein",
+              "Susan & Michael Thonis",
+              "Beverly L. Tucker",
+              "Roberta & Stephen R. Weiner",
+              "Constance V. R. White",
+              "Eleanor & Frank Williams",
+              "Linda & Stephen Zaref"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "martha-jones",
+        "title": "Martha H. Jones Society for Lifetime Giving",
+        "accent": "tangerine",
+        "brush": "harmony",
+        "intro": "Named in honor of Martha H. Jones, this society recognizes patrons whose cumulative lifetime giving has reached $100,000 or more.",
+        "tiers": [
+          {
+            "label": "Lifetime Patrons",
+            "donors": [
+              "Anonymous (6)",
+              "Amy & Joshua Boger",
+              "The Bernstein Family Charitable Foundation",
+              "Linda Cabot Black",
+              "Diane M. Capstaff",
+              "Margaret M. Cunningham",
+              "Crescendo Donor Advised Fund",
+              "Henry & Frances Donaldson",
+              "Estate of Helen J. Forman",
+              "Lisa & Mark Goldman",
+              "Estate of Martha H. Jones",
+              "Susan B. Kaplan",
+              "James & Susan Levitan",
+              "Carolyn & Peter Lynch",
+              "Mary Ellen & Sandy McKenzie",
+              "Anne & Joseph O'Connell",
+              "Cynthia Strauss & Jonathan Klein",
+              "Susan & Michael Thonis",
+              "Roberta & Stephen R. Weiner",
+              "Estate of Eleanor Williams",
+              "Linda & Stephen Zaref"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "aaron-richmond",
+        "title": "Aaron Richmond Legacy Society",
+        "accent": "azure",
+        "brush": "harmony",
+        "intro": "The Aaron Richmond Legacy Society honors patrons who have included Vivo Performing Arts in their estate plans, ensuring great live performance for generations to come.",
+        "tiers": [
+          {
+            "label": "Legacy Members",
+            "donors": [
+              "Anonymous (12)",
+              "Joan & David Ablon",
+              "Christine & Andrew Berkeley",
+              "Linda Cabot Black",
+              "Margaret & James Boyd",
+              "Diane M. Capstaff",
+              "Joan & Edward Cohen",
+              "Margaret M. Cunningham",
+              "Henry & Frances Donaldson",
+              "Estate of Helen J. Forman",
+              "Lisa & Mark Goldman",
+              "Estate of Martha H. Jones",
+              "Susan B. Kaplan",
+              "James & Susan Levitan",
+              "Stephen & Ellen Lewis",
+              "Carolyn & Peter Lynch",
+              "Doris S. Manley",
+              "Mary Ellen & Sandy McKenzie",
+              "Patricia & James McNulty",
+              "Anne & Joseph O'Connell",
+              "Marie & Charles Robinson",
+              "Joyce & Jack Rosenthal",
+              "Edith & Roy Steele",
+              "Cynthia Strauss & Jonathan Klein",
+              "Susan & Michael Thonis",
+              "Roberta & Stephen R. Weiner",
+              "Constance V. R. White",
+              "Estate of Eleanor Williams",
+              "Linda & Stephen Zaref"
+            ]
+          }
+        ]
+      }
+    ],
+    "footer": "Lists are current as of August 2026. Every effort has been made to ensure accuracy. To report an error or request a change, please contact our Advancement team at give@vivoperformingarts.org or (617) 482-2595."
+  },
+  "publicSupport": "Celebrity Series of Boston, doing business as Vivo Performing Arts, is supported in part by the Mass Cultural Council, a state agency.",
+  "contact": {
+    "press": {
+      "label": "Press Inquiries",
+      "email": "press@vivoperformingarts.org",
+      "phone": "(617) 482-2595",
+      "hours": "Monday–Friday, 10am – 4pm"
+    },
+    "boxOffice": {
+      "label": "Vivo Performing Arts Box Office",
+      "email": "boxoffice@vivoperformingarts.org",
+      "phone": "(617) 482-6661",
+      "hours": "Monday–Friday, 10am – 4pm",
+      "address": "20 Park Plaza, Suite 220, Boston MA 02116"
+    }
+  }
+}

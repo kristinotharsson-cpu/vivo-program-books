@@ -1,0 +1,167 @@
+{
+  "slug": "avery-gagliano-piano",
+  "cover": {
+    "eyebrow": "Vivo Performing Arts presents",
+    "title": "Avery Gagliano",
+    "subtitle": "Piano | Debut Series",
+    "date": "Thursday, Oct. 8, 2026",
+    "time": "7:30 p.m.",
+    "venue": "Longy's Pickman Hall",
+    "accent": "green",
+    "brush": "harmony",
+    "photoCaption": "Avery Gagliano",
+    "calloutLabel": "A note from President and Executive Director",
+    "calloutName": "Gary Dunning",
+    "presentedBy": "",
+    "footerSponsor": null,
+    "artistWebsite": "https://www.averygagliano.com",
+    "pressQuote": "Her ability to inhabit every room in the immense imagination of Frédéric Chopin came as a revelation. New York Classical Review",
+    "pressQuoteURL": "https://newyorkclassicalreview.com/2021/12/avery-gagliano-offers-revelatory-chopin-in-carnegie-hall-debut/"
+  },
+  "sections": [
+    {
+      "id": "welcome",
+      "title": "Welcome",
+      "kind": "welcome",
+      "eyebrow": "From the Artistic Director",
+      "quote": "Pianist Avery Gagliano makes her Vivo Performing Arts debut with an audacious program showcasing her prodigious command of mood and structure: from luminous to relentless, gauzy to percussive, culminating in Schumann's all-encompassing Symphonic Etudes.",
+      "body": [
+        "Celebrated as \"a distinctive young talent\" (International Piano), pianist Avery Gagliano's concerts offer a \"distinctly narrative approach\" (Miami International Piano Festival). She makes her Vivo Performing Arts debut with an audacious program that demonstrates her prodigious command of mood and structure. From the luminous to the relentless, from the gauzy to the percussive, and concluding with Schumann's all-encompassing Symphonic Etudes, Gagliano offers a program that announces her as an artist of assured command."
+      ],
+      "signature": {
+        "name": "Gary Dunning",
+        "role": "President and Executive Director, Vivo Performing Arts"
+      }
+    },
+    {
+      "id": "performance-sponsor",
+      "title": "Performance Sponsor",
+      "kind": "performance-sponsor",
+      "eyebrow": "Tonight's Performance",
+      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
+      "blocks": [
+        {
+          "label": "Performance Supporter",
+          "name": "Performance Sponsor Name",
+          "statement": "This performance is generously supported by [Sponsor Name]."
+        }
+      ],
+      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
+      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+    },
+    {
+      "id": "program",
+      "title": "Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "Program: Schumann Novelette Op. 21 No. 8, Fauré Ballade Op. 19, Rzewski Winnsboro Cotton Mill Blues, Kirchner Interlude II, Schumann Symphonic Etudes Op. 13.",
+      "pieces": [
+        {
+          "composer": "ROBERT SCHUMANN",
+          "work": "Novelette, Op. 21, No. 8"
+        },
+        {
+          "composer": "GABRIEL FAURÉ",
+          "work": "Ballade in F-sharp Major, Op. 19"
+        },
+        {
+          "composer": "FREDERIC RZEWSKI",
+          "work": "North American Ballads: IV. \"Winnsboro Cotton Mill Blues\""
+        },
+        {
+          "composer": "LEON KIRCHNER",
+          "work": "Interlude II"
+        },
+        {
+          "composer": "ROBERT SCHUMANN",
+          "work": "Symphonic Etudes, Op. 13"
+        }
+      ]
+    },
+    {
+      "id": "artist",
+      "title": "Cast & Creative",
+      "kind": "cast",
+      "eyebrow": "On Stage Tonight",
+      "cast": [
+        {
+          "role": "piano",
+          "name": "Avery Gagliano"
+        }
+      ],
+      "creative": []
+    },
+    {
+      "id": "bios",
+      "title": "Artist Bios",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "avery-gagliano",
+          "name": "Avery Gagliano",
+          "role": "piano",
+          "initials": "AG",
+          "photoSrc": "",
+          "body": [
+            "Celebrated as \"a distinctive young talent\" (International Piano), pianist Avery Gagliano's concerts offer a \"distinctly narrative approach\" (Miami International Piano Festival). She makes her Vivo Performing Arts debut with an audacious program that demonstrates her prodigious command of mood and structure. From the luminous to the relentless, from the gauzy to the percussive, and concluding with Schumann's all-encompassing Symphonic Etudes, Gagliano offers a program that announces her as an artist of assured command."
+          ],
+          "website": "https://www.averygagliano.com"
+        }
+      ]
+    },
+    {
+      "id": "vivo",
+      "kind": "vivo",
+      "title": "About Vivo Performing Arts",
+      "eyebrow": "Audience Information · Staff · Supporters"
+    },
+    {
+      "id": "info",
+      "title": "Hall Info",
+      "kind": "info",
+      "eyebrow": "Visitor Info",
+      "sections": [
+        {
+          "h": "Venue",
+          "body": [
+            "Longy's Pickman Hall."
+          ]
+        },
+        {
+          "h": "Land Acknowledgment",
+          "body": [
+            "Vivo Performing Arts gathers and performs on the unceded ancestral lands of the Massachusett, Pawtucket, and Wampanoag peoples."
+          ]
+        },
+        {
+          "h": "Accessibility",
+          "body": [
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+          ]
+        },
+        {
+          "h": "Contact",
+          "body": [
+            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+          ]
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "iso": "2026-10-08",
+    "genre": "Pianist",
+    "venueName": "Longy's Pickman Hall",
+    "leadArtist": "Avery Gagliano",
+    "socialLinks": [
+      {
+        "label": "Artist website",
+        "url": "https://averygagliano.com"
+      }
+    ],
+    "ensembleCount": 1
+  }
+}

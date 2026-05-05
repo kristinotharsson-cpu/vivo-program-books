@@ -1,0 +1,177 @@
+{
+  "slug": "dover-quartet",
+  "cover": {
+    "eyebrow": "Vivo Performing Arts presents",
+    "title": "Dover Quartet",
+    "date": "Sunday, Nov. 15, 2026",
+    "time": "3 p.m.",
+    "venue": "NEC's Jordan Hall",
+    "accent": "green",
+    "brush": "harmony",
+    "photoCaption": "Dover Quartet",
+    "calloutLabel": "A note from President and Executive Director",
+    "calloutName": "Gary Dunning",
+    "presentedBy": "",
+    "footerSponsor": null,
+    "artistWebsite": "https://www.doverquartet.com",
+    "pressQuote": "Named one of the greatest string quartets of the last 100 years. BBC Music Magazine"
+  },
+  "sections": [
+    {
+      "id": "welcome",
+      "title": "Welcome",
+      "kind": "welcome",
+      "eyebrow": "From the Artistic Director",
+      "quote": "In their most recent appearance at Jordan Hall, the Dover Quartet won the hearts and souls of audiences for their refined, luminous playing. Their program pairs Brahms' final string quartet and Dvořák's Czech-rooted masterwork with a new orchestration of Indigenous singer- songwriter Pura Fé's Rattle Songs.",
+      "body": [
+        "JOEL LINK violin BRYAN LEE violin JULIANNE LEE viola CAMDEN SHAW cello In their most recent appearance at Jordan Hall, the Dover Quartet won the hearts and souls of audiences for their refined, luminous playing and insightful programming. Pairing subtle gestures with technically brilliant flourishes, they'll capture your attention and leave you utterly spellbound. Their program features Brahms' final (and favorite) string quartet, Dvořák's nod to Viennese compositional trends while asserting his Czech roots, and an orchestration of Indigenous singer- songwriter Pura Fé's Rattle Songs by Chickasaw composer Jerod Impichchaachaaha' Tate."
+      ],
+      "signature": {
+        "name": "Gary Dunning",
+        "role": "President and Executive Director, Vivo Performing Arts"
+      }
+    },
+    {
+      "id": "performance-sponsor",
+      "title": "Performance Sponsor",
+      "kind": "performance-sponsor",
+      "eyebrow": "Tonight's Performance",
+      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
+      "blocks": [
+        {
+          "label": "Performance Supporter",
+          "name": "Performance Sponsor Name",
+          "statement": "This performance is generously supported by [Sponsor Name]."
+        }
+      ],
+      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
+      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+    },
+    {
+      "id": "program",
+      "title": "Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "Brahms Quartet No. 3 Op. 67, Pura Fé Rattle Songs (orch. Jerod Impichchaachaaha' Tate), Dvořák Quartet No. 11 Op. 61.",
+      "pieces": [
+        {
+          "composer": "JOHANNES BRAHMS",
+          "work": "Quartet No. 3 in B-flat Major, Op. 67"
+        },
+        {
+          "composer": "PURA FÉ",
+          "work": "Rattle Songs, orchestrated by Jerod Impichchaachaaha' Tate"
+        },
+        {
+          "composer": "ANTONÍN",
+          "work": "DVOŘÁK Quartet No. 11 in C Major, Op. 61"
+        }
+      ]
+    },
+    {
+      "id": "artist",
+      "title": "Cast & Creative",
+      "kind": "cast",
+      "eyebrow": "On Stage Tonight",
+      "cast": [
+        {
+          "role": "quartet",
+          "name": "Dover Quartet"
+        },
+        {
+          "role": "violin",
+          "name": "Joel Link"
+        },
+        {
+          "role": "violin",
+          "name": "Bryan Lee"
+        },
+        {
+          "role": "viola",
+          "name": "Julianne Lee"
+        },
+        {
+          "role": "cello",
+          "name": "Camden Shaw"
+        }
+      ],
+      "creative": []
+    },
+    {
+      "id": "bios",
+      "title": "Artist Bios",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "dover-quartet",
+          "name": "Dover Quartet",
+          "role": "quartet",
+          "initials": "DQ",
+          "photoSrc": "",
+          "body": [
+            "JOEL LINK violin BRYAN LEE violin JULIANNE LEE viola CAMDEN SHAW cello In their most recent appearance at Jordan Hall, the Dover Quartet won the hearts and souls of audiences for their refined, luminous playing and insightful programming. Pairing subtle gestures with technically brilliant flourishes, they'll capture your attention and leave you utterly spellbound. Their program features Brahms' final (and favorite) string quartet, Dvořák's nod to Viennese compositional trends while asserting his Czech roots, and an orchestration of Indigenous singer- songwriter Pura Fé's Rattle Songs by Chickasaw composer Jerod Impichchaachaaha' Tate."
+          ],
+          "website": "https://www.doverquartet.com"
+        }
+      ]
+    },
+    {
+      "id": "vivo",
+      "kind": "vivo",
+      "title": "About Vivo Performing Arts",
+      "eyebrow": "Audience Information · Staff · Supporters"
+    },
+    {
+      "id": "info",
+      "title": "Hall Info",
+      "kind": "info",
+      "eyebrow": "Visitor Info",
+      "sections": [
+        {
+          "h": "Venue",
+          "body": [
+            "NEC's Jordan Hall."
+          ]
+        },
+        {
+          "h": "Land Acknowledgment",
+          "body": [
+            "Vivo Performing Arts gathers and performs on the unceded ancestral lands of the Massachusett, Pawtucket, and Wampanoag peoples."
+          ]
+        },
+        {
+          "h": "Accessibility",
+          "body": [
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+          ]
+        },
+        {
+          "h": "Contact",
+          "body": [
+            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+          ]
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "iso": "2026-11-15",
+    "genre": "Chamber",
+    "venueName": "NEC's Jordan Hall",
+    "leadArtist": "Dover Quartet",
+    "socialLinks": [
+      {
+        "label": "Artist website",
+        "url": "https://doverquartet.com"
+      },
+      {
+        "label": "Instagram @doverquartet",
+        "url": "https://instagram.com/doverquartet"
+      }
+    ],
+    "ensembleCount": 5
+  }
+}

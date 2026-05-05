@@ -1,0 +1,172 @@
+{
+  "slug": "london-symphony-orchestra",
+  "cover": {
+    "eyebrow": "Vivo Performing Arts presents",
+    "title": "London Symphony Orchestra",
+    "subtitle": "Sir Antonio Pappano, chief conductor & Maxim Vengerov, violin soloist",
+    "date": "Thursday, March 11, 2027",
+    "time": "7:30 p.m.",
+    "venue": "Symphony Hall",
+    "accent": "green",
+    "brush": "harmony",
+    "photoCaption": "London Symphony Orchestra",
+    "calloutLabel": "A note from President and Executive Director",
+    "calloutName": "Gary Dunning",
+    "presentedBy": "",
+    "footerSponsor": null,
+    "genre": "Orchestra",
+    "artistWebsite": "https://www.lso.co.uk",
+    "pressQuote": "The London Symphony Orchestra played with phenomenal virtuosity. The Times (London)",
+    "pressQuoteURL": "https://www.youtube.com/watch?v=FZmWXzhf6TE"
+  },
+  "sections": [
+    {
+      "id": "welcome",
+      "title": "Welcome",
+      "kind": "welcome",
+      "eyebrow": "From the Artistic Director",
+      "quote": "Welcome to Vivo Performing Arts.",
+      "body": [
+        "The London Symphony Orchestra returns to Symphony Hall for the first time since 2009, now under the electrifying leadership of Chief Conductor Sir Antonio Pappano. The evening begins with Beethoven’s Violin Concerto, brought to life by one of the world’s great violin virtuosos, Maxim Vengerov, whose playing unites commanding power with extraordinary poetic sensitivity. The program culminates in Strauss’s Ein Heldenleben, where Sir Antonio Pappano—a conductor whose operatic soul runs deep—unfolds a sweeping orchestral epic, painting vivid portraits of love, longing, and hard-won triumph that will leave you breathless."
+      ],
+      "signature": {
+        "name": "Gary Dunning",
+        "role": "President and Executive Director, Vivo Performing Arts"
+      }
+    },
+    {
+      "id": "performance-sponsor",
+      "title": "Performance Sponsor",
+      "kind": "performance-sponsor",
+      "eyebrow": "Tonight's Performance",
+      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
+      "blocks": [
+        {
+          "label": "Performance Supporter",
+          "name": "Performance Sponsor Name",
+          "statement": "This performance is generously supported by [Sponsor Name]."
+        }
+      ],
+      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
+      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+    },
+    {
+      "id": "program",
+      "title": "Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "First LSO return since 2009. Beethoven Violin Concerto Op. 61 + Strauss Ein Heldenleben Op. 40.",
+      "pieces": [
+        {
+          "composer": "LUDWIG VAN BEETHOVEN",
+          "work": "Violin Concerto in D Major, Op. 61"
+        },
+        {
+          "composer": "RICHARD STRAUSS",
+          "work": "Ein Heldenleben, Op. 40"
+        }
+      ]
+    },
+    {
+      "id": "artist",
+      "title": "Cast & Creative",
+      "kind": "cast",
+      "eyebrow": "On Stage Tonight",
+      "cast": [
+        {
+          "role": "orchestra",
+          "name": "London Symphony Orchestra"
+        },
+        {
+          "role": "conductor",
+          "name": "Sir Antonio Pappano"
+        },
+        {
+          "role": "violin",
+          "name": "Maxim Vengerov"
+        }
+      ],
+      "creative": []
+    },
+    {
+      "id": "bios",
+      "title": "Artist Bios",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "london-symphony-orchestra",
+          "name": "London Symphony Orchestra",
+          "role": "orchestra",
+          "initials": "LSO",
+          "photoSrc": "",
+          "body": [
+            "The London Symphony Orchestra returns to Symphony Hall for the first time since 2009, now under the electrifying leadership of Chief Conductor Sir Antonio Pappano. The evening begins with Beethoven’s Violin Concerto, brought to life by one of the world’s great violin virtuosos, Maxim Vengerov, whose playing unites commanding power with extraordinary poetic sensitivity. The program culminates in Strauss’s Ein Heldenleben, where Sir Antonio Pappano—a conductor whose operatic soul runs deep—unfolds a sweeping orchestral epic, painting vivid portraits of love, longing, and hard-won triumph that will leave you breathless."
+          ],
+          "website": "https://www.lso.co.uk"
+        }
+      ]
+    },
+    {
+      "id": "vivo",
+      "kind": "vivo",
+      "title": "About Vivo Performing Arts",
+      "eyebrow": "Audience Information · Staff · Supporters"
+    },
+    {
+      "id": "info",
+      "title": "Hall Info",
+      "kind": "info",
+      "eyebrow": "Visitor Info",
+      "sections": [
+        {
+          "h": "Venue",
+          "body": [
+            "Symphony Hall."
+          ]
+        },
+        {
+          "h": "Land Acknowledgment",
+          "body": [
+            "Vivo Performing Arts gathers and performs on the unceded ancestral lands of the Massachusett, Pawtucket, and Wampanoag peoples."
+          ]
+        },
+        {
+          "h": "Accessibility",
+          "body": [
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+          ]
+        },
+        {
+          "h": "Contact",
+          "body": [
+            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+          ]
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "iso": "2027-03-11",
+    "genre": "Orchestra",
+    "venueName": "Symphony Hall",
+    "leadArtist": "London Symphony Orchestra",
+    "socialLinks": [
+      {
+        "label": "Artist website",
+        "url": "https://lso.co.uk"
+      },
+      {
+        "label": "Instagram @londonsymphonyorchestra",
+        "url": "https://instagram.com/londonsymphonyorchestra"
+      },
+      {
+        "label": "Facebook/londonsymphonyorchestra",
+        "url": "https://facebook.com/londonsymphonyorchestra"
+      }
+    ],
+    "ensembleCount": 3
+  }
+}

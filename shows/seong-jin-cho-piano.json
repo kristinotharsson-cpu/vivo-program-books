@@ -1,0 +1,171 @@
+{
+  "slug": "seong-jin-cho-piano",
+  "cover": {
+    "eyebrow": "Vivo Performing Arts presents",
+    "title": "Seong-Jin Cho, piano",
+    "date": "Sunday, March 7, 2027",
+    "time": "3 p.m.",
+    "venue": "Symphony Hall",
+    "accent": "green",
+    "brush": "harmony",
+    "photoCaption": "Seong-Jin Cho",
+    "calloutLabel": "A note from President and Executive Director",
+    "calloutName": "Gary Dunning",
+    "presentedBy": "",
+    "footerSponsor": null,
+    "genre": "Pianist Title Seong-Jin Cho, piano",
+    "artistWebsite": "https://seongjin-cho.com",
+    "pressQuote": "His passagework gleamingly precise, his sound ranging from staggering softness to luminous Steinway shine. The Guardian",
+    "pressQuoteURL": "https://www.youtube.com/watch?v=5ctnesYYicM"
+  },
+  "sections": [
+    {
+      "id": "welcome",
+      "title": "Welcome",
+      "kind": "welcome",
+      "eyebrow": "From the Artistic Director",
+      "quote": "Welcome to Vivo Performing Arts.",
+      "body": [
+        "Acclaimed for his poetic touch and remarkable clarity, Seong-Jin Cho returns to Symphony Hall with an imaginative program that balances elegance and drama. From the playful charm of Widmann to the theatrical brilliance of selections from Prokofiev’s Romeo and Juliet, the evening moves between wit and intensity. Mozart’s haunting Fantasia in C minor adds lyrical depth before Prokofiev’s monumental Eighth Piano Sonata ends the night with an uproar. Offering virtuosity, color and storytelling at the keyboard, it’s a vivid showcase for one of today’s most compelling pianists."
+      ],
+      "signature": {
+        "name": "Gary Dunning",
+        "role": "President and Executive Director, Vivo Performing Arts"
+      }
+    },
+    {
+      "id": "performance-sponsor",
+      "title": "Performance Sponsor",
+      "kind": "performance-sponsor",
+      "eyebrow": "Tonight's Performance",
+      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
+      "blocks": [
+        {
+          "label": "Performance Supporter",
+          "name": "Performance Sponsor Name",
+          "statement": "This performance is generously supported by [Sponsor Name]."
+        }
+      ],
+      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
+      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+    },
+    {
+      "id": "program",
+      "title": "Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "Widmann Sonatina facile, Prokofiev Ten Pieces from Romeo and Juliet Op. 75, Mozart Fantasia K. 396, Prokofiev Sonata No. 8 Op. 84.",
+      "pieces": [
+        {
+          "composer": "JÖRG WIDMANN",
+          "work": "Sonatina facile for piano (2016)"
+        },
+        {
+          "composer": "SERGEI PROKOFIEV",
+          "work": "Ten Pieces from Romeo and Juliet, Op. 75"
+        },
+        {
+          "composer": "W.A. MOZART",
+          "work": "Fantasia in C minor, K. 396 (completed by Maximilian Stadler)"
+        },
+        {
+          "composer": "SERGEI PROKOFIEV",
+          "work": "Piano Sonata No. 8 in B-flat Major, Op. 84 (1939–44)"
+        }
+      ]
+    },
+    {
+      "id": "artist",
+      "title": "Cast & Creative",
+      "kind": "cast",
+      "eyebrow": "On Stage Tonight",
+      "cast": [
+        {
+          "role": "piano",
+          "name": "Seong-Jin Cho"
+        }
+      ],
+      "creative": []
+    },
+    {
+      "id": "bios",
+      "title": "Artist Bios",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "seong-jin-cho",
+          "name": "Seong-Jin Cho",
+          "role": "piano",
+          "initials": "SC",
+          "photoSrc": "",
+          "body": [
+            "Acclaimed for his poetic touch and remarkable clarity, Seong-Jin Cho returns to Symphony Hall with an imaginative program that balances elegance and drama. From the playful charm of Widmann to the theatrical brilliance of selections from Prokofiev’s Romeo and Juliet, the evening moves between wit and intensity. Mozart’s haunting Fantasia in C minor adds lyrical depth before Prokofiev’s monumental Eighth Piano Sonata ends the night with an uproar. Offering virtuosity, color and storytelling at the keyboard, it’s a vivid showcase for one of today’s most compelling pianists."
+          ],
+          "website": "https://seongjin-cho.com"
+        }
+      ]
+    },
+    {
+      "id": "vivo",
+      "kind": "vivo",
+      "title": "About Vivo Performing Arts",
+      "eyebrow": "Audience Information · Staff · Supporters"
+    },
+    {
+      "id": "info",
+      "title": "Hall Info",
+      "kind": "info",
+      "eyebrow": "Visitor Info",
+      "sections": [
+        {
+          "h": "Venue",
+          "body": [
+            "Symphony Hall."
+          ]
+        },
+        {
+          "h": "Land Acknowledgment",
+          "body": [
+            "Vivo Performing Arts gathers and performs on the unceded ancestral lands of the Massachusett, Pawtucket, and Wampanoag peoples."
+          ]
+        },
+        {
+          "h": "Accessibility",
+          "body": [
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+          ]
+        },
+        {
+          "h": "Contact",
+          "body": [
+            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+          ]
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "iso": "2027-03-07",
+    "genre": "Pianist",
+    "venueName": "Symphony Hall",
+    "leadArtist": "Seong-Jin Cho",
+    "socialLinks": [
+      {
+        "label": "Artist website",
+        "url": "https://seongjin-cho.com"
+      },
+      {
+        "label": "Instagram NA",
+        "url": "https://instagram.com/NA"
+      },
+      {
+        "label": "Facebook/seongjin.cho",
+        "url": "https://facebook.com/seongjin.cho"
+      }
+    ],
+    "ensembleCount": 1
+  }
+}

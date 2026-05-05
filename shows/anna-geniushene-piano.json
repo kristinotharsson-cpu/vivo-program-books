@@ -1,0 +1,166 @@
+{
+  "slug": "anna-geniushene-piano",
+  "cover": {
+    "eyebrow": "Vivo Performing Arts presents",
+    "title": "Anna Geniushene",
+    "subtitle": "Piano",
+    "date": "Friday, April 2, 2027",
+    "time": "8 p.m.",
+    "venue": "Meadow Hall at Groton Hill Music Center",
+    "accent": "green",
+    "brush": "harmony",
+    "photoCaption": "Anna Geniushene",
+    "calloutLabel": "A note from President and Executive Director",
+    "calloutName": "Gary Dunning",
+    "presentedBy": "",
+    "footerSponsor": null,
+    "artistWebsite": "http://annageniushene.com/",
+    "pressQuote": "A fascinating, distinctive artist with raw power and an uncanny instinct for music that rewards thoughtful listening. Van Cliburn International Piano Competition (jury citation, 2022)"
+  },
+  "sections": [
+    {
+      "id": "welcome",
+      "title": "Welcome",
+      "kind": "welcome",
+      "eyebrow": "From the Artistic Director",
+      "quote": "-- 42 of 57 -- Anna Geniushene's silver medal at the 2022 Cliburn competition announced a fascinating, distinctive artist with raw power and deep curiosity. Her program moves from Brahms' searching Ballades through Liszt's hauntingly beautiful Valses Oubliées to Beethoven's monumental Eroica Variations.",
+      "body": [
+        "Anna Geniushene's silver medal at the 2022 Cliburn competition marked the arrival of a fascinating, distinctive artist with raw power, deep curiosity, and an uncanny instinct for music that rewards thoughtful listening. Her program moves from Brahms' dark, searching Ballades through Liszt's hauntingly beautiful Valses Oubliées to Beethoven's monumental Eroica Variations. Come ready to discover an artist—and a program—that lingers purposefully on the mind and spirit."
+      ],
+      "signature": {
+        "name": "Gary Dunning",
+        "role": "President and Executive Director, Vivo Performing Arts"
+      }
+    },
+    {
+      "id": "performance-sponsor",
+      "title": "Performance Sponsor",
+      "kind": "performance-sponsor",
+      "eyebrow": "Tonight's Performance",
+      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
+      "blocks": [
+        {
+          "label": "Performance Supporter",
+          "name": "Performance Sponsor Name",
+          "statement": "This performance is generously supported by [Sponsor Name]."
+        }
+      ],
+      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
+      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+    },
+    {
+      "id": "program",
+      "title": "Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "2022 Cliburn silver medalist. Brahms Ballades Op. 10, Bartk Scherzo, Chopin Variations brillantes Op. 12, Liszt Valses oublies Nos. 1-3, Beethoven Eroica Variations Op. 35.",
+      "pieces": [
+        {
+          "composer": "JOHANNES BRAHMS",
+          "work": "Ballades, Op. 10"
+        },
+        {
+          "composer": "BÉLA BARTÓK",
+          "work": "Scherzo from Four Pieces, Op. 9c, Sz. 22"
+        },
+        {
+          "composer": "FRÉDÉRIC CHOPIN",
+          "work": "Variations brillantes in B-flat Major, Op. 12"
+        },
+        {
+          "composer": "FRANZ LISZT",
+          "work": "Valses oubliées Nos. 1–3, S. 215–217"
+        },
+        {
+          "composer": "LUDWIG VAN BEETHOVEN",
+          "work": "Eroica Variations, Op. 35"
+        }
+      ]
+    },
+    {
+      "id": "artist",
+      "title": "Cast & Creative",
+      "kind": "cast",
+      "eyebrow": "On Stage Tonight",
+      "cast": [
+        {
+          "role": "piano",
+          "name": "Anna Geniushene"
+        }
+      ],
+      "creative": []
+    },
+    {
+      "id": "bios",
+      "title": "Artist Bios",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "anna-geniushene",
+          "name": "Anna Geniushene",
+          "role": "piano",
+          "initials": "AG",
+          "photoSrc": "",
+          "body": [
+            "Anna Geniushene's silver medal at the 2022 Cliburn competition marked the arrival of a fascinating, distinctive artist with raw power, deep curiosity, and an uncanny instinct for music that rewards thoughtful listening. Her program moves from Brahms' dark, searching Ballades through Liszt's hauntingly beautiful Valses Oubliées to Beethoven's monumental Eroica Variations. Come ready to discover an artist—and a program—that lingers purposefully on the mind and spirit."
+          ],
+          "website": "http://annageniushene.com/"
+        }
+      ]
+    },
+    {
+      "id": "vivo",
+      "kind": "vivo",
+      "title": "About Vivo Performing Arts",
+      "eyebrow": "Audience Information · Staff · Supporters"
+    },
+    {
+      "id": "info",
+      "title": "Hall Info",
+      "kind": "info",
+      "eyebrow": "Visitor Info",
+      "sections": [
+        {
+          "h": "Venue",
+          "body": [
+            "Groton Hill Music Center (Meadow Hall)."
+          ]
+        },
+        {
+          "h": "Land Acknowledgment",
+          "body": [
+            "Vivo Performing Arts gathers and performs on the unceded ancestral lands of the Massachusett, Pawtucket, and Wampanoag peoples."
+          ]
+        },
+        {
+          "h": "Accessibility",
+          "body": [
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+          ]
+        },
+        {
+          "h": "Contact",
+          "body": [
+            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+          ]
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "iso": "2027-04-02",
+    "genre": "Pianist",
+    "venueName": "Groton Hill Music Center (Meadow Hall)",
+    "leadArtist": "Anna Geniushene",
+    "socialLinks": [
+      {
+        "label": "Artist website",
+        "url": "https://annageniushene.com"
+      }
+    ],
+    "ensembleCount": 1
+  }
+}

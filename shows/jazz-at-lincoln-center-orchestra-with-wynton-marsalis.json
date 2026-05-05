@@ -1,0 +1,158 @@
+{
+  "slug": "jazz-at-lincoln-center-orchestra-with-wynton-marsalis",
+  "cover": {
+    "eyebrow": "Vivo Performing Arts presents",
+    "title": "Jazz at Lincoln Center Orchestra with Wynton Marsalis",
+    "date": "Friday, April 16, 2027",
+    "time": "8 p.m.",
+    "venue": "Symphony Hall",
+    "accent": "orange",
+    "brush": "rhythm",
+    "photoCaption": "Jazz at Lincoln Center Orchestra",
+    "calloutLabel": "A note from President and Executive Director",
+    "calloutName": "Gary Dunning",
+    "presentedBy": "",
+    "footerSponsor": null,
+    "artistWebsite": "https://jazz.org",
+    "pressQuote": "Wynton Marsalis has single-handedly changed the relationship between jazz and the American cultural establishment. The New York Times"
+  },
+  "sections": [
+    {
+      "id": "welcome",
+      "title": "Welcome",
+      "kind": "welcome",
+      "eyebrow": "From the Artistic Director",
+      "quote": "Say farewell to a legend: Wynton Marsalis takes the stage for the last time as music director of the Jazz at Lincoln Center Orchestra, stepping down at the end of the 2026/27 season. From first note to last, his victory lap will be one to remember.",
+      "body": [
+        "Say farewell to a legend when Wynton Marsalis takes the stage for the last time as music director and member of the Jazz at Lincoln Center Orchestra. A champion of jazz and a fierce advocate for its place in American culture and history, Marsalis steps down as music director at the end of the 2026/27 season. From first note to last, Wynton Marsalis' victory lap with his Orchestra will be one to remember."
+      ],
+      "signature": {
+        "name": "Gary Dunning",
+        "role": "President and Executive Director, Vivo Performing Arts"
+      }
+    },
+    {
+      "id": "performance-sponsor",
+      "title": "Performance Sponsor",
+      "kind": "performance-sponsor",
+      "eyebrow": "Tonight's Performance",
+      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
+      "blocks": [
+        {
+          "label": "Performance Supporter",
+          "name": "Performance Sponsor Name",
+          "statement": "This performance is generously supported by [Sponsor Name]."
+        }
+      ],
+      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
+      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+    },
+    {
+      "id": "program",
+      "title": "Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "WYNTON'S FAREWELL as music director. Final appearance before stepping down end of 2026/27 season. Major story angle.",
+      "pieces": [
+        {
+          "composer": "Program details",
+          "work": "To be announced from the stage.",
+          "meta": ""
+        }
+      ]
+    },
+    {
+      "id": "artist",
+      "title": "Cast & Creative",
+      "kind": "cast",
+      "eyebrow": "On Stage Tonight",
+      "cast": [
+        {
+          "role": "orchestra",
+          "name": "Jazz at Lincoln Center Orchestra"
+        },
+        {
+          "role": "trumpet / leader",
+          "name": "Wynton Marsalis"
+        }
+      ],
+      "creative": []
+    },
+    {
+      "id": "bios",
+      "title": "Artist Bios",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "jazz-at-lincoln-center-orchestra",
+          "name": "Jazz at Lincoln Center Orchestra",
+          "role": "orchestra",
+          "initials": "JAL",
+          "photoSrc": "",
+          "body": [
+            "Say farewell to a legend when Wynton Marsalis takes the stage for the last time as music director and member of the Jazz at Lincoln Center Orchestra. A champion of jazz and a fierce advocate for its place in American culture and history, Marsalis steps down as music director at the end of the 2026/27 season. From first note to last, Wynton Marsalis' victory lap with his Orchestra will be one to remember."
+          ],
+          "website": "https://jazz.org"
+        }
+      ]
+    },
+    {
+      "id": "vivo",
+      "kind": "vivo",
+      "title": "About Vivo Performing Arts",
+      "eyebrow": "Audience Information · Staff · Supporters"
+    },
+    {
+      "id": "info",
+      "title": "Hall Info",
+      "kind": "info",
+      "eyebrow": "Visitor Info",
+      "sections": [
+        {
+          "h": "Venue",
+          "body": [
+            "Symphony Hall."
+          ]
+        },
+        {
+          "h": "Land Acknowledgment",
+          "body": [
+            "Vivo Performing Arts gathers and performs on the unceded ancestral lands of the Massachusett, Pawtucket, and Wampanoag peoples."
+          ]
+        },
+        {
+          "h": "Accessibility",
+          "body": [
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+          ]
+        },
+        {
+          "h": "Contact",
+          "body": [
+            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+          ]
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "iso": "2027-04-16",
+    "genre": "Jazz",
+    "venueName": "Symphony Hall",
+    "leadArtist": "Jazz at Lincoln Center Orchestra",
+    "socialLinks": [
+      {
+        "label": "Artist website",
+        "url": "https://jazz.org"
+      },
+      {
+        "label": "Instagram @jazzdotorg",
+        "url": "https://instagram.com/jazzdotorg"
+      }
+    ],
+    "ensembleCount": 2
+  }
+}

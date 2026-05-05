@@ -1,0 +1,193 @@
+{
+  "slug": "lawrence-brownlee-and-erin-morley",
+  "cover": {
+    "eyebrow": "Vivo Performing Arts presents",
+    "title": "Lawrence Brownlee & Erin Morley",
+    "subtitle": "The Golden Age",
+    "date": "Friday, April 16, 2027",
+    "time": "8 p.m.",
+    "venue": "NEC's Jordan Hall",
+    "accent": "purple",
+    "brush": "voice",
+    "photoCaption": "Lawrence Brownlee",
+    "calloutLabel": "A note from President and Executive Director",
+    "calloutName": "Gary Dunning",
+    "presentedBy": "",
+    "footerSponsor": null,
+    "artistWebsite": "https://www.lawrencebrownlee.com",
+    "pressQuote": "Lawrence Brownlee is simply the finest lyric tenor before the public today—his voice of spun gold has few peers in the world, Opera News With its revival of Donizetti’s “La Fille du Régiment,” the Met followed up with another bel canto winner, this one carried by the irrepressible charm and flawless coloratura of the soprano Erin Morley. The New York Times"
+  },
+  "sections": [
+    {
+      "id": "welcome",
+      "title": "Welcome",
+      "kind": "welcome",
+      "eyebrow": "From the Artistic Director",
+      "quote": "In arias and duets from the most beloved bel canto operas, soprano Erin Morley and tenor Lawrence Brownlee take audiences on a journey through love's many guises—flirtatious rivalry, innocent infatuation, fiery accusations, and joyful sincerity.",
+      "body": [
+        "In arias and duets from some of the most beloved and beautiful operas of the bel canto period and beyond, soprano Erin Morley and tenor Lawrence Brownlee bring us on a journey through love's many guises. Flirtatious rivalry, innocent infatuation, fiery accusations, joyful sincerity: these frequent co-stars bring us a tapestry of the charm, dramatic prowess, and vocal fireworks that have won them admirers from around the world."
+      ],
+      "signature": {
+        "name": "Gary Dunning",
+        "role": "President and Executive Director, Vivo Performing Arts"
+      }
+    },
+    {
+      "id": "performance-sponsor",
+      "title": "Performance Sponsor",
+      "kind": "performance-sponsor",
+      "eyebrow": "Tonight's Performance",
+      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
+      "blocks": [
+        {
+          "label": "Performance Supporter",
+          "name": "Performance Sponsor Name",
+          "statement": "This performance is generously supported by [Sponsor Name]."
+        }
+      ],
+      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
+      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+    },
+    {
+      "id": "program",
+      "title": "Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "Bel canto arias + duets. Rossini Le Comte Ory, Verdi Rigoletto, Bizet Les Pcheurs de Perles, Delibes Lakm, Bellini Il Pirata, Donizetti La Fille du Rgiment. Presented with BLO.",
+      "pieces": [
+        {
+          "composer": "GIOACHINO ROSSINI",
+          "work": "\"Ah, quel respect … Ce téméraire qui croit nous plaire\" from Le Comte",
+          "meta": "Ory"
+        },
+        {
+          "composer": "GIUSEPPE VERDI",
+          "work": "\"Gualtier Maldè! … Caro nome\" from Rigoletto"
+        },
+        {
+          "composer": "GEORGES BIZET",
+          "work": "\"À cette voix quel trouble … Je crois entendre encore\" from Les Pêcheurs",
+          "meta": "de Perles"
+        },
+        {
+          "composer": "LÉO DELIBES",
+          "work": "\"D'où viens-tu? … C'est le dieu de la jeunesse\" from Lakmé"
+        },
+        {
+          "composer": "GEORGES BIZET",
+          "work": "\"Ils verront si je mens!\" from La Jolie Fille de Perth"
+        },
+        {
+          "composer": "VINCENZO BELLINI",
+          "work": "\"Nel furor delle tempeste … Per te di vane lagrime\" from Il Pirata"
+        },
+        {
+          "composer": "LÉO DELIBES",
+          "work": "\"Où va la jeune Indoue\" from Lakmé"
+        },
+        {
+          "composer": "GAETANO DONIZETTI",
+          "work": "\"Quoi? Vous m'aimez? … De cet aveu si tendre\" from La Fille du",
+          "meta": "Régiment"
+        }
+      ]
+    },
+    {
+      "id": "artist",
+      "title": "Cast & Creative",
+      "kind": "cast",
+      "eyebrow": "On Stage Tonight",
+      "cast": [
+        {
+          "role": "tenor",
+          "name": "Lawrence Brownlee"
+        },
+        {
+          "role": "soprano",
+          "name": "Erin Morley"
+        }
+      ],
+      "creative": []
+    },
+    {
+      "id": "bios",
+      "title": "Artist Bios",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "lawrence-brownlee",
+          "name": "Lawrence Brownlee",
+          "role": "tenor",
+          "initials": "LB",
+          "photoSrc": "",
+          "body": [
+            "In arias and duets from some of the most beloved and beautiful operas of the bel canto period and beyond, soprano Erin Morley and tenor Lawrence Brownlee bring us on a journey through love's many guises. Flirtatious rivalry, innocent infatuation, fiery accusations, joyful sincerity: these frequent co-stars bring us a tapestry of the charm, dramatic prowess, and vocal fireworks that have won them admirers from around the world."
+          ],
+          "website": "https://www.lawrencebrownlee.com"
+        }
+      ]
+    },
+    {
+      "id": "vivo",
+      "kind": "vivo",
+      "title": "About Vivo Performing Arts",
+      "eyebrow": "Audience Information · Staff · Supporters"
+    },
+    {
+      "id": "info",
+      "title": "Hall Info",
+      "kind": "info",
+      "eyebrow": "Visitor Info",
+      "sections": [
+        {
+          "h": "Venue",
+          "body": [
+            "NEC's Jordan Hall."
+          ]
+        },
+        {
+          "h": "Land Acknowledgment",
+          "body": [
+            "Vivo Performing Arts gathers and performs on the unceded ancestral lands of the Massachusett, Pawtucket, and Wampanoag peoples."
+          ]
+        },
+        {
+          "h": "Accessibility",
+          "body": [
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+          ]
+        },
+        {
+          "h": "Contact",
+          "body": [
+            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+          ]
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "iso": "2027-04-16",
+    "genre": "Vocal",
+    "venueName": "NEC's Jordan Hall",
+    "leadArtist": "Lawrence Brownlee",
+    "socialLinks": [
+      {
+        "label": "Artist website",
+        "url": "https://lawrencebrownlee.com"
+      },
+      {
+        "label": "Instagram @brownleetenor",
+        "url": "https://instagram.com/brownleetenor"
+      },
+      {
+        "label": "Facebook/lawrencebrownleeofficial",
+        "url": "https://facebook.com/lawrencebrownleeofficial"
+      }
+    ],
+    "ensembleCount": 2
+  }
+}
