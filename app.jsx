@@ -438,7 +438,13 @@ const App = () => {
   }, [fontSize]);
 
   const [editing, setEditing] = useStateA(false);
-  useEffectA(() => { window.__editMode = editing; }, [editing]);
+  // Keep window.__editMode in sync — set it before React re-renders so Editable
+  // components pick it up during the same render pass, not the next one.
+  const toggleEditing = useCallbackA(() => {
+    const next = !window.__editMode;
+    window.__editMode = next;
+    setEditing(next);
+  }, []);
 
   const [menuOpen, setMenuOpen] = useStateA(false);
   const [searchOpen, setSearchOpen] = useStateA(false);
@@ -727,7 +733,7 @@ const App = () => {
           ) : null}
           <footer className="app-footer">
             <img src={theme === "dark" ? "assets/logos/vivo-logo-cream.png" : "assets/logos/vivo-logo-black.png"} alt="Vivo" />
-            <div>© Vivo Performing Arts · vivo.org</div>
+            <div>© Vivo Performing Arts · <a href="https://vivoperformingarts.org/" target="_blank" rel="noopener" style={{color:"inherit"}}>vivoperformingarts.org</a></div>
           </footer>
         </div>
       ) : (
@@ -764,7 +770,7 @@ const App = () => {
         fontSize={fontSize}
         onFontSize={setFontSize}
         onShare={handleShare}
-        onToggleEdit={() => { setEditing(e => !e); setMenuOpen(false); setToast(editing ? "Edit mode off" : "Tap any text to edit"); }}
+        onToggleEdit={() => { toggleEditing(); setMenuOpen(false); setToast(editing ? "Edit mode off" : "Tap any text to edit"); }}
         editing={editing}
         onSaveJson={saveJson}
         onLoadJson={loadJson}

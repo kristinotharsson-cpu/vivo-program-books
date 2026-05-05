@@ -357,7 +357,7 @@ function App() {
         </a>
         <div className="idx-top-right">
           <button className="idx-new-btn" onClick={() => setShowNewModal(true)}>+ New Program</button>
-          <a href="https://vivo.org" target="_blank" rel="noopener">vivo.org ↗</a>
+          <a href="https://vivoperformingarts.org/" target="_blank" rel="noopener">vivoperformingarts.org ↗</a>
         </div>
       </header>
 
