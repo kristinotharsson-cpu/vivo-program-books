@@ -2,6 +2,63 @@
 
 const { useState: useStateA, useEffect: useEffectA, useMemo: useMemoA, useCallback: useCallbackA } = React;
 
+// ---- Design Options panel (self-contained so no cross-script dependency) ----
+const _TweaksPanel = ({ onClose, children }) => (
+  <>
+    <div style={{ position:"fixed",inset:0,background:"rgba(0,0,0,0.35)",zIndex:80 }} onClick={onClose} />
+    <aside style={{ position:"fixed",top:0,right:0,bottom:0,width:"min(320px,92vw)",background:"var(--bg)",borderLeft:"1px solid var(--border)",zIndex:81,display:"flex",flexDirection:"column",fontFamily:"var(--font-body)",overflow:"hidden" }}>
+      <div style={{ display:"flex",alignItems:"center",justifyContent:"space-between",padding:"14px 16px",borderBottom:"1px solid var(--border)",fontSize:13,fontWeight:700,letterSpacing:"0.08em",textTransform:"uppercase",color:"var(--fg-muted)" }}>
+        <span>Design Options</span>
+        <button style={{ background:"none",border:"none",cursor:"pointer",padding:4,color:"var(--fg)",display:"flex",alignItems:"center" }} onClick={onClose} aria-label="Close">✕</button>
+      </div>
+      <div style={{ flex:1,overflowY:"auto",padding:"8px 0 40px" }}>{children}</div>
+    </aside>
+  </>
+);
+const _TweakSection = ({ label, children }) => (
+  <div style={{ borderBottom:"1px solid var(--border)",padding:"12px 16px" }}>
+    <div style={{ fontSize:11,fontWeight:700,letterSpacing:"0.12em",textTransform:"uppercase",color:"var(--fg-muted)",marginBottom:10 }}>{label}</div>
+    {children}
+  </div>
+);
+const _TweakRow = ({ label, children }) => (
+  <div style={{ display:"flex",alignItems:"center",justifyContent:"space-between",gap:8,marginBottom:10 }}>
+    <div style={{ fontSize:13,color:"var(--fg)",minWidth:80 }}>{label}</div>
+    {children}
+  </div>
+);
+const _TweakSelect = ({ label, value, options, onChange }) => (
+  <_TweakRow label={label}>
+    <select style={{ flex:1,fontSize:13,padding:"5px 8px",border:"1px solid var(--border)",borderRadius:5,background:"var(--bg)",color:"var(--fg)",cursor:"pointer" }} value={value} onChange={e => onChange(e.target.value)}>
+      {options.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
+    </select>
+  </_TweakRow>
+);
+const _TweakRadio = ({ label, value, options, onChange }) => (
+  <div style={{ marginBottom:10 }}>
+    <div style={{ fontSize:13,color:"var(--fg)",marginBottom:6 }}>{label}</div>
+    <div style={{ display:"flex",gap:6,flexWrap:"wrap" }}>
+      {options.map(o => (
+        <label key={o.value} style={{ display:"flex",alignItems:"center",gap:5,fontSize:13,padding:"4px 10px",border:"1px solid var(--border)",borderRadius:20,cursor:"pointer",background: value===o.value?"var(--vivo-plum)":"transparent",color: value===o.value?"var(--vivo-cream)":"var(--fg)",transition:"background 0.12s" }}>
+          <input type="radio" name={label} value={o.value} checked={value===o.value} onChange={() => onChange(o.value)} style={{ display:"none" }} />
+          {o.label}
+        </label>
+      ))}
+    </div>
+  </div>
+);
+const _TweakToggle = ({ label, value, onChange }) => (
+  <div style={{ display:"flex",alignItems:"center",justifyContent:"space-between",gap:8,marginBottom:10 }}>
+    <span style={{ fontSize:13,color:"var(--fg)" }}>{label}</span>
+    <button onClick={() => onChange(!value)} role="switch" aria-checked={value} style={{ position:"relative",width:38,height:22,borderRadius:11,background: value?"var(--vivo-plum)":"var(--border)",border:"none",cursor:"pointer",transition:"background 0.18s",flexShrink:0 }}>
+      <span style={{ position:"absolute",top:3,left: value?19:3,width:16,height:16,borderRadius:"50%",background:"#fff",transition:"left 0.18s",display:"block" }} />
+    </button>
+  </div>
+);
+const _TweakButton = ({ label, onClick }) => (
+  <button onClick={onClick} style={{ display:"block",width:"100%",padding:"8px 12px",fontSize:13,fontFamily:"var(--font-body)",background:"var(--vivo-plum)",color:"var(--vivo-cream)",border:"none",borderRadius:6,cursor:"pointer",marginBottom:8,textAlign:"center" }}>{label}</button>
+);
+
 // ---- Cover photo frame (16:9, brush watermark when empty) ----
 const CoverPhotoFrame = ({ src, alt, brushSrc, onChange, onClear }) => {
   const fileRef = React.useRef(null);
@@ -823,9 +880,9 @@ const App = () => {
 
       {/* Tweaks panel */}
       {showTweaks ? (
-        <window.TweaksPanel onClose={() => { setShowTweaks(false); window.parent.postMessage({ type: "__edit_mode_dismissed" }, "*"); }}>
-          <window.TweakSection label="Cover Layout">
-            <window.TweakSelect
+        <_TweaksPanel onClose={() => { setShowTweaks(false); window.parent.postMessage({ type: "__edit_mode_dismissed" }, "*"); }}>
+          <_TweakSection label="Cover Layout">
+            <_TweakSelect
               label="Accent Color"
               value={tweaks.coverAccent}
               options={[
@@ -841,13 +898,13 @@ const App = () => {
               ]}
               onChange={v => setTweak("coverAccent", v)}
             />
-            <window.TweakSelect
+            <_TweakSelect
               label="Brush Mark"
               value={tweaks.coverBrush}
               options={["harmony", "tempo", "rhythm", "pitch", "form", "dynamics", "jazz"].map(b => ({ value: b, label: b[0].toUpperCase() + b.slice(1) }))}
               onChange={v => setTweak("coverBrush", v)}
             />
-            <window.TweakRadio
+            <_TweakRadio
               label="Brush Color"
               value={tweaks.brushColor}
               options={[
@@ -857,7 +914,7 @@ const App = () => {
               ]}
               onChange={v => setTweak("brushColor", v)}
             />
-            <window.TweakSelect
+            <_TweakSelect
               label="Cover Text"
               value={tweaks.coverTextColor}
               options={[
@@ -869,9 +926,9 @@ const App = () => {
               ]}
               onChange={v => setTweak("coverTextColor", v)}
             />
-          </window.TweakSection>
-          <window.TweakSection label="Table of Contents">
-            <window.TweakRadio
+          </_TweakSection>
+          <_TweakSection label="Table of Contents">
+            <_TweakRadio
               label="Layout"
               value={tweaks.tocVariant}
               options={[
@@ -880,7 +937,7 @@ const App = () => {
               ]}
               onChange={v => setTweak("tocVariant", v)}
             />
-            <window.TweakSelect
+            <_TweakSelect
               label="Highlight Color"
               value={tweaks.tocHighlight}
               options={[
@@ -896,14 +953,14 @@ const App = () => {
               ]}
               onChange={v => setTweak("tocHighlight", v)}
             />
-          </window.TweakSection>
-          <window.TweakSection label="Content">
-            <window.TweakButton label="Reset Sample Content" onClick={resetData} />
-          </window.TweakSection>
-          <window.TweakSection label="Sections">
+          </_TweakSection>
+          <_TweakSection label="Content">
+            <_TweakButton label="Reset Sample Content" onClick={resetData} />
+          </_TweakSection>
+          <_TweakSection label="Sections">
             <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>Toggle off to hide a section from the table of contents and navigation. Section content is preserved.</div>
             {data.sections.map(s => (
-              <window.TweakToggle
+              <_TweakToggle
                 key={s.id}
                 label={s.title}
                 value={!hiddenSet.has(s.id)}
@@ -914,7 +971,7 @@ const App = () => {
                 }}
               />
             ))}
-            <window.TweakButton label="+ Add Section" onClick={() => {
+            <_TweakButton label="+ Add Section" onClick={() => {
               const title = (prompt("Section title?") || "").trim();
               if (!title) return;
               const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || ("section-" + Date.now());
@@ -934,15 +991,15 @@ const App = () => {
               });
               setToast(`Added \"${title}\"`);
             }} />
-          </window.TweakSection>
-          <window.TweakSection label="Publish">
+          </_TweakSection>
+          <_TweakSection label="Publish">
             <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>Save your edits back to the live site. Netlify will redeploy automatically in ~30 seconds.</div>
-            <window.TweakButton label="⬆ Publish to Site" onClick={publishShow} />
+            <_TweakButton label="⬆ Publish to Site" onClick={publishShow} />
             <div style={{ height: 12 }} />
             <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>Or download a self-contained HTML file to host manually.</div>
-            <window.TweakButton label="Download HTML" onClick={exportHtml} />
-          </window.TweakSection>
-        </window.TweaksPanel>
+            <_TweakButton label="Download HTML" onClick={exportHtml} />
+          </_TweakSection>
+        </_TweaksPanel>
       ) : null}
     </div>
   );
