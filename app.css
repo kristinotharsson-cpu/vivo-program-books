@@ -1469,13 +1469,14 @@ button {
 }
 [data-theme="dark"] .menu-overlay { background: rgba(255,251,235,0.18); }
 .menu-sheet {
-  position: absolute;
+  position: fixed;
   top: 60px;
   right: 12px;
   background: var(--bg);
   border: 1px solid var(--border);
   min-width: 240px;
   padding: 8px 0;
+  z-index: 71;
 }
 .menu-item {
   display: flex;
