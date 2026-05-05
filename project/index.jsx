@@ -3,6 +3,188 @@
 
 const { useState, useEffect, useMemo } = React;
 
+// ---------- New Program helpers ----------
+const STARTER_GENRES = [
+  { value: "Classical", label: "Classical" },
+  { value: "Jazz", label: "Jazz" },
+  { value: "Dance", label: "Dance" },
+  { value: "Pop/World", label: "Pop / World" },
+  { value: "Spoken Word", label: "Spoken Word" },
+  { value: "Other", label: "Other / Neighborhood Arts" },
+];
+const STARTER_ACCENTS = [
+  { value: "plum", label: "Plum" },
+  { value: "tangerine", label: "Tangerine" },
+  { value: "orange", label: "Orange" },
+  { value: "blue", label: "Blue" },
+  { value: "green", label: "Green" },
+  { value: "lavender", label: "Lavender" },
+];
+
+function slugify(text) {
+  return text.toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 60) || ("program-" + Date.now());
+}
+
+function makeStarterJson(form) {
+  const slug = slugify(form.title + (form.isoDate ? "-" + form.isoDate.replace(/-/g, "") : ""));
+  const initials = (form.title).split(/\s+/).map(w => (w[0] || "").toUpperCase()).filter(Boolean).join("").slice(0, 2) || "VA";
+  return {
+    slug,
+    cover: {
+      eyebrow: "Vivo Performing Arts presents",
+      title: form.title,
+      subtitle: form.subtitle || "",
+      date: form.date || "",
+      time: form.time || "",
+      venue: form.venue || "",
+      accent: form.accent || "plum",
+      brush: "harmony",
+      photoCaption: form.title,
+      calloutLabel: "A note from President and Executive Director",
+      calloutName: "Gary Dunning",
+      presentedBy: "",
+      footerSponsor: null
+    },
+    sections: [
+      {
+        id: "welcome", title: "Welcome", kind: "welcome",
+        eyebrow: "From the Artistic Director",
+        quote: "Welcome to Vivo Performing Arts.",
+        body: ["We are delighted to present " + form.title + ". Thank you for joining us tonight."],
+        signature: { name: "Gary Dunning", role: "President and Executive Director, Vivo Performing Arts" }
+      },
+      {
+        id: "program", title: "Program", kind: "program",
+        eyebrow: "The Running Order",
+        lead: "Program to be announced from the stage.",
+        pieces: [{ composer: "Artist", work: "To be announced from the stage.", meta: "" }]
+      },
+      {
+        id: "artist", title: "Cast & Creative", kind: "cast",
+        eyebrow: "On Stage Tonight",
+        cast: [{ role: form.subtitle || "Artist", name: form.title }],
+        creative: []
+      },
+      {
+        id: "bios", title: "Artist Bios", kind: "bios",
+        eyebrow: "Tonight's Artist",
+        bios: [{
+          id: slugify(form.title), name: form.title, role: form.subtitle || "Artist",
+          initials, photoSrc: "",
+          body: ["Biography to be added. Click Edit Content in the menu to fill in this section."]
+        }]
+      },
+      {
+        id: "vivo", kind: "vivo", title: "About Vivo Performing Arts",
+        eyebrow: "Audience Information · Staff · Supporters"
+      },
+      {
+        id: "info", title: "Hall Info", kind: "info", eyebrow: "Visitor Info",
+        sections: [
+          { h: "Venue", body: [form.venue || "Venue to be confirmed."] },
+          { h: "Land Acknowledgment", body: ["Vivo Performing Arts gathers and performs on the unceded ancestral lands of the Massachusett, Pawtucket, and Wampanoag peoples."] },
+          { h: "Contact", body: ["Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"] }
+        ]
+      }
+    ],
+    _meta: {
+      iso: form.isoDate || "",
+      genre: form.genre || "Other",
+      venueName: form.venue || "",
+      leadArtist: form.title,
+      ensembleCount: 1,
+      _local: true
+    }
+  };
+}
+
+function NewProgramModal({ onClose }) {
+  const [form, setForm] = useState({
+    title: "", subtitle: "", date: "", isoDate: "", time: "", venue: "", genre: "Classical", accent: "plum"
+  });
+  const [creating, setCreating] = useState(false);
+  const set = (key) => (e) => setForm(f => ({ ...f, [key]: e.target.value }));
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!form.title.trim()) return;
+    setCreating(true);
+    const showData = makeStarterJson(form);
+    const slug = showData.slug;
+    try {
+      localStorage.setItem("vivo-pb-data:" + slug, JSON.stringify(showData));
+      const existing = JSON.parse(localStorage.getItem("vivo-new-shows") || "[]");
+      if (!existing.includes(slug)) {
+        localStorage.setItem("vivo-new-shows", JSON.stringify([...existing, slug]));
+      }
+    } catch (ex) {}
+    window.location.href = "Program Book.html?show=" + slug;
+  };
+
+  return (
+    <div className="idx-modal-overlay" onClick={e => e.target === e.currentTarget && onClose()}>
+      <div className="idx-modal" role="dialog" aria-modal="true">
+        <header className="idx-modal-head">
+          <h2>New Program Book</h2>
+          <button className="idx-modal-close" onClick={onClose} aria-label="Close">×</button>
+        </header>
+        <form className="idx-modal-form" onSubmit={handleSubmit}>
+          <label className="idx-modal-field">
+            <span>Program / Artist Name <strong>*</strong></span>
+            <input required value={form.title} onChange={set("title")} placeholder="e.g. Víkingur Ólafsson" autoFocus />
+          </label>
+          <label className="idx-modal-field">
+            <span>Genre / Instrument / Type</span>
+            <input value={form.subtitle} onChange={set("subtitle")} placeholder="e.g. Piano" />
+          </label>
+          <div className="idx-modal-row">
+            <label className="idx-modal-field">
+              <span>Display Date</span>
+              <input value={form.date} onChange={set("date")} placeholder="e.g. SAT SEP 12" />
+            </label>
+            <label className="idx-modal-field">
+              <span>Date (for sorting)</span>
+              <input value={form.isoDate} onChange={set("isoDate")} type="date" />
+            </label>
+            <label className="idx-modal-field">
+              <span>Time</span>
+              <input value={form.time} onChange={set("time")} placeholder="e.g. 7:30PM" />
+            </label>
+          </div>
+          <label className="idx-modal-field">
+            <span>Venue</span>
+            <input value={form.venue} onChange={set("venue")} placeholder="e.g. Symphony Hall" />
+          </label>
+          <div className="idx-modal-row">
+            <label className="idx-modal-field">
+              <span>Genre</span>
+              <select value={form.genre} onChange={set("genre")}>
+                {STARTER_GENRES.map(g => <option key={g.value} value={g.value}>{g.label}</option>)}
+              </select>
+            </label>
+            <label className="idx-modal-field">
+              <span>Cover Color</span>
+              <select value={form.accent} onChange={set("accent")}>
+                {STARTER_ACCENTS.map(a => <option key={a.value} value={a.value}>{a.label}</option>)}
+              </select>
+            </label>
+          </div>
+          <div className="idx-modal-actions">
+            <button type="button" className="idx-modal-cancel" onClick={onClose}>Cancel</button>
+            <button type="submit" className="idx-modal-submit" disabled={creating || !form.title.trim()}>
+              {creating ? "Creating…" : "Create Program Book →"}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}
+
 // Genre code → display label
 const GENRE_LABEL = {
   "PPP": "Public Performance Project",
@@ -12,7 +194,7 @@ const GENRE_LABEL = {
 };
 const genreLabel = s => {
   if (!s) return "";
-  // Tag-based override: Neighborhood Arts trumps the raw genre code
+  if ((s.tags || []).includes("Draft")) return "Draft";
   if ((s.tags || []).includes("Neighborhood Arts")) return "Neighborhood Arts";
   const g = s.genre || "";
   return GENRE_LABEL[g] || g;
@@ -69,6 +251,7 @@ function App() {
   const [query, setQuery] = useState("");
   const [genreFilter, setGenreFilter] = useState("upcoming");
   const [showPast, setShowPast] = useState(false);
+  const [showNewModal, setShowNewModal] = useState(false);
   const todayTs = useMemo(() => {
     const d = new Date();
     d.setHours(0,0,0,0);
@@ -81,7 +264,35 @@ function App() {
   useEffect(() => {
     fetch("shows/manifest.json")
       .then(r => { if (!r.ok) throw new Error("manifest"); return r.json(); })
-      .then(data => { setShows(data); setLoading(false); })
+      .then(data => {
+        // Merge locally-created programs
+        const serverSlugs = new Set(data.map(s => s.slug));
+        let newSlugs = [];
+        try { newSlugs = JSON.parse(localStorage.getItem("vivo-new-shows") || "[]"); } catch (e) {}
+        const localShows = newSlugs
+          .filter(slug => !serverSlugs.has(slug))
+          .map(slug => {
+            try {
+              const d = JSON.parse(localStorage.getItem("vivo-pb-data:" + slug) || "{}");
+              if (!d.cover) return null;
+              return {
+                slug: d.slug || slug,
+                title: d.cover.title || slug,
+                leadArtist: d.cover.title || slug,
+                date: d.cover.date || "DRAFT",
+                time: d.cover.time || "",
+                iso: (d._meta && d._meta.iso) || new Date().toISOString().slice(0, 10),
+                venue: d.cover.venue || "TBD",
+                genre: (d._meta && d._meta.genre) || "Other",
+                tags: ["Draft"],
+                accent: d.cover.accent || "plum",
+                _local: true
+              };
+            } catch (ex) { return null; }
+          }).filter(Boolean);
+        setShows([...data, ...localShows]);
+        setLoading(false);
+      })
       .catch(e => { setError(e.message); setLoading(false); });
   }, []);
 
@@ -145,9 +356,12 @@ function App() {
           <span>Vivo Performing Arts</span>
         </a>
         <div className="idx-top-right">
-          <a href="https://vivo.org" target="_blank" rel="noopener">vivo.org ↗</a>
+          <button className="idx-new-btn" onClick={() => setShowNewModal(true)}>+ New Program</button>
+          <a href="https://vivoperformingarts.org/" target="_blank" rel="noopener">vivoperformingarts.org ↗</a>
         </div>
       </header>
+
+      {showNewModal && <NewProgramModal onClose={() => setShowNewModal(false)} />}
 
       <section className="idx-hero">
         <img className="idx-hero-logo" src="assets/logos/vivo-logo-black.png" alt="Vivo Performing Arts" />

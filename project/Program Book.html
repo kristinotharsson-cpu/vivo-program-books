@@ -45,20 +45,40 @@
     window.__VIVO_STORAGE_KEY = 'vivo-pb-data:' + slug;
     // Block React boot until JSON is ready
     window.__PROGRAM_BOOT_DEFERRED = true;
+
+    function bootWithData(data, shared) {
+      if (shared) window.VIVO_SHARED = shared;
+      window.PROGRAM_DATA = data;
+      document.title = (data.cover && data.cover.title ? data.cover.title : slug) + ' — Vivo Performing Arts';
+      window.__PROGRAM_BOOT_DEFERRED = false;
+      if (window.__bootProgramApp) window.__bootProgramApp();
+    }
+
+    // Check if this is a locally-created program (created via New Program wizard)
+    try {
+      var newSlugs = JSON.parse(localStorage.getItem('vivo-new-shows') || '[]');
+      if (newSlugs.indexOf(slug) !== -1) {
+        var localData = JSON.parse(localStorage.getItem('vivo-pb-data:' + slug) || 'null');
+        if (localData) {
+          bootWithData(localData, null);
+          return;
+        }
+      }
+    } catch (e) {}
+
     Promise.all([
       fetch('shows/' + slug + '.json').then(function (r) { if (!r.ok) throw new Error('not found'); return r.json(); }),
       fetch('shows/_vivo-shared.json').then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
     ])
       .then(function (results) {
-        var data = results[0];
-        var shared = results[1];
-        if (shared) window.VIVO_SHARED = shared;
-        window.PROGRAM_DATA = data;
-        document.title = data.cover.title + ' — Vivo Performing Arts';
-        window.__PROGRAM_BOOT_DEFERRED = false;
-        if (window.__bootProgramApp) window.__bootProgramApp();
+        bootWithData(results[0], results[1]);
       })
       .catch(function (e) {
+        // Last resort: if we have local edits for this slug (e.g. offline, or fetch failed), use them
+        try {
+          var localData = JSON.parse(localStorage.getItem('vivo-pb-data:' + slug) || 'null');
+          if (localData) { bootWithData(localData, null); return; }
+        } catch (_) {}
         document.getElementById('app').innerHTML =
           '<div style="font-family:Inter,sans-serif;max-width:520px;margin:80px auto;padding:32px;text-align:center;">' +
           '<h1 style="font-size:24px;margin:0 0 12px;">Show not found</h1>' +
