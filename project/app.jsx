@@ -823,9 +823,9 @@ const App = () => {
 
       {/* Tweaks panel */}
       {showTweaks ? (
-        <TweaksPanel onClose={() => { setShowTweaks(false); window.parent.postMessage({ type: "__edit_mode_dismissed" }, "*"); }}>
-          <TweakSection label="Cover Layout">
-            <TweakSelect
+        <window.TweaksPanel onClose={() => { setShowTweaks(false); window.parent.postMessage({ type: "__edit_mode_dismissed" }, "*"); }}>
+          <window.TweakSection label="Cover Layout">
+            <window.TweakSelect
               label="Accent Color"
               value={tweaks.coverAccent}
               options={[
@@ -841,13 +841,13 @@ const App = () => {
               ]}
               onChange={v => setTweak("coverAccent", v)}
             />
-            <TweakSelect
+            <window.TweakSelect
               label="Brush Mark"
               value={tweaks.coverBrush}
               options={["harmony", "tempo", "rhythm", "pitch", "form", "dynamics", "jazz"].map(b => ({ value: b, label: b[0].toUpperCase() + b.slice(1) }))}
               onChange={v => setTweak("coverBrush", v)}
             />
-            <TweakRadio
+            <window.TweakRadio
               label="Brush Color"
               value={tweaks.brushColor}
               options={[
@@ -857,7 +857,7 @@ const App = () => {
               ]}
               onChange={v => setTweak("brushColor", v)}
             />
-            <TweakSelect
+            <window.TweakSelect
               label="Cover Text"
               value={tweaks.coverTextColor}
               options={[
@@ -869,9 +869,9 @@ const App = () => {
               ]}
               onChange={v => setTweak("coverTextColor", v)}
             />
-          </TweakSection>
-          <TweakSection label="Table of Contents">
-            <TweakRadio
+          </window.TweakSection>
+          <window.TweakSection label="Table of Contents">
+            <window.TweakRadio
               label="Layout"
               value={tweaks.tocVariant}
               options={[
@@ -880,7 +880,7 @@ const App = () => {
               ]}
               onChange={v => setTweak("tocVariant", v)}
             />
-            <TweakSelect
+            <window.TweakSelect
               label="Highlight Color"
               value={tweaks.tocHighlight}
               options={[
@@ -896,14 +896,14 @@ const App = () => {
               ]}
               onChange={v => setTweak("tocHighlight", v)}
             />
-          </TweakSection>
-          <TweakSection label="Content">
-            <TweakButton label="Reset Sample Content" onClick={resetData} />
-          </TweakSection>
-          <TweakSection label="Sections">
+          </window.TweakSection>
+          <window.TweakSection label="Content">
+            <window.TweakButton label="Reset Sample Content" onClick={resetData} />
+          </window.TweakSection>
+          <window.TweakSection label="Sections">
             <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>Toggle off to hide a section from the table of contents and navigation. Section content is preserved.</div>
             {data.sections.map(s => (
-              <TweakToggle
+              <window.TweakToggle
                 key={s.id}
                 label={s.title}
                 value={!hiddenSet.has(s.id)}
@@ -914,7 +914,7 @@ const App = () => {
                 }}
               />
             ))}
-            <TweakButton label="+ Add Section" onClick={() => {
+            <window.TweakButton label="+ Add Section" onClick={() => {
               const title = (prompt("Section title?") || "").trim();
               if (!title) return;
               const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || ("section-" + Date.now());
@@ -934,15 +934,15 @@ const App = () => {
               });
               setToast(`Added \"${title}\"`);
             }} />
-          </TweakSection>
-          <TweakSection label="Publish">
+          </window.TweakSection>
+          <window.TweakSection label="Publish">
             <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>Save your edits back to the live site. Netlify will redeploy automatically in ~30 seconds.</div>
-            <TweakButton label="⬆ Publish to Site" onClick={publishShow} />
+            <window.TweakButton label="⬆ Publish to Site" onClick={publishShow} />
             <div style={{ height: 12 }} />
             <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>Or download a self-contained HTML file to host manually.</div>
-            <TweakButton label="Download HTML" onClick={exportHtml} />
-          </TweakSection>
-        </TweaksPanel>
+            <window.TweakButton label="Download HTML" onClick={exportHtml} />
+          </window.TweakSection>
+        </window.TweaksPanel>
       ) : null}
     </div>
   );
