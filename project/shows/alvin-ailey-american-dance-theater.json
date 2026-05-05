@@ -1,0 +1,169 @@
+{
+  "slug": "alvin-ailey-american-dance-theater",
+  "cover": {
+    "eyebrow": "Vivo Performing Arts presents",
+    "title": "Alvin Ailey American Dance Theater",
+    "date": "Friday, April 30",
+    "time": "8 p.m. / Saturday, May 1",
+    "venue": "Boch Center Wang Theatre",
+    "accent": "purple",
+    "brush": "motion",
+    "photoCaption": "Alvin Ailey American Dance Theater",
+    "calloutLabel": "A note from President and Executive Director",
+    "calloutName": "Gary Dunning",
+    "presentedBy": "",
+    "footerSponsor": null,
+    "artistWebsite": "https://www.alvinailey.org",
+    "pressQuote": "\"Alvin Ailey American Dance Theater remains one of the most thrilling and deeply moving companies on the planet.\" The New York Times"
+  },
+  "sections": [
+    {
+      "id": "welcome",
+      "title": "Welcome",
+      "kind": "welcome",
+      "eyebrow": "From the Artistic Director",
+      "quote": "For more than six decades, Alvin Ailey American Dance Theater has captivated audiences around the world with performances that blend breathtaking athleticism, expressive storytelling, and the rich traditions of modern dance—celebrating the depth, resilience, and beauty of the human spirit.",
+      "body": [
+        "For more than six decades, Alvin Ailey American Dance Theater has captivated audiences around the world with performances that blend breathtaking athleticism, expressive storytelling, and the rich traditions of modern dance. Founded in 1958, the company has become a cultural touchstone, celebrating the depth, resilience, and beauty of the human spirit while honoring the rich heritage that continues to shape its artistic vision. In these uplifting performances at the Boch Center Wang Theatre, extraordinary dancers radiate passion, precision, and joy from the stage. Join us for performances that continue a beloved dance tradition, one that invites audiences to feel deeply, rejoice together, and share in the exhilaration of live performance."
+      ],
+      "signature": {
+        "name": "Gary Dunning",
+        "role": "President and Executive Director, Vivo Performing Arts"
+      }
+    },
+    {
+      "id": "performance-sponsor",
+      "title": "Performance Sponsor",
+      "kind": "performance-sponsor",
+      "eyebrow": "Tonight's Performance",
+      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
+      "blocks": [
+        {
+          "label": "Performance Supporter",
+          "name": "Performance Sponsor Name",
+          "statement": "This performance is generously supported by [Sponsor Name]."
+        }
+      ],
+      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
+      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+    },
+    {
+      "id": "program",
+      "title": "Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "4 performances: APR 30 8PM; MAY 01 2PM & 8PM; MAY 02 3PM. Artistic Director Alicia Graf Mack.",
+      "pieces": [
+        {
+          "composer": "ALICIA GRAF MACK",
+          "work": "Artistic Director"
+        },
+        {
+          "composer": "MATTHEW RUSHING",
+          "work": "Associate Artistic Director"
+        }
+      ]
+    },
+    {
+      "id": "artist",
+      "title": "Cast & Creative",
+      "kind": "cast",
+      "eyebrow": "On Stage Tonight",
+      "cast": [
+        {
+          "role": "dance company",
+          "name": "Alvin Ailey American Dance Theater"
+        },
+        {
+          "role": "artistic director",
+          "name": "Alicia Graf Mack"
+        },
+        {
+          "role": "associate artistic director",
+          "name": "Matthew Rushing"
+        }
+      ],
+      "creative": []
+    },
+    {
+      "id": "bios",
+      "title": "Artist Bios",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "alvin-ailey-american-dance-theater",
+          "name": "Alvin Ailey American Dance Theater",
+          "role": "dance company",
+          "initials": "AAA",
+          "photoSrc": "",
+          "body": [
+            "For more than six decades, Alvin Ailey American Dance Theater has captivated audiences around the world with performances that blend breathtaking athleticism, expressive storytelling, and the rich traditions of modern dance. Founded in 1958, the company has become a cultural touchstone, celebrating the depth, resilience, and beauty of the human spirit while honoring the rich heritage that continues to shape its artistic vision. In these uplifting performances at the Boch Center Wang Theatre, extraordinary dancers radiate passion, precision, and joy from the stage. Join us for performances that continue a beloved dance tradition, one that invites audiences to feel deeply, rejoice together, and share in the exhilaration of live performance."
+          ],
+          "website": "https://www.alvinailey.org"
+        }
+      ]
+    },
+    {
+      "id": "vivo",
+      "kind": "vivo",
+      "title": "About Vivo Performing Arts",
+      "eyebrow": "Audience Information · Staff · Supporters"
+    },
+    {
+      "id": "info",
+      "title": "Hall Info",
+      "kind": "info",
+      "eyebrow": "Visitor Info",
+      "sections": [
+        {
+          "h": "Venue",
+          "body": [
+            "Boch Center Wang Theatre."
+          ]
+        },
+        {
+          "h": "Land Acknowledgment",
+          "body": [
+            "Vivo Performing Arts gathers and performs on the unceded ancestral lands of the Massachusett, Pawtucket, and Wampanoag peoples."
+          ]
+        },
+        {
+          "h": "Accessibility",
+          "body": [
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+          ]
+        },
+        {
+          "h": "Contact",
+          "body": [
+            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+          ]
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "iso": "2027-04-30",
+    "genre": "Dance",
+    "venueName": "Boch Center Wang Theatre",
+    "leadArtist": "Alvin Ailey American Dance Theater",
+    "socialLinks": [
+      {
+        "label": "Artist website",
+        "url": "https://alvinailey.org"
+      },
+      {
+        "label": "Instagram @alvinailey",
+        "url": "https://instagram.com/alvinailey"
+      },
+      {
+        "label": "Facebook/alvinaileyamericandancetheater",
+        "url": "https://facebook.com/alvinaileyamericandancetheater"
+      }
+    ],
+    "ensembleCount": 3
+  }
+}

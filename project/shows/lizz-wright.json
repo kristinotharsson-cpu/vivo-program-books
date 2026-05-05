@@ -1,0 +1,154 @@
+{
+  "slug": "lizz-wright",
+  "cover": {
+    "eyebrow": "Vivo Performing Arts presents",
+    "title": "Lizz Wright",
+    "date": "Saturday, Oct. 10, 2026",
+    "time": "8 p.m.",
+    "venue": "Berklee Performance Center",
+    "accent": "orange",
+    "brush": "rhythm",
+    "photoCaption": "Lizz Wright",
+    "calloutLabel": "A note from President and Executive Director",
+    "calloutName": "Gary Dunning",
+    "presentedBy": "",
+    "footerSponsor": null,
+    "artistWebsite": "https://www.lizzwright.net",
+    "pressQuote": "[Lizz Wright has] …a smooth, dark alto possessed of qualities you might associate with barrel- aged bourbon or butter-soft leather. The New York Times"
+  },
+  "sections": [
+    {
+      "id": "welcome",
+      "title": "Welcome",
+      "kind": "welcome",
+      "eyebrow": "From the Artistic Director",
+      "quote": "With a warm, honeyed alto and a folk-inflected jazz band, Lizz Wright creates original songs and covers that reflect the cultural fabric of America, inviting audiences into a musical heartland that makes anyone feel at home.",
+      "body": [
+        "With a warm, honeyed alto that listeners have compared to barrel-aged bourbon and soft leather, Lizz Wright invites you closer, to share the communion and empathy that she extends to rapturous listeners around the world. With a folk-inflected jazz band, she creates original songs and covers that reflect the cultural fabric of America, inviting audiences into a musical heartland that makes anyone feel at home."
+      ],
+      "signature": {
+        "name": "Gary Dunning",
+        "role": "President and Executive Director, Vivo Performing Arts"
+      }
+    },
+    {
+      "id": "performance-sponsor",
+      "title": "Performance Sponsor",
+      "kind": "performance-sponsor",
+      "eyebrow": "Tonight's Performance",
+      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
+      "blocks": [
+        {
+          "label": "Performance Supporter",
+          "name": "Performance Sponsor Name",
+          "statement": "This performance is generously supported by [Sponsor Name]."
+        }
+      ],
+      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
+      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+    },
+    {
+      "id": "program",
+      "title": "Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "Warm alto. Folk-inflected jazz band.",
+      "pieces": [
+        {
+          "composer": "Program details",
+          "work": "To be announced from the stage.",
+          "meta": ""
+        }
+      ]
+    },
+    {
+      "id": "artist",
+      "title": "Cast & Creative",
+      "kind": "cast",
+      "eyebrow": "On Stage Tonight",
+      "cast": [
+        {
+          "role": "vocals",
+          "name": "Lizz Wright"
+        }
+      ],
+      "creative": []
+    },
+    {
+      "id": "bios",
+      "title": "Artist Bios",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "lizz-wright",
+          "name": "Lizz Wright",
+          "role": "vocals",
+          "initials": "LW",
+          "photoSrc": "",
+          "body": [
+            "With a warm, honeyed alto that listeners have compared to barrel-aged bourbon and soft leather, Lizz Wright invites you closer, to share the communion and empathy that she extends to rapturous listeners around the world. With a folk-inflected jazz band, she creates original songs and covers that reflect the cultural fabric of America, inviting audiences into a musical heartland that makes anyone feel at home."
+          ],
+          "website": "https://www.lizzwright.net"
+        }
+      ]
+    },
+    {
+      "id": "vivo",
+      "kind": "vivo",
+      "title": "About Vivo Performing Arts",
+      "eyebrow": "Audience Information · Staff · Supporters"
+    },
+    {
+      "id": "info",
+      "title": "Hall Info",
+      "kind": "info",
+      "eyebrow": "Visitor Info",
+      "sections": [
+        {
+          "h": "Venue",
+          "body": [
+            "Berklee Performance Center."
+          ]
+        },
+        {
+          "h": "Land Acknowledgment",
+          "body": [
+            "Vivo Performing Arts gathers and performs on the unceded ancestral lands of the Massachusett, Pawtucket, and Wampanoag peoples."
+          ]
+        },
+        {
+          "h": "Accessibility",
+          "body": [
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+          ]
+        },
+        {
+          "h": "Contact",
+          "body": [
+            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+          ]
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "iso": "2026-10-10",
+    "genre": "Jazz",
+    "venueName": "Berklee Performance Center",
+    "leadArtist": "Lizz Wright",
+    "socialLinks": [
+      {
+        "label": "Artist website",
+        "url": "https://lizzwright.net"
+      },
+      {
+        "label": "Instagram @lizzwrightmusic",
+        "url": "https://instagram.com/lizzwrightmusic"
+      }
+    ],
+    "ensembleCount": 1
+  }
+}

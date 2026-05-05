@@ -1,0 +1,174 @@
+{
+  "slug": "gil-shaham-and-akira-eguchi-violin-and-piano",
+  "cover": {
+    "eyebrow": "Vivo Performing Arts presents",
+    "title": "Gil Shaham & Akira Eguchi",
+    "subtitle": "Violin & Piano",
+    "date": "Thursday, Jan. 14, 2027",
+    "time": "8 p.m.",
+    "venue": "Concert Hall at Groton Hill Music Center",
+    "accent": "green",
+    "brush": "harmony",
+    "photoCaption": "Gil Shaham",
+    "calloutLabel": "A note from President and Executive Director",
+    "calloutName": "Gary Dunning",
+    "presentedBy": "",
+    "footerSponsor": null,
+    "artistWebsite": "https://gilshaham.com",
+    "pressQuote": "\"A virtuoso and a player of deeply intense sincerity—one of today's pre-eminent violinists.\" The New York Times"
+  },
+  "sections": [
+    {
+      "id": "welcome",
+      "title": "Welcome",
+      "kind": "welcome",
+      "eyebrow": "From the Artistic Director",
+      "quote": "One of the great recital partnerships of our time, violinist Gil Shaham and pianist Akira Eguchi bring musical intelligence and irresistible chemistry to every performance—making extraordinary technical mastery appear effortless.",
+      "body": [
+        "One of the great recital partnerships of our time, violinist Gil Shaham and pianist Akira Eguchi bring musical intelligence and irresistible chemistry to every performance. Trusting each other to go where the music takes them, Shaham and Eguchi make music with sweep, drive, and inner life. In a balance honed over decades, this duo comes together with elegance and precision. Shaham's characteristically warm playing glows with passion. Eguchi—lyrical and propulsive by turn—brings a virtuosic sense of momentum and energy that draws you ever more deeply into the music. Acclaimed on stages around the world, Shaham and Eguchi make extraordinary technical mastery appear effortless. Together, they transform each performance into something that feels less like a display and more like a shared offering."
+      ],
+      "signature": {
+        "name": "Gary Dunning",
+        "role": "President and Executive Director, Vivo Performing Arts"
+      }
+    },
+    {
+      "id": "performance-sponsor",
+      "title": "Performance Sponsor",
+      "kind": "performance-sponsor",
+      "eyebrow": "Tonight's Performance",
+      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
+      "blocks": [
+        {
+          "label": "Performance Supporter",
+          "name": "Performance Sponsor Name",
+          "statement": "This performance is generously supported by [Sponsor Name]."
+        }
+      ],
+      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
+      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+    },
+    {
+      "id": "program",
+      "title": "Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "All-Beethoven Op. 30 sonatas: No. 6 in A Major, No. 7 in C minor, No. 8 in G Major.",
+      "pieces": [
+        {
+          "composer": "LUDWIG VAN BEETHOVEN",
+          "work": "Violin Sonatas, Op. 30"
+        },
+        {
+          "composer": "BEETHOVEN",
+          "work": "No. 6 in A Major, Op. 30, No. 1"
+        },
+        {
+          "composer": "BEETHOVEN",
+          "work": "No. 7 in C minor, Op. 30, No. 2"
+        },
+        {
+          "composer": "BEETHOVEN",
+          "work": "No. 8 in G Major, Op. 30, No. 3"
+        }
+      ]
+    },
+    {
+      "id": "artist",
+      "title": "Cast & Creative",
+      "kind": "cast",
+      "eyebrow": "On Stage Tonight",
+      "cast": [
+        {
+          "role": "violin",
+          "name": "Gil Shaham"
+        },
+        {
+          "role": "piano",
+          "name": "Akira Eguchi"
+        }
+      ],
+      "creative": []
+    },
+    {
+      "id": "bios",
+      "title": "Artist Bios",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "gil-shaham",
+          "name": "Gil Shaham",
+          "role": "violin",
+          "initials": "GS",
+          "photoSrc": "",
+          "body": [
+            "One of the great recital partnerships of our time, violinist Gil Shaham and pianist Akira Eguchi bring musical intelligence and irresistible chemistry to every performance. Trusting each other to go where the music takes them, Shaham and Eguchi make music with sweep, drive, and inner life. In a balance honed over decades, this duo comes together with elegance and precision. Shaham's characteristically warm playing glows with passion. Eguchi—lyrical and propulsive by turn—brings a virtuosic sense of momentum and energy that draws you ever more deeply into the music. Acclaimed on stages around the world, Shaham and Eguchi make extraordinary technical mastery appear effortless. Together, they transform each performance into something that feels less like a display and more like a shared offering."
+          ],
+          "website": "https://gilshaham.com"
+        }
+      ]
+    },
+    {
+      "id": "vivo",
+      "kind": "vivo",
+      "title": "About Vivo Performing Arts",
+      "eyebrow": "Audience Information · Staff · Supporters"
+    },
+    {
+      "id": "info",
+      "title": "Hall Info",
+      "kind": "info",
+      "eyebrow": "Visitor Info",
+      "sections": [
+        {
+          "h": "Venue",
+          "body": [
+            "Groton Hill Music Center (Concert Hall)."
+          ]
+        },
+        {
+          "h": "Land Acknowledgment",
+          "body": [
+            "Vivo Performing Arts gathers and performs on the unceded ancestral lands of the Massachusett, Pawtucket, and Wampanoag peoples."
+          ]
+        },
+        {
+          "h": "Accessibility",
+          "body": [
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+          ]
+        },
+        {
+          "h": "Contact",
+          "body": [
+            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+          ]
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "iso": "2027-01-14",
+    "genre": "Instrumentalist",
+    "venueName": "Groton Hill Music Center (Concert Hall)",
+    "leadArtist": "Gil Shaham",
+    "socialLinks": [
+      {
+        "label": "Artist website",
+        "url": "https://gilshaham.com"
+      },
+      {
+        "label": "Instagram @gilshaham_official",
+        "url": "https://instagram.com/gilshaham_official"
+      },
+      {
+        "label": "Facebook/gilshaham",
+        "url": "https://facebook.com/gilshaham"
+      }
+    ],
+    "ensembleCount": 2
+  }
+}

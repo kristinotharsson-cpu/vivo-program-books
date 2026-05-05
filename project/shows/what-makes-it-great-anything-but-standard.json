@@ -1,0 +1,151 @@
+{
+  "slug": "what-makes-it-great-anything-but-standard",
+  "cover": {
+    "eyebrow": "Vivo Performing Arts presents",
+    "title": "What Makes It Great? with Rob Kapilow",
+    "subtitle": "Anything But Standard: The Music of Ella Fitzgerald and Oscar Peterson",
+    "date": "Saturday, Jan. 23, 2027",
+    "time": "8 p.m.",
+    "venue": "NEC's Jordan Hall",
+    "accent": "blue",
+    "brush": "voice",
+    "photoCaption": "Rob Kapilow",
+    "calloutLabel": "A note from President and Executive Director",
+    "calloutName": "Gary Dunning",
+    "presentedBy": "",
+    "footerSponsor": null,
+    "artistWebsite": "https://robkapilow.com/",
+    "pressQuote": "\"Rob Kapilow has an exceptional gift for illuminating music's secrets without diminishing its magic.\" The Boston Globe"
+  },
+  "sections": [
+    {
+      "id": "welcome",
+      "title": "Welcome",
+      "kind": "welcome",
+      "eyebrow": "From the Artistic Director",
+      "quote": "-- 18 of 57 -- Rob Kapilow, a live band, and two vocalists demonstrate the unique power of interpretation— exploring how Ella Fitzgerald and Oscar Peterson transformed popular film and Broadway songs into enduring jazz standards.",
+      "body": [
+        "Rob Kapilow's delightfully illuminating What Makes It Great? programs are a masterclass in composer magic: a sudden spark, a fascinating touch, an unexpected swerve. In Anything But Standard, Kapilow demonstrates the unique power of interpretation. Alongside a live band and two vocalists, he'll consider three songs in detail, showing how the singular vocalist Ella Fitzgerald and jazz pianist Oscar Peterson transformed popular film and Broadway songs into jazz standards. Rob shares what makes a lifelong toolkit in listening for the spirit and rhythm of jazz, and implores audiences to experience the alchemy themselves."
+      ],
+      "signature": {
+        "name": "Gary Dunning",
+        "role": "President and Executive Director, Vivo Performing Arts"
+      }
+    },
+    {
+      "id": "performance-sponsor",
+      "title": "Performance Sponsor",
+      "kind": "performance-sponsor",
+      "eyebrow": "Tonight's Performance",
+      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
+      "blocks": [
+        {
+          "label": "Performance Supporter",
+          "name": "Performance Sponsor Name",
+          "statement": "This performance is generously supported by [Sponsor Name]."
+        }
+      ],
+      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
+      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+    },
+    {
+      "id": "program",
+      "title": "Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "Host Rob Kapilow + live band + 2 vocalists. Explores Ella and Oscar's transformation of film and Broadway songs into jazz standards.",
+      "pieces": [
+        {
+          "composer": "Program details",
+          "work": "To be announced from the stage.",
+          "meta": ""
+        }
+      ]
+    },
+    {
+      "id": "artist",
+      "title": "Cast & Creative",
+      "kind": "cast",
+      "eyebrow": "On Stage Tonight",
+      "cast": [
+        {
+          "role": "host / composer",
+          "name": "Rob Kapilow"
+        }
+      ],
+      "creative": []
+    },
+    {
+      "id": "bios",
+      "title": "Artist Bios",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "rob-kapilow",
+          "name": "Rob Kapilow",
+          "role": "host / composer",
+          "initials": "RK",
+          "photoSrc": "",
+          "body": [
+            "Rob Kapilow's delightfully illuminating What Makes It Great? programs are a masterclass in composer magic: a sudden spark, a fascinating touch, an unexpected swerve. In Anything But Standard, Kapilow demonstrates the unique power of interpretation. Alongside a live band and two vocalists, he'll consider three songs in detail, showing how the singular vocalist Ella Fitzgerald and jazz pianist Oscar Peterson transformed popular film and Broadway songs into jazz standards. Rob shares what makes a lifelong toolkit in listening for the spirit and rhythm of jazz, and implores audiences to experience the alchemy themselves."
+          ],
+          "website": "https://robkapilow.com/"
+        }
+      ]
+    },
+    {
+      "id": "vivo",
+      "kind": "vivo",
+      "title": "About Vivo Performing Arts",
+      "eyebrow": "Audience Information · Staff · Supporters"
+    },
+    {
+      "id": "info",
+      "title": "Hall Info",
+      "kind": "info",
+      "eyebrow": "Visitor Info",
+      "sections": [
+        {
+          "h": "Venue",
+          "body": [
+            "NEC's Jordan Hall."
+          ]
+        },
+        {
+          "h": "Land Acknowledgment",
+          "body": [
+            "Vivo Performing Arts gathers and performs on the unceded ancestral lands of the Massachusett, Pawtucket, and Wampanoag peoples."
+          ]
+        },
+        {
+          "h": "Accessibility",
+          "body": [
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+          ]
+        },
+        {
+          "h": "Contact",
+          "body": [
+            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+          ]
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "iso": "2027-01-23",
+    "genre": "WMIG",
+    "venueName": "NEC's Jordan Hall",
+    "leadArtist": "Rob Kapilow",
+    "socialLinks": [
+      {
+        "label": "Artist website",
+        "url": "https://robkapilow.com"
+      }
+    ],
+    "ensembleCount": 1
+  }
+}
