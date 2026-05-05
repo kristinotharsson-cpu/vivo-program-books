@@ -542,6 +542,35 @@ const App = () => {
     setMenuOpen(false);
   };
 
+  // ---- Publish to GitHub → Netlify redeploys automatically ----
+  const getSlug = useCallbackA(() => {
+    const m = window.location.search.match(/show=([^&]+)/);
+    if (m) return m[1];
+    const pm = window.location.pathname.match(/\/([a-z0-9][a-z0-9-]+)\/?$/);
+    return (pm && pm[1] !== "index") ? pm[1] : null;
+  }, []);
+
+  const publishShow = useCallbackA(async () => {
+    const slug = getSlug();
+    if (!slug) {
+      setToast("Open a specific show to publish");
+      return;
+    }
+    setToast("Publishing…");
+    try {
+      const res = await fetch("/.netlify/functions/publish", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ slug, data, tweaks }),
+      });
+      const result = await res.json();
+      if (!res.ok) throw new Error(result.error || "Publish failed");
+      setToast("Published! Site updates in ~30 sec");
+    } catch (e) {
+      setToast("Publish failed: " + e.message);
+    }
+  }, [data, tweaks, getSlug]);
+
   const resetData = () => {
     if (!confirm("Reset all content to the default sample?")) return;
     setData(JSON.parse(JSON.stringify(window.PROGRAM_DATA)));
@@ -906,8 +935,11 @@ const App = () => {
               setToast(`Added \"${title}\"`);
             }} />
           </window.TweakSection>
-          <window.TweakSection label="Export">
-            <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>Download a self-contained HTML file with all current content baked in. Upload to AWS S3 / CloudFront and host as your official program book.</div>
+          <window.TweakSection label="Publish">
+            <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>Save your edits back to the live site. Netlify will redeploy automatically in ~30 seconds.</div>
+            <window.TweakButton label="⬆ Publish to Site" onClick={publishShow} />
+            <div style={{ height: 12 }} />
+            <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>Or download a self-contained HTML file to host manually.</div>
             <window.TweakButton label="Download HTML" onClick={exportHtml} />
           </window.TweakSection>
         </window.TweaksPanel>
