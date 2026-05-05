@@ -87,7 +87,8 @@ const TopBar = ({ title, onBack, onMenu, onSearch, showLogo, logoSrc, home }) =>
 );
 
 // ---------- Settings Menu ----------
-const SettingsMenu = ({ open, onClose, theme, onTheme, fontSize, onFontSize, onShare, onToggleEdit, editing }) => {
+const SettingsMenu = ({ open, onClose, theme, onTheme, fontSize, onFontSize, onShare, onToggleEdit, editing, onSaveJson, onLoadJson, onCustomize }) => {
+  const fileRef = useRef(null);
   if (!open) return null;
   return (
     <>
@@ -118,6 +119,37 @@ const SettingsMenu = ({ open, onClose, theme, onTheme, fontSize, onFontSize, onS
           <span className="label">{editing ? "Stop Editing" : "Edit Content"}</span>
           <Icon name={editing ? "check" : "edit"} size={16} />
         </button>
+        {onCustomize && (
+          <button className="menu-item" onClick={() => { onCustomize(); onClose(); }}>
+            <span className="label">Design Options</span>
+            <svg viewBox="0 0 24 24" width={16} height={16} fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
+          </button>
+        )}
+        {onSaveJson && (
+          <button className="menu-item" onClick={() => { onSaveJson(); onClose(); }}>
+            <span className="label">Save as JSON</span>
+            <Icon name="download" size={16} />
+          </button>
+        )}
+        {onLoadJson && (
+          <>
+            <button className="menu-item" onClick={() => fileRef.current?.click()}>
+              <span className="label">Load from file</span>
+              <Icon name="image" size={16} />
+            </button>
+            <input
+              ref={fileRef}
+              type="file"
+              accept=".json,application/json"
+              style={{ display: "none" }}
+              onChange={(e) => {
+                const f = e.target.files?.[0];
+                if (f) { onLoadJson(f); onClose(); }
+                e.target.value = "";
+              }}
+            />
+          </>
+        )}
       </div>
     </>
   );
@@ -213,5 +245,67 @@ const PhotoSlot = ({ src, initials = "", alt = "", className = "", onChange, onC
   );
 };
 
+// ---------- Design Options (Tweaks) Panel ----------
+const TweaksPanel = ({ onClose, children }) => (
+  <>
+    <div className="tweaks-overlay" onClick={onClose} />
+    <aside className="tweaks-panel" role="dialog" aria-label="Design Options">
+      <div className="tweaks-header">
+        <span>Design Options</span>
+        <button className="tweaks-close" onClick={onClose} aria-label="Close"><Icon name="x" size={18} /></button>
+      </div>
+      <div className="tweaks-body">{children}</div>
+    </aside>
+  </>
+);
+
+const TweakSection = ({ label, children }) => (
+  <div className="tweak-section">
+    <div className="tweak-section-label">{label}</div>
+    {children}
+  </div>
+);
+
+const TweakSelect = ({ label, value, options, onChange }) => (
+  <div className="tweak-row">
+    <label className="tweak-label">{label}</label>
+    <select className="tweak-select" value={value} onChange={e => onChange(e.target.value)}>
+      {options.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
+    </select>
+  </div>
+);
+
+const TweakRadio = ({ label, value, options, onChange }) => (
+  <div className="tweak-row tweak-row--radio">
+    <div className="tweak-label">{label}</div>
+    <div className="tweak-radios">
+      {options.map(o => (
+        <label key={o.value} className={"tweak-radio-opt" + (value === o.value ? " is-active" : "")}>
+          <input type="radio" name={label} value={o.value} checked={value === o.value} onChange={() => onChange(o.value)} />
+          {o.label}
+        </label>
+      ))}
+    </div>
+  </div>
+);
+
+const TweakToggle = ({ label, value, onChange }) => (
+  <div className="tweak-row tweak-row--toggle">
+    <span className="tweak-label">{label}</span>
+    <button
+      className={"tweak-toggle" + (value ? " is-on" : "")}
+      onClick={() => onChange(!value)}
+      role="switch"
+      aria-checked={value}
+    >
+      <span className="tweak-toggle-knob" />
+    </button>
+  </div>
+);
+
+const TweakButton = ({ label, onClick }) => (
+  <button className="tweak-btn" onClick={onClick}>{label}</button>
+);
+
 // Expose globally for other Babel scripts
-Object.assign(window, { Icon, Editable, TopBar, SettingsMenu, Toast, SectionBottomNav, RowControls, AddRowButton, PhotoSlot });
+Object.assign(window, { Icon, Editable, TopBar, SettingsMenu, Toast, SectionBottomNav, RowControls, AddRowButton, PhotoSlot, TweaksPanel, TweakSection, TweakSelect, TweakRadio, TweakToggle, TweakButton });

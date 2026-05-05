@@ -438,7 +438,13 @@ const App = () => {
   }, [fontSize]);
 
   const [editing, setEditing] = useStateA(false);
-  useEffectA(() => { window.__editMode = editing; }, [editing]);
+  // Keep window.__editMode in sync — set it before React re-renders so Editable
+  // components pick it up during the same render pass, not the next one.
+  const toggleEditing = useCallbackA(() => {
+    const next = !window.__editMode;
+    window.__editMode = next;
+    setEditing(next);
+  }, []);
 
   const [menuOpen, setMenuOpen] = useStateA(false);
   const [searchOpen, setSearchOpen] = useStateA(false);
@@ -450,21 +456,32 @@ const App = () => {
   }, [toast]);
 
   // ---- Tweaks ----
+  const tweakStorageKey = useCallbackA(() => {
+    const base = window.__VIVO_STORAGE_KEY || "vivo-pb-data";
+    return base.replace("vivo-pb-data", "vivo-pb-tweaks");
+  }, []);
+
   const [tweaks, setTweaks] = useStateA(() => {
     if (window.VIVO_PROGRAM_DATA_SNAPSHOT && window.VIVO_PROGRAM_DATA_SNAPSHOT.tweaks) {
       return { ...TWEAK_DEFAULTS, ...window.VIVO_PROGRAM_DATA_SNAPSHOT.tweaks };
     }
+    try {
+      const base = window.__VIVO_STORAGE_KEY || "vivo-pb-data";
+      const saved = localStorage.getItem(base.replace("vivo-pb-data", "vivo-pb-tweaks"));
+      if (saved) return { ...TWEAK_DEFAULTS, ...JSON.parse(saved) };
+    } catch (e) {}
     return TWEAK_DEFAULTS;
   });
-  // Listen for tweaks panel updates
-  useEffectA(() => {
-    if (!window.useTweaks) return;
-    // The TweaksPanel uses postMessage on parent — we read from current tweaks state. Wire up our own.
-  }, []);
 
-  // Tweaks panel: register listener for host activate/deactivate
+  // Persist tweaks per-show to localStorage
+  useEffectA(() => {
+    try { localStorage.setItem(tweakStorageKey(), JSON.stringify(tweaks)); } catch (e) {}
+  }, [tweaks]);
+
+  // Tweaks panel visibility — toggled directly from settings menu
   const [showTweaks, setShowTweaks] = useStateA(false);
   useEffectA(() => {
+    // Also support the Claude Design host postMessage protocol
     const onMsg = (e) => {
       if (!e.data) return;
       if (e.data.type === "__activate_edit_mode") setShowTweaks(true);
@@ -525,11 +542,79 @@ const App = () => {
     setMenuOpen(false);
   };
 
+  // ---- Publish to GitHub → Netlify redeploys automatically ----
+  const getSlug = useCallbackA(() => {
+    const m = window.location.search.match(/show=([^&]+)/);
+    if (m) return m[1];
+    const pm = window.location.pathname.match(/\/([a-z0-9][a-z0-9-]+)\/?$/);
+    return (pm && pm[1] !== "index") ? pm[1] : null;
+  }, []);
+
+  const publishShow = useCallbackA(async () => {
+    const slug = getSlug();
+    if (!slug) {
+      setToast("Open a specific show to publish");
+      return;
+    }
+    setToast("Publishing…");
+    try {
+      const res = await fetch("/.netlify/functions/publish", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ slug, data, tweaks }),
+      });
+      const result = await res.json();
+      if (!res.ok) throw new Error(result.error || "Publish failed");
+      setToast("Published! Site updates in ~30 sec");
+    } catch (e) {
+      setToast("Publish failed: " + e.message);
+    }
+  }, [data, tweaks, getSlug]);
+
   const resetData = () => {
     if (!confirm("Reset all content to the default sample?")) return;
     setData(JSON.parse(JSON.stringify(window.PROGRAM_DATA)));
     setToast("Content reset");
   };
+
+  // ---- Save content as JSON (data only, smaller than full HTML export) ----
+  const saveJson = useCallbackA(() => {
+    const slug = (() => {
+      const m = window.location.search.match(/show=([^&]+)/);
+      if (m) return m[1];
+      const pm = window.location.pathname.match(/\/([a-z0-9][a-z0-9-]+)\/?$/);
+      return pm ? pm[1] : "program";
+    })();
+    const json = JSON.stringify(data, null, 2);
+    const blob = new Blob([json], { type: "application/json;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = slug + "-content.json";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    setToast("Saved as JSON");
+  }, [data]);
+
+  // ---- Load content from a JSON file ----
+  const loadJson = useCallbackA((file) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const parsed = JSON.parse(String(reader.result || ""));
+        // Accept either a full show JSON or just a data object with sections
+        const programData = parsed.sections ? parsed : (parsed.data && parsed.data.sections ? parsed.data : null);
+        if (!programData) throw new Error("No sections found");
+        setData(programData);
+        setToast("Program loaded from file");
+      } catch (e) {
+        setToast("Invalid JSON file");
+      }
+    };
+    reader.readAsText(file);
+  }, []);
 
   // ---- Export HTML for AWS hosting ----
   // Fetches the source HTML, inlines all linked CSS/JS/images/fonts, and bakes
@@ -688,7 +773,7 @@ const App = () => {
           ) : null}
           <footer className="app-footer">
             <img src={theme === "dark" ? "assets/logos/vivo-logo-cream.png" : "assets/logos/vivo-logo-black.png"} alt="Vivo" />
-            <div>© Vivo Performing Arts · vivo.org</div>
+            <div>© Vivo Performing Arts · <a href="https://vivoperformingarts.org/" target="_blank" rel="noopener" style={{color:"inherit"}}>vivoperformingarts.org</a></div>
           </footer>
         </div>
       ) : (
@@ -725,8 +810,11 @@ const App = () => {
         fontSize={fontSize}
         onFontSize={setFontSize}
         onShare={handleShare}
-        onToggleEdit={() => { setEditing(e => !e); setMenuOpen(false); setToast(editing ? "Edit mode off" : "Tap any text to edit"); }}
+        onToggleEdit={() => { toggleEditing(); setMenuOpen(false); setToast(editing ? "Edit mode off" : "Tap any text to edit"); }}
         editing={editing}
+        onSaveJson={saveJson}
+        onLoadJson={loadJson}
+        onCustomize={() => setShowTweaks(true)}
       />
 
       <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} data={data} onGo={goTo} />
@@ -734,10 +822,10 @@ const App = () => {
       <Toast msg={toast} />
 
       {/* Tweaks panel */}
-      {showTweaks && window.TweaksPanel ? (
-        <window.TweaksPanel onClose={() => { setShowTweaks(false); window.parent.postMessage({ type: "__edit_mode_dismissed" }, "*"); }}>
-          <window.TweakSection label="Cover Layout">
-            <window.TweakSelect
+      {showTweaks ? (
+        <TweaksPanel onClose={() => { setShowTweaks(false); window.parent.postMessage({ type: "__edit_mode_dismissed" }, "*"); }}>
+          <TweakSection label="Cover Layout">
+            <TweakSelect
               label="Accent Color"
               value={tweaks.coverAccent}
               options={[
@@ -753,13 +841,13 @@ const App = () => {
               ]}
               onChange={v => setTweak("coverAccent", v)}
             />
-            <window.TweakSelect
+            <TweakSelect
               label="Brush Mark"
               value={tweaks.coverBrush}
               options={["harmony", "tempo", "rhythm", "pitch", "form", "dynamics", "jazz"].map(b => ({ value: b, label: b[0].toUpperCase() + b.slice(1) }))}
               onChange={v => setTweak("coverBrush", v)}
             />
-            <window.TweakRadio
+            <TweakRadio
               label="Brush Color"
               value={tweaks.brushColor}
               options={[
@@ -769,7 +857,7 @@ const App = () => {
               ]}
               onChange={v => setTweak("brushColor", v)}
             />
-            <window.TweakSelect
+            <TweakSelect
               label="Cover Text"
               value={tweaks.coverTextColor}
               options={[
@@ -781,9 +869,9 @@ const App = () => {
               ]}
               onChange={v => setTweak("coverTextColor", v)}
             />
-          </window.TweakSection>
-          <window.TweakSection label="Table of Contents">
-            <window.TweakRadio
+          </TweakSection>
+          <TweakSection label="Table of Contents">
+            <TweakRadio
               label="Layout"
               value={tweaks.tocVariant}
               options={[
@@ -792,7 +880,7 @@ const App = () => {
               ]}
               onChange={v => setTweak("tocVariant", v)}
             />
-            <window.TweakSelect
+            <TweakSelect
               label="Highlight Color"
               value={tweaks.tocHighlight}
               options={[
@@ -808,14 +896,14 @@ const App = () => {
               ]}
               onChange={v => setTweak("tocHighlight", v)}
             />
-          </window.TweakSection>
-          <window.TweakSection label="Content">
-            <window.TweakButton label="Reset Sample Content" onClick={resetData} />
-          </window.TweakSection>
-          <window.TweakSection label="Sections">
+          </TweakSection>
+          <TweakSection label="Content">
+            <TweakButton label="Reset Sample Content" onClick={resetData} />
+          </TweakSection>
+          <TweakSection label="Sections">
             <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>Toggle off to hide a section from the table of contents and navigation. Section content is preserved.</div>
             {data.sections.map(s => (
-              <window.TweakToggle
+              <TweakToggle
                 key={s.id}
                 label={s.title}
                 value={!hiddenSet.has(s.id)}
@@ -826,7 +914,7 @@ const App = () => {
                 }}
               />
             ))}
-            <window.TweakButton label="+ Add Section" onClick={() => {
+            <TweakButton label="+ Add Section" onClick={() => {
               const title = (prompt("Section title?") || "").trim();
               if (!title) return;
               const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || ("section-" + Date.now());
@@ -846,12 +934,15 @@ const App = () => {
               });
               setToast(`Added \"${title}\"`);
             }} />
-          </window.TweakSection>
-          <window.TweakSection label="Export">
-            <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>Download a self-contained HTML file with all current content baked in. Upload to AWS S3 / CloudFront and host as your official program book.</div>
-            <window.TweakButton label="Download HTML" onClick={exportHtml} />
-          </window.TweakSection>
-        </window.TweaksPanel>
+          </TweakSection>
+          <TweakSection label="Publish">
+            <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>Save your edits back to the live site. Netlify will redeploy automatically in ~30 seconds.</div>
+            <TweakButton label="⬆ Publish to Site" onClick={publishShow} />
+            <div style={{ height: 12 }} />
+            <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>Or download a self-contained HTML file to host manually.</div>
+            <TweakButton label="Download HTML" onClick={exportHtml} />
+          </TweakSection>
+        </TweaksPanel>
       ) : null}
     </div>
   );
