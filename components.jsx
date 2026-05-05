@@ -87,7 +87,7 @@ const TopBar = ({ title, onBack, onMenu, onSearch, showLogo, logoSrc, home }) =>
 );
 
 // ---------- Settings Menu ----------
-const SettingsMenu = ({ open, onClose, theme, onTheme, fontSize, onFontSize, onShare, onToggleEdit, editing, onSaveJson, onLoadJson }) => {
+const SettingsMenu = ({ open, onClose, theme, onTheme, fontSize, onFontSize, onShare, onToggleEdit, editing, onSaveJson, onLoadJson, onCustomize }) => {
   const fileRef = useRef(null);
   if (!open) return null;
   return (
@@ -119,6 +119,12 @@ const SettingsMenu = ({ open, onClose, theme, onTheme, fontSize, onFontSize, onS
           <span className="label">{editing ? "Stop Editing" : "Edit Content"}</span>
           <Icon name={editing ? "check" : "edit"} size={16} />
         </button>
+        {onCustomize && (
+          <button className="menu-item" onClick={() => { onCustomize(); onClose(); }}>
+            <span className="label">Design Options</span>
+            <svg viewBox="0 0 24 24" width={16} height={16} fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
+          </button>
+        )}
         {onSaveJson && (
           <button className="menu-item" onClick={() => { onSaveJson(); onClose(); }}>
             <span className="label">Save as JSON</span>

@@ -456,21 +456,32 @@ const App = () => {
   }, [toast]);
 
   // ---- Tweaks ----
+  const tweakStorageKey = useCallbackA(() => {
+    const base = window.__VIVO_STORAGE_KEY || "vivo-pb-data";
+    return base.replace("vivo-pb-data", "vivo-pb-tweaks");
+  }, []);
+
   const [tweaks, setTweaks] = useStateA(() => {
     if (window.VIVO_PROGRAM_DATA_SNAPSHOT && window.VIVO_PROGRAM_DATA_SNAPSHOT.tweaks) {
       return { ...TWEAK_DEFAULTS, ...window.VIVO_PROGRAM_DATA_SNAPSHOT.tweaks };
     }
+    try {
+      const base = window.__VIVO_STORAGE_KEY || "vivo-pb-data";
+      const saved = localStorage.getItem(base.replace("vivo-pb-data", "vivo-pb-tweaks"));
+      if (saved) return { ...TWEAK_DEFAULTS, ...JSON.parse(saved) };
+    } catch (e) {}
     return TWEAK_DEFAULTS;
   });
-  // Listen for tweaks panel updates
-  useEffectA(() => {
-    if (!window.useTweaks) return;
-    // The TweaksPanel uses postMessage on parent — we read from current tweaks state. Wire up our own.
-  }, []);
 
-  // Tweaks panel: register listener for host activate/deactivate
+  // Persist tweaks per-show to localStorage
+  useEffectA(() => {
+    try { localStorage.setItem(tweakStorageKey(), JSON.stringify(tweaks)); } catch (e) {}
+  }, [tweaks]);
+
+  // Tweaks panel visibility — toggled directly from settings menu
   const [showTweaks, setShowTweaks] = useStateA(false);
   useEffectA(() => {
+    // Also support the Claude Design host postMessage protocol
     const onMsg = (e) => {
       if (!e.data) return;
       if (e.data.type === "__activate_edit_mode") setShowTweaks(true);
@@ -774,6 +785,7 @@ const App = () => {
         editing={editing}
         onSaveJson={saveJson}
         onLoadJson={loadJson}
+        onCustomize={() => setShowTweaks(true)}
       />
 
       <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} data={data} onGo={goTo} />
