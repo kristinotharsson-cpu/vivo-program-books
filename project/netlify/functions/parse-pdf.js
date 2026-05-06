@@ -197,11 +197,11 @@ ${text.slice(0, 50000)}`;
     "gemini-2.0-flash",
   ];
 
-  let rawText = "";
-  let lastErr = "";
-  for (const model of MODELS) {
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-    try {
+  try {
+    let rawText = "";
+    let lastErr = "";
+    for (const model of MODELS) {
+      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
       const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -213,19 +213,16 @@ ${text.slice(0, 50000)}`;
       const apiResp = await res.json();
       if (!res.ok) {
         lastErr = apiResp.error?.message || `HTTP ${res.status}`;
-        // If "not found" try next model; otherwise stop
-        if (!lastErr.includes("not found") && !lastErr.includes("not supported")) throw new Error(lastErr);
-        continue;
+        // Only skip to next model if this model simply isn't found
+        if (lastErr.includes("not found") || lastErr.includes("not supported")) continue;
+        // Any other error (quota, auth, etc.) — stop immediately
+        throw new Error(lastErr);
       }
       rawText = apiResp.candidates?.[0]?.content?.parts?.[0]?.text || "";
       if (rawText) break;
-    } catch (e) {
-      throw e;
     }
-  }
-  if (!rawText) throw new Error("No available Gemini model returned content. Last error: " + lastErr);
+    if (!rawText) throw new Error("No available Gemini model returned content. Last error: " + lastErr);
 
-  try {
     // Strip any accidental markdown fences
     const cleaned = rawText.replace(/^```[a-z]*\n?/i, "").replace(/\n?```$/i, "").trim();
 
