@@ -58,6 +58,17 @@ const _TweakToggle = ({ label, value, onChange }) => (
 const _TweakButton = ({ label, onClick }) => (
   <button onClick={onClick} style={{ display:"block",width:"100%",padding:"8px 12px",fontSize:13,fontFamily:"var(--font-body)",background:"var(--vivo-plum)",color:"var(--vivo-cream)",border:"none",borderRadius:6,cursor:"pointer",marginBottom:8,textAlign:"center" }}>{label}</button>
 );
+const _TweakSlider = ({ label, value, min, max, step = 1, unit = "", onChange }) => (
+  <div style={{ marginBottom:12 }}>
+    <div style={{ display:"flex",justifyContent:"space-between",alignItems:"baseline",marginBottom:4 }}>
+      <span style={{ fontSize:13,color:"var(--fg)" }}>{label}</span>
+      <span style={{ fontSize:12,fontWeight:700,color:"var(--fg-muted)",minWidth:36,textAlign:"right" }}>{value}{unit}</span>
+    </div>
+    <input type="range" min={min} max={max} step={step} value={value}
+      onChange={e => onChange(Number(e.target.value))}
+      style={{ width:"100%",accentColor:"var(--vivo-plum)",cursor:"pointer" }} />
+  </div>
+);
 
 // ---- Cover photo frame (16:9, brush watermark when empty) ----
 const CoverPhotoFrame = ({ src, alt, onChange, onClear }) => {
@@ -109,7 +120,7 @@ const CoverPhotoFrame = ({ src, alt, onChange, onClear }) => {
 };
 
 // ---- Cover ----
-const Cover = ({ cover, update, variant, brushColor, textColor, theme }) => {
+const Cover = ({ cover, update, variant, brushColor, textColor, theme, brushScale, brushAngle }) => {
   // Map accent name to css var
   const accentMap = {
     plum: "var(--vivo-plum)",
@@ -141,7 +152,9 @@ const Cover = ({ cover, update, variant, brushColor, textColor, theme }) => {
         <Editable as="h1" className="cover-title" value={cover.title} onChange={v => update({ title: v })} />
         <Editable as="div" className="cover-subtitle" value={cover.subtitle} onChange={v => update({ subtitle: v })} />
         <div className="cover-hero-photo">
-          <img className="cover-brush tr" src={brushSrc} alt="" aria-hidden="true" onError={(e) => e.target.style.display = "none"} />
+          <img className="cover-brush tr" src={brushSrc} alt="" aria-hidden="true"
+            style={{ "--brush-scale": (brushScale || 100) / 100, "--brush-angle": (brushAngle ?? 30) + "deg" }}
+            onError={(e) => e.target.style.display = "none"} />
           <CoverPhotoFrame
             src={cover.photoSrc}
             alt={cover.photoCaption || ""}
@@ -423,6 +436,8 @@ const App = () => {
     "coverAccent": "green",
     "coverBrush": "harmony",
     "brushColor": "cream",
+    "brushScale": 100,
+    "brushAngle": 30,
     "coverTextColor": "auto",
     "hiddenSections": []
   }/*EDITMODE-END*/;
@@ -811,7 +826,7 @@ const App = () => {
 
       {!currentSection ? (
         <div className="page home">
-          <Cover cover={cover} update={updateCover} variant="default" brushColor={tweaks.brushColor} textColor={tweaks.coverTextColor} theme={theme} />
+          <Cover cover={cover} update={updateCover} variant="default" brushColor={tweaks.brushColor} textColor={tweaks.coverTextColor} theme={theme} brushScale={tweaks.brushScale} brushAngle={tweaks.brushAngle} />
           <NoteCallout
             label={data.cover.calloutLabel || "A note from President and Executive Director"}
             name={data.cover.calloutName || "Gary Dunning"}
@@ -917,6 +932,18 @@ const App = () => {
                 { value: "black", label: "Black" }
               ]}
               onChange={v => setTweak("brushColor", v)}
+            />
+            <_TweakSlider
+              label="Brush Size"
+              value={tweaks.brushScale}
+              min={40} max={220} step={5} unit="%"
+              onChange={v => setTweak("brushScale", v)}
+            />
+            <_TweakSlider
+              label="Brush Angle"
+              value={tweaks.brushAngle}
+              min={-180} max={180} step={5} unit="°"
+              onChange={v => setTweak("brushAngle", v)}
             />
             <_TweakSelect
               label="Cover Text"

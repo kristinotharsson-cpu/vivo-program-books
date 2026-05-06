@@ -455,13 +455,12 @@ button {
 .cover.is-photo-hero .cover-brush.tr {
   position: absolute;
   z-index: 0;
-  /* bleed right and down beyond the photo frame */
   top: -15%;
   right: -40%;
   left: auto;
-  width: 160%;
+  width: calc(160% * var(--brush-scale, 1));
   max-width: none;
-  transform: rotate(30deg);
+  transform: rotate(var(--brush-angle, 30deg));
   transform-origin: 60% 40%;
   opacity: 0.95;
   margin: 0;
