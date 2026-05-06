@@ -562,8 +562,9 @@ const App = () => {
   const [menuOpen, setMenuOpen] = useStateA(false);
   const [searchOpen, setSearchOpen] = useStateA(false);
   const [toast, setToast] = useStateA(null);
+  const isErrorToast = (msg) => msg && /failed|error|invalid|not configured|not loaded/i.test(msg);
   useEffectA(() => {
-    if (!toast) return;
+    if (!toast || isErrorToast(toast)) return;
     const t = setTimeout(() => setToast(null), 1800);
     return () => clearTimeout(t);
   }, [toast]);
@@ -1057,7 +1058,7 @@ ${sharedPart}(function(){
 
       <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} data={data} onGo={goTo} />
 
-      <Toast msg={toast} />
+      <Toast msg={toast} onClose={isErrorToast(toast) ? () => setToast(null) : null} />
 
       {/* Tweaks panel */}
       {showTweaks ? (

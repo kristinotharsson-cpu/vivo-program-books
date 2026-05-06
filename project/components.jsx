@@ -176,7 +176,15 @@ const SettingsMenu = ({ open, onClose, theme, onTheme, fontSize, onFontSize, onS
 };
 
 // ---------- Toast ----------
-const Toast = ({ msg }) => msg ? <div className="toast">{msg}</div> : null;
+const Toast = ({ msg, onClose }) => {
+  if (!msg) return null;
+  return (
+    <div className={"toast" + (onClose ? " toast--error" : "")}>
+      <span>{msg}</span>
+      {onClose ? <button className="toast-close" onClick={onClose} aria-label="Dismiss">×</button> : null}
+    </div>
+  );
+};
 
 // ---------- Section bottom nav ----------
 const SectionBottomNav = ({ prev, next, onGo }) => {

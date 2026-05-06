@@ -1562,11 +1562,37 @@ button {
   text-transform: uppercase;
   z-index: 100;
   animation: fadeUp 180ms ease both;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: min(420px, 90vw);
+  white-space: normal;
+  text-align: left;
 }
 [data-theme="dark"] .toast {
   background: var(--vivo-cream);
   color: var(--vivo-black);
 }
+.toast--error {
+  background: #c0001a;
+  color: #fff;
+}
+[data-theme="dark"] .toast--error {
+  background: #c0001a;
+  color: #fff;
+}
+.toast-close {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 18px;
+  line-height: 1;
+  padding: 0 0 0 4px;
+  cursor: pointer;
+  opacity: 0.8;
+}
+.toast-close:hover { opacity: 1; }
 
 /* ----- Sticky TOC FAB (mobile) ----- */
 .toc-fab {
