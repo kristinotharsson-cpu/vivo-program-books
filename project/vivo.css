@@ -220,6 +220,7 @@ h4 { font-size: var(--fs-h4); }
 
 p, .vivo-body {
   font-family: var(--font-body);
+  font-weight: 900;
   font-size: var(--fs-body);
   line-height: var(--lh-relaxed);
   margin: 0 0 var(--space-4);

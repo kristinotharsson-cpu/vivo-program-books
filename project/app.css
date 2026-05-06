@@ -827,7 +827,7 @@ button {
   text-transform: uppercase;
   color: var(--fg-muted);
   padding-bottom: 12px;
-  border-bottom: 4px solid var(--vivo-plum);
+  border-bottom: 4px solid var(--accent, var(--vivo-plum));
   margin-bottom: 0;
   display: inline-block;
 }
@@ -856,7 +856,7 @@ button {
 .toc-link:focus-visible,
 .toc-link:active,
 .toc-link.is-active {
-  background: var(--toc-highlight, var(--vivo-plum));
+  background: var(--toc-highlight, var(--accent, var(--vivo-plum)));
   color: var(--toc-highlight-fg, var(--vivo-cream));
   outline: none;
 }
@@ -933,7 +933,7 @@ button {
   font-size: 11px;
   letter-spacing: var(--ls-eyebrow);
   text-transform: uppercase;
-  color: var(--vivo-plum);
+  color: var(--accent, var(--vivo-plum));
   margin-bottom: 12px;
 }
 .section-title {
@@ -952,12 +952,14 @@ button {
 }
 .section-page p, .section-page .body {
   font-family: var(--font-body);
+  font-weight: 900;
   font-size: 16px;
   line-height: 1.6;
   margin: 0 0 18px;
   text-wrap: pretty;
 }
 .section-page p.lead {
+  font-weight: 900;
   font-size: 19px;
   line-height: 1.5;
 }
@@ -1118,9 +1120,9 @@ button {
   font-size: 11px;
   letter-spacing: var(--ls-eyebrow);
   text-transform: uppercase;
-  color: var(--vivo-plum);
+  color: var(--accent, var(--vivo-plum));
   padding-bottom: 8px;
-  border-bottom: 2px solid var(--vivo-plum);
+  border-bottom: 2px solid var(--accent, var(--vivo-plum));
   margin-bottom: 12px;
 }
 .roster-list {
@@ -1160,9 +1162,9 @@ button {
   font-size: 11px;
   letter-spacing: var(--ls-eyebrow);
   text-transform: uppercase;
-  color: var(--vivo-plum);
+  color: var(--accent, var(--vivo-plum));
   padding-bottom: 8px;
-  border-bottom: 2px solid var(--vivo-plum);
+  border-bottom: 2px solid var(--accent, var(--vivo-plum));
   font-weight: 700;
 }
 .cast-section-h.is-second { margin-top: 32px; }
@@ -1212,9 +1214,9 @@ button {
   font-size: 18px;
   letter-spacing: 0.04em;
   padding-bottom: 8px;
-  border-bottom: 4px solid var(--vivo-plum);
+  border-bottom: 4px solid var(--accent, var(--vivo-plum));
   margin: 0 0 12px;
-  color: var(--vivo-plum);
+  color: var(--accent, var(--vivo-plum));
 }
 .donor-list {
   list-style: none;
@@ -1269,7 +1271,7 @@ button {
 .event-date .month {
   font-size: 13px;
   letter-spacing: 0.05em;
-  color: var(--vivo-plum);
+  color: var(--accent, var(--vivo-plum));
   display: block;
   margin-bottom: 2px;
 }
@@ -1346,15 +1348,20 @@ button {
 
 /* ----- Welcome / land acknowledgment / safety ----- */
 .welcome-page .welcome-quote {
-  font-family: var(--font-display);
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: clamp(22px, 5vw, 30px);
-  letter-spacing: -0.005em;
-  line-height: 1.05;
+  font-family: var(--font-body);
+  font-weight: 900;
+  font-size: clamp(18px, 4vw, 26px);
+  letter-spacing: -0.01em;
+  line-height: 1.12;
   margin: 0 0 32px;
-  border-left: 4px solid var(--vivo-plum);
+  border-left: 4px solid var(--accent, var(--vivo-plum));
   padding-left: 18px;
+}
+.welcome-page p {
+  font-family: var(--font-body);
+  font-weight: 900;
+  font-size: clamp(15px, 2.5vw, 18px);
+  line-height: 1.45;
 }
 
 .signature {
@@ -1428,7 +1435,7 @@ button {
   font-size: 11px;
   letter-spacing: var(--ls-eyebrow);
   text-transform: uppercase;
-  color: var(--vivo-plum);
+  color: var(--accent, var(--vivo-plum));
   margin-bottom: 4px;
 }
 .search-result .what {
@@ -1447,7 +1454,7 @@ button {
   line-height: 1.4;
 }
 .search-result mark {
-  background: var(--vivo-plum);
+  background: var(--accent, var(--vivo-plum));
   color: var(--vivo-cream);
   padding: 0 2px;
 }
@@ -1899,8 +1906,8 @@ li:hover .row-ctrls,
   align-items: center;
   gap: 6px;
   background: transparent;
-  border: 1px solid var(--vivo-plum);
-  color: var(--vivo-plum);
+  border: 1px solid var(--accent, var(--vivo-plum));
+  color: var(--accent, var(--vivo-plum));
   padding: 4px 10px;
   font-family: var(--font-body);
   font-size: 10px;
@@ -1909,7 +1916,7 @@ li:hover .row-ctrls,
   letter-spacing: 0.1em;
   cursor: pointer;
 }
-.bio-link-btn:hover { background: var(--vivo-plum); color: var(--vivo-cream); }
+.bio-link-btn:hover { background: var(--accent, var(--vivo-plum)); color: var(--vivo-cream); }
 [data-theme="dark"] .bio-link-btn { border-color: var(--vivo-cream); color: var(--vivo-cream); }
 [data-theme="dark"] .bio-link-btn:hover { background: var(--vivo-cream); color: var(--vivo-plum); }
 

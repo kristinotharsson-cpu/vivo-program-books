@@ -793,8 +793,15 @@ const App = () => {
     }
   }, [data, tweaks, theme, fontSize]);
 
+  const accentColorMap = {
+    plum: "var(--vivo-plum)", tangerine: "var(--vivo-tangerine)", orange: "var(--vivo-orange)",
+    blue: "var(--vivo-blue)", "sky-blue": "var(--vivo-sky-blue)", green: "var(--vivo-green)",
+    "light-green": "var(--vivo-light-green)", lavender: "var(--vivo-lavender)", black: "var(--vivo-black)"
+  };
+  const accentCss = accentColorMap[tweaks.tocHighlight] || "var(--vivo-plum)";
+
   return (
-    <div className="app">
+    <div className="app" style={{ "--accent": accentCss }}>
       <TopBar
         title={currentSection ? currentSection.title : data.cover.title}
         showLogo={!currentSection}
