@@ -60,7 +60,7 @@ const _TweakButton = ({ label, onClick }) => (
 );
 
 // ---- Cover photo frame (16:9, brush watermark when empty) ----
-const CoverPhotoFrame = ({ src, alt, brushSrc, onChange, onClear }) => {
+const CoverPhotoFrame = ({ src, alt, onChange, onClear }) => {
   const fileRef = React.useRef(null);
   const editing = window.__editMode;
   const handleClick = (e) => {
@@ -86,13 +86,10 @@ const CoverPhotoFrame = ({ src, alt, brushSrc, onChange, onClear }) => {
       {src ? (
         <img src={src} alt={alt} />
       ) : (
-        <React.Fragment>
-          <img className="cover-photo-hero-brush" src={brushSrc} alt="" aria-hidden="true" onError={(e) => e.target.style.display = "none"} />
-          <span className="cover-photo-hero-placeholder">
-            <span className="ratio">1920 × 1080</span>
-            <span className="hint">{editing ? "Click to add photo" : "Photo"}</span>
-          </span>
-        </React.Fragment>
+        <span className="cover-photo-hero-placeholder">
+          <span className="ratio">1920 × 1080</span>
+          <span className="hint">{editing ? "Click to add photo" : "Photo"}</span>
+        </span>
       )}
       {editing ? (
         <span className="cover-photo-hero-overlay" aria-hidden="true">
@@ -144,10 +141,10 @@ const Cover = ({ cover, update, variant, brushColor, textColor, theme }) => {
         <Editable as="h1" className="cover-title" value={cover.title} onChange={v => update({ title: v })} />
         <Editable as="div" className="cover-subtitle" value={cover.subtitle} onChange={v => update({ subtitle: v })} />
         <div className="cover-hero-photo">
+          <img className="cover-brush tr" src={brushSrc} alt="" aria-hidden="true" onError={(e) => e.target.style.display = "none"} />
           <CoverPhotoFrame
             src={cover.photoSrc}
             alt={cover.photoCaption || ""}
-            brushSrc={brushSrc}
             onChange={(src) => update({ photoSrc: src })}
             onClear={() => update({ photoSrc: "" })}
           />
