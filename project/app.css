@@ -458,9 +458,9 @@ button {
   top: -15%;
   right: -40%;
   left: auto;
-  width: calc(160% * var(--brush-scale, 1));
+  width: 160%;
   max-width: none;
-  transform: rotate(var(--brush-angle, 30deg));
+  transform: scale(var(--brush-scale, 1)) rotate(var(--brush-angle, 30deg));
   transform-origin: 60% 40%;
   opacity: 0.95;
   margin: 0;
