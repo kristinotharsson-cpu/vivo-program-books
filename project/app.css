@@ -669,10 +669,11 @@ button {
   margin-bottom: 6px;
 }
 .inline-ad-name {
-  font-family: var(--font-display);
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   line-height: 1.1;
   margin-bottom: 4px;
 }
@@ -719,10 +720,11 @@ button {
   margin-bottom: 8px;
 }
 .footer-sponsor-name {
-  font-family: var(--font-display);
-  font-size: 26px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+  font-family: var(--font-body);
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   margin-bottom: 8px;
 }
 .footer-sponsor-line {
@@ -762,6 +764,7 @@ button {
   font-weight: 700;
   font-size: 22px;
   letter-spacing: 0.04em;
+  text-transform: uppercase;
   overflow: hidden;
   position: relative;
 }
@@ -1073,6 +1076,7 @@ button {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 22px;
+  text-transform: uppercase;
   flex-shrink: 0;
   overflow: hidden;
   position: relative;
@@ -1858,6 +1862,7 @@ li:hover .row-ctrls,
   font-weight: 700;
   font-size: 22px;
   letter-spacing: 0.04em;
+  text-transform: uppercase;
   overflow: hidden;
   flex-shrink: 0;
 }
@@ -1981,10 +1986,12 @@ li:hover .row-ctrls,
 
 /* ----- Performance Sponsor ----- */
 .perf-sponsor .lead {
-  font-family: var(--font-display);
-  font-weight: 500;
-  font-size: 17px;
+  font-family: var(--font-body);
+  font-weight: 900;
+  font-size: 15px;
   line-height: 1.45;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   margin-bottom: 28px;
   text-wrap: pretty;
 }
@@ -2010,10 +2017,12 @@ li:hover .row-ctrls,
   margin-bottom: 6px;
 }
 .perf-sponsor-name {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 22px;
+  font-family: var(--font-body);
+  font-weight: 900;
+  font-size: 20px;
   line-height: 1.2;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   margin-bottom: 8px;
   text-wrap: balance;
 }
@@ -2086,6 +2095,6 @@ li:hover .row-ctrls,
   text-wrap: pretty;
 }
 @media (min-width: 720px) {
-  .perf-sponsor-name { font-size: 26px; }
-  .perf-sponsor-season .perf-sponsor-name { font-size: 22px; }
+  .perf-sponsor-name { font-size: 24px; }
+  .perf-sponsor-season .perf-sponsor-name { font-size: 20px; }
 }
