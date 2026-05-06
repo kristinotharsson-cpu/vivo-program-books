@@ -70,6 +70,22 @@ const _TweakSlider = ({ label, value, min, max, step = 1, unit = "", onChange })
   </div>
 );
 
+// CSS filter chains to recolor any brush PNG (applied to plum PNG as base).
+// brightness(0) collapses all pixels to black; invert+sepia builds a warm base;
+// hue-rotate shifts to target hue; saturate/brightness tune the final look.
+const BRUSH_FILTERS = {
+  cream:         "brightness(0) invert(1) sepia(0.15) brightness(1.05)",
+  plum:          "none",
+  black:         "brightness(0)",
+  tangerine:     "brightness(0) invert(1) sepia(1) hue-rotate(-15deg) saturate(12) brightness(1.1)",
+  orange:        "brightness(0) invert(1) sepia(1) hue-rotate(9deg) saturate(8) brightness(1.3)",
+  blue:          "brightness(0) invert(1) sepia(1) hue-rotate(177deg) saturate(15) brightness(0.8)",
+  "sky-blue":    "brightness(0) invert(1) sepia(1) hue-rotate(175deg) saturate(8) brightness(1.4)",
+  green:         "brightness(0) invert(1) sepia(1) hue-rotate(115deg) saturate(12) brightness(0.9)",
+  "light-green": "brightness(0) invert(1) sepia(1) hue-rotate(72deg) saturate(5) brightness(1.5)",
+  lavender:      "brightness(0) invert(1) sepia(1) hue-rotate(261deg) saturate(2) brightness(1.2)",
+};
+
 // ---- Cover photo frame (16:9, brush watermark when empty) ----
 const CoverPhotoFrame = ({ src, alt, onChange, onClear }) => {
   const fileRef = React.useRef(null);
@@ -120,7 +136,7 @@ const CoverPhotoFrame = ({ src, alt, onChange, onClear }) => {
 };
 
 // ---- Cover ----
-const Cover = ({ cover, update, variant, brushColor, textColor, theme, brushScale, brushAngle, brushOffsetY }) => {
+const Cover = ({ cover, update, variant, brushColor, textColor, theme, brushScale, brushAngle, brushOffsetY, brushOffsetX }) => {
   // Map accent name to css var
   const accentMap = {
     plum: "var(--vivo-plum)",
@@ -142,7 +158,12 @@ const Cover = ({ cover, update, variant, brushColor, textColor, theme, brushScal
     tangerine: "var(--vivo-tangerine)"
   };
   const fg = textColor && textColor !== "auto" ? (textColorMap[textColor] || autoFg) : autoFg;
-  const brushSrc = `assets/illustrations/${cover.brush}-${brushColor}.png`;
+  // Use cream PNG directly when available (non-jazz + cream color) for best quality;
+  // everything else uses the plum PNG + CSS filter chain.
+  const isJazz = cover.brush === "jazz";
+  const useCreampng = brushColor === "cream" && !isJazz;
+  const brushSrc = `assets/illustrations/${cover.brush}-${useCreampng ? "cream" : "plum"}.png`;
+  const brushFilter = useCreampng ? "none" : (BRUSH_FILTERS[brushColor] || "none");
 
   // Default variant: brush layout with 16:9 photo block in place of brush illustration
   if (variant === "default") {
@@ -153,7 +174,7 @@ const Cover = ({ cover, update, variant, brushColor, textColor, theme, brushScal
         <Editable as="div" className="cover-subtitle" value={cover.subtitle} onChange={v => update({ subtitle: v })} />
         <div className="cover-hero-photo">
           <img className="cover-brush tr" src={brushSrc} alt="" aria-hidden="true"
-            style={{ "--brush-scale": (brushScale || 100) / 100, "--brush-angle": (brushAngle ?? 30) + "deg", "--brush-offset-y": (brushOffsetY ?? 0) + "%" }}
+            style={{ "--brush-scale": (brushScale || 100) / 100, "--brush-angle": (brushAngle ?? 30) + "deg", "--brush-offset-y": (brushOffsetY ?? 0) + "%", "--brush-offset-x": (brushOffsetX ?? 0) + "%", filter: brushFilter }}
             onError={(e) => e.target.style.display = "none"} />
           <CoverPhotoFrame
             src={cover.photoSrc}
@@ -439,6 +460,7 @@ const App = () => {
     "brushScale": 100,
     "brushAngle": 30,
     "brushOffsetY": 0,
+    "brushOffsetX": 0,
     "coverTextColor": "auto",
     "hiddenSections": []
   }/*EDITMODE-END*/;
@@ -827,7 +849,7 @@ const App = () => {
 
       {!currentSection ? (
         <div className="page home">
-          <Cover cover={cover} update={updateCover} variant="default" brushColor={tweaks.brushColor} textColor={tweaks.coverTextColor} theme={theme} brushScale={tweaks.brushScale} brushAngle={tweaks.brushAngle} brushOffsetY={tweaks.brushOffsetY} />
+          <Cover cover={cover} update={updateCover} variant="default" brushColor={tweaks.brushColor} textColor={tweaks.coverTextColor} theme={theme} brushScale={tweaks.brushScale} brushAngle={tweaks.brushAngle} brushOffsetY={tweaks.brushOffsetY} brushOffsetX={tweaks.brushOffsetX} />
           <NoteCallout
             label={data.cover.calloutLabel || "A note from President and Executive Director"}
             name={data.cover.calloutName || "Gary Dunning"}
@@ -924,33 +946,46 @@ const App = () => {
               options={["harmony", "tempo", "rhythm", "pitch", "form", "dynamics", "jazz"].map(b => ({ value: b, label: b[0].toUpperCase() + b.slice(1) }))}
               onChange={v => setTweak("coverBrush", v)}
             />
-            <_TweakRadio
+            <_TweakSelect
               label="Brush Color"
               value={tweaks.brushColor}
               options={[
                 { value: "cream", label: "Cream" },
                 { value: "plum", label: "Plum" },
-                { value: "black", label: "Black" }
+                { value: "black", label: "Black" },
+                { value: "tangerine", label: "Tangerine" },
+                { value: "orange", label: "Orange" },
+                { value: "blue", label: "Blue" },
+                { value: "sky-blue", label: "Sky Blue" },
+                { value: "green", label: "Green" },
+                { value: "light-green", label: "Light Green" },
+                { value: "lavender", label: "Lavender" },
               ]}
               onChange={v => setTweak("brushColor", v)}
             />
             <_TweakSlider
               label="Brush Size"
               value={tweaks.brushScale}
-              min={40} max={400} step={5} unit="%"
+              min={40} max={600} step={5} unit="%"
               onChange={v => setTweak("brushScale", v)}
             />
             <_TweakSlider
               label="Brush Angle"
               value={tweaks.brushAngle}
-              min={-180} max={180} step={5} unit="°"
+              min={-360} max={360} step={5} unit="°"
               onChange={v => setTweak("brushAngle", v)}
             />
             <_TweakSlider
-              label="Brush Position"
+              label="Brush Up/Down"
               value={tweaks.brushOffsetY}
               min={-100} max={100} step={2} unit="%"
               onChange={v => setTweak("brushOffsetY", v)}
+            />
+            <_TweakSlider
+              label="Brush Left/Right"
+              value={tweaks.brushOffsetX}
+              min={-100} max={100} step={2} unit="%"
+              onChange={v => setTweak("brushOffsetX", v)}
             />
             <_TweakSelect
               label="Cover Text"
