@@ -544,7 +544,8 @@ const App = () => {
 
   const [fontSize, setFontSize] = useStateA(() => parseInt(localStorage.getItem("vivo-pb-fs") || "16", 10));
   useEffectA(() => {
-    document.documentElement.style.setProperty("--app-font-size", fontSize + "px");
+    // Set on html element so rem units throughout the CSS scale with this value
+    document.documentElement.style.fontSize = fontSize + "px";
     localStorage.setItem("vivo-pb-fs", String(fontSize));
   }, [fontSize]);
 

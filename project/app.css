@@ -14,7 +14,7 @@ html, body {
 body {
   background: var(--bg);
   color: var(--fg);
-  font-size: var(--app-font-size, 16px);
+  font-size: 1rem;
   -webkit-tap-highlight-color: transparent;
   min-height: 100vh;
 }
@@ -968,14 +968,14 @@ button {
 .section-page p, .section-page .body {
   font-family: var(--font-body);
   font-weight: 900;
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.6;
   margin: 0 0 18px;
   text-wrap: pretty;
 }
 .section-page p.lead {
   font-weight: 900;
-  font-size: 19px;
+  font-size: 1.188rem;
   line-height: 1.5;
 }
 .section-page h3 {
@@ -1010,20 +1010,20 @@ button {
 .program-item .work {
   font-family: var(--font-body);
   font-style: italic;
-  font-size: 17px;
+  font-size: 1.063rem;
   line-height: 1.35;
   margin: 0 0 4px;
 }
 .program-item .meta {
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 0.813rem;
   color: var(--fg-muted);
   margin-top: 4px;
 }
 .program-item .movements {
   margin-top: 10px;
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 0.875rem;
   color: var(--fg-muted);
   line-height: 1.5;
 }
@@ -1376,7 +1376,7 @@ button {
 .welcome-page p {
   font-family: var(--font-body);
   font-weight: 900;
-  font-size: clamp(15px, 2.5vw, 18px);
+  font-size: clamp(0.938rem, 2.5vw, 1.125rem);
   line-height: 1.45;
 }
 
