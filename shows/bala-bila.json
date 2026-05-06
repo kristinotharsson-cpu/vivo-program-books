@@ -149,5 +149,19 @@
       }
     ],
     "ensembleCount": 2
+  },
+  "_tweaks": {
+    "coverVariant": "default",
+    "tocVariant": "minimal",
+    "tocHighlight": "tangerine",
+    "coverAccent": "tangerine",
+    "coverBrush": "harmony",
+    "brushColor": "plum",
+    "brushScale": 415,
+    "brushAngle": -25,
+    "brushOffsetY": -100,
+    "brushOffsetX": 36,
+    "coverTextColor": "auto",
+    "hiddenSections": []
   }
 }
