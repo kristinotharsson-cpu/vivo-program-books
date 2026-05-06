@@ -746,6 +746,53 @@ const App = () => {
     reader.readAsText(file);
   }, []);
 
+  // ---- Import from PDF ----
+  const handleImportPdf = useCallbackA(async (file) => {
+    setToast("Reading PDF…");
+    try {
+      if (!window.pdfjsLib) throw new Error("PDF.js not loaded — try refreshing the page");
+
+      const arrayBuffer = await file.arrayBuffer();
+      const pdf = await window.pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+
+      const pageTexts = [];
+      for (let i = 1; i <= pdf.numPages; i++) {
+        const page = await pdf.getPage(i);
+        const content = await page.getTextContent();
+        // Join items; use newline when y-position changes significantly (new line in PDF)
+        let lastY = null;
+        const lines = [];
+        for (const item of content.items) {
+          if (lastY !== null && Math.abs(item.transform[5] - lastY) > 2) {
+            lines.push("\n");
+          }
+          lines.push(item.str);
+          lastY = item.transform[5];
+        }
+        pageTexts.push(`--- PAGE ${i} ---\n${lines.join(" ").replace(/ \n /g, "\n")}`);
+      }
+
+      const text = pageTexts.join("\n\n");
+      setToast("Parsing with AI…");
+
+      const res = await fetch("/.netlify/functions/parse-pdf", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text }),
+      });
+
+      let result;
+      try { result = await res.json(); } catch (_) { throw new Error("Server returned invalid response"); }
+      if (!res.ok) throw new Error(result.error || `Server error ${res.status}`);
+      if (!result.data) throw new Error("No data returned from parser");
+
+      setData(result.data);
+      setToast("Program imported!");
+    } catch (e) {
+      setToast("Import failed: " + e.message);
+    }
+  }, []);
+
   // ---- Export HTML — fully self-contained single file ----
   // Inlines all CSS/JS/fonts, pre-fetches every known image asset into a JS map,
   // injects VIVO_SHARED and data snapshot so the file works with no server.
@@ -988,6 +1035,7 @@ ${sharedPart}(function(){
         editing={editing}
         onSaveJson={saveJson}
         onLoadJson={loadJson}
+        onImportPdf={handleImportPdf}
         onCustomize={() => setShowTweaks(true)}
       />
 
