@@ -163,5 +163,19 @@
       }
     ],
     "ensembleCount": 1
+  },
+  "_tweaks": {
+    "coverVariant": "default",
+    "tocVariant": "minimal",
+    "tocHighlight": "plum",
+    "coverAccent": "plum",
+    "coverBrush": "tempo",
+    "brushColor": "cream",
+    "brushScale": 565,
+    "brushAngle": -25,
+    "brushOffsetY": -100,
+    "brushOffsetX": 58,
+    "coverTextColor": "auto",
+    "hiddenSections": []
   }
 }
