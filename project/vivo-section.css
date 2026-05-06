@@ -36,7 +36,7 @@
   border: none;
   cursor: pointer;
   text-align: left;
-  color: var(--vivo-cream);
+  color: var(--vivo-cream); /* overridden inline for light backgrounds */
   font: inherit;
   overflow: hidden;
   transition: filter var(--dur-base) var(--ease-standard), transform var(--dur-base) var(--ease-standard);
@@ -142,21 +142,27 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
 }
 .vivo-staff-list li {
   font-family: var(--font-body);
-  font-size: 14px;
-  line-height: 1.4;
   display: flex;
-  flex-wrap: wrap;
-  gap: 2px 6px;
-  align-items: baseline;
+  flex-direction: column;
+  gap: 1px;
 }
-.vivo-staff-name { font-weight: 600; }
-.vivo-staff-title { color: var(--fg-muted); }
+.vivo-staff-name {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.3;
+  color: var(--fg);
+}
+.vivo-staff-title {
+  font-size: 12.5px;
+  line-height: 1.35;
+  color: var(--fg-muted);
+}
 .vivo-staff-email {
   font-size: 12.5px;
   color: var(--vivo-plum);
@@ -213,7 +219,6 @@
   .vivo-banner-title { font-size: 22px; }
   .vivo-banner-sub { font-size: 14px; }
   .vivo-band-title { font-size: 14px; }
-  .vivo-staff-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; }
-  .vivo-staff-list li { flex-direction: column; align-items: flex-start; gap: 2px; }
+  .vivo-staff-list { grid-template-columns: 1fr 1fr; gap: 12px 32px; }
   .vivo-tier-donors { font-size: 14.5px; }
 }

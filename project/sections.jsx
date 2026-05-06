@@ -428,10 +428,24 @@ const InfoSection = ({ s, update }) => (
 const VivoAccordion = ({ id, title, subtitle, accent, brush, brushColor, children, defaultOpen }) => {
   const [open, setOpen] = React.useState(!!defaultOpen);
   const accentMap = {
-    magenta: "#BD2691", tangerine: "#F18A2D", azure: "#1A9FCE",
-    violet: "#7B3FA0", green: "#1FAE5E", plum: "#5B1F5F"
+    plum:         "var(--vivo-plum)",
+    tangerine:    "var(--vivo-tangerine)",
+    orange:       "var(--vivo-orange)",
+    blue:         "var(--vivo-blue)",
+    "sky-blue":   "var(--vivo-sky-blue)",
+    green:        "var(--vivo-green)",
+    "light-green":"var(--vivo-light-green)",
+    lavender:     "var(--vivo-lavender)",
+    black:        "var(--vivo-black)",
+    // legacy aliases from old data
+    magenta:      "var(--vivo-plum)",
+    azure:        "var(--vivo-blue)",
+    violet:       "var(--vivo-plum)",
   };
-  const bg = accentMap[accent] || "#BD2691";
+  const bg = accentMap[accent] || "var(--vivo-plum)";
+  // Light backgrounds need dark text
+  const lightBg = accent === "light-green" || accent === "lavender" || accent === "cream";
+  const bannerColor = lightBg ? "var(--vivo-black)" : "var(--vivo-cream)";
   const brushSrc = brush ? `assets/illustrations/${brush}-${brushColor || "cream"}.png` : null;
   return (
     <div className={"vivo-accordion " + (open ? "is-open" : "")}>
@@ -440,7 +454,7 @@ const VivoAccordion = ({ id, title, subtitle, accent, brush, brushColor, childre
         onClick={() => setOpen(o => !o)}
         aria-expanded={open}
         aria-controls={`vivo-panel-${id}`}
-        style={{ background: bg }}
+        style={{ background: bg, color: bannerColor }}
       >
         {brushSrc ? (
           <img className="vivo-banner-brush" src={brushSrc} alt="" aria-hidden="true" onError={(e) => e.target.style.display = "none"} />
@@ -506,7 +520,7 @@ const VivoSection = ({ s }) => {
                   {(d.members || []).map((m, j) => (
                     <li key={j}>
                       <span className="vivo-staff-name">{m.name}</span>
-                      {m.title ? <span className="vivo-staff-title">, {m.title}</span> : null}
+                      {m.title ? <span className="vivo-staff-title">{m.title}</span> : null}
                       {m.email ? (
                         <a className="vivo-staff-email" href={`mailto:${m.email}`}>{m.email}</a>
                       ) : null}
