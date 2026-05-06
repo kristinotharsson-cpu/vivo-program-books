@@ -103,6 +103,11 @@ const CoverPhotoFrame = ({ src, alt, onChange, onClear }) => {
     reader.readAsDataURL(f);
     e.target.value = "";
   };
+  const handleUrl = (e) => {
+    e.stopPropagation();
+    const url = prompt("Paste an image URL:");
+    if (url && url.trim()) onChange?.(url.trim());
+  };
   return (
     <div
       className={"cover-photo-hero" + (editing ? " is-editable" : "") + (src ? " has-photo" : "")}
@@ -115,13 +120,16 @@ const CoverPhotoFrame = ({ src, alt, onChange, onClear }) => {
       ) : (
         <span className="cover-photo-hero-placeholder">
           <span className="ratio">1920 × 1080</span>
-          <span className="hint">{editing ? "Click to add photo" : "Photo"}</span>
+          <span className="hint">{editing ? "Click to upload photo" : "Photo"}</span>
         </span>
       )}
       {editing ? (
         <span className="cover-photo-hero-overlay" aria-hidden="true">
-          {src ? "Replace photo" : "Add photo"}
+          {src ? "Replace photo" : "Upload photo"}
         </span>
+      ) : null}
+      {editing ? (
+        <button className="photo-url-btn" onClick={handleUrl} aria-label="Use image URL">Use URL</button>
       ) : null}
       {editing && src && onClear ? (
         <button

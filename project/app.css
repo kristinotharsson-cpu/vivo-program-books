@@ -601,6 +601,27 @@ button {
 }
 .cover-photo-hero-clear:hover { background: rgba(0, 0, 0, 0.85); }
 
+/* URL button — appears in edit mode on any photo slot or cover frame */
+.photo-url-btn {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  background: rgba(0, 0, 0, 0.55);
+  color: var(--vivo-cream);
+  border: none;
+  border-radius: var(--radius-1);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  cursor: pointer;
+  z-index: 5;
+  transition: background var(--dur-fast) var(--ease-standard);
+}
+.photo-url-btn:hover { background: var(--vivo-plum); }
+
 @media (min-width: 720px) {
   .cover {
     padding: 56px 64px 64px;

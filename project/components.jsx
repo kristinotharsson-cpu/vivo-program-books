@@ -214,6 +214,11 @@ const PhotoSlot = ({ src, initials = "", alt = "", className = "", onChange, onC
     reader.readAsDataURL(f);
     e.target.value = "";
   };
+  const handleUrl = (e) => {
+    e.stopPropagation();
+    const url = prompt("Paste an image URL:");
+    if (url && url.trim()) onChange?.(url.trim());
+  };
   return (
     <div
       className={"photo-slot" + (editing ? " is-editable" : "") + (src ? " has-photo" : "") + (className ? " " + className : "")}
@@ -232,6 +237,9 @@ const PhotoSlot = ({ src, initials = "", alt = "", className = "", onChange, onC
           <Icon name="image" size={Math.max(14, size * 0.22)} />
           <span>{src ? "Replace" : "Add"}</span>
         </span>
+      ) : null}
+      {editing && size >= 56 ? (
+        <button className="photo-url-btn" onClick={handleUrl} aria-label="Use image URL">URL</button>
       ) : null}
       {editing && src && onClear ? (
         <button
