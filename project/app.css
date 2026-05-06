@@ -454,7 +454,7 @@ button {
 }
 .cover.is-photo-hero .cover-brush.tr {
   position: absolute;
-  z-index: 0;
+  z-index: -1;
   top: -15%;
   right: -40%;
   left: auto;
