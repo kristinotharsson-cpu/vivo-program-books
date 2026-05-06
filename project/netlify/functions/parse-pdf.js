@@ -15,11 +15,11 @@ exports.handler = async (event) => {
     return { statusCode: 405, headers, body: JSON.stringify({ error: "Method not allowed" }) };
   }
 
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = process.env.ProgramBookPDFPARSE;
   if (!apiKey) {
     return {
       statusCode: 500, headers,
-      body: JSON.stringify({ error: "GEMINI_API_KEY not configured. Get a free key at aistudio.google.com, then add it in Netlify → Site configuration → Environment variables." }),
+      body: JSON.stringify({ error: "ProgramBookPDFPARSE API key not configured in Netlify environment variables." }),
     };
   }
 
