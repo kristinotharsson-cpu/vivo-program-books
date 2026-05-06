@@ -70,21 +70,37 @@ const _TweakSlider = ({ label, value, min, max, step = 1, unit = "", onChange })
   </div>
 );
 
-// CSS filter chains to recolor any brush PNG (applied to plum PNG as base).
-// brightness(0) collapses all pixels to black; invert+sepia builds a warm base;
-// hue-rotate shifts to target hue; saturate/brightness tune the final look.
-const BRUSH_FILTERS = {
-  cream:         "brightness(0) invert(1) sepia(0.15) brightness(1.05)",
-  plum:          "none",
-  black:         "brightness(0)",
-  tangerine:     "brightness(0) invert(1) sepia(1) hue-rotate(-15deg) saturate(12) brightness(1.1)",
-  orange:        "brightness(0) invert(1) sepia(1) hue-rotate(9deg) saturate(8) brightness(1.3)",
-  blue:          "brightness(0) invert(1) sepia(1) hue-rotate(177deg) saturate(15) brightness(0.8)",
-  "sky-blue":    "brightness(0) invert(1) sepia(1) hue-rotate(175deg) saturate(8) brightness(1.4)",
-  green:         "brightness(0) invert(1) sepia(1) hue-rotate(115deg) saturate(12) brightness(0.9)",
-  "light-green": "brightness(0) invert(1) sepia(1) hue-rotate(72deg) saturate(5) brightness(1.5)",
-  lavender:      "brightness(0) invert(1) sepia(1) hue-rotate(261deg) saturate(2) brightness(1.2)",
+// Normalized RGB triplets for each brand color.
+// Used to generate precise SVG feColorMatrix tint filters.
+// The filter grayscales the source PNG (preserving luminance/texture),
+// then multiplies each pixel by these exact RGB ratios — giving mathematically
+// correct brand colors with no hue approximation.
+const BRUSH_COLOR_DEFS = {
+  plum:          [0.741, 0.149, 0.569],  // #BD2691
+  cream:         [1.000, 0.984, 0.922],  // #FFFBEB
+  black:         [0.000, 0.000, 0.000],  // #000000
+  tangerine:     [0.937, 0.298, 0.149],  // #EF4C26
+  orange:        [1.000, 0.620, 0.114],  // #FF9E1D
+  blue:          [0.000, 0.478, 0.800],  // #007ACC
+  "sky-blue":    [0.224, 0.741, 1.000],  // #39BDFF
+  green:         [0.106, 0.769, 0.412],  // #1BC469
+  "light-green": [0.812, 1.000, 0.635],  // #CFFFA2
+  lavender:      [0.769, 0.694, 0.788],  // #C4B1C9
 };
+
+// Hidden SVG defs — rendered once in App, referenced via filter: url(#vivo-brush-COLOR)
+const BrushFilterDefs = () => (
+  <svg style={{ position: "absolute", width: 0, height: 0, overflow: "hidden" }} aria-hidden="true">
+    <defs>
+      {Object.entries(BRUSH_COLOR_DEFS).map(([name, [r, g, b]]) => (
+        <filter key={name} id={`vivo-brush-${name}`} colorInterpolationFilters="sRGB">
+          <feColorMatrix type="saturate" values="0" />
+          <feColorMatrix type="matrix" values={`${r} 0 0 0 0  ${g} 0 0 0 0  ${b} 0 0 0 0  0 0 0 1 0`} />
+        </filter>
+      ))}
+    </defs>
+  </svg>
+);
 
 // ---- Cover photo frame (16:9, brush watermark when empty) ----
 const CoverPhotoFrame = ({ src, alt, onChange, onClear }) => {
@@ -166,12 +182,9 @@ const Cover = ({ cover, update, variant, brushColor, textColor, theme, brushScal
     tangerine: "var(--vivo-tangerine)"
   };
   const fg = textColor && textColor !== "auto" ? (textColorMap[textColor] || autoFg) : autoFg;
-  // Use cream PNG directly when available (non-jazz + cream color) for best quality;
-  // everything else uses the plum PNG + CSS filter chain.
-  const isJazz = cover.brush === "jazz";
-  const useCreampng = brushColor === "cream" && !isJazz;
-  const brushSrc = `assets/illustrations/${cover.brush}-${useCreampng ? "cream" : "plum"}.png`;
-  const brushFilter = useCreampng ? "none" : (BRUSH_FILTERS[brushColor] || "none");
+  // Always use the plum PNG as base; SVG filter handles exact color tinting.
+  const brushSrc = `assets/illustrations/${cover.brush}-plum.png`;
+  const brushFilter = `url(#vivo-brush-${brushColor || "plum"})`;
 
   // Default variant: brush layout with 16:9 photo block in place of brush illustration
   if (variant === "default") {
@@ -862,6 +875,7 @@ const App = () => {
 
   return (
     <div className="app" style={{ "--accent": accentCss }}>
+      <BrushFilterDefs />
       <TopBar
         title={currentSection ? currentSection.title : data.cover.title}
         showLogo={!currentSection}
