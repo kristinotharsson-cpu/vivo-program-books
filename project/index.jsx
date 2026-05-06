@@ -216,6 +216,7 @@ const MONTH_NAMES = {
 const FILTERS = [
   { id: "all",          label: "All",               match: () => true },
   { id: "upcoming",     label: "Upcoming",          match: (s, ctx) => ctx.upcoming.has(s.slug) },
+  { id: "past",         label: "Past",              match: (s, ctx) => !ctx.upcoming.has(s.slug) },
   { id: "classical",    label: "Classical",         match: s => /Pianist|Chamber|Classical|Orchestra|Instrumentalist|Ch Orch|Vocal/.test(s.genre) },
   { id: "jazz",         label: "Jazz",              match: s => /Jazz/.test(s.genre) },
   { id: "dance",        label: "Dance",             match: s => /Dance|PPP/.test(s.genre) },
@@ -439,20 +440,28 @@ function App() {
             <>
               {upcomingShows.length > 0 && <GridView items={upcomingShows} />}
               {pastShows.length > 0 && (
-                <>
-                  <PastDivider count={pastShows.length} open={showPast} onToggle={() => setShowPast(p => !p)} />
-                  {showPast && <GridView items={pastShows} past />}
-                </>
+                genreFilter === "past" ? (
+                  <GridView items={pastShows} past />
+                ) : (
+                  <>
+                    <PastDivider count={pastShows.length} open={showPast} onToggle={() => setShowPast(p => !p)} />
+                    {showPast && <GridView items={pastShows} past />}
+                  </>
+                )
               )}
             </>
           ) : (
             <>
               {upcomingGroups.length > 0 && <ListView groups={upcomingGroups} />}
               {pastShows.length > 0 && (
-                <>
-                  <PastDivider count={pastShows.length} open={showPast} onToggle={() => setShowPast(p => !p)} />
-                  {showPast && <ListView groups={pastGroups} past />}
-                </>
+                genreFilter === "past" ? (
+                  <ListView groups={pastGroups} past />
+                ) : (
+                  <>
+                    <PastDivider count={pastShows.length} open={showPast} onToggle={() => setShowPast(p => !p)} />
+                    {showPast && <ListView groups={pastGroups} past />}
+                  </>
+                )
               )}
             </>
           )}
