@@ -70,32 +70,30 @@ const _TweakSlider = ({ label, value, min, max, step = 1, unit = "", onChange })
   </div>
 );
 
-// Normalized RGB triplets for each brand color.
-// Used to generate precise SVG feColorMatrix tint filters.
-// The filter grayscales the source PNG (preserving luminance/texture),
-// then multiplies each pixel by these exact RGB ratios — giving mathematically
-// correct brand colors with no hue approximation.
+// Exact brand hex colors for brush tinting.
+// Uses feFlood + feComposite(in) to flood the target color masked by the brush PNG's alpha —
+// gives pixel-perfect brand colors regardless of the source PNG's luminance.
 const BRUSH_COLOR_DEFS = {
-  plum:          [0.741, 0.149, 0.569],  // #BD2691
-  cream:         [1.000, 0.984, 0.922],  // #FFFBEB
-  black:         [0.000, 0.000, 0.000],  // #000000
-  tangerine:     [0.937, 0.298, 0.149],  // #EF4C26
-  orange:        [1.000, 0.620, 0.114],  // #FF9E1D
-  blue:          [0.000, 0.478, 0.800],  // #007ACC
-  "sky-blue":    [0.224, 0.741, 1.000],  // #39BDFF
-  green:         [0.106, 0.769, 0.412],  // #1BC469
-  "light-green": [0.812, 1.000, 0.635],  // #CFFFA2
-  lavender:      [0.769, 0.694, 0.788],  // #C4B1C9
+  plum:          "#BD2691",
+  cream:         "#FFFBEB",
+  black:         "#000000",
+  tangerine:     "#EF4C26",
+  orange:        "#FF9E1D",
+  blue:          "#007ACC",
+  "sky-blue":    "#39BDFF",
+  green:         "#1BC469",
+  "light-green": "#CFFFA2",
+  lavender:      "#C4B1C9",
 };
 
 // Hidden SVG defs — rendered once in App, referenced via filter: url(#vivo-brush-COLOR)
 const BrushFilterDefs = () => (
   <svg style={{ position: "absolute", width: 0, height: 0, overflow: "hidden" }} aria-hidden="true">
     <defs>
-      {Object.entries(BRUSH_COLOR_DEFS).map(([name, [r, g, b]]) => (
+      {Object.entries(BRUSH_COLOR_DEFS).map(([name, hex]) => (
         <filter key={name} id={`vivo-brush-${name}`} colorInterpolationFilters="sRGB">
-          <feColorMatrix type="saturate" values="0" />
-          <feColorMatrix type="matrix" values={`${r} 0 0 0 0  ${g} 0 0 0 0  ${b} 0 0 0 0  0 0 0 1 0`} />
+          <feFlood floodColor={hex} result="color" />
+          <feComposite in="color" in2="SourceGraphic" operator="in" />
         </filter>
       ))}
     </defs>
