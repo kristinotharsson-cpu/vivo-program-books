@@ -747,13 +747,29 @@ const App = () => {
   }, []);
 
   // ---- Import from PDF ----
-  const handleImportPdf = useCallbackA(async (file) => {
-    setToast("Reading PDF…");
-    try {
-      if (!window.pdfjsLib) throw new Error("PDF.js not loaded — try refreshing the page");
+  const loadPdfJs = () => new Promise((resolve, reject) => {
+    if (window.pdfjsLib) { resolve(window.pdfjsLib); return; }
+    const PDFJS_VERSION = "3.11.174";
+    const BASE = `https://unpkg.com/pdfjs-dist@${PDFJS_VERSION}/build/`;
+    const script = document.createElement("script");
+    script.src = BASE + "pdf.min.js";
+    script.onload = () => {
+      if (!window.pdfjsLib) { reject(new Error("PDF.js loaded but pdfjsLib not found on window")); return; }
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = BASE + "pdf.worker.min.js";
+      resolve(window.pdfjsLib);
+    };
+    script.onerror = () => reject(new Error("Failed to load PDF.js from CDN — check your internet connection"));
+    document.head.appendChild(script);
+  });
 
+  const handleImportPdf = useCallbackA(async (file) => {
+    setToast("Loading PDF reader…");
+    try {
+      const pdfjs = await loadPdfJs();
+
+      setToast("Reading PDF…");
       const arrayBuffer = await file.arrayBuffer();
-      const pdf = await window.pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+      const pdf = await pdfjs.getDocument({ data: arrayBuffer }).promise;
 
       const pageTexts = [];
       for (let i = 1; i <= pdf.numPages; i++) {
