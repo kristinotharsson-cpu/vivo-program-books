@@ -460,7 +460,7 @@ button {
   left: auto;
   width: 160%;
   max-width: none;
-  transform: scale(var(--brush-scale, 1)) rotate(var(--brush-angle, 30deg));
+  transform: translateY(var(--brush-offset-y, 0%)) scale(var(--brush-scale, 1)) rotate(var(--brush-angle, 30deg));
   transform-origin: 60% 40%;
   opacity: 0.95;
   margin: 0;

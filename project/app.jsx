@@ -120,7 +120,7 @@ const CoverPhotoFrame = ({ src, alt, onChange, onClear }) => {
 };
 
 // ---- Cover ----
-const Cover = ({ cover, update, variant, brushColor, textColor, theme, brushScale, brushAngle }) => {
+const Cover = ({ cover, update, variant, brushColor, textColor, theme, brushScale, brushAngle, brushOffsetY }) => {
   // Map accent name to css var
   const accentMap = {
     plum: "var(--vivo-plum)",
@@ -153,7 +153,7 @@ const Cover = ({ cover, update, variant, brushColor, textColor, theme, brushScal
         <Editable as="div" className="cover-subtitle" value={cover.subtitle} onChange={v => update({ subtitle: v })} />
         <div className="cover-hero-photo">
           <img className="cover-brush tr" src={brushSrc} alt="" aria-hidden="true"
-            style={{ "--brush-scale": (brushScale || 100) / 100, "--brush-angle": (brushAngle ?? 30) + "deg" }}
+            style={{ "--brush-scale": (brushScale || 100) / 100, "--brush-angle": (brushAngle ?? 30) + "deg", "--brush-offset-y": (brushOffsetY ?? 0) + "%" }}
             onError={(e) => e.target.style.display = "none"} />
           <CoverPhotoFrame
             src={cover.photoSrc}
@@ -438,6 +438,7 @@ const App = () => {
     "brushColor": "cream",
     "brushScale": 100,
     "brushAngle": 30,
+    "brushOffsetY": 0,
     "coverTextColor": "auto",
     "hiddenSections": []
   }/*EDITMODE-END*/;
@@ -826,7 +827,7 @@ const App = () => {
 
       {!currentSection ? (
         <div className="page home">
-          <Cover cover={cover} update={updateCover} variant="default" brushColor={tweaks.brushColor} textColor={tweaks.coverTextColor} theme={theme} brushScale={tweaks.brushScale} brushAngle={tweaks.brushAngle} />
+          <Cover cover={cover} update={updateCover} variant="default" brushColor={tweaks.brushColor} textColor={tweaks.coverTextColor} theme={theme} brushScale={tweaks.brushScale} brushAngle={tweaks.brushAngle} brushOffsetY={tweaks.brushOffsetY} />
           <NoteCallout
             label={data.cover.calloutLabel || "A note from President and Executive Director"}
             name={data.cover.calloutName || "Gary Dunning"}
@@ -936,7 +937,7 @@ const App = () => {
             <_TweakSlider
               label="Brush Size"
               value={tweaks.brushScale}
-              min={40} max={220} step={5} unit="%"
+              min={40} max={400} step={5} unit="%"
               onChange={v => setTweak("brushScale", v)}
             />
             <_TweakSlider
@@ -944,6 +945,12 @@ const App = () => {
               value={tweaks.brushAngle}
               min={-180} max={180} step={5} unit="°"
               onChange={v => setTweak("brushAngle", v)}
+            />
+            <_TweakSlider
+              label="Brush Position"
+              value={tweaks.brushOffsetY}
+              min={-100} max={100} step={2} unit="%"
+              onChange={v => setTweak("brushOffsetY", v)}
             />
             <_TweakSelect
               label="Cover Text"
