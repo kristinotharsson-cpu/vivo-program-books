@@ -746,25 +746,21 @@ const App = () => {
     reader.readAsText(file);
   }, []);
 
-  // ---- Export HTML for AWS hosting ----
-  // Fetches the source HTML, inlines all linked CSS/JS/images/fonts, and bakes
-  // current data + tweaks + theme as a snapshot so the published file boots
-  // with everything as authored.
+  // ---- Export HTML — fully self-contained single file ----
+  // Inlines all CSS/JS/fonts, pre-fetches every known image asset into a JS map,
+  // injects VIVO_SHARED and data snapshot so the file works with no server.
   const exportHtml = useCallbackA(async () => {
     setToast("Bundling export…");
     try {
       const snapshot = { data, tweaks, theme, fontSize, exportedAt: new Date().toISOString() };
       const json = JSON.stringify(snapshot).replace(/<\/script/gi, "<\\/script");
 
-      // Fetch source HTML
       const sourceUrl = window.location.pathname.replace(/[?#].*$/, "");
       let html = await fetch(sourceUrl).then(r => r.text());
 
-      // Helper: resolve relative URL against base (page URL)
       const baseUrl = new URL(sourceUrl, window.location.href);
       const resolve = (href) => new URL(href, baseUrl).href;
 
-      // Helper: fetch as data URL
       const toDataUrl = async (url) => {
         const r = await fetch(url);
         if (!r.ok) throw new Error("fetch failed: " + url);
@@ -777,26 +773,21 @@ const App = () => {
         });
       };
 
-      // 1) Inline <link rel="stylesheet" href="..."> as <style>...</style>,
-      //    rewriting url(...) refs inside the CSS to data URLs.
+      // 1) Inline <link rel="stylesheet"> — also converts url() refs to data URLs
       const linkRe = /<link\b[^>]*rel=["']?stylesheet["']?[^>]*>/gi;
-      const links = [...html.matchAll(linkRe)];
-      for (const m of links) {
+      for (const m of [...html.matchAll(linkRe)]) {
         const tag = m[0];
         const hrefMatch = tag.match(/href=["']([^"']+)["']/i);
         if (!hrefMatch) continue;
         const cssUrl = resolve(hrefMatch[1]);
         try {
           let css = await fetch(cssUrl).then(r => r.text());
-          // Resolve url(...) references relative to the CSS file
           const cssBase = new URL(cssUrl);
           const urlRe = /url\(\s*["']?([^"')]+)["']?\s*\)/g;
-          const refs = [...new Set([...css.matchAll(urlRe)].map(x => x[1]))];
-          for (const ref of refs) {
+          for (const ref of [...new Set([...css.matchAll(urlRe)].map(x => x[1]))]) {
             if (ref.startsWith("data:")) continue;
             try {
-              const abs = new URL(ref, cssBase).href;
-              const dataUrl = await toDataUrl(abs);
+              const dataUrl = await toDataUrl(new URL(ref, cssBase).href);
               css = css.split(ref).join(dataUrl);
             } catch (_) {}
           }
@@ -804,22 +795,14 @@ const App = () => {
         } catch (_) {}
       }
 
-      // 2) Inline <script src="..."> tags with their fetched content.
-      //    Preserve type attribute (e.g. text/babel).
+      // 2) Inline local <script src="..."> (keep CDN scripts external)
       const scriptRe = /<script\b([^>]*)\bsrc=["']([^"']+)["']([^>]*)><\/script>/gi;
-      const scripts = [...html.matchAll(scriptRe)];
-      for (const m of scripts) {
-        const fullTag = m[0];
-        const before = m[1] || "";
-        const src = m[2];
-        const after = m[3] || "";
-        // Skip remote scripts (React/Babel CDN) — keep as-is so they load from CDN
+      for (const m of [...html.matchAll(scriptRe)]) {
+        const [fullTag, before, src, after] = m;
         if (/^https?:\/\//i.test(src)) continue;
         try {
-          const url = resolve(src);
-          const code = await fetch(url).then(r => r.text());
+          const code = await fetch(resolve(src)).then(r => r.text());
           const escaped = code.replace(/<\/script/gi, "<\\/script");
-          // Drop integrity/crossorigin attributes (irrelevant inline)
           const attrs = (before + " " + after)
             .replace(/\s+integrity=["'][^"']*["']/gi, "")
             .replace(/\s+crossorigin=["'][^"']*["']/gi, "")
@@ -829,10 +812,9 @@ const App = () => {
         } catch (_) {}
       }
 
-      // 3) Inline <img src="..."> with data URLs
-      const imgRe = /<img\b[^>]*\bsrc=["']([^"']+)["'][^>]*>/gi;
-      const imgs = [...new Set([...html.matchAll(imgRe)].map(m => m[1]))];
-      for (const src of imgs) {
+      // 3) Inline static <img src="..."> in the HTML
+      const staticImgs = [...new Set([...html.matchAll(/<img\b[^>]*\bsrc=["']([^"']+)["'][^>]*>/gi)].map(m => m[1]))];
+      for (const src of staticImgs) {
         if (/^(data:|https?:\/\/)/i.test(src)) continue;
         try {
           const dataUrl = await toDataUrl(resolve(src));
@@ -840,26 +822,80 @@ const App = () => {
         } catch (_) {}
       }
 
-      // 4) Inject the snapshot script at the very top of <head> so it's available
-      //    before any app code runs.
-      const inject = `<script>window.VIVO_PROGRAM_DATA_SNAPSHOT = ${json};</script>`;
+      // 4) Pre-fetch all known dynamic image assets (brush marks, logos).
+      //    These are rendered by React at runtime so the static pass misses them.
+      const BRUSHES = ["harmony","tempo","rhythm","pitch","form","dynamics","jazz"];
+      const KNOWN_IMGS = [
+        "assets/logos/vivo-logo-cream.png",
+        "assets/logos/vivo-logo-black.png",
+        ...BRUSHES.map(b => `assets/illustrations/${b}-plum.png`),
+      ];
+      const imgMap = {};
+      await Promise.all(KNOWN_IMGS.map(async (path) => {
+        try { imgMap[path] = await toDataUrl(resolve(path)); } catch (_) {}
+      }));
+
+      // Also replace any remaining literal "assets/..." strings in the inlined JS
+      for (const [path, dataUrl] of Object.entries(imgMap)) {
+        html = html.split(`"${path}"`).join(`"${dataUrl}"`).split(`'${path}'`).join(`'${dataUrl}'`);
+      }
+
+      // 5) Fetch VIVO_SHARED (audience info, staff, boards, supporters)
+      let vivoShared = null;
+      try {
+        const r = await fetch(resolve("shows/_vivo-shared.json"));
+        if (r.ok) vivoShared = await r.json();
+      } catch (_) {}
+
+      // 6) Inject snapshot + shared data + image shim (MutationObserver patches
+      //    dynamic img[src] that React sets after DOMContentLoaded)
+      const sharedPart = vivoShared
+        ? `window.VIVO_SHARED = ${JSON.stringify(vivoShared).replace(/<\/script/gi, "<\\/script")};\n`
+        : "";
+      const imgMapJson = JSON.stringify(imgMap);
+      const inject = `<script>
+window.VIVO_PROGRAM_DATA_SNAPSHOT = ${json};
+${sharedPart}(function(){
+  var m = ${imgMapJson};
+  function patch(img){
+    var s = img.getAttribute('src');
+    if(s && !s.startsWith('data:') && m[s]) img.setAttribute('src', m[s]);
+  }
+  var obs = new MutationObserver(function(muts){
+    muts.forEach(function(mut){
+      mut.addedNodes.forEach(function(n){
+        if(n.nodeName==='IMG') patch(n);
+        if(n.querySelectorAll) n.querySelectorAll('img').forEach(patch);
+      });
+      if(mut.type==='attributes' && mut.target.nodeName==='IMG') patch(mut.target);
+    });
+  });
+  document.addEventListener('DOMContentLoaded',function(){
+    obs.observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['src']});
+    document.querySelectorAll('img').forEach(patch);
+  });
+})();
+</script>`;
+
       html = html.includes("<head>")
         ? html.replace("<head>", "<head>\n" + inject)
         : inject + html;
 
-      // 5) Strip the editor-host postMessage chatter (won't break, just noise)
-      // (left intact — harmless on a static host)
+      // 7) Download — filename is the program title
+      const rawTitle = (data?.cover?.title || "Vivo Program Book").trim();
+      const safeTitle = rawTitle.replace(/[/\\?%*:|"<>]/g, "-").replace(/\s+/g, " ").trim();
+      const filename = safeTitle + ".html";
 
       const blob = new Blob([html], { type: "text/html;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
+      const blobUrl = URL.createObjectURL(blob);
       const a = document.createElement("a");
-      a.href = url;
-      a.download = "Vivo Program Book.html";
+      a.href = blobUrl;
+      a.download = filename;
       document.body.appendChild(a);
       a.click();
       a.remove();
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
-      setToast("Bundled HTML downloaded");
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+      setToast("Downloaded: " + filename);
     } catch (e) {
       console.error(e);
       setToast("Export failed — check console");
