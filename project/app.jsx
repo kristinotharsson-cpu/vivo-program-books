@@ -642,6 +642,20 @@ const App = () => {
     return (pm && pm[1] !== "index") ? pm[1] : null;
   }, []);
 
+  // Strip base64 data URLs from the payload before sending to GitHub.
+  // Embedded photos can easily exceed Netlify's 1MB function request limit.
+  // Photos are preserved in localStorage for the current session.
+  const stripDataUrls = (obj) => {
+    if (typeof obj === "string") return obj.startsWith("data:") ? "" : obj;
+    if (Array.isArray(obj)) return obj.map(stripDataUrls);
+    if (obj && typeof obj === "object") {
+      const out = {};
+      for (const k in obj) out[k] = stripDataUrls(obj[k]);
+      return out;
+    }
+    return obj;
+  };
+
   const publishShow = useCallbackA(async () => {
     const slug = getSlug();
     if (!slug) {
@@ -653,9 +667,12 @@ const App = () => {
       const res = await fetch("/.netlify/functions/publish", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ slug, data, tweaks }),
+        body: JSON.stringify({ slug, data: stripDataUrls(data), tweaks }),
       });
-      const result = await res.json();
+      let result;
+      try { result = await res.json(); } catch (_) {
+        throw new Error(res.status === 413 ? "Payload too large — remove large images and try again" : `Server error ${res.status}`);
+      }
       if (!res.ok) throw new Error(result.error || "Publish failed");
       setToast("Published! Site updates in ~30 sec");
     } catch (e) {
