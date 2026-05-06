@@ -188,25 +188,44 @@ Return ONLY valid JSON — no markdown, no explanation, no code fences. Start wi
 PDF TEXT:
 ${text.slice(0, 50000)}`;
 
-  try {
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
-    const res = await fetch(endpoint, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0.1, maxOutputTokens: 8192 },
-      }),
-    });
+  // Try models in order until one works
+  const MODELS = [
+    "gemini-1.5-flash",
+    "gemini-1.5-flash-001",
+    "gemini-1.5-flash-8b",
+    "gemini-2.0-flash-lite",
+    "gemini-2.0-flash",
+  ];
 
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({}));
-      throw new Error(err.error?.message || `Gemini API error ${res.status}`);
+  let rawText = "";
+  let lastErr = "";
+  for (const model of MODELS) {
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+    try {
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: { temperature: 0.1, maxOutputTokens: 8192 },
+        }),
+      });
+      const apiResp = await res.json();
+      if (!res.ok) {
+        lastErr = apiResp.error?.message || `HTTP ${res.status}`;
+        // If "not found" try next model; otherwise stop
+        if (!lastErr.includes("not found") && !lastErr.includes("not supported")) throw new Error(lastErr);
+        continue;
+      }
+      rawText = apiResp.candidates?.[0]?.content?.parts?.[0]?.text || "";
+      if (rawText) break;
+    } catch (e) {
+      throw e;
     }
+  }
+  if (!rawText) throw new Error("No available Gemini model returned content. Last error: " + lastErr);
 
-    const apiResp = await res.json();
-    const rawText = apiResp.candidates?.[0]?.content?.parts?.[0]?.text || "";
-
+  try {
     // Strip any accidental markdown fences
     const cleaned = rawText.replace(/^```[a-z]*\n?/i, "").replace(/\n?```$/i, "").trim();
 
@@ -214,7 +233,7 @@ ${text.slice(0, 50000)}`;
     try {
       parsed = JSON.parse(cleaned);
     } catch (e) {
-      throw new Error("Claude returned invalid JSON: " + e.message);
+      throw new Error("Gemini returned invalid JSON: " + e.message);
     }
 
     if (!parsed.cover || !parsed.sections) {
