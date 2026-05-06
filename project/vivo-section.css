@@ -68,11 +68,12 @@
   min-width: 0;
 }
 .vivo-banner-title {
-  font-family: var(--font-display);
-  font-weight: 700;
+  font-family: var(--font-body);
+  font-weight: 900;
   font-size: 18px;
   line-height: 1.2;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   text-wrap: balance;
 }
 .vivo-banner-sub {
@@ -124,10 +125,11 @@
 .vivo-dept { display: flex; flex-direction: column; gap: 8px; padding: 4px 0 12px; border-bottom: 1px solid var(--border); }
 .vivo-dept:last-child { border-bottom: none; }
 .vivo-dept-h {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 15px;
-  letter-spacing: 0.02em;
+  font-family: var(--font-body);
+  font-weight: 900;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   margin: 4px 0 2px;
   color: var(--vivo-plum);
 }
@@ -216,7 +218,7 @@
 
 @media (min-width: 720px) {
   .vivo-banner { min-height: 84px; padding: 18px 24px; }
-  .vivo-banner-title { font-size: 22px; }
+  .vivo-banner-title { font-size: 20px; }
   .vivo-banner-sub { font-size: 14px; }
   .vivo-band-title { font-size: 14px; }
   .vivo-staff-list { grid-template-columns: 1fr 1fr; gap: 12px 32px; }
