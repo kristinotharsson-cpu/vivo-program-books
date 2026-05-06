@@ -1,5 +1,6 @@
-// Netlify Function — parses extracted PDF text into program book JSON via Claude API.
-// Requires ANTHROPIC_API_KEY set in Netlify → Site configuration → Environment variables.
+// Netlify Function — parses extracted PDF text into program book JSON via Gemini API.
+// Requires GEMINI_API_KEY set in Netlify → Site configuration → Environment variables.
+// Get a free key at https://aistudio.google.com (free tier: 1,500 req/day, no credit card).
 
 exports.handler = async (event) => {
   const headers = {
@@ -14,11 +15,11 @@ exports.handler = async (event) => {
     return { statusCode: 405, headers, body: JSON.stringify({ error: "Method not allowed" }) };
   }
 
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+  const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
     return {
       statusCode: 500, headers,
-      body: JSON.stringify({ error: "ANTHROPIC_API_KEY not configured. Add it in Netlify → Site configuration → Environment variables." }),
+      body: JSON.stringify({ error: "GEMINI_API_KEY not configured. Get a free key at aistudio.google.com, then add it in Netlify → Site configuration → Environment variables." }),
     };
   }
 
@@ -188,27 +189,23 @@ PDF TEXT:
 ${text.slice(0, 50000)}`;
 
   try {
-    const res = await fetch("https://api.anthropic.com/v1/messages", {
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+    const res = await fetch(endpoint, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": apiKey,
-        "anthropic-version": "2023-06-01",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        model: "claude-sonnet-4-6",
-        max_tokens: 8000,
-        messages: [{ role: "user", content: prompt }],
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: { temperature: 0.1, maxOutputTokens: 8192 },
       }),
     });
 
     if (!res.ok) {
       const err = await res.json().catch(() => ({}));
-      throw new Error(err.error?.message || `Anthropic API error ${res.status}`);
+      throw new Error(err.error?.message || `Gemini API error ${res.status}`);
     }
 
     const apiResp = await res.json();
-    const rawText = apiResp.content?.[0]?.text || "";
+    const rawText = apiResp.candidates?.[0]?.content?.parts?.[0]?.text || "";
 
     // Strip any accidental markdown fences
     const cleaned = rawText.replace(/^```[a-z]*\n?/i, "").replace(/\n?```$/i, "").trim();
