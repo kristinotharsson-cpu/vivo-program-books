@@ -93,6 +93,7 @@ function makeStarterJson(form) {
     ],
     _meta: {
       iso: form.isoDate || "",
+      isoEndDate: form.isoEndDate || "",
       genre: form.genre || "Other",
       venueName: form.venue || "",
       leadArtist: form.title,
@@ -104,7 +105,7 @@ function makeStarterJson(form) {
 
 function NewProgramModal({ onClose }) {
   const [form, setForm] = useState({
-    title: "", subtitle: "", date: "", isoDate: "", time: "", venue: "", genre: "Classical", accent: "plum"
+    title: "", subtitle: "", date: "", isoDate: "", isoEndDate: "", time: "", venue: "", genre: "Classical", accent: "plum"
   });
   const [creating, setCreating] = useState(false);
   const set = (key) => (e) => setForm(f => ({ ...f, [key]: e.target.value }));
@@ -144,11 +145,15 @@ function NewProgramModal({ onClose }) {
           <div className="idx-modal-row">
             <label className="idx-modal-field">
               <span>Display Date</span>
-              <input value={form.date} onChange={set("date")} placeholder="e.g. SAT SEP 12" />
+              <input value={form.date} onChange={set("date")} placeholder="e.g. APR 30 – MAY 3" />
             </label>
             <label className="idx-modal-field">
-              <span>Date (for sorting)</span>
+              <span>Start Date</span>
               <input value={form.isoDate} onChange={set("isoDate")} type="date" />
+            </label>
+            <label className="idx-modal-field">
+              <span>End Date <span style={{ fontWeight: 400, opacity: 0.6 }}>(if multi-day)</span></span>
+              <input value={form.isoEndDate} onChange={set("isoEndDate")} type="date" min={form.isoDate || undefined} />
             </label>
             <label className="idx-modal-field">
               <span>Time</span>
@@ -282,6 +287,7 @@ function App() {
                 date: d.cover.date || "DRAFT",
                 time: d.cover.time || "",
                 iso: (d._meta && d._meta.iso) || new Date().toISOString().slice(0, 10),
+                isoEndDate: (d._meta && d._meta.isoEndDate) || "",
                 venue: d.cover.venue || "TBD",
                 genre: (d._meta && d._meta.genre) || "Other",
                 tags: ["Draft"],
@@ -298,11 +304,13 @@ function App() {
 
   useEffect(() => { localStorage.setItem("vivo-idx-view", view); }, [view]);
 
-  // Mark each show upcoming/past based on today's date
+  // Mark each show upcoming/past — use end date when present so multi-day runs
+  // stay in Upcoming until the last performance has passed.
   const upcomingSlugs = useMemo(() => {
     const set = new Set();
     shows.forEach(s => {
-      const ts = s.iso ? new Date(s.iso + "T23:59:59").getTime() : 0;
+      const cutoff = s.isoEndDate || s.iso;
+      const ts = cutoff ? new Date(cutoff + "T23:59:59").getTime() : 0;
       if (ts >= todayTs) set.add(s.slug);
     });
     return set;

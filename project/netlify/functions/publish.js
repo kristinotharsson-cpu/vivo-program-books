@@ -88,6 +88,7 @@ exports.handler = async (event) => {
             date: data.cover.date || "",
             time: data.cover.time || "",
             iso: data._meta?.iso || "",
+            isoEndDate: data._meta?.isoEndDate || "",
             venue: data.cover.venue || "",
             genre: data._meta?.genre || "Other",
             tags: [],
