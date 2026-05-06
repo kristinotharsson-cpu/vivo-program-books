@@ -1,6 +1,6 @@
-// Netlify Function — parses extracted PDF text into program book JSON via Gemini API.
-// Requires GEMINI_API_KEY set in Netlify → Site configuration → Environment variables.
-// Get a free key at https://aistudio.google.com (free tier: 1,500 req/day, no credit card).
+// Netlify Function — parses extracted PDF text into program book JSON via Groq API.
+// Requires GROQ_API_KEY set in Netlify → Site configuration → Environment variables.
+// Get a free key at https://console.groq.com (free tier, no credit card required).
 
 exports.handler = async (event) => {
   const headers = {
@@ -15,11 +15,11 @@ exports.handler = async (event) => {
     return { statusCode: 405, headers, body: JSON.stringify({ error: "Method not allowed" }) };
   }
 
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) {
     return {
       statusCode: 500, headers,
-      body: JSON.stringify({ error: "GEMINI_API_KEY not configured in Netlify environment variables." }),
+      body: JSON.stringify({ error: "GROQ_API_KEY not configured in Netlify environment variables." }),
     };
   }
 
@@ -188,40 +188,26 @@ Return ONLY valid JSON — no markdown, no explanation, no code fences. Start wi
 PDF TEXT:
 ${text.slice(0, 50000)}`;
 
-  // Try models in order until one works
-  const MODELS = [
-    "gemini-1.5-flash",
-    "gemini-1.5-flash-001",
-    "gemini-1.5-flash-8b",
-    "gemini-2.0-flash-lite",
-    "gemini-2.0-flash",
-  ];
-
   try {
-    let rawText = "";
-    let lastErr = "";
-    for (const model of MODELS) {
-      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-      const res = await fetch(endpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: { temperature: 0.1, maxOutputTokens: 8192 },
-        }),
-      });
-      const apiResp = await res.json();
-      if (!res.ok) {
-        lastErr = apiResp.error?.message || `HTTP ${res.status}`;
-        // Only skip to next model if this model simply isn't found
-        if (lastErr.includes("not found") || lastErr.includes("not supported")) continue;
-        // Any other error (quota, auth, etc.) — stop immediately
-        throw new Error(lastErr);
-      }
-      rawText = apiResp.candidates?.[0]?.content?.parts?.[0]?.text || "";
-      if (rawText) break;
-    }
-    if (!rawText) throw new Error("No available Gemini model returned content. Last error: " + lastErr);
+    const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: "llama-3.3-70b-versatile",
+        messages: [{ role: "user", content: prompt }],
+        temperature: 0.1,
+        max_tokens: 8192,
+      }),
+    });
+
+    const apiResp = await res.json();
+    if (!res.ok) throw new Error(apiResp.error?.message || `Groq API error ${res.status}`);
+
+    const rawText = apiResp.choices?.[0]?.message?.content || "";
+    if (!rawText) throw new Error("Groq returned no content");
 
     // Strip any accidental markdown fences
     const cleaned = rawText.replace(/^```[a-z]*\n?/i, "").replace(/\n?```$/i, "").trim();
