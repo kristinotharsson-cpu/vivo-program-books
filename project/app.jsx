@@ -789,20 +789,57 @@ const App = () => {
       }
 
       const text = pageTexts.join("\n\n");
-      setToast("Parsing with AI…");
 
-      const res = await fetch("/.netlify/functions/parse-pdf", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text }),
-      });
+      // Split into 12k-char chunks, process each separately to avoid function timeouts
+      const CHUNK = 12000;
+      const chunks = [];
+      for (let i = 0; i < text.length; i += CHUNK) chunks.push(text.slice(i, i + CHUNK));
 
-      let result;
-      try { result = await res.json(); } catch (_) { throw new Error("Server returned invalid response"); }
-      if (!res.ok) throw new Error(result.error || `Server error ${res.status}`);
-      if (!result.data) throw new Error("No data returned from parser");
+      const callParser = async (chunk, isFirst) => {
+        const res = await fetch("/.netlify/functions/parse-pdf", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ text: chunk, isFirst }),
+        });
+        let result;
+        try { result = await res.json(); } catch (_) { throw new Error("Server returned invalid response"); }
+        if (!res.ok) throw new Error(result.error || `Server error ${res.status}`);
+        if (!result.data) throw new Error("No data returned from parser");
+        return result.data;
+      };
 
-      setData(result.data);
+      const mergeData = (base, addition) => {
+        if (!addition?.sections) return base;
+        for (const section of addition.sections) {
+          const existing = base.sections?.find(s => s.kind === section.kind);
+          if (!existing) { base.sections.push(section); continue; }
+          if (section.pieces?.length) existing.pieces = [...(existing.pieces || []), ...section.pieces];
+          if (section.bios?.length) existing.bios = [...(existing.bios || []), ...section.bios];
+          if (section.cast?.length) existing.cast = [...(existing.cast || []), ...section.cast];
+          if (section.creative?.length) existing.creative = [...(existing.creative || []), ...section.creative];
+          if (section.groups?.length) existing.groups = [...(existing.groups || []), ...section.groups];
+          if (section.events?.length) existing.events = [...(existing.events || []), ...section.events];
+          if (section.blocks?.length) existing.blocks = [...(existing.blocks || []), ...section.blocks];
+          if (section.sections?.length) existing.sections = [...(existing.sections || []), ...section.sections];
+          if (section.tiers?.length) {
+            for (const tier of section.tiers) {
+              const et = (existing.tiers || []).find(t => t.name === tier.name);
+              if (et) et.names = [...(et.names || []), ...(tier.names || [])];
+              else existing.tiers = [...(existing.tiers || []), tier];
+            }
+          }
+        }
+        return base;
+      };
+
+      let merged = null;
+      for (let i = 0; i < chunks.length; i++) {
+        setToast(chunks.length > 1 ? `Parsing… (part ${i + 1} of ${chunks.length})` : "Parsing with AI…");
+        const parsed = await callParser(chunks[i], i === 0);
+        merged = i === 0 ? parsed : mergeData(merged, parsed);
+      }
+
+      setData(merged);
       setToast("Program imported!");
     } catch (e) {
       setToast("Import failed: " + e.message);
