@@ -186,7 +186,7 @@ IMPORTANT RULES:
 Return ONLY valid JSON — no markdown, no explanation, no code fences. Start with { and end with }.
 
 PDF TEXT:
-${text.slice(0, 50000)}`;
+${text.slice(0, 40000)}`;
 
   try {
     const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
@@ -196,7 +196,7 @@ ${text.slice(0, 50000)}`;
         "Authorization": `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: "llama-3.3-70b-versatile",
+        model: "llama-3.1-8b-instant",
         messages: [{ role: "user", content: prompt }],
         temperature: 0.1,
         max_tokens: 8192,
