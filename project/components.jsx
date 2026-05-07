@@ -376,5 +376,36 @@ const TweakButton = ({ label, onClick }) => (
   <button className="tweak-btn" onClick={onClick}>{label}</button>
 );
 
+// ---------- Edit mode formatting guide ----------
+const EditingGuide = () => {
+  const [open, setOpen] = useState(false);
+  if (!window.__editMode) return null;
+  return (
+    <div className="edit-guide">
+      <button className="edit-guide-toggle" onClick={() => setOpen(o => !o)} aria-expanded={open}>
+        <Icon name={open ? "close" : "info"} size={14} />
+        {open ? "Close guide" : "Editing guide"}
+      </button>
+      {open && (
+        <div className="edit-guide-body">
+          <div className="edit-guide-section">
+            <div className="edit-guide-heading">Hyperlinks</div>
+            <div className="edit-guide-row"><code>[link text](https://example.com)</code><span>External link — opens in new tab</span></div>
+            <div className="edit-guide-row"><code>[link text](#/section-id)</code><span>Internal link — navigates to a section (e.g. <code>#/bios</code>, <code>#/program</code>, <code>#/cast</code>)</span></div>
+            <div className="edit-guide-row"><code>[Email us](mailto:info@example.com)</code><span>Email link</span></div>
+          </div>
+          <div className="edit-guide-section">
+            <div className="edit-guide-heading">Editing tips</div>
+            <div className="edit-guide-row"><span>Click any text to edit it inline. Press <kbd>Enter</kbd> to confirm single-line fields.</span></div>
+            <div className="edit-guide-row"><span>Use the <strong>+</strong> buttons to add rows (cast members, bios, donors, etc.).</span></div>
+            <div className="edit-guide-row"><span>Click a photo circle to upload an image; hover and click ✕ to remove it.</span></div>
+            <div className="edit-guide-row"><span>Links render as plain text while editing — switch out of edit mode to see them as clickable links.</span></div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 // Expose globally for other Babel scripts
-Object.assign(window, { Icon, Editable, TopBar, SettingsMenu, Toast, SectionBottomNav, RowControls, AddRowButton, PhotoSlot, TweaksPanel, TweakSection, TweakSelect, TweakRadio, TweakToggle, TweakButton });
+Object.assign(window, { Icon, Editable, EditingGuide, TopBar, SettingsMenu, Toast, SectionBottomNav, RowControls, AddRowButton, PhotoSlot, TweaksPanel, TweakSection, TweakSelect, TweakRadio, TweakToggle, TweakButton });

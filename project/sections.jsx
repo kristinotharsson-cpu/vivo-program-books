@@ -149,14 +149,14 @@ const CastRow = ({ c, i, list, listKey, update, bios, onGoBio }) => {
 
 const CastSection = ({ s, update, bios, onGoBio }) => (
   <div>
-    <h3 className="cast-section-h">The Performer</h3>
+    <Editable as="h3" className="cast-section-h" value={s.castLabel || "Cast"} onChange={v => update({ castLabel: v })} />
     <ul className="cast-list">
       {s.cast.map((c, i) => (
         <CastRow key={i} c={c} i={i} list={s.cast} listKey="cast" update={update} bios={bios} onGoBio={onGoBio} />
       ))}
     </ul>
     <AddRowButton label="Add performer" onAdd={() => update({ cast: [...s.cast, { role: "Role", name: "Name" }] })} />
-    <h3 className="cast-section-h is-second">Creative & Production</h3>
+    <Editable as="h3" className="cast-section-h is-second" value={s.creativeLabel || "Creative & Production"} onChange={v => update({ creativeLabel: v })} />
     <ul className="cast-list">
       {s.creative.map((c, i) => (
         <CastRow key={i} c={c} i={i} list={s.creative} listKey="creative" update={update} bios={bios} onGoBio={onGoBio} />

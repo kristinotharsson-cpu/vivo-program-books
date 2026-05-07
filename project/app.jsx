@@ -1161,6 +1161,7 @@ ${sharedPart}(function(){
         </div>
       ) : (
         <div className="page section-page" key={currentSection.id}>
+          <EditingGuide />
           <Editable as="div" className="section-eyebrow" value={currentSection.eyebrow || ""} onChange={v => updateSection(currentSection.id, { eyebrow: v })} />
           <Editable as="h1" className="section-title" value={currentSection.title} onChange={v => updateSection(currentSection.id, { title: v })} />
           <SectionBody
