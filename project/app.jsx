@@ -867,19 +867,22 @@ welcome: eyebrow, quote, body:[str], signature:{name,role}`;
             ? stripped.slice(firstBrace, lastBrace + 1)
             : stripped;
 
+          // Try direct parse, then with trailing-comma fix (most common LLM JSON error)
           try { return JSON.parse(cleaned); } catch (_) {}
+          const noTrailing = cleaned.replace(/,(\s*[}\]])/g, '$1');
+          try { return JSON.parse(noTrailing); } catch (_) {}
 
           // Truncated output: walk the string tracking open brackets, then close them
           const stack = [];
           let inStr = false, esc = false, lastSafe = 0;
-          for (let i = 0; i < cleaned.length; i++) {
+          for (let i = 0; i < noTrailing.length; i++) {
             if (esc) { esc = false; continue; }
-            if (inStr) { if (cleaned[i] === '\\') esc = true; else if (cleaned[i] === '"') inStr = false; continue; }
-            if (cleaned[i] === '"') { inStr = true; continue; }
-            if (cleaned[i] === '{' || cleaned[i] === '[') stack.push(cleaned[i] === '{' ? '}' : ']');
-            else if (cleaned[i] === '}' || cleaned[i] === ']') { stack.pop(); if (!stack.length) lastSafe = i; }
+            if (inStr) { if (noTrailing[i] === '\\') esc = true; else if (noTrailing[i] === '"') inStr = false; continue; }
+            if (noTrailing[i] === '"') { inStr = true; continue; }
+            if (noTrailing[i] === '{' || noTrailing[i] === '[') stack.push(noTrailing[i] === '{' ? '}' : ']');
+            else if (noTrailing[i] === '}' || noTrailing[i] === ']') { stack.pop(); if (!stack.length) lastSafe = i; }
           }
-          const trimmed = cleaned
+          const trimmed = noTrailing
             .replace(/,?\s*"[^"]*$/, '')
             .replace(/,?\s*"[^"]+"\s*:\s*[^,}\]]*$/, '')
             .replace(/,\s*$/, '');
