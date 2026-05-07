@@ -867,10 +867,27 @@ welcome: eyebrow, quote, body:[str], signature:{name,role}`;
             ? stripped.slice(firstBrace, lastBrace + 1)
             : stripped;
 
-          // Try direct parse, then with trailing-comma fix (most common LLM JSON error)
-          try { return JSON.parse(cleaned); } catch (_) {}
-          const noTrailing = cleaned.replace(/,(\s*[}\]])/g, '$1');
-          try { return JSON.parse(noTrailing); } catch (_) {}
+          // Fix unescaped control characters inside JSON strings (newlines in bio text, etc.)
+          let fixed = '';
+          let inS = false, es = false;
+          for (let i = 0; i < cleaned.length; i++) {
+            const ch = cleaned[i];
+            if (es) { es = false; fixed += ch; continue; }
+            if (ch === '\\' && inS) { es = true; fixed += ch; continue; }
+            if (ch === '"') { inS = !inS; fixed += ch; continue; }
+            if (inS && ch.charCodeAt(0) < 0x20) {
+              fixed += ch === '\n' ? '\\n' : ch === '\r' ? '\\r' : ch === '\t' ? '\\t' : '\\u' + ch.charCodeAt(0).toString(16).padStart(4,'0');
+            } else { fixed += ch; }
+          }
+          const noTrailing = fixed.replace(/,(\s*[}\]])/g, '$1');
+          // Try direct parse, then with trailing-comma fix
+          try { return JSON.parse(fixed); } catch (_) {}
+          try { return JSON.parse(noTrailing); } catch (e) {
+            // Show the exact position of the parse error for diagnosis
+            const pos = parseInt(e.message.match(/position (\d+)/)?.[1] || '-1');
+            if (pos > 0) lastErr = `${model}: JSON error at ${pos}: ...${noTrailing.slice(Math.max(0,pos-60),pos+60)}...`;
+            else lastErr = `${model}: invalid JSON (${e.message.slice(0,80)})`;
+          }
 
           // Truncated output: walk the string tracking open brackets, then close them
           const stack = [];
@@ -882,15 +899,13 @@ welcome: eyebrow, quote, body:[str], signature:{name,role}`;
             if (noTrailing[i] === '{' || noTrailing[i] === '[') stack.push(noTrailing[i] === '{' ? '}' : ']');
             else if (noTrailing[i] === '}' || noTrailing[i] === ']') { stack.pop(); if (!stack.length) lastSafe = i; }
           }
-          const trimmed = noTrailing
+          const trimmedJ = noTrailing
             .replace(/,?\s*"[^"]*$/, '')
             .replace(/,?\s*"[^"]+"\s*:\s*[^,}\]]*$/, '')
             .replace(/,\s*$/, '');
           const closing = stack.slice().reverse().join('');
-          try { return JSON.parse(trimmed + closing); } catch (_) {}
-          if (lastSafe > 0) { try { return JSON.parse(cleaned.slice(0, lastSafe + 1)); } catch (_) {} }
-          // Show snippet so we can diagnose the exact syntax error
-          lastErr = `${model}: invalid JSON — snippet: ${cleaned.slice(0, 120)} [...] ${cleaned.slice(-80)}`;
+          try { return JSON.parse(trimmedJ + closing); } catch (_) {}
+          if (lastSafe > 0) { try { return JSON.parse(noTrailing.slice(0, lastSafe + 1)); } catch (_) {} }
           continue;
         }
         throw new Error("All models failed. Last error: " + lastErr);
