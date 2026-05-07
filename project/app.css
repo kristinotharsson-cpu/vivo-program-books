@@ -2267,6 +2267,21 @@ li:hover .row-ctrls,
   padding: 22px 0;
   border-bottom: 1px solid var(--border);
 }
+.perf-sponsor-photo-wrap {
+  margin-bottom: 14px;
+}
+.perf-sponsor-photo {
+  width: 80px !important;
+  height: 80px !important;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.perf-sponsor-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 .perf-sponsor-label {
   font-family: var(--font-body);
   font-weight: 700;

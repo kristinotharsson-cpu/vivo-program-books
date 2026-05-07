@@ -657,13 +657,14 @@ const EventsSection = ({ s, update }) => (
 
 // ---- PERFORMANCE SPONSOR ----
 const PerformanceSponsorSection = ({ s, update }) => {
+  const editing = window.__editMode;
   const blocks = s.blocks || [];
   const updateBlock = (i, patch) => {
     const next = blocks.map((b, j) => j === i ? { ...b, ...patch } : b);
     update({ blocks: next });
   };
   const addBlock = () => {
-    update({ blocks: [...blocks, { label: "Additional support", name: "Donor name", statement: "Additional support for this performance is provided by Donor name." }] });
+    update({ blocks: [...blocks, { label: "Presented by", name: "", statement: "", photo: "" }] });
   };
   const removeBlock = (i) => {
     update({ blocks: blocks.filter((_, j) => j !== i) });
@@ -674,32 +675,45 @@ const PerformanceSponsorSection = ({ s, update }) => {
       <div className="perf-sponsor-blocks">
         {blocks.map((b, i) => (
           <div key={i} className="perf-sponsor-block">
-            <Editable as="div" className="perf-sponsor-label" value={b.label} onChange={v => updateBlock(i, { label: v })} />
-            <Editable as="div" className="perf-sponsor-name" value={b.name} onChange={v => updateBlock(i, { name: v })} />
-            {b.statement !== undefined ? (
-              <Editable as="p" linkify className="perf-sponsor-statement" value={b.statement} onChange={v => updateBlock(i, { statement: v })} multiline />
-            ) : null}
-            {window.__editMode ? (
-              <button className="perf-sponsor-remove" onClick={() => removeBlock(i)} aria-label="Remove sponsor block">Remove</button>
-            ) : null}
+            {editing && (
+              <button className="perf-sponsor-remove" onClick={() => removeBlock(i)} aria-label="Remove block">Remove</button>
+            )}
+            {/* Photo — shown in view mode if set, always shown in edit mode */}
+            {(editing || b.photo) && (
+              <div className="perf-sponsor-photo-wrap">
+                <PhotoSlot
+                  src={b.photo || ""}
+                  alt={b.name || ""}
+                  className="perf-sponsor-photo"
+                  size={80}
+                  onChange={src => updateBlock(i, { photo: src })}
+                  onClear={() => updateBlock(i, { photo: "" })}
+                />
+              </div>
+            )}
+            <Editable as="div" className="perf-sponsor-label" value={b.label || ""} onChange={v => updateBlock(i, { label: v })} />
+            <Editable as="div" className="perf-sponsor-name" value={b.name || ""} onChange={v => updateBlock(i, { name: v })} />
+            {(editing || b.statement) && (
+              <Editable as="p" linkify className="perf-sponsor-statement" value={b.statement || ""} onChange={v => updateBlock(i, { statement: v })} multiline />
+            )}
           </div>
         ))}
-        {window.__editMode ? (
-          <button className="perf-sponsor-add" onClick={addBlock}>+ Add sponsor block</button>
-        ) : null}
+        {editing && (
+          <button className="perf-sponsor-add" onClick={addBlock}>+ Add block</button>
+        )}
       </div>
-      {s.seasonSponsors ? (
+      {(editing || s.seasonSponsors) && (
         <div className="perf-sponsor-season">
           <Editable as="div" className="perf-sponsor-label" value={s.seasonSponsorsLabel || "Season Sponsors"} onChange={v => update({ seasonSponsorsLabel: v })} />
-          <Editable as="div" className="perf-sponsor-name" value={s.seasonSponsors} onChange={v => update({ seasonSponsors: v })} multiline />
+          <Editable as="div" className="perf-sponsor-name" value={s.seasonSponsors || ""} onChange={v => update({ seasonSponsors: v })} multiline />
         </div>
-      ) : null}
-      {s.publicSupport ? (
-        <Editable as="p" linkify className="perf-sponsor-public" value={s.publicSupport} onChange={v => update({ publicSupport: v })} multiline />
-      ) : null}
-      {s.closing ? (
-        <Editable as="p" linkify className="perf-sponsor-closing" value={s.closing} onChange={v => update({ closing: v })} multiline />
-      ) : null}
+      )}
+      {(editing || s.publicSupport) && (
+        <Editable as="p" linkify className="perf-sponsor-public" value={s.publicSupport || ""} onChange={v => update({ publicSupport: v })} multiline />
+      )}
+      {(editing || s.closing) && (
+        <Editable as="p" linkify className="perf-sponsor-closing" value={s.closing || ""} onChange={v => update({ closing: v })} multiline />
+      )}
     </div>
   );
 };
