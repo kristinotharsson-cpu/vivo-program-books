@@ -4,7 +4,7 @@
 // Add it to Netlify → Site configuration → Environment variables as OPENROUTER_API_KEY
 
 const CHUNK_SIZE = 12000; // chars per API call (~3k tokens of text)
-const MODEL = "meta-llama/llama-3.1-8b-instruct:free";
+const MODEL = "openrouter/free";
 const API_URL = "https://openrouter.ai/api/v1/chat/completions";
 
 const SCHEMA = `OUTPUT: valid JSON only, no markdown.
