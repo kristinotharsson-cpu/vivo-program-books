@@ -889,7 +889,8 @@ welcome: eyebrow, quote, body:[str], signature:{name,role}`;
           const closing = stack.slice().reverse().join('');
           try { return JSON.parse(trimmed + closing); } catch (_) {}
           if (lastSafe > 0) { try { return JSON.parse(cleaned.slice(0, lastSafe + 1)); } catch (_) {} }
-          lastErr = `${model}: invalid JSON (len=${cleaned.length})`;
+          // Show snippet so we can diagnose the exact syntax error
+          lastErr = `${model}: invalid JSON — snippet: ${cleaned.slice(0, 120)} [...] ${cleaned.slice(-80)}`;
           continue;
         }
         throw new Error("All models failed. Last error: " + lastErr);
