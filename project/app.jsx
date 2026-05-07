@@ -848,8 +848,14 @@ welcome: eyebrow, quote, body:[str], signature:{name,role}`;
 
           const apiResp = await res.json();
           if (!res.ok) { lastErr = `${model}: ${apiResp.error?.message || res.status}`; continue; }
-          const raw = apiResp.choices?.[0]?.message?.content || "";
-          if (!raw) { lastErr = `${model}: no content`; continue; }
+          const raw = apiResp.choices?.[0]?.message?.content
+            || apiResp.choices?.[0]?.text
+            || "";
+          const finish = apiResp.choices?.[0]?.finish_reason || "";
+          if (!raw) {
+            lastErr = `${model}: no content (finish=${finish}, keys=${Object.keys(apiResp).join(",")})`;
+            continue;
+          }
           const cleaned = raw.replace(/^```[a-z]*\n?/i, "").replace(/\n?```$/i, "").trim();
           try { return JSON.parse(cleaned); } catch (_) {}
 
