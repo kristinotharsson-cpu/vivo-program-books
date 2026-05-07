@@ -691,10 +691,10 @@ const PerformanceSponsorSection = ({ s, update }) => {
                 />
               </div>
             )}
-            <Editable as="div" className="perf-sponsor-label" value={b.label || ""} onChange={v => updateBlock(i, { label: v })} />
-            <Editable as="div" className="perf-sponsor-name" value={b.name || ""} onChange={v => updateBlock(i, { name: v })} />
+            <Editable as="div" className="perf-sponsor-label" value={b.label || ""} onChange={v => updateBlock(i, { label: v })} placeholder="Label (e.g. Presented by)" />
+            <Editable as="div" className="perf-sponsor-name" value={b.name || ""} onChange={v => updateBlock(i, { name: v })} placeholder="Name or title" />
             {(editing || b.statement) && (
-              <Editable as="p" linkify className="perf-sponsor-statement" value={b.statement || ""} onChange={v => updateBlock(i, { statement: v })} multiline />
+              <Editable as="p" linkify className="perf-sponsor-statement" value={b.statement || ""} onChange={v => updateBlock(i, { statement: v })} multiline placeholder="Supporting statement or body copy…" />
             )}
           </div>
         ))}

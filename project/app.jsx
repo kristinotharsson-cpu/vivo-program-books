@@ -1419,6 +1419,20 @@ ${sharedPart}(function(){
             onClearExpandedBio={() => setExpandedBioId(null)}
           />
           <ExtraHtmlBlocks section={currentSection} update={(patch) => updateSection(currentSection.id, patch)} />
+          {editing && (
+            <div className="section-delete-row">
+              <button
+                className="section-delete-btn"
+                onClick={() => {
+                  if (!confirm(`Delete "${currentSection.title}"? This cannot be undone.`)) return;
+                  setData(d => ({ ...d, sections: d.sections.filter(s => s.id !== currentSection.id) }));
+                  goHome();
+                }}
+              >
+                <Icon name="x" size={14} /> Delete this section
+              </button>
+            </div>
+          )}
           <SectionBottomNav
             prev={visibleIdx > 0 ? visibleSections[visibleIdx - 1] : null}
             next={visibleIdx >= 0 && visibleIdx < visibleSections.length - 1 ? visibleSections[visibleIdx + 1] : null}

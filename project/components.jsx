@@ -55,7 +55,7 @@ function renderLinks(text) {
 // ---------- Editable text ----------
 // Wraps text in a contentEditable when edit mode is on.
 // When linkify is true, renders [text](url) as clickable links in view mode.
-const Editable = ({ value, onChange, multiline = false, as = "span", linkify = false, ...rest }) => {
+const Editable = ({ value, onChange, multiline = false, as = "span", linkify = false, placeholder = "", ...rest }) => {
   const ref = useRef(null);
   const editing = window.__editMode;
 
@@ -90,6 +90,7 @@ const Editable = ({ value, onChange, multiline = false, as = "span", linkify = f
       onBlur={handleBlur}
       onKeyDown={handleKey}
       spellCheck={false}
+      data-placeholder={editing && placeholder ? placeholder : undefined}
       {...rest}
     >{value}</Tag>
   );

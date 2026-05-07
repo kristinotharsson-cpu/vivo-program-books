@@ -31,6 +31,14 @@ button {
   cursor: pointer;
 }
 
+[contenteditable][data-placeholder]:empty::before {
+  content: attr(data-placeholder);
+  color: var(--fg-muted);
+  opacity: 0.45;
+  pointer-events: none;
+  font-style: italic;
+}
+
 [contenteditable="true"]:focus {
   outline: 2px solid var(--vivo-plum);
   outline-offset: 4px;
@@ -2630,6 +2638,31 @@ li:hover .row-ctrls,
 }
 .extra-html-add-btn {
   margin-top: 16px;
+}
+.section-delete-row {
+  margin-top: 48px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.section-delete-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--fg-muted);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 7px 12px;
+  background: none;
+  cursor: pointer;
+}
+.section-delete-btn:hover {
+  color: #c0392b;
+  border-color: #c0392b;
 }
 .extra-html-remove-btn {
   font-family: var(--font-body);
