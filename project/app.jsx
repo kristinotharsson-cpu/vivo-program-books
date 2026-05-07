@@ -840,9 +840,17 @@ welcome: eyebrow, quote, body:[str], signature:{name,role}`;
         if (!res.ok) throw new Error(apiResp.error?.message || `API error ${res.status}`);
         const raw = apiResp.choices?.[0]?.message?.content || "";
         if (!raw) throw new Error("Model returned no content");
-        const cleaned = raw.replace(/^```[a-z]*\n?/i, "").replace(/\n?```$/i, "").trim();
-        try { return JSON.parse(cleaned); }
-        catch (e) { throw new Error("Model returned invalid JSON: " + e.message); }
+        let cleaned = raw.replace(/^```[a-z]*\n?/i, "").replace(/\n?```$/i, "").trim();
+        try { return JSON.parse(cleaned); } catch (_) {}
+        // Truncated response: find last complete top-level object and close the structure
+        const lastBrace = cleaned.lastIndexOf("}");
+        if (lastBrace > 0) {
+          // Try progressively shorter truncations until we get valid JSON
+          for (let cut = lastBrace; cut > cleaned.length / 2; cut = cleaned.lastIndexOf("}", cut - 1)) {
+            try { return JSON.parse(cleaned.slice(0, cut + 1)); } catch (_) {}
+          }
+        }
+        throw new Error("Model returned invalid JSON (response may be too long)");
       };
 
       const mergeData = (base, addition) => {
@@ -869,8 +877,8 @@ welcome: eyebrow, quote, body:[str], signature:{name,role}`;
         return base;
       };
 
-      // Split into 12k-char chunks and call OpenRouter directly from browser (no server timeout)
-      const CHUNK = 12000;
+      // Split into 5k-char chunks so the model's output stays within its token limit
+      const CHUNK = 5000;
       const chunks = [];
       for (let i = 0; i < text.length; i += CHUNK) chunks.push(text.slice(i, i + CHUNK));
 
