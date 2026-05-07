@@ -44,7 +44,7 @@ button {
   cursor: text;
 }
 
-/* edit-mode toggle banner */
+/* edit-mode toggle banner (legacy — kept for iframe embeds) */
 .edit-banner {
   position: fixed;
   bottom: 24px;
@@ -67,6 +67,92 @@ button {
 }
 .edit-banner svg { width: 14px; height: 14px; }
 .edit-banner.is-editing { background: var(--vivo-black); }
+
+/* ---- Publish bar (visible during edit mode) ---- */
+.publish-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 16px;
+  background: var(--vivo-black);
+  color: var(--vivo-cream);
+  border-top: 2px solid var(--vivo-plum);
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.25);
+}
+@media (min-width: 480px) {
+  .publish-bar { padding: 12px 24px; }
+}
+.publish-bar-exit {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 0;
+}
+.publish-bar-exit:hover { color: var(--vivo-cream); }
+.publish-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.publish-bar-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--vivo-cream);
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 3px;
+  padding: 8px 14px;
+  cursor: pointer;
+}
+.publish-bar-download:hover { background: rgba(255,255,255,0.18); }
+.publish-bar-publish {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--vivo-black);
+  background: var(--vivo-cream);
+  border: none;
+  border-radius: 3px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+.publish-bar-publish:hover { background: var(--vivo-tangerine); }
+.publish-bar-publish svg { flex-shrink: 0; }
+
+/* Nudge FAB above publish bar when editing */
+.toc-fab--editing {
+  bottom: calc(56px + 16px);
+}
+
+/* Extra bottom clearance so publish bar doesn't cover content */
+.app:has(.publish-bar) .home { padding-bottom: 120px; }
+.app:has(.publish-bar) .section-page { padding-bottom: 140px; }
 
 /* ---------- App shell ---------- */
 .app {
@@ -157,6 +243,45 @@ button {
 }
 .topbar-icon-btn:hover { color: var(--vivo-plum); }
 .topbar-icon-btn svg { width: 20px; height: 20px; }
+
+/* Edit toggle button in topbar */
+.topbar-edit-btn {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  padding: 6px 13px;
+  border: 1.5px solid var(--border-strong);
+  border-radius: 3px;
+  color: var(--fg);
+  background: transparent;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.topbar-edit-btn:hover { border-color: var(--fg); }
+.topbar-edit-btn.is-active {
+  background: var(--vivo-plum);
+  color: var(--vivo-cream);
+  border-color: var(--vivo-plum);
+}
+/* On the black home topbar, use cream so it's visible */
+.topbar.is-home .topbar-edit-btn {
+  color: var(--vivo-cream);
+  border-color: rgba(255,251,235,0.5);
+}
+.topbar.is-home .topbar-edit-btn:hover {
+  border-color: var(--vivo-cream);
+}
+.topbar.is-home .topbar-edit-btn.is-active {
+  background: var(--vivo-plum);
+  color: var(--vivo-cream);
+  border-color: var(--vivo-plum);
+}
+/* Editing state: tint the topbar border so it's clear the mode is on */
+.topbar.is-editing {
+  border-bottom: 2px solid var(--vivo-plum);
+}
 
 /* ---------- Page transitions ---------- */
 .page {
@@ -287,7 +412,7 @@ button {
   padding: 22px 20px 26px;
 }
 [data-theme="dark"] .cover-meta-band {
-  background: #1a1a1a;
+  background: var(--vivo-black);
   color: var(--vivo-cream);
 }
 .cover-when {
@@ -679,9 +804,9 @@ button {
 }
 .inline-ad-tagline {
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 400;
-  line-height: 1.4;
+  line-height: 1.5;
   margin-bottom: 8px;
   opacity: 0.8;
 }
@@ -697,6 +822,114 @@ button {
   color: var(--vivo-plum);
 }
 [data-theme="dark"] .inline-ad-cta { color: var(--vivo-tangerine); }
+
+/* TOC image block */
+.toc-img-block {
+  margin: 14px 0;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.toc-img-block-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.toc-img-block-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  background: color-mix(in srgb, var(--border) 40%, var(--bg));
+  color: var(--fg-muted);
+}
+
+/* TOC block manager (edit mode) */
+.toc-block-manager {
+  margin: 16px 0 8px;
+  padding: 14px 16px;
+  border: 1px dashed var(--border-strong);
+  border-radius: 6px;
+  font-family: var(--font-body);
+}
+.toc-bm-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  margin-bottom: 12px;
+}
+.toc-bm-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 0;
+  border-top: 1px solid var(--border);
+}
+.toc-bm-kind {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--fg-muted);
+  flex-shrink: 0;
+  padding-top: 4px;
+  width: 48px;
+}
+.toc-bm-fields {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.toc-bm-field {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--fg);
+  min-height: 22px;
+}
+.toc-bm-field--muted {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--fg-muted);
+}
+.toc-bm-thumb {
+  width: 100%;
+  max-height: 80px;
+  object-fit: cover;
+  border-radius: 3px;
+  cursor: pointer;
+  border: 1px solid var(--border);
+}
+.toc-bm-img-add {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-family: var(--font-body);
+  color: var(--fg-muted);
+  border: 1px dashed var(--border-strong);
+  border-radius: 4px;
+  padding: 6px 10px;
+  cursor: pointer;
+  background: none;
+}
+.toc-bm-img-add:hover { color: var(--fg); border-color: var(--fg); }
+.toc-bm-remove {
+  flex-shrink: 0;
+  color: var(--fg-muted);
+  padding: 4px;
+  opacity: 0.6;
+}
+.toc-bm-remove:hover { opacity: 1; color: var(--fg); }
+.toc-bm-add-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
 
 /* Footer sponsor banner */
 .footer-sponsor {
@@ -729,7 +962,7 @@ button {
 }
 .footer-sponsor-line {
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 0.875rem;
   line-height: 1.5;
   opacity: 0.85;
   max-width: 480px;
@@ -812,16 +1045,16 @@ button {
 }
 .note-callout-label {
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 1rem;
   font-weight: 500;
-  line-height: 1.3;
+  line-height: 1.4;
   margin-bottom: 2px;
 }
 .note-callout-name {
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 1rem;
   font-weight: 700;
-  line-height: 1.3;
+  line-height: 1.4;
 }
 
 /* TOC ----- */
@@ -1016,9 +1249,10 @@ button {
 }
 .program-item .meta {
   font-family: var(--font-body);
-  font-size: 0.813rem;
+  font-size: 0.875rem;
   color: var(--fg-muted);
   margin-top: 4px;
+  line-height: 1.5;
 }
 .program-item .movements {
   margin-top: 10px;
@@ -1117,7 +1351,7 @@ button {
 .bio-body .inner-pad {
   padding: 4px 0 24px 16px;
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 1rem;
   line-height: 1.6;
   color: var(--fg);
 }
@@ -1154,7 +1388,7 @@ button {
 }
 .roster-list li {
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 1rem;
   padding: 8px 0;
   border-bottom: 1px solid var(--border);
   display: flex;
@@ -1244,7 +1478,7 @@ button {
 @media (min-width: 480px) { .donor-list { columns: 2; } }
 .donor-list li {
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 0.875rem;
   line-height: 1.5;
   padding: 4px 0;
   break-inside: avoid;
@@ -1307,9 +1541,9 @@ button {
 }
 .event-info .meta {
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 0.875rem;
   color: var(--fg-muted);
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 /* ----- Sponsor / Ad page ----- */
@@ -1388,7 +1622,7 @@ button {
 }
 .signature .name {
   font-weight: 700;
-  font-size: 15px;
+  font-size: 1rem;
 }
 .signature .role {
   font-weight: 700;
@@ -1465,9 +1699,9 @@ button {
 }
 .search-result .snip {
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 0.875rem;
   color: var(--fg-muted);
-  line-height: 1.4;
+  line-height: 1.5;
 }
 .search-result mark {
   background: var(--accent, var(--vivo-plum));
@@ -1479,7 +1713,7 @@ button {
   text-align: center;
   color: var(--fg-muted);
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 /* ----- Settings menu ----- */
@@ -1674,7 +1908,7 @@ button {
   position: fixed;
   top: 0;
   right: 0;
-  bottom: 0;
+  bottom: 60px; /* clear publish bar */
   width: min(320px, 92vw);
   background: var(--bg);
   border-left: 1px solid var(--border);
@@ -2128,7 +2362,7 @@ li:hover .row-ctrls,
 /* ===== EDITING GUIDE ===== */
 .edit-guide {
   margin-bottom: 18px;
-  border: 1px solid var(--vivo-plum);
+  border: 1px solid var(--border-strong);
   border-radius: 8px;
   overflow: hidden;
   font-family: var(--font-body);
@@ -2139,7 +2373,7 @@ li:hover .row-ctrls,
   gap: 7px;
   width: 100%;
   padding: 9px 14px;
-  background: color-mix(in srgb, var(--vivo-plum) 10%, var(--bg));
+  background: color-mix(in srgb, var(--fg) 6%, var(--bg));
   border: none;
   cursor: pointer;
   font-family: var(--font-body);
@@ -2147,16 +2381,16 @@ li:hover .row-ctrls,
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--vivo-plum);
+  color: var(--fg);
   text-align: left;
 }
-.edit-guide-toggle:hover { background: color-mix(in srgb, var(--vivo-plum) 16%, var(--bg)); }
+.edit-guide-toggle:hover { background: color-mix(in srgb, var(--fg) 12%, var(--bg)); }
 .edit-guide-body {
   padding: 14px 16px;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  border-top: 1px solid color-mix(in srgb, var(--vivo-plum) 25%, transparent);
+  border-top: 1px solid var(--border);
   background: var(--bg);
 }
 .edit-guide-section { display: flex; flex-direction: column; gap: 6px; }
@@ -2182,7 +2416,7 @@ li:hover .row-ctrls,
   background: color-mix(in srgb, var(--border) 60%, var(--bg));
   padding: 1px 5px;
   border-radius: 3px;
-  color: var(--vivo-plum);
+  color: var(--fg);
   display: inline-block;
   margin-bottom: 1px;
 }
@@ -2261,3 +2495,899 @@ li:hover .row-ctrls,
   text-align: left;
 }
 .html-section-view th { font-weight: 700; background: color-mix(in srgb, var(--border) 40%, var(--bg)); }
+
+/* ---- Program style picker ---- */
+.prog-style-picker {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.prog-style-label {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--fg-muted);
+  margin-right: 2px;
+}
+.prog-style-btn {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border: 1px solid var(--border-strong);
+  border-radius: 3px;
+  background: transparent;
+  color: var(--fg);
+  cursor: pointer;
+  letter-spacing: 0.03em;
+}
+.prog-style-btn.is-active {
+  background: var(--fg);
+  color: var(--bg);
+  border-color: var(--fg);
+}
+.prog-style-btn:hover:not(.is-active) {
+  border-color: var(--fg);
+}
+
+/* ---- Extra HTML blocks ---- */
+.extra-html-blocks {
+  margin-top: 28px;
+}
+.extra-html-block + .extra-html-block {
+  margin-top: 16px;
+}
+.extra-html-add-btn {
+  margin-top: 16px;
+}
+.extra-html-remove-btn {
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  color: var(--fg-muted);
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+.extra-html-remove-btn:hover { color: var(--fg); border-color: var(--fg); }
+
+/* ================================================================
+   PROGRAM CENTERED — dance layout (view mode)
+   ================================================================ */
+
+.program-centered {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Info block — performance schedule and notes */
+.pc-info-block {
+  background: rgba(255,248,232,0.05);
+  border: 1px solid rgba(255,248,232,0.12);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+.pc-info-line {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: var(--fg);
+  text-wrap: pretty;
+}
+.pc-info-dates {
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.375rem;
+}
+
+/* Piece container */
+.pc-piece {
+  padding: 2rem 0;
+  border-bottom: 1px solid rgba(255,248,232,0.1);
+  text-align: center;
+}
+.pc-piece:last-child { border-bottom: none; }
+
+/* Piece title — serif, italic, bold, all-caps */
+.pc-piece-title {
+  font-family: var(--font-body);
+  font-size: clamp(1.5rem, 5vw, 2.25rem);
+  font-weight: 700;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  color: var(--fg);
+  margin-bottom: 0.25rem;
+}
+
+/* Year — e.g. (1960) */
+.pc-piece-year {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--fg-muted);
+  margin-bottom: 0.375rem;
+}
+
+/* Meta — e.g. "World Premiere" */
+.pc-piece-meta {
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--vivo-plum);
+  margin-bottom: 0.75rem;
+}
+
+/* Credits — role bold, name regular */
+.pc-credits { margin: 0.875rem 0; }
+.pc-credit-line {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: var(--fg);
+}
+.pc-credit-role { font-weight: 700; }
+.pc-credit-name { font-weight: 400; }
+
+/* Description / pull-quote blocks */
+.pc-description { margin: 1.25rem auto; max-width: 520px; }
+.pc-quote-block { margin-bottom: 1.125rem; }
+.pc-quote-text {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--fg);
+  margin: 0 0 0.2rem;
+  text-wrap: pretty;
+}
+.pc-quote-attr {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: var(--fg-muted);
+  font-style: normal;
+  margin: 0;
+  text-align: right;
+}
+
+/* Note — italic support/commission credit */
+.pc-note {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--fg-muted);
+  margin: 1rem auto;
+  max-width: 520px;
+  text-wrap: pretty;
+}
+
+/* Sub-sections — e.g. Revelations movements */
+.pc-subsections {
+  margin: 1.5rem 0 0.5rem;
+  border-top: 1px solid rgba(255,248,232,0.1);
+  padding-top: 1.25rem;
+}
+.pc-subsection { margin-bottom: 1.5rem; }
+.pc-subsection-h {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  margin-bottom: 0.625rem;
+}
+.pc-subsection-item { margin-bottom: 0.5rem; }
+.pc-subsection-item-title {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--fg);
+  display: block;
+  line-height: 1.4;
+}
+.pc-subsection-item-meta {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+  display: block;
+  line-height: 1.5;
+}
+
+/* Music credits — fine print footer */
+.pc-music-credits {
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  line-height: 1.65;
+  color: var(--fg-muted);
+  opacity: 0.7;
+  margin-top: 1.25rem;
+  text-align: left;
+  text-wrap: pretty;
+}
+
+/* Intermission divider */
+.pc-intermission {
+  padding: 1.75rem 0;
+  text-align: center;
+}
+.pc-intermission span {
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+/* ================================================================
+   PROGRAM TABULAR — orchestra / classical / voice (view mode)
+   ================================================================ */
+
+.program-tabular { width: 100%; }
+
+.pt-lead {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--fg-muted);
+  line-height: 1.6;
+  margin: 0 0 1.5rem;
+  text-wrap: pretty;
+}
+
+.pt-body { border-top: 1px solid var(--border); }
+
+/* One piece row */
+.pt-row {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.125rem 0;
+  border-bottom: 1px solid var(--border);
+  align-items: flex-start;
+}
+
+/* Left: composer */
+.pt-composer {
+  flex: 0 0 160px;
+  font-size: 0.8125rem;
+  color: var(--fg-muted);
+  line-height: 1.45;
+  padding-top: 0.15em;
+}
+
+/* Right: work + movements + subitems */
+.pt-work-block { flex: 1; min-width: 0; }
+
+.pt-work {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--fg);
+  margin-bottom: 0.3rem;
+}
+
+.pt-movements {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+.pt-mvt {
+  font-size: 0.8125rem;
+  color: var(--fg-muted);
+  line-height: 1.55;
+}
+.pt-mvt em {
+  font-style: italic;
+  color: var(--fg);
+}
+
+/* Sub-items — indented works within a larger work */
+.pt-subitems { margin-top: 0.375rem; }
+.pt-subitem {
+  display: flex;
+  gap: 0.75rem;
+  padding-left: 1rem;
+  margin-top: 0.25rem;
+  align-items: baseline;
+}
+.pt-subitem-work {
+  flex: 1;
+  font-size: 0.875rem;
+  font-style: italic;
+  color: var(--fg-muted);
+  line-height: 1.4;
+}
+.pt-subitem-composer {
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+  opacity: 0.7;
+  white-space: nowrap;
+}
+
+/* Intermission */
+.pt-intermission {
+  padding: 0.875rem 0;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+}
+.pt-intermission span {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+/* Group header — PART I, PART II, etc. */
+.pt-group-header {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  padding: 1.125rem 0 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Mobile: stack composer above work */
+@media (max-width: 520px) {
+  .pt-row { flex-direction: column; gap: 0.2rem; }
+  .pt-composer { flex: none; font-size: 0.75rem; }
+  .pt-subitem { padding-left: 0.75rem; }
+}
+
+/* ================================================================
+   NOTES SECTION — Phase 4 additions
+   ================================================================ */
+
+/* Subhead — sits tight under h3, e.g. "Symphony No. 7 in A Major" */
+.notes-subhead {
+  font-size: 0.9375rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--fg-muted);
+  margin: -0.5rem 0 1rem;
+  line-height: 1.4;
+}
+
+/* Callout box — "From the archives…" etc. */
+.notes-callout {
+  background: rgba(255,248,232,0.04);
+  border-left: 3px solid var(--vivo-plum);
+  padding: 1rem 1.25rem;
+  margin: 2rem 0;
+  border-radius: 0 4px 4px 0;
+}
+.notes-callout-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--vivo-plum);
+  margin-bottom: 0.75rem;
+}
+.notes-callout-body {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--fg);
+  margin: 0 0 0.75rem;
+  text-wrap: pretty;
+}
+.notes-callout-body:last-child { margin-bottom: 0; }
+
+/* Sub-section — e.g. "Berlioz' program note for the Symphonie fantastique" */
+.notes-sub-section {
+  margin: 2rem 0 0;
+  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
+}
+.notes-sub-h {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--fg);
+  margin: 0 0 1.25rem;
+  line-height: 1.3;
+}
+
+/* Sub-part — PART ONE: DREAMS — PASSIONS etc. */
+.notes-sub-part { margin-bottom: 1.5rem; }
+.notes-sub-part-h {
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  margin: 0 0 0.5rem;
+}
+.notes-sub-part-body {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--fg);
+  margin: 0 0 0.75rem;
+  text-wrap: pretty;
+}
+.notes-sub-part-body:last-child { margin-bottom: 0; }
+
+/* Closing attribution — "—Phillip Huscher is the program annotator…" */
+.notes-closing {
+  font-size: 0.875rem;
+  font-style: italic;
+  color: var(--fg-muted);
+  margin: 2rem 0 0;
+  line-height: 1.5;
+}
+
+/* ======================================================
+   Phase 5 — SongTextBlock
+   ====================================================== */
+
+.song-text-block {
+  margin: var(--space-6) 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-relaxed);
+}
+
+/* --- Toolbar --- */
+.stb-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+.stb-mode-btn {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
+  font-weight: 700;
+  line-height: 1;
+  padding: 5px 12px;
+  border: var(--bw-1) solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--fg);
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-standard), color var(--dur-fast) var(--ease-standard);
+}
+
+.stb-mode-btn:hover,
+.stb-mode-btn.is-active {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+/* --- Shared stanza spacing --- */
+.stb-stanza,
+.stb-sbs-pair,
+.stb-stacked-pair,
+.stb-il-stanza {
+  margin-bottom: var(--space-6);
+}
+
+.stb-stanza:last-child,
+.stb-sbs-pair:last-child,
+.stb-stacked-pair:last-child,
+.stb-il-stanza:last-child {
+  margin-bottom: 0;
+}
+
+/* Speaker label above stanza */
+.stb-speaker {
+  font-style: italic;
+  font-size: var(--fs-body-sm);
+  color: var(--fg-muted);
+  margin-bottom: 2px;
+}
+
+/* Chorus stanza: indent + italic */
+.stb-orig.is-chorus,
+.stb-trans.is-chorus {
+  padding-left: var(--space-6);
+  font-style: italic;
+}
+
+/* Translation: italic, slightly muted */
+.stb-trans {
+  font-style: italic;
+  opacity: 0.9;
+}
+
+/* Translator credit at foot of block */
+.stb-translator {
+  font-style: italic;
+  font-size: var(--fs-body-sm);
+  color: var(--fg-muted);
+  margin-top: var(--space-5);
+  margin-bottom: 0;
+}
+
+/* --- Side by side --- */
+.stb-sbs-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+/* --- Stacked: translation indented below original --- */
+.stb-trans--indent {
+  padding-left: var(--space-5);
+  opacity: 0.9;
+  margin-top: var(--space-3);
+}
+
+/* --- Interlinear: each line paired tightly --- */
+.stb-il-orig {
+  line-height: var(--lh-snug);
+}
+
+.stb-il-trans {
+  font-style: italic;
+  color: var(--fg-muted);
+  line-height: var(--lh-snug);
+  margin-bottom: var(--space-3);
+}
+
+/* --- Facing page: two independent flowing columns --- */
+.stb-fp {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-7);
+  align-items: start;
+}
+
+.stb-fp-trans-col .stb-orig,
+.stb-fp-trans-col .stb-stanza > div {
+  font-style: italic;
+  opacity: 0.9;
+}
+
+/* --- Mobile --- */
+@media (max-width: 767px) {
+  .stb-sbs-cols {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .stb-fp {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .stb-fp-trans-col {
+    margin-top: var(--space-6);
+    padding-top: var(--space-6);
+    border-top: var(--bw-1) solid var(--border);
+  }
+}
+
+/* ======================================================
+   Phase 6 — Dance Company Layout + Roster Footer
+   ====================================================== */
+
+/* --- 3-column company members grid --- */
+.cast-company {
+  text-align: center;
+}
+
+.cast-company-eyebrow {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--fs-eyebrow);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-eyebrow);
+  color: var(--fg-muted);
+  margin: var(--space-6) 0 var(--space-5);
+}
+
+.cast-company-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2) var(--space-5);
+  margin-bottom: var(--space-7);
+}
+
+.cast-company-name {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-snug);
+  color: var(--fg);
+}
+
+/* Creative credits below the grid: centered, compact */
+.cast-creative-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cast-creative-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  margin-bottom: var(--space-3);
+}
+
+.cast-creative-name {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--fs-body);
+}
+
+.cast-creative-role {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
+  color: var(--fg-muted);
+}
+
+@media (max-width: 480px) {
+  .cast-company-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* --- Roster footer credit line --- */
+.roster-footer {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
+  color: var(--fg-muted);
+  font-style: italic;
+  margin-top: var(--space-6);
+  line-height: var(--lh-relaxed);
+  text-wrap: pretty;
+}
+
+/* =========================================================
+   Phase 8 — Print stylesheet
+   Cream paper (#faf7f2) / near-black ink (#1a1a1a).
+   Hides all chrome (topbar, nav, edit UI, song-text toolbar).
+   Each section detail prints as a natural page.
+   ========================================================= */
+@media print {
+
+  /* ---- Reset to paper colours ---- */
+  :root,
+  [data-theme],
+  [data-theme="dark"] {
+    --bg: #fff !important;
+    --fg: #1a1a1a !important;
+    --fg-muted: #555 !important;
+    --border: #ccc !important;
+    --border-strong: #888 !important;
+    --accent: #1a1a1a !important;
+    --vivo-plum: #1a1a1a !important;
+    --vivo-tangerine: #1a1a1a !important;
+    --vivo-cream: #fff !important;
+    --vivo-black: #1a1a1a !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    color: #1a1a1a !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body {
+    background: #fff !important;
+    font-size: 10pt;
+    line-height: 1.5;
+  }
+
+  /* ---- Hide all screen-only chrome ---- */
+  .topbar,
+  .topbar-icon-btn,
+  .edit-banner,
+  .edit-guide,
+  .add-row-btn,
+  .stb-toolbar,
+  .bio-chev,
+  .bio-toggle,
+  .bio-link-row,
+  .cast-name-link svg,
+  .row-ctrls,
+  .search-overlay,
+  .settings-menu,
+  .tweaks-panel,
+  [role="dialog"],
+  .toast {
+    display: none !important;
+  }
+
+  /* ---- Page setup ---- */
+  @page {
+    size: letter portrait;
+    margin: 18mm 18mm 22mm;
+  }
+
+  @page :first {
+    margin-top: 12mm;
+  }
+
+  /* ---- Page breaks ---- */
+  .page {
+    animation: none !important;
+  }
+
+  .section-page {
+    padding: 0;
+    max-width: 100%;
+    page-break-before: always;
+    break-before: page;
+  }
+
+  /* Don't break inside a single program piece or bio item */
+  .pt-row,
+  .pc-piece,
+  .bio-item,
+  .roster-group,
+  .cast-section-h,
+  .notes-sub-section,
+  .stb-sbs-pair,
+  .stb-stacked-pair,
+  .stb-il-stanza {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Headings should stay with the content that follows */
+  .section-title,
+  .section-eyebrow,
+  .pt-lead,
+  .notes-subhead,
+  .pc-piece-title,
+  .cast-section-h,
+  .roster-group h3 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  /* ---- Cover: print title block only, no photo chrome ---- */
+  .cover-logo-strip {
+    background: #1a1a1a !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    padding: 12pt 0;
+    text-align: center;
+  }
+
+  .cover-brush-corner,
+  .cover-photo-block .cover-photo-frame,
+  .cover.is-photo-hero .cover-hero-photo { display: none !important; }
+
+  .cover { padding: 24pt 0 16pt; }
+
+  .cover-title {
+    font-size: 36pt !important;
+    line-height: 1 !important;
+  }
+
+  .cover-subtitle { font-size: 13pt !important; }
+
+  .cover-meta-band {
+    background: #1a1a1a !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .cover-meta-band,
+  .cover-meta-band * { color: #fff !important; }
+
+  /* ---- Section header ---- */
+  .section-eyebrow { color: #555 !important; }
+
+  .section-title { font-size: 28pt !important; line-height: 1 !important; }
+
+  .section-rule { border-color: #ccc !important; }
+
+  /* ---- Program tabular ---- */
+  .pt-body { border-top: 1px solid #ccc !important; }
+
+  .pt-row {
+    border-bottom: 1px solid #ccc !important;
+    padding: 7pt 0 !important;
+    gap: 10pt !important;
+  }
+
+  .pt-composer {
+    font-size: 9pt !important;
+    color: #555 !important;
+  }
+
+  .pt-mvt { color: #555 !important; }
+
+  .pt-intermission {
+    border-top: 1px solid #1a1a1a !important;
+    border-bottom: 1px solid #1a1a1a !important;
+  }
+
+  /* ---- Program centered ---- */
+  .pc-piece { border-bottom: 1px solid #ccc !important; }
+
+  .pc-info-block { border: 1px solid #ccc !important; }
+
+  /* ---- Bio accordion: always expanded in print ---- */
+  .bio-body {
+    grid-template-rows: 1fr !important;
+    display: block !important;
+  }
+
+  .bio-body .inner-pad { padding: 8pt 0 !important; }
+
+  .bio-photo {
+    width: 48pt !important;
+    height: 48pt !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* ---- Roster ---- */
+  .roster-list {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 4pt 16pt !important;
+  }
+
+  /* ---- Cast company grid: 3-col stays in print ---- */
+  .cast-company-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
+  /* ---- Song text block ---- */
+  .song-text-block { border: none !important; }
+
+  .stb-sbs-cols {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 16pt !important;
+  }
+
+  .stb-fp {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 24pt !important;
+  }
+
+  .stb-orig,
+  .stb-trans { font-size: 9.5pt !important; line-height: 1.5 !important; }
+
+  .stb-il-orig { font-style: italic !important; }
+
+  .stb-translator { color: #555 !important; font-size: 8.5pt !important; }
+
+  /* ---- Notes ---- */
+  .notes-callout {
+    border-left: 2pt solid #1a1a1a !important;
+    background: transparent !important;
+  }
+
+  /* ---- Suppress animations ---- */
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* ---- Links: show URL in footnote style only for external hrefs ---- */
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 7.5pt;
+    color: #555;
+  }
+}

@@ -5,8 +5,8 @@ const { useState: useStateA, useEffect: useEffectA, useMemo: useMemoA, useCallba
 // ---- Design Options panel (self-contained so no cross-script dependency) ----
 const _TweaksPanel = ({ onClose, children }) => (
   <>
-    <div style={{ position:"fixed",inset:0,background:"rgba(0,0,0,0.35)",zIndex:80 }} onClick={onClose} />
-    <aside style={{ position:"fixed",top:0,right:0,bottom:0,width:"min(320px,92vw)",background:"var(--bg)",borderLeft:"1px solid var(--border)",zIndex:81,display:"flex",flexDirection:"column",fontFamily:"var(--font-body)",overflow:"hidden" }}>
+    <div style={{ position:"fixed",inset:"0 0 60px 0",background:"rgba(0,0,0,0.35)",zIndex:80 }} onClick={onClose} />
+    <aside style={{ position:"fixed",top:0,right:0,bottom:"60px",width:"min(320px,92vw)",background:"var(--bg)",borderLeft:"1px solid var(--border)",zIndex:99,display:"flex",flexDirection:"column",fontFamily:"var(--font-body)",overflow:"hidden" }}>
       <div style={{ display:"flex",alignItems:"center",justifyContent:"space-between",padding:"14px 16px",borderBottom:"1px solid var(--border)",fontSize:13,fontWeight:700,letterSpacing:"0.08em",textTransform:"uppercase",color:"var(--fg-muted)" }}>
         <span>Design Options</span>
         <button style={{ background:"none",border:"none",cursor:"pointer",padding:4,color:"var(--fg)",display:"flex",alignItems:"center" }} onClick={onClose} aria-label="Close">✕</button>
@@ -39,7 +39,7 @@ const _TweakRadio = ({ label, value, options, onChange }) => (
     <div style={{ fontSize:13,color:"var(--fg)",marginBottom:6 }}>{label}</div>
     <div style={{ display:"flex",gap:6,flexWrap:"wrap" }}>
       {options.map(o => (
-        <label key={o.value} style={{ display:"flex",alignItems:"center",gap:5,fontSize:13,padding:"4px 10px",border:"1px solid var(--border)",borderRadius:20,cursor:"pointer",background: value===o.value?"var(--vivo-plum)":"transparent",color: value===o.value?"var(--vivo-cream)":"var(--fg)",transition:"background 0.12s" }}>
+        <label key={o.value} style={{ display:"flex",alignItems:"center",gap:5,fontSize:13,padding:"4px 10px",border:"1px solid var(--border-strong)",borderRadius:20,cursor:"pointer",background: value===o.value?"var(--fg)":"transparent",color: value===o.value?"var(--bg)":"var(--fg)",transition:"background 0.12s" }}>
           <input type="radio" name={label} value={o.value} checked={value===o.value} onChange={() => onChange(o.value)} style={{ display:"none" }} />
           {o.label}
         </label>
@@ -47,16 +47,16 @@ const _TweakRadio = ({ label, value, options, onChange }) => (
     </div>
   </div>
 );
-const _TweakToggle = ({ label, value, onChange }) => (
-  <div style={{ display:"flex",alignItems:"center",justifyContent:"space-between",gap:8,marginBottom:10 }}>
+const _TweakToggle = ({ label, value, onChange, style: outerStyle }) => (
+  <div style={{ display:"flex",alignItems:"center",justifyContent:"space-between",gap:8,marginBottom:10,...outerStyle }}>
     <span style={{ fontSize:13,color:"var(--fg)" }}>{label}</span>
-    <button onClick={() => onChange(!value)} role="switch" aria-checked={value} style={{ position:"relative",width:38,height:22,borderRadius:11,background: value?"var(--vivo-plum)":"var(--border)",border:"none",cursor:"pointer",transition:"background 0.18s",flexShrink:0 }}>
-      <span style={{ position:"absolute",top:3,left: value?19:3,width:16,height:16,borderRadius:"50%",background:"#fff",transition:"left 0.18s",display:"block" }} />
+    <button onClick={() => onChange(!value)} role="switch" aria-checked={value} style={{ position:"relative",width:38,height:22,borderRadius:11,background: value?"var(--fg)":"var(--border)",border:"none",cursor:"pointer",transition:"background 0.18s",flexShrink:0 }}>
+      <span style={{ position:"absolute",top:3,left: value?19:3,width:16,height:16,borderRadius:"50%",background: value?"var(--bg)":"var(--fg-inverse, #fff)",transition:"left 0.18s",display:"block" }} />
     </button>
   </div>
 );
 const _TweakButton = ({ label, onClick }) => (
-  <button onClick={onClick} style={{ display:"block",width:"100%",padding:"8px 12px",fontSize:13,fontFamily:"var(--font-body)",background:"var(--vivo-plum)",color:"var(--vivo-cream)",border:"none",borderRadius:6,cursor:"pointer",marginBottom:8,textAlign:"center" }}>{label}</button>
+  <button onClick={onClick} style={{ display:"block",width:"100%",padding:"8px 12px",fontSize:13,fontFamily:"var(--font-body)",background:"var(--fg)",color:"var(--bg)",border:"none",borderRadius:6,cursor:"pointer",marginBottom:8,textAlign:"center",fontWeight:600 }}>{label}</button>
 );
 const _TweakSlider = ({ label, value, min, max, step = 1, unit = "", onChange }) => (
   <div style={{ marginBottom:12 }}>
@@ -66,7 +66,7 @@ const _TweakSlider = ({ label, value, min, max, step = 1, unit = "", onChange })
     </div>
     <input type="range" min={min} max={max} step={step} value={value}
       onChange={e => onChange(Number(e.target.value))}
-      style={{ width:"100%",accentColor:"var(--vivo-plum)",cursor:"pointer" }} />
+      style={{ width:"100%",accentColor:"var(--fg)",cursor:"pointer" }} />
   </div>
 );
 
@@ -269,7 +269,7 @@ const FooterSponsor = ({ sponsor }) => (
 );
 
 // ---- Note Callout (link card on home, between cover and TOC) ----
-const NoteCallout = ({ label, name, photoSrc, initials, onClick, onPhotoChange, onPhotoClear }) => {
+const NoteCallout = ({ label, name, photoSrc, initials, onClick, onPhotoChange, onPhotoClear, onLabelChange, onNameChange }) => {
   const fileRef = React.useRef(null);
   const editing = window.__editMode;
   const handlePhotoClick = (e) => {
@@ -285,8 +285,9 @@ const NoteCallout = ({ label, name, photoSrc, initials, onClick, onPhotoChange, 
     reader.readAsDataURL(f);
     e.target.value = "";
   };
+  const Wrapper = editing ? "div" : "button";
   return (
-    <button className={"note-callout" + (editing ? " is-editing" : "")} onClick={onClick}>
+    <Wrapper className={"note-callout" + (editing ? " is-editing" : "")} onClick={editing ? undefined : onClick}>
       <div
         className={"note-callout-photo" + (editing ? " is-editable" : "")}
         onClick={handlePhotoClick}
@@ -310,8 +311,12 @@ const NoteCallout = ({ label, name, photoSrc, initials, onClick, onPhotoChange, 
         />
       </div>
       <div className="note-callout-text">
-        <div className="note-callout-label">{label}</div>
-        <div className="note-callout-name">{name}</div>
+        {editing
+          ? <Editable as="div" className="note-callout-label" value={label || ""} onChange={v => onLabelChange?.(v)} />
+          : <div className="note-callout-label">{label}</div>}
+        {editing
+          ? <Editable as="div" className="note-callout-name" value={name || ""} onChange={v => onNameChange?.(v)} />
+          : <div className="note-callout-name">{name}</div>}
       </div>
       {editing && photoSrc ? (
         <button
@@ -322,13 +327,13 @@ const NoteCallout = ({ label, name, photoSrc, initials, onClick, onPhotoChange, 
           <Icon name="x" size={14} />
         </button>
       ) : null}
-      <Icon name="arrow-right" size={20} />
-    </button>
+      {!editing && <Icon name="arrow-right" size={20} />}
+    </Wrapper>
   );
 };
 
 // ---- TOC ----
-const TOC = ({ sections, onGo, variant, ads = [], highlightColor }) => {
+const TOC = ({ sections, onGo, variant, ads = [], highlightColor, tocBlocks = [] }) => {
   const cls = "toc-list" + (variant === "minimal" ? " is-minimal" : "");
   const highlightMap = {
     plum: "var(--vivo-plum)",
@@ -345,13 +350,14 @@ const TOC = ({ sections, onGo, variant, ads = [], highlightColor }) => {
   const onLight = highlightColor === "light-green" || highlightColor === "lavender";
   const highlightFg = onLight ? "var(--vivo-black)" : "var(--vivo-cream)";
   const tocStyle = { "--toc-highlight": highlight, "--toc-highlight-fg": highlightFg };
-  // Inline ads slotted into TOC at intervals
+  // Prefer manual tocBlocks; fall back to auto-populated ads
+  const slots = tocBlocks.length > 0 ? tocBlocks : ads;
   const items = [];
   sections.forEach((s, i) => {
     items.push({ kind: "section", section: s, idx: i });
-    // After items 3 and 7, slot an ad if available
-    if ((i === 2 || i === 6) && ads[Math.floor(i / 4)]) {
-      items.push({ kind: "ad", ad: ads[Math.floor(i / 4)] });
+    if ((i === 2 || i === 6) && slots[Math.floor(i / 4)]) {
+      const slot = slots[Math.floor(i / 4)];
+      items.push({ kind: slot.kind || "sponsor", slot });
     }
   });
   return (
@@ -360,11 +366,7 @@ const TOC = ({ sections, onGo, variant, ads = [], highlightColor }) => {
         <h2 className="toc-heading">Table of Contents</h2>
       </div>
       <ol className={cls} style={{ marginTop: 16 }}>
-        {items.map((item, i) => item.kind === "ad" ? (
-          <li key={"ad-" + i} className="toc-ad-slot">
-            <InlineAd ad={item.ad} />
-          </li>
-        ) : (
+        {items.map((item, i) => item.kind === "section" ? (
           <li key={item.section.id} className="toc-item">
             <button className="toc-link" onClick={() => onGo(item.section.id)}>
               <span className="num">{String(item.idx + 1).padStart(2, "0")}</span>
@@ -372,9 +374,75 @@ const TOC = ({ sections, onGo, variant, ads = [], highlightColor }) => {
               <Icon name="arrow-right" size={20} />
             </button>
           </li>
+        ) : (
+          <li key={"slot-" + i} className="toc-ad-slot">
+            {item.kind === "image"
+              ? <TocImageBlock block={item.slot} />
+              : <InlineAd ad={item.slot} />}
+          </li>
         ))}
       </ol>
     </section>
+  );
+};
+
+// ---- TOC image block ----
+const TocImageBlock = ({ block }) => {
+  const inner = (
+    <div className="toc-img-block">
+      {block.src
+        ? <img src={block.src} alt={block.alt || ""} className="toc-img-block-img" />
+        : <div className="toc-img-block-placeholder"><Icon name="image" size={28} /></div>}
+    </div>
+  );
+  return block.href
+    ? <a href={block.href} target="_blank" rel="noopener noreferrer" style={{ display: "block", textDecoration: "none" }}>{inner}</a>
+    : inner;
+};
+
+// ---- TOC block manager (edit mode only) ----
+const TocBlockManager = ({ blocks, onChange }) => {
+  const fileRefs = React.useRef({});
+  const update = (i, patch) => { const next = [...blocks]; next[i] = { ...next[i], ...patch }; onChange(next); };
+  const remove = (i) => onChange(blocks.filter((_, j) => j !== i));
+  const addSponsor = () => onChange([...blocks, { kind: "sponsor", name: "Sponsor Name", tagline: "Supporting the arts", href: "", cta: "Learn more" }]);
+  const addImage = () => onChange([...blocks, { kind: "image", src: "", alt: "", href: "" }]);
+  const handleImageFile = (i, e) => {
+    const f = e.target.files?.[0]; if (!f) return;
+    const reader = new FileReader();
+    reader.onload = () => update(i, { src: String(reader.result || "") });
+    reader.readAsDataURL(f);
+    e.target.value = "";
+  };
+  return (
+    <div className="toc-block-manager">
+      <div className="toc-bm-label">TOC Sponsor / Image Blocks</div>
+      {blocks.map((b, i) => (
+        <div key={i} className="toc-bm-row">
+          <div className="toc-bm-kind">{b.kind === "image" ? "Image" : "Sponsor"}</div>
+          {b.kind === "sponsor" ? (
+            <div className="toc-bm-fields">
+              <Editable as="div" className="toc-bm-field" value={b.name || ""} onChange={v => update(i, { name: v })} />
+              <Editable as="div" className="toc-bm-field toc-bm-field--muted" value={b.tagline || ""} onChange={v => update(i, { tagline: v })} />
+              <Editable as="div" className="toc-bm-field toc-bm-field--muted" value={b.href || ""} onChange={v => update(i, { href: v })} placeholder="https://..." />
+            </div>
+          ) : (
+            <div className="toc-bm-fields">
+              {b.src
+                ? <img src={b.src} alt="" className="toc-bm-thumb" onClick={() => fileRefs.current[i]?.click()} />
+                : <button className="toc-bm-img-add" onClick={() => fileRefs.current[i]?.click()}><Icon name="image" size={16} /> Upload image</button>}
+              <Editable as="div" className="toc-bm-field toc-bm-field--muted" value={b.href || ""} onChange={v => update(i, { href: v })} placeholder="Optional link URL" />
+              <input ref={el => fileRefs.current[i] = el} type="file" accept="image/*" style={{ display: "none" }} onChange={e => handleImageFile(i, e)} />
+            </div>
+          )}
+          <button className="toc-bm-remove" onClick={() => remove(i)} aria-label="Remove block"><Icon name="x" size={14} /></button>
+        </div>
+      ))}
+      <div className="toc-bm-add-row">
+        <button className="add-row-btn" onClick={addSponsor}><span>+</span> Add sponsor block</button>
+        <button className="add-row-btn" onClick={addImage}><span>+</span> Add image block</button>
+      </div>
+    </div>
   );
 };
 
@@ -462,6 +530,88 @@ const SearchOverlay = ({ open, onClose, data, onGo }) => {
           ))
         )}
       </div>
+    </div>
+  );
+};
+
+// ---- Program style picker (edit mode only) ----
+const PROGRAM_STYLES = [
+  { value: "",         label: "Auto-detect" },
+  { value: "tabular",  label: "Classical / Tabular" },
+  { value: "centered", label: "Dance / Centered" },
+];
+const ProgramStylePicker = ({ section, update }) => {
+  if (!window.__editMode) return null;
+  const current = section.displayStyle || "";
+  return (
+    <div className="prog-style-picker">
+      <span className="prog-style-label">Layout</span>
+      {PROGRAM_STYLES.map(opt => (
+        <button
+          key={opt.value}
+          className={"prog-style-btn" + (current === opt.value ? " is-active" : "")}
+          onClick={() => update({ displayStyle: opt.value || undefined })}
+        >
+          {opt.label}
+        </button>
+      ))}
+    </div>
+  );
+};
+
+// ---- Extra HTML blocks (appended to any section page) ----
+const ExtraHtmlBlocks = ({ section, update }) => {
+  const editing = window.__editMode;
+  const blocks = section.extraHtmlBlocks || [];
+  const fileRefs = React.useRef({});
+
+  const updateBlock = (i, content) => {
+    const next = [...blocks]; next[i] = { ...next[i], content }; update({ extraHtmlBlocks: next });
+  };
+  const removeBlock = (i) => update({ extraHtmlBlocks: blocks.filter((_, j) => j !== i) });
+  const addBlock = () => update({ extraHtmlBlocks: [...blocks, { content: "" }] });
+  const handleFile = (i, e) => {
+    const f = e.target.files?.[0]; if (!f) return;
+    const reader = new FileReader();
+    reader.onload = ev => updateBlock(i, ev.target.result || "");
+    reader.readAsText(f);
+    e.target.value = "";
+  };
+
+  if (!editing && blocks.length === 0) return null;
+
+  return (
+    <div className="extra-html-blocks">
+      {blocks.map((b, i) => (
+        <div key={i} className="extra-html-block">
+          {editing ? (
+            <div className="html-section-edit">
+              <textarea
+                className="html-section-textarea"
+                value={b.content || ""}
+                onChange={e => updateBlock(i, e.target.value)}
+                placeholder={"Paste HTML here…\n\n<p>Paragraph</p>\n<table>...</table>"}
+                rows={8}
+                spellCheck={false}
+              />
+              <div className="html-section-actions">
+                <input ref={el => fileRefs.current[i] = el} type="file" accept=".html,.htm,.txt" style={{ display: "none" }} onChange={e => handleFile(i, e)} />
+                <button className="html-section-upload-btn" onClick={() => fileRefs.current[i]?.click()}>Upload HTML file</button>
+                <button className="extra-html-remove-btn" onClick={() => removeBlock(i)}>Remove block</button>
+              </div>
+            </div>
+          ) : (
+            b.content
+              ? <div className="html-section-view" dangerouslySetInnerHTML={{ __html: b.content }} />
+              : null
+          )}
+        </div>
+      ))}
+      {editing && (
+        <button className="add-row-btn extra-html-add-btn" onClick={addBlock}>
+          <span>+</span> Add HTML block
+        </button>
+      )}
     </div>
   );
 };
@@ -1064,6 +1214,7 @@ welcome: eyebrow, quote, body:[str], signature:{name,role}`;
       const imgMapJson = JSON.stringify(imgMap);
       const inject = `<script>
 window.VIVO_PROGRAM_DATA_SNAPSHOT = ${json};
+window.__VIVO_READONLY = true;
 ${sharedPart}(function(){
   var m = ${imgMapJson};
   function patch(img){
@@ -1118,6 +1269,8 @@ ${sharedPart}(function(){
   };
   const accentCss = accentColorMap[tweaks.tocHighlight] || "var(--vivo-plum)";
 
+  const isReadonly = !!window.__VIVO_READONLY;
+
   return (
     <div className="app" style={{ "--accent": accentCss }}>
       <BrushFilterDefs />
@@ -1126,9 +1279,11 @@ ${sharedPart}(function(){
         showLogo={!currentSection}
         logoSrc="assets/logos/vivo-logo-cream.png"
         onBack={currentSection ? goHome : null}
-        onMenu={() => setMenuOpen(true)}
+        onMenu={isReadonly ? undefined : () => setMenuOpen(true)}
         onSearch={() => setSearchOpen(true)}
         home={!currentSection}
+        onEdit={isReadonly ? undefined : toggleEditing}
+        editing={editing}
       />
 
       {!currentSection ? (
@@ -1142,15 +1297,25 @@ ${sharedPart}(function(){
             onClick={() => goTo("welcome")}
             onPhotoChange={(src) => updateCover({ calloutPhotoSrc: src })}
             onPhotoClear={() => updateCover({ calloutPhotoSrc: "" })}
+            onLabelChange={(v) => updateCover({ calloutLabel: v })}
+            onNameChange={(v) => updateCover({ calloutName: v })}
           />
           <TOC sections={visibleSections} onGo={goTo} variant={tweaks.tocVariant} highlightColor={tweaks.tocHighlight}
+            tocBlocks={data.cover.tocBlocks || []}
             ads={(data.sections.find(s => s.kind === "sponsors")?.ads || []).slice(0, 2).map(a => ({
+              kind: "sponsor",
               name: a.name,
               tagline: a.tagline,
               cta: "Learn more",
               href: a.url ? "https://" + a.url : "#"
             }))}
           />
+          {editing && (
+            <TocBlockManager
+              blocks={data.cover.tocBlocks || []}
+              onChange={(blocks) => updateCover({ tocBlocks: blocks })}
+            />
+          )}
           {data.cover.footerSponsor ? (
             <FooterSponsor sponsor={data.cover.footerSponsor} />
           ) : null}
@@ -1164,6 +1329,9 @@ ${sharedPart}(function(){
           <EditingGuide />
           <Editable as="div" className="section-eyebrow" value={currentSection.eyebrow || ""} onChange={v => updateSection(currentSection.id, { eyebrow: v })} />
           <Editable as="h1" className="section-title" value={currentSection.title} onChange={v => updateSection(currentSection.id, { title: v })} />
+          {currentSection.kind === "program" && (
+            <ProgramStylePicker section={currentSection} update={(patch) => updateSection(currentSection.id, patch)} />
+          )}
           <SectionBody
             section={currentSection}
             update={(patch) => updateSection(currentSection.id, patch)}
@@ -1172,6 +1340,7 @@ ${sharedPart}(function(){
             expandedBioId={expandedBioId}
             onClearExpandedBio={() => setExpandedBioId(null)}
           />
+          <ExtraHtmlBlocks section={currentSection} update={(patch) => updateSection(currentSection.id, patch)} />
           <SectionBottomNav
             prev={visibleIdx > 0 ? visibleSections[visibleIdx - 1] : null}
             next={visibleIdx >= 0 && visibleIdx < visibleSections.length - 1 ? visibleSections[visibleIdx + 1] : null}
@@ -1181,12 +1350,31 @@ ${sharedPart}(function(){
       )}
 
       {currentSection ? (
-        <button className="toc-fab" onClick={goHome} aria-label="Back to Table of Contents">
+        <button className={"toc-fab" + (editing ? " toc-fab--editing" : "")} onClick={goHome} aria-label="Back to Table of Contents">
           <Icon name="list" size={22} />
         </button>
       ) : null}
 
-      <SettingsMenu
+      {!isReadonly && editing && (
+        <div className="publish-bar">
+          <button className="publish-bar-exit" onClick={toggleEditing}>
+            <Icon name="x" size={15} />
+            Exit editing
+          </button>
+          <div className="publish-bar-actions">
+            <button className="publish-bar-download" onClick={exportHtml} title="Download HTML">
+              <Icon name="share" size={15} />
+              Download
+            </button>
+            <button className="publish-bar-publish" onClick={publishShow}>
+              <Icon name="arrow-right" size={16} />
+              Publish to site
+            </button>
+          </div>
+        </div>
+      )}
+
+      {!isReadonly && <SettingsMenu
         open={menuOpen}
         onClose={() => setMenuOpen(false)}
         theme={theme}
@@ -1200,14 +1388,14 @@ ${sharedPart}(function(){
         onLoadJson={loadJson}
         onImportPdf={handleImportPdf}
         onCustomize={() => setShowTweaks(true)}
-      />
+      />}
 
       <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} data={data} onGo={goTo} />
 
       <Toast msg={toast} onClose={isErrorToast(toast) ? () => setToast(null) : null} />
 
       {/* Tweaks panel */}
-      {showTweaks ? (
+      {!isReadonly && showTweaks ? (
         <_TweaksPanel onClose={() => { setShowTweaks(false); window.parent.postMessage({ type: "__edit_mode_dismissed" }, "*"); }}>
           <_TweakSection label="Cover Layout">
             <_TweakSelect
@@ -1317,19 +1505,48 @@ ${sharedPart}(function(){
             <_TweakButton label="Reset Sample Content" onClick={resetData} />
           </_TweakSection>
           <_TweakSection label="Sections">
-            <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>Toggle off to hide a section from the table of contents and navigation. Section content is preserved.</div>
-            {data.sections.map(s => (
-              <_TweakToggle
-                key={s.id}
-                label={s.title}
-                value={!hiddenSet.has(s.id)}
-                onChange={(on) => {
-                  const cur = new Set(tweaks.hiddenSections || []);
-                  if (on) cur.delete(s.id); else cur.add(s.id);
-                  setTweak("hiddenSections", Array.from(cur));
-                }}
-              />
-            ))}
+            <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 10 }}>Use arrows to reorder. Toggle to show or hide in navigation.</div>
+            {data.sections.map((s, idx) => {
+              const moveSection = (dir) => {
+                setData(d => {
+                  const secs = [...d.sections];
+                  const swap = idx + dir;
+                  if (swap < 0 || swap >= secs.length) return d;
+                  [secs[idx], secs[swap]] = [secs[swap], secs[idx]];
+                  return { ...d, sections: secs };
+                });
+              };
+              return (
+                <div key={s.id} style={{ display:"flex",alignItems:"center",gap:4,marginBottom:2 }}>
+                  <div style={{ display:"flex",flexDirection:"column",gap:1,flexShrink:0 }}>
+                    <button
+                      onClick={() => moveSection(-1)}
+                      disabled={idx === 0}
+                      aria-label={`Move "${s.title}" up`}
+                      style={{ appearance:"none",border:"none",background:"none",padding:"1px 5px",cursor:idx===0?"default":"pointer",opacity:idx===0?0.2:0.6,fontSize:9,color:"var(--fg)",lineHeight:1 }}
+                    >▲</button>
+                    <button
+                      onClick={() => moveSection(1)}
+                      disabled={idx === data.sections.length - 1}
+                      aria-label={`Move "${s.title}" down`}
+                      style={{ appearance:"none",border:"none",background:"none",padding:"1px 5px",cursor:idx===data.sections.length-1?"default":"pointer",opacity:idx===data.sections.length-1?0.2:0.6,fontSize:9,color:"var(--fg)",lineHeight:1 }}
+                    >▼</button>
+                  </div>
+                  <div style={{ flex:1,minWidth:0 }}>
+                    <_TweakToggle
+                      label={s.title}
+                      value={!hiddenSet.has(s.id)}
+                      style={{ marginBottom:6 }}
+                      onChange={(on) => {
+                        const cur = new Set(tweaks.hiddenSections || []);
+                        if (on) cur.delete(s.id); else cur.add(s.id);
+                        setTweak("hiddenSections", Array.from(cur));
+                      }}
+                    />
+                  </div>
+                </div>
+              );
+            })}
             <_TweakButton label="+ Add Section" onClick={() => {
               const title = (prompt("Section title?") || "").trim();
               if (!title) return;

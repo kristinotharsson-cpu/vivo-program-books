@@ -96,8 +96,8 @@ const Editable = ({ value, onChange, multiline = false, as = "span", linkify = f
 };
 
 // ---------- Top Bar ----------
-const TopBar = ({ title, onBack, onMenu, onSearch, showLogo, logoSrc, home }) => (
-  <header className={"topbar" + (home ? " is-home" : "")}>
+const TopBar = ({ title, onBack, onMenu, onSearch, showLogo, logoSrc, home, onEdit, editing }) => (
+  <header className={"topbar" + (home ? " is-home" : "") + (editing ? " is-editing" : "")}>
     <div className="topbar-left">
       {onBack ? (
         <button className="topbar-back" onClick={onBack} aria-label="Back">
@@ -114,7 +114,16 @@ const TopBar = ({ title, onBack, onMenu, onSearch, showLogo, logoSrc, home }) =>
     </div>
     <div className="topbar-right">
       <button className="topbar-icon-btn" onClick={onSearch} aria-label="Search"><Icon name="search" /></button>
-      <button className="topbar-icon-btn" onClick={onMenu} aria-label="Menu"><Icon name="menu" /></button>
+      {onEdit && (
+        <button
+          className={"topbar-edit-btn" + (editing ? " is-active" : "")}
+          onClick={onEdit}
+          aria-label={editing ? "Exit edit mode" : "Edit"}
+        >
+          {editing ? "Editing" : "Edit"}
+        </button>
+      )}
+      {onMenu && <button className="topbar-icon-btn" onClick={onMenu} aria-label="Menu"><Icon name="menu" /></button>}
     </div>
   </header>
 );
