@@ -14,7 +14,7 @@ window.PROGRAM_DATA = {
     brush: "harmony",
     photoCaption: "Víkingur Ólafsson",
     calloutLabel: "A note from President and Executive Director",
-    calloutName: "Gary Dunning",
+    calloutName: "Thor Steingraber",
     presentedBy: "The Klarman Family Foundation",
     footerSponsor: {
       name: "Steinway & Sons",

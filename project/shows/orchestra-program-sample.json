@@ -1,0 +1,147 @@
+{
+  "cover": {
+    "eyebrow": "Vivo Performing Arts presents",
+    "title": "Chicago Symphony Orchestra",
+    "subtitle": "Klaus Mäkelä, Zell Music Director Designate",
+    "date": "Sun Mar 01, 2026",
+    "time": "5PM",
+    "venue": "Symphony Hall"
+  },
+  "sections": [
+    {
+      "id": "program",
+      "title": "Program",
+      "kind": "program",
+      "eyebrow": "Program",
+      "displayStyle": "tabular",
+      "lead": "This evening's program will run approximately two hours, including intermission.",
+      "pieces": [
+        {
+          "composer": "Ludwig van Beethoven",
+          "work": "Symphony No. 7 in A Major, Op. 92",
+          "movements": [
+            "Poco sostenuto — Vivace",
+            "Allegretto",
+            "Presto",
+            "Allegro con brio"
+          ]
+        },
+        { "kind": "intermission", "label": "INTERMISSION" },
+        {
+          "composer": "Hector Berlioz",
+          "work": "Symphonie fantastique, Op. 14",
+          "movements": [
+            "Dreams — Passions (Largo — Allegro agitato ed appassionato assai)",
+            "A Ball (Waltz: Allegro non troppo)",
+            "A Scene in the Country (Adagio)",
+            "March to the Scaffold (Allegretto non troppo)",
+            "Dream of a Witches' Sabbath (Larghetto — Allegro)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "notes",
+      "title": "Notes on the Program",
+      "kind": "notes",
+      "eyebrow": "Program Notes",
+      "lead": "",
+      "sections": [
+        {
+          "h": "Ludwig van Beethoven (1770-1827)",
+          "subhead": "Symphony No. 7 in A Major, Op. 92",
+          "body": [
+            "Here is what Goethe wrote after he first met Beethoven during the summer of 1812:",
+            "His talent amazed me; unfortunately, he is an utterly untamed personality, who is not altogether in the wrong in holding the world to be detestable, but surely does not make it any more enjoyable either for himself or for others by his attitude.",
+            "We're told that the two men walked together through the streets of Teplitz, where Beethoven had gone for the summer, and exchanged cordial words. When royalty approached, Goethe stepped aside, tipping his hat and bowing deeply; Beethoven, indifferent to nobility, walked on. This was a characteristic Beethoven gesture: defiant, individual, strongly humanitarian, intolerant of hypocrisy—and many listeners find its essence reflected in his music (although it is curious that throughout his life Beethoven clung to the \"van\" in his name because it was so easily confused with \"von\" and its suggestion of lofty bloodlines).",
+            "Beethoven's contemporaries clearly thought he was a complicated man, perhaps even the utterly untamed personality Goethe found him to be. It is hard to know what Goethe thought of Beethoven's music—his taste in music in general was far from advanced—but the general perception of Beethoven's output at the time was that it was as unconventional as the man himself. This is our greatest loss today, for Beethoven's widespread familiarity has blinded us not only to his visionary outlook (so far ahead of his time that he was out of fashion in his last years), but also to the uncompromising and disturbing nature of the music itself.",
+            "His Seventh Symphony is so well known to us today that we can't imagine a time that knew Beethoven, but not this glorious work. But that was the case when the poet and the composer walked together in Teplitz in July 1812. Beethoven had finished the A-major symphony three months earlier—envisioning a premiere for that spring that did not materialize—but the first performance would not take place for another year and a half, on December 8, 1813.",
+            "That night in Vienna gave the rest of the nineteenth century plenty to talk about. No other symphony of Beethoven's so openly invited interpretation—not even his Sixth, the self-proclaimed Pastoral Symphony, with its bird calls, thunderstorm, and frank evocation of something beyond mere eighth notes and bar lines. To Richard Wagner, Beethoven's Seventh Symphony was \"the apotheosis of the dance.\" Berlioz heard a ronde des paysans (peasants' round) in the first movement. The entire score, in fact, is filled with the rhythms of dance music; sometimes they are surprisingly obsessive and relentless, but they are never truly absent, even on the gentlest of pages.",
+            "The true significance of Beethoven's Seventh Symphony is to be found in the notes on the page—in his distinctive use of rhythm and pioneering sense of key relationships. By the end of the symphony, it is difficult to hear the ordinary rhythm of a dotted eighth note followed by a sixteenth note in the same way again. And even if we see on the page how Beethoven has turned the conventional rules of harmony upside down, we are still dumbfounded at the ease with which he has done it.",
+            "Beethoven's magnificent introduction is of unprecedented size and ambition. He begins decisively in A major, but at the first opportunity moves away—not to the dominant (E major) as one would expect, but to the unlikely regions of C major and F major—keys up a third and down a third. Beethoven will not be limited to the seven degrees of the A-major scale, which contains neither C natural nor F natural. By the time he's done, Beethoven will have proven not only that both keys sound comfortably at home in an A-major symphony, but that A major can be made to seem like the outsider.",
+            "First, we move from the spacious vistas of the introduction, with its plaintive oboe melody, into the joyous, dancing song of the Vivace. Making that transition is a challenge Beethoven relishes—and one that remains a landmark of compositional bravura—as a passage of stagnant, repeated Es (there are sixty-two of them) catch fire suddenly with the dancing dotted rhythm that will carry through the entire movement. The way he manages those repeated notes, halting and faltering and then bursting forth directly in the Vivace, is the mark of a composer who famously sketched, rewrote, and slaved over the precise placement and duration of every note until the rhythm, the pacing, and the long-range effect on the entire passage was just what he wanted. The development section brings new explorations of C and F, and the coda includes a spectacular, long-sustained crescendo, with churning repetitions over a rumbling pedal point E that is said to have convinced the composer Carl Maria von Weber, sixteen years his junior, that Beethoven was \"ripe for the madhouse.\"",
+            "The Allegretto is as famous as any music Beethoven wrote, and it was a success from the first performance, when a repeat was demanded. Like much great art, it is simplicity itself, yet it eludes explanation and has regularly defied other composers' attempts to duplicate its plain power. It is not a true slow movement, but its marking, allegretto (moderately fast, but not as fast as allegro), assures that it is sufficiently slower than the music that precedes and follows, providing the necessary relief.",
+            "By designing the Allegretto in A minor, Beethoven has moved one step closer to F major; he now dares to write the next movement, a raucous scherzo, in that key. A major, when it arrives on the scene, is treated not as the main key of the symphony, but as a foreign visitor. It is a quintessential Beethovenian gambit—the kind of sleight of hand that only the truest of geniuses can pull off.",
+            "With nothing more than the two thundering chords that open the finale, we are firmly back in the land of A major. The rhythmic drive of the preceding movements now shifts into high gear, carrying the music to the brink of pandemonium, yet always strictly in control, which is what gives this final sweep of music its hair-raising charge. It is marked Allegro con brio, but the emphasis is on brio. When C and F major return, as they were destined to do, in the development section, they now sound as remote as they did in the symphony's introduction, and we sense that we have come full circle. The final pages are a brilliant, exhilarating companion to the \"madhouse\" ending of the first movement."
+          ]
+        },
+        {
+          "h": "Hector Berlioz (1803-1869)",
+          "subhead": "Symphonie fantastique, Op. 14",
+          "body": [
+            "\"I come now to the supreme drama of my life,\" Berlioz wrote in his Memoirs at the beginning of the chapter in which he discovers Shakespeare and the young Irish actress Harriet Smithson. \"Shakespeare, coming up on me unawares, struck me like a thunderbolt,\" he wrote after attending Hamlet, given in English—a language Berlioz did not speak—at the Odéon Theater on September 11, 1827. But it was Smithson appearing as Ophelia, and then four days later as Juliet, who captured his heart and set in motion one of the grandest creative outbursts in romantic art.",
+            "Berlioz began the Symphonie fantastique almost at once, and it immediately became a consuming passion. Throughout its composition, he was obsessed with Henriette, the familiar French name for her he had begun to use, even though they wouldn't meet until long after the work was finished. On April 16, 1830, he wrote to his friend Humbert Ferrand that he had \"just written the last note\" of his new symphony, one of the most shockingly modern works in the repertoire and surely the most astonishing first symphony any composer has given us. \"Here is its subject,\" he continued, \"which will be published in a program and distributed in the hall on the day of the concert.\" Then follows the sketch of a story as famous as any in the history of music: the tale of a man who falls desperately in love with a woman who embodies all he is seeking; is tormented by recurring thoughts of her, and, in a fit of despair, poisons himself with opium; and, finally, in a horrible narcotic vision, dreams that he is condemned to death and witnesses his own execution.",
+            "Berlioz knew audiences well; he provided a title for each of his five movements and wrote a detailed program note to tell the story behind the music. A few days before the premiere, Berlioz's full-scale program was printed in the Revue musicale, and, for the performance on December 5, 1830, two thousand copies of a leaflet containing the same narrative were distributed in the concert hall, according to Felix Mendelssohn, who would remember that night for the rest of his life because he was so shaken by the music. No one was unmoved. It is hard to know which provoked the greater response—Berlioz' radical music or its bold story. For Berlioz, who always believed in the bond between music and ideas, the two were inseparable. In an often-quoted footnote to the program as it was published with the score in 1845, he insisted that \"the distribution of this program to the audience, at concerts where this symphony is to be performed, is indispensable for a complete understanding of the dramatic outline of the work.\"",
+            "Even in 1830, the fuss over the program couldn't disguise the daring of the music. Berlioz' new symphony sounded like no other music yet written. Its hallmarks can be quickly listed: five movements, each with its own title (as in Beethoven's Pastoral Symphony), and the use of a signature motif, the idée fixe representing Harriet Smithson that recurs in each movement and is transformed dramatically at the end. But there is no precedent in music—just three years after the death of Beethoven—for his staggeringly inventive use of the orchestra, creating entirely new sounds with the same instruments that had been playing together for years; for the bold, unexpected harmonies; and for melodies that are still, to this day, unlike anyone else's. There isn't a page of this score that doesn't contain something distinctive and surprising. Some of it can be explained—Berlioz developed his idiosyncratic sense of harmony, for example, not at the piano, since he never learned to play more than a few basic chords, but by improvising on the guitar. But explanation doesn't diminish our astonishment.",
+            "None of this was lost on Berlioz' colleagues. According to Jacques Barzun, the composer's biographer, one can date Berlioz' \"unremitting influence on nineteenth-century composers\" from the date of the first performance of the Symphonie fantastique. In a famous essay on Berlioz, Robert Schumann relished the work's novelty; remembering how, as a child, he loved turning music upside down to find strange new patterns before his eyes, Schumann commented that \"right side up, this symphony resembled such inverted music.\" He was, at first, dumbfounded, but \"at last struck with wonderment.\" Mendelssohn was confused, and perhaps disappointed: \"He is really a cultured, agreeable man and yet he composes so very badly,\" he wrote in a letter to his mother. For Liszt, who attended the premiere—he was just nineteen years old at the time—and took Berlioz to dinner afterwards, the only question was whether Berlioz was \"merely a talented composer or a real genius. For us,\" he concluded, \"there can be no doubt.\" (He sided with genius.) When Wagner called the Symphonie fantastique \"a work that would have made Beethoven smile,\" he was probably right. But he continued: \"The first movement of Beethoven's Fifth Symphony would seem an act of pure kindness to me after the Symphonie fantastique.\"",
+            "In fact, it was Berlioz' discovery of Beethoven that prompted him to write symphonies in the first place. At the same time, Berlioz also seems to foreshadow Mahler, for whom a symphony meant \"the building up of a world, using every available technical means.\" The Symphonie fantastique did, for its time, stretch the definition of the symphony to the limit. But it didn't shatter the model set by Beethoven. For it was a conscious effort on Berlioz' part to tell his fantastic tale in a way that Beethoven would have understood and to put even his most outrageous ideas into the enduring framework of the classical symphony.",
+            "At the premiere, Berlioz himself was onstage—playing in the percussion section, as he often liked to do—to witness the audience cheering and stomping in excitement at the end. Later, in his Memoirs, he admitted that the performance was far from perfect—\"it hardly could be, with works of such difficulty and after only two rehearsals\"—but that night he knew that he had the public in his camp, and that with the recent, coveted Prix de Rome under his belt, his career was about to skyrocket."
+          ],
+          "subSections": [
+            {
+              "h": "Berlioz' program note for the Symphonie fantastique",
+              "parts": [
+                {
+                  "h": "PART ONE: DREAMS — PASSIONS",
+                  "body": [
+                    "The author imagines that a young musician, afflicted with that moral disease that a well-known writer calls the vague des passions, sees for the first time a woman who embodies all the charms of the ideal being he has imagined in his dreams, and he falls desperately in love with her. Through an odd whim, whenever the beloved image appears before the mind's eye of the artist, it is linked with a musical thought whose character, passionate but at the same time noble and shy, he finds similar to the one he attributes to his beloved.",
+                    "This melodic image and the model it reflects pursue him incessantly like a double idée fixe. That is the reason for the constant appearance, in every movement of the symphony, of the melody that begins the first Allegro. The passage from this state of melancholy reverie, interrupted by a few fits of groundless joy, to one of frenzied passion, with its gestures of fury, of jealousy, its return of tenderness, its tears, its religious consolations—this is the subject of the first movement."
+                  ]
+                },
+                {
+                  "h": "PART TWO: A BALL",
+                  "body": [
+                    "The artist finds himself in the most varied situations—in the midst of the tumult of a party, in the peaceful contemplation of the beauties of nature; but everywhere, in town, in the country, the beloved image appears before him and disturbs his peace of mind."
+                  ]
+                },
+                {
+                  "h": "PART THREE: A SCENE IN THE COUNTRY",
+                  "body": [
+                    "Finding himself one evening in the country, he hears in the distance two shepherds piping a ranz des vaches in dialogue. This Pastoral duet, the scenery, the quiet rustling of the trees gently brushed by the wind, the hopes he has recently found some reason to entertain—all concur in affording his heart an unaccustomed calm, and in giving a more cheerful color to his ideas. He reflects upon his isolation; he hopes that his loneliness will soon be over.—But what if she were deceiving him!—This mingling of hope and fear, these ideas of happiness disturbed by black presentiments, form the subject of the Adagio. At the end, one of the shepherds again takes up the ranz des vaches; the other no longer replies.—Distant sound of thunder—loneliness—silence."
+                  ]
+                },
+                {
+                  "h": "PART FOUR: MARCH TO THE SCAFFOLD",
+                  "body": [
+                    "Convinced that his love is unappreciated, the artist poisons himself with opium. The dose of the narcotic, too weak to kill him, plunges him into a sleep accompanied by the most horrible visions. He dreams that he has killed his beloved, that he is condemned and led to the scaffold, and that he is witnessing his own execution. The procession moves forward to the sounds of a march that is now somber and fierce, now brilliant and solemn, in which the muffled noise of heavy steps gives way without transition to the noisiest clamor. At the end of the march, the first four measures of the idée fixe reappear, like a last thought of love interrupted by the fatal blow."
+                  ]
+                },
+                {
+                  "h": "PART FIVE: DREAM OF A WITCHES' SABBATH",
+                  "body": [
+                    "He sees himself at the sabbath, in the midst of a frightful troop of ghosts, sorcerers, monsters of every kind, come together for his funeral. Strange noises, groans, bursts of laughter, distant cries which other cries seem to answer. The beloved melody appears again, but it has lost its character of nobility and shyness; it is no more than a dance tune, mean, trivial, and grotesque: it is she, coming to join the sabbath.—A roar of joy at her arrival.—She takes part in the devilish orgy.—Funeral knell, burlesque parody of the Dies irae, sabbath round-dance. The sabbath round and the Dies irae are combined."
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "callout": null,
+      "closing": "—Phillip Huscher is the program annotator and scholar-in-residence for the Chicago Symphony Orchestra."
+    },
+    {
+      "id": "sponsors",
+      "title": "Sponsors & Acknowledgments",
+      "kind": "performance-sponsor",
+      "eyebrow": "Support",
+      "lead": "The Chicago Symphony Orchestra's U.S. Tour is generously sponsored by Zell Family Foundation.",
+      "blocks": [
+        {
+          "label": "LIVE PERFORMANCE! Arts for All Leadership Support",
+          "name": "Eleanor & Frank Pao",
+          "statement": ""
+        },
+        {
+          "label": "Take Your Seat program",
+          "name": "Margaret Eagle",
+          "statement": "Special thanks to Margaret Eagle for supporting tonight's Take Your Seat program attendees."
+        }
+      ],
+      "seasonSponsorsLabel": "2025/26 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and The Thonis Family",
+      "publicSupport": "Vivo Performing Arts is supported by the Mass Cultural Council, a state agency.",
+      "closing": ""
+    }
+  ]
+}

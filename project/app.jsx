@@ -1351,7 +1351,7 @@ ${sharedPart}(function(){
           <Cover cover={cover} update={updateCover} variant="default" brushColor={tweaks.brushColor} textColor={tweaks.coverTextColor} theme={theme} brushScale={tweaks.brushScale} brushAngle={tweaks.brushAngle} brushOffsetY={tweaks.brushOffsetY} brushOffsetX={tweaks.brushOffsetX} />
           <NoteCallout
             label={data.cover.calloutLabel || "A note from President and Executive Director"}
-            name={data.cover.calloutName || "Gary Dunning"}
+            name={data.cover.calloutName || "Thor Steingraber"}
             photoSrc={data.cover.calloutPhotoSrc}
             initials={(data.cover.calloutName || "GD").split(" ").map(n => n[0]).join("").slice(0, 2)}
             onClick={() => goTo("welcome")}

@@ -1,0 +1,164 @@
+{
+  "cover": {
+    "eyebrow": "Vivo Performing Arts presents",
+    "title": "Joshua Bell, violin",
+    "subtitle": "Shai Wosner, piano",
+    "date": "Sun Apr 26, 2026",
+    "time": "3PM",
+    "venue": "Symphony Hall"
+  },
+  "sections": [
+    {
+      "id": "program",
+      "title": "Program",
+      "kind": "program",
+      "eyebrow": "Program",
+      "displayStyle": "tabular",
+      "lead": "This afternoon's program will run approximately one hour and 45 minutes, including intermission.",
+      "pieces": [
+        {
+          "composer": "Edvard Grieg",
+          "work": "Violin Sonata No. 3 in C minor, Op. 45",
+          "movements": [
+            "Allegro molto ed appassionato",
+            "Allegretto espressivo alla Romanza – Allegro molto – Tempo I",
+            "Allegro animato"
+          ]
+        },
+        {
+          "composer": "Franz Schubert",
+          "work": "Violin Sonata in A Major, D. 574 \"Grand Duo\"",
+          "movements": [
+            "Allegro moderato",
+            "Scherzo. Presto",
+            "Andantino",
+            "Allegro vivace"
+          ]
+        },
+        { "kind": "intermission", "label": "INTERMISSION" },
+        {
+          "composer": "Sergei Prokofiev",
+          "work": "Violin Sonata No. 2 in D Major, Op. 94a",
+          "movements": [
+            "Moderato",
+            "Presto – poco più mosso del – Tempo 1",
+            "Andante",
+            "Allegro con brio – Poco meno mosso – Tempo 1 – Poco meno mosso – Allegro con brio"
+          ]
+        },
+        {
+          "composer": "Maurice Ravel",
+          "work": "Violin Sonata, M. 77",
+          "movements": [
+            "Allegretto",
+            "Blues. Moderato",
+            "Perpetuum mobile. Allegro"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "notes",
+      "title": "Notes on the Program",
+      "kind": "notes",
+      "eyebrow": "Program Notes",
+      "lead": "",
+      "sections": [
+        {
+          "h": "Franz Schubert (1797-1828)",
+          "subhead": "Violin Sonata in A Major, D. 574 \"Grand Duo\"",
+          "body": [
+            "Franz Schubert composed a remarkable amount of music in his short life. By the time he completed the A-major violin sonata in August 1817, he had written hundreds of works including five symphonies, four masses, seven string quartets, and more than 300 solo songs; he was only twenty years old. Ironically, despite his tremendous output Schubert had not yet given a single public performance in Vienna or published a single note. It was a frustrating time for the ambitious young composer: after a fledgling attempt at independence, financial woes forced Schubert to move back into his parents' house. He was also stuck in a tedious job teaching young children at the school where his father was schoolmaster.",
+            "The A-major sonata stands among Schubert's early adult forays into chamber music. It was his fourth and final violin sonata; he penned the other three a year earlier. Schubert virtually abandoned the duo sonata after 1817; the only other he composed was for piano and arpeggione (a sort of bowed guitar). The first three violin sonatas were published posthumously under the diminutive \"sonatina,\" while the A major sonata was designated \"Duo.\" Its first publisher was Anton Diabelli, who is best remembered for composing the waltz from which sprang Ludwig van Beethoven's thirty-three Diabelli Variations.",
+            "The sonata opens with a lilting bassline in the piano. Coincidentally, its melodic contours echo the opening of Mozart's Eine Kleine Nachtmusik, though the Mozart piece hadn't yet been published when Schubert composed this work. A youthful, care-free spirit pervades Schubert's graceful violin melody, which is occasionally punctuated by lively dialogue between the players. Frequent harmonic detours imbue the movement with an eager sense of roving. Following a brief, restless minor-key development section, the music returns to its jovial mood.",
+            "Though the scherzo (Italian for \"joke\") has roots in the early baroque period, it was Beethoven and Schubert who popularized it as an alternative to the polite, delicate minuet. Here an energetic, off-kilter scherzo alternates with a largely tranquil trio section.",
+            "In an early memorial to Schubert, one of his compatriots referred to the composer as \"my friend… whose life lay in melody.\" Indeed, the \"King of Song\" displays his seemingly limitless gift for melody in the third movement's placid opening theme. Yet this mood of tranquility is soon interrupted. The harmonic restlessness of the first movement reasserts itself throughout the Andantino: after a shortened reprise of the opening melody, the final bars find Schubert equivocating between C major and minor.",
+            "The sonata concludes with a brilliant Allegro vivace. Here the tunefulness of the first and third movements combines seamlessly with the jocular rhythmic vitality of the second movement scherzo. Not content to end quietly, Schubert interrupts the coda with a playful fortissimo outburst."
+          ]
+        },
+        {
+          "h": "Edvard Grieg (1843–1907)",
+          "subhead": "Violin Sonata No. 3 in C minor, Op. 45",
+          "body": [
+            "Grieg wrote few chamber pieces in his lifetime, completing only one string quartet, a single cello sonata, and his three violin sonatas. He also tended to avoid large-scale forms: he finished no symphonies, operas, or oratorios. His sole concerto, the Piano Concerto in A minor, was written in his mid-20s. Grieg composed his first two violin sonatas around the same time. He completed the Third in 1887, more than two decades later, and not without serious effort. In a letter to his publishers he lamented, \"Only the gods know when it will be finished.\" Grieg later reflected on his triptych of sonatas, writing, \"They represent periods in my development—the first naïve, rich in ideas; the second national; and the third with a wider horizon.\"",
+            "He dedicated the Third Sonata to German painter Franz von Lenbach, who made portraits of numerous famous musicians including Liszt, Wagner, and Clara Schumann. Lenbach left his portrait of Grieg unfinished after Grieg complained that it made him appear sickly. He seemed to have no issues with Lenbach's portrait of his wife Nina, for he made Lenbach the dedicatee of the Third Violin Sonata. His acquaintance with Teresina Tua, a young Italian woman nicknamed \"the angel of the violin,\" partially inspired the sonata. Given Grieg's sometimes strained relationship with his wife, his decision to dedicate the work to someone other than Tua was probably for the best.",
+            "Grieg's Third Sonata is the last in which he used a tripartite sonata structure. True to form, the first movement opens with two contrasting themes. Grieg incorporates a three-note figure, a falling second followed by a falling third, into these themes as well as the piano accompaniment. This gesture, which he used throughout his career, has become known as the \"Grieg motif.\" Here the motif appears in its original guise as well as inverted, with a rising third followed by a rising second.",
+            "Syncopated block chords in the piano imbue much of the movement with a sense of unrest, even as the violin ends its phrases with hopeful upward inflections. Contrasting this sense of cautious optimism, at times the violin can manage only fragmented, exhausted sighs. The movement concludes with a darting, presto coda that ends in brooding gloom.",
+            "The second movement is in ABA form. The piano introduces the light, cantabile melody in an extended solo (note the reappearance of the Grieg motif). The violin then takes up the melody, buoyed by gentle piano accompaniment. The middle section is livelier, a folksy minor-key dance replete with plucked strings. The A section returns with a soaring iteration of the theme, the violin now playing the melody an octave higher over restless block chords. The movement ends with violin intoning a crystalline high note, like the evening's first star glimmering across a far distance.",
+            "The final movement opens with soft, undulating piano arpeggios that give way to a lively call and response between the players. Following this animated volley the violin introduces the second theme, a cantabile melody that starts low in the instrument's range before ascending. Each of these sections is repeated before a rapid-fire coda concludes the work in a sunny, triumphant major key."
+          ]
+        },
+        {
+          "h": "Sergei Prokofiev (1891-1953)",
+          "subhead": "Violin Sonata No. 2 in D Major, Op. 94a",
+          "body": [
+            "Like many artists, Sergei Prokofiev fled Russia in the wake of the 1917 revolutions. He moved between America and Western Europe for nearly a decade, avoiding the bloodiest chapters of the Revolution while remaining in touch with friends and professional connections in Russia. He eventually began visiting Moscow and Leningrad to perform concerts of his music, and over several years the Stalinist government persuaded him to move back. In 1936, Prokofiev permanently returned to Moscow with his wife Lina and their children just before Stalin's Great Purge began in earnest.",
+            "Earlier that year, Shostakovich's opera Lady Macbeth of the Mtsensk District and his ballet The Limpid Stream had been formally denounced in Pravda, the official newspaper of the Communist Party, after Stalin attended a performance of the former (it is suspected that Stalin himself may have written the Pravda article attacking Lady Macbeth). Despite this and other warning signs Prokofiev was undeterred, possibly thinking himself above the censorship affecting other Soviet artists. Though initially lauded as a Soviet cultural hero, Prokofiev soon began to understand the cost of his homecoming; in one ominous episode, his passport was taken at a government appointment and confiscated with no explanation. Prokofiev would never leave the Soviet Union again.",
+            "In response to the German invasion of the Soviet Union in the summer of 1941, the government evacuated Prokofiev and other high-profile artists from major Russian cities. Prokofiev and his lover, Mira Mendelssohn, spent nearly two years in various cities across Eastern Europe and Central Asia. He worked on a variety of projects during the war including film music, propaganda pieces to bolster the war effort, his massive opera War and Peace, and a handful of intimate chamber works. One of these, the Flute Sonata, was a commission from the Union of Soviet Composers. He began writing the Sonata in Alma-Ata (now Almaty), Kazakhstan before the government relocated Sergei and Mira to the city of Perm; there he completed it in the summer of 1943. The couple returned to Moscow that fall; the Flute Sonata—Prokofiev's only work for solo flute—premiered there that December.",
+            "Shortly after the premiere, violinist David Oistrakh asked Prokofiev to create an arrangement for him. The arrangement for violin and piano closely adheres to the original, with the piano part remaining unchanged. Prokofiev and Oistrakh left much of the flute part unchanged as well, though the violin part takes advantage of some of the instrument's idiomatic techniques, like multiple stopping and string plucking. Despite the work's designation as Prokofiev's second violin sonata, it is actually the first of his violin sonatas to be completed. Prokofiev began his Violin Sonata No. 1, a bleak rumination on life under the Soviet regime, in 1938, yet a flurry of new projects and the outbreak of the war pushed the work from his mind. He would not finish the First Violin Sonata until 1946, a year after the war's end.",
+            "\"I wanted,\" Prokofiev wrote of this work, \"to write a sonata in delicate, fluid classical style.\" The opening theme is cheerful and lyrical, as is the gently rocking theme that follows. Included in the score is a repeat of the exposition (a key feature of Classical-era sonata form), another example of Prokofiev's desire for a return to classical balance. As the two themes develop, they grow increasingly animated and climb higher into the violin's top register. The movement ends with a soft, final repetition of the first theme high in the piano. A lively and darting scherzo follows, the violin's bowed lines punctuated by cheeky pizzicatos. The brief middle section is slower and more lyrical before returning to the opening theme, closed with a last defiant pluck.",
+            "A light and graceful theme opens and closes the third movement Andante. Sandwiched between them, the music in this middle section is more subdued, winding and lilting with echoes of American jazz. Closing the sonata is a boisterous, virtuosic rondo."
+          ]
+        },
+        {
+          "h": "Maurice Ravel (1875-1937)",
+          "subhead": "Violin Sonata, M. 77",
+          "body": [
+            "Ravel's final chamber work, the Violin Sonata, gave its composer no small amount of grief. He announced its premiere in both 1923 and 1924 before cancelling the performances, admitting that the work was not ready. Two years later, a student walked into Ravel's study to find the smoldering remnants of what had been the finale. When the student protested, Ravel responded, \"I liked it very much. But it didn't fit the Sonata. It was not the right kind of finale for the first and second movements. So I have destroyed it and composed another finale which is not so good, but it's a good finale.\"",
+            "Despite its difficulties, Ravel ultimately grew quite fond of the piece. He frequently performed the Sonata on his extended tour of the United States, using these concerts as an opportunity to promote jazz and blues in the American concert hall. While many audiences gave the Sonata (and Ravel's proclamations on African American music) a lukewarm reception, Chicago audiences demanded the \"Blues\" movement as an encore.",
+            "African American music was a fertile source of inspiration for French composers in the Roaring Twenties (the Années folles, or \"crazy years,\" in France), and Ravel was no exception. Several of his late-period masterpieces were greatly influenced by the rhythms, harmonies, and melodic gestures of ragtime, jazz, and the blues. During his time in New York he met George Gershwin, who took Ravel to Harlem's famous Savoy Ballroom and Cotton Club. Those encounters inspired his Piano Concerto in G as well as the Piano Concerto for the Left Hand.",
+            "Commencing with a lighthearted skipping melody, the Sonata soon turns reflective. At times, the independent part-writing seems to suggest that the two soloists are playing different pieces. In an extended climax, hushed, eerie violin tremolos give way to lush cantabile melodies. The movement closes as the violin ascends into the top of its register, while the opening theme gently reappears in the piano.",
+            "\"Blues\" opens with plucked chords on the violin, an overt reference to banjo strumming. The piano enters in an entirely different key, creating a twinge of dissonance akin to an untuned upright in a juke joint. Ravel imbues the movement with signifiers of jazz, blues, and ragtime, including upward slurs in the violin's bowed lines that echo the expressive sighs of African American club singers. An infectious interplay of rhythms between the players builds to a raucous climax, capped with a cheeky call-and-response coda.",
+            "The third movement starts with a teasing back-and-forth before the violin launches into a fierce perpetuum mobile. The piano serves as a rhythmic anchor as a ceaseless river of sixteenth notes pours from the violin until the very last bar."
+          ]
+        }
+      ],
+      "callout": null,
+      "closing": "© Andrew McIntyre, 2026"
+    },
+    {
+      "id": "bios",
+      "title": "About the Artists",
+      "kind": "bios",
+      "eyebrow": "Artists",
+      "bios": [
+        {
+          "id": "joshua-bell",
+          "name": "Joshua Bell",
+          "role": "violin",
+          "initials": "JB",
+          "photoSrc": "",
+          "body": [
+            "With a career spanning almost four decades, Grammy Award-winning violinist Joshua Bell CBE is one of the most celebrated artists of our time. He has performed with virtually every major orchestra in the world, and regularly appears as a soloist, recitalist, chamber musician, conductor, and as the music director of London's Academy of St Martin in the Fields. In 2025, he was awarded an honorary Commander of the Most Excellent Order of the British Empire.",
+            "Following his world premiere recording of Thomas de Hartmann's Violin Concerto, Bell gives the work's UK, North American, and Canadian premieres at London's BBC Proms, with the New York Philharmonic, and during his season-long tenure as a Toronto Symphony Spotlight Artist, respectively. He also leads extensive US and European tours with the Academy of St Martin in the Fields; makes his first appearances as the New Jersey Symphony's inaugural Principal Guest Conductor; tours Asia with Hamburg's NDR Elbphilharmonie Orchestra; and joins Steven Isserlis and Evgeny Kissin for trio programs in New York, Paris, Vienna, and Prague.",
+            "Bell has been nominated for six Grammy awards, named \"Instrumentalist of the Year\" by Musical America, selected as a \"Young Global Leader\" by the World Economic Forum, recognized with the Avery Fisher Prize, and honored as an \"Indiana Living Legend.\" His many collaborators include Emanuel Ax, Chris Botti, Chick Corea, Renée Fleming, Josh Groban, Lang Lang, Dave Matthews, Anoushka Shankar, Regina Spektor, Sting, and Daniil Trifonov. Bell has performed for three American presidents and the justices of the Supreme Court of the United States. After participating in former president Barack Obama's Committee on the Arts and Humanities' first cultural mission to Cuba, he headlined the subsequent Emmy-nominated PBS Live from Lincoln Center special.",
+            "Bell performs on the 1713 Huberman Stradivarius violin."
+          ]
+        },
+        {
+          "id": "shai-wosner",
+          "name": "Shai Wosner",
+          "role": "piano",
+          "initials": "SW",
+          "photoSrc": "",
+          "body": [
+            "Pianist Shai Wosner has attracted international recognition for his exceptional artistry, musical integrity, and creative insight. This season, he makes solo appearances with Mason Bates' Piano Concerto in Italy and Vijay Iyer's 'Handmade Universe' with East Coast Chamber Orchestra (ECCO) in Seattle. Other highlights include a program with the JACK Quartet at the Frick Collection in New York, the three Brahms Sonatas with Pinchas Zukerman, and a US tour with Joshua Bell.",
+            "Shai's chamber arrangements of various Beethoven Symphonies have been premiered and toured by Emanuel Ax, Leonidas Kavakos, and Yo-Yo Ma and are available in GRAMMY-nominated recordings released by Sony Classical. His own recordings for Onyx Classics range from Schubert sonatas, to chamber works by Bartók and Kurtág, to concerti by Haydn and Ligeti. He has received Lincoln Center's Martin E. Segal Award, an Avery Fisher Career Grant, and a Borletti-Buitoni Trust Award."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sponsors",
+      "title": "Sponsors & Acknowledgments",
+      "kind": "performance-sponsor",
+      "eyebrow": "Support",
+      "lead": "Joshua Bell appears by arrangement with Park Avenue Artists and Primo Artists. Shai Wosner appears by arrangement with Opus 3 Artists.",
+      "blocks": [],
+      "seasonSponsorsLabel": "2025/26 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and The Thonis Family",
+      "publicSupport": "Vivo Performing Arts is supported by the Mass Cultural Council, a state agency.",
+      "closing": ""
+    }
+  ]
+}

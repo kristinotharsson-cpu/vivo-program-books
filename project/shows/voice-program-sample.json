@@ -1,0 +1,402 @@
+{
+  "cover": {
+    "eyebrow": "Vivo Performing Arts presents",
+    "title": "Ruckus and Davóne Tines",
+    "subtitle": "What Is Your Hand in This?",
+    "date": "Sat Jan 31, 2026",
+    "time": "8PM",
+    "venue": "Sanders Theatre"
+  },
+  "sections": [
+    {
+      "id": "program",
+      "title": "What Is Your Hand in This?",
+      "kind": "program",
+      "eyebrow": "Program",
+      "displayStyle": "tabular",
+      "lead": "There will be no intermission in this evening's program, which will run approximately one hour and 15 minutes.",
+      "pieces": [
+        {
+          "title": "PART I",
+          "isGroup": true,
+          "items": [
+            { "work": "Beautiful Dreamer", "composer": "Stephen Foster" },
+            { "work": "Overture from Compassion Preludes", "composer": "Douglas Adam August Balliett" },
+            { "work": "The Four F's from Compassion Preludes", "composer": "Balliett" },
+            { "work": "Be the Lover of My Soul", "composer": "Traditional / arr. Davóne Tines" }
+          ]
+        },
+        {
+          "title": "PART II",
+          "isGroup": true,
+          "items": [
+            { "work": "Concerto Grosso No. 10 in D minor, Op. 6: ii", "composer": "George Frederic Handel" },
+            { "work": "Scherzo from Compassion Preludes", "composer": "Balliett" },
+            { "work": "The Liberty Song", "composer": "John Dickinson / arr. Balliett" },
+            { "work": "Concerto Grosso No. 10 in D minor, Op. 6: iv", "composer": "Handel" },
+            { "work": "What Mean Ye?", "composer": "George W. Clark" }
+          ]
+        },
+        {
+          "title": "PART III",
+          "isGroup": true,
+          "items": [
+            { "work": "A New Death March", "composer": "Sawney Freeman" },
+            { "work": "To the White People of America", "composer": "Joshua McCarter Simpson" },
+            { "work": "The Rays of Liberty", "composer": "Freeman" },
+            {
+              "work": "Federal Nations",
+              "composer": "Balliett",
+              "subItems": [
+                { "work": "The Federal Overture", "composer": "Benjamin Carr" },
+                { "work": "\"Why do the Nations so Furiously Rage\" from Messiah", "composer": "Handel" }
+              ]
+            },
+            { "work": "The House I Live In", "composer": "Allan & Robinson / arr. Tines & Balliett" }
+          ]
+        },
+        {
+          "title": "PART IV",
+          "isGroup": true,
+          "items": [
+            { "work": "Buddha", "composer": "Julius Eastman" },
+            { "work": "This Bitter Earth", "composer": "Clyde Otis arr. Tines & Balliett" },
+            { "work": "What is My Hand in This?", "composer": "Tines, arr. Balliett" },
+            { "work": "Chester", "composer": "William Billings / arr. Balliett" },
+            { "work": "A Change is Gonna Come", "composer": "Sam Cooke" },
+            { "work": "Nunc Dimiitis from Compassion Preludes", "composer": "Balliett" },
+            { "work": "Be the Lover of My Soul (Reprise)", "composer": "Traditional / arr. Tines" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "performers",
+      "title": "The Performers and the Work",
+      "kind": "roster",
+      "eyebrow": "Ensemble",
+      "lead": "",
+      "groups": [
+        {
+          "h": "Ruckus",
+          "players": [
+            "Douglas Adam August Balliett — electric bass, arrangements and compositions",
+            "Elliot Figg — harpsichord, piano, electric keyboard",
+            "Keir GoGwilt — violin",
+            "Manami Mizumoto — viola",
+            "Paul Holmes Morton — baroque guitar",
+            "Shelby Yamin — violin",
+            "Clay Zeller-Townson — baroque bassoon, taille, percussion, research"
+          ]
+        },
+        {
+          "h": "Soloist",
+          "players": ["Davóne Tines — singer and arrangements"]
+        },
+        {
+          "h": "Chorus",
+          "players": ["Harvard-Radcliffe Collegium Musicum, Dr. Hana Cai, conductor"]
+        }
+      ],
+      "footer": "Program conceived by Douglas Balliett, Davóne Tines and Clay Zeller-Townson. Developed by Ruckus Early Music. Commissioned by Carnegie Hall and Hudson Hall with support from the New York State Council of the Arts."
+    },
+    {
+      "id": "callout-mission",
+      "title": "What Is Your Hand in This?",
+      "kind": "notes",
+      "eyebrow": "",
+      "lead": "",
+      "sections": [],
+      "callout": {
+        "label": "What Is Your Hand in This?",
+        "body": [
+          "America's music at the founding of the country was the music of dissent.",
+          "We celebrate this tradition.",
+          "— Ruckus and Davóne Tines"
+        ]
+      },
+      "closing": ""
+    },
+    {
+      "id": "song-notes",
+      "title": "Notes on Musical Sources & Song Texts",
+      "kind": "notes",
+      "eyebrow": "Program Notes",
+      "lead": "",
+      "sections": [
+        {
+          "h": "Beautiful Dreamer (1864)",
+          "subhead": "Words and music by Stephen Foster (1826-1864)",
+          "body": [
+            "One of Stephen Foster's most iconic parlor songs, \"Beautiful Dreamer\" was one of the final songs he wrote while in bad health and in desperate need of money. Its sentimental style is devoid of the minstrel themes that many of his songs contained. It has become one of his most performed songs in the last century, covered by The Beatles, Roy Orbison, Bing Crosby, and many others."
+          ],
+          "songText": {
+            "kind": "song-text",
+            "displayMode": "original-only",
+            "originalLanguage": "en",
+            "stanzas": [
+              {
+                "original": "Beautiful Dreamer, wake unto me,\nStarlight and dewdrops are waiting for thee;\nSounds of the rude world heard in the day,\nLull'd by the moonlight have all pass'd away!"
+              },
+              {
+                "original": "Beautiful dreamer, queen of my song,\nList while I woo thee with soft melody;\nGone are the cares of life's busy throng\nBeautiful dreamer, awake unto me!\nBeautiful dreamer, awake unto me!"
+              }
+            ]
+          }
+        },
+        {
+          "h": "Overture and The Four Fs from Compassion Preludes (2025)",
+          "subhead": "Doug Balliett (b. 1982)",
+          "body": [
+            "Commissioned for the occasion, works from the Compassion Preludes were created for this program and interspersed throughout. The Overture is instrumental; the texts of the Four Fs follows:"
+          ],
+          "songText": {
+            "kind": "song-text",
+            "displayMode": "original-only",
+            "originalLanguage": "en",
+            "stanzas": [
+              {
+                "original": "Evolutionary biologists are all agreed:\nthat there are four basic needs,\nThat every animal feels\nThough some will say the drive\nIs all from the genes."
+              },
+              {
+                "original": "And these needs can be destructive\nWhen they when they collide with privilege and power\nBut we live with these needs\nThey're called the Four F's:\nWe fight, We flee, we feed, and we F*ind a way to keep reproducing"
+              },
+              {
+                "original": "And these truths are self-evident,\nthat we are plagued by fear …of one another\n…and want… of more…\nand desire… for acceptance.\nBut America has always left somebody out.\nAnd we don't know how to make America…"
+              }
+            ]
+          }
+        },
+        {
+          "h": "Be the Lover of My Soul",
+          "subhead": "Traditional, as sung by Providence Baptist Church, Orlean, Virginia. Arranged by Davóne Tines (b. 1986)",
+          "body": [
+            "Davóne Tines grew up singing this hymn (as \"Jesus, Lover of My Soul\") at the Providence Baptist Church of Orlean, VA. He has adapted it and arranged it for this program."
+          ],
+          "songText": {
+            "kind": "song-text",
+            "displayMode": "original-only",
+            "originalLanguage": "en",
+            "stanzas": [
+              {
+                "original": "Be the lover of my soul,\nlet me to thy bosom fly,\nwhile the nearer waters roll,\nwhile the tempest still is high;"
+              },
+              {
+                "original": "Hide me, O my Savior, hide,\ntill the storm of life is past;\nsafe into the haven guide,\nO receive my soul at last!"
+              }
+            ]
+          }
+        },
+        {
+          "h": "Liberty Song (1768/2025)",
+          "subhead": "Lyrics: John Dickinson (1732-1808). Tune: \"Heart of Oak\". Arrangement: Douglas Balliett (b. 1982)",
+          "body": [
+            "When John Dickinson published his \"Letters from a Pennsylvania Farmer\" in 1767-1768, he became a political celebrity across the colonies. While they were written to protest the Townsend Acts, Dickinson's goal was novel: he taught citizens how to begin to think of themselves as a united \"American\" people, rather than British subjects divided across the sea. Shortly after these letters were published, Dickinson penned \"The Liberty Song,\" to further this notion musically. In its chorus, Dickinson repeats over and over the founding hypocrisy of the American Revolution: \"not as slaves, but as freemen our money we'll give.\" Indeed, while Dickinson wrote \"The Liberty Song\" he had dozens of enslaved people working on his farm in Delaware. The song became one of the most popular songs of the time, and was sung to the well-known tune (and anthem of the British Royal Navy) \"Heart of Oak.\""
+          ],
+          "songText": {
+            "kind": "song-text",
+            "displayMode": "original-only",
+            "originalLanguage": "en",
+            "stanzas": [
+              {
+                "original": "Come, join hand in hand, brave Americans all,\nAnd rouse your bold hearts at fair Liberty's call;\nNo tyrannous acts shall suppress your just claim,\nOr stain with dishonor America's name."
+              },
+              {
+                "original": "Chorus:\nIn Freedom we're born and in Freedom we'll live.\nOur purses are ready. Steady, friends, steady;\nNot as slaves, but as Freemen our money we'll give.",
+                "isChorus": true
+              },
+              {
+                "original": "Our worthy forefathers, let's give them a cheer,\nTo climates unknown did courageously steer;\nThrew' oceans to deserts for Freedom they came,\nAnd dying, bequeath'd us their freedom and fame"
+              },
+              {
+                "original": "How sweet are the labors that free men endure,\nthat men shall enjoy the sweet profit secure.\nNo more sweet labors Americans know,\nIf British shall reap what Americans sow."
+              }
+            ]
+          }
+        },
+        {
+          "h": "What Mean Ye? (1845)",
+          "subhead": "Published in The Liberty Minstrel. Lyrics: George W. Clark. Hymn: \"Mear\" as appears in The Sacred Harp",
+          "body": [
+            "The Liberty Minstrel, just as in Joshua McCarter Simpson's Emancipation Car, functioned as a way for abolitionists to express themselves during group meetings. Abolitionist George Washington Clark published numerous songbooks in his lifetime for the cause. \"What Mean Ye?\" has an everlasting power, as it simply sets forth a series of searing questions to the listener. The chorale we have set it to, \"Mear,\" has been a favorite of shape-note singers (a living tradition of American folk singing) for hundreds of years, and is one of the oldest hymns found in The Sacred Harp."
+          ],
+          "songText": {
+            "kind": "song-text",
+            "displayMode": "original-only",
+            "originalLanguage": "en",
+            "stanzas": [
+              { "original": "What mean ye that ye bruise and bind\nMy people, saith the Lord,\nAnd starve your craving brother's mind,\nThat asks to hear my word?" },
+              { "original": "What mean ye that ye make them toil\nThrough long and dreary years,\nAnd shed like rain upon your soil\nTheir blood and bitter tears?" },
+              { "original": "What mean ye that ye dare to rend\nThe tender mother's heart;\nBrothers from sisters, friend from friend,\nHow dare you bid them part?" },
+              { "original": "What mean ye, when God's bounteous hand\nTo you so much has given,\nThat from all those who till your land\nYou keep both earth and heaven?" },
+              { "original": "When at the judgement God shall call,\nWhere is thy brother? say,\nWhat mean ye to the Judge of all,\nTo answer on that day?" }
+            ]
+          }
+        },
+        {
+          "h": "A New Death March & The Rays of Liberty (1801?)",
+          "subhead": "by Sawney Freeman (1769-1828)",
+          "body": [
+            "Sawney Freeman's music has only very recently been rediscovered. Born into slavery in Connecticut around 1770, he escaped in 1790. Freeman was a devoted violin player and composer, and he is one of the earliest known published Black American composers, writing in the New England four-part instrumental-chorale idiom. His \"New Death March\" is likely written in reaction to Handel's March from Saul, a perennial piece that made its way into many of these \"instrumental tutor\" publications of the time. Freeman's first known publication was his Musicians Pocket Companion of 1801 (an existing copy has yet to be found). The works in this program were collected in the \"Gurdon Trumbull Copybook\" from 1817."
+          ]
+        },
+        {
+          "h": "To the White People of America (1854)",
+          "subhead": "Published in The Emancipation Car. by Joshua McCarter Simpson (ca. 1820-1877). Tune: \"Massa's in the Cold Cold Ground,\" 1852",
+          "body": [
+            "In 2022 a new resource became available to students of American musical history. Songs of Slavery and Emancipation, a collection of some of the earliest published songs from the Black American experience was compiled and published by Mat Callahan and the University Press of Mississippi. In this collection we found the work of Joshua McCarter Simpson and his Emancipation Car. Simpson's boldly honest preface (\"A Note to the Public\") and his searing texts were among the earliest findings that felt essential for us as performers. \"To The White People of America\" holds a powerful balance of ideas: calling out the hypocrisy of white enslavers, questioning if anyone can actually hear his people's suffering, and a remarkable refrain: \"the day will come that you must die.\" Is this a condemnation, is it speaking a truth that we are all equal under the force of mortality? Or is he referring to the death of an ideology? Simpson carefully chose the tune to set this text to: Stephen Foster's \"Massa's in the Cold Cold Ground,\" a song often sung in minstrel shows portraying an enslaved person as lamenting the death of his enslaver."
+          ],
+          "songText": {
+            "kind": "song-text",
+            "displayMode": "original-only",
+            "originalLanguage": "en",
+            "stanzas": [
+              { "original": "O'er this wide extended country,\nHear the solemn echoes roll,\nFor a long and weary century,\nThose cries have gone from pole to pole;" },
+              { "original": "See the white man sway his sceptre,\nIn one hand he holds the rod—\nIn the other hand the Scripture,\nAnd says that he's a man of God." },
+              { "original": "Hear ye that mourning? 'Tis your brothers' cry!\nO! ye wicked men take warning,\nThe day will come when you must die." },
+              { "original": "Lo! Ten thousand steeples shining\nThrough this mighty Christian land,\nWhile four millions slaves all pining\nAnd dying 'neath the Tyrant's hand." },
+              { "original": "See the \"blood-stained\" Christian banner\nFollowed by a host of saints\nWhile they loudly sing Hosannah,\nWe hear the dying slave's complaints:" },
+              { "original": "Hear ye that mourning? Anglo-sons of God,\nO! ye Hypocrites take warning,\nAnd shun your sable brothers blood." }
+            ]
+          }
+        },
+        {
+          "h": "Federal Nations (2025)",
+          "subhead": "by Douglas Balliett, using: \"Why do the Nations so Furiously Rage\" from Messiah (1741) by Handel; The Federal Overture (1794) by Benjamin Carr",
+          "body": [
+            "\"Federal Nations\" combines two works of 18th-century music: Handel's rage aria from Messiah and Benjamin Carr's concert overture celebrating the birth of the Republic. Composer Douglas Balliett weaves both together to form an unhinged, madcap ride of rage and pomp. Carr's \"Federal Overture\" has all the elements you'd expect from one of the earliest uniquely American symphonic works: a yankee doodle fugue, folk song arrangements, and late classical \"sturm und drang.\""
+          ],
+          "songText": {
+            "kind": "song-text",
+            "displayMode": "original-only",
+            "originalLanguage": "en",
+            "stanzas": [
+              { "original": "Why do the nations so furiously rage together:\nwhy do the people imagine a vain thing?" },
+              { "original": "The kings of the earth rise up,\nand the rulers take counsel together:\nagainst the Lord and His anointed." }
+            ]
+          }
+        },
+        {
+          "h": "The House I Live In (1942/2025)",
+          "subhead": "Music: Earl Robinson (1910-1991). Lyrics: Abel Meeropol (aka Lewis Allan; 1903-1986). Arr. Tines / Balliett",
+          "body": [
+            "\"The House I Live In\" first appeared in a Broadway revue called Let Freedom Ring! in 1942, but was made an instant classic in 1945 when sung by Frank Sinatra in a short film of the same name. The film was created to oppose anti-Semitism in the post-war moment, but the song has been covered by many artists as a way of broadening the language of who should be considered an American. The second and third verses in this program were written by Davóne Tines, and this version appears on his album ROBESON."
+          ],
+          "songText": {
+            "kind": "song-text",
+            "displayMode": "original-only",
+            "originalLanguage": "en",
+            "stanzas": [
+              { "original": "The house I live in, the friends that I have found,\nThe folks beyond the railroad and the people all around,\nThe worker and the farmer, the sailor on the sea,\nThe folks who built this country, that's America to me." },
+              { "original": "But we know this country will always have its way\nWith people sleeping soundly, while their rotting dreams decay\nIt lays it trap full willing to justify the killing\nWhile wracking up the billing on a debt to never pay" },
+              { "original": "While truth becomes banished and justice never won\nOur hopes to find some freedom, still just raisins in the sun\nIt's sad to see it failing, its the way its always been\nTo never cleanse the staining of its bloody primal sin" },
+              { "original": "Cause that's America,\nWhat's America?\nWho's America?\nWhere's America?\n\nFind America… for me" }
+            ]
+          }
+        },
+        {
+          "h": "Buddha (1984)",
+          "subhead": "Music: Julius Eastman (1940-1990)",
+          "body": [
+            "Julius Eastman has become an American icon of radical minimalism whose music is finally getting the platform it deserves. \"Buddha\" is presented to performers as a graphic score—a series of musical lines, mostly long tones, housed within a large oval (Is it an egg? The belly of The Buddha?). Any performer may take any line and react to the musical moment—creating a sustained and tense sonic meditation."
+          ]
+        },
+        {
+          "h": "This Bitter Earth (1960)",
+          "subhead": "Music and lyrics: Clyde Otis (1924-2008). Arrangement: Davóne Tines and Douglas Balliett",
+          "body": [
+            "\"This Bitter Earth\" was popularized by Dinah Washington and was one of her final hits in her lifetime, rising to #1 on the Billboard Hot R&B charts."
+          ],
+          "songText": {
+            "kind": "song-text",
+            "displayMode": "original-only",
+            "originalLanguage": "en",
+            "stanzas": [
+              { "original": "This bitter earth\nWell, what a fruit it bears\nWhat good is love\nThat no one shares?\nAnd if my life is like the dust\nThat hides the glow of a rose\nWhat good am I?\nHeaven only knows" },
+              { "original": "Oh, this bitter earth\nYes, can it be so cold?\nToday you're young\nToo soon you're old\nBut while a voice\nWithin me cries\nI'm sure someone\nMay answer my call\nAnd this bitter earth,\nMay not, be so bitter after all" }
+            ]
+          }
+        },
+        {
+          "h": "What is My Hand in This? (2025)",
+          "subhead": "Words and music by Davóne Tines (b. 1986)",
+          "body": [
+            "The idea for the song \"What is My Hand in This\" came from an invitation to be part of the entertainment at a Christmas party in one of New York City's wealthiest neighborhoods. Davóne took this as an opportunity not to entertain, but to speak directly and imploringly to a room of the 1% with the subtext \"You in this room have the power to affect great change, so what is your hand in contributing?\" The tune borrows from Black American folk tradition."
+          ],
+          "songText": {
+            "kind": "song-text",
+            "displayMode": "original-only",
+            "originalLanguage": "en",
+            "stanzas": [
+              { "original": "What is my hand in this?\nAs you go about your day,\nDo you ever stop and say,\nWhat is my hand in this?" },
+              { "original": "What is my hand in this?\nAs you fret upon your woes\nAnd cast the blame upon your foes, please ask\nWhat is my hand in this?" },
+              { "original": "What is my hand in this?\nWhile you listen to this song,\nWill you try to right your wrong, asking,\nWhat is my hand in this?" }
+            ]
+          }
+        },
+        {
+          "h": "Chester (1778)",
+          "subhead": "Words and music by William Billings (1746-1800). Published in The Singing Master's Assistant. Arrangement: Douglas Balliett",
+          "body": [
+            "\"Chester\" has always been an anthem of the American Revolution, functioning in its day as a way for New Englanders to demonstrate solidarity and to cry out together during a tumultuous and war-ravaged time. \"Chester\" existed in many forms, as a tune to be roared out or played in the streets, or as a four-part hymn to be sung in meeting houses, singing schools, and churches."
+          ],
+          "songText": {
+            "kind": "song-text",
+            "displayMode": "original-only",
+            "originalLanguage": "en",
+            "stanzas": [
+              { "original": "What grateful Off'ring shall we bring?\nWhat shall we render to the World?\nLoud Halleluiahs let us Sing,\nAnd praise the name on ev'ry Chord." }
+            ]
+          }
+        },
+        {
+          "h": "A Change is Gonna Come (1964)",
+          "subhead": "Sam Cooke (1931-1964), arr. Balliett",
+          "body": [],
+          "songText": {
+            "kind": "song-text",
+            "displayMode": "original-only",
+            "originalLanguage": "en",
+            "stanzas": [
+              { "original": "I was born by the river\nIn a little tent\nOh, and just like the river, I've been running\nEver since\nIt's been a long\nA long time coming, but I know\nA change gon' come\nOh yes, it will" },
+              { "original": "It's been too hard living\nBut I'm afraid to die\n'Cause I don't know what's up there\nBeyond the sky\nIt's been a long\nA long time coming, but I know\nA change gon' come\nOh yes, it will" },
+              { "original": "I go to the movie\nAnd I go downtown\nAnd somebody keep telling me\n\"Don't hang around\"\nIt's been a long\nA long time coming, but I know\nA change gon' come\nOh yes, it will" },
+              { "original": "Then, I go to my brother\nAnd I say, \"Brother, help me, please\"\nBut he winds up knockin' me\nBack down on my knees, oh" },
+              { "original": "There been times that I thought\nI couldn't last for long\nBut now, I think I'm able\nTo carry on\nIt's been a long\nA long time coming, but I know\nA change gon' come\nOh yes, it will" }
+            ]
+          }
+        },
+        {
+          "h": "\"Nunc Dimittis\" from Compassion Preludes (2025)",
+          "subhead": "Douglas Balliett (b. 1982)",
+          "body": [
+            "The fifth of the Compassion Preludes of Douglas Balliet performed today, this is one of two with a vocal part."
+          ],
+          "songText": {
+            "kind": "song-text",
+            "displayMode": "original-only",
+            "originalLanguage": "en",
+            "stanzas": [
+              { "original": "We will finally be in peace\nWhen the promise is fulfilled\nMy eyes will see the glory\nOf the coming of the day\nWhen a light will reveal to the nation\nThe error of his ways." },
+              { "original": "Glory to the Father and to the Son\nAnd the Mother and the Daughter and actually\nTo everyone\nWhat could have been in the beginning is beginning now,\nWhat will be your hand in this?" }
+            ]
+          }
+        }
+      ],
+      "callout": null,
+      "closing": "Notes by Clay Zeller-Townson"
+    },
+    {
+      "id": "sponsors",
+      "title": "Sponsors",
+      "kind": "performance-sponsor",
+      "eyebrow": "Support",
+      "lead": "",
+      "blocks": [],
+      "seasonSponsorsLabel": "2025/26 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and the Thonis Family",
+      "publicSupport": "Vivo Performing Arts is supported by the Mass Cultural Council, a state agency.",
+      "closing": ""
+    }
+  ]
+}
