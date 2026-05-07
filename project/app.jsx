@@ -333,7 +333,9 @@ const NoteCallout = ({ label, name, photoSrc, initials, onClick, onPhotoChange, 
 };
 
 // ---- TOC ----
-const TOC = ({ sections, onGo, variant, ads = [], highlightColor, tocBlocks = [] }) => {
+const TOC = ({ sections, onGo, variant, ads = [], highlightColor, tocBlocks = [], onReorder, onToggleHide, hiddenSet = new Set() }) => {
+  const editing = window.__editMode;
+  const dragIdx = React.useRef(null);
   const cls = "toc-list" + (variant === "minimal" ? " is-minimal" : "");
   const highlightMap = {
     plum: "var(--vivo-plum)",
@@ -350,7 +352,6 @@ const TOC = ({ sections, onGo, variant, ads = [], highlightColor, tocBlocks = []
   const onLight = highlightColor === "light-green" || highlightColor === "lavender";
   const highlightFg = onLight ? "var(--vivo-black)" : "var(--vivo-cream)";
   const tocStyle = { "--toc-highlight": highlight, "--toc-highlight-fg": highlightFg };
-  // Prefer manual tocBlocks; fall back to auto-populated ads
   const slots = tocBlocks.length > 0 ? tocBlocks : ads;
   const items = [];
   sections.forEach((s, i) => {
@@ -360,19 +361,45 @@ const TOC = ({ sections, onGo, variant, ads = [], highlightColor, tocBlocks = []
       items.push({ kind: slot.kind || "sponsor", slot });
     }
   });
+
+  const handleDragStart = (sectionIdx) => { dragIdx.current = sectionIdx; };
+  const handleDrop = (targetSectionIdx) => {
+    if (dragIdx.current === null || dragIdx.current === targetSectionIdx) return;
+    onReorder?.(dragIdx.current, targetSectionIdx);
+    dragIdx.current = null;
+  };
+
   return (
     <section className="toc-section" style={tocStyle}>
       <div style={{ marginBottom: 0, display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 16 }}>
         <h2 className="toc-heading">Table of Contents</h2>
+        {editing && <span style={{ fontSize: 11, color: "var(--fg-muted)", fontFamily: "var(--font-body)" }}>Drag to reorder</span>}
       </div>
       <ol className={cls} style={{ marginTop: 16 }}>
         {items.map((item, i) => item.kind === "section" ? (
-          <li key={item.section.id} className="toc-item">
-            <button className="toc-link" onClick={() => onGo(item.section.id)}>
+          <li
+            key={item.section.id}
+            className={"toc-item" + (editing ? " is-draggable" : "") + (hiddenSet.has(item.section.id) ? " is-hidden-item" : "")}
+            draggable={editing}
+            onDragStart={() => handleDragStart(item.idx)}
+            onDragOver={e => { if (editing) e.preventDefault(); }}
+            onDrop={() => handleDrop(item.idx)}
+          >
+            {editing && <span className="toc-drag-handle" title="Drag to reorder"><Icon name="menu" size={14} /></span>}
+            <button className="toc-link" onClick={() => { if (!editing) onGo(item.section.id); }}>
               <span className="num">{String(item.idx + 1).padStart(2, "0")}</span>
               <span className="title">{item.section.title}</span>
               <Icon name="arrow-right" size={20} />
             </button>
+            {editing && (
+              <button
+                className={"toc-hide-btn" + (hiddenSet.has(item.section.id) ? " is-hidden" : "")}
+                onClick={() => onToggleHide?.(item.section.id)}
+                title={hiddenSet.has(item.section.id) ? "Show in TOC" : "Hide from TOC"}
+              >
+                {hiddenSet.has(item.section.id) ? "Hidden" : "Hide"}
+              </button>
+            )}
           </li>
         ) : (
           <li key={"slot-" + i} className="toc-ad-slot">
@@ -414,6 +441,13 @@ const TocBlockManager = ({ blocks, onChange }) => {
     reader.readAsDataURL(f);
     e.target.value = "";
   };
+  const handleDrop = (i, e) => {
+    e.preventDefault();
+    const f = e.dataTransfer.files?.[0]; if (!f || !f.type.startsWith("image/")) return;
+    const reader = new FileReader();
+    reader.onload = () => update(i, { src: String(reader.result || "") });
+    reader.readAsDataURL(f);
+  };
   return (
     <div className="toc-block-manager">
       <div className="toc-bm-label">TOC Sponsor / Image Blocks</div>
@@ -424,14 +458,40 @@ const TocBlockManager = ({ blocks, onChange }) => {
             <div className="toc-bm-fields">
               <Editable as="div" className="toc-bm-field" value={b.name || ""} onChange={v => update(i, { name: v })} />
               <Editable as="div" className="toc-bm-field toc-bm-field--muted" value={b.tagline || ""} onChange={v => update(i, { tagline: v })} />
-              <Editable as="div" className="toc-bm-field toc-bm-field--muted" value={b.href || ""} onChange={v => update(i, { href: v })} placeholder="https://..." />
+              <div className="toc-bm-url-row">
+                <span className="toc-bm-url-label">URL</span>
+                <input
+                  className="toc-bm-url-input"
+                  type="url"
+                  value={b.href || ""}
+                  onChange={e => update(i, { href: e.target.value })}
+                  placeholder="https://..."
+                />
+              </div>
             </div>
           ) : (
             <div className="toc-bm-fields">
-              {b.src
-                ? <img src={b.src} alt="" className="toc-bm-thumb" onClick={() => fileRefs.current[i]?.click()} />
-                : <button className="toc-bm-img-add" onClick={() => fileRefs.current[i]?.click()}><Icon name="image" size={16} /> Upload image</button>}
-              <Editable as="div" className="toc-bm-field toc-bm-field--muted" value={b.href || ""} onChange={v => update(i, { href: v })} placeholder="Optional link URL" />
+              <div
+                className={"toc-bm-drop-zone" + (b.src ? " has-image" : "")}
+                onClick={() => fileRefs.current[i]?.click()}
+                onDragOver={e => e.preventDefault()}
+                onDrop={e => handleDrop(i, e)}
+              >
+                {b.src
+                  ? <img src={b.src} alt="" className="toc-bm-thumb" />
+                  : <><Icon name="image" size={20} /><span>Drop image or click to upload</span></>}
+              </div>
+              <div className="toc-bm-size-hint">Recommended: 750 × 250 px (3:1 ratio) — fits most mobile screens</div>
+              <div className="toc-bm-url-row">
+                <span className="toc-bm-url-label">URL</span>
+                <input
+                  className="toc-bm-url-input"
+                  type="url"
+                  value={b.href || ""}
+                  onChange={e => update(i, { href: e.target.value })}
+                  placeholder="Optional link (https://...)"
+                />
+              </div>
               <input ref={el => fileRefs.current[i] = el} type="file" accept="image/*" style={{ display: "none" }} onChange={e => handleImageFile(i, e)} />
             </div>
           )}
@@ -621,7 +681,7 @@ const App = () => {
   // Tweakable defaults — JSON block for host edit-mode persistence
   const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
     "coverVariant": "default",
-    "tocVariant": "default",
+    "tocVariant": "minimal",
     "tocHighlight": "plum",
     "coverAccent": "green",
     "coverBrush": "harmony",
@@ -1300,8 +1360,13 @@ ${sharedPart}(function(){
             onLabelChange={(v) => updateCover({ calloutLabel: v })}
             onNameChange={(v) => updateCover({ calloutName: v })}
           />
-          <TOC sections={visibleSections} onGo={goTo} variant={tweaks.tocVariant} highlightColor={tweaks.tocHighlight}
+          <TOC
+            sections={editing ? data.sections : visibleSections}
+            onGo={goTo}
+            variant={tweaks.tocVariant}
+            highlightColor={tweaks.tocHighlight}
             tocBlocks={data.cover.tocBlocks || []}
+            hiddenSet={hiddenSet}
             ads={(data.sections.find(s => s.kind === "sponsors")?.ads || []).slice(0, 2).map(a => ({
               kind: "sponsor",
               name: a.name,
@@ -1309,6 +1374,19 @@ ${sharedPart}(function(){
               cta: "Learn more",
               href: a.url ? "https://" + a.url : "#"
             }))}
+            onReorder={(fromIdx, toIdx) => {
+              setData(d => {
+                const secs = [...d.sections];
+                const [moved] = secs.splice(fromIdx, 1);
+                secs.splice(toIdx, 0, moved);
+                return { ...d, sections: secs };
+              });
+            }}
+            onToggleHide={(id) => {
+              const cur = new Set(tweaks.hiddenSections || []);
+              cur.has(id) ? cur.delete(id) : cur.add(id);
+              setTweak("hiddenSections", Array.from(cur));
+            }}
           />
           {editing && (
             <TocBlockManager
