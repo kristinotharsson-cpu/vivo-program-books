@@ -26,15 +26,42 @@ const Icon = ({ name, size = 20 }) => {
   }
 };
 
+// ---------- Link rendering ----------
+// Parses [text](url) markdown links in body text.
+// External: opens in new tab. Internal (#/section-id): navigates via hash routing.
+const LINK_RE = /\[([^\]]+)\]\(((?:https?:\/\/|mailto:|#)[^)\s]+)\)/g;
+function renderLinks(text) {
+  if (!text || !text.includes('[')) return text;
+  const parts = [];
+  let last = 0, m;
+  LINK_RE.lastIndex = 0;
+  while ((m = LINK_RE.exec(text)) !== null) {
+    if (m.index > last) parts.push(text.slice(last, m.index));
+    const [, label, href] = m;
+    const isInternal = href.startsWith('#');
+    parts.push(React.createElement('a', {
+      key: m.index,
+      href,
+      target: isInternal ? undefined : "_blank",
+      rel: isInternal ? undefined : "noopener noreferrer",
+      style: { color: 'var(--vivo-plum)', textDecoration: 'underline' },
+    }, label));
+    last = m.index + m[0].length;
+  }
+  if (last < text.length) parts.push(text.slice(last));
+  return parts;
+}
+
 // ---------- Editable text ----------
 // Wraps text in a contentEditable when edit mode is on.
-const Editable = ({ value, onChange, multiline = false, as = "span", ...rest }) => {
+// When linkify is true, renders [text](url) as clickable links in view mode.
+const Editable = ({ value, onChange, multiline = false, as = "span", linkify = false, ...rest }) => {
   const ref = useRef(null);
   const editing = window.__editMode;
 
   useEffect(() => {
-    if (ref.current && ref.current.innerText !== value) {
-      ref.current.innerText = value;
+    if (ref.current && ref.current.innerText !== (value || "")) {
+      ref.current.innerText = value || "";
     }
   }, [value]);
 
@@ -49,6 +76,12 @@ const Editable = ({ value, onChange, multiline = false, as = "span", ...rest }) 
   };
 
   const Tag = as;
+
+  // View mode with links: render parsed markdown links as <a> tags
+  if (!editing && linkify && value && value.includes('[')) {
+    return <Tag {...rest}>{renderLinks(value)}</Tag>;
+  }
+
   return (
     <Tag
       ref={ref}

@@ -8,7 +8,7 @@ const WelcomeSection = ({ s, update }) => (
   <div className="welcome-page">
     <Editable as="div" className="welcome-quote" value={s.quote} onChange={v => update({ quote: v })} multiline />
     {s.body.map((p, i) => (
-      <Editable key={i} as="p" value={p} onChange={v => {
+      <Editable key={i} as="p" linkify value={p} onChange={v => {
         const body = [...s.body]; body[i] = v; update({ body });
       }} multiline />
     ))}
@@ -70,7 +70,7 @@ const NotesSection = ({ s, update }) => (
           const sections = [...s.sections]; sections[i] = { ...sec, h: v }; update({ sections });
         }} />
         {sec.body.map((p, pi) => (
-          <Editable key={pi} as="p" value={p} onChange={v => {
+          <Editable key={pi} as="p" linkify value={p} onChange={v => {
             const sections = [...s.sections];
             const body = [...sec.body]; body[pi] = v;
             sections[i] = { ...sec, body };
@@ -98,7 +98,7 @@ const SynopsisSection = ({ s, update }) => (
           const sections = [...s.sections]; sections[i] = { ...sec, h: v }; update({ sections });
         }} />
         {sec.body.map((p, pi) => (
-          <Editable key={pi} as="p" value={p} onChange={v => {
+          <Editable key={pi} as="p" linkify value={p} onChange={v => {
             const sections = [...s.sections];
             const body = [...sec.body]; body[pi] = v;
             sections[i] = { ...sec, body };
@@ -258,7 +258,7 @@ const BiosSection = ({ s, update, expandedId, onClearExpanded }) => {
               <div className="inner">
                 <div className="inner-pad">
                   {b.body.map((p, pi) => (
-                    <Editable key={pi} as="p" value={p} onChange={v => {
+                    <Editable key={pi} as="p" linkify value={p} onChange={v => {
                       const bios = [...s.bios];
                       const body = [...b.body]; body[pi] = v;
                       bios[i] = { ...b, body };
@@ -353,7 +353,7 @@ const PerformanceSponsorSection = ({ s, update }) => {
             <Editable as="div" className="perf-sponsor-label" value={b.label} onChange={v => updateBlock(i, { label: v })} />
             <Editable as="div" className="perf-sponsor-name" value={b.name} onChange={v => updateBlock(i, { name: v })} />
             {b.statement !== undefined ? (
-              <Editable as="p" className="perf-sponsor-statement" value={b.statement} onChange={v => updateBlock(i, { statement: v })} multiline />
+              <Editable as="p" linkify className="perf-sponsor-statement" value={b.statement} onChange={v => updateBlock(i, { statement: v })} multiline />
             ) : null}
             {window.__editMode ? (
               <button className="perf-sponsor-remove" onClick={() => removeBlock(i)} aria-label="Remove sponsor block">Remove</button>
@@ -371,10 +371,10 @@ const PerformanceSponsorSection = ({ s, update }) => {
         </div>
       ) : null}
       {s.publicSupport ? (
-        <Editable as="p" className="perf-sponsor-public" value={s.publicSupport} onChange={v => update({ publicSupport: v })} multiline />
+        <Editable as="p" linkify className="perf-sponsor-public" value={s.publicSupport} onChange={v => update({ publicSupport: v })} multiline />
       ) : null}
       {s.closing ? (
-        <Editable as="p" className="perf-sponsor-closing" value={s.closing} onChange={v => update({ closing: v })} multiline />
+        <Editable as="p" linkify className="perf-sponsor-closing" value={s.closing} onChange={v => update({ closing: v })} multiline />
       ) : null}
     </div>
   );
@@ -411,7 +411,7 @@ const InfoSection = ({ s, update }) => (
           const sections = [...s.sections]; sections[i] = { ...sec, h: v }; update({ sections });
         }} />
         {sec.body.map((p, pi) => (
-          <Editable key={pi} as="p" value={p} onChange={v => {
+          <Editable key={pi} as="p" linkify value={p} onChange={v => {
             const sections = [...s.sections];
             const body = [...sec.body]; body[pi] = v;
             sections[i] = { ...sec, body };
