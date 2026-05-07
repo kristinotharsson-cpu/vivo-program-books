@@ -1340,15 +1340,28 @@ ${sharedPart}(function(){
                 return {
                   ...d,
                   sections: [...d.sections, {
-                    id,
-                    title,
-                    kind: "info",
-                    eyebrow: "",
-                    paragraphs: [""]
+                    id, title, kind: "info", eyebrow: "",
+                    sections: [{ h: "", body: [""] }]
                   }]
                 };
               });
-              setToast(`Added \"${title}\"`);
+              setToast(`Added "${title}"`);
+            }} />
+            <_TweakButton label="+ Add HTML Block" onClick={() => {
+              const title = (prompt("Block title? (shown as section heading)") || "").trim();
+              if (!title) return;
+              const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || ("html-" + Date.now());
+              setData(d => {
+                const exists = d.sections.some(s => s.id === slug);
+                const id = exists ? slug + "-" + Date.now() : slug;
+                return {
+                  ...d,
+                  sections: [...d.sections, {
+                    id, title, kind: "html", eyebrow: "", content: ""
+                  }]
+                };
+              });
+              setToast(`Added HTML block "${title}"`);
             }} />
           </_TweakSection>
           <_TweakSection label="Publish">

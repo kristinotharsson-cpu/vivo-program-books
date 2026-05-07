@@ -600,6 +600,46 @@ const VivoSection = ({ s }) => {
   );
 };
 
+// ---- CUSTOM HTML ----
+const HtmlSection = ({ s, update }) => {
+  const editing = window.__editMode;
+  const fileRef = useRefS(null);
+
+  const handleFile = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => update({ content: ev.target.result || "" });
+    reader.readAsText(file);
+    e.target.value = "";
+  };
+
+  if (editing) {
+    return (
+      <div className="html-section-edit">
+        <textarea
+          className="html-section-textarea"
+          value={s.content || ""}
+          onChange={e => update({ content: e.target.value })}
+          placeholder={"Paste HTML here, or upload a file below…\n\nExamples:\n<p>Paragraph text</p>\n<a href=\"https://...\">Link</a>\n<table>...</table>"}
+          rows={12}
+          spellCheck={false}
+        />
+        <div className="html-section-actions">
+          <input ref={fileRef} type="file" accept=".html,.htm,.txt" style={{ display: "none" }} onChange={handleFile} />
+          <button className="html-section-upload-btn" onClick={() => fileRef.current?.click()}>
+            Upload HTML file (.html / .htm)
+          </button>
+          <span className="html-section-hint">Paste any HTML — paragraphs, tables, formatted text, embeds. Renders exactly as written in view mode.</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (!s.content) return null;
+  return <div className="html-section-view" dangerouslySetInnerHTML={{ __html: s.content }} />;
+};
+
 // ---- Main switcher ----
 const SectionBody = ({ section, update, allSections, onGoSection, expandedBioId, onClearExpandedBio }) => {
   const biosSection = allSections?.find(s => s.kind === "bios");
@@ -620,6 +660,7 @@ const SectionBody = ({ section, update, allSections, onGoSection, expandedBioId,
     case "performance-sponsor": return <PerformanceSponsorSection s={section} update={update} />;
     case "sponsors": return <SponsorsSection s={section} update={update} />;
     case "info": return <InfoSection s={section} update={update} />;
+    case "html": return <HtmlSection s={section} update={update} />;
     case "vivo": return <VivoSection s={section} update={update} />;
     default: return null;
   }
