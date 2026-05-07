@@ -333,7 +333,7 @@ const NoteCallout = ({ label, name, photoSrc, initials, onClick, onPhotoChange, 
 };
 
 // ---- TOC ----
-const TOC = ({ sections, onGo, variant, ads = [], highlightColor, tocBlocks = [], onReorder, onToggleHide, hiddenSet = new Set() }) => {
+const TOC = ({ sections, onGo, variant, ads = [], highlightColor, tocBlocks = [], onReorder, onToggleHide, hiddenSet = new Set(), onUpdateBlock }) => {
   const editing = window.__editMode;
   const dragIdx = React.useRef(null);
   const cls = "toc-list" + (variant === "minimal" ? " is-minimal" : "");
@@ -357,8 +357,9 @@ const TOC = ({ sections, onGo, variant, ads = [], highlightColor, tocBlocks = []
   sections.forEach((s, i) => {
     items.push({ kind: "section", section: s, idx: i });
     if ((i === 2 || i === 6) && slots[Math.floor(i / 4)]) {
-      const slot = slots[Math.floor(i / 4)];
-      items.push({ kind: slot.kind || "sponsor", slot });
+      const slotIdx = Math.floor(i / 4);
+      const slot = slots[slotIdx];
+      items.push({ kind: slot.kind || "sponsor", slot, slotIdx });
     }
   });
 
@@ -404,8 +405,8 @@ const TOC = ({ sections, onGo, variant, ads = [], highlightColor, tocBlocks = []
         ) : (
           <li key={"slot-" + i} className="toc-ad-slot">
             {item.kind === "image"
-              ? <TocImageBlock block={item.slot} />
-              : <InlineAd ad={item.slot} />}
+              ? <TocImageBlock block={item.slot} onUpdate={patch => onUpdateBlock?.(item.slotIdx, patch)} />
+              : <InlineAd ad={item.slot} onUpdate={patch => onUpdateBlock?.(item.slotIdx, patch)} />}
           </li>
         ))}
       </ol>
@@ -414,7 +415,44 @@ const TOC = ({ sections, onGo, variant, ads = [], highlightColor, tocBlocks = []
 };
 
 // ---- TOC image block ----
-const TocImageBlock = ({ block }) => {
+const TocImageBlock = ({ block, onUpdate }) => {
+  const editing = window.__editMode;
+  const fileRef = React.useRef(null);
+  const handleFile = (e) => {
+    const f = e.target.files?.[0]; if (!f) return;
+    const reader = new FileReader();
+    reader.onload = () => onUpdate?.({ src: String(reader.result || "") });
+    reader.readAsDataURL(f);
+    e.target.value = "";
+  };
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const f = e.dataTransfer.files?.[0]; if (!f || !f.type.startsWith("image/")) return;
+    const reader = new FileReader();
+    reader.onload = () => onUpdate?.({ src: String(reader.result || "") });
+    reader.readAsDataURL(f);
+  };
+  if (editing) return (
+    <div className="toc-img-block is-editing">
+      <div
+        className={"toc-bm-drop-zone" + (block.src ? " has-image" : "")}
+        onClick={() => fileRef.current?.click()}
+        onDragOver={e => e.preventDefault()}
+        onDrop={handleDrop}
+        style={{ cursor: "pointer" }}
+      >
+        {block.src
+          ? <img src={block.src} alt="" className="toc-bm-thumb" />
+          : <><Icon name="image" size={20} /><span>Drop image or click to upload</span></>}
+      </div>
+      <div className="toc-bm-size-hint">Recommended: 750 × 250 px (3:1 ratio)</div>
+      <div className="toc-bm-url-row" style={{ marginTop: 4 }}>
+        <span className="toc-bm-url-label">URL</span>
+        <input className="toc-bm-url-input" type="url" value={block.href || ""} onChange={e => onUpdate?.({ href: e.target.value })} placeholder="Optional link (https://...)" />
+      </div>
+      <input ref={fileRef} type="file" accept="image/*" style={{ display: "none" }} onChange={handleFile} />
+    </div>
+  );
   const inner = (
     <div className="toc-img-block">
       {block.src
@@ -507,14 +545,29 @@ const TocBlockManager = ({ blocks, onChange }) => {
 };
 
 // ---- Inline ad card ----
-const InlineAd = ({ ad }) => (
-  <a className="inline-ad" href={ad.href || "#"} target="_blank" rel="noopener noreferrer">
-    <div className="inline-ad-tag">Sponsor</div>
-    <div className="inline-ad-name">{ad.name}</div>
-    <div className="inline-ad-tagline">{ad.tagline}</div>
-    {ad.cta ? <div className="inline-ad-cta">{ad.cta} <Icon name="arrow-right" size={14} /></div> : null}
-  </a>
-);
+const InlineAd = ({ ad, onUpdate }) => {
+  const editing = window.__editMode;
+  if (editing) return (
+    <div className="inline-ad is-editing">
+      <div className="inline-ad-tag">Sponsor</div>
+      <Editable as="div" className="inline-ad-name" value={ad.name || ""} onChange={v => onUpdate?.({ name: v })} placeholder="Sponsor name" />
+      <Editable as="div" className="inline-ad-tagline" value={ad.tagline || ""} onChange={v => onUpdate?.({ tagline: v })} placeholder="Tagline or description" />
+      <Editable as="div" className="inline-ad-cta" value={ad.cta || ""} onChange={v => onUpdate?.({ cta: v })} placeholder="CTA text (e.g. Learn more)" />
+      <div className="toc-bm-url-row" style={{ marginTop: 6 }}>
+        <span className="toc-bm-url-label">URL</span>
+        <input className="toc-bm-url-input" type="url" value={ad.href || ""} onChange={e => onUpdate?.({ href: e.target.value })} placeholder="https://..." />
+      </div>
+    </div>
+  );
+  return (
+    <a className="inline-ad" href={ad.href || "#"} target="_blank" rel="noopener noreferrer">
+      <div className="inline-ad-tag">Sponsor</div>
+      <div className="inline-ad-name">{ad.name}</div>
+      <div className="inline-ad-tagline">{ad.tagline}</div>
+      {ad.cta ? <div className="inline-ad-cta">{ad.cta} <Icon name="arrow-right" size={14} /></div> : null}
+    </a>
+  );
+};
 
 // ---- Search ----
 const useSearchIndex = (data) => useMemoA(() => {
@@ -1386,6 +1439,10 @@ ${sharedPart}(function(){
               const cur = new Set(tweaks.hiddenSections || []);
               cur.has(id) ? cur.delete(id) : cur.add(id);
               setTweak("hiddenSections", Array.from(cur));
+            }}
+            onUpdateBlock={(i, patch) => {
+              const blocks = data.cover.tocBlocks || [];
+              updateCover({ tocBlocks: blocks.map((b, j) => j === i ? { ...b, ...patch } : b) });
             }}
           />
           {editing && (

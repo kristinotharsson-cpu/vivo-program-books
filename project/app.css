@@ -830,6 +830,11 @@ button {
   color: var(--vivo-plum);
 }
 [data-theme="dark"] .inline-ad-cta { color: var(--vivo-tangerine); }
+.inline-ad.is-editing {
+  cursor: default;
+}
+.inline-ad.is-editing:hover { transform: none; box-shadow: none; }
+.inline-ad.is-editing .inline-ad-cta { min-height: 1.4em; }
 
 /* TOC image block */
 .toc-img-block {
