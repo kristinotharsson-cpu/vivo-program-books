@@ -790,22 +790,59 @@ const App = () => {
 
       const text = pageTexts.join("\n\n");
 
-      // Split into 12k-char chunks, process each separately to avoid function timeouts
-      const CHUNK = 12000;
-      const chunks = [];
-      for (let i = 0; i < text.length; i += CHUNK) chunks.push(text.slice(i, i + CHUNK));
+      // Fetch API key from server (keeps key out of source code)
+      setToast("Connecting to AI…");
+      const keyRes = await fetch("/.netlify/functions/get-openrouter-key");
+      let keyData;
+      try { keyData = await keyRes.json(); } catch (_) { throw new Error("Could not reach server"); }
+      if (!keyRes.ok) throw new Error(keyData.error || "Failed to get API key");
+      const openrouterKey = keyData.key;
 
-      const callParser = async (chunk, isFirst) => {
-        const res = await fetch("/.netlify/functions/parse-pdf", {
+      const SCHEMA = `OUTPUT: valid JSON only, no markdown.
+{"cover":{"eyebrow":"","title":"","subtitle":"","date":"","time":"","venue":""},"sections":[...]}
+Each section: {"id":"slug","title":"","kind":"KIND",...fields}
+KINDS:
+cast: eyebrow, cast:[{role,name}], creative:[{role,name}]
+program: eyebrow, lead, pieces:[{title,year,meta,credits:[{role,name}],description,note,musicCredits,sections:[{h,items:[{title,meta}]}]}] — use {kind:"intermission",label:"INTERMISSION"} for breaks
+notes: eyebrow, lead, sections:[{h,body:[str]}], callout:{label,body:[str]}, closing
+bios: eyebrow, bios:[{id,name,role,initials,photoSrc:"",body:[str]}]
+performance-sponsor: eyebrow, lead, blocks:[{label,name,statement}], seasonSponsorsLabel, seasonSponsors, publicSupport, closing
+donors: eyebrow, lead, tiers:[{name,names:[str]}], footer
+roster: eyebrow, lead, groups:[{h,players:[str]}]
+info: eyebrow, sections:[{h,body:[str]}]
+events: eyebrow, lead, events:[{month,day,title,meta}]
+welcome: eyebrow, quote, body:[str], signature:{name,role}`;
+
+      const RULES = `Company members→cast[]. Directors/leaders→creative[]. Each dance work=one piece with all credits. Sub-songs→piece.sections[]. Music copyrights→musicCredits. About company→notes. Boxed callout→notes.callout. Sponsors→performance-sponsor.`;
+
+      const callOpenRouter = async (chunk, isFirst) => {
+        const prompt = isFirst
+          ? `Parse this performing arts program book into JSON.\n${SCHEMA}\n${RULES}\nPDF TEXT:\n${chunk}`
+          : `Extract content from this continuation of the same program book. Return JSON with same structure — only include what appears in THIS text.\n${SCHEMA}\nTEXT:\n${chunk}`;
+
+        const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ text: chunk, isFirst }),
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${openrouterKey}`,
+            "HTTP-Referer": window.location.origin,
+            "X-Title": "Vivo Program Books",
+          },
+          body: JSON.stringify({
+            model: "openrouter/free",
+            messages: [{ role: "user", content: prompt }],
+            temperature: 0.1,
+            max_tokens: 4096,
+          }),
         });
-        let result;
-        try { result = await res.json(); } catch (_) { throw new Error("Server returned invalid response"); }
-        if (!res.ok) throw new Error(result.error || `Server error ${res.status}`);
-        if (!result.data) throw new Error("No data returned from parser");
-        return result.data;
+
+        const apiResp = await res.json();
+        if (!res.ok) throw new Error(apiResp.error?.message || `API error ${res.status}`);
+        const raw = apiResp.choices?.[0]?.message?.content || "";
+        if (!raw) throw new Error("Model returned no content");
+        const cleaned = raw.replace(/^```[a-z]*\n?/i, "").replace(/\n?```$/i, "").trim();
+        try { return JSON.parse(cleaned); }
+        catch (e) { throw new Error("Model returned invalid JSON: " + e.message); }
       };
 
       const mergeData = (base, addition) => {
@@ -832,10 +869,16 @@ const App = () => {
         return base;
       };
 
+      // Split into 12k-char chunks and call OpenRouter directly from browser (no server timeout)
+      const CHUNK = 12000;
+      const chunks = [];
+      for (let i = 0; i < text.length; i += CHUNK) chunks.push(text.slice(i, i + CHUNK));
+
       let merged = null;
       for (let i = 0; i < chunks.length; i++) {
         setToast(chunks.length > 1 ? `Parsing… (part ${i + 1} of ${chunks.length})` : "Parsing with AI…");
-        const parsed = await callParser(chunks[i], i === 0);
+        const parsed = await callOpenRouter(chunks[i], i === 0);
+        if (i === 0 && (!parsed.cover || !parsed.sections)) throw new Error("AI response missing required fields");
         merged = i === 0 ? parsed : mergeData(merged, parsed);
       }
 
