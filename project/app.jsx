@@ -816,10 +816,10 @@ welcome: eyebrow, quote, body:[str], signature:{name,role}`;
       const RULES = `Company members→cast[]. Directors/leaders→creative[]. Each dance work=one piece with all credits. Sub-songs→piece.sections[]. Music copyrights→musicCredits. About company→notes. Boxed callout→notes.callout. Sponsors→performance-sponsor.`;
 
       const FREE_MODELS = [
-        "deepseek/deepseek-r1:free",
-        "meta-llama/llama-3.3-70b-instruct:free",
-        "mistralai/mistral-small-3.1-24b-instruct:free",
+        "mistralai/mistral-7b-instruct:free",
         "google/gemma-2-9b-it:free",
+        "qwen/qwen-2.5-7b-instruct:free",
+        "meta-llama/llama-3.2-3b-instruct:free",
         "openrouter/free",
       ];
 
@@ -848,12 +848,12 @@ welcome: eyebrow, quote, body:[str], signature:{name,role}`;
 
           const apiResp = await res.json();
           if (!res.ok) { lastErr = `${model}: ${apiResp.error?.message || res.status}`; continue; }
-          const raw = apiResp.choices?.[0]?.message?.content
-            || apiResp.choices?.[0]?.text
-            || "";
-          const finish = apiResp.choices?.[0]?.finish_reason || "";
+          const choice = apiResp.choices?.[0];
+          const msg = choice?.message || {};
+          const raw = msg.content || msg.reasoning_content || choice?.text || "";
+          const finish = choice?.finish_reason || "";
           if (!raw) {
-            lastErr = `${model}: no content (finish=${finish}, keys=${Object.keys(apiResp).join(",")})`;
+            lastErr = `${model}: empty (finish=${finish} msg_keys=${Object.keys(msg).join(",")})`;
             continue;
           }
           const cleaned = raw.replace(/^```[a-z]*\n?/i, "").replace(/\n?```$/i, "").trim();
