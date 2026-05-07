@@ -3,6 +3,9 @@
    Colors, type, and semantic element styles
    ========================================================= */
 
+/* Source Serif 4 — used for dance piece titles and program notes */
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,700;1,8..60,400;1,8..60,700&display=swap');
+
 /* ---------- Fonts ---------- */
 @font-face {
   font-family: "ABC Diatype";
@@ -86,6 +89,7 @@
   /* ---------- Type families ---------- */
   --font-display:  "Bricolage Grotesque Condensed", "Arial Narrow", sans-serif;
   --font-body:     "ABC Diatype", "Inter", system-ui, -apple-system, sans-serif;
+  --font-serif:    "Source Serif 4", "Source Serif Pro", Georgia, serif;
   --font-mono:     ui-monospace, "SF Mono", Menlo, monospace;
 
   /* ---------- Type scale (desktop) ---------- */
