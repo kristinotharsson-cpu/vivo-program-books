@@ -815,53 +815,65 @@ welcome: eyebrow, quote, body:[str], signature:{name,role}`;
 
       const RULES = `Company members→cast[]. Directors/leaders→creative[]. Each dance work=one piece with all credits. Sub-songs→piece.sections[]. Music copyrights→musicCredits. About company→notes. Boxed callout→notes.callout. Sponsors→performance-sponsor.`;
 
+      const FREE_MODELS = [
+        "deepseek/deepseek-r1:free",
+        "meta-llama/llama-3.3-70b-instruct:free",
+        "mistralai/mistral-small-3.1-24b-instruct:free",
+        "google/gemma-2-9b-it:free",
+        "openrouter/free",
+      ];
+
       const callOpenRouter = async (chunk, isFirst) => {
         const prompt = isFirst
           ? `Parse this performing arts program book into JSON.\n${SCHEMA}\n${RULES}\nPDF TEXT:\n${chunk}`
           : `Extract content from this continuation of the same program book. Return JSON with same structure — only include what appears in THIS text.\n${SCHEMA}\nTEXT:\n${chunk}`;
 
-        const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${openrouterKey}`,
-            "HTTP-Referer": window.location.origin,
-            "X-Title": "Vivo Program Books",
-          },
-          body: JSON.stringify({
-            model: "openrouter/free",
-            messages: [{ role: "user", content: prompt }],
-            temperature: 0.1,
-            max_tokens: 4096,
-          }),
-        });
+        let lastErr = "";
+        for (const model of FREE_MODELS) {
+          const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${openrouterKey}`,
+              "HTTP-Referer": window.location.origin,
+              "X-Title": "Vivo Program Books",
+            },
+            body: JSON.stringify({
+              model,
+              messages: [{ role: "user", content: prompt }],
+              temperature: 0.1,
+              max_tokens: 4096,
+            }),
+          });
 
-        const apiResp = await res.json();
-        if (!res.ok) throw new Error(apiResp.error?.message || `API error ${res.status}`);
-        const raw = apiResp.choices?.[0]?.message?.content || "";
-        if (!raw) throw new Error("Model returned no content");
-        const cleaned = raw.replace(/^```[a-z]*\n?/i, "").replace(/\n?```$/i, "").trim();
-        try { return JSON.parse(cleaned); } catch (_) {}
+          const apiResp = await res.json();
+          if (!res.ok) { lastErr = `${model}: ${apiResp.error?.message || res.status}`; continue; }
+          const raw = apiResp.choices?.[0]?.message?.content || "";
+          if (!raw) { lastErr = `${model}: no content`; continue; }
+          const cleaned = raw.replace(/^```[a-z]*\n?/i, "").replace(/\n?```$/i, "").trim();
+          try { return JSON.parse(cleaned); } catch (_) {}
 
-        // Truncated output: walk the string tracking open brackets, then close them
-        const stack = [];
-        let inStr = false, esc = false, lastSafe = 0;
-        for (let i = 0; i < cleaned.length; i++) {
-          if (esc) { esc = false; continue; }
-          if (inStr) { if (cleaned[i] === '\\') esc = true; else if (cleaned[i] === '"') inStr = false; continue; }
-          if (cleaned[i] === '"') { inStr = true; continue; }
-          if (cleaned[i] === '{' || cleaned[i] === '[') stack.push(cleaned[i] === '{' ? '}' : ']');
-          else if (cleaned[i] === '}' || cleaned[i] === ']') { stack.pop(); if (!stack.length) lastSafe = i; }
+          // Truncated output: walk the string tracking open brackets, then close them
+          const stack = [];
+          let inStr = false, esc = false, lastSafe = 0;
+          for (let i = 0; i < cleaned.length; i++) {
+            if (esc) { esc = false; continue; }
+            if (inStr) { if (cleaned[i] === '\\') esc = true; else if (cleaned[i] === '"') inStr = false; continue; }
+            if (cleaned[i] === '"') { inStr = true; continue; }
+            if (cleaned[i] === '{' || cleaned[i] === '[') stack.push(cleaned[i] === '{' ? '}' : ']');
+            else if (cleaned[i] === '}' || cleaned[i] === ']') { stack.pop(); if (!stack.length) lastSafe = i; }
+          }
+          const trimmed = cleaned
+            .replace(/,?\s*"[^"]*$/, '')
+            .replace(/,?\s*"[^"]+"\s*:\s*[^,}\]]*$/, '')
+            .replace(/,\s*$/, '');
+          const closing = stack.slice().reverse().join('');
+          try { return JSON.parse(trimmed + closing); } catch (_) {}
+          if (lastSafe > 0) { try { return JSON.parse(cleaned.slice(0, lastSafe + 1)); } catch (_) {} }
+          lastErr = `${model}: invalid JSON`;
+          continue;
         }
-        // Trim trailing incomplete key-value or dangling comma, then close open brackets
-        const trimmed = cleaned
-          .replace(/,?\s*"[^"]*$/, '')
-          .replace(/,?\s*"[^"]+"\s*:\s*[^,}\]]*$/, '')
-          .replace(/,\s*$/, '');
-        const closing = stack.slice().reverse().join('');
-        try { return JSON.parse(trimmed + closing); } catch (_) {}
-        if (lastSafe > 0) { try { return JSON.parse(cleaned.slice(0, lastSafe + 1)); } catch (_) {} }
-        throw new Error("Model returned invalid JSON (response too long for free tier)");
+        throw new Error("All models failed. Last error: " + lastErr);
       };
 
       const mergeData = (base, addition) => {
