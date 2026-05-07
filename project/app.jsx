@@ -843,6 +843,7 @@ welcome: eyebrow, quote, body:[str], signature:{name,role}`;
               messages: [{ role: "user", content: prompt }],
               temperature: 0.1,
               max_tokens: 4096,
+              provider: { ignore: ["DeepSeek", "Perplexity"] },
             }),
           });
 
@@ -850,7 +851,8 @@ welcome: eyebrow, quote, body:[str], signature:{name,role}`;
           if (!res.ok) { lastErr = `${model}: ${apiResp.error?.message || res.status}`; continue; }
           const choice = apiResp.choices?.[0];
           const msg = choice?.message || {};
-          const raw = msg.content || msg.reasoning_content || choice?.text || "";
+          // reasoning models put output in reasoning field; also check reasoning_content variant
+          const raw = msg.content || msg.reasoning || msg.reasoning_content || choice?.text || "";
           const finish = choice?.finish_reason || "";
           if (!raw) {
             lastErr = `${model}: empty (finish=${finish} msg_keys=${Object.keys(msg).join(",")})`;
