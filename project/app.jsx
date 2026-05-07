@@ -1622,6 +1622,17 @@ ${sharedPart}(function(){
                       }}
                     />
                   </div>
+                  <button
+                    onClick={() => {
+                      if (!confirm(`Delete "${s.title}"? This cannot be undone.`)) return;
+                      setData(d => ({ ...d, sections: d.sections.filter(sec => sec.id !== s.id) }));
+                    }}
+                    aria-label={`Delete "${s.title}"`}
+                    title="Delete section"
+                    style={{ appearance:"none",border:"none",background:"none",padding:"4px 5px",cursor:"pointer",color:"var(--fg-muted)",fontSize:14,lineHeight:1,flexShrink:0,opacity:0.5 }}
+                    onMouseEnter={e => e.currentTarget.style.opacity = 1}
+                    onMouseLeave={e => e.currentTarget.style.opacity = 0.5}
+                  >✕</button>
                 </div>
               );
             })}
