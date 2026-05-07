@@ -676,7 +676,12 @@ const PerformanceSponsorSection = ({ s, update }) => {
         {blocks.map((b, i) => (
           <div key={i} className="perf-sponsor-block">
             {editing && (
-              <button className="perf-sponsor-remove" onClick={() => removeBlock(i)} aria-label="Remove block">Remove</button>
+              <div className="perf-sponsor-block-bar">
+                <span className="perf-sponsor-block-num">Block {i + 1}</span>
+                <button className="perf-sponsor-delete-btn" onClick={() => removeBlock(i)}>
+                  <Icon name="x" size={13} /> Delete block
+                </button>
+              </div>
             )}
             {/* Photo — shown in view mode if set, always shown in edit mode */}
             {(editing || b.photo) && (

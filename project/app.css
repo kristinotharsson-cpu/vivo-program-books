@@ -2389,23 +2389,39 @@ li:hover .row-ctrls,
   margin: 0;
   text-wrap: pretty;
 }
-.perf-sponsor-remove {
-  position: absolute;
-  top: 18px;
-  right: 0;
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--fg-muted);
+.perf-sponsor-block-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.perf-sponsor-block-num {
   font-family: var(--font-body);
   font-size: 10px;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: var(--ls-eyebrow);
-  padding: 4px 8px;
+  letter-spacing: 0.1em;
+  color: var(--fg-muted);
+}
+.perf-sponsor-delete-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--fg-muted);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 4px 9px;
+  background: none;
   cursor: pointer;
 }
-.perf-sponsor-remove:hover {
-  color: var(--vivo-plum);
-  border-color: var(--vivo-plum);
+.perf-sponsor-delete-btn:hover {
+  color: #c0392b;
+  border-color: #c0392b;
 }
 .perf-sponsor-add {
   margin-top: 12px;
