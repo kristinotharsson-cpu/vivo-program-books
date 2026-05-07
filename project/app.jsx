@@ -840,17 +840,28 @@ welcome: eyebrow, quote, body:[str], signature:{name,role}`;
         if (!res.ok) throw new Error(apiResp.error?.message || `API error ${res.status}`);
         const raw = apiResp.choices?.[0]?.message?.content || "";
         if (!raw) throw new Error("Model returned no content");
-        let cleaned = raw.replace(/^```[a-z]*\n?/i, "").replace(/\n?```$/i, "").trim();
+        const cleaned = raw.replace(/^```[a-z]*\n?/i, "").replace(/\n?```$/i, "").trim();
         try { return JSON.parse(cleaned); } catch (_) {}
-        // Truncated response: find last complete top-level object and close the structure
-        const lastBrace = cleaned.lastIndexOf("}");
-        if (lastBrace > 0) {
-          // Try progressively shorter truncations until we get valid JSON
-          for (let cut = lastBrace; cut > cleaned.length / 2; cut = cleaned.lastIndexOf("}", cut - 1)) {
-            try { return JSON.parse(cleaned.slice(0, cut + 1)); } catch (_) {}
-          }
+
+        // Truncated output: walk the string tracking open brackets, then close them
+        const stack = [];
+        let inStr = false, esc = false, lastSafe = 0;
+        for (let i = 0; i < cleaned.length; i++) {
+          if (esc) { esc = false; continue; }
+          if (inStr) { if (cleaned[i] === '\\') esc = true; else if (cleaned[i] === '"') inStr = false; continue; }
+          if (cleaned[i] === '"') { inStr = true; continue; }
+          if (cleaned[i] === '{' || cleaned[i] === '[') stack.push(cleaned[i] === '{' ? '}' : ']');
+          else if (cleaned[i] === '}' || cleaned[i] === ']') { stack.pop(); if (!stack.length) lastSafe = i; }
         }
-        throw new Error("Model returned invalid JSON (response may be too long)");
+        // Trim trailing incomplete key-value or dangling comma, then close open brackets
+        const trimmed = cleaned
+          .replace(/,?\s*"[^"]*$/, '')
+          .replace(/,?\s*"[^"]+"\s*:\s*[^,}\]]*$/, '')
+          .replace(/,\s*$/, '');
+        const closing = stack.slice().reverse().join('');
+        try { return JSON.parse(trimmed + closing); } catch (_) {}
+        if (lastSafe > 0) { try { return JSON.parse(cleaned.slice(0, lastSafe + 1)); } catch (_) {} }
+        throw new Error("Model returned invalid JSON (response too long for free tier)");
       };
 
       const mergeData = (base, addition) => {
@@ -877,8 +888,8 @@ welcome: eyebrow, quote, body:[str], signature:{name,role}`;
         return base;
       };
 
-      // Split into 5k-char chunks so the model's output stays within its token limit
-      const CHUNK = 5000;
+      // 2k chars → ~500 tokens output, safely within free model limits (~1500 tokens)
+      const CHUNK = 2000;
       const chunks = [];
       for (let i = 0; i < text.length; i += CHUNK) chunks.push(text.slice(i, i + CHUNK));
 
