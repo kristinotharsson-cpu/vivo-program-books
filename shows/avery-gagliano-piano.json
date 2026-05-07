@@ -17,7 +17,7 @@
     "artistWebsite": "https://www.averygagliano.com",
     "pressQuote": "Her ability to inhabit every room in the immense imagination of Frédéric Chopin came as a revelation. New York Classical Review",
     "pressQuoteURL": "https://newyorkclassicalreview.com/2021/12/avery-gagliano-offers-revelatory-chopin-in-carnegie-hall-debut/",
-    "photoSrc": "https://celebrity-series.s3.amazonaws.com/files/resources/averygaglino-1440x960.jpg"
+    "photoSrc": ""
   },
   "sections": [
     {
@@ -105,7 +105,7 @@
           "name": "Avery Gagliano",
           "role": "piano",
           "initials": "AG",
-          "photoSrc": "https://celebrity-series.s3.amazonaws.com/files/resources/averygaglino-800x800.jpg",
+          "photoSrc": "",
           "body": [
             "Celebrated as \"a distinctive young talent\" (International Piano), pianist Avery Gagliano's concerts offer a \"distinctly narrative approach\" (Miami International Piano Festival). She makes her Vivo Performing Arts debut with an audacious program that demonstrates her prodigious command of mood and structure. From the luminous to the relentless, from the gauzy to the percussive, and concluding with Schumann's all-encompassing Symphonic Etudes, Gagliano offers a program that announces her as an artist of assured command."
           ],
@@ -170,12 +170,12 @@
     "tocVariant": "minimal",
     "tocHighlight": "plum",
     "coverAccent": "plum",
-    "coverBrush": "tempo",
-    "brushColor": "black",
-    "brushScale": 565,
-    "brushAngle": -25,
-    "brushOffsetY": -100,
-    "brushOffsetX": 58,
+    "coverBrush": "form",
+    "brushColor": "tangerine",
+    "brushScale": 600,
+    "brushAngle": -5,
+    "brushOffsetY": 0,
+    "brushOffsetX": 64,
     "coverTextColor": "auto",
     "hiddenSections": []
   }
