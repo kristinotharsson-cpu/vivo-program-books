@@ -32,161 +32,37 @@ exports.handler = async (event) => {
     return { statusCode: 400, headers, body: JSON.stringify({ error: "text is required" }) };
   }
 
-  const SCHEMA = `
-The JSON must have this top-level shape:
-{
-  "cover": {
-    "eyebrow": string,        // presenter / series name (e.g. "Vivo Performing Arts Presents")
-    "title": string,          // main artist / company name (ALL CAPS as printed)
-    "subtitle": string,       // instrument or company type (optional)
-    "date": string,           // date range as printed (e.g. "APR 30 – MAY 3, 2026")
-    "time": string,           // show time if single performance (optional)
-    "venue": string           // venue name
-  },
-  "sections": [ ...SectionObject ]
-}
+  const prompt = `Parse this performing arts program book into JSON. Return ONLY valid JSON, no markdown, no explanation.
 
-Each SectionObject has: { "id": string (slug), "title": string, "kind": string, ...kind-specific fields }
+OUTPUT SHAPE:
+{"cover":{"eyebrow":"","title":"","subtitle":"","date":"","time":"","venue":""},"sections":[...]}
 
-SECTION KINDS:
+Each section: {"id":"slug","title":"","kind":"KIND",...fields}
 
-kind "cast" — company members, cast, and creative/artistic leadership
-{
-  "eyebrow": string,
-  "cast": [ { "role": string, "name": string } ],   // performers / company members (put all company members here, one per entry)
-  "creative": [ { "role": string, "name": string } ] // directors, designers, production staff
-}
-For large dance companies, list ALL company members in "cast" with role "Company Member" (or their specific role if given).
-Named artistic leaders (Artistic Director, Executive Director, etc.) go in "creative".
+KINDS and their extra fields:
+cast: eyebrow, cast:[{role,name}], creative:[{role,name}]
+program: eyebrow, lead, pieces:[{title,year,meta,credits:[{role,name}],description,note,musicCredits,sections:[{h,items:[{title,meta}]}]}] — use {kind:"intermission",label:"INTERMISSION"} or {kind:"pause",label:"PAUSE"} for breaks
+notes: eyebrow, lead, sections:[{h,body:[str]}], callout:{label,body:[str]}, closing
+bios: eyebrow, bios:[{id,name,role,initials,photoSrc:"",body:[str]}]
+performance-sponsor: eyebrow, lead, blocks:[{label,name,statement}], seasonSponsorsLabel, seasonSponsors, publicSupport, closing
+donors: eyebrow, lead, tiers:[{name,names:[str]}], footer
+roster: eyebrow, lead, groups:[{h,players:[str]}]
+info: eyebrow, sections:[{h,body:[str]}]
+events: eyebrow, lead, events:[{month,day,title,meta}]
+welcome: eyebrow, quote, body:[str], signature:{name,role}
 
-kind "program" — the running order / dance pieces
-{
-  "eyebrow": string,
-  "lead": string,   // optional intro
-  "pieces": [
-    {
-      "title": string,          // piece/dance title (ALL CAPS as printed or mixed if source is mixed)
-      "year": string,           // year in parens if present
-      "meta": string,           // parenthetical like "(Company Premiere 2025)" — optional
-      "credits": [              // list of credit lines
-        { "role": string, "name": string }
-      ],
-      "description": string,    // descriptive paragraph if present — optional
-      "note": string,           // italicized support/dedication note — optional
-      "musicCredits": string,   // music licensing credits paragraph — optional
-      "sections": [             // sub-sections within a piece (e.g. PILGRIM OF SORROW, TAKE ME TO THE WATER)
-        {
-          "h": string,
-          "items": [ { "title": string, "meta": string } ]
-        }
-      ]
-    },
-    { "kind": "intermission", "label": "INTERMISSION" },  // for intermission/pause markers
-    { "kind": "pause", "label": "PAUSE" }
-  ]
-}
-
-kind "notes" — about the company, about the program, program notes
-{
-  "eyebrow": string,
-  "lead": string,
-  "sections": [
-    { "h": string, "body": [ string ] }
-  ],
-  "callout": {                  // optional highlighted/boxed callout (e.g. "From the Vivo archives...")
-    "label": string,
-    "body": [ string ]
-  },
-  "closing": string             // optional closing acknowledgment paragraph
-}
-
-kind "bios" — artist biographies
-{
-  "eyebrow": string,
-  "bios": [
-    { "id": string, "name": string, "role": string, "initials": string, "photoSrc": "", "body": [ string ] }
-  ]
-}
-
-kind "performance-sponsor" — sponsors and support acknowledgments
-{
-  "eyebrow": string,
-  "lead": string,
-  "blocks": [
-    { "label": string, "name": string, "statement": string }
-  ],
-  "seasonSponsorsLabel": string,
-  "seasonSponsors": string,
-  "publicSupport": string,      // "Organization is supported by the Mass Cultural Council..." etc
-  "closing": string
-}
-
-kind "donors" — tiered donor lists
-{
-  "eyebrow": string,
-  "lead": string,
-  "tiers": [
-    { "name": string, "names": [ string ] }
-  ],
-  "footer": string
-}
-
-kind "roster" — board of directors, staff, musicians (grouped lists)
-{
-  "eyebrow": string,
-  "lead": string,
-  "groups": [
-    { "h": string, "players": [ string ] }
-  ]
-}
-
-kind "info" — house info, land acknowledgment, accessibility, contact
-{
-  "eyebrow": string,
-  "sections": [ { "h": string, "body": [ string ] } ]
-}
-
-kind "events" — upcoming events / season listings
-{
-  "eyebrow": string,
-  "lead": string,
-  "events": [ { "month": string, "day": string, "title": string, "meta": string } ]
-}
-
-kind "welcome" — letter from artistic/executive director
-{
-  "eyebrow": string,
-  "quote": string,
-  "body": [ string ],
-  "signature": { "name": string, "role": string }
-}
-`;
-
-  const prompt = `You are parsing a performing arts printed program book into structured JSON for a digital program book platform.
-
-Extract ALL content from the PDF text below and map it into the JSON schema provided. Do not invent or embellish content — only use what is explicitly in the text.
-
-SCHEMA:
-${SCHEMA}
-
-IMPORTANT RULES:
-- Every piece of text content should end up somewhere in the JSON.
-- For dance/company programs: company members go in a "cast" section. Artistic leadership (Artistic Director, Executive Director, etc.) go in "creative" within the same cast section.
-- For the dance program pieces: each titled work (e.g. THE HOLY BLUES, BLINK OF AN EYE) is one piece object in the "program" section's pieces array. Include ALL credits listed.
-- Sub-programs within a piece (like PILGRIM OF SORROW / TAKE ME TO THE WATER) go in that piece's "sections" array with their song listings.
-- Music licensing credits (song copyright lines) go in "musicCredits" on the piece.
-- Sponsor acknowledgments go in a "performance-sponsor" section.
-- "About the Company" text goes in a "notes" section.
-- "From the Vivo archives" or similar boxed/highlighted callout goes in that notes section's "callout" field.
-- INTERMISSION and PAUSE markers in the program become { "kind": "intermission" } or { "kind": "pause" } objects in the pieces array.
-- Season/series labels like "2025/26 Season" at the bottom of a page are footers and can go in closing or publicSupport of the nearest sponsor section.
-- If content from the program book doesn't fit any section kind perfectly, choose the closest match.
-- Generate short, unique IDs (slugs) for each section: e.g. "company", "program", "about", "sponsors", "donors".
-
-Return ONLY valid JSON — no markdown, no explanation, no code fences. Start with { and end with }.
+RULES:
+- Company members → cast[]. Artistic/Executive Directors → creative[].
+- Each dance work = one piece object with all its credits.
+- Sub-songs within a piece → that piece's sections[].
+- Music copyright lines → musicCredits on the piece.
+- About the company → notes section.
+- Boxed/highlighted callout → notes.callout.
+- Sponsors → performance-sponsor section.
+- Season footer labels → publicSupport or closing of sponsor section.
 
 PDF TEXT:
-${text.slice(0, 40000)}`;
+${text.slice(0, 14000)}`;
 
   try {
     const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
@@ -199,7 +75,7 @@ ${text.slice(0, 40000)}`;
         model: "llama-3.1-8b-instant",
         messages: [{ role: "user", content: prompt }],
         temperature: 0.1,
-        max_tokens: 8192,
+        max_tokens: 4096,
       }),
     });
 
@@ -209,14 +85,13 @@ ${text.slice(0, 40000)}`;
     const rawText = apiResp.choices?.[0]?.message?.content || "";
     if (!rawText) throw new Error("Groq returned no content");
 
-    // Strip any accidental markdown fences
     const cleaned = rawText.replace(/^```[a-z]*\n?/i, "").replace(/\n?```$/i, "").trim();
 
     let parsed;
     try {
       parsed = JSON.parse(cleaned);
     } catch (e) {
-      throw new Error("Gemini returned invalid JSON: " + e.message);
+      throw new Error("Model returned invalid JSON: " + e.message);
     }
 
     if (!parsed.cover || !parsed.sections) {
