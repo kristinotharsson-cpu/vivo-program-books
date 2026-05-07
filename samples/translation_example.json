@@ -1,0 +1,179 @@
+{
+  "_comment": "Reference fragments showing how song-text blocks should support translations across multiple display modes. Drop any of these into a 'notes' section's 'sections' array. The voice sample (Ruckus) is all English so it uses 'original-only', but the renderer must handle every mode below.",
+
+  "_displayModes": {
+    "side-by-side": {
+      "use_when": "Stanza counts and lengths roughly match between languages. Most lieder, art song, and choral works.",
+      "renders": "Two columns desktop (≥768px), original LEFT, translation RIGHT, vertically aligned per stanza. Translation column italic, 95% opacity. Stacks on mobile.",
+      "example": "Schubert lieder, French mélodie, Italian art song"
+    },
+    "stacked": {
+      "use_when": "Stanzas are long, dense, or asymmetric in length. When you want the audience reading top-to-bottom rather than scanning side-to-side.",
+      "renders": "Always stacked, even on desktop. Per stanza: original block first in cream, then translation immediately below in italic at 90% opacity, with subtle indent. Visual hierarchy makes clear they're paired.",
+      "example": "Long Wagner excerpts, narrative arias, oratorio recitatives"
+    },
+    "interlinear": {
+      "use_when": "Audience needs word-by-word or line-by-line correspondence. Pedagogical contexts, language-learning audiences, or texts where exact phrase matters (liturgical, biblical).",
+      "renders": "Each LINE of original immediately followed by its translation line, alternating, with the translation line italic and slightly muted. Tight line-height; no blank line between the pair.",
+      "example": "Bach cantatas, Latin Mass settings, Hebrew liturgical works"
+    },
+    "facing-page": {
+      "use_when": "Long-form text where audience wants the choice to read either language in continuous flow without distraction.",
+      "renders": "Two columns like side-by-side, but stanzas are NOT vertically aligned per-stanza — each column flows independently. Useful when stanza lengths are very different.",
+      "example": "Schumann's Dichterliebe complete, opera scenes, Mahler Lieder cycles"
+    },
+    "original-only": {
+      "use_when": "Language is the audience's native tongue, OR no translation is available/needed.",
+      "renders": "Single column, no translation rendered, full width.",
+      "example": "English-language American song (the Ruckus voice sample), gospel, folk"
+    },
+    "translation-only": {
+      "use_when": "Audience cannot read original script (e.g. Cyrillic, Arabic, CJK) and translation is the practical reading text. Original may be omitted or shown as a small reference at the foot.",
+      "renders": "Single column showing translation as primary text. Optional small italic block at end with original for reference.",
+      "example": "Programs where audience access matters more than philological purity"
+    }
+  },
+
+  "exampleSection_sideBySide": {
+    "_note": "GERMAN LIED — classic side-by-side case. Stanzas align cleanly.",
+    "h": "Erlkönig (1815)",
+    "subhead": "Music: Franz Schubert (1797-1828). Text: Johann Wolfgang von Goethe (1749-1832)",
+    "body": [
+      "Schubert was just 18 when he set Goethe's 1782 ballad. The poem tells of a father riding through the night with his sick child, who cries out that the Erl-King is reaching for him. The song has become one of the most famous lieder in the German art song tradition, with its galloping piano triplets and four distinct vocal characters — narrator, father, child, and Erl-King — all sung by a single performer."
+    ],
+    "songText": {
+      "kind": "song-text",
+      "displayMode": "side-by-side",
+      "originalLanguage": "de",
+      "translator": "Richard Wigmore",
+      "stanzas": [
+        {
+          "original": "Wer reitet so spät durch Nacht und Wind?\nEs ist der Vater mit seinem Kind;\nEr hat den Knaben wohl in dem Arm,\nEr fasst ihn sicher, er hält ihn warm.",
+          "translation": "Who rides so late through the night and wind?\nIt is the father with his child;\nHe holds the boy in his arms,\nhe clasps him safely, he keeps him warm."
+        },
+        {
+          "original": "\"Mein Sohn, was birgst du so bang dein Gesicht?\"\n\"Siehst, Vater, du den Erlkönig nicht?\nDen Erlenkönig mit Kron und Schweif?\"\n\"Mein Sohn, es ist ein Nebelstreif.\"",
+          "translation": "\"My son, why do you hide your face in fear?\"\n\"Father, do you not see the Erl-King?\nThe Erl-King with his crown and tail?\"\n\"My son, it is a streak of mist.\""
+        },
+        {
+          "original": "\"Du liebes Kind, komm, geh mit mir!\nGar schöne Spiele spiel ich mit dir;\nManch bunte Blumen sind an dem Strand,\nMeine Mutter hat manch gülden Gewand.\"",
+          "translation": "\"Sweet child, come with me!\nI'll play wonderful games with you;\nMany a bright flower grows on the shore;\nmy mother has many a golden garment.\"",
+          "speaker": "Erl-King"
+        }
+      ]
+    }
+  },
+
+  "exampleSection_stacked": {
+    "_note": "ITALIAN ARIA — stanzas are short and rhetorical, but stacked mode keeps each idea contained.",
+    "h": "Lascia ch'io pianga (1711)",
+    "subhead": "Music: George Frederic Handel (1685-1759). Text: Giacomo Rossi, from the opera Rinaldo",
+    "body": [
+      "Almirena's plea for freedom and lament for her lost love, set to one of Handel's most beloved sarabande melodies."
+    ],
+    "songText": {
+      "kind": "song-text",
+      "displayMode": "stacked",
+      "originalLanguage": "it",
+      "translator": "Anonymous",
+      "stanzas": [
+        {
+          "original": "Lascia ch'io pianga\nmia cruda sorte,\ne che sospiri\nla libertà.",
+          "translation": "Let me weep over\nmy cruel fate,\nand let me sigh\nfor liberty."
+        },
+        {
+          "original": "Il duolo infranga\nqueste ritorte\nde' miei martiri\nsol per pietà.",
+          "translation": "May sorrow break\nthese chains\nof my sufferings,\nfor pity's sake."
+        }
+      ]
+    }
+  },
+
+  "exampleSection_interlinear": {
+    "_note": "BACH CANTATA — line-by-line interlinear works for liturgical text where audience tracks correspondence.",
+    "h": "Ich habe genug, BWV 82 — Aria",
+    "subhead": "Music: J.S. Bach (1685-1750). Text: anonymous, after the Nunc dimittis",
+    "body": [
+      "From Bach's solo cantata for the Feast of the Purification, written 1727. The text paraphrases the words of Simeon upon seeing the Christ child."
+    ],
+    "songText": {
+      "kind": "song-text",
+      "displayMode": "interlinear",
+      "originalLanguage": "de",
+      "translator": "Pamela Dellal",
+      "stanzas": [
+        {
+          "original": "Ich habe genug,\nIch habe den Heiland, das Hoffen der Frommen,\nAuf meine begierigen Arme genommen;\nIch habe genug!",
+          "translation": "I have enough,\nI have taken the Savior, the hope of the faithful,\ninto my eager arms;\nI have enough!"
+        }
+      ]
+    }
+  },
+
+  "exampleSection_facingPage": {
+    "_note": "MAHLER — long Romantic lied with asymmetric stanzas; facing-page lets each language breathe.",
+    "h": "Ich bin der Welt abhanden gekommen (1901)",
+    "subhead": "Music: Gustav Mahler (1860-1911). Text: Friedrich Rückert (1788-1866)",
+    "body": [
+      "From Mahler's Rückert-Lieder. The narrator describes withdrawing from the world into an inner realm of love, song, and peace."
+    ],
+    "songText": {
+      "kind": "song-text",
+      "displayMode": "facing-page",
+      "originalLanguage": "de",
+      "translator": "Emily Ezust",
+      "stanzas": [
+        {
+          "original": "Ich bin der Welt abhanden gekommen,\nMit der ich sonst viele Zeit verdorben,\nSie hat so lange nichts von mir vernommen,\nSie mag wohl glauben, ich sei gestorben!",
+          "translation": "I have become lost to the world\nwith which I used to waste much time;\nit has heard nothing of me for so long\nthat it may very well believe that I am dead!"
+        },
+        {
+          "original": "Es ist mir auch gar nichts daran gelegen,\nOb sie mich für gestorben hält,\nIch kann auch gar nichts sagen dagegen,\nDenn wirklich bin ich gestorben der Welt.",
+          "translation": "Nor am I at all concerned\nif it should think me dead.\nI cannot deny it,\nfor I really am dead to the world."
+        },
+        {
+          "original": "Ich bin gestorben dem Weltgetümmel,\nUnd ruh' in einem stillen Gebiet!\nIch leb' allein in meinem Himmel,\nIn meinem Lieben, in meinem Lied.",
+          "translation": "I am dead to the world's tumult\nand rest in a quiet realm!\nI live alone in my heaven,\nin my love, in my song."
+        }
+      ]
+    }
+  },
+
+  "exampleSection_originalOnly": {
+    "_note": "ENGLISH PROGRAM — like the Ruckus voice sample. No translation needed.",
+    "h": "Beautiful Dreamer (1864)",
+    "subhead": "Words and music by Stephen Foster (1826-1864)",
+    "body": [
+      "One of Stephen Foster's most iconic parlor songs, written while he was in bad health. Its sentimental style is devoid of the minstrel themes that many of his songs contained."
+    ],
+    "songText": {
+      "kind": "song-text",
+      "displayMode": "original-only",
+      "originalLanguage": "en",
+      "stanzas": [
+        {
+          "original": "Beautiful Dreamer, wake unto me,\nStarlight and dewdrops are waiting for thee;\nSounds of the rude world heard in the day,\nLull'd by the moonlight have all pass'd away!"
+        },
+        {
+          "original": "Beautiful dreamer, queen of my song,\nList while I woo thee with soft melody;\nGone are the cares of life's busy throng\nBeautiful dreamer, awake unto me!\nBeautiful dreamer, awake unto me!"
+        }
+      ]
+    }
+  },
+
+  "_renderingNotes": {
+    "user_toggle": "RECOMMENDED: Render a small toolbar above each song-text block letting the user switch displayMode at runtime. The JSON sets the DEFAULT, but readers may prefer different modes (e.g. someone fluent in German may switch Erlkönig to original-only; an English speaker learning German may switch to interlinear). Persist the preference per-program via localStorage.",
+    "speaker_field": "Optional. When present, render as a small italic label above the stanza (e.g. for opera, oratorio, or any text with multiple voices)",
+    "isChorus_field": "Optional boolean. When true, indent the stanza and italicize, matching print convention for refrains",
+    "translator_field": "Renders once at the foot of the entire song-text block, italic small caption: 'Translation by Richard Wigmore'",
+    "originalLanguage": "BCP-47 code. Used for lang attribute on the original-text column for accessibility / screen readers / hyphenation.",
+    "mobile_behavior": {
+      "side-by-side": "stacks (original first, translation second)",
+      "stacked": "remains stacked",
+      "interlinear": "remains interlinear (works at any width)",
+      "facing-page": "stacks the columns (each column's full text shown sequentially)",
+      "original-only": "single column",
+      "translation-only": "single column"
+    }
+  }
+}
