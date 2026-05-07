@@ -856,7 +856,15 @@ welcome: eyebrow, quote, body:[str], signature:{name,role}`;
             lastErr = `${model}: empty (finish=${finish} msg_keys=${Object.keys(msg).join(",")})`;
             continue;
           }
-          const cleaned = raw.replace(/^```[a-z]*\n?/i, "").replace(/\n?```$/i, "").trim();
+
+          // Strip markdown fences, then extract the JSON object from any surrounding text
+          const stripped = raw.replace(/^```[a-z]*\n?/i, "").replace(/\n?```$/i, "").trim();
+          const firstBrace = stripped.indexOf('{');
+          const lastBrace = stripped.lastIndexOf('}');
+          const cleaned = (firstBrace >= 0 && lastBrace > firstBrace)
+            ? stripped.slice(firstBrace, lastBrace + 1)
+            : stripped;
+
           try { return JSON.parse(cleaned); } catch (_) {}
 
           // Truncated output: walk the string tracking open brackets, then close them
@@ -876,7 +884,7 @@ welcome: eyebrow, quote, body:[str], signature:{name,role}`;
           const closing = stack.slice().reverse().join('');
           try { return JSON.parse(trimmed + closing); } catch (_) {}
           if (lastSafe > 0) { try { return JSON.parse(cleaned.slice(0, lastSafe + 1)); } catch (_) {} }
-          lastErr = `${model}: invalid JSON`;
+          lastErr = `${model}: invalid JSON (len=${cleaned.length})`;
           continue;
         }
         throw new Error("All models failed. Last error: " + lastErr);
@@ -906,8 +914,8 @@ welcome: eyebrow, quote, body:[str], signature:{name,role}`;
         return base;
       };
 
-      // 2k chars → ~500 tokens output, safely within free model limits (~1500 tokens)
-      const CHUNK = 2000;
+      // 3k chars per chunk — small enough to fit within free model output limits
+      const CHUNK = 3000;
       const chunks = [];
       for (let i = 0; i < text.length; i += CHUNK) chunks.push(text.slice(i, i + CHUNK));
 
