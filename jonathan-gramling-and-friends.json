@@ -1,0 +1,150 @@
+{
+  "slug": "jonathan-gramling-and-friends",
+  "cover": {
+    "eyebrow": "Vivo Performing Arts presents",
+    "title": "Jonathan Gramling & Friends",
+    "subtitle": "Other",
+    "date": "SAT OCT 03",
+    "time": "3PM",
+    "venue": "Twelfth Baptist Church",
+    "accent": "blue",
+    "brush": "harmony",
+    "photoCaption": "Jonathan Gramling",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
+    "presentedBy": "",
+    "footerSponsor": null
+  },
+  "sections": [
+    {
+      "id": "welcome",
+      "title": "Welcome",
+      "kind": "welcome",
+      "eyebrow": "From the Artistic Director",
+      "quote": "Welcome to Vivo Performing Arts.",
+      "body": [
+        "Tonight, Jonathan Gramling — Reggae, gospel, soul, jazz. With Liberator Band.",
+        "We are delighted to share this program with you. Thank you for being here."
+      ],
+      "signature": {
+        "name": "Thor Steingraber",
+        "role": "CEO, Vivo Performing Arts"
+      }
+    },
+    {
+      "id": "performance-sponsor",
+      "title": "Performance Sponsor",
+      "kind": "performance-sponsor",
+      "eyebrow": "Tonight's Performance",
+      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
+      "blocks": [
+        {
+          "label": "Performance Supporter",
+          "name": "Performance Sponsor Name",
+          "statement": "This performance is generously supported by [Sponsor Name]."
+        }
+      ],
+      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
+      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+    },
+    {
+      "id": "program",
+      "title": "Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "Reggae, gospel, soul, jazz. With Liberator Band.",
+      "pieces": [
+        {
+          "composer": "Program details",
+          "work": "To be announced from the stage.",
+          "meta": ""
+        }
+      ],
+      "runtimeNote": "There will be no intermission in this afternoon’s program, which will run 60-75 minutes."
+    },
+    {
+      "id": "artist",
+      "title": "Cast & Creative",
+      "kind": "cast",
+      "eyebrow": "On Stage Tonight",
+      "cast": [
+        {
+          "role": "vocals",
+          "name": "Jonathan Gramling"
+        }
+      ],
+      "creative": []
+    },
+    {
+      "id": "bios",
+      "title": "Artist Bios",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "jonathan-gramling",
+          "name": "Jonathan Gramling",
+          "role": "vocals",
+          "initials": "JG",
+          "photoSrc": "",
+          "body": [
+            "Reggae, gospel, soul, jazz. With Liberator Band."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "vivo",
+      "kind": "vivo",
+      "title": "About Vivo Performing Arts",
+      "eyebrow": "Audience Information   Staff   Supporters"
+    },
+    {
+      "id": "info",
+      "title": "Hall Info",
+      "kind": "info",
+      "eyebrow": "Visitor Info",
+      "sections": [
+        {
+          "h": "Venue",
+          "body": [
+            "Twelfth Baptist Church."
+          ]
+        },
+        {
+          "h": "Land Acknowledgment",
+          "body": [
+            "Vivo Performing Arts gathers and performs on the unceded ancestral lands of the Massachusett, Pawtucket, and Wampanoag peoples."
+          ]
+        },
+        {
+          "h": "Accessibility",
+          "body": [
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
+          ]
+        },
+        {
+          "h": "Contact",
+          "body": [
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
+          ]
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "iso": "2026-10-03",
+    "genre": "Other",
+    "venueName": "Twelfth Baptist Church",
+    "leadArtist": "Jonathan Gramling",
+    "socialLinks": [
+      {
+        "label": "Instagram @jonathangramling",
+        "url": "https://instagram.com/jonathangramling"
+      }
+    ],
+    "ensembleCount": 1
+  }
+}

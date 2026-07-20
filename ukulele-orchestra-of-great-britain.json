@@ -1,0 +1,150 @@
+{
+  "slug": "ukulele-orchestra-of-great-britain",
+  "cover": {
+    "eyebrow": "Vivo Performing Arts presents",
+    "title": "Ukulele Orchestra of Great Britain",
+    "date": "Saturday, April 17, 2027",
+    "time": "8 p.m.",
+    "venue": "NEC's Jordan Hall",
+    "accent": "blue",
+    "brush": "harmony",
+    "photoCaption": "Ukulele Orchestra of Great Britain",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
+    "presentedBy": "",
+    "footerSponsor": null,
+    "artistWebsite": "https://www.ukuleleorchestra.com",
+    "pressQuote": "\"A joyful collision of musical pyrotechnics and deadpan British wit—the Ukulele Orchestra of Great Britain remains irresistible.\" The Guardian"
+  },
+  "sections": [
+    {
+      "id": "welcome",
+      "title": "Welcome",
+      "kind": "welcome",
+      "eyebrow": "From the Artistic Director",
+      "quote": "Small but mighty, the \"Ukes\" are a tour-de-force of strings worthy of any musical wish list—jaw- dropping musical virtuosity on four types of ukuleles paired with humor ranging from bone-dry to almost slapstick. An evening of joy and musicianship that expands horizons and warms the soul.",
+      "body": [
+        "Small but mighty, the \"Ukes\" are a tour-de-force of strings worthy of any musical wish list. Treat yourself to a blend of jaw-dropping musical virtuosity (on four types of ukuleles) and humor that ranges from bone-dry to almost slapstick. Delightfully versatile, they'll perform anything and everything: classic rock, TV theme songs, classical music, and so much more. It's an evening of joy and musicianship that expands horizons and warms the soul."
+      ],
+      "signature": {
+        "name": "Thor Steingraber",
+        "role": "CEO, Vivo Performing Arts"
+      }
+    },
+    {
+      "id": "performance-sponsor",
+      "title": "Performance Sponsor",
+      "kind": "performance-sponsor",
+      "eyebrow": "Tonight's Performance",
+      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
+      "blocks": [
+        {
+          "label": "Performance Supporter",
+          "name": "Performance Sponsor Name",
+          "statement": "This performance is generously supported by [Sponsor Name]."
+        }
+      ],
+      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
+      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+    },
+    {
+      "id": "program",
+      "title": "Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "4 types of ukuleles. Classic rock, TV themes, classical music + British wit.",
+      "pieces": [
+        {
+          "composer": "Program details",
+          "work": "To be announced from the stage.",
+          "meta": ""
+        }
+      ]
+    },
+    {
+      "id": "artist",
+      "title": "Cast & Creative",
+      "kind": "cast",
+      "eyebrow": "On Stage Tonight",
+      "cast": [
+        {
+          "role": "ensemble",
+          "name": "Ukulele Orchestra of Great Britain"
+        }
+      ],
+      "creative": []
+    },
+    {
+      "id": "bios",
+      "title": "Artist Bios",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "ukulele-orchestra-of-great-britain",
+          "name": "Ukulele Orchestra of Great Britain",
+          "role": "ensemble",
+          "initials": "UOO",
+          "photoSrc": "",
+          "body": [
+            "Small but mighty, the \"Ukes\" are a tour-de-force of strings worthy of any musical wish list. Treat yourself to a blend of jaw-dropping musical virtuosity (on four types of ukuleles) and humor that ranges from bone-dry to almost slapstick. Delightfully versatile, they'll perform anything and everything: classic rock, TV theme songs, classical music, and so much more. It's an evening of joy and musicianship that expands horizons and warms the soul."
+          ],
+          "website": "https://www.ukuleleorchestra.com"
+        }
+      ]
+    },
+    {
+      "id": "vivo",
+      "kind": "vivo",
+      "title": "About Vivo Performing Arts",
+      "eyebrow": "Audience Information   Staff   Supporters"
+    },
+    {
+      "id": "info",
+      "title": "Hall Info",
+      "kind": "info",
+      "eyebrow": "Visitor Info",
+      "sections": [
+        {
+          "h": "Venue",
+          "body": [
+            "NEC's Jordan Hall."
+          ]
+        },
+        {
+          "h": "Land Acknowledgment",
+          "body": [
+            "Vivo Performing Arts gathers and performs on the unceded ancestral lands of the Massachusett, Pawtucket, and Wampanoag peoples."
+          ]
+        },
+        {
+          "h": "Accessibility",
+          "body": [
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
+          ]
+        },
+        {
+          "h": "Contact",
+          "body": [
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
+          ]
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "iso": "2027-04-17",
+    "genre": "Other",
+    "venueName": "NEC's Jordan Hall",
+    "leadArtist": "Ukulele Orchestra of Great Britain",
+    "socialLinks": [
+      {
+        "label": "Artist website",
+        "url": "https://ukuleleorchestra.com"
+      }
+    ],
+    "ensembleCount": 1
+  }
+}

@@ -1,0 +1,163 @@
+{
+  "slug": "fred-hersch-trio",
+  "cover": {
+    "eyebrow": "Vivo Performing Arts presents",
+    "title": "Fred Hersch Trio",
+    "subtitle": "Jazz Festival",
+    "date": "Thursday, April 1, 2027",
+    "time": "8 p.m.",
+    "venue": "Museum of Science's Public Science Common",
+    "accent": "orange",
+    "brush": "rhythm",
+    "photoCaption": "Fred Hersch",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
+    "presentedBy": "",
+    "footerSponsor": null,
+    "artistWebsite": "https://fredhersch.com",
+    "pressQuote": "One of the major ensembles of our time. The Wall Street Journal"
+  },
+  "sections": [
+    {
+      "id": "welcome",
+      "title": "Welcome",
+      "kind": "welcome",
+      "eyebrow": "From the Artistic Director",
+      "quote": "Hailed as \"a living legend\" by The New Yorker, Fred Hersch and his trio move between stillness and surprise, luminous lyricism and fearless exploration—opening the Jazz Festival at the Museum of Science's extraordinary new performance space.",
+      "body": [
+        "FRED HERSCH piano DREW GRESS bass JOEY BARON drums Hailed by The New Yorker as \"a living legend,\" Fred Hersch and his trio of nearly four decades move between stillness and surprise, luminous lyricism and fearless exploration. The Museum of Science suits an artist inspired by neuroscience: Hersch's multimedia opus My Coma Dreams was drawn from dreams he remembered after surviving a two-month coma. In a hall that will showcase Hersch's subtlety and sensitivity, come ready to listen closely to an outstanding pianist and composer."
+      ],
+      "signature": {
+        "name": "Thor Steingraber",
+        "role": "CEO, Vivo Performing Arts"
+      }
+    },
+    {
+      "id": "performance-sponsor",
+      "title": "Performance Sponsor",
+      "kind": "performance-sponsor",
+      "eyebrow": "Tonight's Performance",
+      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
+      "blocks": [
+        {
+          "label": "Performance Supporter",
+          "name": "Performance Sponsor Name",
+          "statement": "This performance is generously supported by [Sponsor Name]."
+        }
+      ],
+      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
+      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+    },
+    {
+      "id": "program",
+      "title": "Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "Opens Jazz Festival. Co-pro with MOS. Trio of nearly four decades.",
+      "pieces": [
+        {
+          "composer": "Program details",
+          "work": "To be announced from the stage.",
+          "meta": ""
+        }
+      ]
+    },
+    {
+      "id": "artist",
+      "title": "Cast & Creative",
+      "kind": "cast",
+      "eyebrow": "On Stage Tonight",
+      "cast": [
+        {
+          "role": "piano",
+          "name": "Fred Hersch"
+        },
+        {
+          "role": "bass",
+          "name": "Drew Gress"
+        },
+        {
+          "role": "drums",
+          "name": "Joey Baron"
+        }
+      ],
+      "creative": []
+    },
+    {
+      "id": "bios",
+      "title": "Artist Bios",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "fred-hersch",
+          "name": "Fred Hersch",
+          "role": "piano / leader",
+          "initials": "FH",
+          "photoSrc": "",
+          "body": [
+            "FRED HERSCH piano DREW GRESS bass JOEY BARON drums Hailed by The New Yorker as \"a living legend,\" Fred Hersch and his trio of nearly four decades move between stillness and surprise, luminous lyricism and fearless exploration. The Museum of Science suits an artist inspired by neuroscience: Hersch's multimedia opus My Coma Dreams was drawn from dreams he remembered after surviving a two-month coma. In a hall that will showcase Hersch's subtlety and sensitivity, come ready to listen closely to an outstanding pianist and composer."
+          ],
+          "website": "https://fredhersch.com"
+        }
+      ]
+    },
+    {
+      "id": "vivo",
+      "kind": "vivo",
+      "title": "About Vivo Performing Arts",
+      "eyebrow": "Audience Information   Staff   Supporters"
+    },
+    {
+      "id": "info",
+      "title": "Hall Info",
+      "kind": "info",
+      "eyebrow": "Visitor Info",
+      "sections": [
+        {
+          "h": "Venue",
+          "body": [
+            "Museum of Science's Public Science Common."
+          ]
+        },
+        {
+          "h": "Land Acknowledgment",
+          "body": [
+            "Vivo Performing Arts gathers and performs on the unceded ancestral lands of the Massachusett, Pawtucket, and Wampanoag peoples."
+          ]
+        },
+        {
+          "h": "Accessibility",
+          "body": [
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
+          ]
+        },
+        {
+          "h": "Contact",
+          "body": [
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
+          ]
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "iso": "2027-04-01",
+    "genre": "Jazz",
+    "venueName": "Museum of Science's Public Science Common",
+    "leadArtist": "Fred Hersch",
+    "socialLinks": [
+      {
+        "label": "Artist website",
+        "url": "https://fredhersch.com"
+      },
+      {
+        "label": "Instagram @fredherschmusic",
+        "url": "https://instagram.com/fredherschmusic"
+      }
+    ],
+    "ensembleCount": 3
+  }
+}

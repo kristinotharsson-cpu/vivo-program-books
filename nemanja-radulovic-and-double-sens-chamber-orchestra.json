@@ -1,0 +1,205 @@
+{
+  "slug": "nemanja-radulovic-and-double-sens-chamber-orchestra",
+  "cover": {
+    "eyebrow": "Vivo Performing Arts presents",
+    "title": "Nemanja Radulović & Double Sens Chamber Orchestra",
+    "date": "Friday, Nov. 13, 2026",
+    "time": "8 p.m.",
+    "venue": "NEC's Jordan Hall",
+    "accent": "green",
+    "brush": "harmony",
+    "photoCaption": "Nemanja Radulović",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
+    "presentedBy": "",
+    "footerSponsor": null,
+    "artistWebsite": "https://doublesens.org",
+    "pressQuote": "An artist who has the ability to transcend the boundaries of classical music. Le Figaro"
+  },
+  "sections": [
+    {
+      "id": "welcome",
+      "title": "Welcome",
+      "kind": "welcome",
+      "eyebrow": "From the Artistic Director",
+      "quote": "Serbian-born, Paris-based violinist Nemanja Radulović and his Double Sens Chamber Orchestra make their U.S. debut—moving seamlessly between classical masterworks, folk traditions, and beyond, with striking charisma, agility, and emotional depth.",
+      "body": [
+        "Serbian-born, Paris-based violinist Nemanja Radulović founded Double Sens as an artistic reflection of his dual identity—the creative dialogue between two cultures that shape his voice. He brought together a circle of trusted Serbian and French musicians, united by friendship and a shared desire to inspire one another toward their highest artistry. Making its U.S. debut in 2026 with a program including Vivaldi's The Four Seasons, the ensemble moves seamlessly between classical masterworks, folk traditions, and repertoire beyond, performing with striking charisma, agility, and emotional depth. Double Sens radiates warmth, authenticity, and a palpable sense of freedom that captivates audiences from the very first note."
+      ],
+      "signature": {
+        "name": "Thor Steingraber",
+        "role": "CEO, Vivo Performing Arts"
+      }
+    },
+    {
+      "id": "performance-sponsor",
+      "title": "Performance Sponsor",
+      "kind": "performance-sponsor",
+      "eyebrow": "Tonight's Performance",
+      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
+      "blocks": [
+        {
+          "label": "Performance Supporter",
+          "name": "Performance Sponsor Name",
+          "statement": "This performance is generously supported by [Sponsor Name]."
+        }
+      ],
+      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
+      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you.",
+      "mgmtCredit": "Nemanja Radulović & Double Sens Chamber Orchestra appear by arrangement with Opus 3 Artists, New York, NY"
+    },
+    {
+      "id": "program",
+      "title": "Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "U.S. debut. Vivaldi Four Seasons + additional program TBD.",
+      "pieces": [
+        {
+          "composer": "VIVALDI",
+          "work": "The Four Seasons, Op. 8"
+        },
+        {
+          "composer": "VIVALDI",
+          "work": "Violin Concerto in E Major, RV 269 “Spring",
+          "movements": [
+            "Allegro",
+            "Largo",
+            "Danza pastorale. Allegro"
+          ]
+        },
+        {
+          "composer": "VIVALDI",
+          "work": "Violin Concerto in G Major, RV 315 “Summer",
+          "movements": [
+            "Allegro",
+            "Adagio e piano – Presto e forte",
+            "Presto"
+          ]
+        },
+        {
+          "composer": "VIVALDI",
+          "work": "Violin Concerto in G Major, RV 293 “Autumn",
+          "movements": [
+            "Allegro",
+            "Adagio molto",
+            "Allegro ‘Caccia’"
+          ]
+        },
+        {
+          "composer": "VIVALDI",
+          "work": "Violin Concerto in F minor, RV 297 “Winter",
+          "movements": [
+            "Allegro con molto",
+            "Largo",
+            "Allegro"
+          ]
+        },
+        {
+          "kind": "intermission"
+        },
+        {
+          "composer": "RIMSKY-KORSAKOV",
+          "work": "Symphonic Suite from Scheherazade, Op. 35 (arr. Aleksandar Sedlar)"
+        }
+      ]
+    },
+    {
+      "id": "artist",
+      "title": "Cast & Creative",
+      "kind": "cast",
+      "eyebrow": "On Stage Tonight",
+      "cast": [
+        {
+          "role": "violin / leader",
+          "name": "Nemanja Radulović"
+        },
+        {
+          "role": "ensemble",
+          "name": "Double Sens Chamber Orchestra"
+        }
+      ],
+      "creative": []
+    },
+    {
+      "id": "bios",
+      "title": "Artist Bios",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "nemanja-radulovic",
+          "name": "Nemanja Radulović",
+          "role": "violin / leader",
+          "initials": "NR",
+          "photoSrc": "",
+          "body": [
+            "Serbian-born, Paris-based violinist Nemanja Radulović founded Double Sens as an artistic reflection of his dual identity—the creative dialogue between two cultures that shape his voice. He brought together a circle of trusted Serbian and French musicians, united by friendship and a shared desire to inspire one another toward their highest artistry. Making its U.S. debut in 2026 with a program including Vivaldi's The Four Seasons, the ensemble moves seamlessly between classical masterworks, folk traditions, and repertoire beyond, performing with striking charisma, agility, and emotional depth. Double Sens radiates warmth, authenticity, and a palpable sense of freedom that captivates audiences from the very first note."
+          ],
+          "website": "https://doublesens.org"
+        }
+      ]
+    },
+    {
+      "id": "vivo",
+      "kind": "vivo",
+      "title": "About Vivo Performing Arts",
+      "eyebrow": "Audience Information   Staff   Supporters"
+    },
+    {
+      "id": "info",
+      "title": "Hall Info",
+      "kind": "info",
+      "eyebrow": "Visitor Info",
+      "sections": [
+        {
+          "h": "Venue",
+          "body": [
+            "NEC's Jordan Hall."
+          ]
+        },
+        {
+          "h": "Land Acknowledgment",
+          "body": [
+            "Vivo Performing Arts gathers and performs on the unceded ancestral lands of the Massachusett, Pawtucket, and Wampanoag peoples."
+          ]
+        },
+        {
+          "h": "Accessibility",
+          "body": [
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
+          ]
+        },
+        {
+          "h": "Contact",
+          "body": [
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
+          ]
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "iso": "2026-11-13",
+    "genre": "Ch Orch",
+    "venueName": "NEC's Jordan Hall",
+    "leadArtist": "Nemanja Radulović",
+    "socialLinks": [
+      {
+        "label": "Artist website",
+        "url": "https://nemanjaviolin.com"
+      },
+      {
+        "label": "Instagram @nemanjaraduloff",
+        "url": "https://instagram.com/nemanjaraduloff"
+      },
+      {
+        "label": "Facebook/nemanjaradulOFF",
+        "url": "https://facebook.com/nemanjaradulOFF"
+      }
+    ],
+    "ensembleCount": 2
+  }
+}

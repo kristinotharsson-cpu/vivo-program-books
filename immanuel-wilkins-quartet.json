@@ -1,0 +1,174 @@
+{
+  "slug": "immanuel-wilkins-quartet",
+  "cover": {
+    "eyebrow": "Vivo Performing Arts presents",
+    "title": "Immanuel Wilkins Quartet",
+    "subtitle": "Jazz Festival",
+    "date": "Saturday, April 3, 2027",
+    "time": "8 p.m.",
+    "venue": "Museum of Science's Public Science Common",
+    "accent": "orange",
+    "brush": "rhythm",
+    "photoCaption": "Immanuel Wilkins",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
+    "presentedBy": "",
+    "footerSponsor": null,
+    "artistWebsite": "https://immanuelwilkins.com",
+    "pressQuote": "This haunting, profound, astonishing record is this reviewer’s pick for the year’s best — and it isn’t even close. Indeed, few albums released in any year achieve alto saxophonist/composer Wilkins’ improbable balance of ethereal and earthy, of searching and grounded, of virtuosic and plainspokenly lyrical. The afore-used “astonishing” doesn’t do it justice — but there’s no better word, either. DOWNBEAT album review, Blues Blood"
+  },
+  "sections": [
+    {
+      "id": "welcome",
+      "title": "Welcome",
+      "kind": "welcome",
+      "eyebrow": "From the Artistic Director",
+      "quote": "Alto saxophonist Immanuel Wilkins is one of the most magnetic young musicians in America. With his quartet, he brings a sound marked by confidence, clarity of purpose, and an intensity that feels wholly alive in the moment, promising an essential night for anyone drawn to music where virtuosity and emotion are inseparable.",
+      "body": [
+        "Alto saxophonist Immanuel Wilkins is one of the most magnetic young musicians in America. With his quartet, he brings a sound marked by confidence, clarity of purpose, and an intensity that feels wholly alive in the moment. Wilkins composes with rare intention—each phrase shaped by a deep idea—and his band delivers it with the kind of conviction that fills a room. This quartet's Vivo Performing Arts debut will be an essential night for anyone drawn to music where virtuosity, community, and emotion are inseparable."
+      ],
+      "signature": {
+        "name": "Thor Steingraber",
+        "role": "CEO, Vivo Performing Arts"
+      }
+    },
+    {
+      "id": "performance-sponsor",
+      "title": "Performance Sponsor",
+      "kind": "performance-sponsor",
+      "eyebrow": "Tonight's Performance",
+      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
+      "blocks": [
+        {
+          "label": "Performance Supporter",
+          "name": "Performance Sponsor Name",
+          "statement": "This performance is generously supported by [Sponsor Name]."
+        }
+      ],
+      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
+      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+    },
+    {
+      "id": "program",
+      "title": "Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "Jazz Festival night 3. Co-pro with MOS. Artist in Residence.",
+      "pieces": [
+        {
+          "composer": "IMMANUEL WILKINS",
+          "work": "alto saxophone"
+        },
+        {
+          "composer": "MICAH THOMAS",
+          "work": "piano"
+        },
+        {
+          "composer": "RYOMA TAKENAGA",
+          "work": "bass"
+        },
+        {
+          "composer": "KWEKU SUMBRY",
+          "work": "drums"
+        }
+      ]
+    },
+    {
+      "id": "artist",
+      "title": "Cast & Creative",
+      "kind": "cast",
+      "eyebrow": "On Stage Tonight",
+      "cast": [
+        {
+          "role": "piano",
+          "name": "Micah Thomas"
+        },
+        {
+          "role": "bass",
+          "name": "Ryoma Takenaga"
+        },
+        {
+          "role": "drums",
+          "name": "Kweku Sumbry"
+        }
+      ],
+      "creative": []
+    },
+    {
+      "id": "bios",
+      "title": "Artist Bios",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "immanuel-wilkins",
+          "name": "Immanuel Wilkins",
+          "role": "alto saxophone / leader",
+          "initials": "IW",
+          "photoSrc": "",
+          "body": [
+            "Alto saxophonist Immanuel Wilkins is one of the most magnetic young musicians in America. With his quartet, he brings a sound marked by confidence, clarity of purpose, and an intensity that feels wholly alive in the moment. Wilkins composes with rare intention—each phrase shaped by a deep idea—and his band delivers it with the kind of conviction that fills a room. This quartet's Vivo Performing Arts debut will be an essential night for anyone drawn to music where virtuosity, community, and emotion are inseparable."
+          ],
+          "website": "https://immanuelwilkins.com"
+        }
+      ]
+    },
+    {
+      "id": "vivo",
+      "kind": "vivo",
+      "title": "About Vivo Performing Arts",
+      "eyebrow": "Audience Information   Staff   Supporters"
+    },
+    {
+      "id": "info",
+      "title": "Hall Info",
+      "kind": "info",
+      "eyebrow": "Visitor Info",
+      "sections": [
+        {
+          "h": "Venue",
+          "body": [
+            "Museum of Science's Public Science Common."
+          ]
+        },
+        {
+          "h": "Land Acknowledgment",
+          "body": [
+            "Vivo Performing Arts gathers and performs on the unceded ancestral lands of the Massachusett, Pawtucket, and Wampanoag peoples."
+          ]
+        },
+        {
+          "h": "Accessibility",
+          "body": [
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
+          ]
+        },
+        {
+          "h": "Contact",
+          "body": [
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
+          ]
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "iso": "2027-04-03",
+    "genre": "Jazz",
+    "venueName": "Museum of Science's Public Science Common",
+    "leadArtist": "Immanuel Wilkins",
+    "socialLinks": [
+      {
+        "label": "Artist website",
+        "url": "https://immanuelwilkins.com"
+      },
+      {
+        "label": "Instagram @immanuel.wilkins",
+        "url": "https://instagram.com/immanuel.wilkins"
+      }
+    ],
+    "ensembleCount": 4
+  }
+}
