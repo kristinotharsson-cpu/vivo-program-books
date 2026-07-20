@@ -93,6 +93,10 @@ function App() {
   const [overrides, setOverrides] = useState(() => {
     try { return JSON.parse(localStorage.getItem("vivo-idx-overrides") || "{}"); } catch (e) { return {}; }
   });
+  const [statuses, setStatuses] = useState({});
+  useEffect(() => {
+    if (window.VivoStore) window.VivoStore.listPrograms().then(setStatuses).catch(() => {});
+  }, []);
   useEffect(() => { localStorage.setItem("vivo-idx-overrides", JSON.stringify(overrides)); }, [overrides]);
   const applyEdit = (slug, field, value) => {
     setOverrides(o => ({ ...o, [slug]: { ...(o[slug] || {}), [field]: value } }));
@@ -126,8 +130,12 @@ function App() {
   }, [shows, todayTs]);
 
   const mergedShows = useMemo(
-    () => shows.map(s => (overrides[s.slug] ? { ...s, ...overrides[s.slug] } : s)),
-    [shows, overrides]
+    () => shows.map(s => {
+      const st = statuses[s.slug];
+      const base = overrides[s.slug] ? { ...s, ...overrides[s.slug] } : s;
+      return { ...base, _status: st ? st.status : "empty", _updatedAt: st && st.updatedAt, _exportedAt: st && st.lastExportedAt };
+    }),
+    [shows, overrides, statuses]
   );
 
   const filtered = useMemo(() => {
@@ -293,6 +301,41 @@ function PastDivider({ count, open, onToggle }) {
   );
 }
 
+// Relative "last edited" label
+function relTime(iso) {
+  if (!iso) return null;
+  const d = (Date.now() - new Date(iso).getTime()) / 1000;
+  if (d < 90) return "just now";
+  if (d < 3600) return Math.round(d / 60) + "m ago";
+  if (d < 86400) return Math.round(d / 3600) + "h ago";
+  if (d < 172800) return "yesterday";
+  return Math.round(d / 86400) + "d ago";
+}
+function StatusBadge({ s }) {
+  const status = s._status || "empty";
+  const label = status === "published" ? "Published" : status === "draft" ? "Draft" : "Empty";
+  const when = relTime(s._updatedAt);
+  return (
+    <div className="idx-status">
+      <span className={"idx-status-badge is-" + status}>{label}</span>
+      {status === "empty"
+        ? <span className="idx-status-when">Awaiting PDF import</span>
+        : when ? <span className="idx-status-when">Last edited {when}</span> : null}
+    </div>
+  );
+}
+function CardActions({ s }) {
+  const go = (url) => (e) => { e.preventDefault(); e.stopPropagation(); location.assign(url); };
+  return (
+    <div className="idx-card-actions">
+      <button className="idx-act" onClick={go(`Program Book.html?show=${s.slug}`)}>Open</button>
+      {s._status !== "empty" ? (
+        <button className="idx-act is-ghost" onClick={go(`Program Book.html?show=${s.slug}&export=1`)}>Export</button>
+      ) : null}
+    </div>
+  );
+}
+
 function GridView({ items, past, edit, onEdit }) {
   return (
     <div className="idx-grid">
@@ -300,12 +343,14 @@ function GridView({ items, past, edit, onEdit }) {
         const d = compactDate(s.date);
         return (
           <a key={s.slug} className={"idx-card" + (past ? " idx-card-past" : "") + (edit ? " is-editing" : "")} data-accent={s.accent || "purple"} href={`Program Book.html?show=${s.slug}`} onClick={e => { if (edit) e.preventDefault(); }}>
-            <div className="idx-card-genre">{genreLabel(s)}</div>
-            <div className="idx-card-date">
-              <span className="idx-card-day">{d.mon} {d.day}</span>
-              {edit
-                ? <IdxEditable className="idx-card-time" value={s.time || ""} field="time" slug={s.slug} onEdit={onEdit} placeholder="Time" />
-                : <span className="idx-card-time">{s.time || ""}</span>}
+            <div className="idx-card-head">
+              <div className="idx-card-date">
+                <span className="idx-card-day">{d.mon} {d.day}</span>
+                {edit
+                  ? <IdxEditable className="idx-card-time" value={s.time || ""} field="time" slug={s.slug} onEdit={onEdit} placeholder="Time" />
+                  : <span className="idx-card-time">{s.time || ""}</span>}
+              </div>
+              <div className="idx-card-genre">{genreLabel(s)}</div>
             </div>
             {edit
               ? <IdxEditable as="h3" className="idx-card-title" value={s.title} field="title" slug={s.slug} onEdit={onEdit} placeholder="Title" />
@@ -318,6 +363,8 @@ function GridView({ items, past, edit, onEdit }) {
                 ? <IdxEditable value={s.venue || ""} field="venue" slug={s.slug} onEdit={onEdit} placeholder="Venue" />
                 : <span>{s.venue}</span>}
             </div>
+            <StatusBadge s={s} />
+            <CardActions s={s} />
             <span className="idx-card-arrow">→</span>
           </a>
         );
@@ -353,6 +400,7 @@ function ListView({ groups, past, edit, onEdit }) {
                     {edit
                       ? <IdxEditable value={s.venue || ""} field="venue" slug={s.slug} onEdit={onEdit} placeholder="Venue" />
                       : <span>{s.venue}</span>}
+                    <span className={"idx-status-badge is-" + (s._status || "empty")}>{s._status === "published" ? "Published" : s._status === "draft" ? "Draft" : "Empty"}</span>
                   </div>
                 </div>
                 <div className="idx-row-genre">{genreLabel(s)}</div>

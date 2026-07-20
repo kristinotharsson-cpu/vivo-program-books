@@ -20,6 +20,7 @@ const Icon = ({ name, size = 20 }) => {
     case "check": return <svg viewBox="0 0 24 24" {...s}><polyline points="5,13 10,18 20,7"/></svg>;
     case "image": return <svg viewBox="0 0 24 24" {...s}><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><polyline points="3,18 9,13 14,17 21,11"/></svg>;
     case "download": return <svg viewBox="0 0 24 24" {...s}><path d="M12 4v12"/><polyline points="6,12 12,18 18,12"/><line x1="4" y1="20" x2="20" y2="20"/></svg>;
+    case "upload": return <svg viewBox="0 0 24 24" {...s}><path d="M12 16V4"/><polyline points="6,8 12,4 18,8"/><line x1="4" y1="20" x2="20" y2="20"/></svg>;
     case "eye": return <svg viewBox="0 0 24 24" {...s}><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>;
     case "eye-off": return <svg viewBox="0 0 24 24" {...s}><path d="M3 3l18 18"/><path d="M10.5 6.4A10 10 0 0 1 12 6c6.5 0 10 6 10 6a16 16 0 0 1-3.4 4.3"/><path d="M6.6 6.6A16 16 0 0 0 2 12s3.5 6 10 6a10 10 0 0 0 4.5-1"/><path d="M14.1 14.1a3 3 0 1 1-4.2-4.2"/></svg>;
     case "instagram": return <svg viewBox="0 0 24 24" {...s}><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>;
@@ -91,7 +92,7 @@ const TopBar = ({ title, onBack, onMenu, onSearch, showLogo, logoSrc, home }) =>
 );
 
 // ---------- Settings Menu ----------
-const SettingsMenu = ({ open, onClose, theme, onTheme, fontSize, onFontSize, onShare, onToggleEdit, editing }) => {
+const SettingsMenu = ({ open, onClose, theme, onTheme, fontSize, onFontSize, onShare, onToggleEdit, editing, onImport, onExport }) => {
   if (!open) return null;
   return (
     <>
@@ -122,6 +123,18 @@ const SettingsMenu = ({ open, onClose, theme, onTheme, fontSize, onFontSize, onS
           <span className="label">{editing ? "Stop Editing" : "Edit Content"}</span>
           <Icon name={editing ? "check" : "edit"} size={16} />
         </button>
+        {onImport ? (
+          <button className="menu-item" onClick={onImport}>
+            <span className="label">Import PDF</span>
+            <Icon name="upload" size={16} />
+          </button>
+        ) : null}
+        {onExport ? (
+          <button className="menu-item" onClick={onExport}>
+            <span className="label">Export HTML</span>
+            <Icon name="download" size={16} />
+          </button>
+        ) : null}
       </div>
     </>
   );

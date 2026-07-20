@@ -418,6 +418,21 @@ const App = () => {
   });
   useEffectA(() => {
     try { localStorage.setItem(window.__VIVO_STORAGE_KEY || "vivo-pb-data", JSON.stringify(data)); } catch (e) {}
+    // Mirror to VivoStore (Netlify Blobs when deployed) as the program record
+    const slug = new URLSearchParams(location.search).get("show") || (window.PROGRAM_DATA && window.PROGRAM_DATA.slug) || "sample";
+    if (window.VivoStore && !window.VIVO_PROGRAM_DATA_SNAPSHOT) {
+      clearTimeout(window.__vivoSaveT);
+      window.__vivoSaveT = setTimeout(async () => {
+        try {
+          const prev = await window.VivoStore.getProgram(slug);
+          const rec = prev
+            ? window.VivoStore.touch(prev, { data })
+            : window.VivoStore.newRecord(slug, data, "draft");
+          rec.data = data;
+          await window.VivoStore.saveProgram(slug, rec);
+        } catch (e) { console.warn("VivoStore save failed", e); }
+      }, 800);
+    }
   }, [data]);
 
   const [theme, setTheme] = useStateA(() => {
@@ -442,6 +457,15 @@ const App = () => {
 
   const [menuOpen, setMenuOpen] = useStateA(false);
   const [searchOpen, setSearchOpen] = useStateA(false);
+  const [importOpen, setImportOpen] = useStateA(false);
+  // ?export=1 → auto-export once booted (library Export button)
+  useEffectA(() => {
+    if (new URLSearchParams(location.search).get("export") === "1") {
+      const t = setTimeout(() => exportRef.current && exportRef.current(), 1200);
+      return () => clearTimeout(t);
+    }
+  }, []);
+  const exportRef = React.useRef(null);
   const [toast, setToast] = useStateA(null);
   useEffectA(() => {
     if (!toast) return;
@@ -639,17 +663,29 @@ const App = () => {
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = "Vivo Program Book.html";
+      const slug = new URLSearchParams(location.search).get("show") || "program";
+      a.download = slug + ".html";
       document.body.appendChild(a);
       a.click();
       a.remove();
       setTimeout(() => URL.revokeObjectURL(url), 1000);
-      setToast("Bundled HTML downloaded");
+      // Mark record published
+      if (window.VivoStore && !window.VIVO_PROGRAM_DATA_SNAPSHOT) {
+        try {
+          const prev = await window.VivoStore.getProgram(slug);
+          const rec = prev ? window.VivoStore.touch(prev, {}) : window.VivoStore.newRecord(slug, data, "draft");
+          rec.status = "published";
+          rec.lastExportedAt = new Date().toISOString();
+          await window.VivoStore.saveProgram(slug, rec);
+        } catch (e) {}
+      }
+      setToast("Exported " + slug + ".html — upload to S3");
     } catch (e) {
       console.error(e);
       setToast("Export failed — check console");
     }
   }, [data, tweaks, theme, fontSize]);
+  useEffectA(() => { exportRef.current = exportHtml; }, [exportHtml]);
 
   const ACCENT_MAP = {
     plum: "var(--vivo-plum)", tangerine: "var(--vivo-tangerine)", orange: "var(--vivo-orange)",
@@ -733,8 +769,7 @@ const App = () => {
       ) : null}
 
       <SettingsMenu
-        open={menuOpen}
-        onClose={() => setMenuOpen(false)}
+        open={menuOpen}        onClose={() => setMenuOpen(false)}
         theme={theme}
         onTheme={(t) => { setTheme(t); }}
         fontSize={fontSize}
@@ -742,7 +777,20 @@ const App = () => {
         onShare={handleShare}
         onToggleEdit={() => { setEditing(e => !e); setMenuOpen(false); setToast(editing ? "Edit mode off" : "Tap any text to edit"); }}
         editing={editing}
+        onImport={window.VIVO_PROGRAM_DATA_SNAPSHOT ? null : () => { setMenuOpen(false); setImportOpen(true); }}
+        onExport={window.VIVO_PROGRAM_DATA_SNAPSHOT ? null : () => { setMenuOpen(false); exportHtml(); }}
       />
+      {window.ImportOverlay ? (
+        <window.ImportOverlay
+          open={importOpen}
+          onClose={() => setImportOpen(false)}
+          hasContent={data.sections && data.sections.some(s => (s.pieces && s.pieces.length) || (s.cast && s.cast.length) || (s.bios && s.bios.length))}
+          setToast={setToast}
+          onApplySections={(sections, meta) => {
+            setData(d => ({ ...d, sections: sections.map(s => ({ ...s, _meta: meta && meta.needsReview && meta.needsReview.includes(s.id) ? { needsReview: true } : s._meta })) }));
+          }}
+        />
+      ) : null}
 
       <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} data={data} onGo={goTo} />
 

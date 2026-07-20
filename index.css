@@ -252,12 +252,19 @@ html { background: var(--bg); }
   letter-spacing: 0.05em;
   text-transform: uppercase;
   margin-bottom: 16px;
-  padding-right: 44%;
   display: flex;
   align-items: baseline;
   flex-wrap: wrap;
   gap: 4px 10px;
 }
+.idx-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.idx-card-head .idx-card-date { margin-bottom: 0; padding-right: 0; flex: 1; }
 .idx-card-date .idx-card-day {
   color: var(--fg);
 }
@@ -297,16 +304,13 @@ html { background: var(--bg); }
 }
 
 .idx-card-genre {
-  position: absolute;
-  top: 24px;
-  right: 20px;
-  max-width: 42%;
   text-align: right;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--fg-muted);
+  max-width: 45%;
 }
 
 .idx-card-arrow {
