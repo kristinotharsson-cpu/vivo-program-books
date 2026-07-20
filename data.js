@@ -13,7 +13,7 @@ window.PROGRAM_DATA = {
     accent: "green",
     brush: "harmony",
     photoCaption: "Víkingur Ólafsson",
-    calloutLabel: "A note from CEO",
+    calloutLabel: "A note from CEO of Vivo Performing Arts",
     calloutName: "Thor Steingraber",
     presentedBy: "The Klarman Family Foundation",
     footerSponsor: {

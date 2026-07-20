@@ -1600,6 +1600,7 @@ button {
 .footer-social a:hover { color: var(--accent, var(--vivo-plum)); }
 /* Library card status + actions */
 .idx-status { display: flex; align-items: center; gap: 10px; margin-top: 12px; font-family: var(--font-body); }
+.idx-row .idx-status { margin-top: 8px; }
 .idx-status-badge { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 8px; border: 1px solid var(--border); color: var(--fg-muted); }
 .idx-status-badge.is-draft { border-color: var(--vivo-orange); color: var(--vivo-orange); }
 .idx-status-badge.is-published { border-color: var(--vivo-green); color: var(--vivo-green); }

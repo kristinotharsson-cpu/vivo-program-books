@@ -722,7 +722,7 @@ const App = () => {
         <div className="page home">
           <Cover cover={cover} update={updateCover} variant="default" brushColor={tweaks.brushColor} textColor={tweaks.coverTextColor} theme={theme} />
           <NoteCallout
-            label={data.cover.calloutLabel || "A note from CEO"}
+            label={data.cover.calloutLabel || "A note from CEO of Vivo Performing Arts"}
             name={data.cover.calloutName || "Thor Steingraber"}
             photoSrc={data.cover.calloutPhotoSrc}
             initials={(data.cover.calloutName || "TS").split(" ").map(n => n[0]).join("").slice(0, 2)}
@@ -789,7 +789,7 @@ const App = () => {
         editing={editing}
         onImport={window.VIVO_PROGRAM_DATA_SNAPSHOT ? null : () => { setMenuOpen(false); setImportOpen(true); }}
         onExport={window.VIVO_PROGRAM_DATA_SNAPSHOT ? null : () => { setMenuOpen(false); exportHtml(); }}
-        onDesign={window.VIVO_PROGRAM_DATA_SNAPSHOT ? null : () => { setMenuOpen(false); setShowTweaks(true); }}
+        onDesign={window.VIVO_PROGRAM_DATA_SNAPSHOT ? null : () => { setMenuOpen(false); setShowTweaks(true); setTimeout(() => window.postMessage({ type: "__activate_edit_mode" }, "*"), 50); }}
       />
       {window.ImportOverlay ? (
         <window.ImportOverlay
