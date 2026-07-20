@@ -182,7 +182,7 @@ function App() {
     <div className="idx-shell">
       <header className="idx-top">
         <a href="index.html" className="idx-brand">
-          <span className="idx-brand-mark">V</span>
+          <span className="idx-brand-mark"><img src="assets/logos/vivo-logo-cream.png" alt="Vivo" /></span>
           <span>Vivo Performing Arts</span>
         </a>
         <div className="idx-top-right">
@@ -400,8 +400,8 @@ function ListView({ groups, past, edit, onEdit }) {
                     {edit
                       ? <IdxEditable value={s.venue || ""} field="venue" slug={s.slug} onEdit={onEdit} placeholder="Venue" />
                       : <span>{s.venue}</span>}
-                    <span className={"idx-status-badge is-" + (s._status || "empty")}>{s._status === "published" ? "Published" : s._status === "draft" ? "Draft" : "Empty"}</span>
                   </div>
+                  <StatusBadge s={s} />
                 </div>
                 <div className="idx-row-genre">{genreLabel(s)}</div>
               </a>
