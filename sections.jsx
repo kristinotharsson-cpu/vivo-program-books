@@ -23,6 +23,9 @@ const WelcomeSection = ({ s, update }) => (
 const ProgramSection = ({ s, update }) => (
   <div>
     <Editable as="p" className="lead" value={s.lead} onChange={v => update({ lead: v })} multiline />
+    {s.runtimeNote ? (
+      <Editable as="p" className="program-runtime" value={s.runtimeNote} onChange={v => update({ runtimeNote: v })} multiline />
+    ) : null}
     <ol className="program-list">
       {s.pieces.map((p, i) => {
         if (p.kind === "intermission") {
@@ -346,6 +349,18 @@ const PerformanceSponsorSection = ({ s, update }) => {
   };
   return (
     <div className="perf-sponsor">
+      {(s.imageSrc || window.__editMode) ? (
+        <div className="perf-sponsor-image">
+          <PhotoSlot
+            fill
+            src={s.imageSrc || ""}
+            alt="Performance sponsor"
+            initials="SPONSOR IMAGE"
+            onChange={(src) => update({ imageSrc: src })}
+            onClear={() => update({ imageSrc: "" })}
+          />
+        </div>
+      ) : null}
       <Editable as="p" className="lead" value={s.lead || ""} onChange={v => update({ lead: v })} multiline />
       <div className="perf-sponsor-blocks">
         {blocks.map((b, i) => (
@@ -369,6 +384,9 @@ const PerformanceSponsorSection = ({ s, update }) => {
           <Editable as="div" className="perf-sponsor-label" value={s.seasonSponsorsLabel || "Season Sponsors"} onChange={v => update({ seasonSponsorsLabel: v })} />
           <Editable as="div" className="perf-sponsor-name" value={s.seasonSponsors} onChange={v => update({ seasonSponsors: v })} multiline />
         </div>
+      ) : null}
+      {s.mgmtCredit ? (
+        <Editable as="p" className="perf-sponsor-mgmt" value={s.mgmtCredit} onChange={v => update({ mgmtCredit: v })} multiline />
       ) : null}
       {s.publicSupport ? (
         <Editable as="p" className="perf-sponsor-public" value={s.publicSupport} onChange={v => update({ publicSupport: v })} multiline />
@@ -428,10 +446,10 @@ const InfoSection = ({ s, update }) => (
 const VivoAccordion = ({ id, title, subtitle, accent, brush, brushColor, children, defaultOpen }) => {
   const [open, setOpen] = React.useState(!!defaultOpen);
   const accentMap = {
-    magenta: "#BD2691", tangerine: "#F18A2D", azure: "#1A9FCE",
-    violet: "#7B3FA0", green: "#1FAE5E", plum: "#5B1F5F"
+    magenta: "var(--vivo-plum)", tangerine: "var(--vivo-orange)", azure: "var(--vivo-blue)",
+    violet: "var(--vivo-plum)", green: "var(--vivo-green)", plum: "var(--vivo-plum)"
   };
-  const bg = accentMap[accent] || "#BD2691";
+  const bg = accentMap[accent] || "var(--vivo-plum)";
   const brushSrc = brush ? `assets/illustrations/${brush}-${brushColor || "cream"}.png` : null;
   return (
     <div className={"vivo-accordion " + (open ? "is-open" : "")}>
@@ -572,7 +590,7 @@ const VivoSection = ({ s }) => {
               <div key={ti} className="vivo-tier">
                 <div className="vivo-tier-label">{tier.label}</div>
                 <p className="vivo-tier-donors">
-                  {(tier.donors || []).join(" · ")}
+                  {(tier.donors || []).join(" ")}
                 </p>
               </div>
             ))}

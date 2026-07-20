@@ -4,17 +4,17 @@
 
 window.PROGRAM_DATA = {
   cover: {
-    eyebrow: "Celebrity Series of Boston is Now",
+    eyebrow: "Vivo Performing Arts",
     title: "Víkingur Ólafsson",
     subtitle: "Piano",
-    date: "FRI · MAR 20, 2026",
+    date: "FRI   MAR 20, 2026",
     time: "8PM",
     venue: "Symphony Hall",
     accent: "green",
     brush: "harmony",
     photoCaption: "Víkingur Ólafsson",
-    calloutLabel: "A note from President and Executive Director",
-    calloutName: "Gary Dunning",
+    calloutLabel: "A note from CEO",
+    calloutName: "Thor Steingraber",
     presentedBy: "The Klarman Family Foundation",
     footerSponsor: {
       name: "Steinway & Sons",
@@ -82,11 +82,11 @@ window.PROGRAM_DATA = {
         { composer: "J. S. Bach", work: "Trio Sonata No. 1, BWV 525: I. Allegro moderato", meta: "Transcr. György Kurtág" },
         { composer: "Sigvaldi Kaldalóns", work: "Ave María", meta: "Arr. Víkingur Ólafsson" },
         { composer: "György Kurtág", work: "Little Chorale", meta: "From Játékok, Book 1" },
-        { composer: "W. A. Mozart", work: "Laudate Dominum", meta: "From Vesperae solennes de confessore, K. 339 · Arr. Víkingur Ólafsson" },
+        { composer: "W. A. Mozart", work: "Laudate Dominum", meta: "From Vesperae solennes de confessore, K. 339   Arr. Víkingur Ólafsson" },
         { composer: "György Kurtág", work: "Sleepily", meta: "From Játékok, Book 1" },
         { composer: "Robert Schumann", work: "Träumerei, from Kinderszenen Op. 15 No. 7" },
         { composer: "György Kurtág", work: "Flowers We Are", meta: "From Játékok, Book 7" },
-        { composer: "Thomas Adès", work: "The Branch (Az Ág)", meta: "World premiere recording · written for Víkingur Ólafsson" },
+        { composer: "Thomas Adès", work: "The Branch (Az Ág)", meta: "World premiere recording   written for Víkingur Ólafsson" },
         { composer: "György Kurtág", work: "Twittering", meta: "From Játékok, Book 1" },
         { composer: "Robert Schumann", work: "Vogel als Prophet, from Waldszenen Op. 82 No. 7" },
         { composer: "Johannes Brahms", work: "Intermezzo in E minor, Op. 116 No. 5" },
@@ -180,7 +180,7 @@ window.PROGRAM_DATA = {
       id: "musicians",
       title: "Musicians",
       kind: "roster",
-      eyebrow: "Vivo Resident Orchestra · Off Tonight",
+      eyebrow: "Vivo Resident Orchestra   Off Tonight",
       lead: "Tonight's recital is a solo program, but Vivo's Resident Orchestra — heard with us throughout the season — is listed below.",
       groups: [
         { h: "Violin I", players: ["Anna Lindström, concertmaster", "Pavel Horák", "Reiko Sato", "Sofía Vega", "Jules Dembélé", "Henrietta Voss", "Mei Lin Tan", "Oskar Bjørn"] },
@@ -219,7 +219,7 @@ window.PROGRAM_DATA = {
         {
           id: "gyorgy-kurtag",
           name: "György Kurtág",
-          role: "Composer · In Tribute",
+          role: "Composer   In Tribute",
           initials: "GK",
           photoSrc: "",
           body: [
@@ -237,11 +237,11 @@ window.PROGRAM_DATA = {
       eyebrow: "With Gratitude",
       lead: "Vivo Performing Arts is supported by the generosity of our patrons. Tonight's recital is dedicated to our donor community.",
       tiers: [
-        { name: "Leadership Circle · $100,000+", level: "leader", names: ["The Hartwell Family Foundation", "Anonymous", "Eleanor & James Whitfield", "The Sato Endowment for the Arts"] },
-        { name: "Conductor's Circle · $50,000–$99,999", names: ["Adelaide Brennan", "Cyrus & Maya Patel", "The Garrison Family", "Marisol & Theo Reyes", "Walter & Inga Brandt", "The Lindgren Trust", "Nora Achebe-Hill"] },
-        { name: "Composer's Circle · $25,000–$49,999", names: ["Bea & Daniel Ostrov", "The Hyland Group", "Frederica Marsh", "Jamil & Lara Khan", "Birgitte Aaron", "Owen & Suzanne Kelley", "Iris Ferraro Charitable Fund", "The MacGregor Family", "Paolo & Yumi Tagliatti", "Vesna Petrović"] },
-        { name: "Soloist's Circle · $10,000–$24,999", names: ["Aaron Levy", "Adriana & Marc Boudreau", "Beatrice Onyango", "Calla Marshall", "Daniel & Holly Ferreira", "Edith Vance Trust", "Felipe Souza", "Greta Engelmann", "Henrik & Ulla Aas", "Imani Bridges", "Jasper Wong", "Kira Sundström", "Liam O'Donnell", "Marisa Drexler", "Nathaniel Park", "Olu Adesanya", "Priya Krishnamurti", "Quentin Larue", "Roxanne Pemberton", "Salvador Ortega", "Tanya Brennan", "Ursula Stein", "Vihaan Mehra"] },
-        { name: "Patron's Circle · $5,000–$9,999", names: ["Akira Tanaka", "Brigitte Voss", "Caleb Mwangi", "Daria Volkova", "Esme Holloway", "Fyodor Karpov", "Gemma Lascelles", "Hugo Bertrand", "Iyabo Adesina", "Joaquín Salas", "Kjell Lindqvist", "Linnea Søgaard", "Mateo Quintana", "Naia Rasmussen", "Olive Tremaine", "Petra Holovenko", "Quinn Aldercott", "Ruslana Bondar", "Sven Halldórsson", "Tariq Bashir", "Una Pávlovskaya", "Vito Barbieri", "Wren Eastwood", "Xiulan Cheng", "Yara Hassan", "Zane Kovac"] }
+        { name: "Leadership Circle   $100,000+", level: "leader", names: ["The Hartwell Family Foundation", "Anonymous", "Eleanor & James Whitfield", "The Sato Endowment for the Arts"] },
+        { name: "Conductor's Circle   $50,000–$99,999", names: ["Adelaide Brennan", "Cyrus & Maya Patel", "The Garrison Family", "Marisol & Theo Reyes", "Walter & Inga Brandt", "The Lindgren Trust", "Nora Achebe-Hill"] },
+        { name: "Composer's Circle   $25,000–$49,999", names: ["Bea & Daniel Ostrov", "The Hyland Group", "Frederica Marsh", "Jamil & Lara Khan", "Birgitte Aaron", "Owen & Suzanne Kelley", "Iris Ferraro Charitable Fund", "The MacGregor Family", "Paolo & Yumi Tagliatti", "Vesna Petrović"] },
+        { name: "Soloist's Circle   $10,000–$24,999", names: ["Aaron Levy", "Adriana & Marc Boudreau", "Beatrice Onyango", "Calla Marshall", "Daniel & Holly Ferreira", "Edith Vance Trust", "Felipe Souza", "Greta Engelmann", "Henrik & Ulla Aas", "Imani Bridges", "Jasper Wong", "Kira Sundström", "Liam O'Donnell", "Marisa Drexler", "Nathaniel Park", "Olu Adesanya", "Priya Krishnamurti", "Quentin Larue", "Roxanne Pemberton", "Salvador Ortega", "Tanya Brennan", "Ursula Stein", "Vihaan Mehra"] },
+        { name: "Patron's Circle   $5,000–$9,999", names: ["Akira Tanaka", "Brigitte Voss", "Caleb Mwangi", "Daria Volkova", "Esme Holloway", "Fyodor Karpov", "Gemma Lascelles", "Hugo Bertrand", "Iyabo Adesina", "Joaquín Salas", "Kjell Lindqvist", "Linnea Søgaard", "Mateo Quintana", "Naia Rasmussen", "Olive Tremaine", "Petra Holovenko", "Quinn Aldercott", "Ruslana Bondar", "Sven Halldórsson", "Tariq Bashir", "Una Pávlovskaya", "Vito Barbieri", "Wren Eastwood", "Xiulan Cheng", "Yara Hassan", "Zane Kovac"] }
       ]
     },
     {
@@ -262,14 +262,14 @@ window.PROGRAM_DATA = {
       title: "Upcoming",
       kind: "events",
       eyebrow: "Coming Up at Vivo",
-      lead: "Subscribe to the season at vivo.org and never miss a night.",
+      lead: "Subscribe to the season at vivoperformingarts.org and never miss a night.",
       events: [
-        { month: "MAR", day: "14", title: "Schubert's Winterreise", meta: "Matthias Goerne, baritone · Daniil Trifonov, piano · 7:30 PM · Symphony Hall" },
-        { month: "MAR", day: "22", title: "Vienna Philharmonic", meta: "Andris Nelsons, conductor · 8:00 PM · Symphony Hall" },
-        { month: "APR", day: "05", title: "Anna Lindström Plays Sibelius", meta: "Vivo Resident Orchestra · Lucien Foster, conductor · 7:30 PM" },
-        { month: "APR", day: "19", title: "Late Night Jazz: Brad Mehldau Trio", meta: "10:00 PM · The Studio · 21+" },
-        { month: "MAY", day: "02", title: "Beethoven's Ninth", meta: "Vivo Resident Orchestra & Chorus · Lucien Foster, conductor · 7:30 PM" },
-        { month: "MAY", day: "16", title: "A Recital by Hilary Hahn", meta: "Hilary Hahn, violin · 7:30 PM · Symphony Hall" }
+        { month: "MAR", day: "14", title: "Schubert's Winterreise", meta: "Matthias Goerne, baritone   Daniil Trifonov, piano   7:30 PM   Symphony Hall" },
+        { month: "MAR", day: "22", title: "Vienna Philharmonic", meta: "Andris Nelsons, conductor   8:00 PM   Symphony Hall" },
+        { month: "APR", day: "05", title: "Anna Lindström Plays Sibelius", meta: "Vivo Resident Orchestra   Lucien Foster, conductor   7:30 PM" },
+        { month: "APR", day: "19", title: "Late Night Jazz: Brad Mehldau Trio", meta: "10:00 PM   The Studio   21+" },
+        { month: "MAY", day: "02", title: "Beethoven's Ninth", meta: "Vivo Resident Orchestra & Chorus   Lucien Foster, conductor   7:30 PM" },
+        { month: "MAY", day: "16", title: "A Recital by Hilary Hahn", meta: "Hilary Hahn, violin   7:30 PM   Symphony Hall" }
       ]
     },
     {
@@ -291,9 +291,9 @@ window.PROGRAM_DATA = {
       eyebrow: "Land Acknowledgment & Visitor Info",
       sections: [
         { h: "Land Acknowledgment", body: ["Vivo Performing Arts gathers and performs on the unceded ancestral lands of the Massachusett, Pawtucket, and Wampanoag peoples. We acknowledge the original stewards of this land and recognize that the privilege of making music here carries a responsibility to honor, support, and listen to Indigenous communities — past, present, and future."] },
-        { h: "Accessibility", body: ["Symphony Hall is fully wheelchair accessible. Assistive listening devices are available at the coat check at no charge. Large-print programs are available; please ask an usher. For ASL or audio description on selected performances, please contact access@vivo.org at least one week in advance."] },
+        { h: "Accessibility", body: ["Symphony Hall is fully wheelchair accessible. Assistive listening devices are available at the coat check at no charge. Large-print programs are available; please ask an usher. For ASL or audio description on selected performances, please contact access@vivoperformingarts.org at least one week in advance."] },
         { h: "Safety & Etiquette", body: ["Please silence all phones and watches before the performance begins. Photography and recording of any kind are not permitted. Latecomers will be seated at a suitable break in the music. In the event of an emergency, please follow the directions of ushers to the nearest exit — exits are located at the rear, both sides, and at the front of the orchestra level."] },
-        { h: "Contact", body: ["Box Office · (617) 555-0140 · tickets@vivo.org · 1 Symphony Place, Boston · vivo.org"] }
+        { h: "Contact", body: ["Box Office   (617) 555-0140   tickets@vivoperformingarts.org   1 Symphony Place, Boston   vivoperformingarts.org"] }
       ]
     }
   ]
