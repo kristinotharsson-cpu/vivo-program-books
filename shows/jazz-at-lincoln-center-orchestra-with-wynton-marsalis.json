@@ -9,8 +9,8 @@
     "accent": "orange",
     "brush": "rhythm",
     "photoCaption": "Jazz at Lincoln Center Orchestra",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "artistWebsite": "https://jazz.org",
@@ -27,8 +27,8 @@
         "Say farewell to a legend when Wynton Marsalis takes the stage for the last time as music director and member of the Jazz at Lincoln Center Orchestra. A champion of jazz and a fierce advocate for its place in American culture and history, Marsalis steps down as music director at the end of the 2026/27 season. From first note to last, Wynton Marsalis' victory lap with his Orchestra will be one to remember."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -70,10 +70,6 @@
       "eyebrow": "On Stage Tonight",
       "cast": [
         {
-          "role": "orchestra",
-          "name": "Jazz at Lincoln Center Orchestra"
-        },
-        {
           "role": "trumpet / leader",
           "name": "Wynton Marsalis"
         }
@@ -103,7 +99,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -126,13 +122,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

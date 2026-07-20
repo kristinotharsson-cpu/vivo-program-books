@@ -9,8 +9,8 @@
     "accent": "orange",
     "brush": "rhythm",
     "photoCaption": "Damir Imamović",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "genre": "Stave Title/Billing: Damir Imamović",
@@ -29,8 +29,8 @@
         "DAMIR IMAMOVIĆ tambur, vocals CHAD MCCULLOUGH trumpet, flugelhorn GEORGE LAWLER percussion Bosnian singer-songwriter Damir Imamović, with his trio, shares the narrative power, the gorgeous melancholy, and the yearning inherent in sevdah music. Sometimes called “Bosnian blues” or sevdalinka, the music reflects Bosnia’s rich cultural history: Roma, Slavic, and Sephardic Jewish influences meld with sounds from across the Ottoman Empire. Imamović, a Sarajevo-born artist with deep family roots in Balkan music, preserves folk tradition while creating music that’s evolving and vibrantly alive."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -109,7 +109,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -132,13 +132,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

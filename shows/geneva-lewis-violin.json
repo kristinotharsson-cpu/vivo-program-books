@@ -10,8 +10,8 @@
     "accent": "green",
     "brush": "harmony",
     "photoCaption": "Geneva Lewis",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "artistWebsite": "https://www.genevalewisviolinist.com",
@@ -28,8 +28,8 @@
         "Geneva Lewis—a rapidly rising star on the international stage—makes her Vivo Performing Arts debut with a program of striking emotional range and intention. Praised for her lustrous tone and the rare ability to unite fervent passion with immaculate precision, Lewis moves from Mozart's surprising, nocturnal G-Major Sonata into the tender longing of Silvestrov's miniatures, the somber weight of Weinberg's survival-haunted sonata, and the electric intensity of Webern. With Strauss' early violin sonata—glowing, love-struck, and radiantly alive—Lewis brings this distinguished debut to a spirited and joyful close."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -59,22 +59,51 @@
       "pieces": [
         {
           "composer": "W. A. MOZART",
-          "work": "Violin Sonata in G Major, K.379"
+          "work": "Violin Sonata in G Major, K. 379",
+          "movements": [
+            "Adagio – Allegro",
+            "Andantino cantabile [Theme and Variations]",
+            "Allegretto"
+          ]
         },
         {
           "composer": "VALENTIN SILVESTROV",
-          "work": "Two pieces for violin and piano (2020)",
-          "meta": "MIECZYSŁAW WEINBERG Sonata No. 5 for violin and piano"
+          "work": "Two pieces for violin and piano (2020)"
+        },
+        {
+          "composer": "MIECZYSŁAW WEINBERG",
+          "work": "Sonata No. 5 for violin and piano (1953)",
+          "movements": [
+            "Andante con moto",
+            "Allegro molto",
+            "Allegro moderato",
+            "Allegro – Andante — Allegretto — Andante"
+          ]
         },
         {
           "composer": "ANTON WEBERN",
-          "work": "Four Pieces for violin and piano"
+          "work": "Four Pieces for violin and piano, Op. 7 (1910; rev. 1914)",
+          "movements": [
+            "Sehr langsam",
+            "Rasch",
+            "Sehr langsam",
+            "Bewegt"
+          ]
         },
         {
           "composer": "RICHARD STRAUSS",
-          "work": "Violin Sonata in E-flat Major, Op. 18"
+          "work": "Violin Sonata in E-flat Major, Op. 18",
+          "movements": [
+            "Allegro, ma non troppo",
+            "Improvisation: Andante cantabile",
+            "Finale: Andante – Allegro"
+          ]
+        },
+        {
+          "kind": "intermission"
         }
-      ]
+      ],
+      "runtimeNote": "This afternoon’s program will run approximately one hour and 45 minutes, including intermission."
     },
     {
       "id": "artist",
@@ -112,7 +141,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -135,13 +164,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

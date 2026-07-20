@@ -9,8 +9,8 @@
     "accent": "blue",
     "brush": "harmony",
     "photoCaption": "Audra McDonald",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "artistWebsite": "https://audramcdonald.com",
@@ -27,8 +27,8 @@
         "Join us for an intimate evening of music with Broadway star Audra McDonald—winner of a record-breaking six Tony Awards, two Grammy Awards, an Emmy, and recipient of the National Medal of Arts—as she returns to Boston for an extraordinary concert with her band. She'll perform her signature mix of songs from Broadway, the Great American Songbook, and beyond, captivating audiences with her unmistakable warmth and artistry, and her unparalleled gift for storytelling."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -99,7 +99,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -122,13 +122,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

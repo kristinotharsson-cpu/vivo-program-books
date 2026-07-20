@@ -10,8 +10,8 @@
     "accent": "purple",
     "brush": "voice",
     "photoCaption": "Nadine Sierra",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "artistWebsite": "https://nadinesoprano.com",
@@ -28,8 +28,8 @@
         "NADINE SIERRA soprano BRYAN WAGORN piano Praised for her vocal beauty, seamless technique, and abundant musicality, Nadine Sierra is hailed as one of the most promising young talents in opera today. After a string of successful debuts at the Metropolitan Opera, Teatro alla Scala, Paris Opera, and Staatsoper Berlin, she has become a fixture at many of the top opera houses around the world. She returns to Boston Lyric Opera, where she had early career triumphs as Gilda in Rigoletto and as Tytania in A Midsummer Night's Dream, for a special one-night-only recital performance alongside pianist Bryan Wagorn. Presented by Boston Lyric Opera in association with Vivo Performing Arts."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -71,10 +71,6 @@
       "eyebrow": "On Stage Tonight",
       "cast": [
         {
-          "role": "soprano",
-          "name": "Nadine Sierra"
-        },
-        {
           "role": "piano",
           "name": "Bryan Wagorn"
         }
@@ -104,7 +100,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -127,13 +123,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

@@ -10,8 +10,8 @@
     "accent": "green",
     "brush": "harmony",
     "photoCaption": "Leonkoro Quartet",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "artistWebsite": "https://www.leonkoroquartet.com",
@@ -28,8 +28,8 @@
         "JONATHAN SCHWARZ violin EMIRI KAKIUCHI violin MAYU KONOE viola LUKAS SCHWARZ cello Leonkoro is Esperanto for \"lionheart,\" and this Berlin-based quartet lives up to every spirited syllable. At its core are brothers Jonathan and Lukas Schwarz, first violin and cello, whose sibling intuition gives the ensemble an almost telepathic inner pulse. Founded in 2019, they swept the Wigmore Hall International String Quartet Competition in 2022, winning nine prizes as the youngest ensemble in the field. Alfred Brendel called them \"perfectly unanimous, colorful and original.\" Come experience their fearless, indomitable sound in person."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -58,9 +58,16 @@
       "lead": "Berlin-based. Jonathan and Lukas Schwarz are brothers. 2022 Wigmore Hall Competition: 9 prizes. Alfred Brendel: perfectly unanimous, colorful and original.",
       "pieces": [
         {
-          "composer": "Program details",
-          "work": "To be announced from the stage.",
-          "meta": ""
+          "composer": "JOSEPH HAYDN",
+          "work": "String Quartet in D Major, Op. 76, No. 5"
+        },
+        {
+          "composer": "SAULI ZINOVJEV",
+          "work": "New work for string quartet (composed for the Leonkoro Quartet)"
+        },
+        {
+          "composer": "FELIX MENDELSSOHN",
+          "work": "String Quartet No. 6 in F minor, Op. 80"
         }
       ]
     },
@@ -116,7 +123,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -139,13 +146,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

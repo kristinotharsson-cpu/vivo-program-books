@@ -10,8 +10,8 @@
     "accent": "orange",
     "brush": "rhythm",
     "photoCaption": "Stanley Clarke",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "artistWebsite": "https://stanleyclarke.com",
@@ -28,8 +28,8 @@
         "Audiences can't get enough of Hiromi. A boundary-defying pianist who never fails to deliver an exhilarating experience, she returns with a must-see personal tribute that's going to be truly extraordinary. Joining forces with bass legend Stanley Clarke, they honor Chick Corea, the Chelsea-born jazz giant who had massive influence on both of their lives and careers. With the brilliant PUBLIQuartet adding lush strings to the mix, this is an evening of music full of love that radiates off the stage, into the audience: joyful, virtuosic, and deeply felt."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -71,10 +71,6 @@
       "eyebrow": "On Stage Tonight",
       "cast": [
         {
-          "role": "bass",
-          "name": "Stanley Clarke"
-        },
-        {
           "role": "piano",
           "name": "Hiromi"
         },
@@ -108,7 +104,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -131,13 +127,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

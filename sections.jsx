@@ -624,6 +624,7 @@ const SectionBody = ({ section, update, allSections, onGoSection, expandedBioId,
     case "performance-sponsor": return <PerformanceSponsorSection s={section} update={update} />;
     case "sponsors": return <SponsorsSection s={section} update={update} />;
     case "info": return <InfoSection s={section} update={update} />;
+    case "songtexts": return <window.SongTextsSection s={section} update={update} />;
     case "vivo": return <VivoSection s={section} update={update} />;
     default: return null;
   }

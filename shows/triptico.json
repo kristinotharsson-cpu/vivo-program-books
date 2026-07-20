@@ -10,8 +10,8 @@
     "accent": "blue",
     "brush": "harmony",
     "photoCaption": "Tríptico",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null
   },
@@ -27,8 +27,8 @@
         "We are delighted to share this program with you. Thank you for being here."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -61,7 +61,8 @@
           "work": "To be announced from the stage.",
           "meta": ""
         }
-      ]
+      ],
+      "runtimeNote": "There will be no intermission in this afternoon’s program, which will run 60-75 minutes."
     },
     {
       "id": "artist",
@@ -69,10 +70,6 @@
       "kind": "cast",
       "eyebrow": "On Stage Tonight",
       "cast": [
-        {
-          "role": "Latin jazz trio",
-          "name": "Tríptico"
-        },
         {
           "role": "guitar",
           "name": "Claudio Ragazzi"
@@ -110,7 +107,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -133,13 +130,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

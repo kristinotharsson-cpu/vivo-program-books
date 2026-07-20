@@ -9,8 +9,8 @@
     "accent": "green",
     "brush": "harmony",
     "photoCaption": "Dover Quartet",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "artistWebsite": "https://www.doverquartet.com",
@@ -27,8 +27,8 @@
         "JOEL LINK violin BRYAN LEE violin JULIANNE LEE viola CAMDEN SHAW cello In their most recent appearance at Jordan Hall, the Dover Quartet won the hearts and souls of audiences for their refined, luminous playing and insightful programming. Pairing subtle gestures with technically brilliant flourishes, they'll capture your attention and leave you utterly spellbound. Their program features Brahms' final (and favorite) string quartet, Dvořák's nod to Viennese compositional trends while asserting his Czech roots, and an orchestration of Indigenous singer- songwriter Pura Fé's Rattle Songs by Chickasaw composer Jerod Impichchaachaaha' Tate."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -58,17 +58,33 @@
       "pieces": [
         {
           "composer": "JOHANNES BRAHMS",
-          "work": "Quartet No. 3 in B-flat Major, Op. 67"
+          "work": "Quartet No. 3 in B-flat Major, Op. 67",
+          "movements": [
+            "Vivace",
+            "Andante",
+            "Agitato (Allegretto non troppo)",
+            "Poco Allegretto con Variazioni"
+          ]
         },
         {
           "composer": "PURA FÉ",
-          "work": "Rattle Songs, orchestrated by Jerod Impichchaachaaha' Tate"
+          "work": "Rattle Songs, orchestrated by Jerod Impichchaachaaha’ Tate"
         },
         {
-          "composer": "ANTONÍN",
-          "work": "DVOŘÁK Quartet No. 11 in C Major, Op. 61"
+          "kind": "intermission"
+        },
+        {
+          "composer": "ANTONÍN DVOŘÁK",
+          "work": "Quartet No. 11 in C Major, Op. 61, B. 121",
+          "movements": [
+            "Allegro",
+            "Poco adagio e molto cantabile",
+            "Scherzo. Allegro vivo — Trio",
+            "Finale. Vivace"
+          ]
         }
-      ]
+      ],
+      "runtimeNote": "This afternoon’s program will run approximately one hour and 45 minutes, including intermission."
     },
     {
       "id": "artist",
@@ -76,10 +92,6 @@
       "kind": "cast",
       "eyebrow": "On Stage Tonight",
       "cast": [
-        {
-          "role": "quartet",
-          "name": "Dover Quartet"
-        },
         {
           "role": "violin",
           "name": "Joel Link"
@@ -122,7 +134,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -145,13 +157,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

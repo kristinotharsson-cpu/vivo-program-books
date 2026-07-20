@@ -10,8 +10,8 @@
     "accent": "green",
     "brush": "harmony",
     "photoCaption": "Anna Geniushene",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "artistWebsite": "http://annageniushene.com/",
@@ -28,8 +28,8 @@
         "Anna Geniushene's silver medal at the 2022 Cliburn competition marked the arrival of a fascinating, distinctive artist with raw power, deep curiosity, and an uncanny instinct for music that rewards thoughtful listening. Her program moves from Brahms' dark, searching Ballades through Liszt's hauntingly beautiful Valses Oubliées to Beethoven's monumental Eroica Variations. Come ready to discover an artist—and a program—that lingers purposefully on the mind and spirit."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -59,15 +59,18 @@
       "pieces": [
         {
           "composer": "JOHANNES BRAHMS",
-          "work": "Ballades, Op. 10"
+          "work": "Balladen, Op. 10"
         },
         {
           "composer": "BÉLA BARTÓK",
-          "work": "Scherzo from Four Pieces, Op. 9c, Sz. 22"
+          "work": "Scherzo from Four Pieces, Sz. 22"
+        },
+        {
+          "kind": "intermission"
         },
         {
           "composer": "FRÉDÉRIC CHOPIN",
-          "work": "Variations brillantes in B-flat Major, Op. 12"
+          "work": "Variations brillantes, Op. 12"
         },
         {
           "composer": "FRANZ LISZT",
@@ -75,7 +78,7 @@
         },
         {
           "composer": "LUDWIG VAN BEETHOVEN",
-          "work": "Eroica Variations, Op. 35"
+          "work": "15 Variations and a Fugue on an original theme, Op. 35 “Eroica"
         }
       ]
     },
@@ -115,7 +118,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -138,13 +141,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

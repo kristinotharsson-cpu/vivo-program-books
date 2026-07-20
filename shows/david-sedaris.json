@@ -9,8 +9,8 @@
     "accent": "blue",
     "brush": "voice",
     "photoCaption": "David Sedaris",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "artistWebsite": "https://www.davidsedaris.com",
@@ -27,8 +27,8 @@
         "Beloved humorist David Sedaris brings his singular voice to Symphony Hall for an evening of sharp wit, surprising insight, and laugh-out-loud storytelling. Known for his bestselling books (most recently The Land and its People), magazine contributions, and appearances on public radio, Sedaris turns the quirks of everyday life into unforgettable comedy. Expect freshly written and unpublished pieces, diary excerpts, and the offbeat observations that have made him one of America's most distinctive literary performers. Join us for a night of smart, irreverent humor and the chance to hear Sedaris' stories come vividly to life on stage."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -99,7 +99,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -122,13 +122,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

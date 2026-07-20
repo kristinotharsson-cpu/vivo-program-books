@@ -10,8 +10,8 @@
     "accent": "orange",
     "brush": "rhythm",
     "photoCaption": "Artemis",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "artistWebsite": "https://www.artemisband.com",
@@ -28,8 +28,8 @@
         "RENEE ROSNES piano INGRID JENSEN trumpet NICOLE GLOVER tenor saxophone NORIKO UEDA bass ALLISON MILLER drums In celebration of Miles Davis' centennial, the award-winning band explores his monumental impact with reimagined arrangements largely drawn from the trumpeter's signature 1960s period. From introspective moods to free interplay and dramatic shifts, Artemis presents a fascinating look at the many moods of Miles."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -70,10 +70,6 @@
       "kind": "cast",
       "eyebrow": "On Stage Tonight",
       "cast": [
-        {
-          "role": "ensemble",
-          "name": "Artemis"
-        },
         {
           "role": "piano",
           "name": "Renee Rosnes"
@@ -120,7 +116,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -143,13 +139,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

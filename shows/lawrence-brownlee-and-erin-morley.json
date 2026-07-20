@@ -10,8 +10,8 @@
     "accent": "purple",
     "brush": "voice",
     "photoCaption": "Lawrence Brownlee",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "artistWebsite": "https://www.lawrencebrownlee.com",
@@ -28,8 +28,8 @@
         "In arias and duets from some of the most beloved and beautiful operas of the bel canto period and beyond, soprano Erin Morley and tenor Lawrence Brownlee bring us on a journey through love's many guises. Flirtatious rivalry, innocent infatuation, fiery accusations, joyful sincerity: these frequent co-stars bring us a tapestry of the charm, dramatic prowess, and vocal fireworks that have won them admirers from around the world."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -58,39 +58,43 @@
       "lead": "Bel canto arias + duets. Rossini Le Comte Ory, Verdi Rigoletto, Bizet Les Pcheurs de Perles, Delibes Lakm, Bellini Il Pirata, Donizetti La Fille du Rgiment. Presented with BLO.",
       "pieces": [
         {
-          "composer": "GIOACHINO ROSSINI",
-          "work": "\"Ah, quel respect … Ce téméraire qui croit nous plaire\" from Le Comte",
-          "meta": "Ory"
+          "composer": "ROSSINI",
+          "work": "from Le Comte Ory — “Ah, quel respect … Ce téméraire qui croit nous plaire” — Brownlee & Morley (10:00)"
         },
         {
-          "composer": "GIUSEPPE VERDI",
-          "work": "\"Gualtier Maldè! … Caro nome\" from Rigoletto"
+          "composer": "VERDI",
+          "work": "from Rigoletto — “Gualtier Maldè! … Caro nome” — Morley (6:40)"
         },
         {
-          "composer": "GEORGES BIZET",
-          "work": "\"À cette voix quel trouble … Je crois entendre encore\" from Les Pêcheurs",
-          "meta": "de Perles"
+          "composer": "BIZET",
+          "work": "from Les Pêcheurs de Perles — “À cette voix quel trouble … Je crois entendre encore” — Brownlee (5:20)"
         },
         {
-          "composer": "LÉO DELIBES",
-          "work": "\"D'où viens-tu? … C'est le dieu de la jeunesse\" from Lakmé"
+          "composer": "DELIBES",
+          "work": "from Lakmé — “D’où viens-tu? … C’est le dieu de la jeunesse” — Brownlee & Morley (7:00)"
         },
         {
-          "composer": "GEORGES BIZET",
-          "work": "\"Ils verront si je mens!\" from La Jolie Fille de Perth"
+          "kind": "intermission"
         },
         {
-          "composer": "VINCENZO BELLINI",
-          "work": "\"Nel furor delle tempeste … Per te di vane lagrime\" from Il Pirata"
+          "composer": "BIZET",
+          "work": "from La Jolie Fille de Perth — “Ils verront si je mens!” — Brownlee & Morley (7:00)"
         },
         {
-          "composer": "LÉO DELIBES",
-          "work": "\"Où va la jeune Indoue\" from Lakmé"
+          "composer": "BELLINI",
+          "work": "from Il Pirata — “Nel furor delle tempeste … Per te di vane lagrime” — Brownlee (7:00)"
         },
         {
-          "composer": "GAETANO DONIZETTI",
-          "work": "\"Quoi? Vous m'aimez? … De cet aveu si tendre\" from La Fille du",
-          "meta": "Régiment"
+          "composer": "DELIBES",
+          "work": "from Lakmé — “Où va la jeune Indoue” — Morley (8:00)"
+        },
+        {
+          "composer": "DONIZETTI",
+          "work": "from La Fille du Régiment — “Quoi? Vous m’aimez? … De cet aveu si tendre” — Brownlee & Morley (7:00)"
+        },
+        {
+          "composer": "DONIZETTI ENCORE — from",
+          "work": "Don Pasquale — “Tornami a dir che m’ami” (3:00)"
         }
       ]
     },
@@ -134,7 +138,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -157,13 +161,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

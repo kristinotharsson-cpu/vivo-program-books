@@ -10,8 +10,8 @@
     "accent": "blue",
     "brush": "voice",
     "photoCaption": "Rob Kapilow",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "artistWebsite": "https://robkapilow.com/",
@@ -28,8 +28,8 @@
         "Host Rob Kapilow, Boston's A Far Cry chamber orchestra, and clarinetist Romie de Guise- Langlois—hailed as \"extraordinary\" by the New York Times—unlock the secrets of the most celebrated clarinet concerto ever written. Composed just weeks before Mozart's death at age 35, this luminous masterpiece helped establish the clarinet as a true solo voice in the orchestra. Blending in-depth analysis with storytelling, fun facts, and plenty of good humor, Kapilow will put this late treasure in a dazzling new light and forever change how you listen to Mozart."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -62,7 +62,8 @@
           "work": "Clarinet Concerto",
           "meta": "(full program TBD)"
         }
-      ]
+      ],
+      "runtimeNote": "An hour-long discussion and demonstration of the piece will be followed by a 15-minute intermission. The second half will include a full performance of the work and an opportunity for audience questions. This afternoon's program will run approximately two hours, including intermission."
     },
     {
       "id": "artist",
@@ -108,7 +109,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -131,13 +132,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

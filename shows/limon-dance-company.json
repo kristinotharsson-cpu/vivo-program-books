@@ -9,8 +9,8 @@
     "accent": "purple",
     "brush": "motion",
     "photoCaption": "Limón Dance Company",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "genre": "Dance",
@@ -29,8 +29,8 @@
         "Witness a conversation across decades and generations with the return of Limón Dance Company to Boston. The company brings us an essential José Limón classic—Mazurkas, set to music of Chopin—and marks its 80th anniversary season with a new creation by Akram Khan that reimagines Limón’s indelible The Moor’s Pavane. Through Limón and Khan’s shared histories as storytellers of the immigrant experience, don’t miss this retelling of Othello for today’s dancers, today’s outsiders, today’s world."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -66,7 +66,8 @@
           "composer": "AKRAM KHAN",
           "work": "New work (2027)"
         }
-      ]
+      ],
+      "runtimeNote": "Post-show TS following Sat matinee to be confirmed."
     },
     {
       "id": "artist",
@@ -104,7 +105,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -127,13 +128,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

@@ -10,8 +10,8 @@
     "accent": "purple",
     "brush": "motion",
     "photoCaption": "Gravity & Other Myths",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "artistWebsite": "https://www.gravityandothermyths.com",
@@ -28,8 +28,8 @@
         "In Ten Thousand Hours, contemporary circus company Gravity & Other Myths goes beyond jaw-dropping feats to weave a tale of impassioned dedication. Calling the show an \"ode to the countless hours needed to achieve great things,\" eight acrobats and one musician share a peek behind the curtain: dazzling insight into the journey of dedication and persistence that has made Gravity & Other Myths one of Australia's best loved and most decorated contemporary circuses."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -48,7 +48,8 @@
       "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
       "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
       "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
-      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you.",
+      "mgmtCredit": "Gravity & Other Myths appears by arrangement with Opus 3 Artists"
     },
     {
       "id": "program",
@@ -62,7 +63,8 @@
           "work": "To be announced from the stage.",
           "meta": ""
         }
-      ]
+      ],
+      "runtimeNote": "There will be no intermission in today’s performance, which will run approximately one hour."
     },
     {
       "id": "artist",
@@ -100,7 +102,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -123,13 +125,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

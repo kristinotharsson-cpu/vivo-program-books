@@ -10,8 +10,8 @@
     "accent": "orange",
     "brush": "rhythm",
     "photoCaption": "Immanuel Wilkins",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "artistWebsite": "https://immanuelwilkins.com",
@@ -28,8 +28,8 @@
         "Alto saxophonist Immanuel Wilkins is one of the most magnetic young musicians in America. With his quartet, he brings a sound marked by confidence, clarity of purpose, and an intensity that feels wholly alive in the moment. Wilkins composes with rare intention—each phrase shaped by a deep idea—and his band delivers it with the kind of conviction that fills a room. This quartet's Vivo Performing Arts debut will be an essential night for anyone drawn to music where virtuosity, community, and emotion are inseparable."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -82,10 +82,6 @@
       "eyebrow": "On Stage Tonight",
       "cast": [
         {
-          "role": "alto saxophone / leader",
-          "name": "Immanuel Wilkins"
-        },
-        {
           "role": "piano",
           "name": "Micah Thomas"
         },
@@ -123,7 +119,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -146,13 +142,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

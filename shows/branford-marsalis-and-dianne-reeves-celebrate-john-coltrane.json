@@ -9,8 +9,8 @@
     "accent": "orange",
     "brush": "rhythm",
     "photoCaption": "Branford Marsalis",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "artistWebsite": "https://www.branfordmarsalis.com",
@@ -27,8 +27,8 @@
         "In a year rich with tributes to John Coltrane, this promises to be among the most compelling. Emotional depth and musical nuance come to the fore as the incomparable Dianne Reeves joins Branford Marsalis and his longtime quartet to honor Coltrane's landmark \"classic quartet\" collaboration with vocalist Johnny Hartman. Expect beloved standards such as \"My One and Only Love,\" \"Lush Life,\" and other enduring ballads imbued with Coltrane's unmistakable signature. \"They Say It's Wonderful\"—and this evening is poised to prove it."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -70,10 +70,6 @@
       "eyebrow": "On Stage Tonight",
       "cast": [
         {
-          "role": "saxophone",
-          "name": "Branford Marsalis"
-        },
-        {
           "role": "vocals",
           "name": "Dianne Reeves"
         }
@@ -103,7 +99,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -126,13 +122,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

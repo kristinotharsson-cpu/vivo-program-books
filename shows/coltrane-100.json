@@ -10,8 +10,8 @@
     "accent": "orange",
     "brush": "rhythm",
     "photoCaption": "Joe Lovano",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "artistWebsite": "https://www.imnworld.com/artists/coltrane100",
@@ -28,8 +28,8 @@
         "JOE LOVANO tenor saxophone MELISSA ALDANA tenor saxophone LEO GENOVESE piano LINDA MAY HAN OH bass JEFF \"TAIN\" WATTS drums 2026 marks the centennial of the birth of iconic saxophonist John Coltrane. Coltrane 100 brings together saxophonists Joe Lovano and Melissa Aldana, pianist Leo Genovese, bassist Linda May Han Oh, and drummer Jeff \"Tain\" Watts for a collective tribute reflecting Coltrane's enduring influence across generations, geographies, and musical traditions."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -116,7 +116,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -139,13 +139,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]
