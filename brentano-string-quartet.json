@@ -1,0 +1,204 @@
+{
+  "slug": "brentano-string-quartet",
+  "cover": {
+    "eyebrow": "Vivo Performing Arts presents",
+    "title": "Brentano String Quartet",
+    "subtitle": "Flights of Fugue",
+    "date": "Friday, Oct. 16, 2026",
+    "time": "8 p.m.",
+    "venue": "NEC's Jordan Hall",
+    "accent": "green",
+    "brush": "harmony",
+    "photoCaption": "Brentano String Quartet",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
+    "presentedBy": "",
+    "footerSponsor": null,
+    "artistWebsite": "https://www.brentanoquartet.com",
+    "pressQuote": "\"Make no mistake: the Brentanos are a magnificent string quartet. This was wonderful, selfless music-making.\" The Times (London)"
+  },
+  "sections": [
+    {
+      "id": "welcome",
+      "title": "Welcome",
+      "kind": "welcome",
+      "eyebrow": "From the Artistic Director",
+      "quote": "Fearless, spellbinding players, the Brentano String Quartet brings \"Flights of Fugue,” a program exposing the unflinching heart of late quartets by Shostakovich and Beethoven, paired with Bach and Shostakovich fugue arrangements.",
+      "body": [
+        "MARK STEINBERG violin SERENA CANIN violin MISHA AMORY viola NINA LEE cello The Brentano Quartet—fearless, spellbinding players whose attention to detail and to each other give their music freshness and life—bring us \"Flights of Fugue,\" a program that exposes the unflinching heart of late quartets by Shostakovich and Beethoven. Paired arrangements of piano works that mirror each other across the centuries set a deceptively orderly tonal roadmap for the flights of passion and intensity that follow. Both quartets strain the boundaries of the form: massive in scale and throwing expectations about tempo and mood aside, they are revelatory, showcasing the unity, vivid intelligence, and ensemble playing that set the Brentanos apart."
+      ],
+      "signature": {
+        "name": "Thor Steingraber",
+        "role": "CEO, Vivo Performing Arts"
+      }
+    },
+    {
+      "id": "performance-sponsor",
+      "title": "Performance Sponsor",
+      "kind": "performance-sponsor",
+      "eyebrow": "Tonight's Performance",
+      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
+      "blocks": [
+        {
+          "label": "Performance Supporter",
+          "name": "Performance Sponsor Name",
+          "statement": "This performance is generously supported by [Sponsor Name]."
+        }
+      ],
+      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
+      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you.",
+      "mgmtCredit": "The Brentano String Quartet appears by arrangement with David Rowe Artists."
+    },
+    {
+      "id": "program",
+      "title": "Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "Flights of Fugue: Shostakovich Op. 87/14 fugue, Quartet No. 15 Op. 144, Bach Fugue in C-sharp minor BWV 849, Beethoven Op. 131.",
+      "pieces": [
+        {
+          "composer": "DMITRI SHOSTAKOVICH",
+          "work": "from 24 Preludes and Fugues, Op. 87 (arr. for quartet) — 14. Fugue in E-flat minor"
+        },
+        {
+          "composer": "SHOSTAKOVICH",
+          "work": "Quartet No. 15 in E-flat minor, Op. 144",
+          "movements": [
+            "Elegy – Adagio, attacca",
+            "Serenade – Adagio, attacca",
+            "Intermezzo – Adagio, attacca",
+            "Nocturne – Adagio, attacca",
+            "Funeral March – Adagio molto, attacca",
+            "Epilogue – Adagio"
+          ]
+        },
+        {
+          "kind": "intermission"
+        },
+        {
+          "composer": "J. S. BACH",
+          "work": "from The Well-Tempered Clavier, Book I (arr. for quartet) — Fugue in C-sharp minor, BWV 849"
+        },
+        {
+          "composer": "LUDWIG VAN BEETHOVEN",
+          "work": "String Quartet No. 14 in C-sharp minor, Op. 131",
+          "movements": [
+            "Adagio ma non troppo e molto espressivo",
+            "Allegro molto vivace",
+            "Allegro moderato (recitative)",
+            "Andante ma non troppo e molto cantabile",
+            "Presto",
+            "Adagio quasi un poco andante",
+            "Allegro"
+          ]
+        }
+      ],
+      "runtimeNote": "This evening’s program will run approximately one hour and 45 minutes, including intermission."
+    },
+    {
+      "id": "artist",
+      "title": "Cast & Creative",
+      "kind": "cast",
+      "eyebrow": "On Stage Tonight",
+      "cast": [
+        {
+          "role": "violin",
+          "name": "Mark Steinberg"
+        },
+        {
+          "role": "violin",
+          "name": "Serena Canin"
+        },
+        {
+          "role": "viola",
+          "name": "Misha Amory"
+        },
+        {
+          "role": "cello",
+          "name": "Nina Lee"
+        }
+      ],
+      "creative": []
+    },
+    {
+      "id": "bios",
+      "title": "Artist Bios",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "brentano-string-quartet",
+          "name": "Brentano String Quartet",
+          "role": "quartet",
+          "initials": "BSQ",
+          "photoSrc": "",
+          "body": [
+            "MARK STEINBERG violin SERENA CANIN violin MISHA AMORY viola NINA LEE cello The Brentano Quartet—fearless, spellbinding players whose attention to detail and to each other give their music freshness and life—bring us \"Flights of Fugue,\" a program that exposes the unflinching heart of late quartets by Shostakovich and Beethoven. Paired arrangements of piano works that mirror each other across the centuries set a deceptively orderly tonal roadmap for the flights of passion and intensity that follow. Both quartets strain the boundaries of the form: massive in scale and throwing expectations about tempo and mood aside, they are revelatory, showcasing the unity, vivid intelligence, and ensemble playing that set the Brentanos apart."
+          ],
+          "website": "https://www.brentanoquartet.com"
+        }
+      ]
+    },
+    {
+      "id": "vivo",
+      "kind": "vivo",
+      "title": "About Vivo Performing Arts",
+      "eyebrow": "Audience Information   Staff   Supporters"
+    },
+    {
+      "id": "info",
+      "title": "Hall Info",
+      "kind": "info",
+      "eyebrow": "Visitor Info",
+      "sections": [
+        {
+          "h": "Venue",
+          "body": [
+            "NEC's Jordan Hall."
+          ]
+        },
+        {
+          "h": "Land Acknowledgment",
+          "body": [
+            "Vivo Performing Arts gathers and performs on the unceded ancestral lands of the Massachusett, Pawtucket, and Wampanoag peoples."
+          ]
+        },
+        {
+          "h": "Accessibility",
+          "body": [
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
+          ]
+        },
+        {
+          "h": "Contact",
+          "body": [
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
+          ]
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "iso": "2026-10-16",
+    "genre": "Chamber",
+    "venueName": "NEC's Jordan Hall",
+    "leadArtist": "Brentano String Quartet",
+    "socialLinks": [
+      {
+        "label": "Artist website",
+        "url": "https://brentanoquartet.com"
+      },
+      {
+        "label": "Instagram NA",
+        "url": "https://instagram.com/NA"
+      },
+      {
+        "label": "Facebook/BrentanoQuartet",
+        "url": "https://facebook.com/BrentanoQuartet"
+      }
+    ],
+    "ensembleCount": 5
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "slug": "david-sedaris",
+  "cover": {
+    "eyebrow": "Vivo Performing Arts presents",
+    "title": "David Sedaris",
+    "date": "Friday, April 9, 2027",
+    "time": "8 p.m.",
+    "venue": "Symphony Hall",
+    "accent": "blue",
+    "brush": "voice",
+    "photoCaption": "David Sedaris",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
+    "presentedBy": "",
+    "footerSponsor": null,
+    "artistWebsite": "https://www.davidsedaris.com",
+    "pressQuote": "Sedaris has become one of the funniest, most disturbing, most illuminating writers alive. The Washington Post"
+  },
+  "sections": [
+    {
+      "id": "welcome",
+      "title": "Welcome",
+      "kind": "welcome",
+      "eyebrow": "From the Artistic Director",
+      "quote": "Beloved humorist David Sedaris brings his singular voice to Symphony Hall for an evening of sharp wit, surprising insight, and laugh-out-loud storytelling—with freshly written and unpublished pieces, diary excerpts, and the offbeat observations that have made him one of America's most distinctive literary performers.",
+      "body": [
+        "Beloved humorist David Sedaris brings his singular voice to Symphony Hall for an evening of sharp wit, surprising insight, and laugh-out-loud storytelling. Known for his bestselling books (most recently The Land and its People), magazine contributions, and appearances on public radio, Sedaris turns the quirks of everyday life into unforgettable comedy. Expect freshly written and unpublished pieces, diary excerpts, and the offbeat observations that have made him one of America's most distinctive literary performers. Join us for a night of smart, irreverent humor and the chance to hear Sedaris' stories come vividly to life on stage."
+      ],
+      "signature": {
+        "name": "Thor Steingraber",
+        "role": "CEO, Vivo Performing Arts"
+      }
+    },
+    {
+      "id": "performance-sponsor",
+      "title": "Performance Sponsor",
+      "kind": "performance-sponsor",
+      "eyebrow": "Tonight's Performance",
+      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
+      "blocks": [
+        {
+          "label": "Performance Supporter",
+          "name": "Performance Sponsor Name",
+          "statement": "This performance is generously supported by [Sponsor Name]."
+        }
+      ],
+      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
+      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+    },
+    {
+      "id": "program",
+      "title": "Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "Most recent book: The Land and its People. Freshly written and unpublished pieces, diary excerpts.",
+      "pieces": [
+        {
+          "composer": "Program details",
+          "work": "To be announced from the stage.",
+          "meta": ""
+        }
+      ]
+    },
+    {
+      "id": "artist",
+      "title": "Cast & Creative",
+      "kind": "cast",
+      "eyebrow": "On Stage Tonight",
+      "cast": [
+        {
+          "role": "author / humorist",
+          "name": "David Sedaris"
+        }
+      ],
+      "creative": []
+    },
+    {
+      "id": "bios",
+      "title": "Artist Bios",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "david-sedaris",
+          "name": "David Sedaris",
+          "role": "author / humorist",
+          "initials": "DS",
+          "photoSrc": "",
+          "body": [
+            "Beloved humorist David Sedaris brings his singular voice to Symphony Hall for an evening of sharp wit, surprising insight, and laugh-out-loud storytelling. Known for his bestselling books (most recently The Land and its People), magazine contributions, and appearances on public radio, Sedaris turns the quirks of everyday life into unforgettable comedy. Expect freshly written and unpublished pieces, diary excerpts, and the offbeat observations that have made him one of America's most distinctive literary performers. Join us for a night of smart, irreverent humor and the chance to hear Sedaris' stories come vividly to life on stage."
+          ],
+          "website": "https://www.davidsedaris.com"
+        }
+      ]
+    },
+    {
+      "id": "vivo",
+      "kind": "vivo",
+      "title": "About Vivo Performing Arts",
+      "eyebrow": "Audience Information   Staff   Supporters"
+    },
+    {
+      "id": "info",
+      "title": "Hall Info",
+      "kind": "info",
+      "eyebrow": "Visitor Info",
+      "sections": [
+        {
+          "h": "Venue",
+          "body": [
+            "Symphony Hall."
+          ]
+        },
+        {
+          "h": "Land Acknowledgment",
+          "body": [
+            "Vivo Performing Arts gathers and performs on the unceded ancestral lands of the Massachusett, Pawtucket, and Wampanoag peoples."
+          ]
+        },
+        {
+          "h": "Accessibility",
+          "body": [
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
+          ]
+        },
+        {
+          "h": "Contact",
+          "body": [
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
+          ]
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "iso": "2027-04-09",
+    "genre": "Spoken Word",
+    "venueName": "Symphony Hall",
+    "leadArtist": "David Sedaris",
+    "socialLinks": [
+      {
+        "label": "Artist website",
+        "url": "https://davidsedaris.com"
+      },
+      {
+        "label": "Instagram @davidsedarisbooks",
+        "url": "https://instagram.com/davidsedarisbooks"
+      }
+    ],
+    "ensembleCount": 1
+  }
+}

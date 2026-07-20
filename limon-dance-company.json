@@ -1,0 +1,156 @@
+{
+  "slug": "limon-dance-company",
+  "cover": {
+    "eyebrow": "Vivo Performing Arts presents",
+    "title": "Limón Dance Company",
+    "date": "Feb. 12–13, 2027",
+    "time": "8 p.m./2 p.m./8 p.m.",
+    "venue": "Boston Arts Academy Theater",
+    "accent": "purple",
+    "brush": "motion",
+    "photoCaption": "Limón Dance Company",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
+    "presentedBy": "",
+    "footerSponsor": null,
+    "genre": "Dance",
+    "artistWebsite": "https://www.limon.nyc",
+    "pressQuote": "As long as we lie, hate, envy and betray, José Limón’s work will continue to fascinate. The Washington Post",
+    "pressQuoteURL": "https://www.youtube.com/watch?v=8OP6dtXpa4U"
+  },
+  "sections": [
+    {
+      "id": "welcome",
+      "title": "Welcome",
+      "kind": "welcome",
+      "eyebrow": "From the Artistic Director",
+      "quote": "Welcome to Vivo Performing Arts.",
+      "body": [
+        "Witness a conversation across decades and generations with the return of Limón Dance Company to Boston. The company brings us an essential José Limón classic—Mazurkas, set to music of Chopin—and marks its 80th anniversary season with a new creation by Akram Khan that reimagines Limón’s indelible The Moor’s Pavane. Through Limón and Khan’s shared histories as storytellers of the immigrant experience, don’t miss this retelling of Othello for today’s dancers, today’s outsiders, today’s world."
+      ],
+      "signature": {
+        "name": "Thor Steingraber",
+        "role": "CEO, Vivo Performing Arts"
+      }
+    },
+    {
+      "id": "performance-sponsor",
+      "title": "Performance Sponsor",
+      "kind": "performance-sponsor",
+      "eyebrow": "Tonight's Performance",
+      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
+      "blocks": [
+        {
+          "label": "Performance Supporter",
+          "name": "Performance Sponsor Name",
+          "statement": "This performance is generously supported by [Sponsor Name]."
+        }
+      ],
+      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
+      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+    },
+    {
+      "id": "program",
+      "title": "Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "3 performances: FEB 12 8PM; FEB 13 2PM & 8PM. Limón's Mazurkas (1958, music of Chopin) + new work by Akram Khan (2027) reimagining Moor's Pavane. 80th anniversary.",
+      "pieces": [
+        {
+          "composer": "JOSÉ LIMÓN",
+          "work": "Mazurkas (1958)"
+        },
+        {
+          "composer": "AKRAM KHAN",
+          "work": "New work (2027)"
+        }
+      ],
+      "runtimeNote": "Post-show TS following Sat matinee to be confirmed."
+    },
+    {
+      "id": "artist",
+      "title": "Cast & Creative",
+      "kind": "cast",
+      "eyebrow": "On Stage Tonight",
+      "cast": [
+        {
+          "role": "dance company",
+          "name": "Limón Dance Company"
+        }
+      ],
+      "creative": []
+    },
+    {
+      "id": "bios",
+      "title": "Artist Bios",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "limon-dance-company",
+          "name": "Limón Dance Company",
+          "role": "dance company",
+          "initials": "LDC",
+          "photoSrc": "",
+          "body": [
+            "Witness a conversation across decades and generations with the return of Limón Dance Company to Boston. The company brings us an essential José Limón classic—Mazurkas, set to music of Chopin—and marks its 80th anniversary season with a new creation by Akram Khan that reimagines Limón’s indelible The Moor’s Pavane. Through Limón and Khan’s shared histories as storytellers of the immigrant experience, don’t miss this retelling of Othello for today’s dancers, today’s outsiders, today’s world."
+          ],
+          "website": "https://www.limon.nyc"
+        }
+      ]
+    },
+    {
+      "id": "vivo",
+      "kind": "vivo",
+      "title": "About Vivo Performing Arts",
+      "eyebrow": "Audience Information   Staff   Supporters"
+    },
+    {
+      "id": "info",
+      "title": "Hall Info",
+      "kind": "info",
+      "eyebrow": "Visitor Info",
+      "sections": [
+        {
+          "h": "Venue",
+          "body": [
+            "Boston Arts Academy Theater."
+          ]
+        },
+        {
+          "h": "Land Acknowledgment",
+          "body": [
+            "Vivo Performing Arts gathers and performs on the unceded ancestral lands of the Massachusett, Pawtucket, and Wampanoag peoples."
+          ]
+        },
+        {
+          "h": "Accessibility",
+          "body": [
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
+          ]
+        },
+        {
+          "h": "Contact",
+          "body": [
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
+          ]
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "iso": "2027-02-12",
+    "genre": "Dance",
+    "venueName": "Boston Arts Academy Theater",
+    "leadArtist": "Limón Dance Company",
+    "socialLinks": [
+      {
+        "label": "Artist website",
+        "url": "https://limon.nyc"
+      }
+    ],
+    "ensembleCount": 1
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "slug": "lachanze",
+  "cover": {
+    "eyebrow": "Vivo Performing Arts presents",
+    "title": "LaChanze",
+    "date": "Sunday, Nov. 1, 2026",
+    "time": "5 p.m.",
+    "venue": "Berklee Performance Center",
+    "accent": "orange",
+    "brush": "rhythm",
+    "photoCaption": "LaChanze",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
+    "presentedBy": "",
+    "footerSponsor": null,
+    "artistWebsite": "https://www.mslachanze.com",
+    "pressQuote": "This was no ordinary moment in cabaret. This was storytelling, singing, acting, performing being presented at its highest vibration. It was an unforgettable moment in time for everyone present. That is the magic of LaChanze. BroadwayWorld"
+  },
+  "sections": [
+    {
+      "id": "welcome",
+      "title": "Welcome",
+      "kind": "welcome",
+      "eyebrow": "From the Artistic Director",
+      "quote": "Tony Award winner LaChanze—originator of the role of Celie in The Color Purple—possesses one of the most commanding and deeply felt voices on the American stage. An evening with LaChanze is an encounter with an artist at the fullest expression of her powers.",
+      "body": [
+        "A Tony Award winner for originating the role of Celie in The Color Purple, LaChanze possesses one of the most commanding and deeply felt voices on the American stage. Her gift is rare: technical brilliance in complete service to the song, the truth of the music, and the electricity of genuine human feeling. An evening with LaChanze is an encounter with an artist at the fullest expression of her powers, one that audiences carry with them long after the last note rings out."
+      ],
+      "signature": {
+        "name": "Thor Steingraber",
+        "role": "CEO, Vivo Performing Arts"
+      }
+    },
+    {
+      "id": "performance-sponsor",
+      "title": "Performance Sponsor",
+      "kind": "performance-sponsor",
+      "eyebrow": "Tonight's Performance",
+      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
+      "blocks": [
+        {
+          "label": "Performance Supporter",
+          "name": "Performance Sponsor Name",
+          "statement": "This performance is generously supported by [Sponsor Name]."
+        }
+      ],
+      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
+      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+    },
+    {
+      "id": "program",
+      "title": "Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "Tony Award winner. Originated the role of Celie in The Color Purple.",
+      "pieces": [
+        {
+          "composer": "Program details",
+          "work": "To be announced from the stage.",
+          "meta": ""
+        }
+      ]
+    },
+    {
+      "id": "artist",
+      "title": "Cast & Creative",
+      "kind": "cast",
+      "eyebrow": "On Stage Tonight",
+      "cast": [
+        {
+          "role": "vocals",
+          "name": "LaChanze"
+        }
+      ],
+      "creative": []
+    },
+    {
+      "id": "bios",
+      "title": "Artist Bios",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "lachanze",
+          "name": "LaChanze",
+          "role": "vocals",
+          "initials": "L",
+          "photoSrc": "",
+          "body": [
+            "A Tony Award winner for originating the role of Celie in The Color Purple, LaChanze possesses one of the most commanding and deeply felt voices on the American stage. Her gift is rare: technical brilliance in complete service to the song, the truth of the music, and the electricity of genuine human feeling. An evening with LaChanze is an encounter with an artist at the fullest expression of her powers, one that audiences carry with them long after the last note rings out."
+          ],
+          "website": "https://www.mslachanze.com"
+        }
+      ]
+    },
+    {
+      "id": "vivo",
+      "kind": "vivo",
+      "title": "About Vivo Performing Arts",
+      "eyebrow": "Audience Information   Staff   Supporters"
+    },
+    {
+      "id": "info",
+      "title": "Hall Info",
+      "kind": "info",
+      "eyebrow": "Visitor Info",
+      "sections": [
+        {
+          "h": "Venue",
+          "body": [
+            "Berklee Performance Center."
+          ]
+        },
+        {
+          "h": "Land Acknowledgment",
+          "body": [
+            "Vivo Performing Arts gathers and performs on the unceded ancestral lands of the Massachusett, Pawtucket, and Wampanoag peoples."
+          ]
+        },
+        {
+          "h": "Accessibility",
+          "body": [
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
+          ]
+        },
+        {
+          "h": "Contact",
+          "body": [
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
+          ]
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "iso": "2026-11-01",
+    "genre": "Jazz",
+    "venueName": "Berklee Performance Center",
+    "leadArtist": "LaChanze",
+    "socialLinks": [
+      {
+        "label": "Artist website",
+        "url": "https://mslachanze.com"
+      },
+      {
+        "label": "Instagram @mslachanze",
+        "url": "https://instagram.com/mslachanze"
+      }
+    ],
+    "ensembleCount": 1
+  }
+}

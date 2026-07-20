@@ -1,0 +1,182 @@
+{
+  "slug": "jeremy-denk-piano",
+  "cover": {
+    "eyebrow": "Vivo Performing Arts presents",
+    "title": "Jeremy Denk, piano",
+    "subtitle": "Pianist",
+    "date": "FRI DEC 11",
+    "time": "8PM",
+    "venue": "NEC's Jordan Hall",
+    "accent": "green",
+    "brush": "harmony",
+    "photoCaption": "Jeremy Denk",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
+    "presentedBy": "",
+    "footerSponsor": null
+  },
+  "sections": [
+    {
+      "id": "welcome",
+      "title": "Welcome",
+      "kind": "welcome",
+      "eyebrow": "From the Artistic Director",
+      "quote": "Welcome to Vivo Performing Arts.",
+      "body": [
+        "Tonight, Jeremy Denk — Bach WTC Book II Prelude & Fugue BWV 892, Unsuk Chin Six tudes, Beethoven Op. 110 & Op.",
+        "We are delighted to share this program with you. Thank you for being here."
+      ],
+      "signature": {
+        "name": "Thor Steingraber",
+        "role": "CEO, Vivo Performing Arts"
+      }
+    },
+    {
+      "id": "performance-sponsor",
+      "title": "Performance Sponsor",
+      "kind": "performance-sponsor",
+      "eyebrow": "Tonight's Performance",
+      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
+      "blocks": [
+        {
+          "label": "Performance Supporter",
+          "name": "Performance Sponsor Name",
+          "statement": "This performance is generously supported by [Sponsor Name]."
+        }
+      ],
+      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
+      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+    },
+    {
+      "id": "program",
+      "title": "Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "Bach WTC Book II Prelude & Fugue BWV 892, Unsuk Chin Six tudes, Beethoven Op. 110 & Op. 111, Hélène de Montgeroult tudes.",
+      "pieces": [
+        {
+          "composer": "J. S. BACH",
+          "work": "Prelude and Fugue in B Major, BWV 892, from The Well-Tempered Clavier, Book II"
+        },
+        {
+          "composer": "UNSUK CHIN",
+          "work": "Piano Études (Nos. 1–6) (1995–2003)"
+        },
+        {
+          "composer": "LUDWIG VAN BEETHOVEN",
+          "work": "Piano Sonata No. 31 in A-flat Major, Op. 110",
+          "movements": [
+            "Moderato cantabile molto espressivo",
+            "Allegro molto",
+            "Adagio ma non troppo – Arioso dolente – Fuga. Allegro ma non troppo"
+          ]
+        },
+        {
+          "composer": "HÉLÈNE DE MONTGEROULT",
+          "work": "Études"
+        },
+        {
+          "composer": "BEETHOVEN",
+          "work": "Piano Sonata No. 32 in C minor, Op. 111",
+          "movements": [
+            "Maestoso – Allegro con brio ed appassionato",
+            "Arietta. Adagio molto semplice cantabile"
+          ]
+        },
+        {
+          "kind": "intermission"
+        }
+      ],
+      "runtimeNote": "This afternoon’s program will run approximately 90 minutes, including intermission."
+    },
+    {
+      "id": "artist",
+      "title": "Cast & Creative",
+      "kind": "cast",
+      "eyebrow": "On Stage Tonight",
+      "cast": [
+        {
+          "role": "piano",
+          "name": "Jeremy Denk"
+        }
+      ],
+      "creative": []
+    },
+    {
+      "id": "bios",
+      "title": "Artist Bios",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "jeremy-denk",
+          "name": "Jeremy Denk",
+          "role": "piano",
+          "initials": "JD",
+          "photoSrc": "",
+          "body": [
+            "Bach WTC Book II Prelude & Fugue BWV 892, Unsuk Chin Six tudes, Beethoven Op. 110 & Op. 111, Hélène de Montgeroult tudes.",
+            "Management: Opus 3 Artists (verify)."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "vivo",
+      "kind": "vivo",
+      "title": "About Vivo Performing Arts",
+      "eyebrow": "Audience Information   Staff   Supporters"
+    },
+    {
+      "id": "info",
+      "title": "Hall Info",
+      "kind": "info",
+      "eyebrow": "Visitor Info",
+      "sections": [
+        {
+          "h": "Venue",
+          "body": [
+            "NEC's Jordan Hall."
+          ]
+        },
+        {
+          "h": "Land Acknowledgment",
+          "body": [
+            "Vivo Performing Arts gathers and performs on the unceded ancestral lands of the Massachusett, Pawtucket, and Wampanoag peoples."
+          ]
+        },
+        {
+          "h": "Accessibility",
+          "body": [
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
+          ]
+        },
+        {
+          "h": "Contact",
+          "body": [
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
+          ]
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "iso": "2026-12-11",
+    "genre": "Pianist",
+    "venueName": "NEC's Jordan Hall",
+    "leadArtist": "Jeremy Denk",
+    "socialLinks": [
+      {
+        "label": "Artist website",
+        "url": "https://jeremydenk.com"
+      },
+      {
+        "label": "Instagram @jeremydenkpiano",
+        "url": "https://instagram.com/jeremydenkpiano"
+      }
+    ],
+    "ensembleCount": 1
+  }
+}

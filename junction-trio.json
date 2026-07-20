@@ -1,0 +1,180 @@
+{
+  "slug": "junction-trio",
+  "cover": {
+    "eyebrow": "Vivo Performing Arts presents",
+    "title": "Junction Trio",
+    "subtitle": "Stefan Jackiw, Jay Campbell, and Conrad Tao",
+    "date": "Saturday, Feb. 13, 2027",
+    "time": "8 p.m.",
+    "venue": "NEC’s Jordan Hall",
+    "accent": "green",
+    "brush": "harmony",
+    "photoCaption": "Junction Trio",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
+    "presentedBy": "",
+    "footerSponsor": null,
+    "genre": "Chamber Artist: Junction Trio",
+    "artistWebsite": "https://www.jcttrio.com",
+    "pressQuote": "Three stupendous musicians who glory in artistic instability, the sense that styles are not pure or settled practices and never were. Vulture",
+    "pressQuoteURL": "https://www.youtube.com/watch?v=t9Iokqn6S40"
+  },
+  "sections": [
+    {
+      "id": "welcome",
+      "title": "Welcome",
+      "kind": "welcome",
+      "eyebrow": "From the Artistic Director",
+      "quote": "Welcome to Vivo Performing Arts.",
+      "body": [
+        "Tonight, Junction Trio — Beethoven Ghost Trio, Andrew Norman new work (NE premiere, co-commissioned by Vivo), Shostakovich Piano Trio No. 2.",
+        "We are delighted to share this program with you. Thank you for being here."
+      ],
+      "signature": {
+        "name": "Thor Steingraber",
+        "role": "CEO, Vivo Performing Arts"
+      }
+    },
+    {
+      "id": "performance-sponsor",
+      "title": "Performance Sponsor",
+      "kind": "performance-sponsor",
+      "eyebrow": "Tonight's Performance",
+      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
+      "blocks": [
+        {
+          "label": "Performance Supporter",
+          "name": "Performance Sponsor Name",
+          "statement": "This performance is generously supported by [Sponsor Name]."
+        }
+      ],
+      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
+      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+    },
+    {
+      "id": "program",
+      "title": "Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "Beethoven Ghost Trio, Andrew Norman new work (NE premiere, co-commissioned by Vivo), Shostakovich Piano Trio No. 2.",
+      "pieces": [
+        {
+          "composer": "LUDWIG VAN BEETHOVEN",
+          "work": "Piano Trio in D Major, Op. 70, No. 1 “Ghost",
+          "movements": [
+            "Allegro vivace e con brio",
+            "Largo assai ed espressivo",
+            "Presto",
+            "tbd” ANDREW NORMAN New work (New England premiere; co-commissioned by Vivo Performing Arts)"
+          ]
+        },
+        {
+          "kind": "intermission"
+        },
+        {
+          "composer": "DMITRI SHOSTAKOVICH",
+          "work": "Piano Trio No. 2 in E minor, Op. 67",
+          "movements": [
+            "Andante — Moderato",
+            "Allegro con brio",
+            "Largo",
+            "Allegretto — Adagio"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "artist",
+      "title": "Cast & Creative",
+      "kind": "cast",
+      "eyebrow": "On Stage Tonight",
+      "cast": [
+        {
+          "role": "violin",
+          "name": "Stefan Jackiw"
+        },
+        {
+          "role": "cello",
+          "name": "Jay Campbell"
+        },
+        {
+          "role": "piano",
+          "name": "Conrad Tao"
+        }
+      ],
+      "creative": []
+    },
+    {
+      "id": "bios",
+      "title": "Artist Bios",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "junction-trio",
+          "name": "Junction Trio",
+          "role": "piano trio",
+          "initials": "JT",
+          "photoSrc": "",
+          "body": [
+            "Beethoven Ghost Trio, Andrew Norman new work (NE premiere, co-commissioned by Vivo), Shostakovich Piano Trio No. 2."
+          ],
+          "website": "https://www.jcttrio.com"
+        }
+      ]
+    },
+    {
+      "id": "vivo",
+      "kind": "vivo",
+      "title": "About Vivo Performing Arts",
+      "eyebrow": "Audience Information   Staff   Supporters"
+    },
+    {
+      "id": "info",
+      "title": "Hall Info",
+      "kind": "info",
+      "eyebrow": "Visitor Info",
+      "sections": [
+        {
+          "h": "Venue",
+          "body": [
+            "NEC's Jordan Hall."
+          ]
+        },
+        {
+          "h": "Land Acknowledgment",
+          "body": [
+            "Vivo Performing Arts gathers and performs on the unceded ancestral lands of the Massachusett, Pawtucket, and Wampanoag peoples."
+          ]
+        },
+        {
+          "h": "Accessibility",
+          "body": [
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
+          ]
+        },
+        {
+          "h": "Contact",
+          "body": [
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
+          ]
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "iso": "2027-02-13",
+    "genre": "Chamber",
+    "venueName": "NEC's Jordan Hall",
+    "leadArtist": "Junction Trio",
+    "socialLinks": [
+      {
+        "label": "Artist website",
+        "url": "https://jcttrio.com"
+      }
+    ],
+    "ensembleCount": 4
+  }
+}

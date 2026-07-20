@@ -1,0 +1,163 @@
+{
+  "slug": "stanley-clarke-and-hiromi-featuring-publiquartet",
+  "cover": {
+    "eyebrow": "Vivo Performing Arts presents",
+    "title": "Stanley Clarke & Hiromi",
+    "subtitle": "featuring PUBLIQuartet | A Celebration of the Music of Chick Corea and Beyond",
+    "date": "Sunday, April 11, 2027",
+    "time": "5 p.m.",
+    "venue": "Berklee Performance Center",
+    "accent": "orange",
+    "brush": "rhythm",
+    "photoCaption": "Stanley Clarke",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
+    "presentedBy": "",
+    "footerSponsor": null,
+    "artistWebsite": "https://stanleyclarke.com",
+    "pressQuote": "Hiromi plays as if the weight of the world depends on each note—her performances are events that demand to be witnessed live. The Guardian"
+  },
+  "sections": [
+    {
+      "id": "welcome",
+      "title": "Welcome",
+      "kind": "welcome",
+      "eyebrow": "From the Artistic Director",
+      "quote": "Audiences can't get enough of Hiromi. A boundary-defying pianist, she returns with a must-see personal tribute—joining forces with bass legend Stanley Clarke to honor Chick Corea, with the brilliant PUBLIQuartet adding lush strings. Joyful, virtuosic, and deeply felt.",
+      "body": [
+        "Audiences can't get enough of Hiromi. A boundary-defying pianist who never fails to deliver an exhilarating experience, she returns with a must-see personal tribute that's going to be truly extraordinary. Joining forces with bass legend Stanley Clarke, they honor Chick Corea, the Chelsea-born jazz giant who had massive influence on both of their lives and careers. With the brilliant PUBLIQuartet adding lush strings to the mix, this is an evening of music full of love that radiates off the stage, into the audience: joyful, virtuosic, and deeply felt."
+      ],
+      "signature": {
+        "name": "Thor Steingraber",
+        "role": "CEO, Vivo Performing Arts"
+      }
+    },
+    {
+      "id": "performance-sponsor",
+      "title": "Performance Sponsor",
+      "kind": "performance-sponsor",
+      "eyebrow": "Tonight's Performance",
+      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
+      "blocks": [
+        {
+          "label": "Performance Supporter",
+          "name": "Performance Sponsor Name",
+          "statement": "This performance is generously supported by [Sponsor Name]."
+        }
+      ],
+      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
+      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+    },
+    {
+      "id": "program",
+      "title": "Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "Tribute to Chick Corea. Hiromi 207K IG + Clarke 120K IG = major combined reach.",
+      "pieces": [
+        {
+          "composer": "Program details",
+          "work": "To be announced from the stage.",
+          "meta": ""
+        }
+      ]
+    },
+    {
+      "id": "artist",
+      "title": "Cast & Creative",
+      "kind": "cast",
+      "eyebrow": "On Stage Tonight",
+      "cast": [
+        {
+          "role": "piano",
+          "name": "Hiromi"
+        },
+        {
+          "role": "quartet",
+          "name": "PUBLIQuartet"
+        }
+      ],
+      "creative": []
+    },
+    {
+      "id": "bios",
+      "title": "Artist Bios",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "stanley-clarke",
+          "name": "Stanley Clarke",
+          "role": "bass",
+          "initials": "SC",
+          "photoSrc": "",
+          "body": [
+            "Audiences can't get enough of Hiromi. A boundary-defying pianist who never fails to deliver an exhilarating experience, she returns with a must-see personal tribute that's going to be truly extraordinary. Joining forces with bass legend Stanley Clarke, they honor Chick Corea, the Chelsea-born jazz giant who had massive influence on both of their lives and careers. With the brilliant PUBLIQuartet adding lush strings to the mix, this is an evening of music full of love that radiates off the stage, into the audience: joyful, virtuosic, and deeply felt."
+          ],
+          "website": "https://stanleyclarke.com"
+        }
+      ]
+    },
+    {
+      "id": "vivo",
+      "kind": "vivo",
+      "title": "About Vivo Performing Arts",
+      "eyebrow": "Audience Information   Staff   Supporters"
+    },
+    {
+      "id": "info",
+      "title": "Hall Info",
+      "kind": "info",
+      "eyebrow": "Visitor Info",
+      "sections": [
+        {
+          "h": "Venue",
+          "body": [
+            "Berklee Performance Center."
+          ]
+        },
+        {
+          "h": "Land Acknowledgment",
+          "body": [
+            "Vivo Performing Arts gathers and performs on the unceded ancestral lands of the Massachusett, Pawtucket, and Wampanoag peoples."
+          ]
+        },
+        {
+          "h": "Accessibility",
+          "body": [
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
+          ]
+        },
+        {
+          "h": "Contact",
+          "body": [
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
+          ]
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "iso": "2027-04-11",
+    "genre": "Jazz",
+    "venueName": "Berklee Performance Center",
+    "leadArtist": "Stanley Clarke",
+    "socialLinks": [
+      {
+        "label": "Artist website",
+        "url": "https://stanleyclarke.com"
+      },
+      {
+        "label": "Instagram @stanleyclarke",
+        "url": "https://instagram.com/stanleyclarke"
+      },
+      {
+        "label": "Facebook/officialstanleyclarke",
+        "url": "https://facebook.com/officialstanleyclarke"
+      }
+    ],
+    "ensembleCount": 3
+  }
+}
