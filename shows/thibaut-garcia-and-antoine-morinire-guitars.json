@@ -10,8 +10,8 @@
     "accent": "green",
     "brush": "harmony",
     "photoCaption": "Thibaut Garcia",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "genre": "Instrumentalist",
@@ -30,8 +30,8 @@
         "Thibaut Garcia and Antoine Morinière bring a fresh and captivating perspective to Bach’s Goldberg Variations, one of the most celebrated masterpieces of the solo keyboard repertoire. Playing instruments built by the same luthier from the same tree, these longtime friends do more than divide the music between two guitars: they pass Bach’s voices and counterpoint back and forth with an almost telepathic intimacy, performing the suite as though with a single musical mind. Don’t miss this rare and remarkable evening of music."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -60,8 +60,13 @@
       "lead": "Bach Goldberg Variations arr. Garcia/Morinire. Guitars built from same tree.",
       "pieces": [
         {
-          "composer": "J.S. BACH",
-          "work": "Goldberg Variations, BWV 988, arranged by T. Garcia and A. Morinière"
+          "composer": "J. S. BACH",
+          "work": "Goldberg Variations, BWV 988 — arr. for two guitars by T. Garcia and A. Mornière",
+          "movements": [
+            "Aria",
+            "Var. 1–30 (full set, including all canons and the Quodlibet)",
+            "Aria da capo"
+          ]
         }
       ]
     },
@@ -105,7 +110,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -128,13 +133,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

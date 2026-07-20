@@ -10,8 +10,8 @@
     "accent": "green",
     "brush": "harmony",
     "photoCaption": "Isidore String Quartet",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "artistWebsite": "https://www.isidorestringquartet.com",
@@ -28,8 +28,8 @@
         "ADRIAN STEELE violin PHOENIX AVALON violin DEVIN MOORE viola JOSHUA McCLENDON cello With JEREMY DENK piano Next-generation standouts, the Isidore Quartet are at an exhilarating place in their career: competition wins and young-artist accolades launched them, and now, their programmatic voice, technical mastery, and passion for sharing chamber music with a wide audience have put them among the most in-demand artists on the scene. After Britten's witty neoclassical Divertimenti and the grief-stricken outcry of Mendelssohn's Quartet in F minor, they team with pianist Jeremy Denk for Brahms' Piano Quintet. Piano and quartet face equal demands in this masterpiece, and the artists offer an electric stylistic interplay: the Isidores' emotional directness in conversation with Denk's searching restraint."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -48,7 +48,8 @@
       "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
       "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
       "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
-      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you.",
+      "mgmtCredit": "The Isidore String Quartet appears by arrangement with David Rowe Artists. Jeremy Denk appears by arrangement with Opus 3 Artists."
     },
     {
       "id": "program",
@@ -59,17 +60,39 @@
       "pieces": [
         {
           "composer": "BENJAMIN BRITTEN",
-          "work": "Three Divertimenti for string quartet"
+          "work": "Three Divertimenti for string quartet",
+          "movements": [
+            "March",
+            "Waltz",
+            "Burlesque"
+          ]
         },
         {
           "composer": "FELIX MENDELSSOHN",
-          "work": "String Quartet No. 6 in F minor, Op. 80"
+          "work": "String Quartet No. 6 in F minor, Op. 80",
+          "movements": [
+            "Allegro vivace assai",
+            "Allegro assai",
+            "Adagio",
+            "Finale: Allegro molto"
+          ]
+        },
+        {
+          "kind": "intermission"
         },
         {
           "composer": "JOHANNES BRAHMS",
-          "work": "Piano Quintet in F minor, Op. 34"
+          "work": "Piano Quintet in F minor, Op. 34",
+          "movements": [
+            "Allegro non troppo",
+            "Andante, un poco",
+            "Adagio",
+            "Scherzo. Allegro – Trio",
+            "Finale. Poco sostenuto — Allegro non troppo"
+          ]
         }
-      ]
+      ],
+      "runtimeNote": "This afternoon’s program will run just short of one hour and 45 minutes, including intermission."
     },
     {
       "id": "artist",
@@ -77,10 +100,6 @@
       "kind": "cast",
       "eyebrow": "On Stage Tonight",
       "cast": [
-        {
-          "role": "quartet",
-          "name": "Isidore String Quartet"
-        },
         {
           "role": "violin",
           "name": "Adrian Steele"
@@ -127,7 +146,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -150,13 +169,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

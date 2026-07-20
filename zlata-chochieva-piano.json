@@ -1,0 +1,188 @@
+{
+  "slug": "zlata-chochieva-piano",
+  "cover": {
+    "eyebrow": "Vivo Performing Arts presents",
+    "title": "Zlata Chochieva, piano",
+    "date": "Saturday, Feb. 20, 2027",
+    "time": "8 p.m.",
+    "venue": "NEC’s Jordan Hall",
+    "accent": "green",
+    "brush": "harmony",
+    "photoCaption": "Zlata Chochieva",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
+    "presentedBy": "",
+    "footerSponsor": null,
+    "genre": "Pianist",
+    "artistWebsite": "https://zlatachochieva.com/",
+    "pressQuote": "Performances of huge emotional scope and intense drama. The Guardian",
+    "pressQuoteURL": "https://www.youtube.com/watch?v=nxsiphwoXNY"
+  },
+  "sections": [
+    {
+      "id": "welcome",
+      "title": "Welcome",
+      "kind": "welcome",
+      "eyebrow": "From the Artistic Director",
+      "quote": "Welcome to Vivo Performing Arts.",
+      "body": [
+        "Zlata Chochieva returns to Vivo Performing Arts following her triumphant debut in 2025, when her sold-out recital announced an artist of taste, passion, and distinction. For her much- anticipated return, she shares with us music of overwhelming emotional intensity, from the volcanic fury of Beethoven to the supernatural terror of Ravel. She’s exactly the pianist to navigate this storm: fierce and ferocious where the music demands it, yet capable of an almost unearthly delicacy in more tender passages."
+      ],
+      "signature": {
+        "name": "Thor Steingraber",
+        "role": "CEO, Vivo Performing Arts"
+      }
+    },
+    {
+      "id": "performance-sponsor",
+      "title": "Performance Sponsor",
+      "kind": "performance-sponsor",
+      "eyebrow": "Tonight's Performance",
+      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
+      "blocks": [
+        {
+          "label": "Performance Supporter",
+          "name": "Performance Sponsor Name",
+          "statement": "This performance is generously supported by [Sponsor Name]."
+        }
+      ],
+      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
+      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+    },
+    {
+      "id": "program",
+      "title": "Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "Returns after sold-out 2025 debut. Beethoven Appassionata Op. 57, Cowell Aeolian Harp, Ravel Gaspard de la nuit, Saint-Sans Op. 52 No. 3, Brahms Sonata No. 3 Op. 5.",
+      "pieces": [
+        {
+          "composer": "LUDWIG VAN BEETHOVEN",
+          "work": "Sonata No. 23, Op. 57 “Appassionata",
+          "movements": [
+            "Allegro assai",
+            "Andante con moto",
+            "Allegro ma non troppo – Presto"
+          ]
+        },
+        {
+          "composer": "HENRY COWELL",
+          "work": "Aeolian Harp” (1923)"
+        },
+        {
+          "composer": "MAURICE RAVEL",
+          "work": "Gaspard de la nuit, M. 55",
+          "movements": [
+            "Ondine. Lent",
+            "Le Gibet. Très lent",
+            "Scarbo. Modéré"
+          ]
+        },
+        {
+          "kind": "intermission"
+        },
+        {
+          "composer": "CAMILLE SAINT-SAËNS",
+          "work": "Prelude and Fugue in F minor, Op. 52, No. 3"
+        },
+        {
+          "composer": "JOHANNES BRAHMS",
+          "work": "Sonata No. 3 in F minor, Op. 5",
+          "movements": [
+            "Allegro maestoso",
+            "Andante espressivo",
+            "Scherzo. Allegro energico —",
+            "Trio",
+            "Intermezzo. Andante molto",
+            "Finale. Allegro moderato ma rubato"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "artist",
+      "title": "Cast & Creative",
+      "kind": "cast",
+      "eyebrow": "On Stage Tonight",
+      "cast": [
+        {
+          "role": "piano",
+          "name": "Zlata Chochieva"
+        }
+      ],
+      "creative": []
+    },
+    {
+      "id": "bios",
+      "title": "Artist Bios",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "zlata-chochieva",
+          "name": "Zlata Chochieva",
+          "role": "piano",
+          "initials": "ZC",
+          "photoSrc": "",
+          "body": [
+            "Zlata Chochieva returns to Vivo Performing Arts following her triumphant debut in 2025, when her sold-out recital announced an artist of taste, passion, and distinction. For her much- anticipated return, she shares with us music of overwhelming emotional intensity, from the volcanic fury of Beethoven to the supernatural terror of Ravel. She’s exactly the pianist to navigate this storm: fierce and ferocious where the music demands it, yet capable of an almost unearthly delicacy in more tender passages."
+          ],
+          "website": "https://zlatachochieva.com/"
+        }
+      ]
+    },
+    {
+      "id": "vivo",
+      "kind": "vivo",
+      "title": "About Vivo Performing Arts",
+      "eyebrow": "Audience Information   Staff   Supporters"
+    },
+    {
+      "id": "info",
+      "title": "Hall Info",
+      "kind": "info",
+      "eyebrow": "Visitor Info",
+      "sections": [
+        {
+          "h": "Venue",
+          "body": [
+            "NEC's Jordan Hall."
+          ]
+        },
+        {
+          "h": "Land Acknowledgment",
+          "body": [
+            "Vivo Performing Arts gathers and performs on the unceded ancestral lands of the Massachusett, Pawtucket, and Wampanoag peoples."
+          ]
+        },
+        {
+          "h": "Accessibility",
+          "body": [
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
+          ]
+        },
+        {
+          "h": "Contact",
+          "body": [
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
+          ]
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "iso": "2027-02-20",
+    "genre": "Pianist",
+    "venueName": "NEC's Jordan Hall",
+    "leadArtist": "Zlata Chochieva",
+    "socialLinks": [
+      {
+        "label": "Artist website",
+        "url": "https://zlatachochieva.com"
+      }
+    ],
+    "ensembleCount": 1
+  }
+}

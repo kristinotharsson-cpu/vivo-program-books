@@ -20,8 +20,13 @@ const Icon = ({ name, size = 20 }) => {
     case "check": return <svg viewBox="0 0 24 24" {...s}><polyline points="5,13 10,18 20,7"/></svg>;
     case "image": return <svg viewBox="0 0 24 24" {...s}><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><polyline points="3,18 9,13 14,17 21,11"/></svg>;
     case "download": return <svg viewBox="0 0 24 24" {...s}><path d="M12 4v12"/><polyline points="6,12 12,18 18,12"/><line x1="4" y1="20" x2="20" y2="20"/></svg>;
+    case "upload": return <svg viewBox="0 0 24 24" {...s}><path d="M12 16V4"/><polyline points="6,8 12,4 18,8"/><line x1="4" y1="20" x2="20" y2="20"/></svg>;
     case "eye": return <svg viewBox="0 0 24 24" {...s}><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>;
     case "eye-off": return <svg viewBox="0 0 24 24" {...s}><path d="M3 3l18 18"/><path d="M10.5 6.4A10 10 0 0 1 12 6c6.5 0 10 6 10 6a16 16 0 0 1-3.4 4.3"/><path d="M6.6 6.6A16 16 0 0 0 2 12s3.5 6 10 6a10 10 0 0 0 4.5-1"/><path d="M14.1 14.1a3 3 0 1 1-4.2-4.2"/></svg>;
+    case "instagram": return <svg viewBox="0 0 24 24" {...s}><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>;
+    case "facebook": return <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor" stroke="none"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg>;
+    case "youtube": return <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor" stroke="none"><path d="M23 12s0-3.2-.41-4.73a2.5 2.5 0 0 0-1.76-1.77C19.29 5.1 12 5.1 12 5.1s-7.29 0-8.83.4a2.5 2.5 0 0 0-1.76 1.77C1 8.8 1 12 1 12s0 3.2.41 4.73a2.5 2.5 0 0 0 1.76 1.77c1.54.4 8.83.4 8.83.4s7.29 0 8.83-.4a2.5 2.5 0 0 0 1.76-1.77C23 15.2 23 12 23 12zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>;
+    case "linkedin": return <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor" stroke="none"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>;
     default: return null;
   }
 };
@@ -87,8 +92,7 @@ const TopBar = ({ title, onBack, onMenu, onSearch, showLogo, logoSrc, home }) =>
 );
 
 // ---------- Settings Menu ----------
-const SettingsMenu = ({ open, onClose, theme, onTheme, fontSize, onFontSize, onShare, onToggleEdit, editing, onSaveJson, onLoadJson, onCustomize }) => {
-  const fileRef = useRef(null);
+const SettingsMenu = ({ open, onClose, theme, onTheme, fontSize, onFontSize, onShare, onToggleEdit, editing, onImport, onExport }) => {
   if (!open) return null;
   return (
     <>
@@ -119,37 +123,18 @@ const SettingsMenu = ({ open, onClose, theme, onTheme, fontSize, onFontSize, onS
           <span className="label">{editing ? "Stop Editing" : "Edit Content"}</span>
           <Icon name={editing ? "check" : "edit"} size={16} />
         </button>
-        {onCustomize && (
-          <button className="menu-item" onClick={() => { onCustomize(); onClose(); }}>
-            <span className="label">Design Options</span>
-            <svg viewBox="0 0 24 24" width={16} height={16} fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
+        {onImport ? (
+          <button className="menu-item" onClick={onImport}>
+            <span className="label">Import PDF</span>
+            <Icon name="upload" size={16} />
           </button>
-        )}
-        {onSaveJson && (
-          <button className="menu-item" onClick={() => { onSaveJson(); onClose(); }}>
-            <span className="label">Save as JSON</span>
+        ) : null}
+        {onExport ? (
+          <button className="menu-item" onClick={onExport}>
+            <span className="label">Export HTML</span>
             <Icon name="download" size={16} />
           </button>
-        )}
-        {onLoadJson && (
-          <>
-            <button className="menu-item" onClick={() => fileRef.current?.click()}>
-              <span className="label">Load from file</span>
-              <Icon name="image" size={16} />
-            </button>
-            <input
-              ref={fileRef}
-              type="file"
-              accept=".json,application/json"
-              style={{ display: "none" }}
-              onChange={(e) => {
-                const f = e.target.files?.[0];
-                if (f) { onLoadJson(f); onClose(); }
-                e.target.value = "";
-              }}
-            />
-          </>
-        )}
+        ) : null}
       </div>
     </>
   );
@@ -198,7 +183,7 @@ const AddRowButton = ({ onAdd, label = "Add row" }) => {
 };
 
 // ---------- Photo Slot (upload-on-click in edit mode) ----------
-const PhotoSlot = ({ src, initials = "", alt = "", className = "", onChange, onClear, size = 64 }) => {
+const PhotoSlot = ({ src, initials = "", alt = "", className = "", onChange, onClear, size = 64, fill = false }) => {
   const fileRef = useRef(null);
   const editing = window.__editMode;
   const handleClick = (e) => {
@@ -216,8 +201,8 @@ const PhotoSlot = ({ src, initials = "", alt = "", className = "", onChange, onC
   };
   return (
     <div
-      className={"photo-slot" + (editing ? " is-editable" : "") + (src ? " has-photo" : "") + (className ? " " + className : "")}
-      style={{ width: size, height: size, flex: "0 0 " + size + "px" }}
+      className={"photo-slot" + (fill ? " photo-slot-fill" : "") + (editing ? " is-editable" : "") + (src ? " has-photo" : "") + (className ? " " + className : "")}
+      style={fill ? undefined : { width: size, height: size, flex: "0 0 " + size + "px" }}
       onClick={handleClick}
       role={editing ? "button" : undefined}
       aria-label={editing ? "Change photo" : undefined}

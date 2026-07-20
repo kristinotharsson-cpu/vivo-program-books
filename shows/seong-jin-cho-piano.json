@@ -9,8 +9,8 @@
     "accent": "green",
     "brush": "harmony",
     "photoCaption": "Seong-Jin Cho",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "genre": "Pianist Title Seong-Jin Cho, piano",
@@ -29,8 +29,8 @@
         "Acclaimed for his poetic touch and remarkable clarity, Seong-Jin Cho returns to Symphony Hall with an imaginative program that balances elegance and drama. From the playful charm of Widmann to the theatrical brilliance of selections from Prokofiev’s Romeo and Juliet, the evening moves between wit and intensity. Mozart’s haunting Fantasia in C minor adds lyrical depth before Prokofiev’s monumental Eighth Piano Sonata ends the night with an uproar. Offering virtuosity, color and storytelling at the keyboard, it’s a vivid showcase for one of today’s most compelling pianists."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -64,17 +64,38 @@
         },
         {
           "composer": "SERGEI PROKOFIEV",
-          "work": "Ten Pieces from Romeo and Juliet, Op. 75"
+          "work": "Ten Pieces from Romeo and Juliet, Op. 75",
+          "movements": [
+            "Folk Dance",
+            "Scene",
+            "Minuet",
+            "Young Juliet",
+            "Masks",
+            "Montagues and Capulets",
+            "Friar Laurence",
+            "Mercutio",
+            "Dance of the Girls With Lilies",
+            "Romeo and Juliet Before Parting"
+          ]
         },
         {
-          "composer": "W.A. MOZART",
+          "composer": "W. A. MOZART",
           "work": "Fantasia in C minor, K. 396 (completed by Maximilian Stadler)"
         },
         {
-          "composer": "SERGEI PROKOFIEV",
-          "work": "Piano Sonata No. 8 in B-flat Major, Op. 84 (1939–44)"
+          "composer": "PROKOFIEV",
+          "work": "Piano Sonata No. 8 in B-flat Major, Op. 84 (1939–44)",
+          "movements": [
+            "Andante dolce",
+            "Andante sognando",
+            "Vivace"
+          ]
+        },
+        {
+          "kind": "intermission"
         }
-      ]
+      ],
+      "runtimeNote": "This afternoon’s program will run approximately one hour and 45 minutes, including intermission."
     },
     {
       "id": "artist",
@@ -112,7 +133,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -135,13 +156,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

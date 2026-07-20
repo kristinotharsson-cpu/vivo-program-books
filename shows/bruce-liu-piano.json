@@ -10,8 +10,8 @@
     "accent": "green",
     "brush": "harmony",
     "photoCaption": "Bruce Liu",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "artistWebsite": "https://bruce-liu.com",
@@ -28,8 +28,8 @@
         "-- 4 of 57 -- In Bruce Liu's hands, phrases and melodies shimmer and breathe like a living being. He gives playful pieces sparkle and momentum, and conveys the gravity of inward, dramatic works. His sense of flow and spontaneity refreshes beloved classics for longtime fans and newcomers alike. Liu's program weaves day and night, fiery brilliance and nocturnal hush. From Beethoven's \"Moonlight\" sonata and Chopin's Nocturnes to Bach's Baroque clarity, the atmospherics of Debussy and Mompou, and dazzling Liszt, the evening is a showcase of contrast and Liu's formidable range."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -48,7 +48,8 @@
       "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
       "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
       "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
-      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you.",
+      "mgmtCredit": "Bruce Liu appears by arrangement with Opus 3 Artists, New York"
     },
     {
       "id": "program",
@@ -58,11 +59,64 @@
       "lead": "Beethoven Moonlight, Chopin Nocturnes, Bach, Debussy, Mompou, Liszt. 2021 Chopin Competition winner. Exclusive DG artist.",
       "pieces": [
         {
-          "composer": "Program details",
-          "work": "To be announced from the stage.",
-          "meta": ""
+          "composer": "GYÖRGY LIGETI",
+          "work": "Fanfares from Études, Book I, No. 4 (1985)"
+        },
+        {
+          "composer": "LUDWIG VAN BEETHOVEN",
+          "work": "Piano Sonata No. 14 in C-sharp minor, Op. 27, No. 2 “Moonlight",
+          "movements": [
+            "Adagio sostenuto",
+            "Allegretto - Trio",
+            "Presto agitato"
+          ]
+        },
+        {
+          "composer": "FRÉDÉRIC CHOPIN",
+          "work": "Nocturne in C-sharp minor, Op. 27, No. 1"
+        },
+        {
+          "composer": "CHOPIN",
+          "work": "Nocturne in D-flat Major, Op. 27, No. 2"
+        },
+        {
+          "composer": "ISAAC ALBÉNIZ",
+          "work": "El Puerto from Iberia"
+        },
+        {
+          "kind": "intermission"
+        },
+        {
+          "composer": "J. S. BACH",
+          "work": "French Suite No. 5 in G Major, BWV 816",
+          "movements": [
+            "Allemande",
+            "Courante",
+            "Sarabande",
+            "Gavotte",
+            "Bourrée",
+            "Loure",
+            "Gigue"
+          ]
+        },
+        {
+          "composer": "CLAUDE DEBUSSY",
+          "work": "Rêverie"
+        },
+        {
+          "composer": "MAURICE RAVEL",
+          "work": "Alborada del gracioso"
+        },
+        {
+          "composer": "FEDERICO MOMPOU",
+          "work": "Glossa sobre “Au clair de lune"
+        },
+        {
+          "composer": "FRANZ LISZT",
+          "work": "Rhapsodie espagnole, S. 254, R. 90"
         }
-      ]
+      ],
+      "runtimeNote": "This afternoon’s program will run approximately one hour and 45 minutes, including intermission."
     },
     {
       "id": "artist",
@@ -100,7 +154,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -123,13 +177,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

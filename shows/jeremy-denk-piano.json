@@ -10,8 +10,8 @@
     "accent": "green",
     "brush": "harmony",
     "photoCaption": "Jeremy Denk",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null
   },
@@ -27,8 +27,8 @@
         "We are delighted to share this program with you. Thank you for being here."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -57,11 +57,39 @@
       "lead": "Bach WTC Book II Prelude & Fugue BWV 892, Unsuk Chin Six tudes, Beethoven Op. 110 & Op. 111, Hélène de Montgeroult tudes.",
       "pieces": [
         {
-          "composer": "Program details",
-          "work": "To be announced from the stage.",
-          "meta": ""
+          "composer": "J. S. BACH",
+          "work": "Prelude and Fugue in B Major, BWV 892, from The Well-Tempered Clavier, Book II"
+        },
+        {
+          "composer": "UNSUK CHIN",
+          "work": "Piano Études (Nos. 1–6) (1995–2003)"
+        },
+        {
+          "composer": "LUDWIG VAN BEETHOVEN",
+          "work": "Piano Sonata No. 31 in A-flat Major, Op. 110",
+          "movements": [
+            "Moderato cantabile molto espressivo",
+            "Allegro molto",
+            "Adagio ma non troppo – Arioso dolente – Fuga. Allegro ma non troppo"
+          ]
+        },
+        {
+          "composer": "HÉLÈNE DE MONTGEROULT",
+          "work": "Études"
+        },
+        {
+          "composer": "BEETHOVEN",
+          "work": "Piano Sonata No. 32 in C minor, Op. 111",
+          "movements": [
+            "Maestoso – Allegro con brio ed appassionato",
+            "Arietta. Adagio molto semplice cantabile"
+          ]
+        },
+        {
+          "kind": "intermission"
         }
-      ]
+      ],
+      "runtimeNote": "This afternoon’s program will run approximately 90 minutes, including intermission."
     },
     {
       "id": "artist",
@@ -99,7 +127,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -122,13 +150,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

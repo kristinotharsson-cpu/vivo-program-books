@@ -10,8 +10,8 @@
     "accent": "green",
     "brush": "harmony",
     "photoCaption": "Igor Levit",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "artistWebsite": "https://www.igor-levit.com",
@@ -28,8 +28,8 @@
         "Pianist Igor Levit makes his Symphony Hall recital debut with an all-Beethoven program. It's a fitting stage, beneath the plaque that bears the composer's name, for a pianist whose sound has been compared, in its power and expressive range, to a full orchestra. For the bicentennial of Beethoven's death, Levit reveals an icon's humanity—his early-career swagger and hunger, his despair at losing his hearing, a moment of joy—before arriving at the \"Waldstein\" sonata, a luminous statement of faith in the power of art."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -59,21 +59,47 @@
       "pieces": [
         {
           "composer": "LUDWIG VAN BEETHOVEN",
-          "work": "Sonata No. 1 in F minor, Op. 2, No. 1"
+          "work": "Sonata No. 1 in F minor, Op. 2, No. 1",
+          "movements": [
+            "Allegro",
+            "Adagio",
+            "Minuet. Allegretto –",
+            "Trio",
+            "Prestissimo"
+          ]
         },
         {
           "composer": "BEETHOVEN",
-          "work": "Sonata No. 17 in D minor, Op. 31, No. 2 \"The Tempest\""
+          "work": "Sonata No. 17 in D minor, Op. 31, No. 2 “The Tempest",
+          "movements": [
+            "Largo – Allegro",
+            "Adagio",
+            "Allegretto"
+          ]
+        },
+        {
+          "kind": "intermission"
         },
         {
           "composer": "BEETHOVEN",
-          "work": "Sonata No. 25 in G Major, Op. 79"
+          "work": "Sonata No. 25 in G Major, Op. 79",
+          "movements": [
+            "Presto alla tedesca",
+            "Andante",
+            "Vivace"
+          ]
         },
         {
           "composer": "BEETHOVEN",
-          "work": "Sonata No. 21 in C Major, Op. 53 \"Waldstein\""
+          "work": "Sonata No. 21 in C Major, Op. 53 “Waldstein",
+          "movements": [
+            "Allegro con brio",
+            "Introduzione. Adagio molto –",
+            "Rondo. Allegretto moderato – Prestissimo"
+          ]
         }
-      ]
+      ],
+      "runtimeNote": "This afternoon’s program will run approximately one hour and 45 minutes, including intermission."
     },
     {
       "id": "artist",
@@ -111,7 +137,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -134,13 +160,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

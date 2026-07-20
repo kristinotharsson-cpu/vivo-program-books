@@ -1,18 +1,5 @@
 [build]
-  publish = "project"
+  publish = "."
 
 [functions]
-  directory = "project/netlify/functions"
   node_bundler = "esbuild"
-
-# Bundle the schema, system prompt, and few-shot samples with any function
-# that reads them. zip-it-and-ship-it would usually auto-detect static
-# fs.readFileSync paths, but declare explicitly so it doesn't break.
-[functions."parse-pdf-anthropic-background"]
-  included_files = [
-    "schema/program.schema.json",
-    "parser-package/parser_system_prompt.md",
-    "parser-package/fewshot/*",
-    "samples/dance_program.json",
-    "samples/voice_program.json",
-  ]

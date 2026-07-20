@@ -9,8 +9,8 @@
     "accent": "green",
     "brush": "harmony",
     "photoCaption": "Pavel Haas Quartet",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "artistWebsite": "https://www.pavelhaasquartet.com",
@@ -27,8 +27,8 @@
         "Veronika Jarůšková violin Marek Zwiebel violin Šimon Truszka viola Peter Jarůšek cello Experience the Pavel Haas Quartet, one of BBC Music Magazine's top 10 string quartets of all time, in a stunning all-Czech program. In Pavel Haas's third and final quartet, shadows gather as war approaches. Leoš Janáček's First Quartet, inspired by Leo Tolstoy's novella The Kreutzer Sonata, pulses with urgency and emotional intensity. The evening concludes with the openhearted warmth of Antonín Dvořák's \"American\" Quartet, composed among Czech immigrants in Iowa and shaped by the spirituals and folk traditions he encountered there."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -58,17 +58,26 @@
       "pieces": [
         {
           "composer": "PAVEL HAAS",
-          "work": "String Quartet No. 3, Op. 15"
+          "work": "String Quartet No. 3, Op. 15",
+          "movements": [
+            "Allegro moderato",
+            "Lento ma non troppo e poco rubato",
+            "Tema con variazione e fuga. Con moto"
+          ]
         },
         {
-          "composer": "LEOŠ",
-          "work": "JANÁČEK String Quartet No. 1 \"Kreutzer Sonata\""
+          "composer": "LEOŠ JANÁČEK",
+          "work": "String Quartet No. 1 “Kreutzer Sonata"
         },
         {
-          "composer": "ANTONÍN",
-          "work": "DVOŘÁK String Quartet No. 12 in F Major, Op. 96 \"American\""
+          "kind": "intermission"
+        },
+        {
+          "composer": "ANTONÍN DVOŘÁK",
+          "work": "String Quartet No. 12 in F Major, Op. 96 “American"
         }
-      ]
+      ],
+      "runtimeNote": "This evening’s program will run approximately 90 minutes, including intermission."
     },
     {
       "id": "artist",
@@ -77,12 +86,8 @@
       "eyebrow": "On Stage Tonight",
       "cast": [
         {
-          "role": "quartet",
-          "name": "Pavel Haas Quartet"
-        },
-        {
           "role": "violin",
-          "name": "Veronika Jaříková"
+          "name": "Veronika Jarůšková"
         },
         {
           "role": "violin",
@@ -94,7 +99,7 @@
         },
         {
           "role": "cello",
-          "name": "Peter Jarček"
+          "name": "Peter Jarůšek"
         }
       ],
       "creative": []
@@ -122,7 +127,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -145,13 +150,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

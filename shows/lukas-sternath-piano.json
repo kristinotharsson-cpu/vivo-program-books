@@ -10,8 +10,8 @@
     "accent": "green",
     "brush": "harmony",
     "photoCaption": "Lukas Sternath",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "artistWebsite": "https://lukassternath.com",
@@ -28,8 +28,8 @@
         "\"A young man comes on stage and plays the stars from the sky for you,\" wrote a reviewer in Frankfurt, Germany, about Austrian pianist Lukas Sternath. It's a lovely, arresting image that speaks to Sternath's reputation as a soloist with a chamber-music sensibility: he's committed to making the cosmic personal, to you. In his Boston debut program, built around Liszt's intimate transcriptions of Schubert Lieder, his playing—praised for its vocal, singing qualities—summons deep reserves of emotion without sentimentality, each feeling earned."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -48,7 +48,8 @@
       "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
       "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
       "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
-      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you.",
+      "mgmtCredit": "to follow bio World Management: Classic Concerts Management GmbH, Exclusive Manager: Kristin Schuster"
     },
     {
       "id": "program",
@@ -58,34 +59,53 @@
       "lead": "Austrian pianist, Boston debut. Liszt transcriptions of Schubert Lieder + Schubert Wanderer Fantasy D. 760 + Liszt Années de pèlerinage, Italie.",
       "pieces": [
         {
-          "composer": "FRANZ LISZT",
-          "work": "\"Der Wanderer\" from 12 Lieder von Franz Schubert"
+          "composer": "SCHUBERT (ARR. LISZT)",
+          "work": "Der Wanderer, D. 489 (arr. for solo piano, S. 558/11)"
         },
         {
-          "composer": "LISZT",
-          "work": "\"Frühlingsglaube\" from 12 Lieder von Franz Schubert"
+          "composer": "SCHUBERT (ARR. LISZT)",
+          "work": "Frühlingsglaube, D. 686 (arr. for solo piano, S. 558/7)"
         },
         {
-          "composer": "LISZT",
-          "work": "\"Auf dem Wasser zu singen\" from 12 Lieder von Franz Schubert"
+          "composer": "SCHUBERT (ARR. LISZT)",
+          "work": "Auf dem Wasser zu singen, D. 774 (arr. for solo piano, S. 558/2)"
         },
         {
-          "composer": "LISZT",
-          "work": "\"Litaney\" from Franz Schuberts geistliche Lieder"
+          "composer": "SCHUBERT (ARR. LISZT)",
+          "work": "Litanei auf das Fest Allerseelen, D. 343, from geistliche Lieder (arr. for solo piano, S. 562/1)"
         },
         {
-          "composer": "LISZT",
-          "work": "\"Der Müller und der Bach\" from Müllerlieder von Franz Schubert"
+          "composer": "SCHUBERT (ARR. LISZT)",
+          "work": "Der Müller und der Bach, from Die schöne Müllerin, D. 795, No. 19 (arr. for solo piano, S. 565/2)"
         },
         {
           "composer": "FRANZ SCHUBERT",
-          "work": "Fantasy in C Major, D. 760, \"Wanderer Fantasy\""
+          "work": "Fantasie in C Major, Op. 15, D. 760 “Wanderer Fantasy",
+          "movements": [
+            "Allegro con fuoco ma non troppo",
+            "Adagio",
+            "Presto",
+            "Allegro"
+          ]
         },
         {
-          "composer": "LISZT",
-          "work": "Années de pèlerinage, deuxième année: Italie"
+          "kind": "intermission"
+        },
+        {
+          "composer": "FRANZ LISZT",
+          "work": "Années de pèlerinage, deuxième année: Italie, S. 161",
+          "movements": [
+            "Sposalizio",
+            "Il Pensieroso",
+            "Canzonetta del Salvator Rosa",
+            "Sonetto 47 del Petrarca",
+            "Sonetto 104 del Petrarca",
+            "Sonetto 123 del Petrarca",
+            "Après une lecture du Dante. Fantasia quasi Sonata"
+          ]
         }
-      ]
+      ],
+      "runtimeNote": "This evening’s program will run approximately one hour and 45 minutes, including intermission."
     },
     {
       "id": "artist",
@@ -123,7 +143,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -146,13 +166,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

@@ -1,0 +1,1092 @@
+[
+  {
+    "slug": "triptico",
+    "title": "Tríptico",
+    "leadArtist": "Tríptico",
+    "date": "SAT SEP 12",
+    "time": "3PM",
+    "iso": "2026-09-12",
+    "venue": "Arlington Street Church",
+    "genre": "Other",
+    "tags": [
+      "Neighborhood Arts"
+    ],
+    "accent": "blue"
+  },
+  {
+    "slug": "bala-bila",
+    "title": "Bala-Bila",
+    "leadArtist": "Balla Kouyaté",
+    "date": "SAT SEP 19",
+    "time": "3PM",
+    "iso": "2026-09-19",
+    "venue": "Bethel AME Church",
+    "genre": "Other",
+    "tags": [
+      "Neighborhood Arts"
+    ],
+    "accent": "blue"
+  },
+  {
+    "slug": "let-s-dance-boston",
+    "title": "Let's Dance Boston",
+    "leadArtist": "Let's Dance Boston",
+    "date": "WED SEP 23  SUN SEP 27",
+    "time": "Various",
+    "iso": "2026-09-23",
+    "venue": "Rose Kennedy Greenway (Dewey Square Plaza)",
+    "genre": "PPP",
+    "tags": [
+      "Let's Dance Boston"
+    ],
+    "accent": "orange"
+  },
+  {
+    "slug": "jonathan-gramling-and-friends",
+    "title": "Jonathan Gramling & Friends",
+    "leadArtist": "Jonathan Gramling",
+    "date": "SAT OCT 03",
+    "time": "3PM",
+    "iso": "2026-10-03",
+    "venue": "Twelfth Baptist Church",
+    "genre": "Other",
+    "tags": [
+      "Neighborhood Arts",
+      "Roxbury"
+    ],
+    "accent": "blue"
+  },
+  {
+    "slug": "avery-gagliano-piano",
+    "title": "Avery Gagliano, piano (Debut Series)",
+    "leadArtist": "Avery Gagliano",
+    "date": "THU OCT 08",
+    "time": "7:30PM",
+    "iso": "2026-10-08",
+    "venue": "Longy's Pickman Hall",
+    "genre": "Pianist",
+    "tags": [
+      "Piano"
+    ],
+    "accent": "green"
+  },
+  {
+    "slug": "hemenway-strings",
+    "title": "Hemenway Strings (Lynn Chang, director)",
+    "leadArtist": "Hemenway Strings",
+    "date": "SAT OCT 10",
+    "time": "12PM",
+    "iso": "2026-10-10",
+    "venue": "Shaw-Roxbury Branch, Boston Public Library",
+    "genre": "Chamber",
+    "tags": [
+      "Neighborhood Arts",
+      "Roxbury"
+    ],
+    "accent": "green"
+  },
+  {
+    "slug": "lizz-wright",
+    "title": "Lizz Wright",
+    "leadArtist": "Lizz Wright",
+    "date": "SAT OCT 10",
+    "time": "8PM",
+    "iso": "2026-10-10",
+    "venue": "Berklee Performance Center",
+    "genre": "Jazz",
+    "tags": [],
+    "accent": "orange"
+  },
+  {
+    "slug": "brentano-string-quartet",
+    "title": "Brentano String Quartet: Flights of Fugue",
+    "leadArtist": "Brentano String Quartet",
+    "date": "FRI OCT 16",
+    "time": "8PM",
+    "iso": "2026-10-16",
+    "venue": "NEC's Jordan Hall",
+    "genre": "Chamber",
+    "tags": [],
+    "accent": "green"
+  },
+  {
+    "slug": "castle-of-our-skins",
+    "title": "Castle of Our Skins: Sacred Transcendence",
+    "leadArtist": "Castle of Our Skins",
+    "date": "SAT OCT 17",
+    "time": "3PM",
+    "iso": "2026-10-17",
+    "venue": "Twelfth Baptist Church",
+    "genre": "Chamber",
+    "tags": [
+      "Neighborhood Arts",
+      "Roxbury"
+    ],
+    "accent": "green"
+  },
+  {
+    "slug": "bruce-liu-piano",
+    "title": "Bruce Liu, piano",
+    "leadArtist": "Bruce Liu",
+    "date": "SUN OCT 18",
+    "time": "3PM",
+    "iso": "2026-10-18",
+    "venue": "Groton Hill Music Center (Concert Hall)",
+    "genre": "Pianist",
+    "tags": [
+      "Piano"
+    ],
+    "accent": "green"
+  },
+  {
+    "slug": "christian-mcbride-and-ursa-major",
+    "title": "Christian McBride & Ursa Major",
+    "leadArtist": "Christian McBride",
+    "date": "WED OCT 21",
+    "time": "8PM",
+    "iso": "2026-10-21",
+    "venue": "Berklee Performance Center",
+    "genre": "Jazz",
+    "tags": [],
+    "accent": "orange"
+  },
+  {
+    "slug": "gravity-and-other-myths",
+    "title": "Gravity & Other Myths: Ten Thousand Hours",
+    "leadArtist": "Gravity & Other Myths",
+    "date": "FRI OCT 23  SAT OCT 24",
+    "time": "Various",
+    "iso": "2026-10-23",
+    "venue": "Boston Arts Academy Theater",
+    "genre": "Dance",
+    "tags": [
+      "Dance"
+    ],
+    "accent": "purple"
+  },
+  {
+    "slug": "geneva-lewis-violin",
+    "title": "Geneva Lewis, violin",
+    "leadArtist": "Geneva Lewis",
+    "date": "SUN OCT 25",
+    "time": "3PM",
+    "iso": "2026-10-25",
+    "venue": "Groton Hill Music Center (Meadow Hall)",
+    "genre": "Instrumentalist",
+    "tags": [],
+    "accent": "green"
+  },
+  {
+    "slug": "stringfest",
+    "title": "Stringfest: Borromeo Quartet featuring Boston String Academy",
+    "leadArtist": "Borromeo String Quartet",
+    "date": "SUN OCT 25",
+    "time": "3PM",
+    "iso": "2026-10-25",
+    "venue": "Multicultural Arts Center",
+    "genre": "Chamber",
+    "tags": [
+      "Neighborhood Arts"
+    ],
+    "accent": "green"
+  },
+  {
+    "slug": "lachanze",
+    "title": "LaChanze",
+    "leadArtist": "LaChanze",
+    "date": "SUN NOV 01",
+    "time": "5PM",
+    "iso": "2026-11-01",
+    "venue": "Berklee Performance Center",
+    "genre": "Jazz",
+    "tags": [],
+    "accent": "orange"
+  },
+  {
+    "slug": "igor-levit-piano",
+    "title": "Igor Levit, piano",
+    "leadArtist": "Igor Levit",
+    "date": "SUN NOV 08",
+    "time": "3PM",
+    "iso": "2026-11-08",
+    "venue": "Symphony Hall",
+    "genre": "Pianist",
+    "tags": [
+      "Beethoven 200",
+      "Piano"
+    ],
+    "accent": "green"
+  },
+  {
+    "slug": "all-cello-orchestra",
+    "title": "All-Cello Orchestra: Pablo Casals 150th Birthday Tribute (Eugene Friesen, conductor)",
+    "leadArtist": "All-Cello Orchestra",
+    "date": "SUN NOV 08",
+    "time": "3PM",
+    "iso": "2026-11-08",
+    "venue": "Roxbury Community College",
+    "genre": "Classical",
+    "tags": [
+      "Neighborhood Arts",
+      "Roxbury"
+    ],
+    "accent": "green"
+  },
+  {
+    "slug": "nemanja-radulovic-and-double-sens-chamber-orchestra",
+    "title": "Nemanja Radulović & Double Sens Chamber Orchestra: The Four Seasons",
+    "leadArtist": "Nemanja Radulović",
+    "date": "FRI NOV 13",
+    "time": "8PM",
+    "iso": "2026-11-13",
+    "venue": "NEC's Jordan Hall",
+    "genre": "Ch Orch",
+    "tags": [],
+    "accent": "green"
+  },
+  {
+    "slug": "pelin-su-yavuz",
+    "title": "Pelin Su Yavuz (Roxbury Concert Series Rising Star)",
+    "leadArtist": "Pelin Su Yavuz",
+    "date": "SAT NOV 14",
+    "time": "12PM",
+    "iso": "2026-11-14",
+    "venue": "Shaw-Roxbury Branch, Boston Public Library",
+    "genre": "Pianist",
+    "tags": [
+      "Piano",
+      "Neighborhood Arts",
+      "Roxbury"
+    ],
+    "accent": "green"
+  },
+  {
+    "slug": "dover-quartet",
+    "title": "Dover Quartet",
+    "leadArtist": "Dover Quartet",
+    "date": "SUN NOV 15",
+    "time": "3PM",
+    "iso": "2026-11-15",
+    "venue": "NEC's Jordan Hall",
+    "genre": "Chamber",
+    "tags": [],
+    "accent": "green"
+  },
+  {
+    "slug": "ballet-bc",
+    "title": "Ballet BC",
+    "leadArtist": "Ballet BC",
+    "date": "FRI NOV 20  SAT NOV 21",
+    "time": "Various",
+    "iso": "2026-11-20",
+    "venue": "Cutler Majestic Theatre at Emerson College",
+    "genre": "Dance",
+    "tags": [
+      "Dance"
+    ],
+    "accent": "purple"
+  },
+  {
+    "slug": "triana-maciel-and-nino-de-los-reyes",
+    "title": "Triana Maciel & Nino de los Reyes: PerpetuARTE",
+    "leadArtist": "Triana Maciel",
+    "date": "SAT NOV 21",
+    "time": "3PM",
+    "iso": "2026-11-21",
+    "venue": "Roxbury Community College",
+    "genre": "Pop/World/Misc.",
+    "tags": [
+      "Neighborhood Arts",
+      "Roxbury"
+    ],
+    "accent": "orange"
+  },
+  {
+    "slug": "coltrane-100",
+    "title": "Coltrane 100: Both Directions at Once (feat. Lovano, Aldana, Genovese, Oh, Watts)",
+    "leadArtist": "Joe Lovano",
+    "date": "SAT NOV 21",
+    "time": "8PM",
+    "iso": "2026-11-21",
+    "venue": "Berklee Performance Center",
+    "genre": "Jazz",
+    "tags": [
+      "Coltrane 100"
+    ],
+    "accent": "orange"
+  },
+  {
+    "slug": "what-makes-it-great-mozart-s-clarinet-concerto",
+    "title": "What Makes It Great? Mozart's Clarinet Concerto",
+    "leadArtist": "Rob Kapilow",
+    "date": "SUN NOV 22",
+    "time": "3PM",
+    "iso": "2026-11-22",
+    "venue": "NEC's Jordan Hall",
+    "genre": "WMIG",
+    "tags": [],
+    "accent": "blue"
+  },
+  {
+    "slug": "nadia-washington-quartet",
+    "title": "Nadia Washington Quartet",
+    "leadArtist": "Nadia Washington",
+    "date": "SAT DEC 05",
+    "time": "3PM",
+    "iso": "2026-12-05",
+    "venue": "First Church Roxbury",
+    "genre": "Jazz",
+    "tags": [
+      "Neighborhood Arts",
+      "Roxbury"
+    ],
+    "accent": "orange"
+  },
+  {
+    "slug": "jeremy-denk-piano",
+    "title": "Jeremy Denk, piano",
+    "leadArtist": "Jeremy Denk",
+    "date": "FRI DEC 11",
+    "time": "8PM",
+    "iso": "2026-12-11",
+    "venue": "NEC's Jordan Hall",
+    "genre": "Pianist",
+    "tags": [
+      "Piano"
+    ],
+    "accent": "green"
+  },
+  {
+    "slug": "stringfest-2",
+    "title": "Stringfest: Jorge Santiago Arce (feat. Boston Music Project, City Strings United, Project STEP)",
+    "leadArtist": "Jorge Santiago Arce",
+    "date": "SAT DEC 12",
+    "time": "3PM",
+    "iso": "2026-12-12",
+    "venue": "Salvation Army Kroc Center",
+    "genre": "Pop/World/Misc.",
+    "tags": [
+      "Neighborhood Arts"
+    ],
+    "accent": "orange"
+  },
+  {
+    "slug": "gil-shaham-and-akira-eguchi-violin-and-piano",
+    "title": "Gil Shaham & Akira Eguchi, violin & piano",
+    "leadArtist": "Gil Shaham",
+    "date": "THU JAN 14",
+    "time": "8PM",
+    "iso": "2027-01-14",
+    "venue": "Groton Hill Music Center (Concert Hall)",
+    "genre": "Instrumentalist",
+    "tags": [
+      "Beethoven 200",
+      "Piano"
+    ],
+    "accent": "green"
+  },
+  {
+    "slug": "what-makes-it-great-anything-but-standard",
+    "title": "What Makes It Great? Anything But Standard: Ella Fitzgerald & Oscar Peterson",
+    "leadArtist": "Rob Kapilow",
+    "date": "SAT JAN 23",
+    "time": "8PM",
+    "iso": "2027-01-23",
+    "venue": "NEC's Jordan Hall",
+    "genre": "WMIG",
+    "tags": [],
+    "accent": "blue"
+  },
+  {
+    "slug": "lukas-sternath-piano",
+    "title": "Lukas Sternath, piano (Debut Series)",
+    "leadArtist": "Lukas Sternath",
+    "date": "THU JAN 28",
+    "time": "7:30PM",
+    "iso": "2027-01-28",
+    "venue": "Longy's Pickman Hall",
+    "genre": "Pianist",
+    "tags": [
+      "Piano"
+    ],
+    "accent": "green"
+  },
+  {
+    "slug": "michel-camilo-trio",
+    "title": "Michel Camilo Trio",
+    "leadArtist": "Michel Camilo",
+    "date": "SAT JAN 30",
+    "time": "8PM",
+    "iso": "2027-01-30",
+    "venue": "Berklee Performance Center",
+    "genre": "Jazz",
+    "tags": [
+      "Piano"
+    ],
+    "accent": "orange"
+  },
+  {
+    "slug": "edgar-meyer-mike-marshall-and-george-meyer",
+    "title": "Edgar Meyer, Mike Marshall & George Meyer",
+    "leadArtist": "Edgar Meyer",
+    "date": "SUN JAN 31",
+    "time": "3PM",
+    "iso": "2027-01-31",
+    "venue": "Sanders Theatre",
+    "genre": "Pop/World/Misc.",
+    "tags": [],
+    "accent": "orange"
+  },
+  {
+    "slug": "mitsuko-uchida-piano",
+    "title": "Mitsuko Uchida, piano",
+    "leadArtist": "Mitsuko Uchida",
+    "date": "TUE FEB 02",
+    "time": "7:30PM",
+    "iso": "2027-02-02",
+    "venue": "Symphony Hall",
+    "genre": "Pianist",
+    "tags": [
+      "Piano"
+    ],
+    "accent": "green"
+  },
+  {
+    "slug": "ahmed-alom-piano",
+    "title": "Ahmed Alom, piano",
+    "leadArtist": "Ahmed Alom",
+    "date": "SAT FEB 06",
+    "time": "12PM",
+    "iso": "2027-02-06",
+    "venue": "Shaw-Roxbury Branch, Boston Public Library",
+    "genre": "Jazz",
+    "tags": [
+      "Piano",
+      "Neighborhood Arts",
+      "Roxbury"
+    ],
+    "accent": "orange"
+  },
+  {
+    "slug": "isidore-string-quartet-with-jeremy-denk-piano",
+    "title": "Isidore String Quartet with Jeremy Denk, piano",
+    "leadArtist": "Isidore String Quartet",
+    "date": "SUN FEB 07",
+    "time": "3PM",
+    "iso": "2027-02-07",
+    "venue": "NEC's Jordan Hall",
+    "genre": "Chamber",
+    "tags": [
+      "Piano"
+    ],
+    "accent": "green"
+  },
+  {
+    "slug": "emmet-cohen-trio-with-georgia-heers-vocals",
+    "title": "Emmet Cohen Trio with Georgia Heers, vocals",
+    "leadArtist": "Emmet Cohen Trio",
+    "date": "FRI FEB 12",
+    "time": "8PM",
+    "iso": "2027-02-12",
+    "venue": "Berklee Performance Center",
+    "genre": "Jazz",
+    "tags": [
+      "Piano"
+    ],
+    "accent": "orange"
+  },
+  {
+    "slug": "limon-dance-company",
+    "title": "Limón Dance Company",
+    "leadArtist": "Limón Dance Company",
+    "date": "FRI FEB 12  SAT FEB 13",
+    "time": "Various",
+    "iso": "2027-02-12",
+    "venue": "Boston Arts Academy Theater",
+    "genre": "Dance",
+    "tags": [
+      "Dance"
+    ],
+    "accent": "purple"
+  },
+  {
+    "slug": "junction-trio",
+    "title": "Junction Trio (Stefan Jackiw, Jay Campbell, Conrad Tao)",
+    "leadArtist": "Junction Trio",
+    "date": "SAT FEB 13",
+    "time": "8PM",
+    "iso": "2027-02-13",
+    "venue": "NEC's Jordan Hall",
+    "genre": "Chamber",
+    "tags": [],
+    "accent": "green"
+  },
+  {
+    "slug": "so-percussion-with-helado-negro-and-kate-stables",
+    "title": "Sō Percussion with Helado Negro and Kate Stables (This Is the Kit)",
+    "leadArtist": "Sō Percussion",
+    "date": "WED FEB 17",
+    "time": "8PM",
+    "iso": "2027-02-17",
+    "venue": "Crystal Ballroom at Somerville Theatre",
+    "genre": "Classical",
+    "tags": [],
+    "accent": "green"
+  },
+  {
+    "slug": "damir-imamovic",
+    "title": "Damir Imamović",
+    "leadArtist": "Damir Imamović",
+    "date": "THU FEB 18",
+    "time": "8PM",
+    "iso": "2027-02-18",
+    "venue": "Crystal Ballroom at Somerville Theatre",
+    "genre": "Jazz",
+    "tags": [],
+    "accent": "orange"
+  },
+  {
+    "slug": "charles-yang",
+    "title": "Charles Yang",
+    "leadArtist": "Charles Yang",
+    "date": "FRI FEB 19",
+    "time": "8PM",
+    "iso": "2027-02-19",
+    "venue": "Crystal Ballroom at Somerville Theatre",
+    "genre": "Classical",
+    "tags": [],
+    "accent": "green"
+  },
+  {
+    "slug": "amanda-shea-and-tim-hall-trio",
+    "title": "Amanda Shea & Tim Hall Trio",
+    "leadArtist": "Amanda Shea",
+    "date": "SAT FEB 20",
+    "time": "3PM",
+    "iso": "2027-02-20",
+    "venue": "First Church Roxbury",
+    "genre": "Spoken Word",
+    "tags": [
+      "Neighborhood Arts",
+      "Roxbury"
+    ],
+    "accent": "blue"
+  },
+  {
+    "slug": "flor-de-toloache",
+    "title": "Flor de Toloache",
+    "leadArtist": "Flor de Toloache",
+    "date": "SAT FEB 20",
+    "time": "8PM",
+    "iso": "2027-02-20",
+    "venue": "Crystal Ballroom at Somerville Theatre",
+    "genre": "Other",
+    "tags": [],
+    "accent": "blue"
+  },
+  {
+    "slug": "zlata-chochieva-piano",
+    "title": "Zlata Chochieva, piano",
+    "leadArtist": "Zlata Chochieva",
+    "date": "SAT FEB 20",
+    "time": "8PM",
+    "iso": "2027-02-20",
+    "venue": "NEC's Jordan Hall",
+    "genre": "Pianist",
+    "tags": [
+      "Piano"
+    ],
+    "accent": "green"
+  },
+  {
+    "slug": "thibaut-garcia-and-antoine-morinire-guitars",
+    "title": "Thibaut Garcia & Antoine Morinire, guitars: Bach Goldberg Variations (Debut Series)",
+    "leadArtist": "Thibaut Garcia",
+    "date": "THU FEB 25",
+    "time": "7:30PM",
+    "iso": "2027-02-25",
+    "venue": "Longy's Pickman Hall",
+    "genre": "Instrumentalist",
+    "tags": [],
+    "accent": "green"
+  },
+  {
+    "slug": "huang-yi-and-kuka",
+    "title": "Huang Yi & KUKA",
+    "leadArtist": "Huang Yi",
+    "date": "THU FEB 25  SAT FEB 27",
+    "time": "Various",
+    "iso": "2027-02-25",
+    "venue": "Museum of Science's Public Science Common",
+    "genre": "Dance",
+    "tags": [
+      "Dance"
+    ],
+    "accent": "purple"
+  },
+  {
+    "slug": "the-debo-ray-experience",
+    "title": "The Débo Ray Experience",
+    "leadArtist": "Débo Ray",
+    "date": "SAT FEB 27",
+    "time": "3PM",
+    "iso": "2027-02-27",
+    "venue": "Bethel AME Church",
+    "genre": "Jazz",
+    "tags": [
+      "Neighborhood Arts"
+    ],
+    "accent": "orange"
+  },
+  {
+    "slug": "vikingur-olafsson-piano",
+    "title": "Víkingur Ólafsson, piano",
+    "leadArtist": "Víkingur Ólafsson",
+    "date": "SUN FEB 28",
+    "time": "3PM",
+    "iso": "2027-02-28",
+    "venue": "Symphony Hall",
+    "genre": "Pianist",
+    "tags": [
+      "Piano"
+    ],
+    "accent": "green"
+  },
+  {
+    "slug": "yoko-miwa-trio",
+    "title": "Yoko Miwa Trio",
+    "leadArtist": "Yoko Miwa",
+    "date": "SUN FEB 28",
+    "time": "3PM",
+    "iso": "2027-02-28",
+    "venue": "Multicultural Arts Center",
+    "genre": "Jazz",
+    "tags": [
+      "Piano",
+      "Neighborhood Arts"
+    ],
+    "accent": "orange"
+  },
+  {
+    "slug": "isabelle-faust-violin-and-kristian-bezuidenhout-harpsichord",
+    "title": "Isabelle Faust, violin & Kristian Bezuidenhout, harpsichord",
+    "leadArtist": "Isabelle Faust",
+    "date": "FRI MAR 05",
+    "time": "8PM",
+    "iso": "2027-03-05",
+    "venue": "NEC's Jordan Hall",
+    "genre": "Instrumentalist",
+    "tags": [],
+    "accent": "green"
+  },
+  {
+    "slug": "modern-connections-collective",
+    "title": "Modern Connections Collective: Four Here or To Go (Jenny Oliver, founder/choreographer)",
+    "leadArtist": "Modern Connections Collective",
+    "date": "SAT MAR 06",
+    "time": "3PM",
+    "iso": "2027-03-06",
+    "venue": "Roxbury Community College",
+    "genre": "Jazz",
+    "tags": [
+      "Neighborhood Arts",
+      "Roxbury"
+    ],
+    "accent": "orange"
+  },
+  {
+    "slug": "seong-jin-cho-piano",
+    "title": "Seong-Jin Cho, piano",
+    "leadArtist": "Seong-Jin Cho",
+    "date": "SUN MAR 07",
+    "time": "3PM",
+    "iso": "2027-03-07",
+    "venue": "Symphony Hall",
+    "genre": "Pianist",
+    "tags": [
+      "Piano"
+    ],
+    "accent": "green"
+  },
+  {
+    "slug": "london-symphony-orchestra",
+    "title": "London Symphony Orchestra (Pappano, conductor; Vengerov, violin)",
+    "leadArtist": "London Symphony Orchestra",
+    "date": "THU MAR 11",
+    "time": "7:30PM",
+    "iso": "2027-03-11",
+    "venue": "Symphony Hall",
+    "genre": "Orchestra",
+    "tags": [
+      "Beethoven 200"
+    ],
+    "accent": "green"
+  },
+  {
+    "slug": "pavel-haas-quartet",
+    "title": "Pavel Haas Quartet",
+    "leadArtist": "Pavel Haas Quartet",
+    "date": "FRI MAR 19",
+    "time": "8PM",
+    "iso": "2027-03-19",
+    "venue": "NEC's Jordan Hall",
+    "genre": "Chamber",
+    "tags": [],
+    "accent": "green"
+  },
+  {
+    "slug": "rakish-with-rasa-string-quartet",
+    "title": "Rakish with Rasa String Quartet",
+    "leadArtist": "Rakish",
+    "date": "SAT MAR 20",
+    "time": "3PM",
+    "iso": "2027-03-20",
+    "venue": "Multicultural Arts Center",
+    "genre": "Pop/World/Misc.",
+    "tags": [
+      "Neighborhood Arts"
+    ],
+    "accent": "orange"
+  },
+  {
+    "slug": "fernando-brandao-quartet",
+    "title": "Fernando Brandão Quartet",
+    "leadArtist": "Fernando Brandão",
+    "date": "SUN MAR 21",
+    "time": "3PM",
+    "iso": "2027-03-21",
+    "venue": "Multicultural Arts Center",
+    "genre": "Jazz",
+    "tags": [
+      "Neighborhood Arts"
+    ],
+    "accent": "orange"
+  },
+  {
+    "slug": "artemis",
+    "title": "Artemis: Sketches of Miles",
+    "leadArtist": "Artemis",
+    "date": "THU MAR 25",
+    "time": "8PM",
+    "iso": "2027-03-25",
+    "venue": "Berklee Performance Center",
+    "genre": "Jazz",
+    "tags": [],
+    "accent": "orange"
+  },
+  {
+    "slug": "fred-hersch-trio",
+    "title": "Fred Hersch Trio (Jazz Festival)",
+    "leadArtist": "Fred Hersch",
+    "date": "THU APR 01",
+    "time": "8PM",
+    "iso": "2027-04-01",
+    "venue": "Museum of Science's Public Science Common",
+    "genre": "Jazz",
+    "tags": [
+      "Jazz Festival",
+      "Piano"
+    ],
+    "accent": "orange"
+  },
+  {
+    "slug": "endea-owens-and-the-cookout",
+    "title": "Endea Owens & The Cookout (Jazz Festival)",
+    "leadArtist": "Endea Owens",
+    "date": "FRI APR 02",
+    "time": "8PM",
+    "iso": "2027-04-02",
+    "venue": "Museum of Science's Public Science Common",
+    "genre": "Jazz",
+    "tags": [
+      "Jazz Festival"
+    ],
+    "accent": "orange"
+  },
+  {
+    "slug": "anna-geniushene-piano",
+    "title": "Anna Geniushene, piano",
+    "leadArtist": "Anna Geniushene",
+    "date": "FRI APR 02",
+    "time": "8PM",
+    "iso": "2027-04-02",
+    "venue": "Groton Hill Music Center (Meadow Hall)",
+    "genre": "Pianist",
+    "tags": [
+      "Piano"
+    ],
+    "accent": "green"
+  },
+  {
+    "slug": "gregory-groover-quintet",
+    "title": "Gregory Groover Quintet: North to Boston",
+    "leadArtist": "Gregory Groover",
+    "date": "SAT APR 03",
+    "time": "3PM",
+    "iso": "2027-04-03",
+    "venue": "Twelfth Baptist Church",
+    "genre": "Jazz",
+    "tags": [
+      "Neighborhood Arts",
+      "Roxbury"
+    ],
+    "accent": "orange"
+  },
+  {
+    "slug": "immanuel-wilkins-quartet",
+    "title": "Immanuel Wilkins Quartet (Jazz Festival)",
+    "leadArtist": "Immanuel Wilkins",
+    "date": "SAT APR 03",
+    "time": "8PM",
+    "iso": "2027-04-03",
+    "venue": "Museum of Science's Public Science Common",
+    "genre": "Jazz",
+    "tags": [
+      "Jazz Festival",
+      "Artist in Residence"
+    ],
+    "accent": "orange"
+  },
+  {
+    "slug": "patricia-brennan-tentet",
+    "title": "Patricia Brennan Tentet: Of The Near And Far (Jazz Festival)",
+    "leadArtist": "Patricia Brennan",
+    "date": "SUN APR 04",
+    "time": "3PM",
+    "iso": "2027-04-04",
+    "venue": "Museum of Science's Public Science Common",
+    "genre": "Jazz",
+    "tags": [
+      "Jazz Festival"
+    ],
+    "accent": "orange"
+  },
+  {
+    "slug": "david-sedaris",
+    "title": "David Sedaris",
+    "leadArtist": "David Sedaris",
+    "date": "FRI APR 09",
+    "time": "8PM",
+    "iso": "2027-04-09",
+    "venue": "Symphony Hall",
+    "genre": "Spoken Word",
+    "tags": [],
+    "accent": "blue"
+  },
+  {
+    "slug": "manuela-sanchez-goubert-ensemble",
+    "title": "Manuela Sánchez-Goubert Ensemble",
+    "leadArtist": "Manuela Sánchez-Goubert",
+    "date": "SAT APR 10",
+    "time": "12PM",
+    "iso": "2027-04-10",
+    "venue": "Shaw-Roxbury Branch, Boston Public Library",
+    "genre": "Pop/World/Misc.",
+    "tags": [
+      "Neighborhood Arts",
+      "Roxbury"
+    ],
+    "accent": "orange"
+  },
+  {
+    "slug": "zambra-collective",
+    "title": "Zambra Collective",
+    "leadArtist": "Zambra Collective",
+    "date": "SUN APR 11",
+    "time": "3PM",
+    "iso": "2027-04-11",
+    "venue": "First Church Roxbury",
+    "genre": "Pop/World/Misc.",
+    "tags": [
+      "Neighborhood Arts",
+      "Roxbury"
+    ],
+    "accent": "orange"
+  },
+  {
+    "slug": "stanley-clarke-and-hiromi-featuring-publiquartet",
+    "title": "Stanley Clarke & Hiromi featuring PUBLIQuartet: A Celebration of Chick Corea and Beyond",
+    "leadArtist": "Stanley Clarke",
+    "date": "SUN APR 11",
+    "time": "5PM",
+    "iso": "2027-04-11",
+    "venue": "Berklee Performance Center",
+    "genre": "Jazz",
+    "tags": [
+      "Piano"
+    ],
+    "accent": "orange"
+  },
+  {
+    "slug": "branford-marsalis-and-dianne-reeves-celebrate-john-coltrane",
+    "title": "Branford Marsalis & Dianne Reeves Celebrate John Coltrane",
+    "leadArtist": "Branford Marsalis",
+    "date": "TUE APR 13",
+    "time": "7:30PM",
+    "iso": "2027-04-13",
+    "venue": "Symphony Hall",
+    "genre": "Jazz",
+    "tags": [
+      "Coltrane 100"
+    ],
+    "accent": "orange"
+  },
+  {
+    "slug": "leonkoro-quartet",
+    "title": "Leonkoro Quartet (Debut Series)",
+    "leadArtist": "Leonkoro Quartet",
+    "date": "WED APR 14",
+    "time": "7:30PM",
+    "iso": "2027-04-14",
+    "venue": "Longy's Pickman Hall",
+    "genre": "Chamber",
+    "tags": [],
+    "accent": "green"
+  },
+  {
+    "slug": "jazz-at-lincoln-center-orchestra-with-wynton-marsalis",
+    "title": "Jazz at Lincoln Center Orchestra with Wynton Marsalis",
+    "leadArtist": "Jazz at Lincoln Center Orchestra",
+    "date": "FRI APR 16",
+    "time": "8PM",
+    "iso": "2027-04-16",
+    "venue": "Symphony Hall",
+    "genre": "Jazz",
+    "tags": [],
+    "accent": "orange"
+  },
+  {
+    "slug": "lawrence-brownlee-and-erin-morley",
+    "title": "Lawrence Brownlee & Erin Morley: The Golden Age",
+    "leadArtist": "Lawrence Brownlee",
+    "date": "FRI APR 16",
+    "time": "8PM",
+    "iso": "2027-04-16",
+    "venue": "NEC's Jordan Hall",
+    "genre": "Vocal",
+    "tags": [],
+    "accent": "purple"
+  },
+  {
+    "slug": "ukulele-orchestra-of-great-britain",
+    "title": "Ukulele Orchestra of Great Britain",
+    "leadArtist": "Ukulele Orchestra of Great Britain",
+    "date": "SAT APR 17",
+    "time": "8PM",
+    "iso": "2027-04-17",
+    "venue": "NEC's Jordan Hall",
+    "genre": "Other",
+    "tags": [],
+    "accent": "blue"
+  },
+  {
+    "slug": "jason-palmer-quartet-featuring-immanuel-wilkins-saxophone",
+    "title": "Jason Palmer Quartet featuring Immanuel Wilkins, saxophone",
+    "leadArtist": "Jason Palmer",
+    "date": "SAT APR 24",
+    "time": "3PM",
+    "iso": "2027-04-24",
+    "venue": "Roxbury Community College",
+    "genre": "Jazz",
+    "tags": [
+      "Artist in Residence",
+      "Neighborhood Arts",
+      "Roxbury"
+    ],
+    "accent": "orange"
+  },
+  {
+    "slug": "alvin-ailey-american-dance-theater",
+    "title": "Alvin Ailey American Dance Theater",
+    "leadArtist": "Alvin Ailey American Dance Theater",
+    "date": "FRI APR 30  SUN MAY 02",
+    "time": "Various",
+    "iso": "2027-04-30",
+    "venue": "Boch Center Wang Theatre",
+    "genre": "Dance",
+    "tags": [
+      "Dance"
+    ],
+    "accent": "purple"
+  },
+  {
+    "slug": "an-evening-with-audra-mcdonald",
+    "title": "An Evening with Audra McDonald",
+    "leadArtist": "Audra McDonald",
+    "date": "FRI APR 30",
+    "time": "8PM",
+    "iso": "2027-04-30",
+    "venue": "Symphony Hall",
+    "genre": "Other",
+    "tags": [],
+    "accent": "blue"
+  },
+  {
+    "slug": "veronica-robles-female-mariachi",
+    "title": "Veronica Robles Female Mariachi",
+    "leadArtist": "Veronica Robles",
+    "date": "SAT MAY 01",
+    "time": "3PM",
+    "iso": "2027-05-01",
+    "venue": "Arlington Street Church",
+    "genre": "Pop/World/Misc.",
+    "tags": [
+      "Neighborhood Arts"
+    ],
+    "accent": "orange"
+  },
+  {
+    "slug": "alisa-amador-and-friends",
+    "title": "Alisa Amador & Friends",
+    "leadArtist": "Alisa Amador",
+    "date": "THU MAY 06",
+    "time": "7:30PM",
+    "iso": "2027-05-06",
+    "venue": "Arlington Street Church",
+    "genre": "Pop/World/Misc.",
+    "tags": [
+      "Neighborhood Arts"
+    ],
+    "accent": "orange"
+  },
+  {
+    "slug": "bela-fleck-edmar-castaneda-antonio-sanchez-trio",
+    "title": "Béla Fleck, Edmar Castañeda, Antonio Sánchez Trio",
+    "leadArtist": "Béla Fleck",
+    "date": "FRI MAY 14",
+    "time": "8PM",
+    "iso": "2027-05-14",
+    "venue": "Berklee Performance Center",
+    "genre": "Jazz",
+    "tags": [],
+    "accent": "orange"
+  },
+  {
+    "slug": "nadine-sierra-soprano",
+    "title": "Nadine Sierra, soprano",
+    "leadArtist": "Nadine Sierra",
+    "date": "WED JUN 02",
+    "time": "7:30PM",
+    "iso": "2027-06-02",
+    "venue": "NEC's Jordan Hall",
+    "genre": "Vocal",
+    "tags": [],
+    "accent": "purple"
+  },
+  {
+    "slug": "rasa-string-quartet-with-carlos-vargas-piano",
+    "title": "Rasa String Quartet with Carlos Vargas, piano",
+    "leadArtist": "Rasa String Quartet",
+    "date": "SAT JUN 05",
+    "time": "12PM",
+    "iso": "2027-06-05",
+    "venue": "Shaw-Roxbury Branch, Boston Public Library",
+    "genre": "Chamber",
+    "tags": [
+      "Piano",
+      "Neighborhood Arts",
+      "Roxbury"
+    ],
+    "accent": "green"
+  }
+]

@@ -9,8 +9,8 @@
     "accent": "orange",
     "brush": "rhythm",
     "photoCaption": "Lizz Wright",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "artistWebsite": "https://www.lizzwright.net",
@@ -27,8 +27,8 @@
         "With a warm, honeyed alto that listeners have compared to barrel-aged bourbon and soft leather, Lizz Wright invites you closer, to share the communion and empathy that she extends to rapturous listeners around the world. With a folk-inflected jazz band, she creates original songs and covers that reflect the cultural fabric of America, inviting audiences into a musical heartland that makes anyone feel at home."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -61,7 +61,8 @@
           "work": "To be announced from the stage.",
           "meta": ""
         }
-      ]
+      ],
+      "runtimeNote": "There will be no intermission in this evening’s program, which will run approximately 90 minutes."
     },
     {
       "id": "artist",
@@ -99,7 +100,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -122,13 +123,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

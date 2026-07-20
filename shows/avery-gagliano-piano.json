@@ -10,14 +10,13 @@
     "accent": "green",
     "brush": "harmony",
     "photoCaption": "Avery Gagliano",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "artistWebsite": "https://www.averygagliano.com",
     "pressQuote": "Her ability to inhabit every room in the immense imagination of Frédéric Chopin came as a revelation. New York Classical Review",
-    "pressQuoteURL": "https://newyorkclassicalreview.com/2021/12/avery-gagliano-offers-revelatory-chopin-in-carnegie-hall-debut/",
-    "photoSrc": ""
+    "pressQuoteURL": "https://newyorkclassicalreview.com/2021/12/avery-gagliano-offers-revelatory-chopin-in-carnegie-hall-debut/"
   },
   "sections": [
     {
@@ -30,8 +29,8 @@
         "Celebrated as \"a distinctive young talent\" (International Piano), pianist Avery Gagliano's concerts offer a \"distinctly narrative approach\" (Miami International Piano Festival). She makes her Vivo Performing Arts debut with an audacious program that demonstrates her prodigious command of mood and structure. From the luminous to the relentless, from the gauzy to the percussive, and concluding with Schumann's all-encompassing Symphonic Etudes, Gagliano offers a program that announces her as an artist of assured command."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -50,7 +49,8 @@
       "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
       "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
       "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
-      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you.",
+      "mgmtCredit": "Avery Gagliano is represented by Curtis Artist Management at Curtis Institute of Music."
     },
     {
       "id": "program",
@@ -69,7 +69,13 @@
         },
         {
           "composer": "FREDERIC RZEWSKI",
-          "work": "North American Ballads: IV. \"Winnsboro Cotton Mill Blues\""
+          "work": "from Four North American Ballads",
+          "movements": [
+            "IV. “Winnsboro Cotton Mill Blues”"
+          ]
+        },
+        {
+          "kind": "intermission"
         },
         {
           "composer": "LEON KIRCHNER",
@@ -77,9 +83,28 @@
         },
         {
           "composer": "ROBERT SCHUMANN",
-          "work": "Symphonic Etudes, Op. 13"
+          "work": "Symphonic Etudes, Op. 13 and posthumous",
+          "movements": [
+            "Theme: Andante",
+            "Etude 1 (Var. 1): Un poco più vivo",
+            "Etude 2 (Var. 2): Andante",
+            "Etude 3: Vivace",
+            "Etude 4 (Var. 3): Allegro marcato",
+            "Etude 5 (Var. 4): Scherzando",
+            "Etude 6 (Var. 5): Agitato",
+            "Etude 7 (Var. 6): Allegro molto",
+            "Etude 8 (Var. 7): Sempre marcatissimo",
+            "Posth. Var. IV: Allegretto",
+            "Posth. Var. V: Moderato",
+            "Etude 9: Presto possibile",
+            "Etude 10 (Var. 8): Allegro con energia",
+            "Posth. Var. I: Andante, Tempo del tema",
+            "Etude 11 (Var. 9): Andante espressivo",
+            "Etude 12 (Finale): Allegro brillante"
+          ]
         }
-      ]
+      ],
+      "runtimeNote": "This evening’s program will run approximately 90 minutes, including intermission."
     },
     {
       "id": "artist",
@@ -117,7 +142,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -140,13 +165,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]
@@ -164,19 +189,5 @@
       }
     ],
     "ensembleCount": 1
-  },
-  "_tweaks": {
-    "coverVariant": "default",
-    "tocVariant": "minimal",
-    "tocHighlight": "plum",
-    "coverAccent": "plum",
-    "coverBrush": "form",
-    "brushColor": "tangerine",
-    "brushScale": 600,
-    "brushAngle": -5,
-    "brushOffsetY": 0,
-    "brushOffsetX": 64,
-    "coverTextColor": "auto",
-    "hiddenSections": []
   }
 }

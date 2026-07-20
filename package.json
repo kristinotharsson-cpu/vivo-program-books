@@ -1,24 +1,7 @@
 {
   "name": "vivo-program-books",
-  "version": "1.0.0",
-  "description": "Vivo Performing Arts — Digital Program Book Platform",
-  "scripts": {
-    "dev": "npx serve project -l 3000",
-    "start": "npx serve project -l 3000",
-    "preview": "npx serve project -l 3000"
-  },
-  "devDependencies": {
-    "serve": "^14.2.4"
-  },
-  "engines": {
-    "node": ">=18"
-  },
+  "private": true,
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.32.1",
-    "@babel/standalone": "^7.29.4",
-    "@netlify/blobs": "^8.1.0",
-    "ajv": "^8.17.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "@netlify/blobs": "^8.1.0"
   }
 }

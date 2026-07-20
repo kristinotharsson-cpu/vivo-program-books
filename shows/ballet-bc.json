@@ -9,8 +9,8 @@
     "accent": "purple",
     "brush": "motion",
     "photoCaption": "Ballet BC",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "artistWebsite": "https://balletbc.com",
@@ -27,8 +27,8 @@
         "\"Visually stunning and emotionally profound\" (PBS), Vancouver's Ballet BC arrives with a program that moves through tenderness, ecstasy, and raw human longing. Under artistic director Medhi Walerski, a veteran of the legendary Nederlands Dans Theater, 20 dancers bring precision and a rare openness: they share movement that asks questions, rather than delivering answers. Ballet BC treats creation itself as its reason for being, and it shows: these performances, and these stunning works, will be a highlight of the season."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -68,7 +68,8 @@
           "composer": "SHAHAR BINYAMINI BOLERO X",
           "work": "(2026)"
         }
-      ]
+      ],
+      "runtimeNote": "Sentence re post-show Sat eve with TS to be finalized."
     },
     {
       "id": "artist",
@@ -106,7 +107,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -129,13 +130,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

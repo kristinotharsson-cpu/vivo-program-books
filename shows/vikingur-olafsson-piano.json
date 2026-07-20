@@ -9,8 +9,8 @@
     "accent": "green",
     "brush": "harmony",
     "photoCaption": "Víkingur Ólafsson",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "genre": "Pianist",
@@ -29,8 +29,8 @@
         "Audiences of Vivo Performing Arts have come to expect from Víkingur Ólafsson not only performances of striking brilliance, but programs shaped with insight and intention. In his upcoming appearance at Symphony Hall, Ólafsson marks Philip Glass’s 90th birthday while drawing from his own Deutsche Grammophon discography, pairing Glass’ etudes with selections from suites by Baroque master Jean-Philippe Rameau and modernist composer Claude Debussy."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -60,43 +60,48 @@
       "pieces": [
         {
           "composer": "PHILIP GLASS",
-          "work": "“Opening” from Glassworks"
+          "work": "Opening from Glassworks",
+          "movements": [
+            "CLAUDE DEBUSSY “Ondine,” No. 8 from",
+            "Préludes, Book II",
+            "GLASS Etude No. 15",
+            "JEAN-PHILIPPE RAMEAU Selections from Suite No. 3 in D Major",
+            "Les tendres plaintes",
+            "Les tourbillons",
+            "La joyeuse",
+            "Les cyclopes"
+          ]
         },
         {
-          "composer": "CLAUDE DEBUSSY",
-          "work": "“Ondine,” No. 8 from Préludes, Book II"
+          "composer": "DEBUSSY",
+          "work": "Serenade for the Doll, from Children’s Corner",
+          "movements": [
+            "RAMEAU Selections from Suite No. 2 in E minor",
+            "Le Rappel des Oiseaux",
+            "Rigaudons I, II & Double",
+            "Musette en Rondeau",
+            "Tambourin",
+            "La Villageoise",
+            "Gigues en Rondeau I & II",
+            "DEBUSSY “Jardins sous la pluie” from",
+            "Estampes"
+          ]
         },
         {
           "composer": "GLASS",
-          "work": "Etude No. 15"
-        },
-        {
-          "composer": "JEAN-PHILIPPE RAMEAU",
-          "work": "Selections from Suite No. 3 in D Major"
-        },
-        {
-          "composer": "DEBUSSY",
-          "work": "“Serenade for the Doll,” from Children’s Corner"
-        },
-        {
-          "composer": "RAMEAU",
-          "work": "Selections from Suite No. 2 in E minor"
-        },
-        {
-          "composer": "DEBUSSY",
-          "work": "“Jardins sous la pluie” from Estampes"
-        },
-        {
-          "composer": "GLASS",
-          "work": "Etude No. 3"
-        },
-        {
-          "composer": "DEBUSSY",
-          "work": "“The Snow Is Dancing,” from Children’s Corner"
-        },
-        {
-          "composer": "RAMEAU",
-          "work": "Selections from Suite No. 5 in A minor"
+          "work": "Etude No. 3",
+          "movements": [
+            "DEBUSSY “The Snow Is Dancing,” from",
+            "Children’s Corner",
+            "RAMEAU Selections from Suite No. 5 in A minor",
+            "Allemande",
+            "Courante",
+            "Sarabande",
+            "Les Trois Mains",
+            "La Fanfarinette",
+            "La Triomphante",
+            "Gavotte and 6 Doubles"
+          ]
         }
       ]
     },
@@ -136,7 +141,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -159,13 +164,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

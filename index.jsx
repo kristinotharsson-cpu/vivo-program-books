@@ -3,188 +3,6 @@
 
 const { useState, useEffect, useMemo } = React;
 
-// ---------- New Program helpers ----------
-const STARTER_GENRES = [
-  { value: "Classical", label: "Classical" },
-  { value: "Jazz", label: "Jazz" },
-  { value: "Dance", label: "Dance" },
-  { value: "Pop/World", label: "Pop / World" },
-  { value: "Spoken Word", label: "Spoken Word" },
-  { value: "Other", label: "Other / Neighborhood Arts" },
-];
-const STARTER_ACCENTS = [
-  { value: "plum", label: "Plum" },
-  { value: "tangerine", label: "Tangerine" },
-  { value: "orange", label: "Orange" },
-  { value: "blue", label: "Blue" },
-  { value: "green", label: "Green" },
-  { value: "lavender", label: "Lavender" },
-];
-
-function slugify(text) {
-  return text.toLowerCase()
-    .normalize("NFD").replace(/[̀-ͯ]/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "")
-    .slice(0, 60) || ("program-" + Date.now());
-}
-
-function makeStarterJson(form) {
-  const slug = slugify(form.title + (form.isoDate ? "-" + form.isoDate.replace(/-/g, "") : ""));
-  const initials = (form.title).split(/\s+/).map(w => (w[0] || "").toUpperCase()).filter(Boolean).join("").slice(0, 2) || "VA";
-  return {
-    slug,
-    cover: {
-      eyebrow: "Vivo Performing Arts presents",
-      title: form.title,
-      subtitle: form.subtitle || "",
-      date: form.date || "",
-      time: form.time || "",
-      venue: form.venue || "",
-      accent: form.accent || "plum",
-      brush: "harmony",
-      photoCaption: form.title,
-      calloutLabel: "A note from President and Executive Director",
-      calloutName: "Gary Dunning",
-      presentedBy: "",
-      footerSponsor: null
-    },
-    sections: [
-      {
-        id: "welcome", title: "Welcome", kind: "welcome",
-        eyebrow: "From the Artistic Director",
-        quote: "Welcome to Vivo Performing Arts.",
-        body: ["We are delighted to present " + form.title + ". Thank you for joining us tonight."],
-        signature: { name: "Gary Dunning", role: "President and Executive Director, Vivo Performing Arts" }
-      },
-      {
-        id: "program", title: "Program", kind: "program",
-        eyebrow: "The Running Order",
-        lead: "Program to be announced from the stage.",
-        pieces: [{ composer: "Artist", work: "To be announced from the stage.", meta: "" }]
-      },
-      {
-        id: "artist", title: "Cast & Creative", kind: "cast",
-        eyebrow: "On Stage Tonight",
-        cast: [{ role: form.subtitle || "Artist", name: form.title }],
-        creative: []
-      },
-      {
-        id: "bios", title: "Artist Bios", kind: "bios",
-        eyebrow: "Tonight's Artist",
-        bios: [{
-          id: slugify(form.title), name: form.title, role: form.subtitle || "Artist",
-          initials, photoSrc: "",
-          body: ["Biography to be added. Click Edit Content in the menu to fill in this section."]
-        }]
-      },
-      {
-        id: "vivo", kind: "vivo", title: "About Vivo Performing Arts",
-        eyebrow: "Audience Information · Staff · Supporters"
-      },
-      {
-        id: "info", title: "Hall Info", kind: "info", eyebrow: "Visitor Info",
-        sections: [
-          { h: "Venue", body: [form.venue || "Venue to be confirmed."] },
-          { h: "Land Acknowledgment", body: ["Vivo Performing Arts gathers and performs on the unceded ancestral lands of the Massachusett, Pawtucket, and Wampanoag peoples."] },
-          { h: "Contact", body: ["Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"] }
-        ]
-      }
-    ],
-    _meta: {
-      iso: form.isoDate || "",
-      genre: form.genre || "Other",
-      venueName: form.venue || "",
-      leadArtist: form.title,
-      ensembleCount: 1,
-      _local: true
-    }
-  };
-}
-
-function NewProgramModal({ onClose }) {
-  const [form, setForm] = useState({
-    title: "", subtitle: "", date: "", isoDate: "", time: "", venue: "", genre: "Classical", accent: "plum"
-  });
-  const [creating, setCreating] = useState(false);
-  const set = (key) => (e) => setForm(f => ({ ...f, [key]: e.target.value }));
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!form.title.trim()) return;
-    setCreating(true);
-    const showData = makeStarterJson(form);
-    const slug = showData.slug;
-    try {
-      localStorage.setItem("vivo-pb-data:" + slug, JSON.stringify(showData));
-      const existing = JSON.parse(localStorage.getItem("vivo-new-shows") || "[]");
-      if (!existing.includes(slug)) {
-        localStorage.setItem("vivo-new-shows", JSON.stringify([...existing, slug]));
-      }
-    } catch (ex) {}
-    window.location.href = "Program Book.html?show=" + slug;
-  };
-
-  return (
-    <div className="idx-modal-overlay" onClick={e => e.target === e.currentTarget && onClose()}>
-      <div className="idx-modal" role="dialog" aria-modal="true">
-        <header className="idx-modal-head">
-          <h2>New Program Book</h2>
-          <button className="idx-modal-close" onClick={onClose} aria-label="Close">×</button>
-        </header>
-        <form className="idx-modal-form" onSubmit={handleSubmit}>
-          <label className="idx-modal-field">
-            <span>Program / Artist Name <strong>*</strong></span>
-            <input required value={form.title} onChange={set("title")} placeholder="e.g. Víkingur Ólafsson" autoFocus />
-          </label>
-          <label className="idx-modal-field">
-            <span>Genre / Instrument / Type</span>
-            <input value={form.subtitle} onChange={set("subtitle")} placeholder="e.g. Piano" />
-          </label>
-          <div className="idx-modal-row">
-            <label className="idx-modal-field">
-              <span>Display Date</span>
-              <input value={form.date} onChange={set("date")} placeholder="e.g. SAT SEP 12" />
-            </label>
-            <label className="idx-modal-field">
-              <span>Date (for sorting)</span>
-              <input value={form.isoDate} onChange={set("isoDate")} type="date" />
-            </label>
-            <label className="idx-modal-field">
-              <span>Time</span>
-              <input value={form.time} onChange={set("time")} placeholder="e.g. 7:30PM" />
-            </label>
-          </div>
-          <label className="idx-modal-field">
-            <span>Venue</span>
-            <input value={form.venue} onChange={set("venue")} placeholder="e.g. Symphony Hall" />
-          </label>
-          <div className="idx-modal-row">
-            <label className="idx-modal-field">
-              <span>Genre</span>
-              <select value={form.genre} onChange={set("genre")}>
-                {STARTER_GENRES.map(g => <option key={g.value} value={g.value}>{g.label}</option>)}
-              </select>
-            </label>
-            <label className="idx-modal-field">
-              <span>Cover Color</span>
-              <select value={form.accent} onChange={set("accent")}>
-                {STARTER_ACCENTS.map(a => <option key={a.value} value={a.value}>{a.label}</option>)}
-              </select>
-            </label>
-          </div>
-          <div className="idx-modal-actions">
-            <button type="button" className="idx-modal-cancel" onClick={onClose}>Cancel</button>
-            <button type="submit" className="idx-modal-submit" disabled={creating || !form.title.trim()}>
-              {creating ? "Creating…" : "Create Program Book →"}
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  );
-}
-
 // Genre code → display label
 const GENRE_LABEL = {
   "PPP": "Public Performance Project",
@@ -194,7 +12,7 @@ const GENRE_LABEL = {
 };
 const genreLabel = s => {
   if (!s) return "";
-  if ((s.tags || []).includes("Draft")) return "Draft";
+  // Tag-based override: Neighborhood Arts trumps the raw genre code
   if ((s.tags || []).includes("Neighborhood Arts")) return "Neighborhood Arts";
   const g = s.genre || "";
   return GENRE_LABEL[g] || g;
@@ -244,6 +62,26 @@ function compactDate(s) {
   return m ? { mon: m[1], day: m[2] } : { mon: "", day: s };
 }
 
+// Inline-editable text (contentEditable). Blocks link navigation while editing.
+function IdxEditable({ value, field, slug, onEdit, as = "span", className, placeholder }) {
+  const Tag = as;
+  return (
+    <Tag
+      className={(className || "") + " idx-editable"}
+      contentEditable
+      suppressContentEditableWarning
+      spellCheck={false}
+      data-placeholder={placeholder || ""}
+      onClick={e => { e.preventDefault(); e.stopPropagation(); }}
+      onKeyDown={e => { if (e.key === "Enter") { e.preventDefault(); e.currentTarget.blur(); } }}
+      onBlur={e => {
+        const v = e.currentTarget.textContent.trim();
+        if (v !== (value || "")) onEdit(slug, field, v);
+      }}
+    >{value}</Tag>
+  );
+}
+
 function App() {
   const [shows, setShows] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -251,7 +89,18 @@ function App() {
   const [query, setQuery] = useState("");
   const [genreFilter, setGenreFilter] = useState("upcoming");
   const [showPast, setShowPast] = useState(false);
-  const [showNewModal, setShowNewModal] = useState(false);
+  const [edit, setEdit] = useState(false);
+  const [overrides, setOverrides] = useState(() => {
+    try { return JSON.parse(localStorage.getItem("vivo-idx-overrides") || "{}"); } catch (e) { return {}; }
+  });
+  const [statuses, setStatuses] = useState({});
+  useEffect(() => {
+    if (window.VivoStore) window.VivoStore.listPrograms().then(setStatuses).catch(() => {});
+  }, []);
+  useEffect(() => { localStorage.setItem("vivo-idx-overrides", JSON.stringify(overrides)); }, [overrides]);
+  const applyEdit = (slug, field, value) => {
+    setOverrides(o => ({ ...o, [slug]: { ...(o[slug] || {}), [field]: value } }));
+  };
   const todayTs = useMemo(() => {
     const d = new Date();
     d.setHours(0,0,0,0);
@@ -264,35 +113,7 @@ function App() {
   useEffect(() => {
     fetch("shows/manifest.json")
       .then(r => { if (!r.ok) throw new Error("manifest"); return r.json(); })
-      .then(data => {
-        // Merge locally-created programs
-        const serverSlugs = new Set(data.map(s => s.slug));
-        let newSlugs = [];
-        try { newSlugs = JSON.parse(localStorage.getItem("vivo-new-shows") || "[]"); } catch (e) {}
-        const localShows = newSlugs
-          .filter(slug => !serverSlugs.has(slug))
-          .map(slug => {
-            try {
-              const d = JSON.parse(localStorage.getItem("vivo-pb-data:" + slug) || "{}");
-              if (!d.cover) return null;
-              return {
-                slug: d.slug || slug,
-                title: d.cover.title || slug,
-                leadArtist: d.cover.title || slug,
-                date: d.cover.date || "DRAFT",
-                time: d.cover.time || "",
-                iso: (d._meta && d._meta.iso) || new Date().toISOString().slice(0, 10),
-                venue: d.cover.venue || "TBD",
-                genre: (d._meta && d._meta.genre) || "Other",
-                tags: ["Draft"],
-                accent: d.cover.accent || "plum",
-                _local: true
-              };
-            } catch (ex) { return null; }
-          }).filter(Boolean);
-        setShows([...data, ...localShows]);
-        setLoading(false);
-      })
+      .then(data => { setShows(data); setLoading(false); })
       .catch(e => { setError(e.message); setLoading(false); });
   }, []);
 
@@ -308,11 +129,20 @@ function App() {
     return set;
   }, [shows, todayTs]);
 
+  const mergedShows = useMemo(
+    () => shows.map(s => {
+      const st = statuses[s.slug];
+      const base = overrides[s.slug] ? { ...s, ...overrides[s.slug] } : s;
+      return { ...base, _status: st ? st.status : "empty", _updatedAt: st && st.updatedAt, _exportedAt: st && st.lastExportedAt };
+    }),
+    [shows, overrides, statuses]
+  );
+
   const filtered = useMemo(() => {
     const grp = FILTERS.find(g => g.id === genreFilter);
     const q = query.trim().toLowerCase();
     const ctx = { upcoming: upcomingSlugs };
-    return shows.filter(s => {
+    return mergedShows.filter(s => {
       if (grp && !grp.match(s, ctx)) return false;
       if (!q) return true;
       const haystack = [s.title, s.leadArtist, s.venue, s.genre, s.date, ...(s.tags||[])].join(" ").toLowerCase();
@@ -322,7 +152,7 @@ function App() {
       const bi = parseDateMeta(b.iso, b.date).ts;
       return ai - bi;
     });
-  }, [shows, query, genreFilter, upcomingSlugs]);
+  }, [mergedShows, query, genreFilter, upcomingSlugs]);
 
   // Split into upcoming + past
   const { upcomingShows, pastShows } = useMemo(() => {
@@ -356,12 +186,9 @@ function App() {
           <span>Vivo Performing Arts</span>
         </a>
         <div className="idx-top-right">
-          <button className="idx-new-btn" onClick={() => setShowNewModal(true)}>+ New Program</button>
-          <a href="https://vivoperformingarts.org/" target="_blank" rel="noopener">vivoperformingarts.org ↗</a>
+          <a href="https://vivoperformingarts.org" target="_blank" rel="noopener">vivoperformingarts.org ↗</a>
         </div>
       </header>
-
-      {showNewModal && <NewProgramModal onClose={() => setShowNewModal(false)} />}
 
       <section className="idx-hero">
         <img className="idx-hero-logo" src="assets/logos/vivo-logo-black.png" alt="Vivo Performing Arts" />
@@ -407,6 +234,10 @@ function App() {
             <button aria-pressed={view === "list"} onClick={() => setView("list")}>List</button>
             <button aria-pressed={view === "grid"} onClick={() => setView("grid")}>Grid</button>
           </div>
+
+          <div className="idx-view-toggle idx-edit-toggle" role="group" aria-label="Edit">
+            <button aria-pressed={edit} onClick={() => setEdit(e => !e)}>{edit ? "Done" : "Edit"}</button>
+          </div>
         </div>
       </div>
 
@@ -416,9 +247,9 @@ function App() {
       {!loading && !error && (
         <>
           <div className="idx-results-count">
-            {upcomingShows.length} upcoming{pastShows.length > 0 && <> · {pastShows.length} past</>} · {shows.length} total
-            {query && <> · "{query}"</>}
-            {genreFilter !== "all" && <> · {FILTERS.find(g => g.id === genreFilter)?.label}</>}
+            {upcomingShows.length} upcoming{pastShows.length > 0 && <> {pastShows.length} past</>} {shows.length} total
+            {query && <> "{query}"</>}
+            {genreFilter !== "all" && <> {FILTERS.find(g => g.id === genreFilter)?.label}</>}
           </div>
 
           {filtered.length === 0 ? (
@@ -429,21 +260,21 @@ function App() {
             </div>
           ) : view === "grid" ? (
             <>
-              {upcomingShows.length > 0 && <GridView items={upcomingShows} />}
+              {upcomingShows.length > 0 && <GridView items={upcomingShows} edit={edit} onEdit={applyEdit} />}
               {pastShows.length > 0 && (
                 <>
                   <PastDivider count={pastShows.length} open={showPast} onToggle={() => setShowPast(p => !p)} />
-                  {showPast && <GridView items={pastShows} past />}
+                  {showPast && <GridView items={pastShows} past edit={edit} onEdit={applyEdit} />}
                 </>
               )}
             </>
           ) : (
             <>
-              {upcomingGroups.length > 0 && <ListView groups={upcomingGroups} />}
+              {upcomingGroups.length > 0 && <ListView groups={upcomingGroups} edit={edit} onEdit={applyEdit} />}
               {pastShows.length > 0 && (
                 <>
                   <PastDivider count={pastShows.length} open={showPast} onToggle={() => setShowPast(p => !p)} />
-                  {showPast && <ListView groups={pastGroups} past />}
+                  {showPast && <ListView groups={pastGroups} past edit={edit} onEdit={applyEdit} />}
                 </>
               )}
             </>
@@ -470,23 +301,70 @@ function PastDivider({ count, open, onToggle }) {
   );
 }
 
-function GridView({ items, past }) {
+// Relative "last edited" label
+function relTime(iso) {
+  if (!iso) return null;
+  const d = (Date.now() - new Date(iso).getTime()) / 1000;
+  if (d < 90) return "just now";
+  if (d < 3600) return Math.round(d / 60) + "m ago";
+  if (d < 86400) return Math.round(d / 3600) + "h ago";
+  if (d < 172800) return "yesterday";
+  return Math.round(d / 86400) + "d ago";
+}
+function StatusBadge({ s }) {
+  const status = s._status || "empty";
+  const label = status === "published" ? "Published" : status === "draft" ? "Draft" : "Empty";
+  const when = relTime(s._updatedAt);
+  return (
+    <div className="idx-status">
+      <span className={"idx-status-badge is-" + status}>{label}</span>
+      {status === "empty"
+        ? <span className="idx-status-when">Awaiting PDF import</span>
+        : when ? <span className="idx-status-when">Last edited {when}</span> : null}
+    </div>
+  );
+}
+function CardActions({ s }) {
+  const go = (url) => (e) => { e.preventDefault(); e.stopPropagation(); location.assign(url); };
+  return (
+    <div className="idx-card-actions">
+      <button className="idx-act" onClick={go(`Program Book.html?show=${s.slug}`)}>Open</button>
+      {s._status !== "empty" ? (
+        <button className="idx-act is-ghost" onClick={go(`Program Book.html?show=${s.slug}&export=1`)}>Export</button>
+      ) : null}
+    </div>
+  );
+}
+
+function GridView({ items, past, edit, onEdit }) {
   return (
     <div className="idx-grid">
       {items.map(s => {
         const d = compactDate(s.date);
         return (
-          <a key={s.slug} className={"idx-card" + (past ? " idx-card-past" : "")} data-accent={s.accent || "purple"} href={`Program Book.html?show=${s.slug}`}>
-            <div className="idx-card-genre">{genreLabel(s)}</div>
-            <div className="idx-card-date">
-              <span className="idx-card-day">{d.mon} {d.day}</span>
-              <span className="idx-card-time">{s.time || ""}</span>
+          <a key={s.slug} className={"idx-card" + (past ? " idx-card-past" : "") + (edit ? " is-editing" : "")} data-accent={s.accent || "purple"} href={`Program Book.html?show=${s.slug}`} onClick={e => { if (edit) e.preventDefault(); }}>
+            <div className="idx-card-head">
+              <div className="idx-card-date">
+                <span className="idx-card-day">{d.mon} {d.day}</span>
+                {edit
+                  ? <IdxEditable className="idx-card-time" value={s.time || ""} field="time" slug={s.slug} onEdit={onEdit} placeholder="Time" />
+                  : <span className="idx-card-time">{s.time || ""}</span>}
+              </div>
+              <div className="idx-card-genre">{genreLabel(s)}</div>
             </div>
-            <h3 className="idx-card-title">{s.title}</h3>
-            <p className="idx-card-artist">{s.leadArtist !== s.title ? s.leadArtist : ""}</p>
+            {edit
+              ? <IdxEditable as="h3" className="idx-card-title" value={s.title} field="title" slug={s.slug} onEdit={onEdit} placeholder="Title" />
+              : <h3 className="idx-card-title">{s.title}</h3>}
+            {edit
+              ? <IdxEditable as="p" className="idx-card-artist" value={s.leadArtist || ""} field="leadArtist" slug={s.slug} onEdit={onEdit} placeholder="Lead artist" />
+              : <p className="idx-card-artist">{s.leadArtist !== s.title ? s.leadArtist : ""}</p>}
             <div className="idx-card-meta">
-              <span>{s.venue}</span>
+              {edit
+                ? <IdxEditable value={s.venue || ""} field="venue" slug={s.slug} onEdit={onEdit} placeholder="Venue" />
+                : <span>{s.venue}</span>}
             </div>
+            <StatusBadge s={s} />
+            <CardActions s={s} />
             <span className="idx-card-arrow">→</span>
           </a>
         );
@@ -495,7 +373,7 @@ function GridView({ items, past }) {
   );
 }
 
-function ListView({ groups, past }) {
+function ListView({ groups, past, edit, onEdit }) {
   return (
     <div className="idx-list">
       {groups.map(g => (
@@ -504,16 +382,25 @@ function ListView({ groups, past }) {
           {g.items.map(s => {
             const d = compactDate(s.date);
             return (
-              <a key={s.slug} className={"idx-row" + (past ? " idx-row-past" : "")} href={`Program Book.html?show=${s.slug}`}>
+              <a key={s.slug} className={"idx-row" + (past ? " idx-row-past" : "") + (edit ? " is-editing" : "")} href={`Program Book.html?show=${s.slug}`} onClick={e => { if (edit) e.preventDefault(); }}>
                 <div className="idx-row-date">
                   <span className="idx-row-day">{d.day}</span>
-                  <span className="idx-row-time">{d.mon} · {s.time || "—"}</span>
+                  {edit
+                    ? <IdxEditable className="idx-row-time" value={s.time || ""} field="time" slug={s.slug} onEdit={onEdit} placeholder="Time" />
+                    : <span className="idx-row-time">{d.mon} {s.time || "—"}</span>}
                 </div>
                 <div className="idx-row-body">
-                  <h3 className="idx-row-title">{s.title}</h3>
+                  {edit
+                    ? <IdxEditable as="h3" className="idx-row-title" value={s.title} field="title" slug={s.slug} onEdit={onEdit} placeholder="Title" />
+                    : <h3 className="idx-row-title">{s.title}</h3>}
                   <div className="idx-row-meta">
-                    {s.leadArtist && s.leadArtist !== s.title && <span>{s.leadArtist}</span>}
-                    <span>{s.venue}</span>
+                    {edit
+                      ? <IdxEditable value={s.leadArtist || ""} field="leadArtist" slug={s.slug} onEdit={onEdit} placeholder="Lead artist" />
+                      : (s.leadArtist && s.leadArtist !== s.title && <span>{s.leadArtist}</span>)}
+                    {edit
+                      ? <IdxEditable value={s.venue || ""} field="venue" slug={s.slug} onEdit={onEdit} placeholder="Venue" />
+                      : <span>{s.venue}</span>}
+                    <span className={"idx-status-badge is-" + (s._status || "empty")}>{s._status === "published" ? "Published" : s._status === "draft" ? "Draft" : "Empty"}</span>
                   </div>
                 </div>
                 <div className="idx-row-genre">{genreLabel(s)}</div>

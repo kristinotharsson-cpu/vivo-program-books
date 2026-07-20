@@ -10,8 +10,8 @@
     "accent": "green",
     "brush": "harmony",
     "photoCaption": "Gil Shaham",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "artistWebsite": "https://gilshaham.com",
@@ -28,8 +28,8 @@
         "One of the great recital partnerships of our time, violinist Gil Shaham and pianist Akira Eguchi bring musical intelligence and irresistible chemistry to every performance. Trusting each other to go where the music takes them, Shaham and Eguchi make music with sweep, drive, and inner life. In a balance honed over decades, this duo comes together with elegance and precision. Shaham's characteristically warm playing glows with passion. Eguchi—lyrical and propulsive by turn—brings a virtuosic sense of momentum and energy that draws you ever more deeply into the music. Acclaimed on stages around the world, Shaham and Eguchi make extraordinary technical mastery appear effortless. Together, they transform each performance into something that feels less like a display and more like a shared offering."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -48,7 +48,8 @@
       "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
       "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
       "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
-      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you.",
+      "mgmtCredit": "Gil Shaham & Akira Eguchi appear by arrangement of Opus 3 Artists, New York, NY"
     },
     {
       "id": "program",
@@ -59,21 +60,34 @@
       "pieces": [
         {
           "composer": "LUDWIG VAN BEETHOVEN",
-          "work": "Violin Sonatas, Op. 30"
+          "work": "Violin Sonata No. 6 in A Major, Op. 30, No. 1",
+          "movements": [
+            "Allegro",
+            "Adagio molto espressivo",
+            "Allegretto con variazioni"
+          ]
         },
         {
           "composer": "BEETHOVEN",
-          "work": "No. 6 in A Major, Op. 30, No. 1"
+          "work": "Violin Sonata No. 7 in C minor, Op. 30, No. 2",
+          "movements": [
+            "Allegro con brio",
+            "Adagio cantabile",
+            "Scherzo. Allegro",
+            "Finale. Allegro – Presto"
+          ]
         },
         {
           "composer": "BEETHOVEN",
-          "work": "No. 7 in C minor, Op. 30, No. 2"
-        },
-        {
-          "composer": "BEETHOVEN",
-          "work": "No. 8 in G Major, Op. 30, No. 3"
+          "work": "Violin Sonata No. 8 in G Major, Op. 30, No. 3",
+          "movements": [
+            "Allegro assai",
+            "Tempo di Minuetto, ma molto moderato e grazioso",
+            "Allegro vivace"
+          ]
         }
-      ]
+      ],
+      "runtimeNote": "There will be no intermission in this evening’s program, which will run 60-70 minutes."
     },
     {
       "id": "artist",
@@ -115,7 +129,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -138,13 +152,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

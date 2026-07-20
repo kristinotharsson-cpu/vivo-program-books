@@ -9,8 +9,8 @@
     "accent": "green",
     "brush": "harmony",
     "photoCaption": "Nemanja Radulović",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "artistWebsite": "https://doublesens.org",
@@ -27,8 +27,8 @@
         "Serbian-born, Paris-based violinist Nemanja Radulović founded Double Sens as an artistic reflection of his dual identity—the creative dialogue between two cultures that shape his voice. He brought together a circle of trusted Serbian and French musicians, united by friendship and a shared desire to inspire one another toward their highest artistry. Making its U.S. debut in 2026 with a program including Vivaldi's The Four Seasons, the ensemble moves seamlessly between classical masterworks, folk traditions, and repertoire beyond, performing with striking charisma, agility, and emotional depth. Double Sens radiates warmth, authenticity, and a palpable sense of freedom that captivates audiences from the very first note."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -47,7 +47,8 @@
       "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
       "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
       "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
-      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you.",
+      "mgmtCredit": "Nemanja Radulović & Double Sens Chamber Orchestra appear by arrangement with Opus 3 Artists, New York, NY"
     },
     {
       "id": "program",
@@ -57,9 +58,51 @@
       "lead": "U.S. debut. Vivaldi Four Seasons + additional program TBD.",
       "pieces": [
         {
-          "composer": "ANTONIO VIVALDI",
-          "work": "The Four Seasons",
-          "meta": "(additional program TBD)"
+          "composer": "VIVALDI",
+          "work": "The Four Seasons, Op. 8"
+        },
+        {
+          "composer": "VIVALDI",
+          "work": "Violin Concerto in E Major, RV 269 “Spring",
+          "movements": [
+            "Allegro",
+            "Largo",
+            "Danza pastorale. Allegro"
+          ]
+        },
+        {
+          "composer": "VIVALDI",
+          "work": "Violin Concerto in G Major, RV 315 “Summer",
+          "movements": [
+            "Allegro",
+            "Adagio e piano – Presto e forte",
+            "Presto"
+          ]
+        },
+        {
+          "composer": "VIVALDI",
+          "work": "Violin Concerto in G Major, RV 293 “Autumn",
+          "movements": [
+            "Allegro",
+            "Adagio molto",
+            "Allegro ‘Caccia’"
+          ]
+        },
+        {
+          "composer": "VIVALDI",
+          "work": "Violin Concerto in F minor, RV 297 “Winter",
+          "movements": [
+            "Allegro con molto",
+            "Largo",
+            "Allegro"
+          ]
+        },
+        {
+          "kind": "intermission"
+        },
+        {
+          "composer": "RIMSKY-KORSAKOV",
+          "work": "Symphonic Suite from Scheherazade, Op. 35 (arr. Aleksandar Sedlar)"
         }
       ]
     },
@@ -103,7 +146,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -126,13 +169,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

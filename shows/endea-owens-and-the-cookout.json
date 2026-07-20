@@ -10,8 +10,8 @@
     "accent": "orange",
     "brush": "rhythm",
     "photoCaption": "Endea Owens",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "artistWebsite": "https://www.endeaowens.com/",
@@ -28,8 +28,8 @@
         "You're invited to share an exuberant, high-energy concert experience when Endea Owens & The Cookout make their Vivo Performing Arts debut. Bandleader, bassist, and composer Owens draws from a vibrant community of New York jazz musicians who bring soul jazz warmth and irresistible hard bop grooves to every show. Born from Owens' nonprofit work nurturing community through music and shared meals, The Cookout is a band that offers everyone a seat at the table and a feast for the soul."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -100,7 +100,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -123,13 +123,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

@@ -1,0 +1,170 @@
+{
+  "slug": "christian-mcbride-and-ursa-major",
+  "cover": {
+    "eyebrow": "Vivo Performing Arts presents",
+    "title": "Christian McBride & Ursa Major",
+    "date": "Wednesday, Oct. 21, 2026",
+    "time": "8 p.m.",
+    "venue": "Berklee Performance Center",
+    "accent": "orange",
+    "brush": "rhythm",
+    "photoCaption": "Christian McBride",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
+    "presentedBy": "",
+    "footerSponsor": null,
+    "artistWebsite": "https://www.christianmcbride.com",
+    "pressQuote": "\"McBride's clarity of sound, the bullet-like impact he imparts to every note at any speed, and the distinctive turns of his lines, make him one of the most remarkable bassists in post-bop.\" The Guardian"
+  },
+  "sections": [
+    {
+      "id": "welcome",
+      "title": "Welcome",
+      "kind": "welcome",
+      "eyebrow": "From the Artistic Director",
+      "quote": "The 11-time Grammy-winning superstar bassist and four rising stars build irresistible grooves and dazzle with explosive solos in music that's sometimes swinging, sometimes funky, and always easy to like.",
+      "body": [
+        "CHRISTIAN MCBRIDE bass NICOLE GLOVER tenor saxophone ELY PERLMAN guitar MIKE KING piano SAVANNAH HARRIS drums The warmth, charisma, and joy of performance is a tangible delight when Christian McBride and Ursa Major perform together. The 11-time Grammy-winning superstar bassist and four rising stars have become what McBride calls an \"all-in\" band that can \"go anywhere, musically.\" McBride and Ursa Major build irresistible grooves and dazzle with explosive solos in music that's sometimes swinging, sometimes funky, and always easy to like."
+      ],
+      "signature": {
+        "name": "Thor Steingraber",
+        "role": "CEO, Vivo Performing Arts"
+      }
+    },
+    {
+      "id": "performance-sponsor",
+      "title": "Performance Sponsor",
+      "kind": "performance-sponsor",
+      "eyebrow": "Tonight's Performance",
+      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
+      "blocks": [
+        {
+          "label": "Performance Supporter",
+          "name": "Performance Sponsor Name",
+          "statement": "This performance is generously supported by [Sponsor Name]."
+        }
+      ],
+      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
+      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+    },
+    {
+      "id": "program",
+      "title": "Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "Christian McBride performs at Berklee Performance Center.",
+      "pieces": [
+        {
+          "composer": "Program details",
+          "work": "To be announced from the stage.",
+          "meta": ""
+        }
+      ]
+    },
+    {
+      "id": "artist",
+      "title": "Cast & Creative",
+      "kind": "cast",
+      "eyebrow": "On Stage Tonight",
+      "cast": [
+        {
+          "role": "bass",
+          "name": "Christian McBride"
+        },
+        {
+          "role": "tenor saxophone",
+          "name": "Nicole Glover"
+        },
+        {
+          "role": "guitar",
+          "name": "Ely Perlman"
+        },
+        {
+          "role": "piano",
+          "name": "Mike King"
+        },
+        {
+          "role": "drums",
+          "name": "Savannah Harris"
+        }
+      ],
+      "creative": []
+    },
+    {
+      "id": "bios",
+      "title": "Artist Bios",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "christian-mcbride",
+          "name": "Christian McBride",
+          "role": "bass / leader",
+          "initials": "CM",
+          "photoSrc": "",
+          "body": [
+            "CHRISTIAN MCBRIDE bass NICOLE GLOVER tenor saxophone ELY PERLMAN guitar MIKE KING piano SAVANNAH HARRIS drums The warmth, charisma, and joy of performance is a tangible delight when Christian McBride and Ursa Major perform together. The 11-time Grammy-winning superstar bassist and four rising stars have become what McBride calls an \"all-in\" band that can \"go anywhere, musically.\" McBride and Ursa Major build irresistible grooves and dazzle with explosive solos in music that's sometimes swinging, sometimes funky, and always easy to like."
+          ],
+          "website": "https://www.christianmcbride.com"
+        }
+      ]
+    },
+    {
+      "id": "vivo",
+      "kind": "vivo",
+      "title": "About Vivo Performing Arts",
+      "eyebrow": "Audience Information   Staff   Supporters"
+    },
+    {
+      "id": "info",
+      "title": "Hall Info",
+      "kind": "info",
+      "eyebrow": "Visitor Info",
+      "sections": [
+        {
+          "h": "Venue",
+          "body": [
+            "Berklee Performance Center."
+          ]
+        },
+        {
+          "h": "Land Acknowledgment",
+          "body": [
+            "Vivo Performing Arts gathers and performs on the unceded ancestral lands of the Massachusett, Pawtucket, and Wampanoag peoples."
+          ]
+        },
+        {
+          "h": "Accessibility",
+          "body": [
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
+          ]
+        },
+        {
+          "h": "Contact",
+          "body": [
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
+          ]
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "iso": "2026-10-21",
+    "genre": "Jazz",
+    "venueName": "Berklee Performance Center",
+    "leadArtist": "Christian McBride",
+    "socialLinks": [
+      {
+        "label": "Artist website",
+        "url": "https://christianmcbride.com"
+      },
+      {
+        "label": "Instagram @chrmcbride",
+        "url": "https://instagram.com/chrmcbride"
+      }
+    ],
+    "ensembleCount": 5
+  }
+}

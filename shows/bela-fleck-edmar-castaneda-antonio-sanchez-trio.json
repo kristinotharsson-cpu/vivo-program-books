@@ -9,8 +9,8 @@
     "accent": "orange",
     "brush": "rhythm",
     "photoCaption": "Béla Fleck",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "artistWebsite": "https://www.belafleck.com",
@@ -27,8 +27,8 @@
         "BÉLA FLECK banjo EDMAR CASTAÑEDA harp ANTONIO SÁNCHEZ drums Turning his instrument into a conduit for creativity, Béla Fleck can do things with a banjo nobody thought possible. Now, serendipity has found him alongside two partners who match him note for note: harpist Edmar Castañeda, who plays bass, melody, and harmony simultaneously, and Antonio Sánchez, a drummer whose rhythm feels like a conversation. As one powerful entity they take you on musical explorations rich with strong melodies, gorgeous harmonies, and sinuous grooves. Audiences leave stunned, delighted, and positively beaming."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -107,7 +107,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -130,13 +130,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

@@ -9,8 +9,8 @@
     "accent": "purple",
     "brush": "motion",
     "photoCaption": "Huang Yi",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "genre": "Dance",
@@ -29,8 +29,8 @@
         "Taiwanese dancer and choreographer Huang Yi takes the stage with an unconventional dance partner: an industrial robot arm made by the KUKA corporation. In a time when our dance with technology can feel daunting, Huang Yi & KUKA dovetail beauty, tenderness, and nuance. They showcase the fascinating push and pull between humanity and our creations, through choreography, proving that this dynamic doesn’t always need to be a battle: it can also be a duet. Presented in partnership with Museum of Science."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -105,7 +105,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -128,13 +128,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

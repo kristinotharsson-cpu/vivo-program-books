@@ -9,8 +9,8 @@
     "accent": "orange",
     "brush": "rhythm",
     "photoCaption": "Michel Camilo",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "artistWebsite": "https://www.michelcamilo.com",
@@ -27,8 +27,8 @@
         "MICHEL CAMILO piano RICKY RODRÍGUEZ bass MARK WALKER drums Michel Camilo, Berklee College of Music's Honorary Doctorate in Music recipient, is a musical firestorm of heart, joy, and liveliness who brings a scintillating light into any space in which he performs. Bassist Ricky Rodríguez and drummer Mark Walker—bound to Camilo by years of hard-won musical trust—keep the pulse that turns his flights of virtuosity into something you experience with your whole body. Come feel it for yourself when the Michel Camilo Trio makes its Vivo Performing Arts debut."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -61,7 +61,8 @@
           "work": "To be announced from the stage.",
           "meta": ""
         }
-      ]
+      ],
+      "runtimeNote": "There will be no intermission in this evening’s program, which will run 80-90 minutes."
     },
     {
       "id": "artist",
@@ -70,7 +71,7 @@
       "eyebrow": "On Stage Tonight",
       "cast": [
         {
-          "role": "piano / leader",
+          "role": "piano",
           "name": "Michel Camilo"
         },
         {
@@ -107,7 +108,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -130,13 +131,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

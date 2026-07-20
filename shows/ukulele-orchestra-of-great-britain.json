@@ -9,8 +9,8 @@
     "accent": "blue",
     "brush": "harmony",
     "photoCaption": "Ukulele Orchestra of Great Britain",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "artistWebsite": "https://www.ukuleleorchestra.com",
@@ -27,8 +27,8 @@
         "Small but mighty, the \"Ukes\" are a tour-de-force of strings worthy of any musical wish list. Treat yourself to a blend of jaw-dropping musical virtuosity (on four types of ukuleles) and humor that ranges from bone-dry to almost slapstick. Delightfully versatile, they'll perform anything and everything: classic rock, TV theme songs, classical music, and so much more. It's an evening of joy and musicianship that expands horizons and warms the soul."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -99,7 +99,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -122,13 +122,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

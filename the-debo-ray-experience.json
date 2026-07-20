@@ -1,0 +1,149 @@
+{
+  "slug": "the-debo-ray-experience",
+  "cover": {
+    "eyebrow": "Vivo Performing Arts presents",
+    "title": "The Débo Ray Experience",
+    "subtitle": "Jazz",
+    "date": "SAT FEB 27",
+    "time": "3PM",
+    "venue": "Bethel AME Church",
+    "accent": "orange",
+    "brush": "rhythm",
+    "photoCaption": "Débo Ray",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
+    "presentedBy": "",
+    "footerSponsor": null
+  },
+  "sections": [
+    {
+      "id": "welcome",
+      "title": "Welcome",
+      "kind": "welcome",
+      "eyebrow": "From the Artistic Director",
+      "quote": "Welcome to Vivo Performing Arts.",
+      "body": [
+        "Tonight, Débo Ray — Contemporary R&B + 7 musicians, including 3 backing vocals. Teen+ recommended.",
+        "We are delighted to share this program with you. Thank you for being here."
+      ],
+      "signature": {
+        "name": "Thor Steingraber",
+        "role": "CEO, Vivo Performing Arts"
+      }
+    },
+    {
+      "id": "performance-sponsor",
+      "title": "Performance Sponsor",
+      "kind": "performance-sponsor",
+      "eyebrow": "Tonight's Performance",
+      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
+      "blocks": [
+        {
+          "label": "Performance Supporter",
+          "name": "Performance Sponsor Name",
+          "statement": "This performance is generously supported by [Sponsor Name]."
+        }
+      ],
+      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
+      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+    },
+    {
+      "id": "program",
+      "title": "Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "Contemporary R&B + 7 musicians, including 3 backing vocals. Teen+ recommended.",
+      "pieces": [
+        {
+          "composer": "Program details",
+          "work": "To be announced from the stage.",
+          "meta": ""
+        }
+      ]
+    },
+    {
+      "id": "artist",
+      "title": "Cast & Creative",
+      "kind": "cast",
+      "eyebrow": "On Stage Tonight",
+      "cast": [
+        {
+          "role": "vocals",
+          "name": "Débo Ray"
+        }
+      ],
+      "creative": []
+    },
+    {
+      "id": "bios",
+      "title": "Artist Bios",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "debo-ray",
+          "name": "Débo Ray",
+          "role": "vocals",
+          "initials": "DR",
+          "photoSrc": "",
+          "body": [
+            "Contemporary R&B + 7 musicians, including 3 backing vocals. Teen+ recommended."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "vivo",
+      "kind": "vivo",
+      "title": "About Vivo Performing Arts",
+      "eyebrow": "Audience Information   Staff   Supporters"
+    },
+    {
+      "id": "info",
+      "title": "Hall Info",
+      "kind": "info",
+      "eyebrow": "Visitor Info",
+      "sections": [
+        {
+          "h": "Venue",
+          "body": [
+            "Bethel AME Church."
+          ]
+        },
+        {
+          "h": "Land Acknowledgment",
+          "body": [
+            "Vivo Performing Arts gathers and performs on the unceded ancestral lands of the Massachusett, Pawtucket, and Wampanoag peoples."
+          ]
+        },
+        {
+          "h": "Accessibility",
+          "body": [
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
+          ]
+        },
+        {
+          "h": "Contact",
+          "body": [
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
+          ]
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "iso": "2027-02-27",
+    "genre": "Jazz",
+    "venueName": "Bethel AME Church",
+    "leadArtist": "Débo Ray",
+    "socialLinks": [
+      {
+        "label": "Artist website",
+        "url": "https://iamdeboray.com"
+      }
+    ],
+    "ensembleCount": 1
+  }
+}

@@ -10,8 +10,8 @@
     "accent": "green",
     "brush": "harmony",
     "photoCaption": "Junction Trio",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "genre": "Chamber Artist: Junction Trio",
@@ -31,8 +31,8 @@
         "We are delighted to share this program with you. Thank you for being here."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -62,16 +62,26 @@
       "pieces": [
         {
           "composer": "LUDWIG VAN BEETHOVEN",
-          "work": "Piano Trio in D Major, Op. 70, No. 1 “Ghost”"
+          "work": "Piano Trio in D Major, Op. 70, No. 1 “Ghost",
+          "movements": [
+            "Allegro vivace e con brio",
+            "Largo assai ed espressivo",
+            "Presto",
+            "tbd” ANDREW NORMAN New work (New England premiere; co-commissioned by Vivo Performing Arts)"
+          ]
         },
         {
-          "composer": "ANDREW NORMAN",
-          "work": "New work (New England premiere; co-commissioned by Vivo Performing",
-          "meta": "Arts)"
+          "kind": "intermission"
         },
         {
           "composer": "DMITRI SHOSTAKOVICH",
-          "work": "Piano Trio No. 2 in E minor, Op. 67"
+          "work": "Piano Trio No. 2 in E minor, Op. 67",
+          "movements": [
+            "Andante — Moderato",
+            "Allegro con brio",
+            "Largo",
+            "Allegretto — Adagio"
+          ]
         }
       ]
     },
@@ -81,10 +91,6 @@
       "kind": "cast",
       "eyebrow": "On Stage Tonight",
       "cast": [
-        {
-          "role": "piano trio",
-          "name": "Junction Trio"
-        },
         {
           "role": "violin",
           "name": "Stefan Jackiw"
@@ -123,7 +129,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -146,13 +152,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

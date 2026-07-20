@@ -9,8 +9,8 @@
     "accent": "blue",
     "brush": "harmony",
     "photoCaption": "Flor de Toloache",
-    "calloutLabel": "A note from President and Executive Director",
-    "calloutName": "Gary Dunning",
+    "calloutLabel": "A note from CEO",
+    "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
     "genre": "Stave",
@@ -29,8 +29,8 @@
         "The talents of Latin Grammy winners Flor de Toloache cast a spell on audiences that can be felt down to the marrow. Fans and reviewers describe their shows as spiritual, their voices like healing crystals, their sisterhood on stage setting a new standard for what a concert can be. Led by Mireya Ramos and Shae Fiol, the NYC-based ensemble draws from ranchera, cumbia, salsa, jazz, and rock, weaving it all into something that feels like solidarity made sound. Bold, virtuosic, and completely themselves, Flor de Toloache push mariachi somewhere it has never been before."
       ],
       "signature": {
-        "name": "Gary Dunning",
-        "role": "President and Executive Director, Vivo Performing Arts"
+        "name": "Thor Steingraber",
+        "role": "CEO of Vivo Performing Arts"
       }
     },
     {
@@ -101,7 +101,7 @@
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information · Staff · Supporters"
+      "eyebrow": "Audience Information   Staff   Supporters"
     },
     {
       "id": "info",
@@ -124,13 +124,13 @@
         {
           "h": "Accessibility",
           "body": [
-            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivo.org at least one week in advance."
+            "Assistive listening devices are available. For ASL or audio description on selected performances, contact access@vivoperformingarts.org at least one week in advance."
           ]
         },
         {
           "h": "Contact",
           "body": [
-            "Box Office · (617) 555-0140 · tickets@vivo.org · vivo.org"
+            "Box Office   (617) 555-0140   tickets@vivoperformingarts.org   vivoperformingarts.org"
           ]
         }
       ]

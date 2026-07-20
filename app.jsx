@@ -154,11 +154,11 @@ const Cover = ({ cover, update, variant, brushColor, textColor, theme }) => {
 
 // ---- Footer sponsor banner ----
 const FooterSponsor = ({ sponsor }) => (
-  <a className="footer-sponsor" href={sponsor.href || "#"} target="_blank" rel="noopener noreferrer">
+  <div className="footer-sponsor" style={{ backgroundColor: "#000000", color: "#fffbeb" }}>
     <div className="footer-sponsor-tag">In Partnership With</div>
     <div className="footer-sponsor-name">{sponsor.name}</div>
     <div className="footer-sponsor-line">{sponsor.line}</div>
-  </a>
+  </div>
 );
 
 // ---- Note Callout (link card on home, between cover and TOC) ----
@@ -349,7 +349,7 @@ const SearchOverlay = ({ open, onClose, data, onGo }) => {
         ) : (
           results.map((r, i) => (
             <button key={i} className="search-result" onClick={() => { onGo(r.sectionId); onClose(); }}>
-              <div className="where">{r.sectionTitle} · {r.label}</div>
+              <div className="where">{r.sectionTitle}{"\u00A0\u00A0\u00A0"}{r.label}</div>
               <div className="snip">{highlight(r.text.length > 180 ? r.text.slice(0, 180) + "…" : r.text)}</div>
             </button>
           ))
@@ -418,6 +418,21 @@ const App = () => {
   });
   useEffectA(() => {
     try { localStorage.setItem(window.__VIVO_STORAGE_KEY || "vivo-pb-data", JSON.stringify(data)); } catch (e) {}
+    // Mirror to VivoStore (Netlify Blobs when deployed) as the program record
+    const slug = new URLSearchParams(location.search).get("show") || (window.PROGRAM_DATA && window.PROGRAM_DATA.slug) || "sample";
+    if (window.VivoStore && !window.VIVO_PROGRAM_DATA_SNAPSHOT) {
+      clearTimeout(window.__vivoSaveT);
+      window.__vivoSaveT = setTimeout(async () => {
+        try {
+          const prev = await window.VivoStore.getProgram(slug);
+          const rec = prev
+            ? window.VivoStore.touch(prev, { data })
+            : window.VivoStore.newRecord(slug, data, "draft");
+          rec.data = data;
+          await window.VivoStore.saveProgram(slug, rec);
+        } catch (e) { console.warn("VivoStore save failed", e); }
+      }, 800);
+    }
   }, [data]);
 
   const [theme, setTheme] = useStateA(() => {
@@ -438,16 +453,19 @@ const App = () => {
   }, [fontSize]);
 
   const [editing, setEditing] = useStateA(false);
-  // Keep window.__editMode in sync — set it before React re-renders so Editable
-  // components pick it up during the same render pass, not the next one.
-  const toggleEditing = useCallbackA(() => {
-    const next = !window.__editMode;
-    window.__editMode = next;
-    setEditing(next);
-  }, []);
+  useEffectA(() => { window.__editMode = editing; }, [editing]);
 
   const [menuOpen, setMenuOpen] = useStateA(false);
   const [searchOpen, setSearchOpen] = useStateA(false);
+  const [importOpen, setImportOpen] = useStateA(false);
+  // ?export=1 → auto-export once booted (library Export button)
+  useEffectA(() => {
+    if (new URLSearchParams(location.search).get("export") === "1") {
+      const t = setTimeout(() => exportRef.current && exportRef.current(), 1200);
+      return () => clearTimeout(t);
+    }
+  }, []);
+  const exportRef = React.useRef(null);
   const [toast, setToast] = useStateA(null);
   useEffectA(() => {
     if (!toast) return;
@@ -456,32 +474,21 @@ const App = () => {
   }, [toast]);
 
   // ---- Tweaks ----
-  const tweakStorageKey = useCallbackA(() => {
-    const base = window.__VIVO_STORAGE_KEY || "vivo-pb-data";
-    return base.replace("vivo-pb-data", "vivo-pb-tweaks");
-  }, []);
-
   const [tweaks, setTweaks] = useStateA(() => {
     if (window.VIVO_PROGRAM_DATA_SNAPSHOT && window.VIVO_PROGRAM_DATA_SNAPSHOT.tweaks) {
       return { ...TWEAK_DEFAULTS, ...window.VIVO_PROGRAM_DATA_SNAPSHOT.tweaks };
     }
-    try {
-      const base = window.__VIVO_STORAGE_KEY || "vivo-pb-data";
-      const saved = localStorage.getItem(base.replace("vivo-pb-data", "vivo-pb-tweaks"));
-      if (saved) return { ...TWEAK_DEFAULTS, ...JSON.parse(saved) };
-    } catch (e) {}
     return TWEAK_DEFAULTS;
   });
-
-  // Persist tweaks per-show to localStorage
+  // Listen for tweaks panel updates
   useEffectA(() => {
-    try { localStorage.setItem(tweakStorageKey(), JSON.stringify(tweaks)); } catch (e) {}
-  }, [tweaks]);
+    if (!window.useTweaks) return;
+    // The TweaksPanel uses postMessage on parent — we read from current tweaks state. Wire up our own.
+  }, []);
 
-  // Tweaks panel visibility — toggled directly from settings menu
+  // Tweaks panel: register listener for host activate/deactivate
   const [showTweaks, setShowTweaks] = useStateA(false);
   useEffectA(() => {
-    // Also support the Claude Design host postMessage protocol
     const onMsg = (e) => {
       if (!e.data) return;
       if (e.data.type === "__activate_edit_mode") setShowTweaks(true);
@@ -542,79 +549,11 @@ const App = () => {
     setMenuOpen(false);
   };
 
-  // ---- Publish to GitHub → Netlify redeploys automatically ----
-  const getSlug = useCallbackA(() => {
-    const m = window.location.search.match(/show=([^&]+)/);
-    if (m) return m[1];
-    const pm = window.location.pathname.match(/\/([a-z0-9][a-z0-9-]+)\/?$/);
-    return (pm && pm[1] !== "index") ? pm[1] : null;
-  }, []);
-
-  const publishShow = useCallbackA(async () => {
-    const slug = getSlug();
-    if (!slug) {
-      setToast("Open a specific show to publish");
-      return;
-    }
-    setToast("Publishing…");
-    try {
-      const res = await fetch("/.netlify/functions/publish", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ slug, data, tweaks }),
-      });
-      const result = await res.json();
-      if (!res.ok) throw new Error(result.error || "Publish failed");
-      setToast("Published! Site updates in ~30 sec");
-    } catch (e) {
-      setToast("Publish failed: " + e.message);
-    }
-  }, [data, tweaks, getSlug]);
-
   const resetData = () => {
     if (!confirm("Reset all content to the default sample?")) return;
     setData(JSON.parse(JSON.stringify(window.PROGRAM_DATA)));
     setToast("Content reset");
   };
-
-  // ---- Save content as JSON (data only, smaller than full HTML export) ----
-  const saveJson = useCallbackA(() => {
-    const slug = (() => {
-      const m = window.location.search.match(/show=([^&]+)/);
-      if (m) return m[1];
-      const pm = window.location.pathname.match(/\/([a-z0-9][a-z0-9-]+)\/?$/);
-      return pm ? pm[1] : "program";
-    })();
-    const json = JSON.stringify(data, null, 2);
-    const blob = new Blob([json], { type: "application/json;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = slug + "-content.json";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
-    setToast("Saved as JSON");
-  }, [data]);
-
-  // ---- Load content from a JSON file ----
-  const loadJson = useCallbackA((file) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      try {
-        const parsed = JSON.parse(String(reader.result || ""));
-        // Accept either a full show JSON or just a data object with sections
-        const programData = parsed.sections ? parsed : (parsed.data && parsed.data.sections ? parsed.data : null);
-        if (!programData) throw new Error("No sections found");
-        setData(programData);
-        setToast("Program loaded from file");
-      } catch (e) {
-        setToast("Invalid JSON file");
-      }
-    };
-    reader.readAsText(file);
-  }, []);
 
   // ---- Export HTML for AWS hosting ----
   // Fetches the source HTML, inlines all linked CSS/JS/images/fonts, and bakes
@@ -724,20 +663,41 @@ const App = () => {
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = "Vivo Program Book.html";
+      const slug = new URLSearchParams(location.search).get("show") || "program";
+      a.download = slug + ".html";
       document.body.appendChild(a);
       a.click();
       a.remove();
       setTimeout(() => URL.revokeObjectURL(url), 1000);
-      setToast("Bundled HTML downloaded");
+      // Mark record published
+      if (window.VivoStore && !window.VIVO_PROGRAM_DATA_SNAPSHOT) {
+        try {
+          const prev = await window.VivoStore.getProgram(slug);
+          const rec = prev ? window.VivoStore.touch(prev, {}) : window.VivoStore.newRecord(slug, data, "draft");
+          rec.status = "published";
+          rec.lastExportedAt = new Date().toISOString();
+          await window.VivoStore.saveProgram(slug, rec);
+        } catch (e) {}
+      }
+      setToast("Exported " + slug + ".html — upload to S3");
     } catch (e) {
       console.error(e);
       setToast("Export failed — check console");
     }
   }, [data, tweaks, theme, fontSize]);
+  useEffectA(() => { exportRef.current = exportHtml; }, [exportHtml]);
+
+  const ACCENT_MAP = {
+    plum: "var(--vivo-plum)", tangerine: "var(--vivo-tangerine)", orange: "var(--vivo-orange)",
+    blue: "var(--vivo-blue)", "sky-blue": "var(--vivo-sky-blue)", green: "var(--vivo-green)",
+    "light-green": "var(--vivo-light-green)", lavender: "var(--vivo-lavender)", black: "var(--vivo-black)"
+  };
+  const accentColor = ACCENT_MAP[tweaks.tocHighlight] || "var(--vivo-plum)";
+  const accentOnLight = tweaks.tocHighlight === "light-green" || tweaks.tocHighlight === "lavender";
+  const accentFg = accentOnLight ? "var(--vivo-black)" : "var(--vivo-cream)";
 
   return (
-    <div className="app">
+    <div className="app" style={{ "--accent": accentColor, "--accent-fg": accentFg }}>
       <TopBar
         title={currentSection ? currentSection.title : data.cover.title}
         showLogo={!currentSection}
@@ -752,10 +712,10 @@ const App = () => {
         <div className="page home">
           <Cover cover={cover} update={updateCover} variant="default" brushColor={tweaks.brushColor} textColor={tweaks.coverTextColor} theme={theme} />
           <NoteCallout
-            label={data.cover.calloutLabel || "A note from President and Executive Director"}
-            name={data.cover.calloutName || "Gary Dunning"}
+            label={data.cover.calloutLabel || "A note from CEO"}
+            name={data.cover.calloutName || "Thor Steingraber"}
             photoSrc={data.cover.calloutPhotoSrc}
-            initials={(data.cover.calloutName || "GD").split(" ").map(n => n[0]).join("").slice(0, 2)}
+            initials={(data.cover.calloutName || "TS").split(" ").map(n => n[0]).join("").slice(0, 2)}
             onClick={() => goTo("welcome")}
             onPhotoChange={(src) => updateCover({ calloutPhotoSrc: src })}
             onPhotoClear={() => updateCover({ calloutPhotoSrc: "" })}
@@ -773,7 +733,13 @@ const App = () => {
           ) : null}
           <footer className="app-footer">
             <img src={theme === "dark" ? "assets/logos/vivo-logo-cream.png" : "assets/logos/vivo-logo-black.png"} alt="Vivo" />
-            <div>© Vivo Performing Arts · <a href="https://vivoperformingarts.org/" target="_blank" rel="noopener" style={{color:"inherit"}}>vivoperformingarts.org</a></div>
+            <div className="footer-social">
+              <a href="https://www.instagram.com/vivoperformingarts/" target="_blank" rel="noopener noreferrer"><Icon name="instagram" size={18} /><span>Instagram</span></a>
+              <a href="https://www.facebook.com/vivoperformingarts" target="_blank" rel="noopener noreferrer"><Icon name="facebook" size={18} /><span>Facebook</span></a>
+              <a href="https://www.youtube.com/@vivoperformingarts" target="_blank" rel="noopener noreferrer"><Icon name="youtube" size={18} /><span>YouTube</span></a>
+              <a href="https://www.linkedin.com/company/vivoperformingarts" target="_blank" rel="noopener noreferrer"><Icon name="linkedin" size={18} /><span>LinkedIn</span></a>
+            </div>
+            <div>© VIVO PERFORMING ARTS VIVOPERFORMINGARTS.ORG</div>
           </footer>
         </div>
       ) : (
@@ -803,19 +769,28 @@ const App = () => {
       ) : null}
 
       <SettingsMenu
-        open={menuOpen}
-        onClose={() => setMenuOpen(false)}
+        open={menuOpen}        onClose={() => setMenuOpen(false)}
         theme={theme}
         onTheme={(t) => { setTheme(t); }}
         fontSize={fontSize}
         onFontSize={setFontSize}
         onShare={handleShare}
-        onToggleEdit={() => { toggleEditing(); setMenuOpen(false); setToast(editing ? "Edit mode off" : "Tap any text to edit"); }}
+        onToggleEdit={() => { setEditing(e => !e); setMenuOpen(false); setToast(editing ? "Edit mode off" : "Tap any text to edit"); }}
         editing={editing}
-        onSaveJson={saveJson}
-        onLoadJson={loadJson}
-        onCustomize={() => setShowTweaks(true)}
+        onImport={window.VIVO_PROGRAM_DATA_SNAPSHOT ? null : () => { setMenuOpen(false); setImportOpen(true); }}
+        onExport={window.VIVO_PROGRAM_DATA_SNAPSHOT ? null : () => { setMenuOpen(false); exportHtml(); }}
       />
+      {window.ImportOverlay ? (
+        <window.ImportOverlay
+          open={importOpen}
+          onClose={() => setImportOpen(false)}
+          hasContent={data.sections && data.sections.some(s => (s.pieces && s.pieces.length) || (s.cast && s.cast.length) || (s.bios && s.bios.length))}
+          setToast={setToast}
+          onApplySections={(sections, meta) => {
+            setData(d => ({ ...d, sections: sections.map(s => ({ ...s, _meta: meta && meta.needsReview && meta.needsReview.includes(s.id) ? { needsReview: true } : s._meta })) }));
+          }}
+        />
+      ) : null}
 
       <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} data={data} onGo={goTo} />
 
@@ -935,11 +910,8 @@ const App = () => {
               setToast(`Added \"${title}\"`);
             }} />
           </window.TweakSection>
-          <window.TweakSection label="Publish">
-            <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>Save your edits back to the live site. Netlify will redeploy automatically in ~30 seconds.</div>
-            <window.TweakButton label="⬆ Publish to Site" onClick={publishShow} />
-            <div style={{ height: 12 }} />
-            <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>Or download a self-contained HTML file to host manually.</div>
+          <window.TweakSection label="Export">
+            <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>Download a self-contained HTML file with all current content baked in. Upload to AWS S3 / CloudFront and host as your official program book.</div>
             <window.TweakButton label="Download HTML" onClick={exportHtml} />
           </window.TweakSection>
         </window.TweaksPanel>
