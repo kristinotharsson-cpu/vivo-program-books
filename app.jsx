@@ -452,8 +452,15 @@ const App = () => {
     localStorage.setItem("vivo-pb-fs", String(fontSize));
   }, [fontSize]);
 
-  const [editing, setEditing] = useStateA(false);
-  useEffectA(() => { window.__editMode = editing; }, [editing]);
+  const [editing, setEditing] = useStateA(() => {
+    if (window.VIVO_PROGRAM_DATA_SNAPSHOT) return false; // exported HTML is read-only
+    try { return localStorage.getItem("vivo-pb-editmode") === "1"; } catch (e) { return false; }
+  });
+  window.__editMode = editing; // keep flag in sync every render
+  useEffectA(() => {
+    window.__editMode = editing;
+    try { localStorage.setItem("vivo-pb-editmode", editing ? "1" : "0"); } catch (e) {}
+  }, [editing]);
   const toggleEditing = useCallbackA(() => {
     setEditing(e => { window.__editMode = !e; return !e; }); // set flag synchronously so editables render immediately
   }, []);
@@ -782,6 +789,7 @@ const App = () => {
         editing={editing}
         onImport={window.VIVO_PROGRAM_DATA_SNAPSHOT ? null : () => { setMenuOpen(false); setImportOpen(true); }}
         onExport={window.VIVO_PROGRAM_DATA_SNAPSHOT ? null : () => { setMenuOpen(false); exportHtml(); }}
+        onDesign={window.VIVO_PROGRAM_DATA_SNAPSHOT ? null : () => { setMenuOpen(false); setShowTweaks(true); }}
       />
       {window.ImportOverlay ? (
         <window.ImportOverlay
