@@ -454,6 +454,9 @@ const App = () => {
 
   const [editing, setEditing] = useStateA(false);
   useEffectA(() => { window.__editMode = editing; }, [editing]);
+  const toggleEditing = useCallbackA(() => {
+    setEditing(e => { window.__editMode = !e; return !e; }); // set flag synchronously so editables render immediately
+  }, []);
 
   const [menuOpen, setMenuOpen] = useStateA(false);
   const [searchOpen, setSearchOpen] = useStateA(false);
@@ -775,7 +778,7 @@ const App = () => {
         fontSize={fontSize}
         onFontSize={setFontSize}
         onShare={handleShare}
-        onToggleEdit={() => { setEditing(e => !e); setMenuOpen(false); setToast(editing ? "Edit mode off" : "Tap any text to edit"); }}
+        onToggleEdit={() => { toggleEditing(); setMenuOpen(false); setToast(editing ? "Edit mode off" : "Tap any text to edit"); }}
         editing={editing}
         onImport={window.VIVO_PROGRAM_DATA_SNAPSHOT ? null : () => { setMenuOpen(false); setImportOpen(true); }}
         onExport={window.VIVO_PROGRAM_DATA_SNAPSHOT ? null : () => { setMenuOpen(false); exportHtml(); }}
