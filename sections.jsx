@@ -20,58 +20,193 @@ const WelcomeSection = ({ s, update }) => (
 );
 
 // ---- PROGRAM ----
-const ProgramSection = ({ s, update }) => (
-  <div>
-    <Editable as="p" className="lead" value={s.lead} onChange={v => update({ lead: v })} multiline />
-    {s.runtimeNote ? (
-      <Editable as="p" className="program-runtime" value={s.runtimeNote} onChange={v => update({ runtimeNote: v })} multiline />
-    ) : null}
-    <ol className="program-list">
-      {s.pieces.map((p, i) => {
-        if (p.kind === "intermission") {
-          return <li key={i} className="program-divider">— Intermission —</li>;
+const ProgramSection = ({ s, update, displayStyle, allSections, onGoSection, cover }) => {
+  const editing = window.__editMode;
+  const pieces = s.pieces || [];
+  const setPieces = (next) => update({ pieces: next });
+  const patchPiece = (i, patch) => { const n = [...pieces]; n[i] = { ...n[i], ...patch }; setPieces(n); };
+  const addPiece = () => setPieces([...pieces, { composer: "", work: "", movements: [] }]);
+  const addIntermission = () => setPieces([...pieces, { kind: "intermission" }]);
+  const removePiece = (i) => { const n = [...pieces]; n.splice(i, 1); setPieces(n); };
+  const movePiece = (i, dir) => { const n = [...pieces]; const j = i + dir; if (j < 0 || j >= n.length) return; [n[i], n[j]] = [n[j], n[i]]; setPieces(n); };
+  const addMovement = (i) => patchPiece(i, { movements: [...(pieces[i].movements || []), ""] });
+  const noteSections = (allSections || []).filter(x => x.kind === "notes" || x.kind === "info");
+  const [rawOpen, setRawOpen] = React.useState(false);
+  const [rawText, setRawText] = React.useState("");
+  // Parse pasted raw program text into structured pieces (APPENDED to existing).
+  const autoFormat = () => {
+    const blocks = rawText.replace(/\r/g, "").split(/\n\s*\n/).map(b => b.trim()).filter(Boolean);
+    const out = [];
+    blocks.forEach(block => {
+      const lines = block.split("\n").map(l => l.trim()).filter(Boolean);
+      lines.forEach((ln, idx) => {
+        if (/^intermission$/i.test(ln)) { out.push({ kind: "intermission" }); return; }
+        if (idx === 0) {
+          const m = ln.match(/^(.+?)\s*[—–-]\s*(.+)$/) || ln.match(/^(.+?),\s*(.+)$/);
+          if (m) out.push({ composer: m[1].trim(), work: m[2].trim(), movements: [] });
+          else out.push({ composer: ln, work: "", movements: [] });
+        } else {
+          const cur = out[out.length - 1];
+          if (cur && !cur.kind) { if (!cur.work) cur.work = ln; else cur.movements.push(ln); }
         }
+      });
+    });
+    if (out.length) { setPieces([...pieces, ...out]); setRawText(""); setRawOpen(false); }
+  };
+  const resetProgram = () => {
+    if (!confirm("Reset this Program page? Clears all pieces and freeform HTML.")) return;
+    update({ pieces: [], html: "" });
+    setRawOpen(false); setRawText("");
+  };
+  return (
+  <div>
+    {cover ? (
+      <div className="program-perf-head">
+        <div className="program-perf-title">{cover.title}{cover.subtitle ? <span className="program-perf-sub"> — {cover.subtitle}</span> : null}</div>
+        <div className="program-perf-meta">
+          {[cover.date, cover.time, cover.venue].filter(Boolean).join("\u00A0\u00A0\u00A0")}
+        </div>
+      </div>
+    ) : null}
+    {(s.subtitle || editing) ? (
+      <Editable as="p" className="section-subtitle" value={s.subtitle || ""} onChange={v => update({ subtitle: v })} multiline />
+    ) : null}
+    {(s.runtimeNote || editing) ? (
+      <Editable as="p" className="program-runtime" value={s.runtimeNote || ""} onChange={v => update({ runtimeNote: v })} multiline />
+    ) : null}
+    <ol className={"program-list" + ((s.displayStyle || displayStyle) === "centered" ? " is-centered" : "")}>
+      {pieces.map((p, i) => {
+        if (p.kind === "intermission") {
+          return (
+            <li key={i} className="program-divider">— Intermission —
+              {editing ? <span className="prog-edit"><button onClick={() => movePiece(i, -1)}>↑</button><button onClick={() => movePiece(i, 1)}>↓</button><button onClick={() => removePiece(i)}>✕</button></span> : null}
+            </li>
+          );
+        }
+        const noteHref = p.noteId ? "#/" + p.noteId : null;
         return (
           <li key={i} className="program-item">
-            <Editable as="div" className="composer" value={p.composer} onChange={v => {
-              const pieces = [...s.pieces]; pieces[i] = { ...p, composer: v }; update({ pieces });
-            }} />
-            <Editable as="div" className="work" value={p.work} onChange={v => {
-              const pieces = [...s.pieces]; pieces[i] = { ...p, work: v }; update({ pieces });
-            }} multiline />
-            {p.meta ? (
-              <Editable as="div" className="meta" value={p.meta} onChange={v => {
-                const pieces = [...s.pieces]; pieces[i] = { ...p, meta: v }; update({ pieces });
-              }} />
+            <Editable as="div" className="composer" value={p.composer} onChange={v => patchPiece(i, { composer: v })} />
+            {noteHref && !editing ? (
+              <a className="work work-link" href={noteHref} onClick={(e) => { e.preventDefault(); onGoSection && onGoSection(p.noteId); }}>{p.work}</a>
+            ) : (
+              <Editable as="div" className="work" value={p.work} onChange={v => patchPiece(i, { work: v })} multiline />
+            )}
+            {(p.meta || editing) ? (
+              <Editable as="div" className="meta" value={p.meta || ""} onChange={v => patchPiece(i, { meta: v })} />
             ) : null}
             {p.movements && p.movements.length > 0 ? (
               <div className="movements">
                 {p.movements.map((m, mi) => (
                   <Editable key={mi} as="span" className="mvt" value={m} onChange={v => {
-                    const pieces = [...s.pieces];
-                    const movements = [...p.movements]; movements[mi] = v;
-                    pieces[i] = { ...p, movements };
-                    update({ pieces });
+                    const movements = [...p.movements]; movements[mi] = v; patchPiece(i, { movements });
                   }} />
                 ))}
+              </div>
+            ) : null}
+            {editing ? (
+              <div className="prog-edit">
+                <button onClick={() => addMovement(i)}>+ Movement</button>
+                <button onClick={() => movePiece(i, -1)}>↑</button>
+                <button onClick={() => movePiece(i, 1)}>↓</button>
+                <button onClick={() => removePiece(i)}>Delete</button>
+                <label className="prog-note-link">Link to note:
+                  <select value={p.noteId || ""} onChange={(e) => patchPiece(i, { noteId: e.target.value })}>
+                    <option value="">None</option>
+                    {noteSections.map(n => <option key={n.id} value={n.id}>{n.title}</option>)}
+                  </select>
+                </label>
               </div>
             ) : null}
           </li>
         );
       })}
     </ol>
+
+    {/* Freeform HTML block — renders after the structured list, so both coexist */}
+    {editing ? (
+      <div className="prog-html-edit">
+        <div className="prog-help">
+          <strong>Freeform HTML (optional).</strong> Anything here renders below the list above — mix presets and custom HTML freely. Links: <code>&lt;a href="#/notes"&gt;text&lt;/a&gt;</code>. Saves as you type; turn off Edit to preview.
+        </div>
+        <textarea className="prog-html-input" value={s.html || ""} placeholder="<p>Optional custom HTML…</p>" onChange={(e) => update({ html: e.target.value })} />
+      </div>
+    ) : (s.html ? <div className="prog-html" dangerouslySetInnerHTML={{ __html: s.html }} /> : null)}
+
+    {editing && rawOpen ? (
+      <div className="prog-html-edit">
+        <div className="prog-help">
+          <strong>Paste raw text — rules:</strong>
+          <ol className="prog-rules">
+            <li>Separate each piece with a <strong>blank line</strong>.</li>
+            <li>The <strong>first line</strong> of a piece is the composer and work. Split them with a <strong>dash (—)</strong> or a <strong>comma</strong>: <code>Beethoven — Sonata No. 21, Op. 53</code>.</li>
+            <li>Every <strong>following line</strong> in that piece becomes a <strong>movement</strong>.</li>
+            <li>Type <code>INTERMISSION</code> on its own line for a break.</li>
+            <li>Auto-format <strong>appends</strong> to what's already on the page (it won't erase your presets).</li>
+          </ol>
+        </div>
+        <textarea className="prog-html-input" value={rawText} placeholder={"Ludwig van Beethoven — Sonata No. 21 in C major, Op. 53 \u201cWaldstein\u201d\nAllegro con brio\nRondo: Allegretto moderato\n\nINTERMISSION\n\nFrédéric Chopin — Ballade No. 4 in F minor, Op. 52"} onChange={(e) => setRawText(e.target.value)} />
+        <div className="prog-edit prog-edit-add">
+          <button onClick={autoFormat}>Auto-format & append</button>
+          <button onClick={() => { setRawOpen(false); setRawText(""); }}>Cancel</button>
+        </div>
+      </div>
+    ) : null}
+
+    {editing ? (
+      <div className="prog-help">
+        <strong>Linking a piece to a note:</strong> use the <em>Link to note</em> dropdown on any piece to connect it to a Program Notes or Info page — the title becomes a "Read note →" link. Anywhere you type text, <code>[label](#/section-id)</code> also makes a link.
+      </div>
+    ) : null}
+    {editing ? (
+      <div className="prog-edit prog-edit-add">
+        <button onClick={addPiece}>+ Add Piece</button>
+        <button onClick={addIntermission}>+ Intermission</button>
+        <button onClick={() => { setRawOpen(true); setRawText(""); }}>Paste raw text</button>
+        <button onClick={resetProgram}>Reset page</button>
+      </div>
+    ) : null}
   </div>
-);
+  );
+};
 
 // ---- NOTES (long-form) ----
-const NotesSection = ({ s, update }) => (
+const NotesSection = ({ s, update }) => {
+  const editing = window.__editMode;
+  const slugify = (t, i) => "note-" + (t || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") + "-" + i;
+  const jump = (id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const sc = document.scrollingElement || document.documentElement;
+    sc.scrollTo({ top: el.getBoundingClientRect().top + sc.scrollTop - 76, behavior: "smooth" });
+  };
+  const headed = (s.sections || []).map((sec, i) => ({ sec, i, id: slugify(sec.h, i) })).filter(x => (x.sec.h || "").trim());
+  const showIndex = s.showIndex !== false && headed.length > 1;
+  return (
   <div>
     <Editable as="p" className="lead" value={s.lead} onChange={v => update({ lead: v })} multiline />
+    {showIndex ? (
+      <nav className="note-index" aria-label="Jump to a note">
+        {headed.map(({ sec, id }) => (
+          <button key={id} className="note-pill" onClick={() => jump(id)}>{sec.h}</button>
+        ))}
+      </nav>
+    ) : null}
+    {editing && headed.length > 1 ? (
+      <div className="prog-edit" style={{ marginBottom: 14 }}>
+        <button onClick={() => update({ showIndex: s.showIndex === false })}>{s.showIndex === false ? "Show" : "Hide"} note index</button>
+      </div>
+    ) : null}
     {s.sections.map((sec, i) => (
-      <div key={i}>
+      <div key={i} id={slugify(sec.h, i)} className="note-block">
         <Editable as="h3" value={sec.h} onChange={v => {
           const sections = [...s.sections]; sections[i] = { ...sec, h: v }; update({ sections });
         }} />
+        {(sec.sub || editing) ? (
+          <Editable as="p" className="note-subtitle" value={sec.sub || ""} onChange={v => {
+            const sections = [...s.sections]; sections[i] = { ...sec, sub: v }; update({ sections });
+          }} multiline />
+        ) : null}
         {sec.body.map((p, pi) => (
           <Editable key={pi} as="p" value={p} onChange={v => {
             const sections = [...s.sections];
@@ -80,8 +215,23 @@ const NotesSection = ({ s, update }) => (
             update({ sections });
           }} multiline />
         ))}
+        {editing ? (
+          <div className="prog-edit">
+            <button onClick={() => {
+              const sections = [...s.sections]; sections[i] = { ...sec, body: [...(sec.body || []), ""] }; update({ sections });
+            }}>+ Paragraph</button>
+            <button onClick={() => { const sections = [...s.sections]; const j = i - 1; if (j < 0) return; [sections[i], sections[j]] = [sections[j], sections[i]]; update({ sections }); }}>↑</button>
+            <button onClick={() => { const sections = [...s.sections]; const j = i + 1; if (j >= sections.length) return; [sections[i], sections[j]] = [sections[j], sections[i]]; update({ sections }); }}>↓</button>
+            <button onClick={() => { if (!confirm("Delete this note?")) return; update({ sections: s.sections.filter((_, j) => j !== i) }); }}>Delete note</button>
+          </div>
+        ) : null}
       </div>
     ))}
+    {editing ? (
+      <div className="prog-edit prog-edit-add">
+        <button onClick={() => update({ sections: [...(s.sections || []), { h: "New Note", body: [""] }] })}>+ Add Note</button>
+      </div>
+    ) : null}
     {s.author ? (
       <div className="signature">
         <Editable as="div" className="name" value={s.author.name} onChange={v => update({ author: { ...s.author, name: v } })} />
@@ -89,7 +239,8 @@ const NotesSection = ({ s, update }) => (
       </div>
     ) : null}
   </div>
-);
+  );
+};
 
 // ---- SYNOPSIS / SETTING ----
 const SynopsisSection = ({ s, update }) => (
@@ -306,33 +457,108 @@ const DonorsSection = ({ s, update }) => (
 );
 
 // ---- EVENTS (upcoming) ----
-const EventsSection = ({ s, update }) => (
-  <div>
-    {s.lead ? <Editable as="p" className="lead" value={s.lead} onChange={v => update({ lead: v })} multiline /> : null}
-    <ul className="event-list">
-      {s.events.map((e, i) => (
-        <li key={i} className="event-card">
-          <div className="event-date">
-            <Editable as="span" className="month" value={e.month} onChange={v => {
-              const events = [...s.events]; events[i] = { ...e, month: v }; update({ events });
-            }} />
-            <Editable as="span" className="day" value={e.day} onChange={v => {
-              const events = [...s.events]; events[i] = { ...e, day: v }; update({ events });
-            }} />
-          </div>
-          <div className="event-info">
-            <Editable as="div" className="title" value={e.title} onChange={v => {
-              const events = [...s.events]; events[i] = { ...e, title: v }; update({ events });
-            }} />
-            <Editable as="div" className="meta" value={e.meta} onChange={v => {
-              const events = [...s.events]; events[i] = { ...e, meta: v }; update({ events });
-            }} multiline />
-          </div>
-        </li>
-      ))}
-    </ul>
-  </div>
-);
+// Auto-populates from shows/manifest.json (the next few shows after this one),
+// each card linking to that show's program. Set s.auto = false to hand-curate.
+const EventsSection = ({ s, update }) => {
+  const editing = window.__editMode;
+  const [auto, setAuto] = React.useState([]);
+  const isAuto = s.auto !== false;
+  React.useEffect(() => {
+    if (!isAuto) return;
+    const params = new URLSearchParams(location.search);
+    const slug = params.get("show");
+    fetch("shows/manifest.json").then(r => r.json()).then(list => {
+      const sorted = [...list].filter(m => m.iso).sort((a, b) => a.iso.localeCompare(b.iso));
+      const self = sorted.find(m => m.slug === slug);
+      const after = self ? sorted.filter(m => m.iso > self.iso) : sorted;
+      const take = (after.length ? after : sorted).slice(0, s.count || 4);
+      setAuto(take.map(m => {
+        const d = new Date(m.iso + "T00:00");
+        return {
+          month: d.toLocaleString("en-US", { month: "short" }).toUpperCase(),
+          day: String(d.getUTCDate()),
+          title: m.title,
+          meta: [m.leadArtist !== m.title ? m.leadArtist : null, m.venue].filter(Boolean).join("   "),
+          href: m.eventUrl || ("Program Book.html?show=" + m.slug),
+          websiteUrl: m.eventUrl || ("https://vivoperformingarts.org/events/" + m.slug),
+          slug: m.slug,
+          thumb: (s.thumbs && s.thumbs[m.slug]) || m.thumb || "",
+          accent: m.accent || "plum"
+        };
+      }));
+    }).catch(() => {});
+  }, [isAuto, s.count, s.thumbs]);
+
+  const events = isAuto ? auto : (s.events || []);
+  const linkTo = s.linkTo || "program";
+  return (
+    <div>
+      {s.lead ? <Editable as="p" className="lead" value={s.lead} onChange={v => update({ lead: v })} multiline /> : null}
+      {isAuto && editing ? (
+        <div className="st-song-modes" role="group" aria-label="Link destination">
+          <span className="st-song-modes-hint">Cards link to:</span>
+          <button aria-pressed={linkTo === "program"} onClick={() => update({ linkTo: "program" })}>Program page</button>
+          <button aria-pressed={linkTo === "website"} onClick={() => update({ linkTo: "website" })}>Vivo Performing Arts website</button>
+        </div>
+      ) : null}
+      <ul className="event-list">
+        {events.map((e, i) => {
+          const inner = (
+            <React.Fragment>
+              <div className="event-date">
+                <span className="month">{e.month}</span>
+                <span className="day">{e.day}</span>
+              </div>
+              {isAuto ? (
+                <div className={"event-thumb accent-" + (e.accent || "plum")}>
+                  {e.thumb ? <img src={e.thumb} alt="" /> : null}
+                </div>
+              ) : null}
+              <div className="event-info">
+                <div className="title">{e.title}</div>
+                <div className="meta">{e.meta}</div>
+              </div>
+              {e.href ? <Icon name="arrow-right" size={18} /> : null}
+            </React.Fragment>
+          );
+          if (isAuto) {
+            const dest = linkTo === "website" ? e.websiteUrl : e.href;
+            const ext = /^https?:/.test(dest);
+            const setThumb = (src) => update({ thumbs: { ...(s.thumbs || {}), [e.slug]: src } });
+            if (editing) {
+              return (
+                <li key={i} className="event-card event-card-edit">
+                  <div className="event-date">
+                    <span className="month">{e.month}</span>
+                    <span className="day">{e.day}</span>
+                  </div>
+                  <PhotoSlot className={"event-thumb accent-" + (e.accent || "plum")} src={e.thumb} alt={e.title} onChange={setThumb} onClear={() => setThumb("")} size={60} />
+                  <div className="event-info">
+                    <div className="title">{e.title}</div>
+                    <div className="meta">{e.meta}</div>
+                  </div>
+                </li>
+              );
+            }
+            return <li key={i} className="event-card event-card-link"><a className="event-link" href={dest} {...(ext ? { target: "_blank", rel: "noopener noreferrer" } : {})}>{inner}</a></li>;
+          }
+          return (
+            <li key={i} className="event-card">
+              <div className="event-date">
+                <Editable as="span" className="month" value={e.month} onChange={v => { const events = [...s.events]; events[i] = { ...e, month: v }; update({ events }); }} />
+                <Editable as="span" className="day" value={e.day} onChange={v => { const events = [...s.events]; events[i] = { ...e, day: v }; update({ events }); }} />
+              </div>
+              <div className="event-info">
+                <Editable as="div" className="title" value={e.title} onChange={v => { const events = [...s.events]; events[i] = { ...e, title: v }; update({ events }); }} />
+                <Editable as="div" className="meta" value={e.meta} onChange={v => { const events = [...s.events]; events[i] = { ...e, meta: v }; update({ events }); }} multiline />
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+};
 
 // ---- PERFORMANCE SPONSOR ----
 const PerformanceSponsorSection = ({ s, update }) => {
@@ -605,7 +831,7 @@ const VivoSection = ({ s }) => {
 };
 
 // ---- Main switcher ----
-const SectionBody = ({ section, update, allSections, onGoSection, expandedBioId, onClearExpandedBio }) => {
+const SectionBody = ({ section, update, allSections, onGoSection, expandedBioId, onClearExpandedBio, displayStyle, defaultTransMode, cover }) => {
   const biosSection = allSections?.find(s => s.kind === "bios");
   const onGoBio = (bioId) => {
     if (!biosSection) return;
@@ -613,7 +839,7 @@ const SectionBody = ({ section, update, allSections, onGoSection, expandedBioId,
   };
   switch (section.kind) {
     case "welcome": return <WelcomeSection s={section} update={update} />;
-    case "program": return <ProgramSection s={section} update={update} />;
+    case "program": return <ProgramSection s={section} update={update} displayStyle={displayStyle} allSections={allSections} onGoSection={onGoSection} cover={cover} />;
     case "notes": return <NotesSection s={section} update={update} />;
     case "synopsis": return <SynopsisSection s={section} update={update} />;
     case "cast": return <CastSection s={section} update={update} bios={biosSection?.bios} onGoBio={onGoBio} />;
@@ -624,7 +850,7 @@ const SectionBody = ({ section, update, allSections, onGoSection, expandedBioId,
     case "performance-sponsor": return <PerformanceSponsorSection s={section} update={update} />;
     case "sponsors": return <SponsorsSection s={section} update={update} />;
     case "info": return <InfoSection s={section} update={update} />;
-    case "songtexts": return <window.SongTextsSection s={section} update={update} />;
+    case "songtexts": return <window.SongTextsSection s={section} update={update} defaultMode={defaultTransMode} />;
     case "vivo": return <VivoSection s={section} update={update} />;
     default: return null;
   }
