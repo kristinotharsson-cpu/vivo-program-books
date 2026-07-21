@@ -108,6 +108,15 @@
       ]
     },
     {
+      "id": "upcoming",
+      "title": "Upcoming",
+      "kind": "events",
+      "eyebrow": "Coming Up at Vivo Performing Arts",
+      "lead": "Explore the rest of the season at [vivoperformingarts.org](https://vivoperformingarts.org).",
+      "auto": true,
+      "count": 4
+    },
+    {
       "id": "vivo",
       "kind": "vivo",
       "title": "About Vivo Performing Arts",

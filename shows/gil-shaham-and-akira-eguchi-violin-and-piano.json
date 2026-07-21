@@ -10,7 +10,7 @@
     "accent": "green",
     "brush": "harmony",
     "photoCaption": "Gil Shaham",
-    "calloutLabel": "A note from CEO",
+    "calloutLabel": "A note from CEO of Vivo Performing Arts",
     "calloutName": "Thor Steingraber",
     "presentedBy": "",
     "footerSponsor": null,
@@ -124,6 +124,15 @@
           "website": "https://gilshaham.com"
         }
       ]
+    },
+    {
+      "id": "upcoming",
+      "title": "Upcoming",
+      "kind": "events",
+      "eyebrow": "Coming Up at Vivo Performing Arts",
+      "lead": "Explore the rest of the season at [vivoperformingarts.org](https://vivoperformingarts.org).",
+      "auto": true,
+      "count": 4
     },
     {
       "id": "vivo",

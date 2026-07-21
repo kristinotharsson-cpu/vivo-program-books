@@ -65,6 +65,74 @@
       ]
     },
     {
+      "id": "texts",
+      "title": "Sung Texts & Translations",
+      "kind": "songtexts",
+      "eyebrow": "Follow Along",
+      "lead": "Texts for tonight's recital. Use the buttons on each piece to switch between the original language and English, or view them side by side.",
+      "songs": [
+        {
+          "id": "an-die-musik",
+          "title": "An die Musik",
+          "composer": "Franz Schubert — text by Franz von Schober",
+          "note": "D. 547 (1817)",
+          "origLang": "German",
+          "stanzas": [
+            {
+              "original": [
+                "Du holde Kunst, in wieviel grauen Stunden,",
+                "Wo mich des Lebens wilder Kreis umstrickt,",
+                "Hast du mein Herz zu warmer Lieb entzunden,",
+                "Hast mich in eine beßre Welt entrückt!"
+              ],
+              "translation": [
+                "O gracious Art, in how many grey hours,",
+                "When life's fierce orbit encompassed me,",
+                "Have you kindled my heart to warm love,",
+                "Have you transported me into a better world!"
+              ]
+            },
+            {
+              "original": [
+                "Oft hat ein Seufzer, deiner Harf entflossen,",
+                "Ein süßer, heiliger Akkord von dir,",
+                "Den Himmel beßrer Zeiten mir erschlossen,",
+                "Du holde Kunst, ich danke dir dafür!"
+              ],
+              "translation": [
+                "Often a sigh, escaping from your harp,",
+                "A sweet, sacred chord of yours,",
+                "Has opened to me the heaven of better times,",
+                "O gracious Art, for that I thank you!"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "the-vagabond",
+          "title": "The Vagabond",
+          "composer": "Ralph Vaughan Williams — text by Robert Louis Stevenson",
+          "note": "from Songs of Travel (1904). Sung in English.",
+          "origLang": "English",
+          "stanzas": [
+            {
+              "original": [
+                "Give to me the life I love,",
+                "Let the lave go by me,",
+                "Give the jolly heaven above",
+                "And the byway nigh me.",
+                "Bed in the bush with stars to see,",
+                "Bread I dip in the river —",
+                "There's the life for a man like me,",
+                "There's the life for ever."
+              ],
+              "translation": []
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "artist",
       "title": "Cast & Creative",
       "kind": "cast",
@@ -95,6 +163,15 @@
           "website": "https://nadinesoprano.com"
         }
       ]
+    },
+    {
+      "id": "upcoming",
+      "title": "Upcoming",
+      "kind": "events",
+      "eyebrow": "Coming Up at Vivo Performing Arts",
+      "lead": "Explore the rest of the season at [vivoperformingarts.org](https://vivoperformingarts.org).",
+      "auto": true,
+      "count": 4
     },
     {
       "id": "vivo",
