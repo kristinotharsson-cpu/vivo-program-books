@@ -34,6 +34,24 @@ const Icon = ({ name, size = 20 }) => {
 
 // ---------- Editable text ----------
 // Wraps text in a contentEditable when edit mode is on.
+// Link protocol: write [label](https://url) in any text field; in read mode it
+// renders as a real link. In edit mode you see the raw [label](url) to edit.
+const LINK_RE = /\[([^\]]+)\]\((https?:\/\/[^\s)]+|Program Book\.html[^\s)]*|#[^\s)]*)\)/g;
+const hasLinks = (t) => typeof t === "string" && /\[[^\]]+\]\((https?:\/\/|Program Book\.html|#)/.test(t);
+const linkifyHtml = (t) => {
+  const esc = (x) => x.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  let out = ""; let last = 0; let m;
+  LINK_RE.lastIndex = 0;
+  while ((m = LINK_RE.exec(t))) {
+    out += esc(t.slice(last, m.index));
+    const ext = /^https?:/.test(m[2]);
+    out += `<a href="${esc(m[2])}"${ext ? ' target="_blank" rel="noopener noreferrer"' : ""}>${esc(m[1])}</a>`;
+    last = m.index + m[0].length;
+  }
+  out += esc(t.slice(last));
+  return out;
+};
+
 const Editable = ({ value, onChange, multiline = false, as = "span", ...rest }) => {
   const ref = useRef(null);
   const editing = window.__editMode;
@@ -55,6 +73,10 @@ const Editable = ({ value, onChange, multiline = false, as = "span", ...rest }) 
   };
 
   const Tag = as;
+  // Read mode with links: render parsed HTML so [label](url) becomes a real anchor.
+  if (!editing && hasLinks(value)) {
+    return <Tag {...rest} dangerouslySetInnerHTML={{ __html: linkifyHtml(value) }} />;
+  }
   return (
     <Tag
       ref={ref}

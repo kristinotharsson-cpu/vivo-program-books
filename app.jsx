@@ -3,7 +3,7 @@
 const { useState: useStateA, useEffect: useEffectA, useMemo: useMemoA, useCallback: useCallbackA } = React;
 
 // ---- Cover photo frame (16:9, brush watermark when empty) ----
-const CoverPhotoFrame = ({ src, alt, brushSrc, onChange, onClear }) => {
+const CoverPhotoFrame = ({ src, alt, onChange, onClear }) => {
   const fileRef = React.useRef(null);
   const editing = window.__editMode;
   const handleClick = (e) => {
@@ -29,13 +29,10 @@ const CoverPhotoFrame = ({ src, alt, brushSrc, onChange, onClear }) => {
       {src ? (
         <img src={src} alt={alt} />
       ) : (
-        <React.Fragment>
-          <img className="cover-photo-hero-brush" src={brushSrc} alt="" aria-hidden="true" onError={(e) => e.target.style.display = "none"} />
-          <span className="cover-photo-hero-placeholder">
-            <span className="ratio">1920 × 1080</span>
-            <span className="hint">{editing ? "Click to add photo" : "Photo"}</span>
-          </span>
-        </React.Fragment>
+        <span className="cover-photo-hero-placeholder">
+          <span className="ratio">1920 × 1080</span>
+          <span className="hint">{editing ? "Click to add photo" : "Photo"}</span>
+        </span>
       )}
       {editing ? (
         <span className="cover-photo-hero-overlay" aria-hidden="true">
@@ -72,9 +69,7 @@ const Cover = ({ cover, update, variant, brushColor, textColor, theme }) => {
   const autoFg = cover.accent === "light-green" || cover.accent === "lavender" ? "var(--vivo-black)" : "var(--vivo-cream)";
   const textColorMap = {
     cream: "var(--vivo-cream)",
-    black: "var(--vivo-black)",
-    plum: "var(--vivo-plum)",
-    tangerine: "var(--vivo-tangerine)"
+    black: "var(--vivo-black)"
   };
   const fg = textColor && textColor !== "auto" ? (textColorMap[textColor] || autoFg) : autoFg;
   const brushSrc = `assets/illustrations/${cover.brush}-${brushColor}.png`;
@@ -87,10 +82,10 @@ const Cover = ({ cover, update, variant, brushColor, textColor, theme }) => {
         <Editable as="h1" className="cover-title" value={cover.title} onChange={v => update({ title: v })} />
         <Editable as="div" className="cover-subtitle" value={cover.subtitle} onChange={v => update({ subtitle: v })} />
         <div className="cover-hero-photo">
+          <img className="cover-brush tr" src={brushSrc} alt="" aria-hidden="true" onError={(e) => e.target.style.display = "none"} />
           <CoverPhotoFrame
             src={cover.photoSrc}
             alt={cover.photoCaption || ""}
-            brushSrc={brushSrc}
             onChange={(src) => update({ photoSrc: src })}
             onClear={() => update({ photoSrc: "" })}
           />
@@ -162,6 +157,19 @@ const FooterSponsor = ({ sponsor }) => (
 );
 
 // ---- Note Callout (link card on home, between cover and TOC) ----
+const AppFooter = ({ theme }) => (
+  <footer className="app-footer">
+    <img src={theme === "dark" ? "assets/logos/vivo-logo-cream.png" : "assets/logos/vivo-logo-black.png"} alt="Vivo Performing Arts" />
+    <div className="footer-social">
+      <a href="https://www.instagram.com/vivoperformingarts/" target="_blank" rel="noopener noreferrer"><Icon name="instagram" size={18} /><span>Instagram</span></a>
+      <a href="https://www.facebook.com/vivoperformingarts" target="_blank" rel="noopener noreferrer"><Icon name="facebook" size={18} /><span>Facebook</span></a>
+      <a href="https://www.youtube.com/@vivoperformingarts" target="_blank" rel="noopener noreferrer"><Icon name="youtube" size={18} /><span>YouTube</span></a>
+      <a href="https://www.linkedin.com/company/vivoperformingarts" target="_blank" rel="noopener noreferrer"><Icon name="linkedin" size={18} /><span>LinkedIn</span></a>
+    </div>
+    <div className="footer-copy"><a href="https://vivoperformingarts.org" target="_blank" rel="noopener noreferrer">vivoperformingarts.org</a></div>
+  </footer>
+);
+
 const NoteCallout = ({ label, name, photoSrc, initials, onClick, onPhotoChange, onPhotoClear }) => {
   const fileRef = React.useRef(null);
   const editing = window.__editMode;
@@ -369,7 +377,15 @@ const App = () => {
     "coverAccent": "green",
     "coverBrush": "harmony",
     "brushColor": "cream",
+    "brushX": 0,
+    "brushY": 0,
+    "brushSize": 60,
+    "brushRotate": 45,
     "coverTextColor": "auto",
+    "programStyle": "tabular",
+    "transMode": "side-by-side",
+    "exportTheme": "dark",
+    "showFooterSponsor": true,
     "hiddenSections": []
   }/*EDITMODE-END*/;
 
@@ -533,6 +549,37 @@ const App = () => {
       sections: d.sections.map(s => s.id === id ? { ...s, ...patch } : s)
     }));
   }, []);
+  const MODULE_LIBRARY = [
+    { kind: "info", label: "Text / Info", desc: "Headings and paragraphs", make: (t) => ({ title: t || "Information", kind: "info", eyebrow: "", paragraphs: [""] }) },
+    { kind: "notes", label: "Program Notes", desc: "Long-form prose notes", make: (t) => ({ title: t || "Program Notes", kind: "notes", eyebrow: "About the Music", blocks: [{ h: "", body: [""] }] }) },
+    { kind: "program", label: "Program", desc: "Running order of works", make: (t) => ({ title: t || "Program", kind: "program", eyebrow: "The Running Order", lead: "", pieces: [{ composer: "", work: "" }] }) },
+    { kind: "cast", label: "Cast & Creative", desc: "Performers and roles", make: (t) => ({ title: t || "Cast & Creative", kind: "cast", eyebrow: "Who's Performing", cast: [{ role: "", name: "" }] }) },
+    { kind: "bios", label: "Artist Bios", desc: "Photo + biography", make: (t) => ({ title: t || "Artist Bios", kind: "bios", eyebrow: "About the Artists", bios: [{ id: "bio-1", name: "", role: "", photoSrc: "", text: "" }] }) },
+    { kind: "songtexts", label: "Song Texts", desc: "Sung texts & translations", make: (t) => ({ title: t || "Sung Texts & Translations", kind: "songtexts", eyebrow: "Follow Along", lead: "", songs: [{ id: "piece-1", title: "New Piece", composer: "", note: "", origLang: "", stanzas: [{ original: ["", "", "", ""], translation: ["", "", "", ""] }] }] }) },
+    { kind: "events", label: "Upcoming", desc: "Auto season calendar", make: (t) => ({ title: t || "Upcoming", kind: "events", eyebrow: "Coming Up at Vivo Performing Arts", lead: "", auto: true, count: 4 }) },
+    { kind: "roster", label: "Roster", desc: "Grouped name lists", make: (t) => ({ title: t || "Roster", kind: "roster", eyebrow: "", groups: [{ h: "", names: [""] }] }) }
+  ];
+  const addModule = (mod) => {
+    const title = (prompt(mod.label + " — section title?", mod.make("").title) || "").trim();
+    if (!title) return;
+    const base = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || (mod.kind + "-" + Date.now());
+    setData(d => {
+      const id = d.sections.some(s => s.id === base) ? base + "-" + Date.now() : base;
+      return { ...d, sections: [...d.sections, { id, ...mod.make(title) }] };
+    });
+    setToast(`Added \u201c${title}\u201d`);
+  };
+
+  const moveSection = useCallbackA((id, dir) => {
+    setData(d => {
+      const arr = [...d.sections];
+      const i = arr.findIndex(s => s.id === id);
+      const j = i + dir;
+      if (i < 0 || j < 0 || j >= arr.length) return d;
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+      return { ...d, sections: arr };
+    });
+  }, []);
 
   // Find section
   const currentSection = data.sections.find(s => s.id === route);
@@ -572,7 +619,7 @@ const App = () => {
   const exportHtml = useCallbackA(async () => {
     setToast("Bundling export…");
     try {
-      const snapshot = { data, tweaks, theme, fontSize, exportedAt: new Date().toISOString() };
+      const snapshot = { data, tweaks, theme: tweaks.exportTheme || theme, fontSize, exportedAt: new Date().toISOString() };
       const json = JSON.stringify(snapshot).replace(/<\/script/gi, "<\\/script");
 
       // Fetch source HTML
@@ -707,7 +754,13 @@ const App = () => {
   const accentFg = accentOnLight ? "var(--vivo-black)" : "var(--vivo-cream)";
 
   return (
-    <div className="app" style={{ "--accent": accentColor, "--accent-fg": accentFg }}>
+    <div className={"app" + (editing ? " is-editing-mode" : "")} style={{ "--accent": accentColor, "--accent-fg": accentFg, "--brush-x": (tweaks.brushX || 0) + "%", "--brush-y": (tweaks.brushY || 0) + "%", "--brush-size": (tweaks.brushSize || 60) + "%", "--brush-scale": (tweaks.brushSize || 60) / 60, "--brush-rotate": (tweaks.brushRotate == null ? 45 : tweaks.brushRotate) + "deg" }}>
+      {editing ? (
+        <div className="edit-mode-bar">
+          <span className="edit-mode-dot" />Edit Mode — tap any text to change it
+          <button className="edit-mode-done" onClick={toggleEditing}>Done</button>
+        </div>
+      ) : null}
       <TopBar
         title={currentSection ? currentSection.title : data.cover.title}
         showLogo={!currentSection}
@@ -720,7 +773,7 @@ const App = () => {
 
       {!currentSection ? (
         <div className="page home">
-          <Cover cover={cover} update={updateCover} variant="default" brushColor={tweaks.brushColor} textColor={tweaks.coverTextColor} theme={theme} />
+          <Cover cover={cover} update={updateCover} variant={tweaks.coverVariant || "default"} brushColor={tweaks.brushColor} textColor={tweaks.coverTextColor} theme={theme} />
           <NoteCallout
             label={data.cover.calloutLabel || "A note from CEO of Vivo Performing Arts"}
             name={data.cover.calloutName || "Thor Steingraber"}
@@ -738,19 +791,10 @@ const App = () => {
               href: a.url ? "https://" + a.url : "#"
             }))}
           />
-          {data.cover.footerSponsor ? (
+          {data.cover.footerSponsor && tweaks.showFooterSponsor !== false ? (
             <FooterSponsor sponsor={data.cover.footerSponsor} />
           ) : null}
-          <footer className="app-footer">
-            <img src={theme === "dark" ? "assets/logos/vivo-logo-cream.png" : "assets/logos/vivo-logo-black.png"} alt="Vivo" />
-            <div className="footer-social">
-              <a href="https://www.instagram.com/vivoperformingarts/" target="_blank" rel="noopener noreferrer"><Icon name="instagram" size={18} /><span>Instagram</span></a>
-              <a href="https://www.facebook.com/vivoperformingarts" target="_blank" rel="noopener noreferrer"><Icon name="facebook" size={18} /><span>Facebook</span></a>
-              <a href="https://www.youtube.com/@vivoperformingarts" target="_blank" rel="noopener noreferrer"><Icon name="youtube" size={18} /><span>YouTube</span></a>
-              <a href="https://www.linkedin.com/company/vivoperformingarts" target="_blank" rel="noopener noreferrer"><Icon name="linkedin" size={18} /><span>LinkedIn</span></a>
-            </div>
-            <div>© VIVO PERFORMING ARTS VIVOPERFORMINGARTS.ORG</div>
-          </footer>
+          <AppFooter theme={theme} />
         </div>
       ) : (
         <div className="page section-page" key={currentSection.id}>
@@ -763,12 +807,22 @@ const App = () => {
             onGoSection={goSection}
             expandedBioId={expandedBioId}
             onClearExpandedBio={() => setExpandedBioId(null)}
+            displayStyle={tweaks.programStyle}
+            cover={data.cover}
+            defaultTransMode={tweaks.transMode}
           />
+          {editing ? (
+            <div className="custom-html-edit">
+              <div className="prog-help"><strong>Custom HTML (this page).</strong> Anything here renders at the bottom of the page — headings, &lt;p&gt;, lists, images, links (<code>&lt;a href="#/section-id"&gt;</code>). Saves as you type; turn off Edit to preview.</div>
+              <textarea className="prog-html-input" value={currentSection.customHtml || ""} placeholder="<p>Custom HTML for this page…</p>" onChange={(e) => updateSection(currentSection.id, { customHtml: e.target.value })} />
+            </div>
+          ) : (currentSection.customHtml ? <div className="prog-html" dangerouslySetInnerHTML={{ __html: currentSection.customHtml }} /> : null)}
           <SectionBottomNav
             prev={visibleIdx > 0 ? visibleSections[visibleIdx - 1] : null}
             next={visibleIdx >= 0 && visibleIdx < visibleSections.length - 1 ? visibleSections[visibleIdx + 1] : null}
             onGo={goTo}
           />
+          <AppFooter theme={theme} />
         </div>
       )}
 
@@ -833,25 +887,34 @@ const App = () => {
               options={["harmony", "tempo", "rhythm", "pitch", "form", "dynamics", "jazz"].map(b => ({ value: b, label: b[0].toUpperCase() + b.slice(1) }))}
               onChange={v => setTweak("coverBrush", v)}
             />
-            <window.TweakRadio
+            <window.TweakSelect
               label="Brush Color"
               value={tweaks.brushColor}
               options={[
                 { value: "cream", label: "Cream" },
                 { value: "plum", label: "Plum" },
-                { value: "black", label: "Black" }
+                { value: "black", label: "Black" },
+                { value: "blue", label: "Blue" },
+                { value: "sky-blue", label: "Sky Blue" },
+                { value: "green", label: "Green" },
+                { value: "light-green", label: "Light Green" },
+                { value: "lavender", label: "Lavender" },
+                { value: "orange", label: "Orange" },
+                { value: "tangerine", label: "Tangerine" }
               ]}
               onChange={v => setTweak("brushColor", v)}
             />
-            <window.TweakSelect
+            <window.TweakSlider label="Brush Left / Right" value={tweaks.brushX || 0} min={-40} max={40} step={1} unit="%" onChange={v => setTweak("brushX", v)} />
+            <window.TweakSlider label="Brush Up / Down" value={tweaks.brushY || 0} min={-40} max={40} step={1} unit="%" onChange={v => setTweak("brushY", v)} />
+            <window.TweakSlider label="Brush Size" value={tweaks.brushSize || 60} min={25} max={360} step={5} unit="%" onChange={v => setTweak("brushSize", v)} />
+            <window.TweakSlider label="Brush Rotation" value={tweaks.brushRotate == null ? 45 : tweaks.brushRotate} min={-180} max={180} step={5} unit="°" onChange={v => setTweak("brushRotate", v)} />
+            <window.TweakRadio
               label="Cover Text"
               value={tweaks.coverTextColor}
               options={[
                 { value: "auto", label: "Auto" },
                 { value: "cream", label: "Cream" },
-                { value: "black", label: "Black" },
-                { value: "plum", label: "Plum" },
-                { value: "tangerine", label: "Tangerine" }
+                { value: "black", label: "Black" }
               ]}
               onChange={v => setTweak("coverTextColor", v)}
             />
@@ -883,45 +946,79 @@ const App = () => {
               onChange={v => setTweak("tocHighlight", v)}
             />
           </window.TweakSection>
+          <window.TweakSection label="Program">
+            <window.TweakRadio
+              label="Layout"
+              value={tweaks.programStyle || "tabular"}
+              options={[
+                { value: "tabular", label: "Tabular" },
+                { value: "centered", label: "Centered" }
+              ]}
+              onChange={v => setTweak("programStyle", v)}
+            />
+          </window.TweakSection>
+          <window.TweakSection label="Song Texts">
+            <window.TweakSelect
+              label="Default Translation Mode"
+              value={tweaks.transMode || "side-by-side"}
+              options={[
+                { value: "side-by-side", label: "Side by side" },
+                { value: "stacked", label: "Stacked" },
+                { value: "interlinear", label: "Interlinear" },
+                { value: "facing", label: "Facing" },
+                { value: "original", label: "Original only" },
+                { value: "translation", label: "Translation only" }
+              ]}
+              onChange={v => { setTweak("transMode", v); try { localStorage.setItem("vivo-songtext-mode", v); } catch(e){} }}
+            />
+          </window.TweakSection>
           <window.TweakSection label="Content">
+            <window.TweakToggle
+              label="Footer Sponsor Banner"
+              value={tweaks.showFooterSponsor !== false}
+              onChange={on => setTweak("showFooterSponsor", on)}
+            />
             <window.TweakButton label="Reset Sample Content" onClick={resetData} />
           </window.TweakSection>
           <window.TweakSection label="Sections">
-            <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>Toggle off to hide a section from the table of contents and navigation. Section content is preserved.</div>
-            {data.sections.map(s => (
-              <window.TweakToggle
-                key={s.id}
-                label={s.title}
-                value={!hiddenSet.has(s.id)}
-                onChange={(on) => {
-                  const cur = new Set(tweaks.hiddenSections || []);
-                  if (on) cur.delete(s.id); else cur.add(s.id);
-                  setTweak("hiddenSections", Array.from(cur));
-                }}
-              />
+            <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>Toggle off to hide a section from the table of contents and navigation. Use the arrows to reorder. Section content is preserved.</div>
+            {data.sections.map((s, i) => (
+              <div key={s.id} style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                <div style={{ flex: 1 }}>
+                  <window.TweakToggle
+                    label={s.title}
+                    value={!hiddenSet.has(s.id)}
+                    onChange={(on) => {
+                      const cur = new Set(tweaks.hiddenSections || []);
+                      if (on) cur.delete(s.id); else cur.add(s.id);
+                      setTweak("hiddenSections", Array.from(cur));
+                    }}
+                  />
+                </div>
+                <button onClick={() => moveSection(s.id, -1)} disabled={i === 0} title="Move up" style={{ border: 0, background: "transparent", cursor: "pointer", opacity: i === 0 ? 0.3 : 0.7, fontSize: 14, padding: "2px 4px" }}>↑</button>
+                <button onClick={() => moveSection(s.id, 1)} disabled={i === data.sections.length - 1} title="Move down" style={{ border: 0, background: "transparent", cursor: "pointer", opacity: i === data.sections.length - 1 ? 0.3 : 0.7, fontSize: 14, padding: "2px 4px" }}>↓</button>
+              </div>
             ))}
-            <window.TweakButton label="+ Add Section" onClick={() => {
-              const title = (prompt("Section title?") || "").trim();
-              if (!title) return;
-              const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || ("section-" + Date.now());
-              setData(d => {
-                const exists = d.sections.some(s => s.id === slug);
-                const id = exists ? slug + "-" + Date.now() : slug;
-                return {
-                  ...d,
-                  sections: [...d.sections, {
-                    id,
-                    title,
-                    kind: "info",
-                    eyebrow: "",
-                    paragraphs: [""]
-                  }]
-                };
-              });
-              setToast(`Added \"${title}\"`);
-            }} />
+            <div style={{ fontSize: 12, opacity: 0.7, margin: "16px 0 8px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em" }}>Module Library</div>
+            <div className="module-lib">
+              {MODULE_LIBRARY.map(mod => (
+                <button key={mod.kind} className="module-lib-item" onClick={() => addModule(mod)}>
+                  <span className="module-lib-label">{mod.label}</span>
+                  <span className="module-lib-desc">{mod.desc}</span>
+                </button>
+              ))}
+            </div>
           </window.TweakSection>
           <window.TweakSection label="Export">
+            <window.TweakRadio
+              label="Exported Theme"
+              value={tweaks.exportTheme || "dark"}
+              options={[
+                { value: "dark", label: "Black" },
+                { value: "light", label: "Cream" }
+              ]}
+              onChange={v => setTweak("exportTheme", v)}
+            />
             <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>Download a self-contained HTML file with all current content baked in. Upload to AWS S3 / CloudFront and host as your official program book.</div>
             <window.TweakButton label="Download HTML" onClick={exportHtml} />
           </window.TweakSection>

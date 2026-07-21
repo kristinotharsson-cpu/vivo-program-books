@@ -261,7 +261,7 @@ window.PROGRAM_DATA = {
       id: "upcoming",
       title: "Upcoming",
       kind: "events",
-      eyebrow: "Coming Up at Vivo",
+      eyebrow: "Coming Up at Vivo Performing Arts",
       lead: "Subscribe to the season at vivoperformingarts.org and never miss a night.",
       events: [
         { month: "MAR", day: "14", title: "Schubert's Winterreise", meta: "Matthias Goerne, baritone   Daniil Trifonov, piano   7:30 PM   Symphony Hall" },
