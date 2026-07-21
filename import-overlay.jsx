@@ -38,7 +38,8 @@ function ImportOverlay({ open, onClose, hasContent, onApplySections, setToast })
 
   const start = hasContent && phase === "confirm";
 
-  const pick = () => fileRef.current && fileRef.current.click();
+  const pick = () => { if (fileRef.current) { fileRef.current.value = ""; fileRef.current.click(); } };
+  const retry = () => { setError(""); setExtracted(null); setFileName(""); setPhase("pick"); if (fileRef.current) fileRef.current.value = ""; };
 
   const run = async (file) => {
     if (!file) return;
@@ -112,6 +113,7 @@ function ImportOverlay({ open, onClose, hasContent, onApplySections, setToast })
             <p className="import-sheet-body">Text extracted ({extracted.stats.pages} pages). The auto-parser isn't available in this environment — download the extraction and run it through the parser, or paste content manually.</p>
             <div className="import-sheet-actions">
               <button className="import-sheet-btn" onClick={downloadTxt}>Download extraction</button>
+              <button className="import-sheet-btn is-ghost" onClick={retry}>Try another PDF</button>
               <button className="import-sheet-btn is-ghost" onClick={onClose}>Close</button>
             </div>
           </>
@@ -119,6 +121,7 @@ function ImportOverlay({ open, onClose, hasContent, onApplySections, setToast })
           <>
             <p className="import-sheet-body import-sheet-error">{error}</p>
             <div className="import-sheet-actions">
+              <button className="import-sheet-btn" onClick={retry}>Try another PDF</button>
               <button className="import-sheet-btn is-ghost" onClick={onClose}>Close</button>
             </div>
           </>
