@@ -265,14 +265,14 @@ const SynopsisSection = ({ s, update }) => (
 );
 
 // ---- CAST & CREATIVE ----
-const CastRow = ({ c, i, list, listKey, update, bios, onGoBio }) => {
+const CastRow = ({ c, i, rows, onRows, bios, onGoBio }) => {
   const initials = (c.name || "").split(" ").map(n => n[0]).filter(Boolean).slice(0, 2).join("").toUpperCase();
   const setItem = (patch) => {
-    const next = [...list]; next[i] = { ...c, ...patch }; update({ [listKey]: next });
+    const next = [...rows]; next[i] = { ...c, ...patch }; onRows(next);
   };
   const remove = () => {
     if (!confirm("Delete this row?")) return;
-    const next = list.filter((_, j) => j !== i); update({ [listKey]: next });
+    onRows(rows.filter((_, j) => j !== i));
   };
   // find matching bio by name (case-insensitive trim)
   const matchedBio = bios?.find(b => (b.name || "").trim().toLowerCase() === (c.name || "").trim().toLowerCase());
@@ -297,28 +297,54 @@ const CastRow = ({ c, i, list, listKey, update, bios, onGoBio }) => {
         )}
         <RowControls onDelete={remove} label="row" />
       </span>
+      {(c.blurb || window.__editMode) ? (
+        <Editable as="p" className="cast-blurb" value={c.blurb || ""} data-placeholder="Optional bio blurb…" onChange={v => setItem({ blurb: v })} multiline />
+      ) : null}
     </li>
   );
 };
 
-const CastSection = ({ s, update, bios, onGoBio }) => (
-  <div>
-    <h3 className="cast-section-h">The Performer</h3>
-    <ul className="cast-list">
-      {s.cast.map((c, i) => (
-        <CastRow key={i} c={c} i={i} list={s.cast} listKey="cast" update={update} bios={bios} onGoBio={onGoBio} />
+const CastSection = ({ s, update, bios, onGoBio }) => {
+  const editing = window.__editMode;
+  const groups = s.groups || [
+    { id: "cast", h: s.castHeading || "The Performer", rows: s.cast || [] },
+    { id: "creative", h: s.creativeHeading || "Creative & Production", rows: s.creative || [] }
+  ];
+  const setGroups = (next) => update({ groups: next });
+  const editGroup = (gi, fn) => {
+    const next = groups.map(g => ({ ...g, rows: [...(g.rows || [])] }));
+    fn(next[gi], next); setGroups(next);
+  };
+  return (
+    <div>
+      {groups.map((g, gi) => (
+        <div key={g.id || gi} className="cast-group">
+          <div className="cast-h-row">
+            {editing ? (
+              <input className="cast-h-input" value={g.h || ""} placeholder="Section heading"
+                onChange={e => editGroup(gi, gg => { gg.h = e.target.value; })} />
+            ) : (
+              <h3 className={"cast-section-h" + (gi > 0 ? " is-second" : "")}>{g.h}</h3>
+            )}
+            {editing ? (
+              <button className="cast-del-section" title="Delete section"
+                onClick={() => { if (confirm("Delete this whole section and its credits?")) setGroups(groups.filter((_, j) => j !== gi)); }}>Delete section</button>
+            ) : null}
+          </div>
+          <ul className="cast-list">
+            {(g.rows || []).map((c, i) => (
+              <CastRow key={i} c={c} i={i} rows={g.rows || []} onRows={(next) => editGroup(gi, gg => { gg.rows = next; })} bios={bios} onGoBio={onGoBio} />
+            ))}
+          </ul>
+          <AddRowButton label="Add credit" onAdd={() => editGroup(gi, gg => { gg.rows = [...(gg.rows || []), { role: "Role", name: "Name" }]; })} />
+        </div>
       ))}
-    </ul>
-    <AddRowButton label="Add performer" onAdd={() => update({ cast: [...s.cast, { role: "Role", name: "Name" }] })} />
-    <h3 className="cast-section-h is-second">Creative & Production</h3>
-    <ul className="cast-list">
-      {s.creative.map((c, i) => (
-        <CastRow key={i} c={c} i={i} list={s.creative} listKey="creative" update={update} bios={bios} onGoBio={onGoBio} />
-      ))}
-    </ul>
-    <AddRowButton label="Add credit" onAdd={() => update({ creative: [...s.creative, { role: "Role", name: "Name" }] })} />
-  </div>
-);
+      {editing ? (
+        <button className="cast-add-section" onClick={() => setGroups([...groups, { id: "grp-" + Date.now().toString(36), h: "New Section", rows: [{ role: "Role", name: "Name" }] }])}>+ Add section</button>
+      ) : null}
+    </div>
+  );
+};
 
 // ---- ROSTER (musicians, board, staff) ----
 const RosterSection = ({ s, update }) => (
@@ -465,13 +491,14 @@ const EventsSection = ({ s, update }) => {
   const isAuto = s.auto !== false;
   React.useEffect(() => {
     if (!isAuto) return;
+    const hidden = s.hiddenSlugs || [];
     const params = new URLSearchParams(location.search);
     const slug = params.get("show");
     fetch("shows/manifest.json").then(r => r.json()).then(list => {
       const sorted = [...list].filter(m => m.iso).sort((a, b) => a.iso.localeCompare(b.iso));
       const self = sorted.find(m => m.slug === slug);
       const after = self ? sorted.filter(m => m.iso > self.iso) : sorted;
-      const take = (after.length ? after : sorted).slice(0, s.count || 4);
+      const take = (after.length ? after : sorted).filter(m => !hidden.includes(m.slug)).slice(0, s.count || 4);
       setAuto(take.map(m => {
         const d = new Date(m.iso + "T00:00");
         return {
@@ -479,28 +506,60 @@ const EventsSection = ({ s, update }) => {
           day: String(d.getUTCDate()),
           title: m.title,
           meta: [m.leadArtist !== m.title ? m.leadArtist : null, m.venue].filter(Boolean).join("   "),
-          href: m.eventUrl || ("Program Book.html?show=" + m.slug),
-          websiteUrl: m.eventUrl || ("https://vivoperformingarts.org/events/" + m.slug),
+          href: m.pdpUrl || m.eventUrl || ("Program Book.html?show=" + m.slug),
+          websiteUrl: m.pdpUrl || m.eventUrl || ("https://www.vivoperformingarts.org/live-performances/performance-event-calendar/"),
+          programUrl: "Program Book.html?show=" + m.slug,
           slug: m.slug,
           thumb: (s.thumbs && s.thumbs[m.slug]) || m.thumb || "",
           accent: m.accent || "plum"
         };
       }));
     }).catch(() => {});
-  }, [isAuto, s.count, s.thumbs]);
+  }, [isAuto, s.count, s.thumbs, s.hiddenSlugs]);
 
-  const events = isAuto ? auto : (s.events || []);
-  const linkTo = s.linkTo || "program";
+  const extras = (s.extra || []).map((e, ei) => ({ ...e, manual: true, _ei: ei, accent: e.accent || "plum", websiteUrl: e.url || "#", programUrl: e.url || "#", href: e.url || "#" }));
+  const events = isAuto ? [...auto, ...extras] : (s.events || []);
+  const linkTo = s.linkTo || "website";
+  const isCarousel = s.layout ? s.layout === "carousel" : isAuto;
+  const hideSlug = (slug) => update({ hiddenSlugs: [...(s.hiddenSlugs || []), slug] });
+  const patchExtra = (idx, patch) => { const extra = [...(s.extra || [])]; extra[idx] = { ...extra[idx], ...patch }; update({ extra }); };
+  const removeExtra = (idx) => { const extra = [...(s.extra || [])]; extra.splice(idx, 1); update({ extra }); };
   return (
     <div>
       {s.lead ? <Editable as="p" className="lead" value={s.lead} onChange={v => update({ lead: v })} multiline /> : null}
       {isAuto && editing ? (
         <div className="st-song-modes" role="group" aria-label="Link destination">
           <span className="st-song-modes-hint">Cards link to:</span>
-          <button aria-pressed={linkTo === "program"} onClick={() => update({ linkTo: "program" })}>Program page</button>
           <button aria-pressed={linkTo === "website"} onClick={() => update({ linkTo: "website" })}>Vivo Performing Arts website</button>
+          <button aria-pressed={linkTo === "program"} onClick={() => update({ linkTo: "program" })}>Program page</button>
         </div>
       ) : null}
+      {isAuto && editing ? (
+        <div className="st-song-modes" role="group" aria-label="Layout">
+          <span className="st-song-modes-hint">Layout:</span>
+          <button aria-pressed={!isCarousel} onClick={() => update({ layout: "list" })}>List</button>
+          <button aria-pressed={isCarousel} onClick={() => update({ layout: "carousel" })}>Carousel</button>
+        </div>
+      ) : null}
+      {isCarousel ? (
+        <div className="event-carousel">
+          {events.map((e, i) => {
+            const dest = linkTo === "program" ? e.programUrl : e.websiteUrl;
+            const ext = /^https?:/.test(dest);
+            return (
+              <a key={i} className="event-promo" href={dest} {...(ext ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
+                <div className={"event-promo-img accent-" + (e.accent || "plum")}>{e.thumb ? <img src={e.thumb} alt="" /> : null}</div>
+                <div className="event-promo-body">
+                  <div className="event-promo-date">{e.month}&nbsp;{e.day}</div>
+                  <div className="event-promo-title">{e.title}</div>
+                  {e.meta ? <div className="event-promo-meta">{e.meta}</div> : null}
+                  <span className="event-promo-cta">Details &rarr;</span>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      ) : (
       <ul className="event-list">
         {events.map((e, i) => {
           const inner = (
@@ -522,21 +581,25 @@ const EventsSection = ({ s, update }) => {
             </React.Fragment>
           );
           if (isAuto) {
-            const dest = linkTo === "website" ? e.websiteUrl : e.href;
+            const dest = linkTo === "program" ? e.programUrl : e.websiteUrl;
             const ext = /^https?:/.test(dest);
             const setThumb = (src) => update({ thumbs: { ...(s.thumbs || {}), [e.slug]: src } });
             if (editing) {
+              const xIdx = e.manual ? (s.extra || []).indexOf((s.extra || [])[e._ei]) : -1;
               return (
                 <li key={i} className="event-card event-card-edit">
                   <div className="event-date">
-                    <span className="month">{e.month}</span>
-                    <span className="day">{e.day}</span>
+                    {e.manual
+                      ? <><Editable as="span" className="month" value={e.month} onChange={v => patchExtra(e._ei, { month: v })} /><Editable as="span" className="day" value={e.day} onChange={v => patchExtra(e._ei, { day: v })} /></>
+                      : <><span className="month">{e.month}</span><span className="day">{e.day}</span></>}
                   </div>
-                  <PhotoSlot className={"event-thumb accent-" + (e.accent || "plum")} src={e.thumb} alt={e.title} onChange={setThumb} onClear={() => setThumb("")} size={60} />
+                  <PhotoSlot className={"event-thumb accent-" + (e.accent || "plum")} src={e.thumb} alt={e.title} onChange={e.manual ? (src => patchExtra(e._ei, { thumb: src })) : setThumb} onClear={() => e.manual ? patchExtra(e._ei, { thumb: "" }) : setThumb("")} size={60} />
                   <div className="event-info">
-                    <div className="title">{e.title}</div>
-                    <div className="meta">{e.meta}</div>
+                    {e.manual
+                      ? <><Editable as="div" className="title" value={e.title} onChange={v => patchExtra(e._ei, { title: v })} /><Editable as="div" className="meta" value={e.meta} onChange={v => patchExtra(e._ei, { meta: v })} multiline /><Editable as="div" className="meta" value={e.url || ""} onChange={v => patchExtra(e._ei, { url: v })} /></>
+                      : <><div className="title">{e.title}</div><div className="meta">{e.meta}</div></>}
                   </div>
+                  <button className="event-remove" title="Remove from list" onClick={() => e.manual ? removeExtra(e._ei) : hideSlug(e.slug)}>✕</button>
                 </li>
               );
             }
@@ -556,10 +619,16 @@ const EventsSection = ({ s, update }) => {
           );
         })}
       </ul>
+      )}
+      {isAuto && editing ? (
+        <div className="prog-edit prog-edit-add">
+          <button onClick={() => update({ extra: [...(s.extra || []), { month: "MON", day: "1", title: "New Listing", meta: "Details", url: "https://www.vivoperformingarts.org/" }] })}>+ Add listing</button>
+          {(s.hiddenSlugs && s.hiddenSlugs.length) ? <button onClick={() => update({ hiddenSlugs: [] })}>Restore removed ({s.hiddenSlugs.length})</button> : null}
+        </div>
+      ) : null}
     </div>
   );
 };
-
 // ---- PERFORMANCE SPONSOR ----
 const PerformanceSponsorSection = ({ s, update }) => {
   const blocks = s.blocks || [];
@@ -569,6 +638,9 @@ const PerformanceSponsorSection = ({ s, update }) => {
   };
   const addBlock = () => {
     update({ blocks: [...blocks, { label: "Additional support", name: "Donor name", statement: "Additional support for this performance is provided by Donor name." }] });
+  };
+  const addImageBlock = () => {
+    update({ blocks: [...blocks, { label: "Performance Sponsor", name: "Sponsor name", statement: "This performance is generously supported by Sponsor name.", imageSrc: "" }] });
   };
   const removeBlock = (i) => {
     update({ blocks: blocks.filter((_, j) => j !== i) });
@@ -589,20 +661,34 @@ const PerformanceSponsorSection = ({ s, update }) => {
       ) : null}
       <Editable as="p" className="lead" value={s.lead || ""} onChange={v => update({ lead: v })} multiline />
       <div className="perf-sponsor-blocks">
-        {blocks.map((b, i) => (
-          <div key={i} className="perf-sponsor-block">
-            <Editable as="div" className="perf-sponsor-label" value={b.label} onChange={v => updateBlock(i, { label: v })} />
-            <Editable as="div" className="perf-sponsor-name" value={b.name} onChange={v => updateBlock(i, { name: v })} />
-            {b.statement !== undefined ? (
-              <Editable as="p" className="perf-sponsor-statement" value={b.statement} onChange={v => updateBlock(i, { statement: v })} multiline />
+        {blocks.map((b, i) => {
+          const isCard = b.imageSrc !== undefined;
+          return (
+          <div key={i} className={"perf-sponsor-block" + (isCard ? " perf-sponsor-card" : "")}>
+            {isCard ? (
+              <div className="perf-sponsor-card-img">
+                <PhotoSlot fill src={b.imageSrc || ""} alt={b.name || "Sponsor"} initials="SPONSOR IMAGE"
+                  onChange={(src) => updateBlock(i, { imageSrc: src })} onClear={() => updateBlock(i, { imageSrc: "" })} />
+              </div>
             ) : null}
-            {window.__editMode ? (
-              <button className="perf-sponsor-remove" onClick={() => removeBlock(i)} aria-label="Remove sponsor block">Remove</button>
-            ) : null}
+            <div className="perf-sponsor-card-body">
+              <Editable as="div" className="perf-sponsor-label" value={b.label} onChange={v => updateBlock(i, { label: v })} />
+              <Editable as="div" className="perf-sponsor-name" value={b.name} onChange={v => updateBlock(i, { name: v })} />
+              {b.statement !== undefined ? (
+                <Editable as="p" className="perf-sponsor-statement" value={b.statement} onChange={v => updateBlock(i, { statement: v })} multiline />
+              ) : null}
+              {window.__editMode ? (
+                <button className="perf-sponsor-remove" onClick={() => removeBlock(i)} aria-label="Remove sponsor block">Remove</button>
+              ) : null}
+            </div>
           </div>
-        ))}
+          );
+        })}
         {window.__editMode ? (
-          <button className="perf-sponsor-add" onClick={addBlock}>+ Add sponsor block</button>
+          <div className="perf-sponsor-add-row">
+            <button className="perf-sponsor-add" onClick={addBlock}>+ Add sponsor block</button>
+            <button className="perf-sponsor-add" onClick={addImageBlock}>+ Add sponsor with image</button>
+          </div>
         ) : null}
       </div>
       {s.seasonSponsors ? (
@@ -647,36 +733,107 @@ const SponsorsSection = ({ s, update }) => (
 );
 
 // ---- INFO (land ack, accessibility, safety, contact) ----
-const InfoSection = ({ s, update }) => (
+const VENUE_LINKS = {
+  "arlington street church": "https://www.vivoperformingarts.org/in-the-community/discover/arlington-street-church/",
+  "arrow street arts": "https://www.vivoperformingarts.org/in-the-community/discover/arrow-street-arts/",
+  "berklee performance center": "https://www.vivoperformingarts.org/in-the-community/discover/berklee-performance-center/",
+  "bethel ame church": "https://www.vivoperformingarts.org/in-the-community/discover/bethel-a-m-e-church/",
+  "bethel a.m.e. church": "https://www.vivoperformingarts.org/in-the-community/discover/bethel-a-m-e-church/",
+  "boch center wang theatre": "https://www.vivoperformingarts.org/in-the-community/discover/boch-center-wang-theatre/",
+  "boston arts academy theater": "https://www.vivoperformingarts.org/in-the-community/discover/boston-arts-academy-theatre/",
+  "boston arts academy theatre": "https://www.vivoperformingarts.org/in-the-community/discover/boston-arts-academy-theatre/",
+  "boston public library roxbury branch": "https://www.vivoperformingarts.org/in-the-community/discover/boston-public-library-roxbury-branch/",
+  "cutler majestic theatre at emerson college": "https://www.vivoperformingarts.org/in-the-community/discover/cutler-majestic-theatre-at-emerson-college/",
+  "cutler majestic theatre": "https://www.vivoperformingarts.org/in-the-community/discover/cutler-majestic-theatre-at-emerson-college/",
+  "crystal ballroom at somerville theatre": "https://www.vivoperformingarts.org/in-the-community/discover/crystal-ballroom-at-somerville-theatre/",
+  "dewey square plaza": "https://www.vivoperformingarts.org/in-the-community/discover/dewey-square-plaza/",
+  "first church roxbury": "https://www.vivoperformingarts.org/in-the-community/discover/first-church-roxbury/",
+  "groton hill music center": "https://www.vivoperformingarts.org/in-the-community/discover/groton-hill-music-center/",
+  "longy's pickman hall": "https://www.vivoperformingarts.org/in-the-community/discover/longy-s-pickman-hall/",
+  "pickman hall": "https://www.vivoperformingarts.org/in-the-community/discover/longy-s-pickman-hall/",
+  "multicultural arts center": "https://www.vivoperformingarts.org/in-the-community/discover/multicultural-arts-center/",
+  "museum of science": "https://www.vivoperformingarts.org/in-the-community/discover/museum-of-science/",
+  "nec's jordan hall": "https://www.vivoperformingarts.org/in-the-community/discover/nec-s-jordan-hall/",
+  "jordan hall": "https://www.vivoperformingarts.org/in-the-community/discover/nec-s-jordan-hall/",
+  "roxbury community college media arts center": "https://www.vivoperformingarts.org/in-the-community/discover/roxbury-community-college/",
+  "salvation army kroc center": "https://www.vivoperformingarts.org/in-the-community/discover/salvation-army-kroc-center/",
+  "sanders theatre": "https://www.vivoperformingarts.org/in-the-community/discover/sanders-theatre/",
+  "symphony hall": "https://www.vivoperformingarts.org/in-the-community/discover/symphony-hall/",
+  "twelfth baptist church": "https://www.vivoperformingarts.org/in-the-community/discover/twelfth-baptist-church/",
+  "shaw-roxbury branch, boston public library": "https://www.vivoperformingarts.org/in-the-community/discover/boston-public-library-roxbury-branch/",
+  "shaw goodman branch": "https://www.vivoperformingarts.org/in-the-community/discover/boston-public-library-roxbury-branch/",
+  "roxbury community college": "https://www.vivoperformingarts.org/in-the-community/discover/roxbury-community-college/",
+  "cathedral church of saint paul": "https://www.vivoperformingarts.org/in-the-community/discover/cathedral-church-of-st-paul/",
+  "cathedral church of st paul": "https://www.vivoperformingarts.org/in-the-community/discover/cathedral-church-of-st-paul/",
+  "first church, boston uu": "https://www.vivoperformingarts.org/in-the-community/discover/",
+  "first church boston": "https://www.vivoperformingarts.org/in-the-community/discover/"
+};
+const _normVenue = (t) => (t || "").toLowerCase().replace(/['’.,]/g, "").replace(/[-–—]/g, " ").replace(/\s+/g, " ").trim();
+const _VENUE_NORM = Object.keys(VENUE_LINKS).map(k => [_normVenue(k), VENUE_LINKS[k]]).sort((a, b) => b[0].length - a[0].length);
+const venueUrlFor = (text) => {
+  const key = _normVenue(text);
+  if (!key) return null;
+  for (const [k, url] of _VENUE_NORM) { if (k === key) return url; }
+  for (const [k, url] of _VENUE_NORM) { if (key.includes(k)) return url; }
+  return null;
+};
+const InfoSection = ({ s, update }) => {
+  const audienceInfo = (s.audienceInfo && s.audienceInfo.length) ? s.audienceInfo : ((window.VIVO_SHARED && window.VIVO_SHARED.audienceInfo) || []);
+  return (
   <div>
-    {s.sections.map((sec, i) => (
+    {s.sections.map((sec, i) => {
+      const isVenue = /^venue$/i.test((sec.h || "").trim());
+      return (
       <div key={i}>
         <Editable as="h3" value={sec.h} onChange={v => {
           const sections = [...s.sections]; sections[i] = { ...sec, h: v }; update({ sections });
         }} />
-        {sec.body.map((p, pi) => (
+        {isVenue && (sec.imageSrc || window.__editMode) ? (
+          <div className="venue-photo">
+            <PhotoSlot fill src={sec.imageSrc || ""} alt="Venue" initials="VENUE PHOTO"
+              onChange={(src) => { const sections = [...s.sections]; sections[i] = { ...sec, imageSrc: src }; update({ sections }); }}
+              onClear={() => { const sections = [...s.sections]; sections[i] = { ...sec, imageSrc: "" }; update({ sections }); }} />
+          </div>
+        ) : null}
+        {sec.body.map((p, pi) => {
+          const vUrl = isVenue && !window.__editMode ? venueUrlFor(p) : null;
+          if (vUrl) return <p key={pi} className="venue-link-wrap"><a className="venue-btn" href={vUrl} target="_blank" rel="noopener noreferrer">{(p || "").replace(/\.$/, "")}<span className="venue-btn-arrow" aria-hidden="true">↗</span></a></p>;
+          return (
           <Editable key={pi} as="p" value={p} onChange={v => {
             const sections = [...s.sections];
             const body = [...sec.body]; body[pi] = v;
             sections[i] = { ...sec, body };
             update({ sections });
           }} multiline />
+          );
+        })}
+      </div>
+      );
+    })}
+    {audienceInfo.length ? (
+      <div className="vivo-band" style={{ marginTop: 24 }}>
+        <h3 className="vivo-band-title">Audience Information</h3>
+        {audienceInfo.map((item) => (
+          <VivoAccordion key={item.id} id={item.id} title={item.title} accent="green" defaultOpen={false}>
+            {(item.body || []).map((p, pi) => <p key={pi}>{p}</p>)}
+          </VivoAccordion>
         ))}
       </div>
-    ))}
+    ) : null}
   </div>
-);
+  );
+};
 
 // ---- VIVO SHARED (audience info / staff / boards / supporters) ----
 // Pulls all content from window.VIVO_SHARED — same data on every show, edited once.
-const VivoAccordion = ({ id, title, subtitle, accent, brush, brushColor, children, defaultOpen }) => {
+const VivoAccordion = ({ id, title, subtitle, accent, brush, brushColor, index, count, children, defaultOpen }) => {
   const [open, setOpen] = React.useState(!!defaultOpen);
   const accentMap = {
     magenta: "var(--vivo-plum)", tangerine: "var(--vivo-orange)", azure: "var(--vivo-blue)",
     violet: "var(--vivo-plum)", green: "var(--vivo-green)", plum: "var(--vivo-plum)"
   };
   const bg = accentMap[accent] || "var(--vivo-plum)";
-  const brushSrc = brush ? `assets/illustrations/${brush}-${brushColor || "cream"}.png` : null;
+  const brushSrc = brush ? `assets/illustrations/${brush}-tangerine.png` : null;
   return (
     <div className={"vivo-accordion " + (open ? "is-open" : "")}>
       <button
@@ -687,7 +844,7 @@ const VivoAccordion = ({ id, title, subtitle, accent, brush, brushColor, childre
         style={{ background: bg }}
       >
         {brushSrc ? (
-          <img className="vivo-banner-brush" src={brushSrc} alt="" aria-hidden="true" onError={(e) => e.target.style.display = "none"} />
+          <img className="vivo-banner-stripe" src={brushSrc} alt="" aria-hidden="true" style={{ "--i": index || 0, "--n": count || 1 }} onError={(e) => e.target.style.display = "none"} />
         ) : null}
         <span className="vivo-banner-text">
           <span className="vivo-banner-title">{title}</span>
@@ -735,99 +892,329 @@ const VivoSection = ({ s }) => {
           </VivoAccordion>
         ))}
       </div>
+    </div>
+  );
+};
 
-      {/* Vivo Performing Arts: Staff + Boards */}
-      <div className="vivo-band">
-        <h3 className="vivo-band-title">Vivo Performing Arts</h3>
-        <VivoAccordion id="staff" title="Staff Listing" accent="plum" defaultOpen={false}>
-          {(staff.departments || []).map((d, i) => (
-            <div key={i} className="vivo-dept">
+// ---- STAFF & BOARD (standalone module, editable — date-scoped like supporters) ----
+const StaffBoardSection = ({ s }) => {
+  const editing = window.__editMode;
+  const shared = window.VIVO_SHARED || {};
+  const [staff, setStaff] = React.useState(() => shared.staff || s.staff || { departments: [], credits: [] });
+  const [boards, setBoards] = React.useState(() => shared.boards || s.boards || { directors: [], advisors: [] });
+
+  const persist = (nextStaff, nextBoards) => {
+    if (window.VIVO_SHARED) { window.VIVO_SHARED.staff = nextStaff; window.VIVO_SHARED.boards = nextBoards; }
+    else window.VIVO_SHARED = { staff: nextStaff, boards: nextBoards };
+    try {
+      var dstr = window.PROGRAM_DATA && window.PROGRAM_DATA.cover && window.PROGRAM_DATA.cover.date;
+      var dnum = window.VivoStore && window.VivoStore.parseDate ? window.VivoStore.parseDate(dstr) : null;
+      if (window.VivoStore && window.VivoStore.saveVersion) window.VivoStore.saveVersion("staffBoard", dnum, { staff: nextStaff, boards: nextBoards });
+    } catch (e) {}
+  };
+  const editStaff = (fn) => {
+    const next = { ...staff, credits: [...(staff.credits || [])], departments: (staff.departments || []).map(d => ({ ...d, members: (d.members || []).map(m => ({ ...m })) })) };
+    fn(next); setStaff(next); persist(next, boards);
+  };
+  const editBoards = (fn) => {
+    const next = { ...boards, directors: (boards.directors || []).map(m => ({ ...m })), advisors: (boards.advisors || []).map(m => ({ ...m })) };
+    fn(next); setBoards(next); persist(staff, next);
+  };
+
+  const MemberList = ({ list, onEdit, roles }) => (
+    editing ? (
+      <div className="sb-edit-list">
+        {list.map((m, i) => (
+          <div key={i} className="sb-edit-row">
+            <PhotoSlot src={m.photoSrc || ""} size={40} initials="＋" alt={m.name}
+              onChange={(src) => onEdit(l => { l[i].photoSrc = src; })}
+              onClear={() => onEdit(l => { l[i].photoSrc = ""; })} />
+            <input className="sup-input sb-in-name" value={m.name || ""} placeholder="Name" onChange={(e) => onEdit(l => { l[i].name = e.target.value; })} />
+            <input className="sup-input sb-in-title" value={m.title || ""} placeholder={roles ? "Role" : "Title"} onChange={(e) => onEdit(l => { l[i].title = e.target.value; })} />
+            {!roles ? <input className="sup-input sb-in-email" value={m.email || ""} placeholder="Email (optional)" onChange={(e) => onEdit(l => { l[i].email = e.target.value; })} /> : null}
+            <button className="sup-del-tier" title="Remove" onClick={() => onEdit(l => l.splice(i, 1))}>×</button>
+          </div>
+        ))}
+        <button className="sup-add-name" onClick={() => onEdit(l => l.push({ name: "", title: "" }))}>+ Add person</button>
+      </div>
+    ) : (
+      <ul className={"vivo-staff-list" + (roles ? " is-roles" : "")}>
+        {list.map((m, j) => (
+          <li key={j} className={m.photoSrc ? "has-photo" : ""}>
+            {m.photoSrc ? <PhotoSlot src={m.photoSrc} size={40} alt={m.name} className="sb-photo" /> : null}
+            <div className="vivo-staff-text">
+              <span className="vivo-staff-name">{m.name}</span>
+              {m.title ? <span className="vivo-staff-title">{m.title}</span> : null}
+              {m.email ? <a className="vivo-staff-email" href={`mailto:${m.email}`}>{m.email}</a> : null}
+            </div>
+          </li>
+        ))}
+      </ul>
+    )
+  );
+
+  return (
+    <div className="vivo-shared sb-section">
+      {editing ? (
+        <p className="sup-scope-note">Edits apply to this program and every later-dated program; earlier programs keep their existing roster.</p>
+      ) : null}
+
+      <div className="sb-block">
+        <h3 className="vivo-band-title">Staff</h3>
+        {(staff.departments || []).map((d, di) => (
+          <div key={di} className="vivo-dept">
+            {editing ? (
+              <div className="sup-tier-head">
+                <input className="sup-input sup-input-tier" value={d.name || ""} placeholder="Department" onChange={(e) => editStaff(n => { n.departments[di].name = e.target.value; })} />
+                <button className="sup-del-tier" title="Delete department" onClick={() => editStaff(n => n.departments.splice(di, 1))}>×</button>
+              </div>
+            ) : (
               <h4 className="vivo-dept-h">{d.name}</h4>
-              {d.inline ? (
-                <p className="vivo-dept-inline">{d.inline}</p>
-              ) : (
-                <ul className="vivo-staff-list">
-                  {(d.members || []).map((m, j) => (
-                    <li key={j}>
-                      <span className="vivo-staff-name">{m.name}</span>
-                      {m.title ? <span className="vivo-staff-title">, {m.title}</span> : null}
-                      {m.email ? (
-                        <a className="vivo-staff-email" href={`mailto:${m.email}`}>{m.email}</a>
-                      ) : null}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          ))}
-          {(staff.credits || []).length > 0 ? (
-            <div className="vivo-staff-credits">
-              {staff.credits.map((c, i) => <p key={i}>{c}</p>)}
-            </div>
-          ) : null}
-        </VivoAccordion>
-        <VivoAccordion id="boards" title="Board Listing" accent="plum" defaultOpen={false}>
-          {boards._note ? <p className="vivo-note">{boards._note}</p> : null}
-          {(boards.directors || []).length > 0 ? (
-            <div className="vivo-dept">
-              <h4 className="vivo-dept-h">Board of Directors</h4>
-              <ul className="vivo-staff-list">
-                {boards.directors.map((m, j) => (
-                  <li key={j}>
-                    <span className="vivo-staff-name">{m.name}</span>
-                    {m.title ? <span className="vivo-staff-title">, {m.title}</span> : null}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : null}
-          {(boards.advisors || []).length > 0 ? (
-            <div className="vivo-dept">
-              <h4 className="vivo-dept-h">Advisory Board</h4>
-              <ul className="vivo-staff-list">
-                {boards.advisors.map((m, j) => (
-                  <li key={j}>
-                    <span className="vivo-staff-name">{m.name}</span>
-                    {m.title ? <span className="vivo-staff-title">, {m.title}</span> : null}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : null}
-        </VivoAccordion>
+            )}
+            {d.inline && !editing ? (
+              <p className="vivo-dept-inline">{d.inline}</p>
+            ) : d.inline ? (
+              <textarea className="sup-input sb-in-inline" value={d.inline} placeholder="Comma-separated names" onChange={(e) => editStaff(n => { n.departments[di].inline = e.target.value; })} />
+            ) : (
+              <MemberList list={d.members || []} onEdit={(fn) => editStaff(n => fn(n.departments[di].members || (n.departments[di].members = [])))} />
+            )}
+          </div>
+        ))}
+        {editing ? (
+          <div className="sb-add-row">
+            <button className="sup-add-tier" onClick={() => editStaff(n => n.departments.push({ name: "New Department", members: [{ name: "", title: "" }] }))}>+ Add department</button>
+            <button className="sup-add-tier" onClick={() => editStaff(n => n.departments.push({ name: "New Group", inline: "" }))}>+ Add inline group</button>
+          </div>
+        ) : null}
+        {(staff.credits || []).length > 0 ? (
+          <div className="vivo-staff-credits">
+            {staff.credits.map((c, i) => <p key={i}>{c}</p>)}
+          </div>
+        ) : null}
       </div>
 
-      {/* Vivo Supporters */}
-      <div className="vivo-band">
-        <h3 className="vivo-band-title">Vivo Supporters</h3>
-        <p className="vivo-band-lead">Vivo Performing Arts is sustained by an extraordinary community of donors, members, and partners. Tap any category below to see the names that make our season possible.</p>
-        {(supporters.categories || []).map((cat) => (
-          <VivoAccordion
-            key={cat.id}
-            id={cat.id}
-            title={cat.title}
-            accent={cat.accent}
-            brush={cat.brush}
-            brushColor="cream"
-            defaultOpen={false}
-          >
-            {cat.intro ? <p className="vivo-cat-intro">{cat.intro}</p> : null}
-            {(cat.tiers || []).map((tier, ti) => (
-              <div key={ti} className="vivo-tier">
-                <div className="vivo-tier-label">{tier.label}</div>
-                <p className="vivo-tier-donors">
-                  {(tier.donors || []).join(" ")}
-                </p>
-              </div>
-            ))}
-          </VivoAccordion>
-        ))}
-        {supporters.footer ? (
-          <p className="vivo-supporters-footer">{supporters.footer}</p>
-        ) : null}
+      <div className="sb-block">
+        <h3 className="vivo-band-title">Board of Directors</h3>
+        {boards.intro ? <p className="sb-board-intro">{boards.intro}</p> : null}
+        <MemberList list={boards.directors || []} roles onEdit={(fn) => editBoards(n => fn(n.directors))} />
+      </div>
+
+      {(boards.emeriti || []).length || editing ? (
+        <div className="sb-block">
+          <h3 className="vivo-band-title">Board of Directors, Emeriti</h3>
+          <MemberList list={boards.emeriti || []} roles onEdit={(fn) => editBoards(n => fn(n.emeriti || (n.emeriti = [])))} />
+        </div>
+      ) : null}
+
+      <div className="sb-block">
+        <h3 className="vivo-band-title">Board of Advisors</h3>
+        <MemberList list={boards.advisors || []} roles onEdit={(fn) => editBoards(n => fn(n.advisors))} />
+        {boards.legend ? <p className="sb-board-legend">{boards.legend}</p> : null}
       </div>
     </div>
   );
+};
+
+// ---- VIVO SUPPORTERS (standalone module, editable — updates every show) ----
+const SupportersSection = ({ s }) => {
+  const editing = window.__editMode;
+  const shared = window.VIVO_SHARED || {};
+  const [sup, setSup] = React.useState(() => (shared.supporters) || s.supporters || { categories: [] });
+
+  const commit = (next) => {
+    setSup(next);
+    if (window.VIVO_SHARED) window.VIVO_SHARED.supporters = next;
+    else window.VIVO_SHARED = { supporters: next };
+    try {
+      var dstr = window.PROGRAM_DATA && window.PROGRAM_DATA.cover && window.PROGRAM_DATA.cover.date;
+      var dnum = window.VivoStore && window.VivoStore.parseDate ? window.VivoStore.parseDate(dstr) : null;
+      if (window.VivoStore && window.VivoStore.saveSupportersVersion) window.VivoStore.saveSupportersVersion(dnum, next);
+    } catch (e) {}
+  };
+  const editCats = (fn) => { const cats = sup.categories.map(c => ({ ...c, tiers: (c.tiers || []).map(t => ({ ...t, donors: [...(t.donors || [])] })) })); fn(cats); commit({ ...sup, categories: cats }); };
+
+  return (
+    <div className="vivo-shared">
+      <div className="vivo-band">
+        <p className="vivo-band-lead">Vivo Performing Arts is sustained by an extraordinary community of donors, members, and partners. Tap any category below to see the names that make our season possible.</p>
+        {editing ? (
+          <p className="sup-scope-note">Edits here apply to this program and every later-dated program. Programs dated earlier keep their existing supporter list.</p>
+        ) : null}
+        <div className="sup-bars">
+        {(sup.categories || []).map((cat, ci) => (
+          <VivoAccordion
+            key={cat.id || ci}
+            id={cat.id || ("sup-" + ci)}
+            title={cat.title}
+            accent={cat.accent}
+            brush="rhythm"
+            index={ci}
+            count={(sup.categories || []).length}
+            defaultOpen={editing}
+          >
+            {editing ? (
+              <div className="sup-cat-edit">
+                <input className="sup-input sup-input-title" value={cat.title || ""} placeholder="Category title"
+                  onChange={(e) => editCats(cs => { cs[ci].title = e.target.value; })} />
+                <button className="sup-del-cat" title="Delete category" onClick={() => editCats(cs => cs.splice(ci, 1))}>Delete category</button>
+              </div>
+            ) : null}
+            {cat.intro ? <p className="vivo-cat-intro">{cat.intro}</p> : null}
+            {(cat.tiers || []).map((tier, ti) => (
+              <div key={ti} className="vivo-tier">
+                {editing ? (
+                  <div className="sup-tier-head">
+                    <input className="sup-input sup-input-amount" value={tier.amount || ""} placeholder="$ / level"
+                      onChange={(e) => editCats(cs => { cs[ci].tiers[ti].amount = e.target.value; })} />
+                    <input className="sup-input sup-input-tier" value={tier.label || ""} placeholder="Tier label"
+                      onChange={(e) => editCats(cs => { cs[ci].tiers[ti].label = e.target.value; })} />
+                    <button className="sup-del-tier" title="Delete tier" onClick={() => editCats(cs => cs[ci].tiers.splice(ti, 1))}>×</button>
+                  </div>
+                ) : (
+                  <div className="vivo-tier-label">
+                    {tier.amount ? <span className="vivo-tier-chip">{tier.amount}</span> : null}
+                    <span className="vivo-tier-name">{tier.label}</span>
+                  </div>
+                )}
+                {editing ? (
+                  <div className="sup-donor-edit">
+                    {(tier.donors || []).map((d, di) => (
+                      <span key={di} className="sup-chip">
+                        <input className="sup-chip-input" value={d} placeholder="Name"
+                          onChange={(e) => editCats(cs => { cs[ci].tiers[ti].donors[di] = e.target.value; })} />
+                        <button className="sup-chip-del" title="Remove name" onClick={() => editCats(cs => cs[ci].tiers[ti].donors.splice(di, 1))}>×</button>
+                      </span>
+                    ))}
+                    <button className="sup-add-name" onClick={() => editCats(cs => cs[ci].tiers[ti].donors.push(""))}>+ Add name</button>
+                  </div>
+                ) : (
+                  <ul className="vivo-tier-donors">{(tier.donors || []).filter(Boolean).map((d, di) => <li key={di}>{d}</li>)}</ul>
+                )}
+              </div>
+            ))}
+            {editing ? (
+              <button className="sup-add-tier" onClick={() => editCats(cs => cs[ci].tiers.push({ label: "New tier", donors: [""] }))}>+ Add tier</button>
+            ) : null}
+          </VivoAccordion>
+        ))}
+        </div>
+        {editing ? (
+          <button className="sup-add-cat" onClick={() => editCats(cs => cs.push({ id: "cat-" + Date.now(), title: "New category", accent: "magenta", brush: "rhythm", tiers: [{ label: "New tier", donors: [""] }] }))}>+ Add category</button>
+        ) : null}
+        {sup.footer ? <p className="vivo-supporters-footer">{sup.footer}</p> : null}
+      </div>
+    </div>
+  );
+};
+
+// ---- PROMO / AD (editable ad element — row / cta / image / partner) ----
+const PROMO_BTN_COLORS = ["cream", "light-green", "lavender", "plum", "blue", "orange"];
+const PromoSection = ({ s, update }) => {
+  const editing = window.__editMode;
+  const layout = s.layout || "row";
+  const color = s.buttonColor || "cream";
+  const dest = s.buttonUrl || "#";
+  const ext = /^https?:/.test(dest);
+  const linkProps = editing ? { onClick: (e) => e.preventDefault() } : (ext ? { target: "_blank", rel: "noopener noreferrer" } : {});
+  const sponsors = s.sponsors || [];
+  const updateSp = (i, patch) => update({ sponsors: sponsors.map((x, j) => j === i ? { ...x, ...patch } : x) });
+  const addSp = () => update({ sponsors: [...sponsors, { name: "", imageSrc: "" }] });
+  const removeSp = (i) => update({ sponsors: sponsors.filter((_, j) => j !== i) });
+  const Btn = (
+    <a className={"promo-btn btn-" + color} href={dest} {...linkProps}>
+      <Editable as="span" value={s.buttonLabel || "Learn More"} data-placeholder="Button label" onChange={v => update({ buttonLabel: v })} />
+    </a>
+  );
+  const controls = editing ? (
+    <div className="promo-controls" contentEditable={false}>
+      <div className="promo-ctl-row">
+        <span className="promo-ctl-label">Layout</span>
+        <div className="promo-seg">
+          {[["row", "Row"], ["cta", "CTA bar"], ["side", "Image"], ["full", "Image + copy"], ["sponsors", "Sponsors"]].map(([v, l]) => (
+            <button key={v} aria-pressed={layout === v} onClick={() => update({ layout: v })}>{l}</button>
+          ))}
+        </div>
+      </div>
+      <div className="promo-ctl-row">
+        <span className="promo-ctl-label">Button color</span>
+        <div className="promo-swatches">
+          {PROMO_BTN_COLORS.map(c => (
+            <button key={c} className={"promo-sw sw-" + c + (color === c ? " is-on" : "")} onClick={() => update({ buttonColor: c })} aria-label={c} />
+          ))}
+        </div>
+      </div>
+      <label className="promo-ctl-row">
+        <span className="promo-ctl-label">Button link</span>
+        <input className="sup-input promo-url" value={s.buttonUrl || ""} placeholder="https://…" onChange={(e) => update({ buttonUrl: e.target.value })} />
+      </label>
+    </div>
+  ) : null;
+
+  let card;
+  if (layout === "cta") {
+    card = (
+      <div className="promo promo-cta">
+        <div className="promo-cta-text">
+          <Editable as="p" className="promo-cta-title" value={s.heading || ""} data-placeholder="Headline" onChange={v => update({ heading: v })} />
+          {(s.body || editing) ? <Editable as="p" className="promo-cta-body" value={s.body || ""} data-placeholder="Optional subtitle" onChange={v => update({ body: v })} /> : null}
+        </div>
+        {Btn}
+      </div>
+    );
+  } else if (layout === "row") {
+    card = (
+      <a className="promo promo-row" href={dest} {...linkProps}>
+        {(s.imageSrc || editing) ? <PhotoSlot className="promo-row-thumb" src={s.imageSrc || ""} initials="IMG" size={64} onChange={src => update({ imageSrc: src })} onClear={() => update({ imageSrc: "" })} /> : null}
+        <span className="promo-row-text">
+          {(s.eyebrow || editing) ? <Editable as="span" className="promo-eyebrow" value={s.eyebrow || ""} data-placeholder="Eyebrow" onChange={v => update({ eyebrow: v })} /> : null}
+          <Editable as="span" className="promo-row-title" value={s.heading || ""} data-placeholder="Headline" onChange={v => update({ heading: v })} />
+          {(s.body || editing) ? <Editable as="span" className="promo-row-sub" value={s.body || ""} data-placeholder="Short line" onChange={v => update({ body: v })} /> : null}
+        </span>
+        <span className="promo-row-arrow" aria-hidden="true">→</span>
+      </a>
+    );
+  } else if (layout === "side") {
+    card = (
+      <div className="promo promo-side">
+        <div className="promo-side-imgwrap"><PhotoSlot fill src={s.imageSrc || ""} initials="PHOTO" onChange={src => update({ imageSrc: src })} onClear={() => update({ imageSrc: "" })} /></div>
+        <div className="promo-side-body">
+          {(s.eyebrow || editing) ? <Editable as="p" className="promo-eyebrow" value={s.eyebrow || ""} data-placeholder="Eyebrow" onChange={v => update({ eyebrow: v })} /> : null}
+          <Editable as="p" className="promo-side-title" value={s.heading || ""} data-placeholder="Headline" onChange={v => update({ heading: v })} />
+          {(s.meta || editing) ? <Editable as="p" className="promo-side-meta" value={s.meta || ""} data-placeholder="Date · venue" onChange={v => update({ meta: v })} /> : null}
+          {Btn}
+        </div>
+      </div>
+    );
+  } else if (layout === "sponsors") {
+    card = (
+      <div className={"promo promo-sponsors" + (sponsors.length <= 1 ? " is-single" : "")}>
+        <Editable as="p" className="promo-sponsors-h" value={s.heading || ""} data-placeholder="This performance is supported by" onChange={v => update({ heading: v })} />
+        <div className="promo-sponsors-list">
+          {sponsors.map((sp, i) => (
+            <div key={i} className="promo-sponsor">
+              {(sp.imageSrc || editing) ? <div className="promo-sponsor-logo"><PhotoSlot fill src={sp.imageSrc || ""} initials="LOGO" onChange={src => updateSp(i, { imageSrc: src })} onClear={() => updateSp(i, { imageSrc: "" })} /></div> : null}
+              <Editable as="p" className="promo-sponsor-name" value={sp.name || ""} data-placeholder="Sponsor name" onChange={v => updateSp(i, { name: v })} />
+              {editing ? <button className="promo-sponsor-del" onClick={() => removeSp(i)} aria-label="Remove sponsor">×</button> : null}
+            </div>
+          ))}
+        </div>
+        {editing ? <button className="promo-sponsor-add" onClick={addSp}>+ Add sponsor</button> : null}
+      </div>
+    );
+  } else {
+    card = (
+      <div className="promo promo-full">
+        <div className="promo-full-imgwrap"><PhotoSlot fill src={s.imageSrc || ""} initials="AD IMAGE" onChange={src => update({ imageSrc: src })} onClear={() => update({ imageSrc: "" })} /></div>
+        <div className="promo-full-body">
+          {(s.eyebrow || editing) ? <Editable as="p" className="promo-eyebrow" value={s.eyebrow || ""} data-placeholder="Eyebrow" onChange={v => update({ eyebrow: v })} /> : null}
+          {(s.heading || editing) ? <Editable as="p" className="promo-full-title" value={s.heading || ""} data-placeholder="Headline" onChange={v => update({ heading: v })} /> : null}
+          {(s.body || editing) ? <Editable as="p" className="promo-full-copy" value={s.body || ""} data-placeholder="Partner copy…" onChange={v => update({ body: v })} multiline /> : null}
+          {Btn}
+        </div>
+      </div>
+    );
+  }
+  return <div className="promo-wrap">{controls}{card}</div>;
 };
 
 // ---- Main switcher ----
@@ -852,6 +1239,9 @@ const SectionBody = ({ section, update, allSections, onGoSection, expandedBioId,
     case "info": return <InfoSection s={section} update={update} />;
     case "songtexts": return <window.SongTextsSection s={section} update={update} defaultMode={defaultTransMode} />;
     case "vivo": return <VivoSection s={section} update={update} />;
+    case "supporters-list": return <SupportersSection s={section} update={update} />;
+    case "staff-board": return <StaffBoardSection s={section} update={update} />;
+    case "promo": return <PromoSection s={section} update={update} />;
     default: return null;
   }
 };

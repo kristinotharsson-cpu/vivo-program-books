@@ -6,7 +6,7 @@
     "subtitle": "Pop/World/Misc.",
     "date": "SAT MAY 01",
     "time": "3PM",
-    "venue": "Arlington Street Church",
+    "venue": "First Church, Boston UU",
     "accent": "orange",
     "brush": "rhythm",
     "photoCaption": "Veronica Robles",
@@ -51,7 +51,7 @@
     },
     {
       "id": "program",
-      "title": "Program",
+      "title": "Today's Program",
       "kind": "program",
       "eyebrow": "The Running Order",
       "lead": "Mariachi singer + Latin American folkloric dancer. Boston cultural leader.",
@@ -78,7 +78,7 @@
     },
     {
       "id": "bios",
-      "title": "Artist Bios",
+      "title": "About the Artists",
       "kind": "bios",
       "eyebrow": "Tonight's Artist",
       "bios": [
@@ -104,10 +104,16 @@
       "count": 4
     },
     {
-      "id": "vivo",
-      "kind": "vivo",
-      "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information   Staff   Supporters"
+      "id": "staff-board",
+      "title": "Staff & Board",
+      "kind": "staff-board",
+      "eyebrow": "Vivo Performing Arts"
+    },
+    {
+      "id": "supporters",
+      "title": "Vivo Performing Arts Supporters",
+      "kind": "supporters-list",
+      "eyebrow": "With Gratitude"
     },
     {
       "id": "info",
@@ -118,7 +124,7 @@
         {
           "h": "Venue",
           "body": [
-            "Arlington Street Church."
+            "First Church, Boston UU."
           ]
         },
         {
@@ -145,7 +151,7 @@
   "_meta": {
     "iso": "2027-05-01",
     "genre": "Pop/World/Misc.",
-    "venueName": "Arlington Street Church",
+    "venueName": "First Church, Boston UU",
     "leadArtist": "Veronica Robles",
     "socialLinks": [
       {

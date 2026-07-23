@@ -7,7 +7,7 @@
 .vivo-band { display: flex; flex-direction: column; gap: 12px; }
 .vivo-band-title {
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 600;
   font-size: 13px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -25,6 +25,19 @@
   text-wrap: pretty;
 }
 .vivo-accordion { display: flex; flex-direction: column; }
+.sup-bars { display: flex; flex-direction: column; gap: 12px; }
+.vivo-banner-stripe {
+  --gap: 12px;
+  --row: 72px;
+  position: absolute;
+  right: -6%;
+  top: calc(var(--i) * (var(--row) + var(--gap)) * -1);
+  height: calc(var(--n) * var(--row) + (var(--n) - 1) * var(--gap));
+  width: auto;
+  opacity: 0.9;
+  z-index: 0;
+  pointer-events: none;
+}
 .vivo-banner {
   position: relative;
   display: flex;
@@ -49,14 +62,20 @@
 }
 .vivo-banner-brush {
   position: absolute;
-  right: -10px;
+  right: 2%;
   top: 50%;
-  height: 130%;
+  height: 320%;
   width: auto;
-  transform: translateY(-50%);
-  opacity: 0.32;
+  transform: translateY(-50%) rotate(-48deg);
+  transform-origin: center;
+  opacity: 0.42;
   pointer-events: none;
   mix-blend-mode: screen;
+  transition: transform var(--dur-base) var(--ease-standard), opacity var(--dur-base) var(--ease-standard);
+}
+.vivo-banner:hover .vivo-banner-brush {
+  transform: translateY(-50%) rotate(-48deg) scale(1.08);
+  opacity: 0.52;
 }
 .vivo-banner-text {
   position: relative;
@@ -69,10 +88,11 @@
 }
 .vivo-banner-title {
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 600;
   font-size: 18px;
   line-height: 1.2;
   letter-spacing: -0.01em;
+  text-transform: uppercase;
   text-wrap: balance;
 }
 .vivo-banner-sub {
@@ -85,7 +105,7 @@
   z-index: 1;
   flex: 0 0 auto;
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 600;
   font-size: 28px;
   line-height: 1;
   width: 32px;
@@ -125,11 +145,12 @@
 .vivo-dept:last-child { border-bottom: none; }
 .vivo-dept-h {
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 600;
   font-size: 15px;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   margin: 4px 0 2px;
-  color: var(--vivo-plum);
+  color: var(--fg);
 }
 .vivo-dept-inline {
   font-family: var(--font-body);
@@ -151,12 +172,12 @@
   font-size: 14px;
   line-height: 1.4;
   display: flex;
-  flex-wrap: wrap;
-  gap: 2px 6px;
-  align-items: baseline;
+  gap: 2px 10px;
+  align-items: flex-start;
 }
-.vivo-staff-name { font-weight: 600; }
-.vivo-staff-title { color: var(--fg-muted); }
+.vivo-staff-text { display: flex; flex-direction: column; gap: 1px; }
+.vivo-staff-name { font-weight: 700; display: block; }
+.vivo-staff-title { font-weight: 400; color: var(--fg-muted); display: block; }
 .vivo-staff-email {
   font-size: 12.5px;
   color: var(--vivo-plum);
@@ -181,6 +202,9 @@
 }
 .vivo-tier:last-child { border-bottom: none; }
 .vivo-tier-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-family: var(--font-body);
   font-weight: 700;
   font-size: 11.5px;
@@ -189,12 +213,34 @@
   color: var(--vivo-plum);
   margin-bottom: 8px;
 }
+.vivo-tier-chip {
+  flex: none;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  font-size: 12px;
+  line-height: 1;
+  color: var(--vivo-cream);
+  background: var(--accent, var(--vivo-plum));
+  padding: 6px 9px;
+}
+.vivo-tier-name { flex: 1; }
+/* Amount input in tier edit row */
+.sup-input-amount { flex: 0 0 92px; font-weight: 700; text-align: center; }
 .vivo-tier-donors {
   font-family: var(--font-body);
-  font-size: 14px;
-  line-height: 1.65;
+  font-size: 1rem;
+  line-height: 1.5;
   color: var(--fg);
   margin: 0;
+  padding: 0;
+  list-style: none;
+  columns: 2;
+  column-gap: 28px;
+}
+.vivo-tier-donors li {
+  break-inside: avoid;
+  padding: 3px 0;
   text-wrap: pretty;
 }
 .vivo-supporters-footer {
@@ -210,10 +256,49 @@
 
 @media (min-width: 720px) {
   .vivo-banner { min-height: 84px; padding: 18px 24px; }
+  .vivo-banner-stripe { --row: 84px; }
   .vivo-banner-title { font-size: 22px; }
   .vivo-banner-sub { font-size: 14px; }
   .vivo-band-title { font-size: 14px; }
   .vivo-staff-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; }
-  .vivo-staff-list li { flex-direction: column; align-items: flex-start; gap: 2px; }
-  .vivo-tier-donors { font-size: 14.5px; }
+  .vivo-staff-list li { align-items: flex-start; }
+  .vivo-tier-donors { columns: 3; }
 }
+
+/* ---- Staff & Board standalone module ---- */
+.sb-section { gap: 32px; }
+.sb-block { display: flex; flex-direction: column; gap: 10px; }
+.sb-block > .vivo-band-title { margin-bottom: 4px; }
+.sb-edit-list { display: flex; flex-direction: column; gap: 8px; }
+.sb-edit-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.sb-in-name { flex: 1 1 140px; font-weight: 700; }
+.sb-in-title { flex: 1 1 140px; }
+.sb-in-email { flex: 1 1 180px; }
+.sb-in-inline { width: 100%; min-height: 60px; font-family: var(--font-body); resize: vertical; }
+.sb-add-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.sb-edit-row .photo-slot { flex: none; }
+.vivo-staff-list li.has-photo { flex-direction: row; align-items: center; gap: 10px; }
+.sb-photo { flex: none; }
+.sb-board-intro { font-family: var(--font-body); font-size: 14px; line-height: 1.55; color: var(--fg-muted); margin: 0 0 6px; max-width: 62ch; }
+.sb-board-legend { font-family: var(--font-body); font-size: 12.5px; line-height: 1.5; color: var(--fg-muted); margin: 12px 0 0; }
+
+/* ---- Supporters edit mode ---- */
+.sup-scope-note { font-family: var(--font-body); font-size: 12.5px; line-height: 1.45; color: var(--fg-muted); border-left: 3px solid var(--accent, var(--vivo-plum)); padding: 6px 0 6px 12px; margin: 0; }
+.sup-cat-edit { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; }
+.sup-input { font-family: var(--font-body); font-size: 14px; color: var(--fg); background: var(--bg); border: 1px solid var(--border); border-radius: 0; padding: 8px 10px; }
+.sup-input-title { flex: 1 1 200px; font-weight: 700; }
+.sup-tier-head { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; }
+.sup-input-tier { flex: 1 1 auto; font-weight: 700; }
+.sup-donor-edit { display: flex; flex-wrap: wrap; gap: 8px; }
+.sup-chip { display: inline-flex; align-items: center; border: 1px solid var(--border); }
+.sup-chip-input { font-family: var(--font-body); font-size: 13.5px; color: var(--fg); background: transparent; border: 0; padding: 7px 4px 7px 10px; min-width: 60px; width: 15ch; }
+.sup-chip-input:focus { outline: none; }
+.sup-chip-del, .sup-del-tier { flex: none; width: 30px; min-height: 34px; border: 0; background: transparent; color: var(--fg-muted); font-size: 18px; line-height: 1; cursor: pointer; }
+.sup-chip-del:hover, .sup-del-tier:hover { color: var(--vivo-tangerine); }
+.sup-add-name, .sup-add-tier, .sup-add-cat, .sup-del-cat { font-family: var(--font-body); font-weight: 700; font-size: 12px; letter-spacing: 0.02em; padding: 8px 12px; min-height: 36px; border: 1px dashed var(--border); background: transparent; color: var(--fg); cursor: pointer; }
+.sup-add-name:hover, .sup-add-tier:hover, .sup-add-cat:hover { border-color: var(--accent, var(--vivo-plum)); color: var(--accent, var(--vivo-plum)); }
+.sup-add-tier { margin-top: 12px; }
+.sup-add-cat { margin-top: 8px; align-self: flex-start; }
+.sup-del-cat { border-style: solid; }
+.sup-del-cat:hover { border-color: var(--vivo-tangerine); color: var(--vivo-tangerine); }
+.vivo-staff-list.is-roles { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 20px; align-items: start; }

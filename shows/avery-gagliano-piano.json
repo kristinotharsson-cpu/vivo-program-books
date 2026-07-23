@@ -54,7 +54,7 @@
     },
     {
       "id": "program",
-      "title": "Program",
+      "title": "Today's Program",
       "kind": "program",
       "eyebrow": "The Running Order",
       "lead": "Program: Schumann Novelette Op. 21 No. 8, Fauré Ballade Op. 19, Rzewski Winnsboro Cotton Mill Blues, Kirchner Interlude II, Schumann Symphonic Etudes Op. 13.",
@@ -121,7 +121,7 @@
     },
     {
       "id": "bios",
-      "title": "Artist Bios",
+      "title": "About the Artists",
       "kind": "bios",
       "eyebrow": "Tonight's Artist",
       "bios": [
@@ -148,10 +148,16 @@
       "count": 4
     },
     {
-      "id": "vivo",
-      "kind": "vivo",
-      "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information   Staff   Supporters"
+      "id": "staff-board",
+      "title": "Staff & Board",
+      "kind": "staff-board",
+      "eyebrow": "Vivo Performing Arts"
+    },
+    {
+      "id": "supporters",
+      "title": "Vivo Performing Arts Supporters",
+      "kind": "supporters-list",
+      "eyebrow": "With Gratitude"
     },
     {
       "id": "info",

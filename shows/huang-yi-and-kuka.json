@@ -53,7 +53,7 @@
     },
     {
       "id": "program",
-      "title": "Program",
+      "title": "Today's Program",
       "kind": "program",
       "eyebrow": "The Running Order",
       "lead": "3 or 4 performances: FEB 25 8PM; FEB 26 8PM; FEB 27 2PM & 8PM. Possible add Sunday if sales warrant. Dance with industrial robot arm. Co-pro with MOS.",
@@ -84,7 +84,7 @@
     },
     {
       "id": "bios",
-      "title": "Artist Bios",
+      "title": "About the Artists",
       "kind": "bios",
       "eyebrow": "Tonight's Artist",
       "bios": [
@@ -111,10 +111,16 @@
       "count": 4
     },
     {
-      "id": "vivo",
-      "kind": "vivo",
-      "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information   Staff   Supporters"
+      "id": "staff-board",
+      "title": "Staff & Board",
+      "kind": "staff-board",
+      "eyebrow": "Vivo Performing Arts"
+    },
+    {
+      "id": "supporters",
+      "title": "Vivo Performing Arts Supporters",
+      "kind": "supporters-list",
+      "eyebrow": "With Gratitude"
     },
     {
       "id": "info",

@@ -229,8 +229,16 @@ const NoteCallout = ({ label, name, photoSrc, initials, onClick, onPhotoChange, 
 };
 
 // ---- TOC ----
-const TOC = ({ sections, onGo, variant, ads = [], highlightColor }) => {
-  const cls = "toc-list" + (variant === "minimal" ? " is-minimal" : "");
+const TOC_BAR_PALETTE = [
+  ["var(--vivo-plum)", "var(--vivo-cream)"],
+  ["var(--vivo-orange)", "var(--vivo-black)"],
+  ["var(--vivo-green)", "var(--vivo-black)"],
+  ["var(--vivo-blue)", "var(--vivo-cream)"]
+];
+const TOC = ({ sections, onGo, variant, ads = [], highlightColor, photoSrc, onPhoto, onUpdateSection }) => {
+  const editing = window.__editMode;
+  const isBars = !variant || variant === "bars";
+  const cls = "toc-list" + (variant === "minimal" ? " is-minimal" : isBars ? " is-bars" : "");
   const highlightMap = {
     plum: "var(--vivo-plum)",
     tangerine: "var(--vivo-tangerine)",
@@ -245,25 +253,34 @@ const TOC = ({ sections, onGo, variant, ads = [], highlightColor }) => {
   const highlight = highlightMap[highlightColor] || "var(--vivo-plum)";
   const onLight = highlightColor === "light-green" || highlightColor === "lavender";
   const highlightFg = onLight ? "var(--vivo-black)" : "var(--vivo-cream)";
-  const tocStyle = { "--toc-highlight": highlight, "--toc-highlight-fg": highlightFg };
+  const tocStyle = { "--toc-highlight": highlight, "--toc-highlight-fg": highlightFg, "--bar": highlight, "--bar-fg": highlightFg };
   // Inline ads slotted into TOC at intervals
   const items = [];
   sections.forEach((s, i) => {
+    if (s.kind === "promo") { items.push({ kind: "promo", section: s }); return; }
     items.push({ kind: "section", section: s, idx: i });
     // After items 3 and 7, slot an ad if available
     if ((i === 2 || i === 6) && ads[Math.floor(i / 4)]) {
       items.push({ kind: "ad", ad: ads[Math.floor(i / 4)] });
     }
   });
+  if (isBars && (photoSrc || editing)) {
+    items.splice(Math.min(3, items.length), 0, { kind: "photo" });
+  }
   return (
     <section className="toc-section" style={tocStyle}>
-      <div style={{ marginBottom: 0, display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 16 }}>
-        <h2 className="toc-heading">Table of Contents</h2>
-      </div>
-      <ol className={cls} style={{ marginTop: 16 }}>
+      <ol className={cls} style={{ marginTop: 0 }}>
         {items.map((item, i) => item.kind === "ad" ? (
           <li key={"ad-" + i} className="toc-ad-slot">
             <InlineAd ad={item.ad} />
+          </li>
+        ) : item.kind === "photo" ? (
+          <li key="toc-photo" className="toc-photo">
+            <PhotoSlot fill src={photoSrc || ""} alt="" initials="DROP A PHOTO" onChange={onPhoto} onClear={() => onPhoto && onPhoto("")} />
+          </li>
+        ) : item.kind === "promo" ? (
+          <li key={item.section.id} className="toc-promo-item">
+            {React.createElement(window.SectionBody, { section: item.section, update: (patch) => onUpdateSection && onUpdateSection(item.section.id, patch) })}
           </li>
         ) : (
           <li key={item.section.id} className="toc-item">
@@ -372,7 +389,7 @@ const App = () => {
   // Tweakable defaults — JSON block for host edit-mode persistence
   const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
     "coverVariant": "default",
-    "tocVariant": "default",
+    "tocVariant": "bars",
     "tocHighlight": "plum",
     "coverAccent": "green",
     "coverBrush": "harmony",
@@ -552,12 +569,22 @@ const App = () => {
   const MODULE_LIBRARY = [
     { kind: "info", label: "Text / Info", desc: "Headings and paragraphs", make: (t) => ({ title: t || "Information", kind: "info", eyebrow: "", paragraphs: [""] }) },
     { kind: "notes", label: "Program Notes", desc: "Long-form prose notes", make: (t) => ({ title: t || "Program Notes", kind: "notes", eyebrow: "About the Music", blocks: [{ h: "", body: [""] }] }) },
-    { kind: "program", label: "Program", desc: "Running order of works", make: (t) => ({ title: t || "Program", kind: "program", eyebrow: "The Running Order", lead: "", pieces: [{ composer: "", work: "" }] }) },
+    { kind: "program", label: "Today's Program", desc: "Running order of works", make: (t) => ({ title: t || "Today's Program", kind: "program", eyebrow: "The Running Order", lead: "", pieces: [{ composer: "", work: "" }] }) },
     { kind: "cast", label: "Cast & Creative", desc: "Performers and roles", make: (t) => ({ title: t || "Cast & Creative", kind: "cast", eyebrow: "Who's Performing", cast: [{ role: "", name: "" }] }) },
-    { kind: "bios", label: "Artist Bios", desc: "Photo + biography", make: (t) => ({ title: t || "Artist Bios", kind: "bios", eyebrow: "About the Artists", bios: [{ id: "bio-1", name: "", role: "", photoSrc: "", text: "" }] }) },
+    { kind: "bios", label: "About the Artists", desc: "Photo + biography", make: (t) => ({ title: t || "About the Artists", kind: "bios", eyebrow: "About the Artists", bios: [{ id: "bio-1", name: "", role: "", photoSrc: "", text: "" }] }) },
     { kind: "songtexts", label: "Song Texts", desc: "Sung texts & translations", make: (t) => ({ title: t || "Sung Texts & Translations", kind: "songtexts", eyebrow: "Follow Along", lead: "", songs: [{ id: "piece-1", title: "New Piece", composer: "", note: "", origLang: "", stanzas: [{ original: ["", "", "", ""], translation: ["", "", "", ""] }] }] }) },
     { kind: "events", label: "Upcoming", desc: "Auto season calendar", make: (t) => ({ title: t || "Upcoming", kind: "events", eyebrow: "Coming Up at Vivo Performing Arts", lead: "", auto: true, count: 4 }) },
-    { kind: "roster", label: "Roster", desc: "Grouped name lists", make: (t) => ({ title: t || "Roster", kind: "roster", eyebrow: "", groups: [{ h: "", names: [""] }] }) }
+    { kind: "events", label: "Next at Vivo", desc: "Swipeable upcoming shows", make: (t) => ({ title: t || "Next at Vivo", kind: "events", eyebrow: "Coming Up at Vivo Performing Arts", lead: "", auto: true, count: 6, layout: "carousel" }) },
+    { kind: "roster", label: "Roster", desc: "Grouped name lists", make: (t) => ({ title: t || "Roster", kind: "roster", eyebrow: "", groups: [{ h: "", names: [""] }] }) },
+    { kind: "roster", label: "Musicians", desc: "Orchestra / ensemble roster", make: (t) => ({ title: t || "Musicians", kind: "roster", eyebrow: "The Ensemble", groups: [{ h: "Violin I", names: [""] }, { h: "Violin II", names: [""] }, { h: "Viola", names: [""] }, { h: "Cello", names: [""] }] }) },
+    { kind: "supporters-list", label: "Vivo Supporters", desc: "Donor & partner listings", make: (t) => ({ title: t || "Vivo Performing Arts Supporters", kind: "supporters-list", eyebrow: "With Gratitude" }) },
+    { kind: "staff-board", label: "Staff & Board", desc: "Staff, directors & advisors", make: (t) => ({ title: t || "Staff & Board", kind: "staff-board", eyebrow: "Vivo Performing Arts" }) },
+    { kind: "performance-sponsor", label: "Performance Sponsor", desc: "Sponsor box, image optional", make: (t) => ({ title: t || "Performance Sponsor", kind: "performance-sponsor", eyebrow: "Tonight's Performance", lead: "", blocks: [{ label: "Performance Sponsor", name: "Sponsor name", statement: "This performance is generously supported by Sponsor name.", imageSrc: "" }] }) },
+    { kind: "promo", label: "Ad: Compact Row", desc: "Thumb + title + link", make: (t) => ({ title: t || "Promo", kind: "promo", layout: "row", eyebrow: "35 & Under", heading: "$20 Student Tickets", body: "Every show, all season", buttonLabel: "Get Tickets", buttonUrl: "https://www.vivoperformingarts.org/", buttonColor: "green", imageSrc: "" }) },
+    { kind: "promo", label: "Ad: CTA Bar", desc: "One-line headline + button", make: (t) => ({ title: t || "Promo", kind: "promo", layout: "cta", heading: "Subscribe & Save 25%", buttonLabel: "Packages", buttonUrl: "https://www.vivoperformingarts.org/", buttonColor: "cream" }) },
+    { kind: "promo", label: "Ad: Image + Button", desc: "Photo, title, button", make: (t) => ({ title: t || "Promo", kind: "promo", layout: "side", eyebrow: "Next at Vivo", heading: "Jeremy Denk, Piano", meta: "FRI OCT 24 · 8PM · Jordan Hall", buttonLabel: "Buy Tickets", buttonUrl: "https://www.vivoperformingarts.org/", buttonColor: "blue", imageSrc: "" }) },
+    { kind: "promo", label: "Partner Ad", desc: "Image + their copy + URL", make: (t) => ({ title: t || "Partner Ad", kind: "promo", layout: "full", eyebrow: "Our Partners", heading: "Partner Name", body: "Copy supplied by the partner goes here.", buttonLabel: "Learn More", buttonUrl: "https://", buttonColor: "cream", imageSrc: "" }) },
+    { kind: "promo", label: "Performance Sponsors", desc: "Recognize 1 or many sponsors", make: (t) => ({ title: t || "Performance Sponsors", kind: "promo", layout: "sponsors", heading: "This performance is generously supported by", sponsors: [{ name: "Sponsor Name", imageSrc: "" }] }) }
   ];
   const addModule = (mod) => {
     const title = (prompt(mod.label + " — section title?", mod.make("").title) || "").trim();
@@ -585,6 +612,9 @@ const App = () => {
   const currentSection = data.sections.find(s => s.id === route);
   const currentIdx = data.sections.findIndex(s => s.id === route);
 
+  const deleteSection = useCallbackA((id) => {
+    setData(d => ({ ...d, sections: d.sections.filter(s => s.id !== id) }));
+  }, []);
   // Visible sections (filter out hidden via tweaks)
   const hiddenSet = useMemoA(() => new Set(tweaks.hiddenSections || []), [tweaks.hiddenSections]);
   const visibleSections = useMemoA(() => data.sections.filter(s => !hiddenSet.has(s.id)), [data.sections, hiddenSet]);
@@ -784,6 +814,7 @@ const App = () => {
             onPhotoClear={() => updateCover({ calloutPhotoSrc: "" })}
           />
           <TOC sections={visibleSections} onGo={goTo} variant={tweaks.tocVariant} highlightColor={tweaks.tocHighlight}
+            photoSrc={data.cover.tocPhotoSrc} onPhoto={(src) => updateCover({ tocPhotoSrc: src })} onUpdateSection={updateSection}
             ads={(data.sections.find(s => s.kind === "sponsors")?.ads || []).slice(0, 2).map(a => ({
               name: a.name,
               tagline: a.tagline,
@@ -924,6 +955,7 @@ const App = () => {
               label="Layout"
               value={tweaks.tocVariant}
               options={[
+                { value: "bars", label: "Color Bars" },
                 { value: "default", label: "List" },
                 { value: "minimal", label: "Minimal" }
               ]}
@@ -984,21 +1016,19 @@ const App = () => {
             <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>Toggle off to hide a section from the table of contents and navigation. Use the arrows to reorder. Section content is preserved.</div>
             {data.sections.map((s, i) => (
               <div key={s.id} style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                <div style={{ flex: 1 }}>
-                  <window.TweakToggle
-                    label={s.title}
-                    value={!hiddenSet.has(s.id)}
-                    onChange={(on) => {
-                      const cur = new Set(tweaks.hiddenSections || []);
-                      if (on) cur.delete(s.id); else cur.add(s.id);
-                      setTweak("hiddenSections", Array.from(cur));
-                    }}
-                  />
-                </div>
+                <input
+                  type="text"
+                  value={s.title}
+                  onChange={(e) => updateSection(s.id, { title: e.target.value })}
+                  style={{ flex: 1, fontFamily: "var(--font-body)", fontSize: 13, fontWeight: 700, color: "#111", padding: "6px 8px", border: "1px solid #ccc", background: "#fff", minWidth: 0 }}
+                />
+                <button onClick={() => { const cur = new Set(tweaks.hiddenSections || []); if (hiddenSet.has(s.id)) cur.delete(s.id); else cur.add(s.id); setTweak("hiddenSections", Array.from(cur)); }} title={hiddenSet.has(s.id) ? "Show" : "Hide"} style={{ border: 0, background: "transparent", cursor: "pointer", opacity: 0.7, fontSize: 15, padding: "2px 4px" }}>{hiddenSet.has(s.id) ? "◯" : "●"}</button>
                 <button onClick={() => moveSection(s.id, -1)} disabled={i === 0} title="Move up" style={{ border: 0, background: "transparent", cursor: "pointer", opacity: i === 0 ? 0.3 : 0.7, fontSize: 14, padding: "2px 4px" }}>↑</button>
                 <button onClick={() => moveSection(s.id, 1)} disabled={i === data.sections.length - 1} title="Move down" style={{ border: 0, background: "transparent", cursor: "pointer", opacity: i === data.sections.length - 1 ? 0.3 : 0.7, fontSize: 14, padding: "2px 4px" }}>↓</button>
+                <button onClick={() => { if (confirm('Delete "' + s.title + '"? This removes the section and its content.')) deleteSection(s.id); }} title="Delete section" style={{ border: 0, background: "transparent", cursor: "pointer", opacity: 0.75, fontSize: 16, padding: "2px 4px", color: "#ef4c26" }}>×</button>
               </div>
             ))}
+            <div style={{ fontSize: 11, opacity: 0.7, margin: "4px 0 0" }}>Edit a title above to rename that page. ● shown / ◯ hidden.</div>
             <div style={{ fontSize: 12, opacity: 0.7, margin: "16px 0 8px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em" }}>Module Library</div>
             <div className="module-lib">
               {MODULE_LIBRARY.map(mod => (

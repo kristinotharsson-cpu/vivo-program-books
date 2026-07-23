@@ -52,7 +52,7 @@
     },
     {
       "id": "program",
-      "title": "Program",
+      "title": "Today's Program",
       "kind": "program",
       "eyebrow": "The Running Order",
       "lead": "HEADLINER. First Boston solo performance in a generation. Haydn Variations Hob. XVII:6, Schoenberg Op. 19, Mozart Rondo K. 511, Kurtág Márta Ligaturája, Schubert D. 959.",
@@ -113,7 +113,7 @@
     },
     {
       "id": "bios",
-      "title": "Artist Bios",
+      "title": "About the Artists",
       "kind": "bios",
       "eyebrow": "Tonight's Artist",
       "bios": [
@@ -140,10 +140,16 @@
       "count": 4
     },
     {
-      "id": "vivo",
-      "kind": "vivo",
-      "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information   Staff   Supporters"
+      "id": "staff-board",
+      "title": "Staff & Board",
+      "kind": "staff-board",
+      "eyebrow": "Vivo Performing Arts"
+    },
+    {
+      "id": "supporters",
+      "title": "Vivo Performing Arts Supporters",
+      "kind": "supporters-list",
+      "eyebrow": "With Gratitude"
     },
     {
       "id": "info",

@@ -6,7 +6,7 @@
     "subtitle": "Other",
     "date": "SAT SEP 12",
     "time": "3PM",
-    "venue": "Arlington Street Church",
+    "venue": "Cathedral Church of Saint Paul",
     "accent": "blue",
     "brush": "harmony",
     "photoCaption": "Tríptico",
@@ -51,7 +51,7 @@
     },
     {
       "id": "program",
-      "title": "Program",
+      "title": "Today's Program",
       "kind": "program",
       "eyebrow": "The Running Order",
       "lead": "Trio from Argentina, Puerto Rico, Costa Rica. Ragazzi is Emmy and Grammy winning film/TV composer.",
@@ -87,7 +87,7 @@
     },
     {
       "id": "bios",
-      "title": "Artist Bios",
+      "title": "About the Artists",
       "kind": "bios",
       "eyebrow": "Tonight's Artist",
       "bios": [
@@ -113,10 +113,16 @@
       "count": 4
     },
     {
-      "id": "vivo",
-      "kind": "vivo",
-      "title": "About Vivo Performing Arts",
-      "eyebrow": "Audience Information   Staff   Supporters"
+      "id": "staff-board",
+      "title": "Staff & Board",
+      "kind": "staff-board",
+      "eyebrow": "Vivo Performing Arts"
+    },
+    {
+      "id": "supporters",
+      "title": "Vivo Performing Arts Supporters",
+      "kind": "supporters-list",
+      "eyebrow": "With Gratitude"
     },
     {
       "id": "info",
@@ -127,7 +133,7 @@
         {
           "h": "Venue",
           "body": [
-            "Arlington Street Church."
+            "Cathedral Church of Saint Paul."
           ]
         },
         {
@@ -154,7 +160,7 @@
   "_meta": {
     "iso": "2026-09-12",
     "genre": "Other",
-    "venueName": "Arlington Street Church",
+    "venueName": "Cathedral Church of Saint Paul",
     "leadArtist": "Tríptico",
     "socialLinks": [
       {

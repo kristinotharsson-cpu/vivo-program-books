@@ -6,12 +6,13 @@
     "date": "SAT SEP 12",
     "time": "3PM",
     "iso": "2026-09-12",
-    "venue": "Arlington Street Church",
+    "venue": "Cathedral Church of Saint Paul",
     "genre": "Other",
     "tags": [
       "Neighborhood Arts"
     ],
-    "accent": "blue"
+    "accent": "blue",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/tríptico/"
   },
   {
     "slug": "bala-bila",
@@ -25,7 +26,8 @@
     "tags": [
       "Neighborhood Arts"
     ],
-    "accent": "blue"
+    "accent": "blue",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/bala-bila/"
   },
   {
     "slug": "let-s-dance-boston",
@@ -39,7 +41,8 @@
     "tags": [
       "Let's Dance Boston"
     ],
-    "accent": "orange"
+    "accent": "orange",
+    "pdpUrl": "https://www.vivoperformingarts.org/live-performances/lets-dance-boston-2026/"
   },
   {
     "slug": "jonathan-gramling-and-friends",
@@ -54,7 +57,8 @@
       "Neighborhood Arts",
       "Roxbury"
     ],
-    "accent": "blue"
+    "accent": "blue",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/jonathan-gramling-and-friends/"
   },
   {
     "slug": "avery-gagliano-piano",
@@ -68,7 +72,8 @@
     "tags": [
       "Piano"
     ],
-    "accent": "green"
+    "accent": "green",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/avery-gagliano/"
   },
   {
     "slug": "hemenway-strings",
@@ -95,7 +100,8 @@
     "venue": "Berklee Performance Center",
     "genre": "Jazz",
     "tags": [],
-    "accent": "orange"
+    "accent": "orange",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/lizz-wright/"
   },
   {
     "slug": "brentano-string-quartet",
@@ -107,7 +113,8 @@
     "venue": "NEC's Jordan Hall",
     "genre": "Chamber",
     "tags": [],
-    "accent": "green"
+    "accent": "green",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/brentano-string-quartet-2026/"
   },
   {
     "slug": "castle-of-our-skins",
@@ -122,7 +129,8 @@
       "Neighborhood Arts",
       "Roxbury"
     ],
-    "accent": "green"
+    "accent": "green",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/castle-of-our-skins-2027/"
   },
   {
     "slug": "bruce-liu-piano",
@@ -136,7 +144,8 @@
     "tags": [
       "Piano"
     ],
-    "accent": "green"
+    "accent": "green",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/bruce-liu-2026/"
   },
   {
     "slug": "christian-mcbride-and-ursa-major",
@@ -148,7 +157,8 @@
     "venue": "Berklee Performance Center",
     "genre": "Jazz",
     "tags": [],
-    "accent": "orange"
+    "accent": "orange",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/christian-mcbride-and-ursa-major/"
   },
   {
     "slug": "gravity-and-other-myths",
@@ -162,7 +172,8 @@
     "tags": [
       "Dance"
     ],
-    "accent": "purple"
+    "accent": "purple",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/gravity-and-other-myths/"
   },
   {
     "slug": "geneva-lewis-violin",
@@ -174,7 +185,8 @@
     "venue": "Groton Hill Music Center (Meadow Hall)",
     "genre": "Instrumentalist",
     "tags": [],
-    "accent": "green"
+    "accent": "green",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/geneva-lewis/"
   },
   {
     "slug": "stringfest",
@@ -188,7 +200,8 @@
     "tags": [
       "Neighborhood Arts"
     ],
-    "accent": "green"
+    "accent": "green",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/stringfest-borromeo-quartet-with-boston-string-academy-2026/"
   },
   {
     "slug": "lachanze",
@@ -200,7 +213,8 @@
     "venue": "Berklee Performance Center",
     "genre": "Jazz",
     "tags": [],
-    "accent": "orange"
+    "accent": "orange",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/lachanze/"
   },
   {
     "slug": "igor-levit-piano",
@@ -215,7 +229,8 @@
       "Beethoven 200",
       "Piano"
     ],
-    "accent": "green"
+    "accent": "green",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/igor-levit-2026/"
   },
   {
     "slug": "all-cello-orchestra",
@@ -230,7 +245,8 @@
       "Neighborhood Arts",
       "Roxbury"
     ],
-    "accent": "green"
+    "accent": "green",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/pablo-casals-150th-birthday-tribute/"
   },
   {
     "slug": "nemanja-radulovic-and-double-sens-chamber-orchestra",
@@ -242,7 +258,8 @@
     "venue": "NEC's Jordan Hall",
     "genre": "Ch Orch",
     "tags": [],
-    "accent": "green"
+    "accent": "green",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/nemanja-radulovic-and-double-sens/"
   },
   {
     "slug": "pelin-su-yavuz",
@@ -258,7 +275,8 @@
       "Neighborhood Arts",
       "Roxbury"
     ],
-    "accent": "green"
+    "accent": "green",
+    "pdpUrl": "https://www.vivoperformingarts.org/live-performances/neighborhood-arts/roxbury-concert-series-pelin-su-yavuz/"
   },
   {
     "slug": "dover-quartet",
@@ -270,7 +288,8 @@
     "venue": "NEC's Jordan Hall",
     "genre": "Chamber",
     "tags": [],
-    "accent": "green"
+    "accent": "green",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/dover-quartet-2026/"
   },
   {
     "slug": "ballet-bc",
@@ -284,7 +303,8 @@
     "tags": [
       "Dance"
     ],
-    "accent": "purple"
+    "accent": "purple",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/ballet-bc/"
   },
   {
     "slug": "triana-maciel-and-nino-de-los-reyes",
@@ -299,7 +319,8 @@
       "Neighborhood Arts",
       "Roxbury"
     ],
-    "accent": "orange"
+    "accent": "orange",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/triana-maciel-nino-de-los-reyes/"
   },
   {
     "slug": "coltrane-100",
@@ -313,7 +334,8 @@
     "tags": [
       "Coltrane 100"
     ],
-    "accent": "orange"
+    "accent": "orange",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/coltrane-100/"
   },
   {
     "slug": "what-makes-it-great-mozart-s-clarinet-concerto",
@@ -325,7 +347,8 @@
     "venue": "NEC's Jordan Hall",
     "genre": "WMIG",
     "tags": [],
-    "accent": "blue"
+    "accent": "blue",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/what-makes-it-great-mozart-2026/"
   },
   {
     "slug": "nadia-washington-quartet",
@@ -340,7 +363,8 @@
       "Neighborhood Arts",
       "Roxbury"
     ],
-    "accent": "orange"
+    "accent": "orange",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/nadia-washington-quartet-2026/"
   },
   {
     "slug": "jeremy-denk-piano",
@@ -354,7 +378,8 @@
     "tags": [
       "Piano"
     ],
-    "accent": "green"
+    "accent": "green",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/jeremy-denk-2027/"
   },
   {
     "slug": "stringfest-2",
@@ -368,7 +393,8 @@
     "tags": [
       "Neighborhood Arts"
     ],
-    "accent": "orange"
+    "accent": "orange",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/stringfest-jorge-santiago-arce/"
   },
   {
     "slug": "gil-shaham-and-akira-eguchi-violin-and-piano",
@@ -383,7 +409,8 @@
       "Beethoven 200",
       "Piano"
     ],
-    "accent": "green"
+    "accent": "green",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/gil-shaham-akira-eguchi/"
   },
   {
     "slug": "what-makes-it-great-anything-but-standard",
@@ -395,7 +422,8 @@
     "venue": "NEC's Jordan Hall",
     "genre": "WMIG",
     "tags": [],
-    "accent": "blue"
+    "accent": "blue",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/what-makes-it-great-fitzgerald-peterson-2027/"
   },
   {
     "slug": "lukas-sternath-piano",
@@ -409,7 +437,8 @@
     "tags": [
       "Piano"
     ],
-    "accent": "green"
+    "accent": "green",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/lukas-sternath/"
   },
   {
     "slug": "michel-camilo-trio",
@@ -423,7 +452,8 @@
     "tags": [
       "Piano"
     ],
-    "accent": "orange"
+    "accent": "orange",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/michel-camilo-trio/"
   },
   {
     "slug": "edgar-meyer-mike-marshall-and-george-meyer",
@@ -435,7 +465,8 @@
     "venue": "Sanders Theatre",
     "genre": "Pop/World/Misc.",
     "tags": [],
-    "accent": "orange"
+    "accent": "orange",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/edgar-meyer-mike-marshall-george-meyer-2027/"
   },
   {
     "slug": "mitsuko-uchida-piano",
@@ -449,7 +480,8 @@
     "tags": [
       "Piano"
     ],
-    "accent": "green"
+    "accent": "green",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/mitsuko-uchida/"
   },
   {
     "slug": "ahmed-alom-piano",
@@ -465,7 +497,8 @@
       "Neighborhood Arts",
       "Roxbury"
     ],
-    "accent": "orange"
+    "accent": "orange",
+    "pdpUrl": "https://www.vivoperformingarts.org/live-performances/neighborhood-arts/roxbury-concert-series-ahmed-alom-trio/"
   },
   {
     "slug": "isidore-string-quartet-with-jeremy-denk-piano",
@@ -479,7 +512,8 @@
     "tags": [
       "Piano"
     ],
-    "accent": "green"
+    "accent": "green",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/isidore-string-quartet-jeremy-denk-2027/"
   },
   {
     "slug": "emmet-cohen-trio-with-georgia-heers-vocals",
@@ -493,7 +527,8 @@
     "tags": [
       "Piano"
     ],
-    "accent": "orange"
+    "accent": "orange",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/emmet-cohen-trio-georgia-heers/"
   },
   {
     "slug": "limon-dance-company",
@@ -507,7 +542,8 @@
     "tags": [
       "Dance"
     ],
-    "accent": "purple"
+    "accent": "purple",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/limon-dance-company/"
   },
   {
     "slug": "junction-trio",
@@ -519,7 +555,8 @@
     "venue": "NEC's Jordan Hall",
     "genre": "Chamber",
     "tags": [],
-    "accent": "green"
+    "accent": "green",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/junction-trio-2027/"
   },
   {
     "slug": "so-percussion-with-helado-negro-and-kate-stables",
@@ -531,7 +568,8 @@
     "venue": "Crystal Ballroom at Somerville Theatre",
     "genre": "Classical",
     "tags": [],
-    "accent": "green"
+    "accent": "green",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/so-percussion-helado-negro-kate-stables-2027/"
   },
   {
     "slug": "damir-imamovic",
@@ -543,7 +581,8 @@
     "venue": "Crystal Ballroom at Somerville Theatre",
     "genre": "Jazz",
     "tags": [],
-    "accent": "orange"
+    "accent": "orange",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/damir-imamovic/"
   },
   {
     "slug": "charles-yang",
@@ -555,7 +594,8 @@
     "venue": "Crystal Ballroom at Somerville Theatre",
     "genre": "Classical",
     "tags": [],
-    "accent": "green"
+    "accent": "green",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/charles-yang/"
   },
   {
     "slug": "amanda-shea-and-tim-hall-trio",
@@ -570,7 +610,8 @@
       "Neighborhood Arts",
       "Roxbury"
     ],
-    "accent": "blue"
+    "accent": "blue",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/amanda-shea-tim-hall-trio/"
   },
   {
     "slug": "flor-de-toloache",
@@ -582,7 +623,8 @@
     "venue": "Crystal Ballroom at Somerville Theatre",
     "genre": "Other",
     "tags": [],
-    "accent": "blue"
+    "accent": "blue",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/flor-de-toloache-2027/"
   },
   {
     "slug": "zlata-chochieva-piano",
@@ -596,7 +638,8 @@
     "tags": [
       "Piano"
     ],
-    "accent": "green"
+    "accent": "green",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/zlata-chochieva-2027/"
   },
   {
     "slug": "thibaut-garcia-and-antoine-morinire-guitars",
@@ -608,7 +651,8 @@
     "venue": "Longy's Pickman Hall",
     "genre": "Instrumentalist",
     "tags": [],
-    "accent": "green"
+    "accent": "green",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/thibaut-antoine/"
   },
   {
     "slug": "huang-yi-and-kuka",
@@ -622,7 +666,8 @@
     "tags": [
       "Dance"
     ],
-    "accent": "purple"
+    "accent": "purple",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/huang-yi-and-kuka/"
   },
   {
     "slug": "the-debo-ray-experience",
@@ -636,7 +681,8 @@
     "tags": [
       "Neighborhood Arts"
     ],
-    "accent": "orange"
+    "accent": "orange",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/the-debo-ray-experience/"
   },
   {
     "slug": "vikingur-olafsson-piano",
@@ -650,7 +696,8 @@
     "tags": [
       "Piano"
     ],
-    "accent": "green"
+    "accent": "green",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/vikingur-olafsson-2027/"
   },
   {
     "slug": "yoko-miwa-trio",
@@ -665,7 +712,8 @@
       "Piano",
       "Neighborhood Arts"
     ],
-    "accent": "orange"
+    "accent": "orange",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/yoko-miwa-trio/"
   },
   {
     "slug": "isabelle-faust-violin-and-kristian-bezuidenhout-harpsichord",
@@ -677,7 +725,8 @@
     "venue": "NEC's Jordan Hall",
     "genre": "Instrumentalist",
     "tags": [],
-    "accent": "green"
+    "accent": "green",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/isabelle-faust-kristian-bezuidenhout/"
   },
   {
     "slug": "modern-connections-collective",
@@ -692,7 +741,8 @@
       "Neighborhood Arts",
       "Roxbury"
     ],
-    "accent": "orange"
+    "accent": "orange",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/modern-connections-collective/"
   },
   {
     "slug": "seong-jin-cho-piano",
@@ -706,7 +756,8 @@
     "tags": [
       "Piano"
     ],
-    "accent": "green"
+    "accent": "green",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/seong-jin-cho-2027/"
   },
   {
     "slug": "london-symphony-orchestra",
@@ -720,7 +771,8 @@
     "tags": [
       "Beethoven 200"
     ],
-    "accent": "green"
+    "accent": "green",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/london-symphony-orchestra/"
   },
   {
     "slug": "pavel-haas-quartet",
@@ -732,7 +784,8 @@
     "venue": "NEC's Jordan Hall",
     "genre": "Chamber",
     "tags": [],
-    "accent": "green"
+    "accent": "green",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/pavel-haas-quartet/"
   },
   {
     "slug": "rakish-with-rasa-string-quartet",
@@ -746,7 +799,8 @@
     "tags": [
       "Neighborhood Arts"
     ],
-    "accent": "orange"
+    "accent": "orange",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/rakish/"
   },
   {
     "slug": "fernando-brandao-quartet",
@@ -760,7 +814,8 @@
     "tags": [
       "Neighborhood Arts"
     ],
-    "accent": "orange"
+    "accent": "orange",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/fernando-brando-quartet-2027/"
   },
   {
     "slug": "artemis",
@@ -772,7 +827,8 @@
     "venue": "Berklee Performance Center",
     "genre": "Jazz",
     "tags": [],
-    "accent": "orange"
+    "accent": "orange",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/artemis-2027/"
   },
   {
     "slug": "fred-hersch-trio",
@@ -787,7 +843,8 @@
       "Jazz Festival",
       "Piano"
     ],
-    "accent": "orange"
+    "accent": "orange",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/fred-hersch-trio/"
   },
   {
     "slug": "endea-owens-and-the-cookout",
@@ -801,7 +858,8 @@
     "tags": [
       "Jazz Festival"
     ],
-    "accent": "orange"
+    "accent": "orange",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/endea-owens/"
   },
   {
     "slug": "anna-geniushene-piano",
@@ -815,7 +873,8 @@
     "tags": [
       "Piano"
     ],
-    "accent": "green"
+    "accent": "green",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/anna-geniushene/"
   },
   {
     "slug": "gregory-groover-quintet",
@@ -830,7 +889,8 @@
       "Neighborhood Arts",
       "Roxbury"
     ],
-    "accent": "orange"
+    "accent": "orange",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/gregory-groover-quintet/"
   },
   {
     "slug": "immanuel-wilkins-quartet",
@@ -845,7 +905,8 @@
       "Jazz Festival",
       "Artist in Residence"
     ],
-    "accent": "orange"
+    "accent": "orange",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/immanuel-wilkins-quartet/"
   },
   {
     "slug": "patricia-brennan-tentet",
@@ -859,7 +920,8 @@
     "tags": [
       "Jazz Festival"
     ],
-    "accent": "orange"
+    "accent": "orange",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/patricia-brennan-tentet/"
   },
   {
     "slug": "david-sedaris",
@@ -871,7 +933,8 @@
     "venue": "Symphony Hall",
     "genre": "Spoken Word",
     "tags": [],
-    "accent": "blue"
+    "accent": "blue",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/david-sedaris-2027/"
   },
   {
     "slug": "manuela-sanchez-goubert-ensemble",
@@ -886,7 +949,8 @@
       "Neighborhood Arts",
       "Roxbury"
     ],
-    "accent": "orange"
+    "accent": "orange",
+    "pdpUrl": "https://www.vivoperformingarts.org/live-performances/neighborhood-arts/roxbury-concert-series-manuela-sanchez-goubert/"
   },
   {
     "slug": "zambra-collective",
@@ -901,7 +965,8 @@
       "Neighborhood Arts",
       "Roxbury"
     ],
-    "accent": "orange"
+    "accent": "orange",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/zambra-collective/"
   },
   {
     "slug": "stanley-clarke-and-hiromi-featuring-publiquartet",
@@ -915,7 +980,8 @@
     "tags": [
       "Piano"
     ],
-    "accent": "orange"
+    "accent": "orange",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/stanley-clarke-and-hiromi/"
   },
   {
     "slug": "branford-marsalis-and-dianne-reeves-celebrate-john-coltrane",
@@ -929,7 +995,8 @@
     "tags": [
       "Coltrane 100"
     ],
-    "accent": "orange"
+    "accent": "orange",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/branford-marsalis-dianne-reeves-2027/"
   },
   {
     "slug": "leonkoro-quartet",
@@ -941,7 +1008,8 @@
     "venue": "Longy's Pickman Hall",
     "genre": "Chamber",
     "tags": [],
-    "accent": "green"
+    "accent": "green",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/leonkoro-quartet/"
   },
   {
     "slug": "jazz-at-lincoln-center-orchestra-with-wynton-marsalis",
@@ -953,7 +1021,8 @@
     "venue": "Symphony Hall",
     "genre": "Jazz",
     "tags": [],
-    "accent": "orange"
+    "accent": "orange",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/jazz-at-lincoln-center-orchestra-2027/"
   },
   {
     "slug": "lawrence-brownlee-and-erin-morley",
@@ -965,7 +1034,8 @@
     "venue": "NEC's Jordan Hall",
     "genre": "Vocal",
     "tags": [],
-    "accent": "purple"
+    "accent": "purple",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/lawrence-brownlee-erin-morley-2027/"
   },
   {
     "slug": "ukulele-orchestra-of-great-britain",
@@ -977,7 +1047,8 @@
     "venue": "NEC's Jordan Hall",
     "genre": "Other",
     "tags": [],
-    "accent": "blue"
+    "accent": "blue",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/ukulele-orchestra-of-great-britain-2027/"
   },
   {
     "slug": "jason-palmer-quartet-featuring-immanuel-wilkins-saxophone",
@@ -993,7 +1064,8 @@
       "Neighborhood Arts",
       "Roxbury"
     ],
-    "accent": "orange"
+    "accent": "orange",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/jason-palmer-quartet/"
   },
   {
     "slug": "alvin-ailey-american-dance-theater",
@@ -1007,7 +1079,8 @@
     "tags": [
       "Dance"
     ],
-    "accent": "purple"
+    "accent": "purple",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/alvin-ailey-american-dance-theater-2027/"
   },
   {
     "slug": "an-evening-with-audra-mcdonald",
@@ -1019,7 +1092,8 @@
     "venue": "Symphony Hall",
     "genre": "Other",
     "tags": [],
-    "accent": "blue"
+    "accent": "blue",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/an-evening-with-audra-mcdonald-2027/"
   },
   {
     "slug": "veronica-robles-female-mariachi",
@@ -1028,12 +1102,13 @@
     "date": "SAT MAY 01",
     "time": "3PM",
     "iso": "2027-05-01",
-    "venue": "Arlington Street Church",
+    "venue": "First Church, Boston UU",
     "genre": "Pop/World/Misc.",
     "tags": [
       "Neighborhood Arts"
     ],
-    "accent": "orange"
+    "accent": "orange",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/veronica-robles-female-mariachi/"
   },
   {
     "slug": "alisa-amador-and-friends",
@@ -1042,12 +1117,13 @@
     "date": "THU MAY 06",
     "time": "7:30PM",
     "iso": "2027-05-06",
-    "venue": "Arlington Street Church",
+    "venue": "First Church, Boston UU",
     "genre": "Pop/World/Misc.",
     "tags": [
       "Neighborhood Arts"
     ],
-    "accent": "orange"
+    "accent": "orange",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/alisa-amador/"
   },
   {
     "slug": "bela-fleck-edmar-castaneda-antonio-sanchez-trio",
@@ -1059,7 +1135,8 @@
     "venue": "Berklee Performance Center",
     "genre": "Jazz",
     "tags": [],
-    "accent": "orange"
+    "accent": "orange",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/bela-fleck-edmar-castaneda-antonio-sanchez-trio/"
   },
   {
     "slug": "nadine-sierra-soprano",
@@ -1071,7 +1148,8 @@
     "venue": "NEC's Jordan Hall",
     "genre": "Vocal",
     "tags": [],
-    "accent": "purple"
+    "accent": "purple",
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/nadine-sierra/"
   },
   {
     "slug": "rasa-string-quartet-with-carlos-vargas-piano",
@@ -1087,6 +1165,7 @@
       "Neighborhood Arts",
       "Roxbury"
     ],
-    "accent": "green"
+    "accent": "green",
+    "pdpUrl": "https://www.vivoperformingarts.org/live-performances/neighborhood-arts/roxbury-concert-series-rasa-string-quartet-vargas/"
   }
 ]

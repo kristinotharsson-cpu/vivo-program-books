@@ -35,6 +35,10 @@
           {
             "name": "Thor Steingraber",
             "title": "CEO of Vivo Performing Arts"
+          },
+          {
+            "name": "Gary Dunning",
+            "title": "Former President and Executive Director (retired June 30, 2026)"
           }
         ]
       },
@@ -173,12 +177,8 @@
         "name": "Performance Operations and Community Engagement",
         "members": [
           {
-            "name": "Karen Brown",
-            "title": "Chief Operating Officer"
-          },
-          {
             "name": "Liz Rosenthal",
-            "title": "Senior Associate Director of Performance Operations"
+            "title": "Acting Director of Artistic Operations"
           },
           {
             "name": "Robin Baker",
@@ -205,8 +205,12 @@
             "title": "Programming Administrator"
           },
           {
-            "name": "Evan DelGaudio",
+            "name": "Meghan Young",
             "title": "Dance Production Manager"
+          },
+          {
+            "name": "Evan DelGaudio",
+            "title": "Production Advisor, Dance & Special Projects"
           }
         ]
       },
@@ -250,43 +254,490 @@
     ]
   },
   "boards": {
-    "_note": "Placeholder — replace with the official Board of Directors and Advisors roster.",
+    "intro": "Vivo Performing Arts is grateful for the leadership of our Board of Directors and the advocacy and ambassadorships of our Board of Advisors. These remarkable volunteers provide invaluable support for the organization by giving of their time, talent, and resources in support of our mission. To learn more about joining either of Vivo Performing Arts’ Boards, please contact Emily Borababy, Chief Advancement Officer, at eborababy@vivoperformingarts.org.",
     "directors": [
       {
-        "name": "Board Chair Name",
+        "name": "Joshua Boger, PhD +",
         "title": "Chair"
       },
       {
-        "name": "Vice Chair Name",
+        "name": "Cherié Butts, PhD +",
+        "title": "Chair-Elect"
+      },
+      {
+        "name": "Stephanie L. Brown +",
         "title": "Vice Chair"
       },
       {
-        "name": "Treasurer Name",
-        "title": "Treasurer"
+        "name": "Melinda Rabb +",
+        "title": "Vice Chair"
       },
       {
-        "name": "Secretary Name",
-        "title": "Secretary"
+        "name": "Dorothy Altman Weber *",
+        "title": ""
       },
       {
-        "name": "Director Name",
-        "title": "Director"
+        "name": "Jill S. Altshuler +",
+        "title": ""
       },
       {
-        "name": "Director Name",
-        "title": "Director"
+        "name": "Howard Appleby",
+        "title": ""
+      },
+      {
+        "name": "Michael S. Canning +",
+        "title": ""
+      },
+      {
+        "name": "Joanne Cheng",
+        "title": ""
+      },
+      {
+        "name": "Joseph Corrado",
+        "title": ""
+      },
+      {
+        "name": "Amy d'Ablemont Burnes +",
+        "title": ""
+      },
+      {
+        "name": "Margaret Eagle",
+        "title": ""
+      },
+      {
+        "name": "Randolph Hawthorne",
+        "title": ""
+      },
+      {
+        "name": "Dr. Joan Helpern Goldberg *",
+        "title": ""
+      },
+      {
+        "name": "Yvette Hochberg",
+        "title": ""
+      },
+      {
+        "name": "Andrea Hoff +",
+        "title": ""
+      },
+      {
+        "name": "Rachel V. Kemp",
+        "title": ""
+      },
+      {
+        "name": "York Lo",
+        "title": ""
+      },
+      {
+        "name": "Israel Meir *",
+        "title": ""
+      },
+      {
+        "name": "Dr. Gordon Moore *",
+        "title": ""
+      },
+      {
+        "name": "Stephen C. Perry *",
+        "title": ""
+      },
+      {
+        "name": "Dr. Beth Pinals +",
+        "title": ""
+      },
+      {
+        "name": "Leontyne Price",
+        "title": "Honorary Director"
+      },
+      {
+        "name": "Michael Raizman *+",
+        "title": ""
+      },
+      {
+        "name": "Reuben Reynolds",
+        "title": ""
+      },
+      {
+        "name": "Jeremy Silverman",
+        "title": ""
+      },
+      {
+        "name": "Margaret Simon",
+        "title": "ex officio"
+      },
+      {
+        "name": "Lawrence Stifler *",
+        "title": ""
+      },
+      {
+        "name": "Susan Thonis +",
+        "title": ""
+      },
+      {
+        "name": "Yukiko Ueno +",
+        "title": ""
+      }
+    ],
+    "emeriti": [
+      {
+        "name": "Caroline Collings",
+        "title": ""
+      },
+      {
+        "name": "Jann E. Leeming *",
+        "title": ""
+      },
+      {
+        "name": "Norman C. Nicholson, Jr. *",
+        "title": ""
+      },
+      {
+        "name": "Eleanor Y. Pao",
+        "title": ""
+      },
+      {
+        "name": "Nancy Richmond Winsten *",
+        "title": ""
+      },
+      {
+        "name": "Mary Elisabeth Swerz",
+        "title": ""
+      },
+      {
+        "name": "Belinda Termeer",
+        "title": ""
+      },
+      {
+        "name": "Arnold B. Zetcher",
+        "title": ""
       }
     ],
     "advisors": [
       {
-        "name": "Advisor Name",
-        "title": "Advisory Board"
+        "name": "Margaret Simon",
+        "title": "Chair"
       },
       {
-        "name": "Advisor Name",
-        "title": "Advisory Board"
+        "name": "Gary Bailey, DHL, MSW, ACSW",
+        "title": ""
+      },
+      {
+        "name": "Chris Barton",
+        "title": ""
+      },
+      {
+        "name": "Meryl Beckingham",
+        "title": ""
+      },
+      {
+        "name": "Marilyn Benson *",
+        "title": ""
+      },
+      {
+        "name": "Judy Bigby, M.D. *",
+        "title": ""
+      },
+      {
+        "name": "Diana L. Bourgeois",
+        "title": ""
+      },
+      {
+        "name": "Joseph C. Cefalu",
+        "title": ""
+      },
+      {
+        "name": "Fernadina Chan",
+        "title": ""
+      },
+      {
+        "name": "Geoff Chasin",
+        "title": ""
+      },
+      {
+        "name": "Sharon A. Chirban, PhD",
+        "title": ""
+      },
+      {
+        "name": "Ellie Choi, PhD",
+        "title": ""
+      },
+      {
+        "name": "Leland Owen Clarke, Ed.D.",
+        "title": ""
+      },
+      {
+        "name": "Debra M. Corrado",
+        "title": ""
+      },
+      {
+        "name": "Jolyon Cowan",
+        "title": ""
+      },
+      {
+        "name": "Tim Deryaga",
+        "title": ""
+      },
+      {
+        "name": "JoAnne Dickinson *",
+        "title": ""
+      },
+      {
+        "name": "Kenneth Douglass *",
+        "title": ""
+      },
+      {
+        "name": "Amy C. Egloff",
+        "title": ""
+      },
+      {
+        "name": "Peter Finn",
+        "title": ""
+      },
+      {
+        "name": "C. Nancy Fisher",
+        "title": ""
+      },
+      {
+        "name": "Deborah Friedman *",
+        "title": ""
+      },
+      {
+        "name": "Susan Y. Friedman",
+        "title": ""
+      },
+      {
+        "name": "Alexandra Fuchs",
+        "title": ""
+      },
+      {
+        "name": "Elkan Gamzu",
+        "title": ""
+      },
+      {
+        "name": "Ellen Glanz",
+        "title": ""
+      },
+      {
+        "name": "Dr. Peter H. Gordon *",
+        "title": ""
+      },
+      {
+        "name": "Harriet Griesinger",
+        "title": ""
+      },
+      {
+        "name": "Teri Groome",
+        "title": ""
+      },
+      {
+        "name": "Stephen C. Harrison *",
+        "title": ""
+      },
+      {
+        "name": "Paul Hartung",
+        "title": ""
+      },
+      {
+        "name": "Horacio Hojman, MD",
+        "title": ""
+      },
+      {
+        "name": "Ilisa Hurowitz",
+        "title": ""
+      },
+      {
+        "name": "Heidi Hutton",
+        "title": ""
+      },
+      {
+        "name": "Olu Ibrahim",
+        "title": ""
+      },
+      {
+        "name": "Maurice Joffe",
+        "title": ""
+      },
+      {
+        "name": "Gerry Katz",
+        "title": ""
+      },
+      {
+        "name": "Nathan Kono",
+        "title": ""
+      },
+      {
+        "name": "Kate Kush *",
+        "title": ""
+      },
+      {
+        "name": "Alesia Latson",
+        "title": ""
+      },
+      {
+        "name": "Fred Ledley",
+        "title": ""
+      },
+      {
+        "name": "Stephen Leonard *",
+        "title": ""
+      },
+      {
+        "name": "Sarah Leaf-Herrmann",
+        "title": ""
+      },
+      {
+        "name": "Valeria Lowe-Barehmi",
+        "title": ""
+      },
+      {
+        "name": "Bonnie H. Margulies",
+        "title": ""
+      },
+      {
+        "name": "Glenda Mattes",
+        "title": ""
+      },
+      {
+        "name": "Theresa C. McLoud, MD",
+        "title": ""
+      },
+      {
+        "name": "Dr. Michael Merport",
+        "title": ""
+      },
+      {
+        "name": "Marilyn Miller *",
+        "title": ""
+      },
+      {
+        "name": "John P. Mordes, MD *",
+        "title": ""
+      },
+      {
+        "name": "Elsa Mosquera Sterenberg",
+        "title": ""
+      },
+      {
+        "name": "Ruth Nemzoff *",
+        "title": ""
+      },
+      {
+        "name": "James L. J. Nuzzo",
+        "title": ""
+      },
+      {
+        "name": "Ovie Paul Ojeni",
+        "title": ""
+      },
+      {
+        "name": "Stella J. Owen",
+        "title": ""
+      },
+      {
+        "name": "Rich Parker, MD *",
+        "title": ""
+      },
+      {
+        "name": "James Perrin",
+        "title": ""
+      },
+      {
+        "name": "Charlie Popper, MD *",
+        "title": ""
+      },
+      {
+        "name": "Suzanne Priebatsch",
+        "title": ""
+      },
+      {
+        "name": "Kristin Qian, PhD",
+        "title": ""
+      },
+      {
+        "name": "Oliver Radford *",
+        "title": ""
+      },
+      {
+        "name": "Sharon L. Rich *",
+        "title": ""
+      },
+      {
+        "name": "Mona J. Roberts *",
+        "title": ""
+      },
+      {
+        "name": "Abby Rosenfeld *",
+        "title": ""
+      },
+      {
+        "name": "Barbara Russell",
+        "title": ""
+      },
+      {
+        "name": "Sally S. Seaver, PhD *",
+        "title": ""
+      },
+      {
+        "name": "Sandra Shapiro *",
+        "title": ""
+      },
+      {
+        "name": "Susan Shapiro Magdanz *",
+        "title": ""
+      },
+      {
+        "name": "Dr. Samuel J. Shubrooks, Jr. *",
+        "title": ""
+      },
+      {
+        "name": "Dr. Michael Silverman",
+        "title": ""
+      },
+      {
+        "name": "Lori Solon",
+        "title": ""
+      },
+      {
+        "name": "Joel A. Stein *",
+        "title": ""
+      },
+      {
+        "name": "Molly Stifler",
+        "title": ""
+      },
+      {
+        "name": "Amir Tadmor",
+        "title": ""
+      },
+      {
+        "name": "Jeffrey A. Thomson *",
+        "title": ""
+      },
+      {
+        "name": "Sheila P. Thorne",
+        "title": ""
+      },
+      {
+        "name": "Sarah Rainwater Ward",
+        "title": ""
+      },
+      {
+        "name": "Wendy L. Watson",
+        "title": ""
+      },
+      {
+        "name": "Sharon R. Weinstein, MD",
+        "title": ""
+      },
+      {
+        "name": "Peter J. Wender *",
+        "title": ""
+      },
+      {
+        "name": "Elizabeth Zachos",
+        "title": ""
       }
-    ]
+    ],
+    "legend": "+ Denotes Executive Committee    * Denotes 25+ year subscriber    d Denotes deceased"
   },
   "supporters": {
     "categories": [

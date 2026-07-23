@@ -62,7 +62,7 @@ window.PROGRAM_DATA = {
     },
     {
       id: "program",
-      title: "Program",
+      title: "Today's Program",
       kind: "program",
       eyebrow: "The Running Order",
       lead: "Twenty-two pieces in a single arc, performed without interval. The first half is heard on the Steinway concert grand; the second half is the same program in the same order, on a felt-covered upright.",
@@ -164,16 +164,26 @@ window.PROGRAM_DATA = {
       title: "Cast & Creative",
       kind: "cast",
       eyebrow: "On Stage Tonight",
-      cast: [
-        { role: "Piano", name: "Víkingur Ólafsson" }
-      ],
-      creative: [
-        { role: "Lighting Design", name: "Halla Pétursdóttir" },
-        { role: "Piano Technician — Steinway", name: "Marcus Vance" },
-        { role: "Piano Technician — Felt Upright", name: "Sarah Chen" },
-        { role: "Stage Manager", name: "Jonas Reyes" },
-        { role: "Tour Production Manager", name: "Birgir Þorvaldsson" },
-        { role: "Artist Management", name: "Konzertdirektion Schmid" }
+      groups: [
+        {
+          id: "cast",
+          h: "The Performer",
+          rows: [
+            { role: "Piano", name: "Víkingur Ólafsson", blurb: "Icelandic pianist and exclusive Deutsche Grammophon artist, celebrated for his probing intelligence and unusually literary programming." }
+          ]
+        },
+        {
+          id: "creative",
+          h: "Creative & Production",
+          rows: [
+            { role: "Lighting Design", name: "Halla Pétursdóttir" },
+            { role: "Piano Technician — Steinway", name: "Marcus Vance" },
+            { role: "Piano Technician — Felt Upright", name: "Sarah Chen" },
+            { role: "Stage Manager", name: "Jonas Reyes" },
+            { role: "Tour Production Manager", name: "Birgir Þorvaldsson" },
+            { role: "Artist Management", name: "Konzertdirektion Schmid" }
+          ]
+        }
       ]
     },
     {
@@ -200,7 +210,7 @@ window.PROGRAM_DATA = {
     },
     {
       id: "bios",
-      title: "Artist Bios",
+      title: "About the Artists",
       kind: "bios",
       eyebrow: "Tonight's Artist",
       bios: [
@@ -231,46 +241,303 @@ window.PROGRAM_DATA = {
       ]
     },
     {
-      id: "donors",
-      title: "Donors",
-      kind: "donors",
+      id: "supporters",
+      title: "Vivo Performing Arts Supporters",
+      kind: "supporters-list",
       eyebrow: "With Gratitude",
-      lead: "Vivo Performing Arts is supported by the generosity of our patrons. Tonight's recital is dedicated to our donor community.",
-      tiers: [
-        { name: "Leadership Circle   $100,000+", level: "leader", names: ["The Hartwell Family Foundation", "Anonymous", "Eleanor & James Whitfield", "The Sato Endowment for the Arts"] },
-        { name: "Conductor's Circle   $50,000–$99,999", names: ["Adelaide Brennan", "Cyrus & Maya Patel", "The Garrison Family", "Marisol & Theo Reyes", "Walter & Inga Brandt", "The Lindgren Trust", "Nora Achebe-Hill"] },
-        { name: "Composer's Circle   $25,000–$49,999", names: ["Bea & Daniel Ostrov", "The Hyland Group", "Frederica Marsh", "Jamil & Lara Khan", "Birgitte Aaron", "Owen & Suzanne Kelley", "Iris Ferraro Charitable Fund", "The MacGregor Family", "Paolo & Yumi Tagliatti", "Vesna Petrović"] },
-        { name: "Soloist's Circle   $10,000–$24,999", names: ["Aaron Levy", "Adriana & Marc Boudreau", "Beatrice Onyango", "Calla Marshall", "Daniel & Holly Ferreira", "Edith Vance Trust", "Felipe Souza", "Greta Engelmann", "Henrik & Ulla Aas", "Imani Bridges", "Jasper Wong", "Kira Sundström", "Liam O'Donnell", "Marisa Drexler", "Nathaniel Park", "Olu Adesanya", "Priya Krishnamurti", "Quentin Larue", "Roxanne Pemberton", "Salvador Ortega", "Tanya Brennan", "Ursula Stein", "Vihaan Mehra"] },
-        { name: "Patron's Circle   $5,000–$9,999", names: ["Akira Tanaka", "Brigitte Voss", "Caleb Mwangi", "Daria Volkova", "Esme Holloway", "Fyodor Karpov", "Gemma Lascelles", "Hugo Bertrand", "Iyabo Adesina", "Joaquín Salas", "Kjell Lindqvist", "Linnea Søgaard", "Mateo Quintana", "Naia Rasmussen", "Olive Tremaine", "Petra Holovenko", "Quinn Aldercott", "Ruslana Bondar", "Sven Halldórsson", "Tariq Bashir", "Una Pávlovskaya", "Vito Barbieri", "Wren Eastwood", "Xiulan Cheng", "Yara Hassan", "Zane Kovac"] }
-      ]
+      supporters: {
+            "categories": [
+                  {
+                        "id": "annual-fund",
+                        "title": "Annual Fund",
+                        "accent": "magenta",
+                        "brush": "rhythm",
+                        "tiers": [
+                              {
+                                    "amount": "$100,000+",
+                                    "label": "Leadership Circle",
+                                    "donors": [
+                                          "The Hartwell Family Foundation",
+                                          "Anonymous",
+                                          "Eleanor & James Whitfield",
+                                          "The Sato Endowment for the Arts"
+                                    ]
+                              },
+                              {
+                                    "amount": "$50,000–$99,999",
+                                    "label": "Conductor's Circle",
+                                    "donors": [
+                                          "Adelaide Brennan",
+                                          "Cyrus & Maya Patel",
+                                          "The Garrison Family",
+                                          "Marisol & Theo Reyes",
+                                          "Walter & Inga Brandt",
+                                          "The Lindgren Trust",
+                                          "Nora Achebe-Hill"
+                                    ]
+                              },
+                              {
+                                    "amount": "$25,000–$49,999",
+                                    "label": "Composer's Circle",
+                                    "donors": [
+                                          "Bea & Daniel Ostrov",
+                                          "The Hyland Group",
+                                          "Frederica Marsh",
+                                          "Jamil & Lara Khan",
+                                          "Birgitte Aaron",
+                                          "Owen & Suzanne Kelley",
+                                          "Iris Ferraro Charitable Fund",
+                                          "The MacGregor Family",
+                                          "Paolo & Yumi Tagliatti",
+                                          "Vesna Petrović"
+                                    ]
+                              },
+                              {
+                                    "amount": "$10,000–$24,999",
+                                    "label": "Soloist's Circle",
+                                    "donors": [
+                                          "Aaron Levy",
+                                          "Adriana & Marc Boudreau",
+                                          "Beatrice Onyango",
+                                          "Calla Marshall",
+                                          "Daniel & Holly Ferreira",
+                                          "Edith Vance Trust",
+                                          "Felipe Souza",
+                                          "Greta Engelmann",
+                                          "Henrik & Ulla Aas",
+                                          "Imani Bridges",
+                                          "Jasper Wong",
+                                          "Kira Sundström",
+                                          "Liam O'Donnell",
+                                          "Marisa Drexler",
+                                          "Nathaniel Park",
+                                          "Olu Adesanya",
+                                          "Priya Krishnamurti",
+                                          "Quentin Larue",
+                                          "Roxanne Pemberton",
+                                          "Salvador Ortega",
+                                          "Tanya Brennan",
+                                          "Ursula Stein",
+                                          "Vihaan Mehra"
+                                    ]
+                              },
+                              {
+                                    "amount": "$5,000–$9,999",
+                                    "label": "Patron's Circle",
+                                    "donors": [
+                                          "Akira Tanaka",
+                                          "Brigitte Voss",
+                                          "Caleb Mwangi",
+                                          "Daria Volkova",
+                                          "Esme Holloway",
+                                          "Fyodor Karpov",
+                                          "Gemma Lascelles",
+                                          "Hugo Bertrand",
+                                          "Iyabo Adesina",
+                                          "Joaquín Salas",
+                                          "Kjell Lindqvist",
+                                          "Linnea Søgaard",
+                                          "Mateo Quintana",
+                                          "Naia Rasmussen",
+                                          "Olive Tremaine",
+                                          "Petra Holovenko",
+                                          "Quinn Aldercott",
+                                          "Ruslana Bondar",
+                                          "Sven Halldórsson",
+                                          "Tariq Bashir",
+                                          "Una Pávlovskaya",
+                                          "Vito Barbieri",
+                                          "Wren Eastwood",
+                                          "Xiulan Cheng",
+                                          "Yara Hassan",
+                                          "Zane Kovac"
+                                    ]
+                              }
+                        ]
+                  }
+            ],
+            "footer": "Every effort has been made to ensure accuracy. To report an error, please contact the Advancement Office."
+      }
     },
     {
-      id: "boardstaff",
-      title: "Board & Staff",
-      kind: "roster",
+      id: "staff-board",
+      title: "Staff & Board",
+      kind: "staff-board",
       eyebrow: "Vivo Performing Arts",
-      groups: [
-        { h: "Board of Directors", players: ["Eleanor Whitfield, Chair", "Cyrus Patel, Vice Chair", "Marisol Reyes, Treasurer", "Theo Reyes, Secretary", "Adelaide Brennan", "James Whitfield", "Bea Ostrov", "Daniel Ostrov", "Frederica Marsh", "Jamil Khan", "The Honorable Inés Vargas", "Nora Achebe-Hill", "Owen Kelley", "Walter Brandt"] },
-        { h: "Artistic Leadership", players: ["Mira Adachi, Artistic Director", "Lucien Foster, Music Director", "Halla Pétursdóttir, Director of Production", "Daniel Mendoza, Dramaturg & Annotator"] },
-        { h: "Administration", players: ["Priya Krishnamurti, Executive Director", "Jonas Reyes, Director of Operations", "Sade Adeyemi, Director of Development", "Akira Tanaka, Director of Marketing", "Liam O'Donnell, Director of Education", "Iris Yamamoto, Finance Director"] },
-        { h: "Production & Stage", players: ["Halla Pétursdóttir, Production Director", "Marcus Vance, Head Piano Technician", "Sarah Chen, Piano Technician", "Birgir Þorvaldsson, Stage Supervisor", "Esme Holloway, House Manager"] },
-        { h: "Education & Community", players: ["Liam O'Donnell, Director", "Caleb Mwangi, Schools Coordinator", "Linnea Søgaard, Community Programs", "Quinn Aldercott, Family Concerts"] }
-      ]
+      staff: {
+            "departments": [
+                  {
+                        "name": "Artistic Leadership",
+                        "members": [
+                              {
+                                    "name": "Mira Adachi",
+                                    "title": "Artistic Director"
+                              },
+                              {
+                                    "name": "Lucien Foster",
+                                    "title": "Music Director"
+                              },
+                              {
+                                    "name": "Halla Pétursdóttir",
+                                    "title": "Director of Production"
+                              },
+                              {
+                                    "name": "Daniel Mendoza",
+                                    "title": "Dramaturg & Annotator"
+                              }
+                        ]
+                  },
+                  {
+                        "name": "Administration",
+                        "members": [
+                              {
+                                    "name": "Priya Krishnamurti",
+                                    "title": "Executive Director"
+                              },
+                              {
+                                    "name": "Jonas Reyes",
+                                    "title": "Director of Operations"
+                              },
+                              {
+                                    "name": "Sade Adeyemi",
+                                    "title": "Director of Development"
+                              },
+                              {
+                                    "name": "Akira Tanaka",
+                                    "title": "Director of Marketing"
+                              },
+                              {
+                                    "name": "Liam O'Donnell",
+                                    "title": "Director of Education"
+                              },
+                              {
+                                    "name": "Iris Yamamoto",
+                                    "title": "Finance Director"
+                              }
+                        ]
+                  },
+                  {
+                        "name": "Production & Stage",
+                        "members": [
+                              {
+                                    "name": "Halla Pétursdóttir",
+                                    "title": "Production Director"
+                              },
+                              {
+                                    "name": "Marcus Vance",
+                                    "title": "Head Piano Technician"
+                              },
+                              {
+                                    "name": "Sarah Chen",
+                                    "title": "Piano Technician"
+                              },
+                              {
+                                    "name": "Birgir Þorvaldsson",
+                                    "title": "Stage Supervisor"
+                              },
+                              {
+                                    "name": "Esme Holloway",
+                                    "title": "House Manager"
+                              }
+                        ]
+                  },
+                  {
+                        "name": "Education & Community",
+                        "members": [
+                              {
+                                    "name": "Liam O'Donnell",
+                                    "title": "Director"
+                              },
+                              {
+                                    "name": "Caleb Mwangi",
+                                    "title": "Schools Coordinator"
+                              },
+                              {
+                                    "name": "Linnea Søgaard",
+                                    "title": "Community Programs"
+                              },
+                              {
+                                    "name": "Quinn Aldercott",
+                                    "title": "Family Concerts"
+                              }
+                        ]
+                  }
+            ],
+            "credits": []
+      },
+      boards: {
+            "directors": [
+                  {
+                        "name": "Eleanor Whitfield",
+                        "title": "Chair"
+                  },
+                  {
+                        "name": "Cyrus Patel",
+                        "title": "Vice Chair"
+                  },
+                  {
+                        "name": "Marisol Reyes",
+                        "title": "Treasurer"
+                  },
+                  {
+                        "name": "Theo Reyes",
+                        "title": "Secretary"
+                  },
+                  {
+                        "name": "Adelaide Brennan"
+                  },
+                  {
+                        "name": "James Whitfield"
+                  },
+                  {
+                        "name": "Bea Ostrov"
+                  },
+                  {
+                        "name": "Daniel Ostrov"
+                  },
+                  {
+                        "name": "Frederica Marsh"
+                  },
+                  {
+                        "name": "Jamil Khan"
+                  },
+                  {
+                        "name": "The Honorable Inés Vargas"
+                  },
+                  {
+                        "name": "Nora Achebe-Hill"
+                  },
+                  {
+                        "name": "Owen Kelley"
+                  },
+                  {
+                        "name": "Walter Brandt"
+                  }
+            ],
+            "advisors": []
+      }
     },
     {
       id: "upcoming",
-      title: "Upcoming",
+      title: "Next at Vivo",
       kind: "events",
       eyebrow: "Coming Up at Vivo Performing Arts",
       lead: "Subscribe to the season at vivoperformingarts.org and never miss a night.",
-      events: [
-        { month: "MAR", day: "14", title: "Schubert's Winterreise", meta: "Matthias Goerne, baritone   Daniil Trifonov, piano   7:30 PM   Symphony Hall" },
-        { month: "MAR", day: "22", title: "Vienna Philharmonic", meta: "Andris Nelsons, conductor   8:00 PM   Symphony Hall" },
-        { month: "APR", day: "05", title: "Anna Lindström Plays Sibelius", meta: "Vivo Resident Orchestra   Lucien Foster, conductor   7:30 PM" },
-        { month: "APR", day: "19", title: "Late Night Jazz: Brad Mehldau Trio", meta: "10:00 PM   The Studio   21+" },
-        { month: "MAY", day: "02", title: "Beethoven's Ninth", meta: "Vivo Resident Orchestra & Chorus   Lucien Foster, conductor   7:30 PM" },
-        { month: "MAY", day: "16", title: "A Recital by Hilary Hahn", meta: "Hilary Hahn, violin   7:30 PM   Symphony Hall" }
-      ]
+      auto: true,
+      count: 6
+    },
+    {
+      id: "student-tickets",
+      title: "Student Tickets",
+      kind: "promo",
+      layout: "row",
+      eyebrow: "35 & Under",
+      heading: "$20 Student Tickets",
+      body: "Every performance this season is just $20 — bring the whole crew.",
+      buttonLabel: "Get Tickets",
+      buttonUrl: "https://www.vivoperformingarts.org/",
+      buttonColor: "green",
+      imageSrc: ""
     },
     {
       id: "sponsors",
@@ -289,6 +556,11 @@ window.PROGRAM_DATA = {
       title: "Hall Info",
       kind: "info",
       eyebrow: "Land Acknowledgment & Visitor Info",
+      audienceInfo: [
+        { id: "arrival", title: "Arrival & Seating", body: ["Doors open 45 minutes before curtain. Latecomers are seated at a suitable break in the music."] },
+        { id: "coat-check", title: "Coat Check", body: ["Complimentary coat check is available in the main lobby, to the left of the box office."] },
+        { id: "food-drink", title: "Food & Drink", body: ["The lobby bar opens one hour before the performance and during intermission. Drinks in spill-proof cups are welcome in the hall."] }
+      ],
       sections: [
         { h: "Land Acknowledgment", body: ["Vivo Performing Arts gathers and performs on the unceded ancestral lands of the Massachusett, Pawtucket, and Wampanoag peoples. We acknowledge the original stewards of this land and recognize that the privilege of making music here carries a responsibility to honor, support, and listen to Indigenous communities — past, present, and future."] },
         { h: "Accessibility", body: ["Symphony Hall is fully wheelchair accessible. Assistive listening devices are available at the coat check at no charge. Large-print programs are available; please ask an usher. For ASL or audio description on selected performances, please contact access@vivoperformingarts.org at least one week in advance."] },

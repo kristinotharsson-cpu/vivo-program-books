@@ -57,7 +57,33 @@
       .then(function (results) {
         var rec = results[0];
         var data = (rec && rec.data && rec.data.sections) ? rec.data : results[1];
+        var shell = results[1];
         var shared = results[2];
+        // Venue is canonical scheduling data — always take it from the shell JSON so venue
+        // changes propagate even to already-saved (cached) program records.
+        try {
+          if (rec && shell && shell.cover) {
+            data.cover = Object.assign({}, data.cover, { venue: shell.cover.venue });
+            var shInfo = (shell.sections || []).filter(function (s) { return s.kind === 'info'; })[0];
+            var dInfo = (data.sections || []).filter(function (s) { return s.kind === 'info'; })[0];
+            if (shInfo && dInfo) {
+              var shV = (shInfo.sections || []).filter(function (x) { return /^venue$/i.test((x.h || '').trim()); })[0];
+              var dV = (dInfo.sections || []).filter(function (x) { return /^venue$/i.test((x.h || '').trim()); })[0];
+              if (shV && dV) dV.body = shV.body;
+            }
+          }
+        } catch (e) {}
+        // Resolve supporters for THIS program's date: an edit stamped on an earlier- or
+        // same-dated program applies here; edits from later programs do not.
+        try {
+          if (shared && window.VivoStore && window.VivoStore.resolveVersion) {
+            var dnum = window.VivoStore.parseDate(data.cover && data.cover.date);
+            if (shared.supporters) shared = Object.assign({}, shared, { supporters: window.VivoStore.resolveVersion("supporters", shared.supporters, dnum) });
+            var sb = { staff: shared.staff, boards: shared.boards };
+            var rsb = window.VivoStore.resolveVersion("staffBoard", sb, dnum);
+            if (rsb) shared = Object.assign({}, shared, { staff: rsb.staff, boards: rsb.boards });
+          }
+        } catch (e) {}
         if (shared) window.VIVO_SHARED = shared;
         window.PROGRAM_DATA = data;
         document.title = data.cover.title + ' — Vivo Performing Arts';
