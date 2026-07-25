@@ -33,6 +33,71 @@
       }
     },
     {
+      "id": "program",
+      "title": "Today's Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "Opens Jazz Festival. Co-pro with MOS. Trio of nearly four decades.",
+      "pieces": [
+        {
+          "composer": "Program details",
+          "work": "To be announced from the stage.",
+          "meta": ""
+        }
+      ]
+    },
+    {
+      "id": "notes",
+      "title": "Program Notes",
+      "kind": "notes",
+      "eyebrow": "About the Music",
+      "sections": [
+        {
+          "h": "",
+          "body": [
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "id": "song-texts",
+      "title": "Song Texts",
+      "kind": "songtexts",
+      "eyebrow": "Follow Along",
+      "lead": "",
+      "songs": []
+    },
+    {
+      "id": "bios",
+      "title": "About the Artist",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "fred-hersch",
+          "name": "Fred Hersch",
+          "role": "piano / leader",
+          "initials": "FH",
+          "photoSrc": "",
+          "body": [
+            "FRED HERSCH piano DREW GRESS bass JOEY BARON drums Hailed by The New Yorker as \"a living legend,\" Fred Hersch and his trio of nearly four decades move between stillness and surprise, luminous lyricism and fearless exploration. The Museum of Science suits an artist inspired by neuroscience: Hersch's multimedia opus My Coma Dreams was drawn from dreams he remembered after surviving a two-month coma. In a hall that will showcase Hersch's subtlety and sensitivity, come ready to listen closely to an outstanding pianist and composer."
+          ],
+          "website": "https://fredhersch.com"
+        }
+      ],
+      "photoLayout": "thumbnail",
+      "archive": {
+        "tag": "Last with us",
+        "when": "",
+        "work": "",
+        "venue": "",
+        "body": [
+          ""
+        ]
+      }
+    },
+    {
       "id": "performance-sponsor",
       "title": "Performance Sponsor",
       "kind": "performance-sponsor",
@@ -51,73 +116,15 @@
       "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
     },
     {
-      "id": "program",
-      "title": "Today's Program",
-      "kind": "program",
-      "eyebrow": "The Running Order",
-      "lead": "Opens Jazz Festival. Co-pro with MOS. Trio of nearly four decades.",
-      "pieces": [
-        {
-          "composer": "Program details",
-          "work": "To be announced from the stage.",
-          "meta": ""
-        }
-      ]
-    },
-    {
-      "id": "artist",
-      "title": "Cast & Creative",
-      "kind": "cast",
-      "eyebrow": "On Stage Tonight",
-      "cast": [
-        {
-          "role": "piano",
-          "name": "Fred Hersch"
-        },
-        {
-          "role": "bass",
-          "name": "Drew Gress"
-        },
-        {
-          "role": "drums",
-          "name": "Joey Baron"
-        }
-      ],
-      "creative": []
-    },
-    {
-      "id": "bios",
-      "title": "About the Artists",
-      "kind": "bios",
-      "eyebrow": "Tonight's Artist",
-      "bios": [
-        {
-          "id": "fred-hersch",
-          "name": "Fred Hersch",
-          "role": "piano / leader",
-          "initials": "FH",
-          "photoSrc": "",
-          "body": [
-            "FRED HERSCH piano DREW GRESS bass JOEY BARON drums Hailed by The New Yorker as \"a living legend,\" Fred Hersch and his trio of nearly four decades move between stillness and surprise, luminous lyricism and fearless exploration. The Museum of Science suits an artist inspired by neuroscience: Hersch's multimedia opus My Coma Dreams was drawn from dreams he remembered after surviving a two-month coma. In a hall that will showcase Hersch's subtlety and sensitivity, come ready to listen closely to an outstanding pianist and composer."
-          ],
-          "website": "https://fredhersch.com"
-        }
-      ]
-    },
-    {
-      "id": "upcoming",
-      "title": "Upcoming",
-      "kind": "events",
-      "eyebrow": "Coming Up at Vivo Performing Arts",
-      "lead": "Explore the rest of the season at [vivoperformingarts.org](https://vivoperformingarts.org).",
-      "auto": true,
-      "count": 4
-    },
-    {
-      "id": "staff-board",
-      "title": "Staff & Board",
-      "kind": "staff-board",
-      "eyebrow": "Vivo Performing Arts"
+      "id": "cta-ad",
+      "title": "Subscribe",
+      "kind": "promo",
+      "layout": "cta",
+      "heading": "Subscribe & Save 25%",
+      "body": "",
+      "buttonLabel": "Packages",
+      "buttonUrl": "https://www.vivoperformingarts.org/",
+      "buttonColor": "cream"
     },
     {
       "id": "supporters",
@@ -126,8 +133,23 @@
       "eyebrow": "With Gratitude"
     },
     {
+      "id": "staff-board",
+      "title": "Staff & Board",
+      "kind": "staff-board",
+      "eyebrow": "Vivo Performing Arts"
+    },
+    {
+      "id": "upcoming",
+      "title": "Next at Vivo",
+      "kind": "events",
+      "eyebrow": "Coming Up at Vivo Performing Arts",
+      "lead": "Explore the rest of the season at [vivoperformingarts.org](https://vivoperformingarts.org).",
+      "auto": true,
+      "count": 4
+    },
+    {
       "id": "info",
-      "title": "Hall Info",
+      "title": "Audience Information",
       "kind": "info",
       "eyebrow": "Visitor Info",
       "sections": [

@@ -34,6 +34,71 @@
       }
     },
     {
+      "id": "program",
+      "title": "Today's Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "Solo show in support of forthcoming album. Rachmaninoff to Brahms to Beatles to B.B. King.",
+      "pieces": [
+        {
+          "composer": "Program details",
+          "work": "To be announced from the stage.",
+          "meta": ""
+        }
+      ]
+    },
+    {
+      "id": "notes",
+      "title": "Program Notes",
+      "kind": "notes",
+      "eyebrow": "About the Music",
+      "sections": [
+        {
+          "h": "",
+          "body": [
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "id": "song-texts",
+      "title": "Song Texts",
+      "kind": "songtexts",
+      "eyebrow": "Follow Along",
+      "lead": "",
+      "songs": []
+    },
+    {
+      "id": "bios",
+      "title": "About the Artist",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "charles-yang",
+          "name": "Charles Yang",
+          "role": "violin / vocals",
+          "initials": "CY",
+          "photoSrc": "",
+          "body": [
+            "Grammy Award-winning violinist and vocalist Charles Yang—best known as a member of the genre-defying trio Time for Three—returns to Boston in support of his forthcoming album. Described by The Boston Globe as playing “classical violin with the charisma of a rockstar,” Yang fuses countless musical influences—from Rachmaninoff and Brahms to The Beatles and B.B. King—into one multifaceted musical experience. Full of virtuosity and heart, Yang shares the songs that shaped his journey and musical vision in a moving, deeply original show that celebrates creativity and the limitless possibilities of music."
+          ],
+          "website": "https://www.charlesyangmusic.com/"
+        }
+      ],
+      "photoLayout": "thumbnail",
+      "archive": {
+        "tag": "Last with us",
+        "when": "",
+        "work": "",
+        "venue": "",
+        "body": [
+          ""
+        ]
+      }
+    },
+    {
       "id": "performance-sponsor",
       "title": "Performance Sponsor",
       "kind": "performance-sponsor",
@@ -52,65 +117,15 @@
       "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
     },
     {
-      "id": "program",
-      "title": "Today's Program",
-      "kind": "program",
-      "eyebrow": "The Running Order",
-      "lead": "Solo show in support of forthcoming album. Rachmaninoff to Brahms to Beatles to B.B. King.",
-      "pieces": [
-        {
-          "composer": "Program details",
-          "work": "To be announced from the stage.",
-          "meta": ""
-        }
-      ]
-    },
-    {
-      "id": "artist",
-      "title": "Cast & Creative",
-      "kind": "cast",
-      "eyebrow": "On Stage Tonight",
-      "cast": [
-        {
-          "role": "violin / vocals",
-          "name": "Charles Yang"
-        }
-      ],
-      "creative": []
-    },
-    {
-      "id": "bios",
-      "title": "About the Artists",
-      "kind": "bios",
-      "eyebrow": "Tonight's Artist",
-      "bios": [
-        {
-          "id": "charles-yang",
-          "name": "Charles Yang",
-          "role": "violin / vocals",
-          "initials": "CY",
-          "photoSrc": "",
-          "body": [
-            "Grammy Award-winning violinist and vocalist Charles Yang—best known as a member of the genre-defying trio Time for Three—returns to Boston in support of his forthcoming album. Described by The Boston Globe as playing “classical violin with the charisma of a rockstar,” Yang fuses countless musical influences—from Rachmaninoff and Brahms to The Beatles and B.B. King—into one multifaceted musical experience. Full of virtuosity and heart, Yang shares the songs that shaped his journey and musical vision in a moving, deeply original show that celebrates creativity and the limitless possibilities of music."
-          ],
-          "website": "https://www.charlesyangmusic.com/"
-        }
-      ]
-    },
-    {
-      "id": "upcoming",
-      "title": "Upcoming",
-      "kind": "events",
-      "eyebrow": "Coming Up at Vivo Performing Arts",
-      "lead": "Explore the rest of the season at [vivoperformingarts.org](https://vivoperformingarts.org).",
-      "auto": true,
-      "count": 4
-    },
-    {
-      "id": "staff-board",
-      "title": "Staff & Board",
-      "kind": "staff-board",
-      "eyebrow": "Vivo Performing Arts"
+      "id": "cta-ad",
+      "title": "Subscribe",
+      "kind": "promo",
+      "layout": "cta",
+      "heading": "Subscribe & Save 25%",
+      "body": "",
+      "buttonLabel": "Packages",
+      "buttonUrl": "https://www.vivoperformingarts.org/",
+      "buttonColor": "cream"
     },
     {
       "id": "supporters",
@@ -119,8 +134,23 @@
       "eyebrow": "With Gratitude"
     },
     {
+      "id": "staff-board",
+      "title": "Staff & Board",
+      "kind": "staff-board",
+      "eyebrow": "Vivo Performing Arts"
+    },
+    {
+      "id": "upcoming",
+      "title": "Next at Vivo",
+      "kind": "events",
+      "eyebrow": "Coming Up at Vivo Performing Arts",
+      "lead": "Explore the rest of the season at [vivoperformingarts.org](https://vivoperformingarts.org).",
+      "auto": true,
+      "count": 4
+    },
+    {
       "id": "info",
-      "title": "Hall Info",
+      "title": "Audience Information",
       "kind": "info",
       "eyebrow": "Visitor Info",
       "sections": [

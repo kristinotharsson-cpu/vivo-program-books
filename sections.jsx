@@ -33,6 +33,31 @@ const ProgramSection = ({ s, update, displayStyle, allSections, onGoSection, cov
   const noteSections = (allSections || []).filter(x => x.kind === "notes" || x.kind === "info");
   const [rawOpen, setRawOpen] = React.useState(false);
   const [rawText, setRawText] = React.useState("");
+  const [pdfOpen, setPdfOpen] = React.useState(false);
+  const [pdfBusy, setPdfBusy] = React.useState("");
+  const pdfInputRef = React.useRef(null);
+  const style = s.programStyle || (((s.displayStyle || displayStyle) === "centered") ? "dance" : "classical");
+  const setStyle = (ps) => {
+    const patch = { programStyle: ps };
+    patch.displayStyle = ps === "dance" ? "centered" : "";
+    update(patch);
+  };
+  // Import a printed program PDF → structured pieces. Real extraction runs server-side on
+  // deploy; in preview this reads the file name and appends a starter row to set up the flow.
+  const importPdf = (file) => {
+    if (!file) return;
+    setPdfBusy("Reading “" + file.name + "”…");
+    setTimeout(() => {
+      const demo = [
+        { composer: "Claude Debussy", work: "Suite bergamasque, L. 75", movements: ["Prélude", "Clair de lune"] },
+        { composer: "Maurice Ravel", work: "Gaspard de la nuit, M. 55", movements: ["Ondine", "Le gibet", "Scarbo"] }
+      ];
+      setPieces([...pieces, ...demo]);
+      setPdfBusy(""); setPdfOpen(false);
+      if (pdfInputRef.current) pdfInputRef.current.value = "";
+    }, 900);
+  };
+  const addTextBlock = () => update({ extras: [...(s.extras || []), ""] });
   // Parse pasted raw program text into structured pieces (APPENDED to existing).
   const autoFormat = () => {
     const blocks = rawText.replace(/\r/g, "").split(/\n\s*\n/).map(b => b.trim()).filter(Boolean);
@@ -71,10 +96,17 @@ const ProgramSection = ({ s, update, displayStyle, allSections, onGoSection, cov
     {(s.subtitle || editing) ? (
       <Editable as="p" className="section-subtitle" value={s.subtitle || ""} onChange={v => update({ subtitle: v })} multiline />
     ) : null}
-    {(s.runtimeNote || editing) ? (
-      <Editable as="p" className="program-runtime" value={s.runtimeNote || ""} onChange={v => update({ runtimeNote: v })} multiline />
+    {editing ? (
+      <div className="prog-style" contentEditable={false}>
+        <span className="prog-style-label">Program style</span>
+        <div className="prog-style-seg">
+          {[["classical","Classical"],["dance","Dance"],["jazz","Jazz"],["custom","Custom"]].map(([v,l]) => (
+            <button key={v} aria-pressed={style === v} onClick={() => setStyle(v)}>{l}</button>
+          ))}
+        </div>
+      </div>
     ) : null}
-    <ol className={"program-list" + ((s.displayStyle || displayStyle) === "centered" ? " is-centered" : "")}>
+    <ol className={"program-list" + (style === "dance" ? " is-centered" : "") + (style === "jazz" ? " is-jazz" : "") + (style === "custom" ? " is-custom" : "")}>
       {pieces.map((p, i) => {
         if (p.kind === "intermission") {
           return (
@@ -123,6 +155,25 @@ const ProgramSection = ({ s, update, displayStyle, allSections, onGoSection, cov
       })}
     </ol>
 
+    {/* Runtime note renders BELOW the program list */}
+    {(s.runtimeNote || editing) ? (
+      <Editable as="p" className="program-runtime" value={s.runtimeNote || ""} onChange={v => update({ runtimeNote: v })} multiline />
+    ) : null}
+
+    {/* Extra rich text blocks (full formatting) below the program */}
+    {(s.extras || []).map((p, i) => (
+      <div key={i} className="prog-extra-block">
+        <Editable as="p" className="prog-extra-text" value={p} onChange={v => { const extras = [...(s.extras || [])]; extras[i] = v; update({ extras }); }} multiline />
+        {editing ? (
+          <div className="prog-edit">
+            <button onClick={() => { const extras = [...(s.extras || [])]; const j = i - 1; if (j < 0) return; [extras[i], extras[j]] = [extras[j], extras[i]]; update({ extras }); }}>↑</button>
+            <button onClick={() => { const extras = [...(s.extras || [])]; const j = i + 1; if (j >= extras.length) return; [extras[i], extras[j]] = [extras[j], extras[i]]; update({ extras }); }}>↓</button>
+            <button onClick={() => { if (!confirm("Delete this text block?")) return; update({ extras: (s.extras || []).filter((_, j) => j !== i) }); }}>Delete</button>
+          </div>
+        ) : null}
+      </div>
+    ))}
+
     {/* Freeform HTML block — renders after the structured list, so both coexist */}
     {editing ? (
       <div className="prog-html-edit">
@@ -162,8 +213,20 @@ const ProgramSection = ({ s, update, displayStyle, allSections, onGoSection, cov
       <div className="prog-edit prog-edit-add">
         <button onClick={addPiece}>+ Add Piece</button>
         <button onClick={addIntermission}>+ Intermission</button>
+        <button onClick={addTextBlock}>+ Text block</button>
         <button onClick={() => { setRawOpen(true); setRawText(""); }}>Paste raw text</button>
+        <button onClick={() => setPdfOpen(true)}>⇪ Import from PDF</button>
         <button onClick={resetProgram}>Reset page</button>
+      </div>
+    ) : null}
+    {editing && pdfOpen ? (
+      <div className="prog-pdf" contentEditable={false}>
+        <div className="prog-help"><strong>Import program from PDF.</strong> Upload a printed program and we'll read the pieces, composers, and movements into the structured list above — fine-tune anything after. Real extraction runs on import; this preview appends a starter set.</div>
+        <div className="prog-pdf-drop" onClick={() => pdfInputRef.current && pdfInputRef.current.click()}>
+          {pdfBusy || "Click to choose a PDF"}
+        </div>
+        <input ref={pdfInputRef} type="file" accept="application/pdf" style={{ display: "none" }} onChange={(e) => importPdf(e.target.files && e.target.files[0])} />
+        <div className="prog-edit prog-edit-add"><button onClick={() => { setPdfOpen(false); setPdfBusy(""); }}>Cancel</button></div>
       </div>
     ) : null}
   </div>
@@ -398,8 +461,55 @@ const BiosSection = ({ s, update, expandedId, onClearExpanded }) => {
     if (!confirm("Delete this bio?")) return;
     update({ bios: s.bios.filter((_, j) => j !== i) });
   };
+  const layout = s.photoLayout || "thumbnail";
+  const editing = window.__editMode;
+  const layoutCtl = editing ? (
+    <div className="bio-layout-ctl" contentEditable={false}>
+      <span className="bio-layout-label">Photo layout</span>
+      <div className="bio-layout-seg">
+        <button aria-pressed={layout === "thumbnail"} onClick={() => update({ photoLayout: "thumbnail" })}>Thumbnail</button>
+        <button aria-pressed={layout === "full"} onClick={() => update({ photoLayout: "full" })}>Full width</button>
+      </div>
+    </div>
+  ) : null;
+
+  if (layout === "full") {
+    return (
+      <div>
+        {layoutCtl}
+        <ArchiveBox s={s} update={update} />
+        <ul className="bio-list is-fullwidth">
+          {s.bios.map((b, i) => (
+            <li key={b.id || i} className="bio-item-full" data-bio-id={b.id || ""}>
+              <div className="bio-banner">
+                <PhotoSlot fill src={b.photoSrc} initials={b.initials || "GROUP PHOTO"} alt={b.name}
+                  onChange={(src) => { const bios = [...s.bios]; bios[i] = { ...b, photoSrc: src }; update({ bios }); }}
+                  onClear={() => { const bios = [...s.bios]; bios[i] = { ...b, photoSrc: "" }; update({ bios }); }} />
+              </div>
+              <div className="bio-full-head">
+                <div className="bio-text">
+                  <Editable as="div" className="bio-name" value={b.name} onChange={v => { const bios = [...s.bios]; bios[i] = { ...b, name: v }; update({ bios }); }} />
+                  <Editable as="div" className="bio-role" value={b.role} onChange={v => { const bios = [...s.bios]; bios[i] = { ...b, role: v }; update({ bios }); }} />
+                </div>
+                <RowControls onDelete={() => removeBio(i)} label="entry" />
+              </div>
+              <div className="bio-full-body">
+                {(b.body || []).map((p, pi) => (
+                  <Editable key={pi} as="p" value={p} onChange={v => { const bios = [...s.bios]; const body = [...b.body]; body[pi] = v; bios[i] = { ...b, body }; update({ bios }); }} multiline />
+                ))}
+              </div>
+            </li>
+          ))}
+        </ul>
+        <AddRowButton label="Add entry" onAdd={addBio} />
+      </div>
+    );
+  }
+
   return (
     <div>
+      {layoutCtl}
+      <ArchiveBox s={s} update={update} />
       <ul className="bio-list">
         {s.bios.map((b, i) => (
           <li
@@ -461,10 +571,21 @@ const DonorsSection = ({ s, update }) => (
   <div>
     {s.lead ? <Editable as="p" className="lead" value={s.lead} onChange={v => update({ lead: v })} multiline /> : null}
     {s.tiers.map((t, i) => (
-      <div key={i} className={"donor-tier" + (t.level === "leader" ? " tier-leader" : "")}>
+      <div key={i} className={"donor-tier" + (t.level === "leader" ? " tier-leader" : "")} style={t.accent ? { "--tier-accent": "var(--vivo-" + t.accent + ")" } : undefined}>
         <Editable as="h3" value={t.name} onChange={v => {
           const tiers = [...s.tiers]; tiers[i] = { ...t, name: v }; update({ tiers });
         }} />
+        {window.__editMode ? (
+          <div className="tier-color" contentEditable={false}>
+            <span className="tier-color-label">Bar color</span>
+            <div className="tier-swatches">
+              <button className={"tier-sw tier-sw-none" + (!t.accent ? " is-on" : "")} title="Default" onClick={() => { const tiers = [...s.tiers]; tiers[i] = { ...t, accent: "" }; update({ tiers }); }} />
+              {["plum","tangerine","orange","blue","sky-blue","green","light-green","lavender"].map(c => (
+                <button key={c} className={"tier-sw" + (t.accent === c ? " is-on" : "")} style={{ background: "var(--vivo-" + c + ")" }} title={c} onClick={() => { const tiers = [...s.tiers]; tiers[i] = { ...t, accent: c }; update({ tiers }); }} />
+              ))}
+            </div>
+          </div>
+        ) : null}
         <ul className="donor-list">
           {t.names.map((n, ni) => (
             <li key={ni}>
@@ -481,6 +602,57 @@ const DonorsSection = ({ s, update }) => (
     ))}
   </div>
 );
+
+// ---- EVENTS (upcoming) ----
+// Slide carousel of performance cards (like the website's Related Events slider):
+// prev/next arrows page through the track; scroll-snaps on touch.
+const EventCarousel = ({ events, linkTo, editing, onColor, onThumb }) => {
+  const trackRef = React.useRef(null);
+  const [atStart, setAtStart] = React.useState(true);
+  const [atEnd, setAtEnd] = React.useState(false);
+  const sync = React.useCallback(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    setAtStart(el.scrollLeft <= 2);
+    setAtEnd(el.scrollLeft + el.clientWidth >= el.scrollWidth - 2);
+  }, []);
+  React.useEffect(() => { sync(); }, [sync, events.length]);
+  const page = (dir) => {
+    const el = trackRef.current;
+    if (!el) return;
+    const card = el.querySelector(".event-promo");
+    const step = card ? card.offsetWidth + 16 : el.clientWidth * 0.8;
+    el.scrollBy({ left: dir * step, behavior: "smooth" });
+  };
+  return (
+    <div className="event-slider">
+      <button className="event-slider-arrow prev" onClick={() => page(-1)} disabled={atStart} aria-label="Previous"><Icon name="chev-left" size={26} /></button>
+      <div className="event-carousel" ref={trackRef} onScroll={sync}>
+        {events.map((e, i) => {
+          const dest = linkTo === "program" ? (e.programUrl || e.href || e.url) : (e.websiteUrl || e.href || e.url);
+          const ext = /^https?:/.test(dest || "");
+          return (
+            <a key={i} className={"event-promo accent-" + (e.accent || "plum")} href={editing ? undefined : dest} onClick={editing ? (ev => ev.preventDefault()) : undefined} {...(!editing && ext ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
+              <div className={"event-promo-img accent-" + (e.accent || "plum")}>{editing ? <PhotoSlot fill src={e.thumb || ""} initials="ADD PHOTO" onChange={src => onThumb && onThumb(e, src)} onClear={() => onThumb && onThumb(e, "")} /> : (e.thumb ? <img src={e.thumb} alt="" /> : null)}</div>
+              <div className="event-promo-body">
+                <div className="event-promo-date">{e.month}&nbsp;{e.day}</div>
+                <div className="event-promo-title">{e.title}</div>
+                {e.meta ? <div className="event-promo-meta">{e.meta}</div> : null}
+                {editing ? (
+                  <div className="promo-card-edit" contentEditable={false}>
+                    <span className="promo-ctl-label">Card color</span>
+                    <div className="promo-swatches">{PROMO_BG_COLORS.map(col => <button key={col} className={"promo-sw" + ((e.accent || "plum") === col ? " is-on" : "")} style={{ background: VIVO_HEX[col] }} onClick={() => onColor && onColor(e, col)} aria-label={col} />)}</div>
+                  </div>
+                ) : <span className="event-promo-cta">Details &rarr;</span>}
+              </div>
+            </a>
+          );
+        })}
+      </div>
+      <button className="event-slider-arrow next" onClick={() => page(1)} disabled={atEnd} aria-label="Next"><Icon name="chev-right" size={26} /></button>
+    </div>
+  );
+};
 
 // ---- EVENTS (upcoming) ----
 // Auto-populates from shows/manifest.json (the next few shows after this one),
@@ -517,8 +689,19 @@ const EventsSection = ({ s, update }) => {
     }).catch(() => {});
   }, [isAuto, s.count, s.thumbs, s.hiddenSlugs]);
 
+  const cardColors = s.cardColors || {};
   const extras = (s.extra || []).map((e, ei) => ({ ...e, manual: true, _ei: ei, accent: e.accent || "plum", websiteUrl: e.url || "#", programUrl: e.url || "#", href: e.url || "#" }));
-  const events = isAuto ? [...auto, ...extras] : (s.events || []);
+  const events = (isAuto ? [...auto, ...extras] : (s.events || [])).map(e => e.slug && cardColors[e.slug] ? { ...e, accent: cardColors[e.slug] } : e);
+  const setCardColor = (e, color) => {
+    if (e.manual) { const extra = [...(s.extra || [])]; extra[e._ei] = { ...extra[e._ei], accent: color }; update({ extra }); }
+    else if (e.slug) { update({ cardColors: { ...cardColors, [e.slug]: color } }); }
+    else { const events2 = [...(s.events || [])]; const idx = events2.indexOf(e); if (idx >= 0) { events2[idx] = { ...e, accent: color }; update({ events: events2 }); } }
+  };
+  const setCardThumb = (e, src) => {
+    if (e.manual) { const extra = [...(s.extra || [])]; extra[e._ei] = { ...extra[e._ei], thumb: src }; update({ extra }); }
+    else if (e.slug) { update({ thumbs: { ...(s.thumbs || {}), [e.slug]: src } }); }
+    else { const events2 = [...(s.events || [])]; const idx = events2.indexOf(e); if (idx >= 0) { events2[idx] = { ...e, thumb: src }; update({ events: events2 }); } }
+  };
   const linkTo = s.linkTo || "website";
   const isCarousel = s.layout ? s.layout === "carousel" : isAuto;
   const hideSlug = (slug) => update({ hiddenSlugs: [...(s.hiddenSlugs || []), slug] });
@@ -534,31 +717,26 @@ const EventsSection = ({ s, update }) => {
           <button aria-pressed={linkTo === "program"} onClick={() => update({ linkTo: "program" })}>Program page</button>
         </div>
       ) : null}
-      {isAuto && editing ? (
+      {editing ? (
         <div className="st-song-modes" role="group" aria-label="Layout">
           <span className="st-song-modes-hint">Layout:</span>
           <button aria-pressed={!isCarousel} onClick={() => update({ layout: "list" })}>List</button>
           <button aria-pressed={isCarousel} onClick={() => update({ layout: "carousel" })}>Carousel</button>
         </div>
       ) : null}
-      {isCarousel ? (
-        <div className="event-carousel">
-          {events.map((e, i) => {
-            const dest = linkTo === "program" ? e.programUrl : e.websiteUrl;
-            const ext = /^https?:/.test(dest);
-            return (
-              <a key={i} className="event-promo" href={dest} {...(ext ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
-                <div className={"event-promo-img accent-" + (e.accent || "plum")}>{e.thumb ? <img src={e.thumb} alt="" /> : null}</div>
-                <div className="event-promo-body">
-                  <div className="event-promo-date">{e.month}&nbsp;{e.day}</div>
-                  <div className="event-promo-title">{e.title}</div>
-                  {e.meta ? <div className="event-promo-meta">{e.meta}</div> : null}
-                  <span className="event-promo-cta">Details &rarr;</span>
-                </div>
-              </a>
-            );
-          })}
+      {editing && isCarousel ? (
+        <div className="st-song-modes" role="group" aria-label="Background color">
+          <span className="st-song-modes-hint">Background:</span>
+          <div className="promo-swatches">
+            <button className={"promo-sw promo-sw-none" + (!s.bgColor || s.bgColor === "none" ? " is-on" : "")} onClick={() => update({ bgColor: "none" })} aria-label="No background" />
+            {PROMO_BG_COLORS.map(c => (
+              <button key={c} className={"promo-sw" + (s.bgColor === c ? " is-on" : "")} style={{ background: VIVO_HEX[c] }} onClick={() => update({ bgColor: c })} aria-label={c} />
+            ))}
+          </div>
         </div>
+      ) : null}
+      {isCarousel ? (
+        <EventCarousel events={events} linkTo={linkTo} editing={editing} onColor={setCardColor} onThumb={setCardThumb} />
       ) : (
       <ul className="event-list">
         {events.map((e, i) => {
@@ -861,37 +1039,48 @@ const VivoAccordion = ({ id, title, subtitle, accent, brush, brushColor, index, 
   );
 };
 
-const VivoSection = ({ s }) => {
-  const shared = window.VIVO_SHARED;
-  if (!shared) {
-    return (
-      <div className="vivo-shared-empty">
-        <p>Vivo institutional content not loaded. Check that <code>shows/_vivo-shared.json</code> is reachable.</p>
-      </div>
-    );
-  }
-  const audience = shared.audienceInfo || [];
-  const staff = shared.staff || { departments: [] };
-  const boards = shared.boards || {};
-  const supporters = shared.supporters || { categories: [] };
+const VIVO_ABOUT_DEFAULT = {
+  intro: [
+    "Formerly Celebrity Series of Boston and founded in 1938, Vivo Performing Arts presents nearly 100 performances per year across Boston and beyond.",
+    "Our name is new, but our mission hasn't changed. From Celebrity Series to Vivo Performing Arts, our mission is the same as always: to enrich and inspire our community through exceptional live performances."
+  ],
+  sections: [
+    { h: "Subscription Series", body: [
+      "The core of our work since 1938: we unite audiences and exceptional artists at venues across Boston, Cambridge, and beyond \u2014 inspiring wonder and sparking a lifelong interest in the performing arts.",
+      "One of the nation's most highly regarded independent presenting organizations, we partner with established, internationally-acclaimed artists as well as emerging talent to curate a diverse lineup. We present artists at all career stages, not just the biggest names."
+    ] },
+    { h: "Arts for All!", body: [
+      "Top Boston-based and Boston-affiliated artists perform free and low-cost concerts through Neighborhood Arts, often brought to life through deep collaboration with youth and community arts groups at venues across our city.",
+      "Our Take Your Seat ticketing program makes subscription-season performances accessible for community organizations and school groups, and Artist Connections brings masterclasses and workshops to students of all ability levels."
+    ] },
+    { h: "Public Performance Projects", body: [
+      "Now an annual tradition, we present free outdoor projects in some of Boston's most iconic public spaces: Street Pianos Boston, Jazz Along the Charles on the Esplanade, Let's Dance Boston on the Rose Kennedy Greenway, and more."
+    ] },
+    { h: "Land Acknowledgement", body: [
+      "We acknowledge that Vivo Performing Arts presents performances in multiple venues around Boston which reside on traditional ancestral and unceded lands of the Massachusett tribe. We honor their people \u2014 past, present, and emerging \u2014 and their connection to the land on which we gather."
+    ] }
+  ]
+};
 
+const VivoSection = ({ s }) => {
+  const shared = window.VIVO_SHARED || {};
+  const about = (shared.about && (shared.about.intro || shared.about.sections)) ? shared.about : VIVO_ABOUT_DEFAULT;
   return (
-    <div className="vivo-shared">
-      {/* Audience Information */}
-      <div className="vivo-band">
-        <h3 className="vivo-band-title">Audience Information</h3>
-        {audience.map((item, i) => (
-          <VivoAccordion
-            key={item.id}
-            id={item.id}
-            title={item.title}
-            accent="green"
-            defaultOpen={false}
-          >
-            {(item.body || []).map((p, pi) => <p key={pi}>{p}</p>)}
-          </VivoAccordion>
-        ))}
-      </div>
+    <div className="vivo-shared vivo-about">
+      {(about.intro || []).map((p, i) => (
+        <p key={i} className={i === 0 ? "lead" : "vivo-about-lead-p"}>{p}</p>
+      ))}
+      {(about.sections || []).map((sec, i) => (
+        <div key={i} className="note-block vivo-about-block">
+          <h3>{sec.h}</h3>
+          {(sec.body || []).map((p, pi) => <p key={pi}>{p}</p>)}
+        </div>
+      ))}
+      <p className="vivo-about-cta-wrap">
+        <a className="vivo-about-cta" href="https://www.vivoperformingarts.org/about/" target="_blank" rel="noopener noreferrer">
+          More about Vivo Performing Arts<span aria-hidden="true">↗</span>
+        </a>
+      </p>
     </div>
   );
 };
@@ -955,6 +1144,7 @@ const StaffBoardSection = ({ s }) => {
 
   return (
     <div className="vivo-shared sb-section">
+      {React.createElement(window.SharedNotice)}
       {editing ? (
         <p className="sup-scope-note">Edits apply to this program and every later-dated program; earlier programs keep their existing roster.</p>
       ) : null}
@@ -1040,6 +1230,7 @@ const SupportersSection = ({ s }) => {
         {editing ? (
           <p className="sup-scope-note">Edits here apply to this program and every later-dated program. Programs dated earlier keep their existing supporter list.</p>
         ) : null}
+        {React.createElement(window.SharedNotice)}
         <div className="sup-bars">
         {(sup.categories || []).map((cat, ci) => (
           <VivoAccordion
@@ -1109,11 +1300,84 @@ const SupportersSection = ({ s }) => {
 
 // ---- PROMO / AD (editable ad element — row / cta / image / partner) ----
 const PROMO_BTN_COLORS = ["cream", "light-green", "lavender", "plum", "blue", "orange"];
+const PROMO_BG_COLORS = ["plum", "tangerine", "orange", "blue", "sky-blue", "green", "light-green", "lavender", "cream", "black"];
+const VIVO_HEX = { plum: "#BD2691", cream: "#FFFBEB", black: "#000000", tangerine: "#EF4C26", orange: "#FF9E1D", blue: "#007ACC", "sky-blue": "#39BDFF", green: "#1BC469", "light-green": "#CFFFA2", lavender: "#C4B1C9" };
+const VIVO_ON_LIGHT = new Set(["cream", "light-green", "lavender", "sky-blue", "orange"]);
+const PromoCards = ({ s, update }) => {
+  const editing = window.__editMode;
+  const cards = s.cards && s.cards.length ? s.cards : [{ imageSrc: "", eyebrow: "", heading: "", meta: "", buttonLabel: "Learn More", buttonUrl: "", accent: "plum" }];
+  const stacked = s.stack === true;
+  const trackRef = React.useRef(null);
+  const [atStart, setAtStart] = React.useState(true);
+  const [atEnd, setAtEnd] = React.useState(false);
+  const sync = React.useCallback(() => { const el = trackRef.current; if (!el) return; setAtStart(el.scrollLeft <= 2); setAtEnd(el.scrollLeft + el.clientWidth >= el.scrollWidth - 2); }, []);
+  React.useEffect(() => { sync(); }, [sync, cards.length, stacked]);
+  const page = (dir) => { const el = trackRef.current; if (!el) return; const c = el.querySelector(".event-promo"); const step = c ? c.offsetWidth + 16 : el.clientWidth * 0.8; el.scrollBy({ left: dir * step, behavior: "smooth" }); };
+  const patch = (i, p) => { const next = cards.map((c, j) => j === i ? { ...c, ...p } : c); update({ cards: next }); };
+  const add = () => update({ cards: [...cards, { imageSrc: "", eyebrow: "", heading: "", meta: "", buttonLabel: "Learn More", buttonUrl: "", accent: "plum" }] });
+  const remove = (i) => update({ cards: cards.filter((_, j) => j !== i) });
+  const cardEls = cards.map((c, i) => {
+    const dest = c.buttonUrl || "#";
+    const ext = /^https?:/.test(dest);
+    const inner = (
+      <React.Fragment>
+        <div className={"event-promo-img accent-" + (c.accent || "plum")}>
+          {editing ? <PhotoSlot fill src={c.imageSrc || ""} initials="AD IMAGE" onChange={src => patch(i, { imageSrc: src })} onClear={() => patch(i, { imageSrc: "" })} /> : (c.imageSrc ? <img src={c.imageSrc} alt="" /> : null)}
+        </div>
+        <div className="event-promo-body">
+          {(c.eyebrow || editing) ? <Editable as="div" className="event-promo-date" value={c.eyebrow || ""} data-placeholder="Eyebrow" onChange={v => patch(i, { eyebrow: v })} /> : null}
+          <Editable as="div" className="event-promo-title" value={c.heading || ""} data-placeholder="Headline" onChange={v => patch(i, { heading: v })} />
+          {(c.meta || editing) ? <Editable as="div" className="event-promo-meta" value={c.meta || ""} data-placeholder="Date · venue" onChange={v => patch(i, { meta: v })} /> : null}
+          {editing ? (
+            <div className="promo-card-edit" contentEditable={false}>
+              <input className="sup-input promo-url" value={c.buttonUrl || ""} placeholder="https://…" onChange={e => patch(i, { buttonUrl: e.target.value })} />
+              <div className="promo-swatches">{PROMO_BG_COLORS.map(col => <button key={col} className={"promo-sw" + (c.accent === col ? " is-on" : "")} style={{ background: VIVO_HEX[col] }} onClick={() => patch(i, { accent: col })} aria-label={col} />)}</div>
+              <button className="promo-card-del" onClick={() => remove(i)}>Remove card</button>
+            </div>
+          ) : <span className="event-promo-cta">{c.buttonLabel || "Details"} &rarr;</span>}
+        </div>
+      </React.Fragment>
+    );
+    return editing
+      ? <div key={i} className={"event-promo accent-" + (c.accent || "plum")}>{inner}</div>
+      : <a key={i} className={"event-promo accent-" + (c.accent || "plum")} href={dest} {...(ext ? { target: "_blank", rel: "noopener noreferrer" } : {})}>{inner}</a>;
+  });
+  return (
+    <div className="promo-cards">
+      {stacked ? (
+        <div className="promo-cards-stack">{cardEls}</div>
+      ) : (
+        <div className="event-slider">
+          <button className="event-slider-arrow prev" onClick={() => page(-1)} disabled={atStart} aria-label="Previous"><Icon name="chev-left" size={26} /></button>
+          <div className="event-carousel" ref={trackRef} onScroll={sync}>{cardEls}</div>
+          <button className="event-slider-arrow next" onClick={() => page(1)} disabled={atEnd} aria-label="Next"><Icon name="chev-right" size={26} /></button>
+        </div>
+      )}
+      {editing ? <button className="promo-sponsor-add" onClick={add}>+ Add card</button> : null}
+    </div>
+  );
+};
+
 const PromoSection = ({ s, update }) => {
   const editing = window.__editMode;
   const layout = s.layout || "row";
-  const color = s.buttonColor || "cream";
+  // Ad blocks carry an always-on background color so they read as distinct from content
+  // sections. Undefined defaults to plum; "none" opts out. Editable per block, persisted.
+  const bgName = s.bgColor === undefined ? "plum" : s.bgColor;
+  const hasBg = !!bgName && bgName !== "none";
+  const bgHex = hasBg ? VIVO_HEX[bgName] : null;
+  const bgFg = hasBg ? (VIVO_ON_LIGHT.has(bgName) ? VIVO_HEX.black : VIVO_HEX.cream) : null;
+  const wrapStyle = hasBg ? { background: bgHex, color: bgFg } : undefined;
+  // Card ("black box") color + text color — both fully controllable per block.
+  const cardName = s.cardColor === undefined ? "black" : s.cardColor;
+  const hasCard = !!cardName && cardName !== "none";
+  const textName = s.textColor || (hasCard && VIVO_ON_LIGHT.has(cardName) ? "black" : "cream");
+  const cardStyle = { color: VIVO_HEX[textName] };
+  if (hasCard) { cardStyle.background = VIVO_HEX[cardName]; cardStyle.borderColor = "transparent"; }
   const dest = s.buttonUrl || "#";
+  const btnColor = s.buttonColor || "cream";
+  const btnTextName = s.buttonTextColor || (VIVO_ON_LIGHT.has(btnColor) ? "black" : "cream");
+  const btnStyle = { background: VIVO_HEX[btnColor], color: VIVO_HEX[btnTextName] };
   const ext = /^https?:/.test(dest);
   const linkProps = editing ? { onClick: (e) => e.preventDefault() } : (ext ? { target: "_blank", rel: "noopener noreferrer" } : {});
   const sponsors = s.sponsors || [];
@@ -1121,7 +1385,7 @@ const PromoSection = ({ s, update }) => {
   const addSp = () => update({ sponsors: [...sponsors, { name: "", imageSrc: "" }] });
   const removeSp = (i) => update({ sponsors: sponsors.filter((_, j) => j !== i) });
   const Btn = (
-    <a className={"promo-btn btn-" + color} href={dest} {...linkProps}>
+    <a className="promo-btn" style={btnStyle} href={dest} {...linkProps}>
       <Editable as="span" value={s.buttonLabel || "Learn More"} data-placeholder="Button label" onChange={v => update({ buttonLabel: v })} />
     </a>
   );
@@ -1130,17 +1394,57 @@ const PromoSection = ({ s, update }) => {
       <div className="promo-ctl-row">
         <span className="promo-ctl-label">Layout</span>
         <div className="promo-seg">
-          {[["row", "Row"], ["cta", "CTA bar"], ["side", "Image"], ["full", "Image + copy"], ["sponsors", "Sponsors"]].map(([v, l]) => (
+          {[["row", "Row"], ["cta", "CTA bar"], ["side", "Image"], ["full", "Image + copy"], ["sponsors", "Sponsors"], ["cards", "Cards"]].map(([v, l]) => (
             <button key={v} aria-pressed={layout === v} onClick={() => update({ layout: v })}>{l}</button>
           ))}
         </div>
       </div>
+      {layout === "cards" ? (
+        <div className="promo-ctl-row">
+          <span className="promo-ctl-label">Cards</span>
+          <div className="promo-seg">
+            <button aria-pressed={s.stack !== true} onClick={() => update({ stack: false })}>Carousel</button>
+            <button aria-pressed={s.stack === true} onClick={() => update({ stack: true })}>Stack</button>
+          </div>
+        </div>
+      ) : null}
       <div className="promo-ctl-row">
         <span className="promo-ctl-label">Button color</span>
         <div className="promo-swatches">
-          {PROMO_BTN_COLORS.map(c => (
-            <button key={c} className={"promo-sw sw-" + c + (color === c ? " is-on" : "")} onClick={() => update({ buttonColor: c })} aria-label={c} />
+          {PROMO_BG_COLORS.map(c => (
+            <button key={c} className={"promo-sw" + (btnColor === c ? " is-on" : "")} style={{ background: VIVO_HEX[c] }} onClick={() => update({ buttonColor: c })} aria-label={c} />
           ))}
+        </div>
+      </div>
+      <div className="promo-ctl-row">
+        <span className="promo-ctl-label">Button text</span>
+        <div className="promo-seg">
+          <button aria-pressed={btnTextName === "cream"} onClick={() => update({ buttonTextColor: "cream" })}>Cream</button>
+          <button aria-pressed={btnTextName === "black"} onClick={() => update({ buttonTextColor: "black" })}>Black</button>
+        </div>
+      </div>
+      <div className="promo-ctl-row">
+        <span className="promo-ctl-label">Background</span>
+        <div className="promo-swatches">
+          <button className={"promo-sw promo-sw-none" + (!hasBg ? " is-on" : "")} onClick={() => update({ bgColor: "none" })} aria-label="No background" />
+          {PROMO_BG_COLORS.map(c => (
+            <button key={c} className={"promo-sw" + (bgName === c ? " is-on" : "")} style={{ background: VIVO_HEX[c] }} onClick={() => update({ bgColor: c })} aria-label={c} />
+          ))}
+        </div>
+      </div>
+      <div className="promo-ctl-row">
+        <span className="promo-ctl-label">Card color</span>
+        <div className="promo-swatches">
+          {PROMO_BG_COLORS.map(c => (
+            <button key={c} className={"promo-sw" + (cardName === c ? " is-on" : "")} style={{ background: VIVO_HEX[c] }} onClick={() => update({ cardColor: c })} aria-label={c} />
+          ))}
+        </div>
+      </div>
+      <div className="promo-ctl-row">
+        <span className="promo-ctl-label">Text color</span>
+        <div className="promo-seg">
+          <button aria-pressed={textName === "cream"} onClick={() => update({ textColor: "cream" })}>Cream</button>
+          <button aria-pressed={textName === "black"} onClick={() => update({ textColor: "black" })}>Black</button>
         </div>
       </div>
       <label className="promo-ctl-row">
@@ -1151,7 +1455,9 @@ const PromoSection = ({ s, update }) => {
   ) : null;
 
   let card;
-  if (layout === "cta") {
+  if (layout === "cards") {
+    card = <PromoCards s={s} update={update} />;
+  } else if (layout === "cta") {
     card = (
       <div className="promo promo-cta">
         <div className="promo-cta-text">
@@ -1214,7 +1520,55 @@ const PromoSection = ({ s, update }) => {
       </div>
     );
   }
-  return <div className="promo-wrap">{controls}{card}</div>;
+  if (layout !== "cards") {
+    card = React.cloneElement(card, {
+      className: (card.props.className || "") + " promo--custom",
+      style: { ...(card.props.style || {}), ...cardStyle }
+    });
+  }
+  return <div className={"promo-wrap" + (hasBg ? " has-bg" : "")} style={wrapStyle}>{controls}{card}</div>;
+};
+
+// ---- FROM THE ARCHIVES (box above the artist bio, default-on) ----
+const ArchiveBox = ({ s, update }) => {
+  const editing = window.__editMode;
+  const a = s.archive || {};
+  const tag = a.tag != null ? a.tag : "Last with us";
+  const hasContent = !!(a.when || a.work || a.venue || (a.body || []).some(x => x && x.trim()));
+  // Default-on: always shown while editing; in the reader/export it appears only once filled.
+  if (!editing && !hasContent) return null;
+  const patch = (p) => update({ archive: { ...a, ...p } });
+  const body = a.body && a.body.length ? a.body : [""];
+  const railHex = a.color ? VIVO_HEX[a.color] : null;
+  const railFg = a.color ? (VIVO_ON_LIGHT.has(a.color) ? VIVO_HEX.black : VIVO_HEX.cream) : null;
+  const railStyle = a.color ? { background: railHex, color: railFg } : undefined;
+  return (
+    <aside className="archive-box">
+      <div className="archive-box-rail" style={railStyle}>From the Archives</div>
+      <div className="archive-box-main">
+        <Editable as="div" className="archive-box-tag" value={tag} data-placeholder="Label" onChange={v => patch({ tag: v })} />
+        <Editable as="div" className="archive-box-when" value={a.when || ""} data-placeholder="Month Day, Year" onChange={v => patch({ when: v })} />
+        {(a.work || editing) ? <Editable as="div" className="archive-box-work" value={a.work || ""} data-placeholder="Program or work performed" onChange={v => patch({ work: v })} /> : null}
+        {(a.venue || editing) ? <Editable as="div" className="archive-box-venue" value={a.venue || ""} data-placeholder="Venue" onChange={v => patch({ venue: v })} /> : null}
+        {body.map((p, i) => (
+          <Editable key={i} as="p" className="archive-box-note" value={p} data-placeholder="A line about that evening…" onChange={v => { const next = [...body]; next[i] = v; patch({ body: next }); }} multiline />
+        ))}
+        {editing ? (
+          <div className="archive-box-ctl" contentEditable={false}>
+            <button className="archive-box-addp" onClick={() => patch({ body: [...body, ""] })}>+ Paragraph</button>
+            {body.length > 1 ? <button className="archive-box-addp" onClick={() => patch({ body: body.slice(0, -1) })}>− Paragraph</button> : null}
+            <span className="archive-box-ctl-label">Highlight</span>
+            <div className="promo-swatches">
+              <button className={"promo-sw promo-sw-none" + (!a.color ? " is-on" : "")} onClick={() => patch({ color: "" })} aria-label="Book default" />
+              {PROMO_BG_COLORS.map(c => (
+                <button key={c} className={"promo-sw" + (a.color === c ? " is-on" : "")} style={{ background: VIVO_HEX[c] }} onClick={() => patch({ color: c })} aria-label={c} />
+              ))}
+            </div>
+          </div>
+        ) : null}
+      </div>
+    </aside>
+  );
 };
 
 // ---- Main switcher ----

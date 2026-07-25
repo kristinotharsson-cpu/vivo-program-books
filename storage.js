@@ -78,6 +78,38 @@
     },
     touch(rec, patch) {
       return { ...rec, ...patch, updatedAt: new Date().toISOString() };
-    }
+    },
+    // ---- Shared supporters, versioned by effective date ----
+    // An edit made on a program dated D applies to that program and every later-dated
+    // program, but never to programs dated before D.
+    SHARED_KEY: "vivo-shared-data",
+    parseDate(str) {
+      if (!str) return null;
+      var m = String(str).match(/([A-Za-z]{3,9})\.?\s+(\d{1,2}),?\s+(\d{4})/);
+      if (m) { var d = Date.parse(m[1] + " " + m[2] + ", " + m[3]); if (!isNaN(d)) return d; }
+      var d2 = Date.parse(str); return isNaN(d2) ? null : d2;
+    },
+    _readShared() { try { var v = localStorage.getItem(this.SHARED_KEY); return v ? JSON.parse(v) : {}; } catch (e) { return {}; } },
+    _writeShared(o) { try { localStorage.setItem(this.SHARED_KEY, JSON.stringify(o)); } catch (e) {} },
+    // Generic date-versioned shared value under any key (e.g. "supporters", "staffBoard").
+    getVersions(key) { var o = this._readShared(); var vk = key + "Versions"; return Array.isArray(o[vk]) ? o[vk] : []; },
+    saveVersion(key, fromNum, value) {
+      if (fromNum == null) fromNum = 0;
+      var o = this._readShared(); var vk = key + "Versions";
+      var vers = (Array.isArray(o[vk]) ? o[vk] : []).filter(function (v) { return v.from !== fromNum; });
+      vers.push({ from: fromNum, value: value });
+      vers.sort(function (a, b) { return a.from - b.from; });
+      o[vk] = vers; this._writeShared(o);
+    },
+    resolveVersion(key, def, dateNum) {
+      if (dateNum == null) return def;
+      var vers = this.getVersions(key), best = null;
+      for (var i = 0; i < vers.length; i++) { var v = vers[i]; if (v.from <= dateNum && (!best || v.from > best.from)) best = v; }
+      return best ? best.value : def;
+    },
+    // Supporters wrappers (kept for the existing boot-loader/section calls).
+    getSupportersVersions() { return this.getVersions("supporters").map(function (v) { return { from: v.from, supporters: v.value }; }); },
+    saveSupportersVersion(fromNum, supporters) { this.saveVersion("supporters", fromNum, supporters); },
+    resolveSupporters(defaultSup, dateNum) { return this.resolveVersion("supporters", defaultSup, dateNum); }
   };
 })();

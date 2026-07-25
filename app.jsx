@@ -255,9 +255,12 @@ const TOC = ({ sections, onGo, variant, ads = [], highlightColor, photoSrc, onPh
   const highlightFg = onLight ? "var(--vivo-black)" : "var(--vivo-cream)";
   const tocStyle = { "--toc-highlight": highlight, "--toc-highlight-fg": highlightFg, "--bar": highlight, "--bar-fg": highlightFg };
   // Inline ads slotted into TOC at intervals
+  const EVT_HEX = { plum: "#BD2691", cream: "#FFFBEB", black: "#000000", tangerine: "#EF4C26", orange: "#FF9E1D", blue: "#007ACC", "sky-blue": "#39BDFF", green: "#1BC469", "light-green": "#CFFFA2", lavender: "#C4B1C9" };
+  const EVT_ON_LIGHT = new Set(["cream", "light-green", "lavender", "sky-blue", "orange"]);
   const items = [];
   sections.forEach((s, i) => {
     if (s.kind === "promo") { items.push({ kind: "promo", section: s }); return; }
+    if (s.kind === "events" && (s.layout === "carousel" || window.__editMode)) { items.push({ kind: "events-inline", section: s }); return; }
     items.push({ kind: "section", section: s, idx: i });
     // After items 3 and 7, slot an ad if available
     if ((i === 2 || i === 6) && ads[Math.floor(i / 4)]) {
@@ -282,6 +285,21 @@ const TOC = ({ sections, onGo, variant, ads = [], highlightColor, photoSrc, onPh
           <li key={item.section.id} className="toc-promo-item">
             {React.createElement(window.SectionBody, { section: item.section, update: (patch) => onUpdateSection && onUpdateSection(item.section.id, patch) })}
           </li>
+        ) : item.kind === "events-inline" ? (
+          (() => {
+            const bc = item.section.bgColor;
+            const hasBc = bc && bc !== "none";
+            const evStyle = hasBc ? { background: EVT_HEX[bc], color: EVT_ON_LIGHT.has(bc) ? "#000" : "#FFFBEB" } : undefined;
+            return (
+              <li key={item.section.id} className={"toc-events-item" + (hasBc ? " has-bg" : "")} style={evStyle}>
+                <div className="toc-events-head">
+                  {item.section.eyebrow ? <p className="toc-events-eyebrow">{item.section.eyebrow}</p> : null}
+                  <h2 className="toc-events-title">{item.section.title}</h2>
+                </div>
+                {React.createElement(window.SectionBody, { section: item.section, update: (patch) => onUpdateSection && onUpdateSection(item.section.id, patch) })}
+              </li>
+            );
+          })()
         ) : (
           <li key={item.section.id} className="toc-item">
             <button className="toc-link" onClick={() => onGo(item.section.id)}>
@@ -451,26 +469,17 @@ const App = () => {
   });
   useEffectA(() => {
     try { localStorage.setItem(window.__VIVO_STORAGE_KEY || "vivo-pb-data", JSON.stringify(data)); } catch (e) {}
-    // Mirror to VivoStore (Netlify Blobs when deployed) as the program record
-    const slug = new URLSearchParams(location.search).get("show") || (window.PROGRAM_DATA && window.PROGRAM_DATA.slug) || "sample";
-    if (window.VivoStore && !window.VIVO_PROGRAM_DATA_SNAPSHOT) {
-      clearTimeout(window.__vivoSaveT);
-      window.__vivoSaveT = setTimeout(async () => {
-        try {
-          const prev = await window.VivoStore.getProgram(slug);
-          const rec = prev
-            ? window.VivoStore.touch(prev, { data })
-            : window.VivoStore.newRecord(slug, data, "draft");
-          rec.data = data;
-          await window.VivoStore.saveProgram(slug, rec);
-        } catch (e) { console.warn("VivoStore save failed", e); }
-      }, 800);
-    }
+    // NOTE: the authoritative commit to the program record (Netlify Blobs when deployed)
+    // happens in the unified snapshot-save effect below, which also persists design tweaks,
+    // theme, and text size — see "Commit the FULL editable snapshot".
   }, [data]);
 
   const [theme, setTheme] = useStateA(() => {
     if (window.VIVO_PROGRAM_DATA_SNAPSHOT && window.VIVO_PROGRAM_DATA_SNAPSHOT.theme) {
       return window.VIVO_PROGRAM_DATA_SNAPSHOT.theme;
+    }
+    if (window.VIVO_PROGRAM_RECORD && window.VIVO_PROGRAM_RECORD.theme) {
+      return window.VIVO_PROGRAM_RECORD.theme;
     }
     return localStorage.getItem("vivo-pb-theme") || "dark";
   });
@@ -479,7 +488,10 @@ const App = () => {
     localStorage.setItem("vivo-pb-theme", theme);
   }, [theme]);
 
-  const [fontSize, setFontSize] = useStateA(() => parseInt(localStorage.getItem("vivo-pb-fs") || "16", 10));
+  const [fontSize, setFontSize] = useStateA(() => {
+    if (window.VIVO_PROGRAM_RECORD && window.VIVO_PROGRAM_RECORD.fontSize) return window.VIVO_PROGRAM_RECORD.fontSize;
+    return parseInt(localStorage.getItem("vivo-pb-fs") || "16", 10);
+  });
   useEffectA(() => {
     document.documentElement.style.setProperty("--app-font-size", fontSize + "px");
     localStorage.setItem("vivo-pb-fs", String(fontSize));
@@ -494,6 +506,21 @@ const App = () => {
     window.__editMode = editing;
     try { localStorage.setItem("vivo-pb-editmode", editing ? "1" : "0"); } catch (e) {}
   }, [editing]);
+  // Save-status pill + device-preview toggle (edit mode conveniences)
+  const [saveState, setSaveState] = useStateA("saved"); // "saved" | "saving"
+  const [devicePreview, setDevicePreview] = useStateA("desktop"); // "desktop" | "mobile"
+  // Undo / redo — snapshot stack of the section data (content edits)
+  const historyRef = React.useRef({ stack: [], i: -1, applying: false });
+  const [histState, setHistState] = useStateA({ canUndo: false, canRedo: false });
+  const pushHistory = useCallbackA((snapshot) => {
+    const h = historyRef.current;
+    if (h.applying) return;
+    h.stack = h.stack.slice(0, h.i + 1);
+    h.stack.push(JSON.stringify(snapshot));
+    if (h.stack.length > 50) h.stack.shift();
+    h.i = h.stack.length - 1;
+    setHistState({ canUndo: h.i > 0, canRedo: false });
+  }, []);
   const toggleEditing = useCallbackA(() => {
     setEditing(e => { window.__editMode = !e; return !e; }); // set flag synchronously so editables render immediately
   }, []);
@@ -521,6 +548,13 @@ const App = () => {
     if (window.VIVO_PROGRAM_DATA_SNAPSHOT && window.VIVO_PROGRAM_DATA_SNAPSHOT.tweaks) {
       return { ...TWEAK_DEFAULTS, ...window.VIVO_PROGRAM_DATA_SNAPSHOT.tweaks };
     }
+    if (window.VIVO_PROGRAM_RECORD && window.VIVO_PROGRAM_RECORD.tweaks) {
+      return { ...TWEAK_DEFAULTS, ...window.VIVO_PROGRAM_RECORD.tweaks };
+    }
+    try {
+      const v = localStorage.getItem((window.__VIVO_STORAGE_KEY || "vivo-pb-data") + ":tweaks");
+      if (v) return { ...TWEAK_DEFAULTS, ...JSON.parse(v) };
+    } catch (e) {}
     return TWEAK_DEFAULTS;
   });
   // Listen for tweaks panel updates
@@ -549,6 +583,32 @@ const App = () => {
     });
   }, []);
 
+  // Persist design tweaks locally (namespaced per show) so the preview restores them too.
+  useEffectA(() => {
+    try { localStorage.setItem((window.__VIVO_STORAGE_KEY || "vivo-pb-data") + ":tweaks", JSON.stringify(tweaks)); } catch (e) {}
+  }, [tweaks]);
+
+  // Commit the FULL editable snapshot (content + design tweaks + theme + text size) to the
+  // program record (Netlify Blobs when deployed, localStorage in preview). This is what makes
+  // every edit-menu change — colors, photos, layout, theme — survive a new session or device.
+  useEffectA(() => {
+    if (window.VIVO_PROGRAM_DATA_SNAPSHOT) return; // exported HTML is read-only
+    if (!window.VivoStore) return;
+    const slug = new URLSearchParams(location.search).get("show") || (window.PROGRAM_DATA && window.PROGRAM_DATA.slug) || "sample";
+    clearTimeout(window.__vivoSaveT);
+    window.__vivoSaveT = setTimeout(async () => {
+      try {
+        const prev = await window.VivoStore.getProgram(slug);
+        const rec = prev ? window.VivoStore.touch(prev, {}) : window.VivoStore.newRecord(slug, data, "draft");
+        rec.data = data;
+        rec.tweaks = tweaks;
+        rec.theme = theme;
+        rec.fontSize = fontSize;
+        await window.VivoStore.saveProgram(slug, rec);
+      } catch (e) { console.warn("VivoStore save failed", e); }
+    }, 800);
+  }, [data, tweaks, theme, fontSize]);
+
   // Apply tweaks to cover data (without persisting into data — they're presentational)
   const cover = useMemoA(() => ({
     ...data.cover,
@@ -566,12 +626,46 @@ const App = () => {
       sections: d.sections.map(s => s.id === id ? { ...s, ...patch } : s)
     }));
   }, []);
+  const undo = useCallbackA(() => {
+    const h = historyRef.current;
+    if (h.i <= 0) return;
+    h.i--; h.applying = true;
+    try { setData(JSON.parse(h.stack[h.i])); } finally { setTimeout(() => { h.applying = false; }, 0); }
+    setHistState({ canUndo: h.i > 0, canRedo: h.i < h.stack.length - 1 });
+  }, []);
+  const redo = useCallbackA(() => {
+    const h = historyRef.current;
+    if (h.i >= h.stack.length - 1) return;
+    h.i++; h.applying = true;
+    try { setData(JSON.parse(h.stack[h.i])); } finally { setTimeout(() => { h.applying = false; }, 0); }
+    setHistState({ canUndo: h.i > 0, canRedo: h.i < h.stack.length - 1 });
+  }, []);
+  // Track history + save-status as content changes
+  useEffectA(() => {
+    if (historyRef.current.stack.length === 0) { pushHistory(data); return; }
+    pushHistory(data);
+    if (window.VIVO_PROGRAM_DATA_SNAPSHOT || !window.VivoStore) return;
+    setSaveState("saving");
+    clearTimeout(window.__savePillT);
+    window.__savePillT = setTimeout(() => setSaveState("saved"), 900);
+  }, [data]);
+  // Keyboard undo/redo (outside rich fields, the bar handles ⌘Z inside text)
+  useEffectA(() => {
+    if (!editing) return;
+    const onKey = (e) => {
+      const inField = e.target && e.target.closest && e.target.closest(".rich-editable, [contenteditable]");
+      if (inField) return;
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "z") { e.preventDefault(); e.shiftKey ? redo() : undo(); }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [editing, undo, redo]);
   const MODULE_LIBRARY = [
     { kind: "info", label: "Text / Info", desc: "Headings and paragraphs", make: (t) => ({ title: t || "Information", kind: "info", eyebrow: "", paragraphs: [""] }) },
     { kind: "notes", label: "Program Notes", desc: "Long-form prose notes", make: (t) => ({ title: t || "Program Notes", kind: "notes", eyebrow: "About the Music", blocks: [{ h: "", body: [""] }] }) },
     { kind: "program", label: "Today's Program", desc: "Running order of works", make: (t) => ({ title: t || "Today's Program", kind: "program", eyebrow: "The Running Order", lead: "", pieces: [{ composer: "", work: "" }] }) },
     { kind: "cast", label: "Cast & Creative", desc: "Performers and roles", make: (t) => ({ title: t || "Cast & Creative", kind: "cast", eyebrow: "Who's Performing", cast: [{ role: "", name: "" }] }) },
-    { kind: "bios", label: "About the Artists", desc: "Photo + biography", make: (t) => ({ title: t || "About the Artists", kind: "bios", eyebrow: "About the Artists", bios: [{ id: "bio-1", name: "", role: "", photoSrc: "", text: "" }] }) },
+    { kind: "bios", label: "About the Artist", desc: "Photo + biography", make: (t) => ({ title: t || "About the Artist", kind: "bios", eyebrow: "About the Artist", photoLayout: "thumbnail", archive: { tag: "Last with us", when: "", work: "", venue: "", body: [""] }, bios: [{ id: "bio-1", name: "", role: "", photoSrc: "", body: [""] }] }) },
     { kind: "songtexts", label: "Song Texts", desc: "Sung texts & translations", make: (t) => ({ title: t || "Sung Texts & Translations", kind: "songtexts", eyebrow: "Follow Along", lead: "", songs: [{ id: "piece-1", title: "New Piece", composer: "", note: "", origLang: "", stanzas: [{ original: ["", "", "", ""], translation: ["", "", "", ""] }] }] }) },
     { kind: "events", label: "Upcoming", desc: "Auto season calendar", make: (t) => ({ title: t || "Upcoming", kind: "events", eyebrow: "Coming Up at Vivo Performing Arts", lead: "", auto: true, count: 4 }) },
     { kind: "events", label: "Next at Vivo", desc: "Swipeable upcoming shows", make: (t) => ({ title: t || "Next at Vivo", kind: "events", eyebrow: "Coming Up at Vivo Performing Arts", lead: "", auto: true, count: 6, layout: "carousel" }) },
@@ -584,7 +678,8 @@ const App = () => {
     { kind: "promo", label: "Ad: CTA Bar", desc: "One-line headline + button", make: (t) => ({ title: t || "Promo", kind: "promo", layout: "cta", heading: "Subscribe & Save 25%", buttonLabel: "Packages", buttonUrl: "https://www.vivoperformingarts.org/", buttonColor: "cream" }) },
     { kind: "promo", label: "Ad: Image + Button", desc: "Photo, title, button", make: (t) => ({ title: t || "Promo", kind: "promo", layout: "side", eyebrow: "Next at Vivo", heading: "Jeremy Denk, Piano", meta: "FRI OCT 24 · 8PM · Jordan Hall", buttonLabel: "Buy Tickets", buttonUrl: "https://www.vivoperformingarts.org/", buttonColor: "blue", imageSrc: "" }) },
     { kind: "promo", label: "Partner Ad", desc: "Image + their copy + URL", make: (t) => ({ title: t || "Partner Ad", kind: "promo", layout: "full", eyebrow: "Our Partners", heading: "Partner Name", body: "Copy supplied by the partner goes here.", buttonLabel: "Learn More", buttonUrl: "https://", buttonColor: "cream", imageSrc: "" }) },
-    { kind: "promo", label: "Performance Sponsors", desc: "Recognize 1 or many sponsors", make: (t) => ({ title: t || "Performance Sponsors", kind: "promo", layout: "sponsors", heading: "This performance is generously supported by", sponsors: [{ name: "Sponsor Name", imageSrc: "" }] }) }
+    { kind: "promo", label: "Performance Sponsors", desc: "Recognize 1 or many sponsors", make: (t) => ({ title: t || "Performance Sponsors", kind: "promo", layout: "sponsors", heading: "This performance is generously supported by", sponsors: [{ name: "Sponsor Name", imageSrc: "" }] }) },
+    { kind: "promo", label: "Ad Cards (carousel)", desc: "Multiple ad cards in a slider", make: (t) => ({ title: t || "Ad Cards", kind: "promo", layout: "cards", stack: false, cards: [{ imageSrc: "", eyebrow: "", heading: "Ad One", meta: "", buttonLabel: "Learn More", buttonUrl: "https://www.vivoperformingarts.org/", accent: "plum" }, { imageSrc: "", eyebrow: "", heading: "Ad Two", meta: "", buttonLabel: "Learn More", buttonUrl: "https://www.vivoperformingarts.org/", accent: "blue" }] }) }
   ];
   const addModule = (mod) => {
     const title = (prompt(mod.label + " — section title?", mod.make("").title) || "").trim();
@@ -615,6 +710,18 @@ const App = () => {
   const deleteSection = useCallbackA((id) => {
     setData(d => ({ ...d, sections: d.sections.filter(s => s.id !== id) }));
   }, []);
+  const duplicateSection = useCallbackA((id) => {
+    setData(d => {
+      const arr = [...d.sections];
+      const i = arr.findIndex(s => s.id === id);
+      if (i < 0) return d;
+      const copy = JSON.parse(JSON.stringify(arr[i]));
+      copy.id = id + "-copy-" + Date.now().toString(36);
+      arr.splice(i + 1, 0, copy);
+      return { ...d, sections: arr };
+    });
+  }, []);
+  const [sectionMenuOpen, setSectionMenuOpen] = useStateA(false);
   // Visible sections (filter out hidden via tweaks)
   const hiddenSet = useMemoA(() => new Set(tweaks.hiddenSections || []), [tweaks.hiddenSections]);
   const visibleSections = useMemoA(() => data.sections.filter(s => !hiddenSet.has(s.id)), [data.sections, hiddenSet]);
@@ -784,22 +891,44 @@ const App = () => {
   const accentFg = accentOnLight ? "var(--vivo-black)" : "var(--vivo-cream)";
 
   return (
-    <div className={"app" + (editing ? " is-editing-mode" : "")} style={{ "--accent": accentColor, "--accent-fg": accentFg, "--brush-x": (tweaks.brushX || 0) + "%", "--brush-y": (tweaks.brushY || 0) + "%", "--brush-size": (tweaks.brushSize || 60) + "%", "--brush-scale": (tweaks.brushSize || 60) / 60, "--brush-rotate": (tweaks.brushRotate == null ? 45 : tweaks.brushRotate) + "deg" }}>
+    <div className={"app" + (editing ? " is-editing-mode" : "") + (editing && devicePreview === "mobile" ? " device-mobile" : "")} style={{ "--accent": accentColor, "--accent-fg": accentFg, "--brush-x": (tweaks.brushX || 0) + "%", "--brush-y": (tweaks.brushY || 0) + "%", "--brush-size": (tweaks.brushSize || 60) + "%", "--brush-scale": (tweaks.brushSize || 60) / 60, "--brush-rotate": (tweaks.brushRotate == null ? 45 : tweaks.brushRotate) + "deg" }}>
       {editing ? (
         <div className="edit-mode-bar">
-          <span className="edit-mode-dot" />Edit Mode — tap any text to change it
+          <span className="edit-mode-dot" />
+          <span className="edit-mode-label">Edit Mode</span>
+          <span className={"save-pill" + (saveState === "saving" ? " is-saving" : "")}><i />{saveState === "saving" ? "Saving…" : "Saved"}</span>
+          <span className="edit-tools">
+            <button className="edit-tool" title="Undo (⌘Z)" disabled={!histState.canUndo} onClick={undo}><Icon name="undo" size={16} /></button>
+            <button className="edit-tool" title="Redo (⌘⇧Z)" disabled={!histState.canRedo} onClick={redo}><Icon name="redo" size={16} /></button>
+            <span className="edit-tool-sep" />
+            <button className={"edit-tool" + (devicePreview === "desktop" ? " is-on" : "")} title="Desktop preview" onClick={() => setDevicePreview("desktop")}><Icon name="monitor" size={16} /></button>
+            <button className={"edit-tool" + (devicePreview === "mobile" ? " is-on" : "")} title="Mobile preview" onClick={() => setDevicePreview("mobile")}><Icon name="phone" size={16} /></button>
+          </span>
           <button className="edit-mode-done" onClick={toggleEditing}>Done</button>
         </div>
       ) : null}
-      <TopBar
-        title={currentSection ? currentSection.title : data.cover.title}
-        showLogo={!currentSection}
-        logoSrc="assets/logos/vivo-logo-cream.png"
-        onBack={currentSection ? goHome : null}
-        onMenu={() => setMenuOpen(true)}
-        onSearch={() => setSearchOpen(true)}
-        home={!currentSection}
-      />
+      {editing ? (
+        <TopBar
+          title={currentSection ? currentSection.title : data.cover.title}
+          showLogo={!currentSection}
+          logoSrc="assets/logos/vivo-logo-cream.png"
+          onBack={currentSection ? goHome : null}
+          onMenu={() => setMenuOpen(true)}
+          onSearch={() => setSearchOpen(true)}
+          home={!currentSection}
+        />
+      ) : (
+        <ReaderNav
+          sections={visibleSections}
+          currentId={currentSection ? currentSection.id : null}
+          onGo={goTo}
+          onHome={goHome}
+          onBack={currentSection ? goHome : null}
+          onSearch={() => setSearchOpen(true)}
+          onMenu={() => setMenuOpen(true)}
+          theme={theme}
+        />
+      )}
 
       {!currentSection ? (
         <div className="page home">
@@ -828,7 +957,29 @@ const App = () => {
           <AppFooter theme={theme} />
         </div>
       ) : (
-        <div className="page section-page" key={currentSection.id}>
+        <div className="page section-page" key={currentSection.id} style={currentSection.accentColor ? { "--accent": "var(--vivo-" + currentSection.accentColor + ")" } : undefined}>
+          {editing ? (
+            <div className="section-rail" contentEditable={false}>
+              <button title="Move up" disabled={currentIdx <= 0} onClick={() => moveSection(currentSection.id, -1)}><Icon name="chev-up" size={16} /></button>
+              <button title="Move down" disabled={currentIdx >= data.sections.length - 1} onClick={() => moveSection(currentSection.id, 1)}><Icon name="chev-down" size={16} /></button>
+              <button title="Duplicate" onClick={() => duplicateSection(currentSection.id)}><Icon name="copy" size={15} /></button>
+              <button title="Section colors" onClick={() => setSectionMenuOpen(o => !o)}><Icon name="sliders" size={16} /></button>
+              <span className="section-rail-sep" />
+              <button className="danger" title="Delete section" onClick={() => { if (confirm('Delete "' + currentSection.title + '"? This removes the section and its content.')) { deleteSection(currentSection.id); goHome(); } }}><Icon name="trash" size={15} /></button>
+              {sectionMenuOpen ? (
+                <div className="section-settings" onMouseDown={e => e.stopPropagation()}>
+                  <div className="ss-field"><span>Accent color</span>
+                    <div className="ss-swatches">
+                      <button className={"ss-sw ss-sw-none" + (!currentSection.accentColor ? " is-on" : "")} title="Book default" onClick={() => updateSection(currentSection.id, { accentColor: "" })} />
+                      {["plum","tangerine","orange","blue","sky-blue","green","light-green","lavender"].map(c => (
+                        <button key={c} className={"ss-sw" + (currentSection.accentColor === c ? " is-on" : "")} style={{ background: "var(--vivo-" + c + ")" }} title={c} onClick={() => updateSection(currentSection.id, { accentColor: c })} />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ) : null}
+            </div>
+          ) : null}
           <Editable as="div" className="section-eyebrow" value={currentSection.eyebrow || ""} onChange={v => updateSection(currentSection.id, { eyebrow: v })} />
           <Editable as="h1" className="section-title" value={currentSection.title} onChange={v => updateSection(currentSection.id, { title: v })} />
           <SectionBody

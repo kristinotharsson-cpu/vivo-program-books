@@ -210,7 +210,7 @@ window.PROGRAM_DATA = {
     },
     {
       id: "bios",
-      title: "About the Artists",
+      title: "About the Artist",
       kind: "bios",
       eyebrow: "Tonight's Artist",
       bios: [
@@ -553,7 +553,7 @@ window.PROGRAM_DATA = {
     },
     {
       id: "info",
-      title: "Hall Info",
+      title: "Audience Information",
       kind: "info",
       eyebrow: "Land Acknowledgment & Visitor Info",
       audienceInfo: [

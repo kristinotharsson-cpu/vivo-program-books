@@ -1,13 +1,13 @@
 .imp{max-width:900px;margin:0 auto;padding:40px 24px 80px;color:var(--vivo-cream)}
 .imp-head{margin-bottom:32px}
 .imp-eyebrow{font-family:var(--font-body,"ABC Diatype");font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-muted-inverse);margin-bottom:10px}
-.imp-title{font-family:var(--font-display,"Bricolage Grotesque Condensed");font-weight:700;text-transform:uppercase;letter-spacing:-.01em;line-height:.95;font-size:clamp(40px,9vw,68px);margin:0 0 10px}
+.imp-title{font-family:var(--font-display,"Bricolage Grotesque Condensed");font-weight:600;text-transform:uppercase;letter-spacing:-.01em;line-height:.95;font-size:clamp(40px,9vw,68px);margin:0 0 10px}
 .imp-sub{font-family:var(--font-body,"ABC Diatype");font-size:16px;line-height:1.5;color:var(--fg-muted-inverse);margin:0;max-width:52ch}
 
 .imp-drop{border:2px dashed rgba(255,248,232,.28);padding:56px 24px;text-align:center;cursor:pointer;transition:border-color .15s ease,background .15s ease}
 .imp-drop:hover,.imp-drop.is-over{border-color:var(--vivo-plum);background:rgba(189,38,145,.08)}
 .imp-drop-icon{display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border:2px solid currentColor;font-family:var(--font-body);font-weight:700;font-size:13px;letter-spacing:.08em;margin-bottom:18px}
-.imp-drop-main{font-family:var(--font-display);font-weight:700;text-transform:uppercase;font-size:24px;letter-spacing:-.005em}
+.imp-drop-main{font-family:var(--font-display);font-weight: 600;text-transform:uppercase;font-size:24px;letter-spacing:-.005em}
 .imp-drop-alt{font-family:var(--font-body);font-size:14px;color:var(--fg-muted-inverse);margin-top:6px}
 
 .imp-error{margin-top:20px;padding:16px 18px;border-left:4px solid var(--vivo-tangerine);background:rgba(239,76,38,.1);font-family:var(--font-body);font-size:15px;line-height:1.5}

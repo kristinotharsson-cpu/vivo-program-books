@@ -33,6 +33,71 @@
       }
     },
     {
+      "id": "program",
+      "title": "Today's Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "All-women supergroup. Miles Davis centennial. Signature 1960s period.",
+      "pieces": [
+        {
+          "composer": "Program details",
+          "work": "To be announced from the stage.",
+          "meta": ""
+        }
+      ]
+    },
+    {
+      "id": "notes",
+      "title": "Program Notes",
+      "kind": "notes",
+      "eyebrow": "About the Music",
+      "sections": [
+        {
+          "h": "",
+          "body": [
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "id": "song-texts",
+      "title": "Song Texts",
+      "kind": "songtexts",
+      "eyebrow": "Follow Along",
+      "lead": "",
+      "songs": []
+    },
+    {
+      "id": "bios",
+      "title": "About the Artist",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "artemis",
+          "name": "Artemis",
+          "role": "ensemble",
+          "initials": "A",
+          "photoSrc": "",
+          "body": [
+            "RENEE ROSNES piano INGRID JENSEN trumpet NICOLE GLOVER tenor saxophone NORIKO UEDA bass ALLISON MILLER drums In celebration of Miles Davis' centennial, the award-winning band explores his monumental impact with reimagined arrangements largely drawn from the trumpeter's signature 1960s period. From introspective moods to free interplay and dramatic shifts, Artemis presents a fascinating look at the many moods of Miles."
+          ],
+          "website": "https://www.artemisband.com"
+        }
+      ],
+      "photoLayout": "thumbnail",
+      "archive": {
+        "tag": "Last with us",
+        "when": "",
+        "work": "",
+        "venue": "",
+        "body": [
+          ""
+        ]
+      }
+    },
+    {
       "id": "performance-sponsor",
       "title": "Performance Sponsor",
       "kind": "performance-sponsor",
@@ -51,81 +116,15 @@
       "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
     },
     {
-      "id": "program",
-      "title": "Today's Program",
-      "kind": "program",
-      "eyebrow": "The Running Order",
-      "lead": "All-women supergroup. Miles Davis centennial. Signature 1960s period.",
-      "pieces": [
-        {
-          "composer": "Program details",
-          "work": "To be announced from the stage.",
-          "meta": ""
-        }
-      ]
-    },
-    {
-      "id": "artist",
-      "title": "Cast & Creative",
-      "kind": "cast",
-      "eyebrow": "On Stage Tonight",
-      "cast": [
-        {
-          "role": "piano",
-          "name": "Renee Rosnes"
-        },
-        {
-          "role": "trumpet",
-          "name": "Ingrid Jensen"
-        },
-        {
-          "role": "tenor saxophone",
-          "name": "Nicole Glover"
-        },
-        {
-          "role": "bass",
-          "name": "Noriko Ueda"
-        },
-        {
-          "role": "drums",
-          "name": "Allison Miller"
-        }
-      ],
-      "creative": []
-    },
-    {
-      "id": "bios",
-      "title": "About the Artists",
-      "kind": "bios",
-      "eyebrow": "Tonight's Artist",
-      "bios": [
-        {
-          "id": "artemis",
-          "name": "Artemis",
-          "role": "ensemble",
-          "initials": "A",
-          "photoSrc": "",
-          "body": [
-            "RENEE ROSNES piano INGRID JENSEN trumpet NICOLE GLOVER tenor saxophone NORIKO UEDA bass ALLISON MILLER drums In celebration of Miles Davis' centennial, the award-winning band explores his monumental impact with reimagined arrangements largely drawn from the trumpeter's signature 1960s period. From introspective moods to free interplay and dramatic shifts, Artemis presents a fascinating look at the many moods of Miles."
-          ],
-          "website": "https://www.artemisband.com"
-        }
-      ]
-    },
-    {
-      "id": "upcoming",
-      "title": "Upcoming",
-      "kind": "events",
-      "eyebrow": "Coming Up at Vivo Performing Arts",
-      "lead": "Explore the rest of the season at [vivoperformingarts.org](https://vivoperformingarts.org).",
-      "auto": true,
-      "count": 4
-    },
-    {
-      "id": "staff-board",
-      "title": "Staff & Board",
-      "kind": "staff-board",
-      "eyebrow": "Vivo Performing Arts"
+      "id": "cta-ad",
+      "title": "Subscribe",
+      "kind": "promo",
+      "layout": "cta",
+      "heading": "Subscribe & Save 25%",
+      "body": "",
+      "buttonLabel": "Packages",
+      "buttonUrl": "https://www.vivoperformingarts.org/",
+      "buttonColor": "cream"
     },
     {
       "id": "supporters",
@@ -134,8 +133,23 @@
       "eyebrow": "With Gratitude"
     },
     {
+      "id": "staff-board",
+      "title": "Staff & Board",
+      "kind": "staff-board",
+      "eyebrow": "Vivo Performing Arts"
+    },
+    {
+      "id": "upcoming",
+      "title": "Next at Vivo",
+      "kind": "events",
+      "eyebrow": "Coming Up at Vivo Performing Arts",
+      "lead": "Explore the rest of the season at [vivoperformingarts.org](https://vivoperformingarts.org).",
+      "auto": true,
+      "count": 4
+    },
+    {
       "id": "info",
-      "title": "Hall Info",
+      "title": "Audience Information",
       "kind": "info",
       "eyebrow": "Visitor Info",
       "sections": [

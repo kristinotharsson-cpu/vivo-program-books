@@ -56,6 +56,7 @@
     ])
       .then(function (results) {
         var rec = results[0];
+        if (rec && rec.data) window.VIVO_PROGRAM_RECORD = rec;
         var data = (rec && rec.data && rec.data.sections) ? rec.data : results[1];
         var shell = results[1];
         var shared = results[2];
@@ -82,6 +83,8 @@
             var sb = { staff: shared.staff, boards: shared.boards };
             var rsb = window.VivoStore.resolveVersion("staffBoard", sb, dnum);
             if (rsb) shared = Object.assign({}, shared, { staff: rsb.staff, boards: rsb.boards });
+            if (shared.about) shared = Object.assign({}, shared, { about: window.VivoStore.resolveVersion("about", shared.about, dnum) });
+            if (shared.audienceInfo) shared = Object.assign({}, shared, { audienceInfo: window.VivoStore.resolveVersion("audienceInfo", shared.audienceInfo, dnum) });
           }
         } catch (e) {}
         if (shared) window.VIVO_SHARED = shared;
@@ -102,6 +105,7 @@
   </script>
 
   <!-- App scripts (order matters) -->
+  <script src="editor-suite.js"></script>
   <script type="text/babel" src="tweaks-panel.jsx"></script>
   <script type="text/babel" src="components.jsx"></script>
   <script type="text/babel" src="import-overlay.jsx"></script>

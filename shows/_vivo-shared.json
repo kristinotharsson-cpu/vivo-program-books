@@ -1127,5 +1127,39 @@
       "hours": "Monday–Friday, 10am – 4pm",
       "address": "20 Park Plaza, Suite 220, Boston MA 02116"
     }
+  },
+  "about": {
+    "intro": [
+      "Formerly Celebrity Series of Boston and founded in 1938, Vivo Performing Arts presents nearly 100 performances per year across Boston and beyond.",
+      "Our name is new, but our mission hasn't changed. From Celebrity Series to Vivo Performing Arts, our mission is the same as always: to enrich and inspire our community through exceptional live performances."
+    ],
+    "sections": [
+      {
+        "h": "Subscription Series",
+        "body": [
+          "The core of our work since 1938: we unite audiences and exceptional artists at venues across Boston, Cambridge, and beyond — inspiring wonder and sparking a lifelong interest in the performing arts.",
+          "One of the nation's most highly regarded independent presenting organizations, we partner with established, internationally-acclaimed artists as well as emerging talent to curate a diverse lineup. We present artists at all career stages, not just the biggest names."
+        ]
+      },
+      {
+        "h": "Arts for All!",
+        "body": [
+          "Top Boston-based and Boston-affiliated artists perform free and low-cost concerts through Neighborhood Arts, often brought to life through deep collaboration with youth and community arts groups at venues across our city.",
+          "Our Take Your Seat ticketing program makes subscription-season performances accessible for community organizations and school groups, and Artist Connections brings masterclasses and workshops to students of all ability levels."
+        ]
+      },
+      {
+        "h": "Public Performance Projects",
+        "body": [
+          "Now an annual tradition, we present free outdoor projects in some of Boston's most iconic public spaces: Street Pianos Boston, Jazz Along the Charles on the Esplanade, Let's Dance Boston on the Rose Kennedy Greenway, and more."
+        ]
+      },
+      {
+        "h": "Land Acknowledgement",
+        "body": [
+          "We acknowledge that Vivo Performing Arts presents performances in multiple venues around Boston which reside on traditional ancestral and unceded lands of the Massachusett tribe. We honor their people — past, present, and emerging — and their connection to the land on which we gather."
+        ]
+      }
+    ]
   }
 }

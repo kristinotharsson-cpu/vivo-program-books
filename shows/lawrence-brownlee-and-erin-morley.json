@@ -33,24 +33,6 @@
       }
     },
     {
-      "id": "performance-sponsor",
-      "title": "Performance Sponsor",
-      "kind": "performance-sponsor",
-      "eyebrow": "Tonight's Performance",
-      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
-      "blocks": [
-        {
-          "label": "Performance Supporter",
-          "name": "Performance Sponsor Name",
-          "statement": "This performance is generously supported by [Sponsor Name]."
-        }
-      ],
-      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
-      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
-      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
-      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
-    },
-    {
       "id": "program",
       "title": "Today's Program",
       "kind": "program",
@@ -99,25 +81,30 @@
       ]
     },
     {
-      "id": "artist",
-      "title": "Cast & Creative",
-      "kind": "cast",
-      "eyebrow": "On Stage Tonight",
-      "cast": [
+      "id": "notes",
+      "title": "Program Notes",
+      "kind": "notes",
+      "eyebrow": "About the Music",
+      "sections": [
         {
-          "role": "tenor",
-          "name": "Lawrence Brownlee"
-        },
-        {
-          "role": "soprano",
-          "name": "Erin Morley"
+          "h": "",
+          "body": [
+            ""
+          ]
         }
-      ],
-      "creative": []
+      ]
+    },
+    {
+      "id": "song-texts",
+      "title": "Song Texts",
+      "kind": "songtexts",
+      "eyebrow": "Follow Along",
+      "lead": "",
+      "songs": []
     },
     {
       "id": "bios",
-      "title": "About the Artists",
+      "title": "About the Artist",
       "kind": "bios",
       "eyebrow": "Tonight's Artist",
       "bios": [
@@ -132,22 +119,46 @@
           ],
           "website": "https://www.lawrencebrownlee.com"
         }
-      ]
+      ],
+      "photoLayout": "thumbnail",
+      "archive": {
+        "tag": "Last with us",
+        "when": "",
+        "work": "",
+        "venue": "",
+        "body": [
+          ""
+        ]
+      }
     },
     {
-      "id": "upcoming",
-      "title": "Upcoming",
-      "kind": "events",
-      "eyebrow": "Coming Up at Vivo Performing Arts",
-      "lead": "Explore the rest of the season at [vivoperformingarts.org](https://vivoperformingarts.org).",
-      "auto": true,
-      "count": 4
+      "id": "performance-sponsor",
+      "title": "Performance Sponsor",
+      "kind": "performance-sponsor",
+      "eyebrow": "Tonight's Performance",
+      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
+      "blocks": [
+        {
+          "label": "Performance Supporter",
+          "name": "Performance Sponsor Name",
+          "statement": "This performance is generously supported by [Sponsor Name]."
+        }
+      ],
+      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
+      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
     },
     {
-      "id": "staff-board",
-      "title": "Staff & Board",
-      "kind": "staff-board",
-      "eyebrow": "Vivo Performing Arts"
+      "id": "cta-ad",
+      "title": "Subscribe",
+      "kind": "promo",
+      "layout": "cta",
+      "heading": "Subscribe & Save 25%",
+      "body": "",
+      "buttonLabel": "Packages",
+      "buttonUrl": "https://www.vivoperformingarts.org/",
+      "buttonColor": "cream"
     },
     {
       "id": "supporters",
@@ -156,8 +167,23 @@
       "eyebrow": "With Gratitude"
     },
     {
+      "id": "staff-board",
+      "title": "Staff & Board",
+      "kind": "staff-board",
+      "eyebrow": "Vivo Performing Arts"
+    },
+    {
+      "id": "upcoming",
+      "title": "Next at Vivo",
+      "kind": "events",
+      "eyebrow": "Coming Up at Vivo Performing Arts",
+      "lead": "Explore the rest of the season at [vivoperformingarts.org](https://vivoperformingarts.org).",
+      "auto": true,
+      "count": 4
+    },
+    {
       "id": "info",
-      "title": "Hall Info",
+      "title": "Audience Information",
       "kind": "info",
       "eyebrow": "Visitor Info",
       "sections": [

@@ -32,6 +32,72 @@
       }
     },
     {
+      "id": "program",
+      "title": "Today's Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "Michel Camilo performs at Berklee Performance Center.",
+      "pieces": [
+        {
+          "composer": "Program details",
+          "work": "To be announced from the stage.",
+          "meta": ""
+        }
+      ],
+      "runtimeNote": "There will be no intermission in this evening’s program, which will run 80-90 minutes."
+    },
+    {
+      "id": "notes",
+      "title": "Program Notes",
+      "kind": "notes",
+      "eyebrow": "About the Music",
+      "sections": [
+        {
+          "h": "",
+          "body": [
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "id": "song-texts",
+      "title": "Song Texts",
+      "kind": "songtexts",
+      "eyebrow": "Follow Along",
+      "lead": "",
+      "songs": []
+    },
+    {
+      "id": "bios",
+      "title": "About the Artist",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "michel-camilo",
+          "name": "Michel Camilo",
+          "role": "piano / leader",
+          "initials": "MC",
+          "photoSrc": "",
+          "body": [
+            "MICHEL CAMILO piano RICKY RODRÍGUEZ bass MARK WALKER drums Michel Camilo, Berklee College of Music's Honorary Doctorate in Music recipient, is a musical firestorm of heart, joy, and liveliness who brings a scintillating light into any space in which he performs. Bassist Ricky Rodríguez and drummer Mark Walker—bound to Camilo by years of hard-won musical trust—keep the pulse that turns his flights of virtuosity into something you experience with your whole body. Come feel it for yourself when the Michel Camilo Trio makes its Vivo Performing Arts debut."
+          ],
+          "website": "https://www.michelcamilo.com"
+        }
+      ],
+      "photoLayout": "thumbnail",
+      "archive": {
+        "tag": "Last with us",
+        "when": "",
+        "work": "",
+        "venue": "",
+        "body": [
+          ""
+        ]
+      }
+    },
+    {
       "id": "performance-sponsor",
       "title": "Performance Sponsor",
       "kind": "performance-sponsor",
@@ -50,74 +116,15 @@
       "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
     },
     {
-      "id": "program",
-      "title": "Today's Program",
-      "kind": "program",
-      "eyebrow": "The Running Order",
-      "lead": "Michel Camilo performs at Berklee Performance Center.",
-      "pieces": [
-        {
-          "composer": "Program details",
-          "work": "To be announced from the stage.",
-          "meta": ""
-        }
-      ],
-      "runtimeNote": "There will be no intermission in this evening’s program, which will run 80-90 minutes."
-    },
-    {
-      "id": "artist",
-      "title": "Cast & Creative",
-      "kind": "cast",
-      "eyebrow": "On Stage Tonight",
-      "cast": [
-        {
-          "role": "piano",
-          "name": "Michel Camilo"
-        },
-        {
-          "role": "bass",
-          "name": "Ricky Rodríguez"
-        },
-        {
-          "role": "drums",
-          "name": "Mark Walker"
-        }
-      ],
-      "creative": []
-    },
-    {
-      "id": "bios",
-      "title": "About the Artists",
-      "kind": "bios",
-      "eyebrow": "Tonight's Artist",
-      "bios": [
-        {
-          "id": "michel-camilo",
-          "name": "Michel Camilo",
-          "role": "piano / leader",
-          "initials": "MC",
-          "photoSrc": "",
-          "body": [
-            "MICHEL CAMILO piano RICKY RODRÍGUEZ bass MARK WALKER drums Michel Camilo, Berklee College of Music's Honorary Doctorate in Music recipient, is a musical firestorm of heart, joy, and liveliness who brings a scintillating light into any space in which he performs. Bassist Ricky Rodríguez and drummer Mark Walker—bound to Camilo by years of hard-won musical trust—keep the pulse that turns his flights of virtuosity into something you experience with your whole body. Come feel it for yourself when the Michel Camilo Trio makes its Vivo Performing Arts debut."
-          ],
-          "website": "https://www.michelcamilo.com"
-        }
-      ]
-    },
-    {
-      "id": "upcoming",
-      "title": "Upcoming",
-      "kind": "events",
-      "eyebrow": "Coming Up at Vivo Performing Arts",
-      "lead": "Explore the rest of the season at [vivoperformingarts.org](https://vivoperformingarts.org).",
-      "auto": true,
-      "count": 4
-    },
-    {
-      "id": "staff-board",
-      "title": "Staff & Board",
-      "kind": "staff-board",
-      "eyebrow": "Vivo Performing Arts"
+      "id": "cta-ad",
+      "title": "Subscribe",
+      "kind": "promo",
+      "layout": "cta",
+      "heading": "Subscribe & Save 25%",
+      "body": "",
+      "buttonLabel": "Packages",
+      "buttonUrl": "https://www.vivoperformingarts.org/",
+      "buttonColor": "cream"
     },
     {
       "id": "supporters",
@@ -126,8 +133,23 @@
       "eyebrow": "With Gratitude"
     },
     {
+      "id": "staff-board",
+      "title": "Staff & Board",
+      "kind": "staff-board",
+      "eyebrow": "Vivo Performing Arts"
+    },
+    {
+      "id": "upcoming",
+      "title": "Next at Vivo",
+      "kind": "events",
+      "eyebrow": "Coming Up at Vivo Performing Arts",
+      "lead": "Explore the rest of the season at [vivoperformingarts.org](https://vivoperformingarts.org).",
+      "auto": true,
+      "count": 4
+    },
+    {
       "id": "info",
-      "title": "Hall Info",
+      "title": "Audience Information",
       "kind": "info",
       "eyebrow": "Visitor Info",
       "sections": [

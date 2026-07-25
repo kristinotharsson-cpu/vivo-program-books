@@ -12,6 +12,15 @@ const Icon = ({ name, size = 20 }) => {
     case "arrow-left": return <svg viewBox="0 0 24 24" {...s}><line x1="20" y1="12" x2="4" y2="12"/><polyline points="10,18 4,12 10,6"/></svg>;
     case "arrow-right": return <svg viewBox="0 0 24 24" {...s}><line x1="4" y1="12" x2="20" y2="12"/><polyline points="14,6 20,12 14,18"/></svg>;
     case "chev-down": return <svg viewBox="0 0 24 24" {...s}><polyline points="6,9 12,15 18,9"/></svg>;
+    case "chev-up": return <svg viewBox="0 0 24 24" {...s}><polyline points="6,15 12,9 18,15"/></svg>;
+    case "copy": return <svg viewBox="0 0 24 24" {...s}><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg>;
+    case "trash": return <svg viewBox="0 0 24 24" {...s}><path d="M4 7h16"/><path d="M10 11v6M14 11v6"/><path d="M6 7l1 13h10l1-13"/><path d="M9 7V4h6v3"/></svg>;
+    case "undo": return <svg viewBox="0 0 24 24" {...s}><path d="M9 14 4 9l5-5"/><path d="M4 9h11a5 5 0 0 1 0 10h-3"/></svg>;
+    case "redo": return <svg viewBox="0 0 24 24" {...s}><path d="m15 14 5-5-5-5"/><path d="M20 9H9a5 5 0 0 0 0 10h3"/></svg>;
+    case "monitor": return <svg viewBox="0 0 24 24" {...s}><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>;
+    case "phone": return <svg viewBox="0 0 24 24" {...s}><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg>;
+    case "chev-left": return <svg viewBox="0 0 24 24" {...s}><polyline points="15,18 9,12 15,6"/></svg>;
+    case "chev-right": return <svg viewBox="0 0 24 24" {...s}><polyline points="9,18 15,12 9,6"/></svg>;
     case "share": return <svg viewBox="0 0 24 24" {...s}><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg>;
     case "list": return <svg viewBox="0 0 24 24" {...s}><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg>;
     case "moon": return <svg viewBox="0 0 24 24" {...s}><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>;
@@ -52,18 +61,33 @@ const linkifyHtml = (t) => {
   return out;
 };
 
-const Editable = ({ value, onChange, multiline = false, as = "span", ...rest }) => {
+const Editable = ({ value, onChange, multiline = false, rich = null, as = "span", ...rest }) => {
   const ref = useRef(null);
   const editing = window.__editMode;
+  // Rich text (bold/italic/underline/color/highlight/links) is on for multiline fields
+  // by default; single-line fields (titles, eyebrows) stay plain unless rich is forced.
+  const isRich = rich === null ? multiline : rich;
+  // Rich values may carry inline HTML tags; plain values are text with legacy [label](url) links.
+  const isHtml = (t) => typeof t === "string" && /<(b|strong|i|em|u|mark|a|span|br)\b/i.test(t);
 
   useEffect(() => {
-    if (ref.current && ref.current.innerText !== value) {
+    if (!ref.current) return;
+    if (isRich && (isHtml(value) || (editing && ref.current.dataset.richSeeded !== "1"))) {
+      if (ref.current.innerHTML !== (value || "")) ref.current.innerHTML = value || "";
+      ref.current.dataset.richSeeded = "1";
+    } else if (!isRich && ref.current.innerText !== value) {
       ref.current.innerText = value;
     }
-  }, [value]);
+  }, [value, isRich, editing]);
 
   const handleBlur = () => {
-    if (ref.current) onChange(ref.current.innerText);
+    if (!ref.current) return;
+    if (isRich) {
+      const html = window.VivoRich ? window.VivoRich.clean(ref.current.innerHTML) : ref.current.innerHTML;
+      onChange(html);
+    } else {
+      onChange(ref.current.innerText);
+    }
   };
   const handleKey = (e) => {
     if (!multiline && e.key === "Enter") {
@@ -73,20 +97,25 @@ const Editable = ({ value, onChange, multiline = false, as = "span", ...rest }) 
   };
 
   const Tag = as;
-  // Read mode with links: render parsed HTML so [label](url) becomes a real anchor.
-  if (!editing && hasLinks(value)) {
-    return <Tag {...rest} dangerouslySetInnerHTML={{ __html: linkifyHtml(value) }} />;
+  const cls = (rest.className ? rest.className + " " : "") + (isRich && editing ? "rich-editable" : "");
+  const props = { ...rest, className: cls || undefined };
+  // Read mode: render inline HTML (rich) or legacy-link-parsed text.
+  if (!editing) {
+    if (isRich && isHtml(value)) return <Tag {...props} dangerouslySetInnerHTML={{ __html: value }} />;
+    if (hasLinks(value)) return <Tag {...props} dangerouslySetInnerHTML={{ __html: linkifyHtml(value) }} />;
+    return <Tag {...props}>{value}</Tag>;
   }
   return (
     <Tag
       ref={ref}
-      contentEditable={editing}
+      contentEditable
       suppressContentEditableWarning
       onBlur={handleBlur}
       onKeyDown={handleKey}
+      data-rich={isRich ? "1" : undefined}
       spellCheck={false}
-      {...rest}
-    >{value}</Tag>
+      {...props}
+    >{isRich ? undefined : value}</Tag>
   );
 };
 
@@ -113,6 +142,70 @@ const TopBar = ({ title, onBack, onMenu, onSearch, showLogo, logoSrc, home }) =>
     </div>
   </header>
 );
+
+// ---------- Reader Nav (reader-facing only: preview + exported HTML) ----------
+// Sticky bar with a link back to the main Vivo site, a Contents jump menu, and search.
+// Never rendered while editing.
+const ReaderNav = ({ sections = [], onGo, onHome, onBack, onSearch, onMenu, theme, homeUrl = "https://vivoperformingarts.org", currentId }) => {
+  const [open, setOpen] = useState(false);
+  const wrapRef = useRef(null);
+  useEffect(() => {
+    if (!open) return;
+    const onDoc = (e) => { if (wrapRef.current && !wrapRef.current.contains(e.target)) setOpen(false); };
+    document.addEventListener("mousedown", onDoc);
+    return () => document.removeEventListener("mousedown", onDoc);
+  }, [open]);
+  const logoSrc = theme === "light" ? "assets/logos/vivo-logo-black.png" : "assets/logos/vivo-logo-cream.png";
+  const jump = (id) => { setOpen(false); if (id === "__home") onHome && onHome(); else onGo && onGo(id); };
+  return (
+    <header className="reader-nav">
+      <div className="reader-nav-left">
+        {onBack ? (
+          <button className="reader-nav-back" onClick={onBack} aria-label="Back to cover"><Icon name="arrow-left" size={20} /></button>
+        ) : null}
+        <a className="reader-nav-brand" href={homeUrl} target="_blank" rel="noopener noreferrer" aria-label="Vivo Performing Arts website">
+          <img src={logoSrc} alt="Vivo Performing Arts" />
+          <span className="reader-nav-ext" aria-hidden="true">↗</span>
+        </a>
+      </div>
+      <div className="reader-nav-right">
+        <div className="reader-nav-contents" ref={wrapRef}>
+          <button className="reader-nav-contents-btn" aria-expanded={open} onClick={() => setOpen(o => !o)}>
+            <Icon name="list" size={18} /><span>Contents</span><Icon name="chev-down" size={16} />
+          </button>
+          {open ? (
+            <div className="reader-nav-menu" role="menu">
+              <button className={"reader-nav-jump" + (!currentId ? " is-current" : "")} onClick={() => jump("__home")}>
+                <span className="num">00</span><span className="ttl">Cover</span>
+              </button>
+              {sections.map((s, i) => (
+                <button key={s.id} className={"reader-nav-jump" + (currentId === s.id ? " is-current" : "")} onClick={() => jump(s.id)}>
+                  <span className="num">{String(i + 1).padStart(2, "0")}</span><span className="ttl">{s.title}</span>
+                </button>
+              ))}
+            </div>
+          ) : null}
+        </div>
+        <button className="reader-nav-icon" onClick={onSearch} aria-label="Search this program"><Icon name="search" size={20} /></button>
+        {onMenu ? <button className="reader-nav-icon" onClick={onMenu} aria-label="Menu"><Icon name="menu" size={20} /></button> : null}
+      </div>
+    </header>
+  );
+};
+
+// ---------- Shared-content notice (edit mode, versioned shared modules) ----------
+// Warns editors that changes to shared institutional content apply to programs from this
+// program's date forward — never to earlier-dated books.
+const SharedNotice = () => {
+  if (!window.__editMode) return null;
+  const d = window.PROGRAM_DATA && window.PROGRAM_DATA.cover && window.PROGRAM_DATA.cover.date;
+  return (
+    <div className="shared-notice" contentEditable={false}>
+      <span className="shared-notice-dot">◆</span>
+      Shared content — edits apply to programs dated {d ? <strong>{d}</strong> : "today"} and later. Earlier books keep their saved version.
+    </div>
+  );
+};
 
 // ---------- Settings Menu ----------
 const SettingsMenu = ({ open, onClose, theme, onTheme, fontSize, onFontSize, onShare, onToggleEdit, editing, onImport, onExport, onDesign }) => {
@@ -260,4 +353,4 @@ const PhotoSlot = ({ src, initials = "", alt = "", className = "", onChange, onC
 };
 
 // Expose globally for other Babel scripts
-Object.assign(window, { Icon, Editable, TopBar, SettingsMenu, Toast, SectionBottomNav, RowControls, AddRowButton, PhotoSlot });
+Object.assign(window, { Icon, Editable, TopBar, ReaderNav, SharedNotice, SettingsMenu, Toast, SectionBottomNav, RowControls, AddRowButton, PhotoSlot });

@@ -33,6 +33,72 @@
       }
     },
     {
+      "id": "program",
+      "title": "Today's Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "3 performances: OCT 23 8PM; OCT 24 2PM & 8PM. 8 acrobats + 1 musician. All ages (4+). 60 min.",
+      "pieces": [
+        {
+          "composer": "Program details",
+          "work": "To be announced from the stage.",
+          "meta": ""
+        }
+      ],
+      "runtimeNote": "There will be no intermission in today’s performance, which will run approximately one hour."
+    },
+    {
+      "id": "notes",
+      "title": "Program Notes",
+      "kind": "notes",
+      "eyebrow": "About the Music",
+      "sections": [
+        {
+          "h": "",
+          "body": [
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "id": "song-texts",
+      "title": "Song Texts",
+      "kind": "songtexts",
+      "eyebrow": "Follow Along",
+      "lead": "",
+      "songs": []
+    },
+    {
+      "id": "bios",
+      "title": "About the Artist",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "gravity-and-other-myths",
+          "name": "Gravity & Other Myths",
+          "role": "contemporary circus",
+          "initials": "G&O",
+          "photoSrc": "",
+          "body": [
+            "In Ten Thousand Hours, contemporary circus company Gravity & Other Myths goes beyond jaw-dropping feats to weave a tale of impassioned dedication. Calling the show an \"ode to the countless hours needed to achieve great things,\" eight acrobats and one musician share a peek behind the curtain: dazzling insight into the journey of dedication and persistence that has made Gravity & Other Myths one of Australia's best loved and most decorated contemporary circuses."
+          ],
+          "website": "https://www.gravityandothermyths.com"
+        }
+      ],
+      "photoLayout": "thumbnail",
+      "archive": {
+        "tag": "Last with us",
+        "when": "",
+        "work": "",
+        "venue": "",
+        "body": [
+          ""
+        ]
+      }
+    },
+    {
       "id": "performance-sponsor",
       "title": "Performance Sponsor",
       "kind": "performance-sponsor",
@@ -52,66 +118,15 @@
       "mgmtCredit": "Gravity & Other Myths appears by arrangement with Opus 3 Artists"
     },
     {
-      "id": "program",
-      "title": "Today's Program",
-      "kind": "program",
-      "eyebrow": "The Running Order",
-      "lead": "3 performances: OCT 23 8PM; OCT 24 2PM & 8PM. 8 acrobats + 1 musician. All ages (4+). 60 min.",
-      "pieces": [
-        {
-          "composer": "Program details",
-          "work": "To be announced from the stage.",
-          "meta": ""
-        }
-      ],
-      "runtimeNote": "There will be no intermission in today’s performance, which will run approximately one hour."
-    },
-    {
-      "id": "artist",
-      "title": "Cast & Creative",
-      "kind": "cast",
-      "eyebrow": "On Stage Tonight",
-      "cast": [
-        {
-          "role": "contemporary circus",
-          "name": "Gravity & Other Myths"
-        }
-      ],
-      "creative": []
-    },
-    {
-      "id": "bios",
-      "title": "About the Artists",
-      "kind": "bios",
-      "eyebrow": "Tonight's Artist",
-      "bios": [
-        {
-          "id": "gravity-and-other-myths",
-          "name": "Gravity & Other Myths",
-          "role": "contemporary circus",
-          "initials": "G&O",
-          "photoSrc": "",
-          "body": [
-            "In Ten Thousand Hours, contemporary circus company Gravity & Other Myths goes beyond jaw-dropping feats to weave a tale of impassioned dedication. Calling the show an \"ode to the countless hours needed to achieve great things,\" eight acrobats and one musician share a peek behind the curtain: dazzling insight into the journey of dedication and persistence that has made Gravity & Other Myths one of Australia's best loved and most decorated contemporary circuses."
-          ],
-          "website": "https://www.gravityandothermyths.com"
-        }
-      ]
-    },
-    {
-      "id": "upcoming",
-      "title": "Upcoming",
-      "kind": "events",
-      "eyebrow": "Coming Up at Vivo Performing Arts",
-      "lead": "Explore the rest of the season at [vivoperformingarts.org](https://vivoperformingarts.org).",
-      "auto": true,
-      "count": 4
-    },
-    {
-      "id": "staff-board",
-      "title": "Staff & Board",
-      "kind": "staff-board",
-      "eyebrow": "Vivo Performing Arts"
+      "id": "cta-ad",
+      "title": "Subscribe",
+      "kind": "promo",
+      "layout": "cta",
+      "heading": "Subscribe & Save 25%",
+      "body": "",
+      "buttonLabel": "Packages",
+      "buttonUrl": "https://www.vivoperformingarts.org/",
+      "buttonColor": "cream"
     },
     {
       "id": "supporters",
@@ -120,8 +135,23 @@
       "eyebrow": "With Gratitude"
     },
     {
+      "id": "staff-board",
+      "title": "Staff & Board",
+      "kind": "staff-board",
+      "eyebrow": "Vivo Performing Arts"
+    },
+    {
+      "id": "upcoming",
+      "title": "Next at Vivo",
+      "kind": "events",
+      "eyebrow": "Coming Up at Vivo Performing Arts",
+      "lead": "Explore the rest of the season at [vivoperformingarts.org](https://vivoperformingarts.org).",
+      "auto": true,
+      "count": 4
+    },
+    {
       "id": "info",
-      "title": "Hall Info",
+      "title": "Audience Information",
       "kind": "info",
       "eyebrow": "Visitor Info",
       "sections": [

@@ -32,6 +32,74 @@
       }
     },
     {
+      "id": "program",
+      "title": "Today's Program",
+      "kind": "program",
+      "eyebrow": "The Running Order",
+      "lead": "4 performances: APR 30 8PM; MAY 01 2PM & 8PM; MAY 02 3PM. Artistic Director Alicia Graf Mack.",
+      "pieces": [
+        {
+          "composer": "ALICIA GRAF MACK",
+          "work": "Artistic Director"
+        },
+        {
+          "composer": "MATTHEW RUSHING",
+          "work": "Associate Artistic Director"
+        }
+      ]
+    },
+    {
+      "id": "notes",
+      "title": "Program Notes",
+      "kind": "notes",
+      "eyebrow": "About the Music",
+      "sections": [
+        {
+          "h": "",
+          "body": [
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "id": "song-texts",
+      "title": "Song Texts",
+      "kind": "songtexts",
+      "eyebrow": "Follow Along",
+      "lead": "",
+      "songs": []
+    },
+    {
+      "id": "bios",
+      "title": "About the Artist",
+      "kind": "bios",
+      "eyebrow": "Tonight's Artist",
+      "bios": [
+        {
+          "id": "alvin-ailey-american-dance-theater",
+          "name": "Alvin Ailey American Dance Theater",
+          "role": "dance company",
+          "initials": "AAA",
+          "photoSrc": "",
+          "body": [
+            "For more than six decades, Alvin Ailey American Dance Theater has captivated audiences around the world with performances that blend breathtaking athleticism, expressive storytelling, and the rich traditions of modern dance. Founded in 1958, the company has become a cultural touchstone, celebrating the depth, resilience, and beauty of the human spirit while honoring the rich heritage that continues to shape its artistic vision. In these uplifting performances at the Boch Center Wang Theatre, extraordinary dancers radiate passion, precision, and joy from the stage. Join us for performances that continue a beloved dance tradition, one that invites audiences to feel deeply, rejoice together, and share in the exhilaration of live performance."
+          ],
+          "website": "https://www.alvinailey.org"
+        }
+      ],
+      "photoLayout": "thumbnail",
+      "archive": {
+        "tag": "Last with us",
+        "when": "",
+        "work": "",
+        "venue": "",
+        "body": [
+          ""
+        ]
+      }
+    },
+    {
       "id": "performance-sponsor",
       "title": "Performance Sponsor",
       "kind": "performance-sponsor",
@@ -50,76 +118,15 @@
       "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
     },
     {
-      "id": "program",
-      "title": "Today's Program",
-      "kind": "program",
-      "eyebrow": "The Running Order",
-      "lead": "4 performances: APR 30 8PM; MAY 01 2PM & 8PM; MAY 02 3PM. Artistic Director Alicia Graf Mack.",
-      "pieces": [
-        {
-          "composer": "ALICIA GRAF MACK",
-          "work": "Artistic Director"
-        },
-        {
-          "composer": "MATTHEW RUSHING",
-          "work": "Associate Artistic Director"
-        }
-      ]
-    },
-    {
-      "id": "artist",
-      "title": "Cast & Creative",
-      "kind": "cast",
-      "eyebrow": "On Stage Tonight",
-      "cast": [
-        {
-          "role": "dance company",
-          "name": "Alvin Ailey American Dance Theater"
-        },
-        {
-          "role": "artistic director",
-          "name": "Alicia Graf Mack"
-        },
-        {
-          "role": "associate artistic director",
-          "name": "Matthew Rushing"
-        }
-      ],
-      "creative": []
-    },
-    {
-      "id": "bios",
-      "title": "About the Artists",
-      "kind": "bios",
-      "eyebrow": "Tonight's Artist",
-      "bios": [
-        {
-          "id": "alvin-ailey-american-dance-theater",
-          "name": "Alvin Ailey American Dance Theater",
-          "role": "dance company",
-          "initials": "AAA",
-          "photoSrc": "",
-          "body": [
-            "For more than six decades, Alvin Ailey American Dance Theater has captivated audiences around the world with performances that blend breathtaking athleticism, expressive storytelling, and the rich traditions of modern dance. Founded in 1958, the company has become a cultural touchstone, celebrating the depth, resilience, and beauty of the human spirit while honoring the rich heritage that continues to shape its artistic vision. In these uplifting performances at the Boch Center Wang Theatre, extraordinary dancers radiate passion, precision, and joy from the stage. Join us for performances that continue a beloved dance tradition, one that invites audiences to feel deeply, rejoice together, and share in the exhilaration of live performance."
-          ],
-          "website": "https://www.alvinailey.org"
-        }
-      ]
-    },
-    {
-      "id": "upcoming",
-      "title": "Upcoming",
-      "kind": "events",
-      "eyebrow": "Coming Up at Vivo Performing Arts",
-      "lead": "Explore the rest of the season at [vivoperformingarts.org](https://vivoperformingarts.org).",
-      "auto": true,
-      "count": 4
-    },
-    {
-      "id": "staff-board",
-      "title": "Staff & Board",
-      "kind": "staff-board",
-      "eyebrow": "Vivo Performing Arts"
+      "id": "cta-ad",
+      "title": "Subscribe",
+      "kind": "promo",
+      "layout": "cta",
+      "heading": "Subscribe & Save 25%",
+      "body": "",
+      "buttonLabel": "Packages",
+      "buttonUrl": "https://www.vivoperformingarts.org/",
+      "buttonColor": "cream"
     },
     {
       "id": "supporters",
@@ -128,8 +135,23 @@
       "eyebrow": "With Gratitude"
     },
     {
+      "id": "staff-board",
+      "title": "Staff & Board",
+      "kind": "staff-board",
+      "eyebrow": "Vivo Performing Arts"
+    },
+    {
+      "id": "upcoming",
+      "title": "Next at Vivo",
+      "kind": "events",
+      "eyebrow": "Coming Up at Vivo Performing Arts",
+      "lead": "Explore the rest of the season at [vivoperformingarts.org](https://vivoperformingarts.org).",
+      "auto": true,
+      "count": 4
+    },
+    {
       "id": "info",
-      "title": "Hall Info",
+      "title": "Audience Information",
       "kind": "info",
       "eyebrow": "Visitor Info",
       "sections": [
