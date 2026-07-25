@@ -17,17 +17,56 @@
     return mode;
   }
 
+  // Local backend: IndexedDB (megabytes of quota — holds base64 photos that overflow
+  // localStorage's ~5MB cap). Falls back to localStorage only if IndexedDB is unavailable.
+  const IDB_NAME = "vivo-programs", IDB_STORE = "records";
+  let _db = null;
+  function idb() {
+    if (_db) return _db;
+    _db = new Promise((resolve, reject) => {
+      let req;
+      try { req = indexedDB.open(IDB_NAME, 1); } catch (e) { return reject(e); }
+      req.onupgradeneeded = () => { req.result.createObjectStore(IDB_STORE); };
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+    return _db;
+  }
+  function idbReq(store, mode, fn) {
+    return idb().then(db => new Promise((resolve, reject) => {
+      const tx = db.transaction(IDB_STORE, mode);
+      const rq = fn(tx.objectStore(IDB_STORE));
+      rq.onsuccess = () => resolve(rq.result);
+      rq.onerror = () => reject(rq.error);
+    }));
+  }
+  const hasIDB = (function () { try { return !!window.indexedDB; } catch (e) { return false; } })();
+
   const local = {
     async getProgram(id) {
+      if (hasIDB) {
+        try { const v = await idbReq(IDB_STORE, "readonly", st => st.get(id)); if (v) return v; } catch (e) {}
+      }
       const v = localStorage.getItem(LS_PREFIX + id);
       return v ? JSON.parse(v) : null;
     },
     async saveProgram(id, record) {
-      localStorage.setItem(LS_PREFIX + id, JSON.stringify(record));
+      if (hasIDB) {
+        try { await idbReq(IDB_STORE, "readwrite", st => st.put(record, id)); return record; } catch (e) {}
+      }
+      try { localStorage.setItem(LS_PREFIX + id, JSON.stringify(record)); } catch (e) { console.warn("VivoStore local save failed (quota)", e); }
       return record;
     },
     async listPrograms() {
       const out = {};
+      if (hasIDB) {
+        try {
+          const keys = await idbReq(IDB_STORE, "readonly", st => st.getAllKeys());
+          const vals = await idbReq(IDB_STORE, "readonly", st => st.getAll());
+          keys.forEach((k, i) => { const r = vals[i] || {}; out[r.id || k] = { status: r.status, updatedAt: r.updatedAt, lastExportedAt: r.lastExportedAt }; });
+          return out;
+        } catch (e) {}
+      }
       for (let i = 0; i < localStorage.length; i++) {
         const k = localStorage.key(i);
         if (k && k.startsWith(LS_PREFIX)) {
@@ -39,7 +78,10 @@
       }
       return out;
     },
-    async deleteProgram(id) { localStorage.removeItem(LS_PREFIX + id); }
+    async deleteProgram(id) {
+      if (hasIDB) { try { await idbReq(IDB_STORE, "readwrite", st => st.delete(id)); } catch (e) {} }
+      localStorage.removeItem(LS_PREFIX + id);
+    }
   };
 
   const blobs = {

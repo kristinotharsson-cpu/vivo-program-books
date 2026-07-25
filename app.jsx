@@ -170,7 +170,7 @@ const AppFooter = ({ theme }) => (
   </footer>
 );
 
-const NoteCallout = ({ label, name, photoSrc, initials, onClick, onPhotoChange, onPhotoClear }) => {
+const NoteCallout = ({ label, name, photoSrc, initials, onClick, onPhotoChange, onPhotoClear, onLabelChange, onNameChange }) => {
   const fileRef = React.useRef(null);
   const editing = window.__editMode;
   const handlePhotoClick = (e) => {
@@ -187,7 +187,7 @@ const NoteCallout = ({ label, name, photoSrc, initials, onClick, onPhotoChange, 
     e.target.value = "";
   };
   return (
-    <button className={"note-callout" + (editing ? " is-editing" : "")} onClick={onClick}>
+    <button className={"note-callout" + (editing ? " is-editing" : "")} onClick={(e) => { if (editing) { if (e.target.closest(".note-callout-text")) return; return; } onClick && onClick(); }}>
       <div
         className={"note-callout-photo" + (editing ? " is-editable" : "")}
         onClick={handlePhotoClick}
@@ -211,8 +211,17 @@ const NoteCallout = ({ label, name, photoSrc, initials, onClick, onPhotoChange, 
         />
       </div>
       <div className="note-callout-text">
-        <div className="note-callout-label">{label}</div>
-        <div className="note-callout-name">{name}</div>
+        {editing ? (
+          <React.Fragment>
+            <Editable as="div" className="note-callout-label" value={label} data-ph="Callout label…" onChange={onLabelChange} />
+            <Editable as="div" className="note-callout-name" value={name} data-ph="Name…" onChange={onNameChange} />
+          </React.Fragment>
+        ) : (
+          <React.Fragment>
+            <div className="note-callout-label">{label}</div>
+            <div className="note-callout-name">{name}</div>
+          </React.Fragment>
+        )}
       </div>
       {editing && photoSrc ? (
         <button
@@ -461,6 +470,12 @@ const App = () => {
     if (window.VIVO_PROGRAM_DATA_SNAPSHOT && window.VIVO_PROGRAM_DATA_SNAPSHOT.data) {
       return JSON.parse(JSON.stringify(window.VIVO_PROGRAM_DATA_SNAPSHOT.data));
     }
+    // 2) The boot loader resolves the saved record (IndexedDB / Blobs) into VIVO_PROGRAM_RECORD
+    //    before render — prefer it so photos and edits restore even when the localStorage
+    //    mirror was dropped (base64 images exceed the ~5MB localStorage quota).
+    if (window.VIVO_PROGRAM_RECORD && window.VIVO_PROGRAM_RECORD.data && window.VIVO_PROGRAM_RECORD.data.sections) {
+      return JSON.parse(JSON.stringify(window.VIVO_PROGRAM_RECORD.data));
+    }
     try {
       const saved = localStorage.getItem(window.__VIVO_STORAGE_KEY || "vivo-pb-data");
       if (saved) return JSON.parse(saved);
@@ -538,10 +553,18 @@ const App = () => {
   const exportRef = React.useRef(null);
   const [toast, setToast] = useStateA(null);
   useEffectA(() => {
+    window.__vivoToast = (msg) => setToast(msg);
+  }, []);
+  useEffectA(() => {
     if (!toast) return;
     const t = setTimeout(() => setToast(null), 1800);
     return () => clearTimeout(t);
   }, [toast]);
+  // First-run edit tip (shown once)
+  const [showTip, setShowTip] = useStateA(() => {
+    try { return localStorage.getItem("vivo-pb-tip-seen") !== "1"; } catch (e) { return true; }
+  });
+  const dismissTip = () => { setShowTip(false); try { localStorage.setItem("vivo-pb-tip-seen", "1"); } catch (e) {} };
 
   // ---- Tweaks ----
   const [tweaks, setTweaks] = useStateA(() => {
@@ -682,14 +705,15 @@ const App = () => {
     { kind: "promo", label: "Ad Cards (carousel)", desc: "Multiple ad cards in a slider", make: (t) => ({ title: t || "Ad Cards", kind: "promo", layout: "cards", stack: false, cards: [{ imageSrc: "", eyebrow: "", heading: "Ad One", meta: "", buttonLabel: "Learn More", buttonUrl: "https://www.vivoperformingarts.org/", accent: "plum" }, { imageSrc: "", eyebrow: "", heading: "Ad Two", meta: "", buttonLabel: "Learn More", buttonUrl: "https://www.vivoperformingarts.org/", accent: "blue" }] }) }
   ];
   const addModule = (mod) => {
-    const title = (prompt(mod.label + " — section title?", mod.make("").title) || "").trim();
-    if (!title) return;
+    const title = mod.make("").title || mod.label;
     const base = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || (mod.kind + "-" + Date.now());
+    let newId = base;
     setData(d => {
-      const id = d.sections.some(s => s.id === base) ? base + "-" + Date.now() : base;
-      return { ...d, sections: [...d.sections, { id, ...mod.make(title) }] };
+      newId = d.sections.some(s => s.id === base) ? base + "-" + Date.now() : base;
+      return { ...d, sections: [...d.sections, { id: newId, ...mod.make(title) }] };
     });
-    setToast(`Added \u201c${title}\u201d`);
+    setToast(`Added \u201c${title}\u201d — opening to edit`);
+    setTimeout(() => { location.hash = "#/" + newId; }, 60);
   };
 
   const moveSection = useCallbackA((id, dir) => {
@@ -891,7 +915,7 @@ const App = () => {
   const accentFg = accentOnLight ? "var(--vivo-black)" : "var(--vivo-cream)";
 
   return (
-    <div className={"app" + (editing ? " is-editing-mode" : "") + (editing && devicePreview === "mobile" ? " device-mobile" : "")} style={{ "--accent": accentColor, "--accent-fg": accentFg, "--brush-x": (tweaks.brushX || 0) + "%", "--brush-y": (tweaks.brushY || 0) + "%", "--brush-size": (tweaks.brushSize || 60) + "%", "--brush-scale": (tweaks.brushSize || 60) / 60, "--brush-rotate": (tweaks.brushRotate == null ? 45 : tweaks.brushRotate) + "deg" }}>
+    <div className={"app" + (editing ? " is-editing-mode" : "") + (editing && showTip ? " has-tip" : "") + (editing && devicePreview === "mobile" ? " device-mobile" : "")} style={{ "--accent": accentColor, "--accent-fg": accentFg, "--brush-x": (tweaks.brushX || 0) + "%", "--brush-y": (tweaks.brushY || 0) + "%", "--brush-size": (tweaks.brushSize || 60) + "%", "--brush-scale": (tweaks.brushSize || 60) / 60, "--brush-rotate": (tweaks.brushRotate == null ? 45 : tweaks.brushRotate) + "deg" }}>
       {editing ? (
         <div className="edit-mode-bar">
           <span className="edit-mode-dot" />
@@ -905,6 +929,12 @@ const App = () => {
             <button className={"edit-tool" + (devicePreview === "mobile" ? " is-on" : "")} title="Mobile preview" onClick={() => setDevicePreview("mobile")}><Icon name="phone" size={16} /></button>
           </span>
           <button className="edit-mode-done" onClick={toggleEditing}>Done</button>
+        </div>
+      ) : null}
+      {editing && showTip ? (
+        <div className="edit-tip">
+          <span><strong>Tip:</strong> Select text to format it · Hover a section for its controls · Use <strong>+ Add</strong> or the menu to add modules · ⌘Z to undo</span>
+          <button className="edit-tip-x" onClick={dismissTip} aria-label="Dismiss tip">×</button>
         </div>
       ) : null}
       {editing ? (
@@ -941,6 +971,8 @@ const App = () => {
             onClick={() => goTo("welcome")}
             onPhotoChange={(src) => updateCover({ calloutPhotoSrc: src })}
             onPhotoClear={() => updateCover({ calloutPhotoSrc: "" })}
+            onLabelChange={(v) => updateCover({ calloutLabel: v })}
+            onNameChange={(v) => updateCover({ calloutName: v })}
           />
           <TOC sections={visibleSections} onGo={goTo} variant={tweaks.tocVariant} highlightColor={tweaks.tocHighlight}
             photoSrc={data.cover.tocPhotoSrc} onPhoto={(src) => updateCover({ tocPhotoSrc: src })} onUpdateSection={updateSection}
@@ -957,7 +989,15 @@ const App = () => {
           <AppFooter theme={theme} />
         </div>
       ) : (
-        <div className="page section-page" key={currentSection.id} style={currentSection.accentColor ? { "--accent": "var(--vivo-" + currentSection.accentColor + ")" } : undefined}>
+        <div className="page section-page" key={currentSection.id} style={(() => {
+          // TOC highlight color propagates to all programmatic pages via the global --accent.
+          // Exception: the shared institutional pages (Supporters, Staff & Board, About Vivo)
+          // don't follow the TOC highlight — they default to plum but keep their own color picker.
+          const sharedKinds = { "supporters-list": 1, "staff-board": 1, "vivo": 1 };
+          if (currentSection.accentColor) return { "--accent": "var(--vivo-" + currentSection.accentColor + ")" };
+          if (sharedKinds[currentSection.kind]) return { "--accent": "var(--vivo-plum)" };
+          return undefined;
+        })()}>
           {editing ? (
             <div className="section-rail" contentEditable={false}>
               <button title="Move up" disabled={currentIdx <= 0} onClick={() => moveSection(currentSection.id, -1)}><Icon name="chev-up" size={16} /></button>
@@ -965,7 +1005,7 @@ const App = () => {
               <button title="Duplicate" onClick={() => duplicateSection(currentSection.id)}><Icon name="copy" size={15} /></button>
               <button title="Section colors" onClick={() => setSectionMenuOpen(o => !o)}><Icon name="sliders" size={16} /></button>
               <span className="section-rail-sep" />
-              <button className="danger" title="Delete section" onClick={() => { if (confirm('Delete "' + currentSection.title + '"? This removes the section and its content.')) { deleteSection(currentSection.id); goHome(); } }}><Icon name="trash" size={15} /></button>
+              <button className="danger" title="Delete section" onClick={() => { deleteSection(currentSection.id); setToast("Section deleted · ⌘Z to undo"); goHome(); }}><Icon name="trash" size={15} /></button>
               {sectionMenuOpen ? (
                 <div className="section-settings" onMouseDown={e => e.stopPropagation()}>
                   <div className="ss-field"><span>Accent color</span>
@@ -994,10 +1034,11 @@ const App = () => {
             defaultTransMode={tweaks.transMode}
           />
           {editing ? (
-            <div className="custom-html-edit">
-              <div className="prog-help"><strong>Custom HTML (this page).</strong> Anything here renders at the bottom of the page — headings, &lt;p&gt;, lists, images, links (<code>&lt;a href="#/section-id"&gt;</code>). Saves as you type; turn off Edit to preview.</div>
+            <details className="advanced-html">
+              <summary>Advanced — add custom HTML to this page</summary>
+              <div className="prog-help">Optional. Anything here renders at the bottom of the page — headings, paragraphs, lists, images, links. For staff comfortable with HTML; most pages never need this.</div>
               <textarea className="prog-html-input" value={currentSection.customHtml || ""} placeholder="<p>Custom HTML for this page…</p>" onChange={(e) => updateSection(currentSection.id, { customHtml: e.target.value })} />
-            </div>
+            </details>
           ) : (currentSection.customHtml ? <div className="prog-html" dangerouslySetInnerHTML={{ __html: currentSection.customHtml }} /> : null)}
           <SectionBottomNav
             prev={visibleIdx > 0 ? visibleSections[visibleIdx - 1] : null}

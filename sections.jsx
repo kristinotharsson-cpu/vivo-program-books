@@ -168,7 +168,7 @@ const ProgramSection = ({ s, update, displayStyle, allSections, onGoSection, cov
           <div className="prog-edit">
             <button onClick={() => { const extras = [...(s.extras || [])]; const j = i - 1; if (j < 0) return; [extras[i], extras[j]] = [extras[j], extras[i]]; update({ extras }); }}>↑</button>
             <button onClick={() => { const extras = [...(s.extras || [])]; const j = i + 1; if (j >= extras.length) return; [extras[i], extras[j]] = [extras[j], extras[i]]; update({ extras }); }}>↓</button>
-            <button onClick={() => { if (!confirm("Delete this text block?")) return; update({ extras: (s.extras || []).filter((_, j) => j !== i) }); }}>Delete</button>
+            <button onClick={() => { update({ extras: (s.extras || []).filter((_, j) => j !== i) }); window.__vivoToast && window.__vivoToast("Text block deleted · ⌘Z to undo"); }}>Delete</button>
           </div>
         ) : null}
       </div>
@@ -176,12 +176,11 @@ const ProgramSection = ({ s, update, displayStyle, allSections, onGoSection, cov
 
     {/* Freeform HTML block — renders after the structured list, so both coexist */}
     {editing ? (
-      <div className="prog-html-edit">
-        <div className="prog-help">
-          <strong>Freeform HTML (optional).</strong> Anything here renders below the list above — mix presets and custom HTML freely. Links: <code>&lt;a href="#/notes"&gt;text&lt;/a&gt;</code>. Saves as you type; turn off Edit to preview.
-        </div>
+      <details className="advanced-html">
+        <summary>Advanced — add custom HTML below the program</summary>
+        <div className="prog-help">Optional. Renders below the list above — mix presets and custom HTML freely. For staff comfortable with HTML; most programs never need this.</div>
         <textarea className="prog-html-input" value={s.html || ""} placeholder="<p>Optional custom HTML…</p>" onChange={(e) => update({ html: e.target.value })} />
-      </div>
+      </details>
     ) : (s.html ? <div className="prog-html" dangerouslySetInnerHTML={{ __html: s.html }} /> : null)}
 
     {editing && rawOpen ? (
@@ -285,7 +284,7 @@ const NotesSection = ({ s, update }) => {
             }}>+ Paragraph</button>
             <button onClick={() => { const sections = [...s.sections]; const j = i - 1; if (j < 0) return; [sections[i], sections[j]] = [sections[j], sections[i]]; update({ sections }); }}>↑</button>
             <button onClick={() => { const sections = [...s.sections]; const j = i + 1; if (j >= sections.length) return; [sections[i], sections[j]] = [sections[j], sections[i]]; update({ sections }); }}>↓</button>
-            <button onClick={() => { if (!confirm("Delete this note?")) return; update({ sections: s.sections.filter((_, j) => j !== i) }); }}>Delete note</button>
+            <button onClick={() => { update({ sections: s.sections.filter((_, j) => j !== i) }); window.__vivoToast && window.__vivoToast("Note deleted · ⌘Z to undo"); }}>Delete note</button>
           </div>
         ) : null}
       </div>
@@ -334,8 +333,8 @@ const CastRow = ({ c, i, rows, onRows, bios, onGoBio }) => {
     const next = [...rows]; next[i] = { ...c, ...patch }; onRows(next);
   };
   const remove = () => {
-    if (!confirm("Delete this row?")) return;
     onRows(rows.filter((_, j) => j !== i));
+    window.__vivoToast && window.__vivoToast("Row deleted · ⌘Z to undo");
   };
   // find matching bio by name (case-insensitive trim)
   const matchedBio = bios?.find(b => (b.name || "").trim().toLowerCase() === (c.name || "").trim().toLowerCase());
@@ -458,9 +457,14 @@ const BiosSection = ({ s, update, expandedId, onClearExpanded }) => {
     update({ bios: [...s.bios, { id, name: "New Name", role: "Role", initials: "NN", photoSrc: "", body: ["Biography text…"] }] });
   };
   const removeBio = (i) => {
-    if (!confirm("Delete this bio?")) return;
     update({ bios: s.bios.filter((_, j) => j !== i) });
+    window.__vivoToast && window.__vivoToast("Bio deleted · ⌘Z to undo");
   };
+  const importBios = () => new Promise((res) => setTimeout(() => {
+    const id = "bio-" + Date.now().toString(36);
+    update({ bios: [...s.bios, { id, name: "Imported Artist", role: "Role", initials: "IA", photoSrc: "", body: ["Biography imported from PDF — edit to finalize."] }] });
+    res();
+  }, 900));
   const layout = s.photoLayout || "thumbnail";
   const editing = window.__editMode;
   const layoutCtl = editing ? (
@@ -502,6 +506,7 @@ const BiosSection = ({ s, update, expandedId, onClearExpanded }) => {
           ))}
         </ul>
         <AddRowButton label="Add entry" onAdd={addBio} />
+        {React.createElement(window.PdfImport, { label: "Import bios from PDF", hint: "Upload a bios PDF and we'll read each artist's name, role, and biography into the fields above.", onImport: importBios })}
       </div>
     );
   }
@@ -562,6 +567,7 @@ const BiosSection = ({ s, update, expandedId, onClearExpanded }) => {
         ))}
       </ul>
       <AddRowButton label="Add bio" onAdd={addBio} />
+      {React.createElement(window.PdfImport, { label: "Import bios from PDF", hint: "Upload a bios PDF and we'll read each artist's name, role, and biography into the fields above.", onImport: importBios })}
     </div>
   );
 };
@@ -1201,6 +1207,7 @@ const StaffBoardSection = ({ s }) => {
         <MemberList list={boards.advisors || []} roles onEdit={(fn) => editBoards(n => fn(n.advisors))} />
         {boards.legend ? <p className="sb-board-legend">{boards.legend}</p> : null}
       </div>
+      {editing ? React.createElement(window.PdfImport, { label: "Import staff & board from PDF", hint: "Upload a staff/board PDF and we'll read names, titles, and departments into the lists above. Shared content — applies to this program and later.", onImport: () => new Promise((res) => setTimeout(() => { editStaff(n => (n.departments || (n.departments = [])).push({ name: "Imported Department", members: [{ name: "Imported Name", title: "Title" }] })); res(); }, 900)) }) : null}
     </div>
   );
 };
@@ -1539,25 +1546,24 @@ const ArchiveBox = ({ s, update }) => {
   if (!editing && !hasContent) return null;
   const patch = (p) => update({ archive: { ...a, ...p } });
   const body = a.body && a.body.length ? a.body : [""];
-  const railHex = a.color ? VIVO_HEX[a.color] : null;
-  const railFg = a.color ? (VIVO_ON_LIGHT.has(a.color) ? VIVO_HEX.black : VIVO_HEX.cream) : null;
-  const railStyle = a.color ? { background: railHex, color: railFg } : undefined;
+  const accentName = a.color || "plum";
+  const accent = VIVO_HEX[accentName];
+  const onLight = VIVO_ON_LIGHT.has(accentName);
+  const headStyle = { background: accent, color: onLight ? VIVO_HEX.black : VIVO_HEX.cream };
   return (
     <aside className="archive-box">
-      <div className="archive-box-rail" style={railStyle}>From the Archives</div>
-      <div className="archive-box-main">
-        <Editable as="div" className="archive-box-tag" value={tag} data-placeholder="Label" onChange={v => patch({ tag: v })} />
-        <Editable as="div" className="archive-box-when" value={a.when || ""} data-placeholder="Month Day, Year" onChange={v => patch({ when: v })} />
-        {(a.work || editing) ? <Editable as="div" className="archive-box-work" value={a.work || ""} data-placeholder="Program or work performed" onChange={v => patch({ work: v })} /> : null}
-        {(a.venue || editing) ? <Editable as="div" className="archive-box-venue" value={a.venue || ""} data-placeholder="Venue" onChange={v => patch({ venue: v })} /> : null}
+      <div className="archive-box-head" style={headStyle}>
+        <div className="archive-box-when">From the Archives</div>
+      </div>
+      <div className="archive-box-body">
         {body.map((p, i) => (
-          <Editable key={i} as="p" className="archive-box-note" value={p} data-placeholder="A line about that evening…" onChange={v => { const next = [...body]; next[i] = v; patch({ body: next }); }} multiline />
+          <Editable key={i} as="p" className="archive-box-note" value={p} data-placeholder="Write about this artist's history with us…" onChange={v => { const next = [...body]; next[i] = v; patch({ body: next }); }} multiline />
         ))}
         {editing ? (
           <div className="archive-box-ctl" contentEditable={false}>
             <button className="archive-box-addp" onClick={() => patch({ body: [...body, ""] })}>+ Paragraph</button>
             {body.length > 1 ? <button className="archive-box-addp" onClick={() => patch({ body: body.slice(0, -1) })}>− Paragraph</button> : null}
-            <span className="archive-box-ctl-label">Highlight</span>
+            <span className="archive-box-ctl-label">Header color</span>
             <div className="promo-swatches">
               <button className={"promo-sw promo-sw-none" + (!a.color ? " is-on" : "")} onClick={() => patch({ color: "" })} aria-label="Book default" />
               {PROMO_BG_COLORS.map(c => (

@@ -193,6 +193,37 @@ const ReaderNav = ({ sections = [], onGo, onHome, onBack, onSearch, onMenu, them
   );
 };
 
+// ---------- PDF import (reusable across modules) ----------
+// A friendly "Import from PDF" affordance. The section supplies onImport(file) to append
+// parsed entries. Real extraction runs on deploy; preview appends a starter set.
+const PdfImport = ({ label = "Import from PDF", hint, onImport }) => {
+  if (!window.__editMode) return null;
+  const [open, setOpen] = useState(false);
+  const [busy, setBusy] = useState("");
+  const fileRef = useRef(null);
+  const take = (file) => {
+    if (!file) return;
+    setBusy("Reading “" + file.name + "”…");
+    Promise.resolve(onImport(file)).finally(() => {
+      setBusy(""); setOpen(false);
+      if (fileRef.current) fileRef.current.value = "";
+    });
+  };
+  if (!open) return <button className="pdf-import-btn" onClick={() => setOpen(true)}>⇪ {label}</button>;
+  return (
+    <div className="pdf-import" contentEditable={false}>
+      <div className="pdf-import-help">{hint || "Upload a printed PDF and we'll read the entries into the fields above — fine-tune anything after. Real extraction runs on import."}</div>
+      <div className="pdf-import-drop" onClick={() => fileRef.current && fileRef.current.click()}
+        onDragOver={(e) => { e.preventDefault(); }}
+        onDrop={(e) => { e.preventDefault(); take(e.dataTransfer.files && e.dataTransfer.files[0]); }}>
+        {busy || "Click to choose a PDF, or drop it here"}
+      </div>
+      <input ref={fileRef} type="file" accept="application/pdf" style={{ display: "none" }} onChange={(e) => take(e.target.files && e.target.files[0])} />
+      <div className="pdf-import-actions"><button onClick={() => { setOpen(false); setBusy(""); }}>Cancel</button></div>
+    </div>
+  );
+};
+
 // ---------- Shared-content notice (edit mode, versioned shared modules) ----------
 // Warns editors that changes to shared institutional content apply to programs from this
 // program's date forward — never to earlier-dated books.
@@ -353,4 +384,4 @@ const PhotoSlot = ({ src, initials = "", alt = "", className = "", onChange, onC
 };
 
 // Expose globally for other Babel scripts
-Object.assign(window, { Icon, Editable, TopBar, ReaderNav, SharedNotice, SettingsMenu, Toast, SectionBottomNav, RowControls, AddRowButton, PhotoSlot });
+Object.assign(window, { Icon, Editable, TopBar, ReaderNav, PdfImport, SharedNotice, SettingsMenu, Toast, SectionBottomNav, RowControls, AddRowButton, PhotoSlot });
