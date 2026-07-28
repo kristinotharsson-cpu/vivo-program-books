@@ -447,10 +447,12 @@ const App = () => {
   }, []);
 
   const goTo = useCallbackA((id) => {
+    if (window.__editMode && window.VivoStore) { clearTimeout(window.__vivoSaveT); if (window.__commitNow) window.__commitNow(); }
     window.location.hash = "/" + id;
     window.scrollTo({ top: 0, behavior: "instant" });
   }, []);
   const goHome = useCallbackA(() => {
+    if (window.__editMode && window.VivoStore) { clearTimeout(window.__vivoSaveT); if (window.__commitNow) window.__commitNow(); }
     window.location.hash = "";
     window.scrollTo({ top: 0, behavior: "instant" });
   }, []);
@@ -478,7 +480,13 @@ const App = () => {
     }
     try {
       const saved = localStorage.getItem(window.__VIVO_STORAGE_KEY || "vivo-pb-data");
-      if (saved) return JSON.parse(saved);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        // Version-gate the localStorage mirror too: if it predates the current base content
+        // version, discard it so the program loads fresh (matches the record gate in boot).
+        const base = window.PROGRAM_DATA && window.PROGRAM_DATA.contentVersion;
+        if (!base || parsed.contentVersion === base) return parsed;
+      }
     } catch (e) {}
     return JSON.parse(JSON.stringify(window.PROGRAM_DATA));
   });
@@ -523,6 +531,10 @@ const App = () => {
   }, [editing]);
   // Save-status pill + device-preview toggle (edit mode conveniences)
   const [saveState, setSaveState] = useStateA("saved"); // "saved" | "saving"
+  const [lastSaved, setLastSaved] = useStateA(() => {
+    const r = window.VIVO_PROGRAM_RECORD;
+    return (r && r.updatedAt) ? r.updatedAt : null;
+  });
   const [devicePreview, setDevicePreview] = useStateA("desktop"); // "desktop" | "mobile"
   // Undo / redo — snapshot stack of the section data (content edits)
   const historyRef = React.useRef({ stack: [], i: -1, applying: false });
@@ -614,22 +626,34 @@ const App = () => {
   // Commit the FULL editable snapshot (content + design tweaks + theme + text size) to the
   // program record (Netlify Blobs when deployed, localStorage in preview). This is what makes
   // every edit-menu change — colors, photos, layout, theme — survive a new session or device.
+  const commitNow = useCallbackA(async () => {
+    if (window.VIVO_PROGRAM_DATA_SNAPSHOT || !window.VivoStore) return;
+    const slug = new URLSearchParams(location.search).get("show") || (window.PROGRAM_DATA && window.PROGRAM_DATA.slug) || "sample";
+    setSaveState("saving");
+    try {
+      const prev = await window.VivoStore.getProgram(slug);
+      const rec = prev ? window.VivoStore.touch(prev, {}) : window.VivoStore.newRecord(slug, dataRef.current, "draft");
+      rec.data = dataRef.current;
+      rec.tweaks = tweaksRef.current;
+      rec.theme = themeRef.current;
+      rec.fontSize = fontSizeRef.current;
+      rec.updatedAt = new Date().toISOString();
+      rec.contentVersion = (window.PROGRAM_DATA && window.PROGRAM_DATA.contentVersion) || rec.contentVersion;
+      await window.VivoStore.saveProgram(slug, rec);
+      setLastSaved(rec.updatedAt);
+    } catch (e) { console.warn("VivoStore save failed", e); }
+    finally { setSaveState("saved"); }
+  }, []);
+  React.useEffect(() => { window.__commitNow = commitNow; }, [commitNow]);
+  const dataRef = React.useRef(data); dataRef.current = data;
+  const tweaksRef = React.useRef(tweaks); tweaksRef.current = tweaks;
+  const themeRef = React.useRef(theme); themeRef.current = theme;
+  const fontSizeRef = React.useRef(fontSize); fontSizeRef.current = fontSize;
   useEffectA(() => {
     if (window.VIVO_PROGRAM_DATA_SNAPSHOT) return; // exported HTML is read-only
     if (!window.VivoStore) return;
-    const slug = new URLSearchParams(location.search).get("show") || (window.PROGRAM_DATA && window.PROGRAM_DATA.slug) || "sample";
     clearTimeout(window.__vivoSaveT);
-    window.__vivoSaveT = setTimeout(async () => {
-      try {
-        const prev = await window.VivoStore.getProgram(slug);
-        const rec = prev ? window.VivoStore.touch(prev, {}) : window.VivoStore.newRecord(slug, data, "draft");
-        rec.data = data;
-        rec.tweaks = tweaks;
-        rec.theme = theme;
-        rec.fontSize = fontSize;
-        await window.VivoStore.saveProgram(slug, rec);
-      } catch (e) { console.warn("VivoStore save failed", e); }
-    }, 800);
+    window.__vivoSaveT = setTimeout(commitNow, 800);
   }, [data, tweaks, theme, fontSize]);
 
   // Apply tweaks to cover data (without persisting into data — they're presentational)
@@ -667,10 +691,6 @@ const App = () => {
   useEffectA(() => {
     if (historyRef.current.stack.length === 0) { pushHistory(data); return; }
     pushHistory(data);
-    if (window.VIVO_PROGRAM_DATA_SNAPSHOT || !window.VivoStore) return;
-    setSaveState("saving");
-    clearTimeout(window.__savePillT);
-    window.__savePillT = setTimeout(() => setSaveState("saved"), 900);
   }, [data]);
   // Keyboard undo/redo (outside rich fields, the bar handles ⌘Z inside text)
   useEffectA(() => {
@@ -696,7 +716,7 @@ const App = () => {
     { kind: "roster", label: "Musicians", desc: "Orchestra / ensemble roster", make: (t) => ({ title: t || "Musicians", kind: "roster", eyebrow: "The Ensemble", groups: [{ h: "Violin I", names: [""] }, { h: "Violin II", names: [""] }, { h: "Viola", names: [""] }, { h: "Cello", names: [""] }] }) },
     { kind: "supporters-list", label: "Vivo Supporters", desc: "Donor & partner listings", make: (t) => ({ title: t || "Vivo Performing Arts Supporters", kind: "supporters-list", eyebrow: "With Gratitude" }) },
     { kind: "staff-board", label: "Staff & Board", desc: "Staff, directors & advisors", make: (t) => ({ title: t || "Staff & Board", kind: "staff-board", eyebrow: "Vivo Performing Arts" }) },
-    { kind: "performance-sponsor", label: "Performance Sponsor", desc: "Sponsor box, image optional", make: (t) => ({ title: t || "Performance Sponsor", kind: "performance-sponsor", eyebrow: "Tonight's Performance", lead: "", blocks: [{ label: "Performance Sponsor", name: "Sponsor name", statement: "This performance is generously supported by Sponsor name.", imageSrc: "" }] }) },
+    { kind: "performance-sponsor", label: "Performance Supporters", desc: "Supporter box, image optional", make: (t) => ({ title: t || "Performance Supporters", kind: "performance-sponsor", eyebrow: "Tonight's Performance", lead: "", blocks: [{ label: "Performance Sponsor", name: "Sponsor name", statement: "This performance is generously supported by Sponsor name.", imageSrc: "" }] }) },
     { kind: "promo", label: "Ad: Compact Row", desc: "Thumb + title + link", make: (t) => ({ title: t || "Promo", kind: "promo", layout: "row", eyebrow: "35 & Under", heading: "$20 Student Tickets", body: "Every show, all season", buttonLabel: "Get Tickets", buttonUrl: "https://www.vivoperformingarts.org/", buttonColor: "green", imageSrc: "" }) },
     { kind: "promo", label: "Ad: CTA Bar", desc: "One-line headline + button", make: (t) => ({ title: t || "Promo", kind: "promo", layout: "cta", heading: "Subscribe & Save 25%", buttonLabel: "Packages", buttonUrl: "https://www.vivoperformingarts.org/", buttonColor: "cream" }) },
     { kind: "promo", label: "Ad: Image + Button", desc: "Photo, title, button", make: (t) => ({ title: t || "Promo", kind: "promo", layout: "side", eyebrow: "Next at Vivo", heading: "Jeremy Denk, Piano", meta: "FRI OCT 24 · 8PM · Jordan Hall", buttonLabel: "Buy Tickets", buttonUrl: "https://www.vivoperformingarts.org/", buttonColor: "blue", imageSrc: "" }) },
@@ -913,6 +933,13 @@ const App = () => {
   const accentColor = ACCENT_MAP[tweaks.tocHighlight] || "var(--vivo-plum)";
   const accentOnLight = tweaks.tocHighlight === "light-green" || tweaks.tocHighlight === "lavender";
   const accentFg = accentOnLight ? "var(--vivo-black)" : "var(--vivo-cream)";
+  const fmtLastSaved = (iso) => {
+    if (!iso) return "Not saved yet";
+    const d = new Date(iso), now = new Date();
+    const same = d.toDateString() === now.toDateString();
+    const t = d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+    return "Last edited " + (same ? t : d.toLocaleDateString([], { month: "short", day: "numeric" }) + ", " + t);
+  };
 
   return (
     <div className={"app" + (editing ? " is-editing-mode" : "") + (editing && showTip ? " has-tip" : "") + (editing && devicePreview === "mobile" ? " device-mobile" : "")} style={{ "--accent": accentColor, "--accent-fg": accentFg, "--brush-x": (tweaks.brushX || 0) + "%", "--brush-y": (tweaks.brushY || 0) + "%", "--brush-size": (tweaks.brushSize || 60) + "%", "--brush-scale": (tweaks.brushSize || 60) / 60, "--brush-rotate": (tweaks.brushRotate == null ? 45 : tweaks.brushRotate) + "deg" }}>
@@ -920,15 +947,20 @@ const App = () => {
         <div className="edit-mode-bar">
           <span className="edit-mode-dot" />
           <span className="edit-mode-label">Edit Mode</span>
-          <span className={"save-pill" + (saveState === "saving" ? " is-saving" : "")}><i />{saveState === "saving" ? "Saving…" : "Saved"}</span>
+          <button className={"edit-save-btn" + (saveState === "saving" ? " is-saving" : "")} onClick={() => { clearTimeout(window.__vivoSaveT); commitNow(); }} disabled={saveState === "saving"}>
+            <Icon name="check" size={15} />{saveState === "saving" ? "Saving…" : "Save"}
+          </button>
+          <span className="edit-last-saved">{fmtLastSaved(lastSaved)}</span>
           <span className="edit-tools">
             <button className="edit-tool" title="Undo (⌘Z)" disabled={!histState.canUndo} onClick={undo}><Icon name="undo" size={16} /></button>
             <button className="edit-tool" title="Redo (⌘⇧Z)" disabled={!histState.canRedo} onClick={redo}><Icon name="redo" size={16} /></button>
             <span className="edit-tool-sep" />
+            <button className="edit-tool" title="Design settings — colors, layout, fonts" onClick={() => { setShowTweaks(true); setTimeout(() => window.postMessage({ type: "__activate_edit_mode" }, "*"), 50); }}><Icon name="sliders" size={16} /></button>
+            <span className="edit-tool-sep" />
             <button className={"edit-tool" + (devicePreview === "desktop" ? " is-on" : "")} title="Desktop preview" onClick={() => setDevicePreview("desktop")}><Icon name="monitor" size={16} /></button>
             <button className={"edit-tool" + (devicePreview === "mobile" ? " is-on" : "")} title="Mobile preview" onClick={() => setDevicePreview("mobile")}><Icon name="phone" size={16} /></button>
           </span>
-          <button className="edit-mode-done" onClick={toggleEditing}>Done</button>
+          <button className="edit-mode-done" onClick={() => { clearTimeout(window.__vivoSaveT); commitNow(); toggleEditing(); }}>Done</button>
         </div>
       ) : null}
       {editing && showTip ? (
@@ -951,6 +983,7 @@ const App = () => {
         <ReaderNav
           sections={visibleSections}
           currentId={currentSection ? currentSection.id : null}
+          currentTitle={currentSection ? currentSection.title : null}
           onGo={goTo}
           onHome={goHome}
           onBack={currentSection ? goHome : null}
@@ -1031,6 +1064,7 @@ const App = () => {
             onClearExpandedBio={() => setExpandedBioId(null)}
             displayStyle={tweaks.programStyle}
             cover={data.cover}
+            updateCover={updateCover}
             defaultTransMode={tweaks.transMode}
           />
           {editing ? (

@@ -3,6 +3,7 @@
 // All text is editable in-page via contentEditable
 
 window.PROGRAM_DATA = {
+  contentVersion: "2026-07-27f",
   cover: {
     eyebrow: "Vivo Performing Arts",
     title: "Víkingur Ólafsson",
@@ -39,7 +40,7 @@ window.PROGRAM_DATA = {
     },
     {
       id: "performance-sponsor",
-      title: "Performance Sponsor",
+      title: "Performance Supporters",
       kind: "performance-sponsor",
       eyebrow: "Tonight's Performance",
       lead: "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
@@ -66,6 +67,11 @@ window.PROGRAM_DATA = {
       kind: "program",
       eyebrow: "The Running Order",
       lead: "Twenty-two pieces in a single arc, performed without interval. The first half is heard on the Steinway concert grand; the second half is the same program in the same order, on a felt-covered upright.",
+      sponsor: {
+        label: "Tonight's performance is sponsored by",
+        name: "Steinway & Sons",
+        line: "Tonight's piano provided by Steinway & Sons — the instruments of choice for the world's greatest pianists."
+      },
       pieces: [
         { composer: "J. S. Bach", work: "Christe, du Lamm Gottes, BWV 619", meta: "Arr. György Kurtág" },
         { composer: "Robert Schumann", work: "Study in Canonic Form, Op. 56 No. 1" },
@@ -524,7 +530,8 @@ window.PROGRAM_DATA = {
       eyebrow: "Coming Up at Vivo Performing Arts",
       lead: "Subscribe to the season at vivoperformingarts.org and never miss a night.",
       auto: true,
-      count: 6
+      count: 6,
+      layout: "carousel"
     },
     {
       id: "student-tickets",

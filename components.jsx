@@ -62,11 +62,12 @@ const linkifyHtml = (t) => {
 };
 
 const Editable = ({ value, onChange, multiline = false, rich = null, as = "span", ...rest }) => {
+  value = (value == null) ? "" : value;
   const ref = useRef(null);
   const editing = window.__editMode;
-  // Rich text (bold/italic/underline/color/highlight/links) is on for multiline fields
-  // by default; single-line fields (titles, eyebrows) stay plain unless rich is forced.
-  const isRich = rich === null ? multiline : rich;
+  // Rich text (bold/italic/underline/color/highlight/links) is enabled on ALL editable
+  // fields by default; pass rich={false} only where inline HTML would break structure.
+  const isRich = rich === null ? true : rich;
   // Rich values may carry inline HTML tags; plain values are text with legacy [label](url) links.
   const isHtml = (t) => typeof t === "string" && /<(b|strong|i|em|u|mark|a|span|br)\b/i.test(t);
 
@@ -146,9 +147,11 @@ const TopBar = ({ title, onBack, onMenu, onSearch, showLogo, logoSrc, home }) =>
 // ---------- Reader Nav (reader-facing only: preview + exported HTML) ----------
 // Sticky bar with a link back to the main Vivo site, a Contents jump menu, and search.
 // Never rendered while editing.
-const ReaderNav = ({ sections = [], onGo, onHome, onBack, onSearch, onMenu, theme, homeUrl = "https://vivoperformingarts.org", currentId }) => {
+const ReaderNav = ({ sections = [], onGo, onHome, onBack, onSearch, onMenu, theme, homeUrl = "https://vivoperformingarts.org", currentId, currentTitle }) => {
   const [open, setOpen] = useState(false);
+  const [filter, setFilter] = useState("");
   const wrapRef = useRef(null);
+  useEffect(() => { if (!open) setFilter(""); }, [open]);
   useEffect(() => {
     if (!open) return;
     const onDoc = (e) => { if (wrapRef.current && !wrapRef.current.contains(e.target)) setOpen(false); };
@@ -168,6 +171,7 @@ const ReaderNav = ({ sections = [], onGo, onHome, onBack, onSearch, onMenu, them
           <span className="reader-nav-ext" aria-hidden="true">↗</span>
         </a>
       </div>
+      {currentTitle ? <div className="reader-nav-current" aria-hidden="true">{currentTitle}</div> : null}
       <div className="reader-nav-right">
         <div className="reader-nav-contents" ref={wrapRef}>
           <button className="reader-nav-contents-btn" aria-expanded={open} onClick={() => setOpen(o => !o)}>
@@ -175,14 +179,26 @@ const ReaderNav = ({ sections = [], onGo, onHome, onBack, onSearch, onMenu, them
           </button>
           {open ? (
             <div className="reader-nav-menu" role="menu">
-              <button className={"reader-nav-jump" + (!currentId ? " is-current" : "")} onClick={() => jump("__home")}>
-                <span className="num">00</span><span className="ttl">Cover</span>
-              </button>
-              {sections.map((s, i) => (
-                <button key={s.id} className={"reader-nav-jump" + (currentId === s.id ? " is-current" : "")} onClick={() => jump(s.id)}>
-                  <span className="num">{String(i + 1).padStart(2, "0")}</span><span className="ttl">{s.title}</span>
+              <div className="reader-nav-filter">
+                <Icon name="search" size={15} />
+                <input value={filter} onChange={(e) => setFilter(e.target.value)} placeholder="Filter contents…" aria-label="Filter contents" />
+              </div>
+              {!filter ? (
+                <button className={"reader-nav-jump" + (!currentId ? " is-current" : "")} onClick={() => jump("__home")}>
+                  <span className="num">00</span><span className="ttl">Cover</span>
                 </button>
-              ))}
+              ) : null}
+              {sections.filter(s => !filter || (s.title || "").toLowerCase().includes(filter.toLowerCase())).map((s) => {
+                const n = sections.indexOf(s) + 1;
+                return (
+                  <button key={s.id} className={"reader-nav-jump" + (currentId === s.id ? " is-current" : "")} onClick={() => jump(s.id)}>
+                    <span className="num">{String(n).padStart(2, "0")}</span><span className="ttl">{s.title}</span>
+                  </button>
+                );
+              })}
+              {filter && !sections.some(s => (s.title || "").toLowerCase().includes(filter.toLowerCase())) ? (
+                <div className="reader-nav-empty">No section matches. <button className="reader-nav-fullsearch" onClick={() => { setOpen(false); onSearch && onSearch(); }}>Search full text →</button></div>
+              ) : null}
             </div>
           ) : null}
         </div>
@@ -259,7 +275,7 @@ const SettingsMenu = ({ open, onClose, theme, onTheme, fontSize, onFontSize, onS
           ))}
         </div>
         <button className="menu-item" onClick={() => onTheme(theme === "dark" ? "light" : "dark")}>
-          <span className="label">{theme === "dark" ? "Cream Mode" : "Black Mode"}</span>
+          <span className="label">{theme === "dark" ? "Switch to Cream" : "Switch to Black"}</span>
           <Icon name="moon" size={16} />
         </button>
         <button className="menu-item" onClick={onShare}>

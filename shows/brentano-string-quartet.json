@@ -15,7 +15,8 @@
     "presentedBy": "",
     "footerSponsor": null,
     "artistWebsite": "https://www.brentanoquartet.com",
-    "pressQuote": "\"Make no mistake: the Brentanos are a magnificent string quartet. This was wonderful, selfless music-making.\" The Times (London)"
+    "pressQuote": "\"Make no mistake: the Brentanos are a magnificent string quartet. This was wonderful, selfless music-making.\" The Times (London)",
+    "photoSrc": "assets/covers/brentano-string-quartet.jpg"
   },
   "sections": [
     {
@@ -76,7 +77,32 @@
           ]
         }
       ],
-      "runtimeNote": "This evening’s program will run approximately one hour and 45 minutes, including intermission."
+      "runtimeNote": "This evening’s program will run approximately one hour and 45 minutes, including intermission.",
+      "sponsor": {
+        "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
+        "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
+        "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
+        "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+      }
+    },
+    {
+      "id": "performance-sponsor",
+      "title": "Performance Supporters",
+      "kind": "performance-sponsor",
+      "eyebrow": "Tonight's Performance",
+      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
+      "blocks": [
+        {
+          "label": "Performance Supporter",
+          "name": "Performance Sponsor Name",
+          "statement": "This performance is generously supported by [Sponsor Name]."
+        }
+      ],
+      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
+      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you.",
+      "mgmtCredit": "The Brentano String Quartet appears by arrangement with David Rowe Artists."
     },
     {
       "id": "notes",
@@ -130,25 +156,6 @@
       }
     },
     {
-      "id": "performance-sponsor",
-      "title": "Performance Sponsor",
-      "kind": "performance-sponsor",
-      "eyebrow": "Tonight's Performance",
-      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
-      "blocks": [
-        {
-          "label": "Performance Supporter",
-          "name": "Performance Sponsor Name",
-          "statement": "This performance is generously supported by [Sponsor Name]."
-        }
-      ],
-      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
-      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
-      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
-      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you.",
-      "mgmtCredit": "The Brentano String Quartet appears by arrangement with David Rowe Artists."
-    },
-    {
       "id": "cta-ad",
       "title": "Subscribe",
       "kind": "promo",
@@ -170,15 +177,6 @@
       "title": "Staff & Board",
       "kind": "staff-board",
       "eyebrow": "Vivo Performing Arts"
-    },
-    {
-      "id": "upcoming",
-      "title": "Next at Vivo",
-      "kind": "events",
-      "eyebrow": "Coming Up at Vivo Performing Arts",
-      "lead": "Explore the rest of the season at [vivoperformingarts.org](https://vivoperformingarts.org).",
-      "auto": true,
-      "count": 4
     },
     {
       "id": "info",
@@ -211,6 +209,16 @@
           ]
         }
       ]
+    },
+    {
+      "id": "upcoming",
+      "title": "Next at Vivo",
+      "kind": "events",
+      "eyebrow": "Coming Up at Vivo Performing Arts",
+      "lead": "Subscribe to the season at vivoperformingarts.org and never miss a night.",
+      "auto": true,
+      "count": 6,
+      "layout": "carousel"
     }
   ],
   "_meta": {
@@ -233,5 +241,6 @@
       }
     ],
     "ensembleCount": 5
-  }
+  },
+  "contentVersion": "2026-07-27g"
 }

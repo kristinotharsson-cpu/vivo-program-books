@@ -20,7 +20,7 @@ const WelcomeSection = ({ s, update }) => (
 );
 
 // ---- PROGRAM ----
-const ProgramSection = ({ s, update, displayStyle, allSections, onGoSection, cover }) => {
+const ProgramSection = ({ s, update, displayStyle, allSections, onGoSection, cover, updateCover }) => {
   const editing = window.__editMode;
   const pieces = s.pieces || [];
   const setPieces = (next) => update({ pieces: next });
@@ -85,14 +85,37 @@ const ProgramSection = ({ s, update, displayStyle, allSections, onGoSection, cov
   };
   return (
   <div>
-    {cover ? (
+    {cover ? (() => {
+      const hd = s.header || {};
+      const gt = (k) => hd[k] != null && hd[k] !== "" ? hd[k] : (cover[k] || "");
+      const title = hd.title != null && hd.title !== "" ? hd.title : cover.title;
+      const subtitle = hd.subtitle != null ? hd.subtitle : cover.subtitle;
+      const setH = (patch) => update({ header: { ...hd, ...patch } });
+      return (
       <div className="program-perf-head">
-        <div className="program-perf-title">{cover.title}{cover.subtitle ? <span className="program-perf-sub"> — {cover.subtitle}</span> : null}</div>
-        <div className="program-perf-meta">
-          {[cover.date, cover.time, cover.venue].filter(Boolean).join("\u00A0\u00A0\u00A0")}
-        </div>
+        {editing ? (
+          <React.Fragment>
+            <div className="program-perf-title">
+              <Editable as="span" value={title || ""} data-ph="Program name…" onChange={v => setH({ title: v })} />
+              <span className="program-perf-sub"> — <Editable as="span" value={subtitle || ""} data-ph="subtitle" onChange={v => setH({ subtitle: v })} /></span>
+            </div>
+            <div className="program-perf-meta">
+              <Editable as="span" value={gt("date")} data-ph="Date" onChange={v => setH({ date: v })} />{"\u00A0\u00A0\u00A0"}
+              <Editable as="span" value={gt("time")} data-ph="Time" onChange={v => setH({ time: v })} />{"\u00A0\u00A0\u00A0"}
+              <Editable as="span" value={gt("venue")} data-ph="Venue" onChange={v => setH({ venue: v })} />
+            </div>
+          </React.Fragment>
+        ) : (
+          <React.Fragment>
+            <div className="program-perf-title">{title}{subtitle ? <span className="program-perf-sub"> — {subtitle}</span> : null}</div>
+            <div className="program-perf-meta">
+              {[gt("date"), gt("time"), gt("venue")].filter(Boolean).join("\u00A0\u00A0\u00A0")}
+            </div>
+          </React.Fragment>
+        )}
       </div>
-    ) : null}
+      );
+    })() : null}
     {(s.subtitle || editing) ? (
       <Editable as="p" className="section-subtitle" value={s.subtitle || ""} onChange={v => update({ subtitle: v })} multiline />
     ) : null}
@@ -208,6 +231,40 @@ const ProgramSection = ({ s, update, displayStyle, allSections, onGoSection, cov
         <strong>Linking a piece to a note:</strong> use the <em>Link to note</em> dropdown on any piece to connect it to a Program Notes or Info page — the title becomes a "Read note →" link. Anywhere you type text, <code>[label](#/section-id)</code> also makes a link.
       </div>
     ) : null}
+    {/* Performance supporter block — renders at the bottom of the Today's Program page,
+        in the sample format: arrangement lines, season sponsors, public-support lines. */}
+    {(() => {
+      const sp = s.sponsor || {};
+      const arr = (sp.arrangements || []).filter(x => x && x.trim());
+      const hasContent = arr.length || sp.name || sp.line || sp.seasonSponsors || sp.publicSupport || sp.closing;
+      if (!hasContent && !editing) return null;
+      return (
+        <div className={"prog-sponsor" + (editing && !hasContent ? " is-empty-optional" : "")}>
+          {editing && !hasContent ? <div className="empty-optional-note" contentEditable={false}>Hidden from readers until filled</div> : null}
+          {(arr.length || editing) ? (
+            <div className="prog-sp-arrangements">
+              {(sp.arrangements && sp.arrangements.length ? sp.arrangements : [""]).map((line, i) => (
+                <Editable key={i} as="p" className="prog-sp-arrangement" value={line} data-ph="[Artist] appears by arrangement with […]" onChange={v => { const a = [...(sp.arrangements || [""])]; a[i] = v; update({ sponsor: { ...sp, arrangements: a } }); }} />
+              ))}
+              {editing ? <button className="prog-sp-addline" contentEditable={false} onClick={() => update({ sponsor: { ...sp, arrangements: [...(sp.arrangements || [""]), ""] } })}>+ Arrangement line</button> : null}
+            </div>
+          ) : null}
+          {(sp.name || sp.seasonSponsors || editing) ? (
+            <div className="prog-sp-season">
+              <Editable as="div" className="prog-sp-season-label" value={sp.seasonSponsorsLabel || sp.label || ""} data-ph="Season Sponsors label…" onChange={v => update({ sponsor: { ...sp, seasonSponsorsLabel: v } })} />
+              <Editable as="div" className="prog-sp-season-names" value={sp.seasonSponsors || sp.name || ""} data-ph="Season sponsor names…" onChange={v => update({ sponsor: { ...sp, seasonSponsors: v } })} multiline />
+            </div>
+          ) : null}
+          {(sp.publicSupport || editing) ? (
+            <Editable as="p" className="prog-sp-support" value={sp.publicSupport || ""} data-ph="Neighborhood Arts / other support statement…" onChange={v => update({ sponsor: { ...sp, publicSupport: v } })} multiline />
+          ) : null}
+          {(sp.closing || editing) ? (
+            <Editable as="p" className="prog-sp-closing" value={sp.closing || ""} data-ph="Public agency line (e.g. supported by the Mass Cultural Council)…" onChange={v => update({ sponsor: { ...sp, closing: v } })} multiline />
+          ) : null}
+        </div>
+      );
+    })()}
+
     {editing ? (
       <div className="prog-edit prog-edit-add">
         <button onClick={addPiece}>+ Add Piece</button>
@@ -390,7 +447,7 @@ const CastSection = ({ s, update, bios, onGoBio }) => {
             )}
             {editing ? (
               <button className="cast-del-section" title="Delete section"
-                onClick={() => { if (confirm("Delete this whole section and its credits?")) setGroups(groups.filter((_, j) => j !== gi)); }}>Delete section</button>
+                onClick={() => { setGroups(groups.filter((_, j) => j !== gi)); window.__vivoToast && window.__vivoToast("Section deleted · ⌘Z to undo"); }}>Delete section</button>
             ) : null}
           </div>
           <ul className="cast-list">
@@ -1013,11 +1070,13 @@ const InfoSection = ({ s, update }) => {
 const VivoAccordion = ({ id, title, subtitle, accent, brush, brushColor, index, count, children, defaultOpen }) => {
   const [open, setOpen] = React.useState(!!defaultOpen);
   const accentMap = {
-    magenta: "var(--vivo-plum)", tangerine: "var(--vivo-orange)", azure: "var(--vivo-blue)",
+    magenta: "var(--vivo-plum)", tangerine: "var(--vivo-tangerine)", orange: "var(--vivo-tangerine)", azure: "var(--vivo-blue)",
     violet: "var(--vivo-plum)", green: "var(--vivo-green)", plum: "var(--vivo-plum)"
   };
   const bg = accentMap[accent] || "var(--vivo-plum)";
-  const brushSrc = brush ? `assets/illustrations/${brush}-tangerine.png` : null;
+  // On tangerine bars the illustration switches to plum for contrast; elsewhere it stays tangerine.
+  const isTangerine = /tangerine|orange/.test(accent || "");
+  const brushSrc = brush ? `assets/illustrations/${brush}-${isTangerine ? "plum" : "tangerine"}.png` : null;
   return (
     <div className={"vivo-accordion " + (open ? "is-open" : "")}>
       <button
@@ -1116,7 +1175,7 @@ const StaffBoardSection = ({ s }) => {
     fn(next); setBoards(next); persist(staff, next);
   };
 
-  const MemberList = ({ list, onEdit, roles }) => (
+  const MemberList = ({ list, onEdit, roles, emails }) => (
     editing ? (
       <div className="sb-edit-list">
         {list.map((m, i) => (
@@ -1126,7 +1185,7 @@ const StaffBoardSection = ({ s }) => {
               onClear={() => onEdit(l => { l[i].photoSrc = ""; })} />
             <input className="sup-input sb-in-name" value={m.name || ""} placeholder="Name" onChange={(e) => onEdit(l => { l[i].name = e.target.value; })} />
             <input className="sup-input sb-in-title" value={m.title || ""} placeholder={roles ? "Role" : "Title"} onChange={(e) => onEdit(l => { l[i].title = e.target.value; })} />
-            {!roles ? <input className="sup-input sb-in-email" value={m.email || ""} placeholder="Email (optional)" onChange={(e) => onEdit(l => { l[i].email = e.target.value; })} /> : null}
+            {emails ? <input className="sup-input sb-in-email" value={m.email || ""} placeholder="Email (optional)" onChange={(e) => onEdit(l => { l[i].email = e.target.value; })} /> : null}
             <button className="sup-del-tier" title="Remove" onClick={() => onEdit(l => l.splice(i, 1))}>×</button>
           </div>
         ))}
@@ -1138,9 +1197,8 @@ const StaffBoardSection = ({ s }) => {
           <li key={j} className={m.photoSrc ? "has-photo" : ""}>
             {m.photoSrc ? <PhotoSlot src={m.photoSrc} size={40} alt={m.name} className="sb-photo" /> : null}
             <div className="vivo-staff-text">
-              <span className="vivo-staff-name">{m.name}</span>
+              {emails && m.email ? <a className="vivo-staff-name vivo-staff-namelink" href={`mailto:${m.email}`}>{m.name}</a> : <span className="vivo-staff-name">{m.name}</span>}
               {m.title ? <span className="vivo-staff-title">{m.title}</span> : null}
-              {m.email ? <a className="vivo-staff-email" href={`mailto:${m.email}`}>{m.email}</a> : null}
             </div>
           </li>
         ))}
@@ -1172,7 +1230,7 @@ const StaffBoardSection = ({ s }) => {
             ) : d.inline ? (
               <textarea className="sup-input sb-in-inline" value={d.inline} placeholder="Comma-separated names" onChange={(e) => editStaff(n => { n.departments[di].inline = e.target.value; })} />
             ) : (
-              <MemberList list={d.members || []} onEdit={(fn) => editStaff(n => fn(n.departments[di].members || (n.departments[di].members = [])))} />
+              <MemberList list={d.members || []} emails={/advancement/i.test(d.name || "")} onEdit={(fn) => editStaff(n => fn(n.departments[di].members || (n.departments[di].members = [])))} />
             )}
           </div>
         ))}
@@ -1578,7 +1636,7 @@ const ArchiveBox = ({ s, update }) => {
 };
 
 // ---- Main switcher ----
-const SectionBody = ({ section, update, allSections, onGoSection, expandedBioId, onClearExpandedBio, displayStyle, defaultTransMode, cover }) => {
+const SectionBody = ({ section, update, allSections, onGoSection, expandedBioId, onClearExpandedBio, displayStyle, defaultTransMode, cover, updateCover }) => {
   const biosSection = allSections?.find(s => s.kind === "bios");
   const onGoBio = (bioId) => {
     if (!biosSection) return;
@@ -1586,7 +1644,7 @@ const SectionBody = ({ section, update, allSections, onGoSection, expandedBioId,
   };
   switch (section.kind) {
     case "welcome": return <WelcomeSection s={section} update={update} />;
-    case "program": return <ProgramSection s={section} update={update} displayStyle={displayStyle} allSections={allSections} onGoSection={onGoSection} cover={cover} />;
+    case "program": return <ProgramSection s={section} update={update} displayStyle={displayStyle} allSections={allSections} onGoSection={onGoSection} cover={cover} updateCover={updateCover} />;
     case "notes": return <NotesSection s={section} update={update} />;
     case "synopsis": return <SynopsisSection s={section} update={update} />;
     case "cast": return <CastSection s={section} update={update} bios={biosSection?.bios} onGoBio={onGoBio} />;

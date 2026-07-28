@@ -37,6 +37,8 @@
   opacity: 0.9;
   z-index: 0;
   pointer-events: none;
+  transform: scale(2);
+  transform-origin: right center;
 }
 .vivo-banner {
   position: relative;
@@ -238,6 +240,7 @@
   columns: 2;
   column-gap: 28px;
 }
+@media (max-width: 640px) { .vivo-tier-donors { columns: 1; } }
 .vivo-tier-donors li {
   break-inside: avoid;
   padding: 3px 0;
@@ -262,10 +265,12 @@
   .vivo-band-title { font-size: 14px; }
   .vivo-staff-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; }
   .vivo-staff-list li { align-items: flex-start; }
-  .vivo-tier-donors { columns: 3; }
 }
 
 /* ---- Staff & Board standalone module ---- */
+.vivo-staff-list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 20px; }
+.vivo-staff-namelink { color: var(--accent, var(--vivo-plum)); text-decoration: none; }
+.vivo-staff-namelink:hover { text-decoration: underline; }
 .sb-section { gap: 32px; }
 .sb-block { display: flex; flex-direction: column; gap: 10px; }
 .sb-block > .vivo-band-title { margin-bottom: 4px; }

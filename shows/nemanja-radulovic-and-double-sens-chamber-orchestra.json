@@ -85,7 +85,32 @@
           "composer": "RIMSKY-KORSAKOV",
           "work": "Symphonic Suite from Scheherazade, Op. 35 (arr. Aleksandar Sedlar)"
         }
-      ]
+      ],
+      "sponsor": {
+        "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
+        "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
+        "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
+        "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+      }
+    },
+    {
+      "id": "performance-sponsor",
+      "title": "Performance Supporters",
+      "kind": "performance-sponsor",
+      "eyebrow": "Tonight's Performance",
+      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
+      "blocks": [
+        {
+          "label": "Performance Supporter",
+          "name": "Performance Sponsor Name",
+          "statement": "This performance is generously supported by [Sponsor Name]."
+        }
+      ],
+      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
+      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
+      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
+      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you.",
+      "mgmtCredit": "Nemanja Radulović & Double Sens Chamber Orchestra appear by arrangement with Opus 3 Artists, New York, NY"
     },
     {
       "id": "notes",
@@ -139,25 +164,6 @@
       }
     },
     {
-      "id": "performance-sponsor",
-      "title": "Performance Sponsor",
-      "kind": "performance-sponsor",
-      "eyebrow": "Tonight's Performance",
-      "lead": "Celebrity Series of Boston is grateful to the supporters whose generosity makes tonight's performance possible.",
-      "blocks": [
-        {
-          "label": "Performance Supporter",
-          "name": "Performance Sponsor Name",
-          "statement": "This performance is generously supported by [Sponsor Name]."
-        }
-      ],
-      "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
-      "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
-      "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
-      "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you.",
-      "mgmtCredit": "Nemanja Radulović & Double Sens Chamber Orchestra appear by arrangement with Opus 3 Artists, New York, NY"
-    },
-    {
       "id": "cta-ad",
       "title": "Subscribe",
       "kind": "promo",
@@ -179,15 +185,6 @@
       "title": "Staff & Board",
       "kind": "staff-board",
       "eyebrow": "Vivo Performing Arts"
-    },
-    {
-      "id": "upcoming",
-      "title": "Next at Vivo",
-      "kind": "events",
-      "eyebrow": "Coming Up at Vivo Performing Arts",
-      "lead": "Explore the rest of the season at [vivoperformingarts.org](https://vivoperformingarts.org).",
-      "auto": true,
-      "count": 4
     },
     {
       "id": "info",
@@ -220,6 +217,16 @@
           ]
         }
       ]
+    },
+    {
+      "id": "upcoming",
+      "title": "Next at Vivo",
+      "kind": "events",
+      "eyebrow": "Coming Up at Vivo Performing Arts",
+      "lead": "Subscribe to the season at vivoperformingarts.org and never miss a night.",
+      "auto": true,
+      "count": 6,
+      "layout": "carousel"
     }
   ],
   "_meta": {
@@ -242,5 +249,6 @@
       }
     ],
     "ensembleCount": 2
-  }
+  },
+  "contentVersion": "2026-07-27f"
 }

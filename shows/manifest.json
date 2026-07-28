@@ -12,7 +12,8 @@
       "Neighborhood Arts"
     ],
     "accent": "blue",
-    "pdpUrl": "https://www.vivoperformingarts.org/productions/tríptico/"
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/tríptico/",
+    "thumb": "assets/covers/triptico.jpg"
   },
   {
     "slug": "bala-bila",
@@ -27,7 +28,8 @@
       "Neighborhood Arts"
     ],
     "accent": "blue",
-    "pdpUrl": "https://www.vivoperformingarts.org/productions/bala-bila/"
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/bala-bila/",
+    "thumb": "assets/covers/bala-bila.jpg"
   },
   {
     "slug": "let-s-dance-boston",
@@ -73,7 +75,8 @@
       "Piano"
     ],
     "accent": "green",
-    "pdpUrl": "https://www.vivoperformingarts.org/productions/avery-gagliano/"
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/avery-gagliano/",
+    "thumb": "assets/covers/avery-gagliano-piano.jpg"
   },
   {
     "slug": "hemenway-strings",
@@ -88,7 +91,8 @@
       "Neighborhood Arts",
       "Roxbury"
     ],
-    "accent": "green"
+    "accent": "green",
+    "thumb": "assets/covers/hemenway-strings.jpg"
   },
   {
     "slug": "lizz-wright",
@@ -101,7 +105,8 @@
     "genre": "Jazz",
     "tags": [],
     "accent": "orange",
-    "pdpUrl": "https://www.vivoperformingarts.org/productions/lizz-wright/"
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/lizz-wright/",
+    "thumb": "assets/covers/lizz-wright.jpg"
   },
   {
     "slug": "brentano-string-quartet",
@@ -114,7 +119,8 @@
     "genre": "Chamber",
     "tags": [],
     "accent": "green",
-    "pdpUrl": "https://www.vivoperformingarts.org/productions/brentano-string-quartet-2026/"
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/brentano-string-quartet-2026/",
+    "thumb": "assets/covers/brentano-string-quartet.jpg"
   },
   {
     "slug": "castle-of-our-skins",

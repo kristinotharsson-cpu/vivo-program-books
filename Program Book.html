@@ -56,9 +56,12 @@
     ])
       .then(function (results) {
         var rec = results[0];
+        var shell = results[1];
+        // Content-reset gate: if the saved record predates the current base content version,
+        // ignore it so the program loads fresh with the latest structure/updates.
+        if (rec && shell && rec.contentVersion !== shell.contentVersion) rec = null;
         if (rec && rec.data) window.VIVO_PROGRAM_RECORD = rec;
         var data = (rec && rec.data && rec.data.sections) ? rec.data : results[1];
-        var shell = results[1];
         var shared = results[2];
         // Venue is canonical scheduling data — always take it from the shell JSON so venue
         // changes propagate even to already-saved (cached) program records.
