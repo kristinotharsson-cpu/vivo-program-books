@@ -43,8 +43,10 @@
       "pieces": [
         {
           "composer": "J. S. BACH",
-          "work": "Goldberg Variations, BWV 988 — arr. for two guitars by T. Garcia and A. Mornière",
+          "work": "BACH",
+          "meta": "90 min",
           "movements": [
+            "Goldberg Variations, BWV 988 — arr. for two guitars by T. Garcia and A. Mornière",
             "Aria",
             "Var. 1–30 (full set, including all canons and the Quodlibet)",
             "Aria da capo"
@@ -210,5 +212,5 @@
     ],
     "ensembleCount": 2
   },
-  "contentVersion": "2026-07-27f"
+  "contentVersion": "2026-07-28a"
 }

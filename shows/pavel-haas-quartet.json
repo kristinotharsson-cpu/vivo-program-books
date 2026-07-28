@@ -41,22 +41,21 @@
         {
           "composer": "PAVEL HAAS",
           "work": "String Quartet No. 3, Op. 15",
+          "meta": "22 min",
           "movements": [
             "Allegro moderato",
             "Lento ma non troppo e poco rubato",
-            "Tema con variazione e fuga. Con moto"
+            "Tema con variazione e fuga. Con moto",
+            "18” LEOŠ JANÁČEK String Quartet No. 1 “Kreutzer Sonata”"
           ]
-        },
-        {
-          "composer": "LEOŠ JANÁČEK",
-          "work": "String Quartet No. 1 “Kreutzer Sonata"
         },
         {
           "kind": "intermission"
         },
         {
           "composer": "ANTONÍN DVOŘÁK",
-          "work": "String Quartet No. 12 in F Major, Op. 96 “American"
+          "work": "String Quartet No. 12 in F Major, Op. 96 “American”",
+          "meta": "25 min"
         }
       ],
       "runtimeNote": "This evening’s program will run approximately 90 minutes, including intermission.",
@@ -215,5 +214,5 @@
     ],
     "ensembleCount": 5
   },
-  "contentVersion": "2026-07-27f"
+  "contentVersion": "2026-07-28a"
 }

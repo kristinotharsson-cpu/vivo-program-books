@@ -40,28 +40,40 @@
       "lead": "Austrian pianist, Boston debut. Liszt transcriptions of Schubert Lieder + Schubert Wanderer Fantasy D. 760 + Liszt Années de pèlerinage, Italie.",
       "pieces": [
         {
-          "composer": "SCHUBERT (ARR. LISZT)",
-          "work": "Der Wanderer, D. 489 (arr. for solo piano, S. 558/11)"
+          "composer": "SCHUBERT",
+          "work": "(ARR. LISZT) Der Wanderer, D. 489 (arr. for solo piano, S. 558/11)",
+          "meta": "5:30 min"
         },
         {
-          "composer": "SCHUBERT (ARR. LISZT)",
-          "work": "Frühlingsglaube, D. 686 (arr. for solo piano, S. 558/7)"
+          "composer": "SCHUBERT",
+          "work": "(ARR. LISZT) Frühlingsglaube, D. 686 (arr. for solo piano, S. 558/7)",
+          "meta": "4 min"
         },
         {
-          "composer": "SCHUBERT (ARR. LISZT)",
-          "work": "Auf dem Wasser zu singen, D. 774 (arr. for solo piano, S. 558/2)"
+          "composer": "SCHUBERT",
+          "work": "(ARR. LISZT) Auf dem Wasser zu singen, D. 774 (arr. for solo piano, S. 558/2)",
+          "meta": "4:07 min"
         },
         {
-          "composer": "SCHUBERT (ARR. LISZT)",
-          "work": "Litanei auf das Fest Allerseelen, D. 343, from geistliche Lieder (arr. for solo piano, S. 562/1)"
+          "composer": "SCHUBERT",
+          "work": "(ARR. LISZT) Litanei auf das Fest Allerseelen, D. 343, from",
+          "meta": "4:30 min",
+          "movements": [
+            "geistliche Lieder (arr. for solo piano, S. 562/1)"
+          ]
         },
         {
-          "composer": "SCHUBERT (ARR. LISZT)",
-          "work": "Der Müller und der Bach, from Die schöne Müllerin, D. 795, No. 19 (arr. for solo piano, S. 565/2)"
+          "composer": "SCHUBERT",
+          "work": "(ARR. LISZT) Der Müller und der Bach, from",
+          "meta": "6 min",
+          "movements": [
+            "Die schöne Müllerin, D. 795, No. 19 (arr. for solo piano, S. 565/2)"
+          ]
         },
         {
           "composer": "FRANZ SCHUBERT",
-          "work": "Fantasie in C Major, Op. 15, D. 760 “Wanderer Fantasy",
+          "work": "Fantasie in C Major, Op. 15, D. 760 “Wanderer Fantasy”",
+          "meta": "20 min",
           "movements": [
             "Allegro con fuoco ma non troppo",
             "Adagio",
@@ -73,9 +85,11 @@
           "kind": "intermission"
         },
         {
-          "composer": "FRANZ LISZT",
-          "work": "Années de pèlerinage, deuxième année: Italie, S. 161",
+          "composer": "FRANZ",
+          "work": "LISZT",
+          "meta": "49 min",
           "movements": [
+            "Années de pèlerinage, deuxième année: Italie, S. 161",
             "Sposalizio",
             "Il Pensieroso",
             "Canzonetta del Salvator Rosa",
@@ -86,12 +100,15 @@
           ]
         }
       ],
-      "runtimeNote": "This evening’s program will run approximately one hour and 45 minutes, including intermission.",
+      "runtimeNote": "This evening’s program will run approiximately one hour and 45 minutes, including intermission.",
       "sponsor": {
         "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
         "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
         "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
-        "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+        "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you.",
+        "arrangements": [
+          "to follow bio World Management: Classic Concerts Management GmbH,"
+        ]
       }
     },
     {
@@ -243,5 +260,5 @@
     ],
     "ensembleCount": 1
   },
-  "contentVersion": "2026-07-27f"
+  "contentVersion": "2026-07-28a"
 }

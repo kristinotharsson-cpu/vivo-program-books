@@ -42,12 +42,15 @@
       "pieces": [
         {
           "composer": "JÖRG WIDMANN",
-          "work": "Sonatina facile for piano (2016)"
+          "work": "Sonatina facile for piano (2016)",
+          "meta": "12 min"
         },
         {
           "composer": "SERGEI PROKOFIEV",
-          "work": "Ten Pieces from Romeo and Juliet, Op. 75",
+          "work": "Ten Pieces from",
+          "meta": "31 min",
           "movements": [
+            "Romeo and Juliet, Op. 75",
             "Folk Dance",
             "Scene",
             "Minuet",
@@ -62,11 +65,13 @@
         },
         {
           "composer": "W. A. MOZART",
-          "work": "Fantasia in C minor, K. 396 (completed by Maximilian Stadler)"
+          "work": "Fantasia in C minor, K. 396 (completed by Maximilian Stadler)",
+          "meta": "10 min"
         },
         {
           "composer": "PROKOFIEV",
           "work": "Piano Sonata No. 8 in B-flat Major, Op. 84 (1939–44)",
+          "meta": "29 min",
           "movements": [
             "Andante dolce",
             "Andante sognando",
@@ -74,7 +79,7 @@
           ]
         }
       ],
-      "runtimeNote": "This afternoon’s program will run approximately one hour and 45 minutes, including intermission.",
+      "runtimeNote": "This afternoon’s program will run approximately one hour and 45 minutes, including intermisison.",
       "sponsor": {
         "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
         "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
@@ -238,5 +243,5 @@
     ],
     "ensembleCount": 1
   },
-  "contentVersion": "2026-07-27f"
+  "contentVersion": "2026-07-28a"
 }

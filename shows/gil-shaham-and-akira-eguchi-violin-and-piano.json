@@ -42,6 +42,7 @@
         {
           "composer": "LUDWIG VAN BEETHOVEN",
           "work": "Violin Sonata No. 6 in A Major, Op. 30, No. 1",
+          "meta": "20 min",
           "movements": [
             "Allegro",
             "Adagio molto espressivo",
@@ -51,6 +52,7 @@
         {
           "composer": "BEETHOVEN",
           "work": "Violin Sonata No. 7 in C minor, Op. 30, No. 2",
+          "meta": "25 min",
           "movements": [
             "Allegro con brio",
             "Adagio cantabile",
@@ -61,6 +63,7 @@
         {
           "composer": "BEETHOVEN",
           "work": "Violin Sonata No. 8 in G Major, Op. 30, No. 3",
+          "meta": "18 min",
           "movements": [
             "Allegro assai",
             "Tempo di Minuetto, ma molto moderato e grazioso",
@@ -73,7 +76,10 @@
         "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
         "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
         "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
-        "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+        "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you.",
+        "arrangements": [
+          "Gil Shaham & Akira Eguchi appear by arrangement of Opus 3 Artists, New York, NY"
+        ]
       }
     },
     {
@@ -233,5 +239,5 @@
     ],
     "ensembleCount": 2
   },
-  "contentVersion": "2026-07-27f"
+  "contentVersion": "2026-07-28a"
 }

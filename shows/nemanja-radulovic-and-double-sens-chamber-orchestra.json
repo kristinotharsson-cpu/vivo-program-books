@@ -40,11 +40,7 @@
       "pieces": [
         {
           "composer": "VIVALDI",
-          "work": "The Four Seasons, Op. 8"
-        },
-        {
-          "composer": "VIVALDI",
-          "work": "Violin Concerto in E Major, RV 269 “Spring",
+          "work": "Violin Concerto in E Major, RV 269 “Spring”",
           "movements": [
             "Allegro",
             "Largo",
@@ -53,7 +49,7 @@
         },
         {
           "composer": "VIVALDI",
-          "work": "Violin Concerto in G Major, RV 315 “Summer",
+          "work": "Violin Concerto in G Major, RV 315 “Summer”",
           "movements": [
             "Allegro",
             "Adagio e piano – Presto e forte",
@@ -62,7 +58,7 @@
         },
         {
           "composer": "VIVALDI",
-          "work": "Violin Concerto in G Major, RV 293 “Autumn",
+          "work": "Violin Concerto in G Major, RV 293 “Autumn”",
           "movements": [
             "Allegro",
             "Adagio molto",
@@ -71,7 +67,7 @@
         },
         {
           "composer": "VIVALDI",
-          "work": "Violin Concerto in F minor, RV 297 “Winter",
+          "work": "Violin Concerto in F minor, RV 297 “Winter”",
           "movements": [
             "Allegro con molto",
             "Largo",
@@ -83,15 +79,24 @@
         },
         {
           "composer": "RIMSKY-KORSAKOV",
-          "work": "Symphonic Suite from Scheherazade, Op. 35 (arr. Aleksandar Sedlar)"
+          "work": "Symphonic Suite from",
+          "meta": "5:26 min",
+          "movements": [
+            "Scheherazade, Op. 35 (arr. Aleksandar Sedlar)",
+            "plus selected Roots encores"
+          ]
         }
       ],
       "sponsor": {
         "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
         "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
         "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
-        "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
-      }
+        "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you.",
+        "arrangements": [
+          "Nemanja Radulović & Double Sens Chamber Orchestra appear by arrangement with Opus 3 Artists, New York, NY"
+        ]
+      },
+      "runtimeNote": "Mgmt credit Nemanja Radulović & Double Sens Chamber Orchestra appear by arrangement with Opus 3 Artists, New York, NY"
     },
     {
       "id": "performance-sponsor",
@@ -250,5 +255,5 @@
     ],
     "ensembleCount": 2
   },
-  "contentVersion": "2026-07-27f"
+  "contentVersion": "2026-07-28a"
 }

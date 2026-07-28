@@ -42,11 +42,13 @@
       "pieces": [
         {
           "composer": "DMITRI SHOSTAKOVICH",
-          "work": "from 24 Preludes and Fugues, Op. 87 (arr. for quartet) — 14. Fugue in E-flat minor"
+          "work": "from 24 Preludes and Fugues, Op. 87 (arr. for quartet) — 14. Fugue in E-flat minor",
+          "meta": "2:30 min"
         },
         {
           "composer": "SHOSTAKOVICH",
           "work": "Quartet No. 15 in E-flat minor, Op. 144",
+          "meta": "37 min",
           "movements": [
             "Elegy – Adagio, attacca",
             "Serenade – Adagio, attacca",
@@ -61,11 +63,13 @@
         },
         {
           "composer": "J. S. BACH",
-          "work": "from The Well-Tempered Clavier, Book I (arr. for quartet) — Fugue in C-sharp minor, BWV 849"
+          "work": "from The Well-Tempered Clavier, Book I (arr. for quartet) — Fugue in C-sharp minor, BWV 849",
+          "meta": "3 min"
         },
         {
           "composer": "LUDWIG VAN BEETHOVEN",
           "work": "String Quartet No. 14 in C-sharp minor, Op. 131",
+          "meta": "39 min",
           "movements": [
             "Adagio ma non troppo e molto espressivo",
             "Allegro molto vivace",
@@ -82,7 +86,10 @@
         "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
         "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
         "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
-        "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+        "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you.",
+        "arrangements": [
+          "The Brentano String Quartet appears by arrangement with David Rowe Artists."
+        ]
       }
     },
     {
@@ -242,5 +249,5 @@
     ],
     "ensembleCount": 5
   },
-  "contentVersion": "2026-07-27g"
+  "contentVersion": "2026-07-28a"
 }

@@ -42,40 +42,52 @@
       "pieces": [
         {
           "composer": "PHILIP GLASS",
-          "work": "Opening from Glassworks",
-          "movements": [
-            "CLAUDE DEBUSSY “Ondine,” No. 8 from",
-            "Préludes, Book II",
-            "GLASS Etude No. 15",
-            "JEAN-PHILIPPE RAMEAU Selections from Suite No. 3 in D Major",
-            "Les tendres plaintes",
-            "Les tourbillons",
-            "La joyeuse",
-            "Les cyclopes"
-          ]
+          "work": "“Opening” from Glassworks",
+          "meta": "6-7 min"
+        },
+        {
+          "composer": "CLAUDE DEBUSSY",
+          "work": "“Ondine,” No. 8 from Préludes, Book II"
+        },
+        {
+          "composer": "GLASS",
+          "work": "Etude No. 15"
+        },
+        {
+          "composer": "JEAN-PHILIPPE RAMEAU",
+          "work": "Selections from Suite No. 3 in D Major Les tendres plaintes Les tourbillons La joyeuse Les cyclopes"
         },
         {
           "composer": "DEBUSSY",
-          "work": "Serenade for the Doll, from Children’s Corner",
+          "work": "“Serenade for the Doll,” from Children’s Corner",
+          "meta": "2 min"
+        },
+        {
+          "composer": "RAMEAU",
+          "work": "Selections from Suite No. 2 in E minor Le Rappel des Oiseaux",
           "movements": [
-            "RAMEAU Selections from Suite No. 2 in E minor",
-            "Le Rappel des Oiseaux",
             "Rigaudons I, II & Double",
             "Musette en Rondeau",
             "Tambourin",
             "La Villageoise",
-            "Gigues en Rondeau I & II",
-            "DEBUSSY “Jardins sous la pluie” from",
-            "Estampes"
+            "Gigues en Rondeau I & II"
           ]
         },
         {
-          "composer": "GLASS",
-          "work": "Etude No. 3",
+          "composer": "DEBUSSY",
+          "work": "“Jardins sous la pluie” from Estampes",
           "movements": [
-            "DEBUSSY “The Snow Is Dancing,” from",
-            "Children’s Corner",
-            "RAMEAU Selections from Suite No. 5 in A minor",
+            "4” 4” GLASS Etude No. 3"
+          ]
+        },
+        {
+          "composer": "DEBUSSY",
+          "work": "“The Snow Is Dancing,” from Children’s Corner"
+        },
+        {
+          "composer": "RAMEAU",
+          "work": "Selections from Suite No. 5 in A minor",
+          "movements": [
             "Allemande",
             "Courante",
             "Sarabande",
@@ -249,5 +261,5 @@
     ],
     "ensembleCount": 1
   },
-  "contentVersion": "2026-07-27f"
+  "contentVersion": "2026-07-28a"
 }

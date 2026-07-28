@@ -41,6 +41,7 @@
         {
           "composer": "J. S. BACH",
           "work": "Sonata in B minor for violin & harpsichord, BWV 1014",
+          "meta": "14 min",
           "movements": [
             "Adagio",
             "Allegro",
@@ -50,11 +51,13 @@
         },
         {
           "composer": "JOHANN JAKOB FROBERGER",
-          "work": "Suite in C Major for solo harpsichord"
+          "work": "Suite in C Major for solo harpsichord",
+          "meta": "3 min"
         },
         {
           "composer": "BACH",
           "work": "Sonata in E Major for violin & obbligato harpsichord, BWV 1016",
+          "meta": "16 min",
           "movements": [
             "Adagio",
             "Allegro",
@@ -65,6 +68,7 @@
         {
           "composer": "JOHANN PAUL VON WESTHOFF",
           "work": "Sonata No. 2 in A minor for violin & continuo",
+          "meta": "10 min",
           "movements": [
             "Largo",
             "Presto",
@@ -78,11 +82,13 @@
         },
         {
           "composer": "NICOLA MATTEIS THE YOUNGER",
-          "work": "Fantasia in A minor for solo violin"
+          "work": "Fantasia in A minor for solo violin",
+          "meta": "4 min"
         },
         {
           "composer": "BACH",
           "work": "Sonata in A Major for violin & harpsichord, BWV 1015",
+          "meta": "14 min",
           "movements": [
             "[Andante]",
             "Allegro",
@@ -92,11 +98,13 @@
         },
         {
           "composer": "HEINRICH IGNAZ FRANZ BIBER",
-          "work": "Sonata in E minor for violin & continuo"
+          "work": "Sonata in E minor for violin & continuo",
+          "meta": "12 min"
         },
         {
           "composer": "BACH",
-          "work": "Sonata in G Major for violin & harpsichord, BWV 1019"
+          "work": "Sonata in G Major for violin & harpsichord, BWV 1019",
+          "meta": "15 min"
         }
       ],
       "runtimeNote": "This evening’s program will run approximately one hour and 45 minutes, including intermission.",
@@ -104,7 +112,10 @@
         "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
         "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
         "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
-        "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+        "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you.",
+        "arrangements": [
+          "Isabelle Faust appears by arrangement with Opus 3 Artists."
+        ]
       }
     },
     {
@@ -260,5 +271,5 @@
     ],
     "ensembleCount": 2
   },
-  "contentVersion": "2026-07-27f"
+  "contentVersion": "2026-07-28a"
 }

@@ -44,6 +44,7 @@
         {
           "composer": "LUDWIG VAN BEETHOVEN",
           "work": "Violin Concerto in D Major, Op. 61",
+          "meta": "42 min",
           "movements": [
             "Allegro ma non troppo",
             "Larghetto",
@@ -54,8 +55,12 @@
           "kind": "intermission"
         },
         {
-          "composer": "RICHARD STRAUSS",
-          "work": "Ein Heldenleben, Op. 40"
+          "composer": "RICHARD",
+          "work": "STRAUSS",
+          "meta": "40 min",
+          "movements": [
+            "Ein Heldenleben, Op. 40"
+          ]
         }
       ],
       "sponsor": {
@@ -63,7 +68,8 @@
         "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
         "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
         "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
-      }
+      },
+      "runtimeNote": "This evening's program will run approximately one hour and 45 minutes, including intermission."
     },
     {
       "id": "performance-sponsor",
@@ -221,5 +227,5 @@
     ],
     "ensembleCount": 3
   },
-  "contentVersion": "2026-07-27f"
+  "contentVersion": "2026-07-28a"
 }

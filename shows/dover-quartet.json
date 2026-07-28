@@ -41,6 +41,7 @@
         {
           "composer": "JOHANNES BRAHMS",
           "work": "Quartet No. 3 in B-flat Major, Op. 67",
+          "meta": "34 min",
           "movements": [
             "Vivace",
             "Andante",
@@ -50,14 +51,16 @@
         },
         {
           "composer": "PURA FÉ",
-          "work": "Rattle Songs, orchestrated by Jerod Impichchaachaaha’ Tate"
+          "work": "Rattle Songs, orchestrated by Jerod Impichchaachaaha’ Tate",
+          "meta": "15 min"
         },
         {
           "kind": "intermission"
         },
         {
-          "composer": "ANTONÍN DVOŘÁK",
-          "work": "Quartet No. 11 in C Major, Op. 61, B. 121",
+          "composer": "ANTONÍN",
+          "work": "DVOŘÁK Quartet No. 11 in C Major, Op. 61, B. 121",
+          "meta": "38 min",
           "movements": [
             "Allegro",
             "Poco adagio e molto cantabile",
@@ -226,5 +229,5 @@
     ],
     "ensembleCount": 5
   },
-  "contentVersion": "2026-07-27f"
+  "contentVersion": "2026-07-28a"
 }

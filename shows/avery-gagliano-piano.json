@@ -43,16 +43,20 @@
       "pieces": [
         {
           "composer": "ROBERT SCHUMANN",
-          "work": "Novelette, Op. 21, No. 8"
+          "work": "Novelette, Op. 21, No. 8",
+          "meta": "12 min"
         },
         {
           "composer": "GABRIEL FAURÉ",
-          "work": "Ballade in F-sharp Major, Op. 19"
+          "work": "Ballade in F-sharp Major, Op. 19",
+          "meta": "15 min"
         },
         {
           "composer": "FREDERIC RZEWSKI",
-          "work": "from Four North American Ballads",
+          "work": "from",
+          "meta": "10 min",
           "movements": [
+            "Four North American Ballads",
             "IV. “Winnsboro Cotton Mill Blues”"
           ]
         },
@@ -61,12 +65,15 @@
         },
         {
           "composer": "LEON KIRCHNER",
-          "work": "Interlude II"
+          "work": "Interlude II",
+          "meta": "6 min"
         },
         {
-          "composer": "ROBERT SCHUMANN",
-          "work": "Symphonic Etudes, Op. 13 and posthumous",
+          "composer": "ROBERT",
+          "work": "SCHUMANN",
+          "meta": "33 min",
           "movements": [
+            "Symphonic Etudes, Op. 13 and posthumous",
             "Theme: Andante",
             "Etude 1 (Var. 1): Un poco più vivo",
             "Etude 2 (Var. 2): Andante",
@@ -91,7 +98,10 @@
         "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
         "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
         "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
-        "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+        "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you.",
+        "arrangements": [
+          "Avery Gagliano is represented by Curtis Artist Management at Curtis Institute of Music."
+        ]
       }
     },
     {
@@ -243,5 +253,5 @@
     ],
     "ensembleCount": 1
   },
-  "contentVersion": "2026-07-27g"
+  "contentVersion": "2026-07-28a"
 }

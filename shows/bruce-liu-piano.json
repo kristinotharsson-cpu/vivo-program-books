@@ -41,11 +41,16 @@
       "pieces": [
         {
           "composer": "GYÖRGY LIGETI",
-          "work": "Fanfares from Études, Book I, No. 4 (1985)"
+          "work": "”Fanfares” from",
+          "meta": "6:45 min",
+          "movements": [
+            "Études, Book I, No. 4 (1985)"
+          ]
         },
         {
           "composer": "LUDWIG VAN BEETHOVEN",
-          "work": "Piano Sonata No. 14 in C-sharp minor, Op. 27, No. 2 “Moonlight",
+          "work": "Piano Sonata No. 14 in C-sharp minor, Op. 27, No. 2 “Moonlight”",
+          "meta": "16 min",
           "movements": [
             "Adagio sostenuto",
             "Allegretto - Trio",
@@ -54,15 +59,21 @@
         },
         {
           "composer": "FRÉDÉRIC CHOPIN",
-          "work": "Nocturne in C-sharp minor, Op. 27, No. 1"
+          "work": "Nocturne in C-sharp minor, Op. 27, No. 1",
+          "meta": "6 min"
         },
         {
           "composer": "CHOPIN",
-          "work": "Nocturne in D-flat Major, Op. 27, No. 2"
+          "work": "Nocturne in D-flat Major, Op. 27, No. 2",
+          "meta": "6 min"
         },
         {
           "composer": "ISAAC ALBÉNIZ",
-          "work": "El Puerto from Iberia"
+          "work": "El Puerto” from",
+          "meta": "4 min",
+          "movements": [
+            "Iberia"
+          ]
         },
         {
           "kind": "intermission"
@@ -70,6 +81,7 @@
         {
           "composer": "J. S. BACH",
           "work": "French Suite No. 5 in G Major, BWV 816",
+          "meta": "21 min",
           "movements": [
             "Allemande",
             "Courante",
@@ -82,19 +94,45 @@
         },
         {
           "composer": "CLAUDE DEBUSSY",
-          "work": "Rêverie"
+          "work": "Rêverie",
+          "meta": "6 min"
         },
         {
           "composer": "MAURICE RAVEL",
-          "work": "Alborada del gracioso"
+          "work": "Alborada del gracioso",
+          "meta": "8 min"
         },
         {
           "composer": "FEDERICO MOMPOU",
-          "work": "Glossa sobre “Au clair de lune"
+          "work": "Glossa sobre “Au clair de lune”",
+          "meta": "2 min"
         },
         {
           "composer": "FRANZ LISZT",
-          "work": "Rhapsodie espagnole, S. 254, R. 90"
+          "work": "Rhapsodie espagnole, S. 254, R. 90",
+          "meta": "13 min",
+          "movements": [
+            "CHRISTIAN MCBRIDE & URSA MAJOR/Christian McBride & Ursa Major",
+            "Code 2705",
+            "Series Subscription",
+            "Day / Date / Time WED OCT 21, 2026 8PM",
+            "Venue BK — Berklee Performance Center",
+            "Approx run time",
+            "Internal asset folder https://celebrityseries.sharepoint.com/:f:/s/CS/IgBQQ5yTdImYRoOv34vDnmIJAdvCVxs38TjQBWZqACxKhvA?e=c1BGJg",
+            "MGMT",
+            "Production contact",
+            "Runtime copy",
+            "Mgmt credit",
+            "Sponsorship credit",
+            "PERSONNEL",
+            "Christian McBride bass",
+            "Nicole Glover tenor saxophone",
+            "Ely Perlman guitar",
+            "Mike King piano",
+            "Savannah Harris drums",
+            "PROGRAM",
+            "Set list TBD"
+          ]
         }
       ],
       "runtimeNote": "This afternoon’s program will run approximately one hour and 45 minutes, including intermission.",
@@ -102,7 +140,10 @@
         "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
         "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
         "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
-        "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+        "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you.",
+        "arrangements": [
+          "Bruce Liu appears by arrangement with Opus 3 Artists, New York"
+        ]
       }
     },
     {
@@ -258,5 +299,5 @@
     ],
     "ensembleCount": 1
   },
-  "contentVersion": "2026-07-27f"
+  "contentVersion": "2026-07-28a"
 }

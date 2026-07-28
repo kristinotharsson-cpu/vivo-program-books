@@ -341,8 +341,7 @@ const useSearchIndex = (data) => useMemoA(() => {
       if (!text) return;
       idx.push({ sectionId: sec.id, sectionTitle: sec.title, label, text: String(text) });
     };
-    collect(sec.title, "Title");
-    collect(sec.eyebrow, "Eyebrow");
+    // Search intentionally excludes section title + eyebrow — only body content is indexed.
     if (sec.lead) collect(sec.lead, "Intro");
     if (sec.quote) collect(sec.quote, "Quote");
     (sec.body || []).forEach(t => collect(t, "Welcome"));

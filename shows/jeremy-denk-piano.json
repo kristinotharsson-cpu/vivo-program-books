@@ -40,15 +40,18 @@
       "pieces": [
         {
           "composer": "J. S. BACH",
-          "work": "Prelude and Fugue in B Major, BWV 892, from The Well-Tempered Clavier, Book II"
+          "work": "Prelude and Fugue in B Major, BWV 892, from The Well-Tempered Clavier, Book II",
+          "meta": "6 min"
         },
         {
           "composer": "UNSUK CHIN",
-          "work": "Piano Études (Nos. 1–6) (1995–2003)"
+          "work": "Piano Études (Nos. 1–6) (1995–2003)",
+          "meta": "16 min"
         },
         {
           "composer": "LUDWIG VAN BEETHOVEN",
           "work": "Piano Sonata No. 31 in A-flat Major, Op. 110",
+          "meta": "21 min",
           "movements": [
             "Moderato cantabile molto espressivo",
             "Allegro molto",
@@ -62,13 +65,14 @@
         {
           "composer": "BEETHOVEN",
           "work": "Piano Sonata No. 32 in C minor, Op. 111",
+          "meta": "27 min",
           "movements": [
             "Maestoso – Allegro con brio ed appassionato",
             "Arietta. Adagio molto semplice cantabile"
           ]
         }
       ],
-      "runtimeNote": "This afternoon’s program will run approximately 90 minutes, including intermission.",
+      "runtimeNote": "This afternoon’s program will run approximately 90 minutes, including intermission",
       "sponsor": {
         "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
         "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
@@ -228,5 +232,5 @@
     ],
     "ensembleCount": 1
   },
-  "contentVersion": "2026-07-27f"
+  "contentVersion": "2026-07-28a"
 }

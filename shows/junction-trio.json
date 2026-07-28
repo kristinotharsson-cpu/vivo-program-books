@@ -44,7 +44,8 @@
       "pieces": [
         {
           "composer": "LUDWIG VAN BEETHOVEN",
-          "work": "Piano Trio in D Major, Op. 70, No. 1 “Ghost",
+          "work": "Piano Trio in D Major, Op. 70, No. 1 “Ghost”",
+          "meta": "25 min",
           "movements": [
             "Allegro vivace e con brio",
             "Largo assai ed espressivo",
@@ -58,6 +59,7 @@
         {
           "composer": "DMITRI SHOSTAKOVICH",
           "work": "Piano Trio No. 2 in E minor, Op. 67",
+          "meta": "25 min",
           "movements": [
             "Andante — Moderato",
             "Allegro con brio",
@@ -221,5 +223,5 @@
     ],
     "ensembleCount": 4
   },
-  "contentVersion": "2026-07-27f"
+  "contentVersion": "2026-07-28a"
 }

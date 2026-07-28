@@ -42,6 +42,7 @@
         {
           "composer": "LUDWIG VAN BEETHOVEN",
           "work": "Sonata No. 1 in F minor, Op. 2, No. 1",
+          "meta": "18 min",
           "movements": [
             "Allegro",
             "Adagio",
@@ -52,7 +53,8 @@
         },
         {
           "composer": "BEETHOVEN",
-          "work": "Sonata No. 17 in D minor, Op. 31, No. 2 “The Tempest",
+          "work": "Sonata No. 17 in D minor, Op. 31, No. 2 “The Tempest”",
+          "meta": "24 min",
           "movements": [
             "Largo – Allegro",
             "Adagio",
@@ -65,6 +67,7 @@
         {
           "composer": "BEETHOVEN",
           "work": "Sonata No. 25 in G Major, Op. 79",
+          "meta": "10 min",
           "movements": [
             "Presto alla tedesca",
             "Andante",
@@ -73,7 +76,8 @@
         },
         {
           "composer": "BEETHOVEN",
-          "work": "Sonata No. 21 in C Major, Op. 53 “Waldstein",
+          "work": "Sonata No. 21 in C Major, Op. 53 “Waldstein”",
+          "meta": "24 min",
           "movements": [
             "Allegro con brio",
             "Introduzione. Adagio molto –",
@@ -241,5 +245,5 @@
     ],
     "ensembleCount": 1
   },
-  "contentVersion": "2026-07-27f"
+  "contentVersion": "2026-07-28a"
 }

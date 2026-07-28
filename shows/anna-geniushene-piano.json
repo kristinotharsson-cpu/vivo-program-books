@@ -60,7 +60,7 @@
         },
         {
           "composer": "LUDWIG VAN BEETHOVEN",
-          "work": "15 Variations and a Fugue on an original theme, Op. 35 “Eroica"
+          "work": "15 Variations and a Fugue on an original theme, Op. 35 “Eroica”"
         }
       ],
       "sponsor": {
@@ -68,7 +68,8 @@
         "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
         "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
         "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
-      }
+      },
+      "runtimeNote": "PROGRAM"
     },
     {
       "id": "performance-sponsor",
@@ -218,5 +219,5 @@
     ],
     "ensembleCount": 1
   },
-  "contentVersion": "2026-07-27f"
+  "contentVersion": "2026-07-28a"
 }

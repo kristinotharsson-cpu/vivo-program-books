@@ -42,6 +42,7 @@
         {
           "composer": "BENJAMIN BRITTEN",
           "work": "Three Divertimenti for string quartet",
+          "meta": "12 min",
           "movements": [
             "March",
             "Waltz",
@@ -51,6 +52,7 @@
         {
           "composer": "FELIX MENDELSSOHN",
           "work": "String Quartet No. 6 in F minor, Op. 80",
+          "meta": "26 min",
           "movements": [
             "Allegro vivace assai",
             "Allegro assai",
@@ -64,6 +66,7 @@
         {
           "composer": "JOHANNES BRAHMS",
           "work": "Piano Quintet in F minor, Op. 34",
+          "meta": "41 min",
           "movements": [
             "Allegro non troppo",
             "Andante, un poco",
@@ -78,7 +81,10 @@
         "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
         "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
         "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
-        "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
+        "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you.",
+        "arrangements": [
+          "The Isidore String Quartet appears by arrangement with David Rowe Artists."
+        ]
       }
     },
     {
@@ -230,5 +236,5 @@
     ],
     "ensembleCount": 6
   },
-  "contentVersion": "2026-07-27f"
+  "contentVersion": "2026-07-28a"
 }

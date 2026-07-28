@@ -41,11 +41,13 @@
       "pieces": [
         {
           "composer": "JOSEPH HAYDN",
-          "work": "Variations in F minor, Hob. XVII:6"
+          "work": "Variations in F minor, Hob. XVII:6",
+          "meta": "15 min"
         },
         {
           "composer": "ARNOLD SCHOENBERG",
           "work": "Six Little Piano Pieces, Op. 19 (7:30)",
+          "meta": "7:30 min",
           "movements": [
             "Leicht, zart",
             "Langsam",
@@ -57,18 +59,21 @@
         },
         {
           "composer": "W. A. MOZART",
-          "work": "Rondo in A minor, K. 511"
+          "work": "Rondo in A minor, K. 511",
+          "meta": "10 min"
         },
         {
           "kind": "intermission"
         },
         {
           "composer": "GYÖRGY KURTÁG",
-          "work": "Márta Ligaturája"
+          "work": "Márta Ligaturája",
+          "meta": "2 min"
         },
         {
           "composer": "FRANZ SCHUBERT",
           "work": "Piano Sonata in A Major, D. 959",
+          "meta": "42 min",
           "movements": [
             "Allegro",
             "Andantino",
@@ -238,5 +243,5 @@
     ],
     "ensembleCount": 1
   },
-  "contentVersion": "2026-07-27f"
+  "contentVersion": "2026-07-28a"
 }

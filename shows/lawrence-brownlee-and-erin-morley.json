@@ -45,7 +45,10 @@
         },
         {
           "composer": "VERDI",
-          "work": "from Rigoletto — “Gualtier Maldè! … Caro nome” — Morley (6:40)"
+          "work": "from",
+          "movements": [
+            "Rigoletto — “Gualtier Maldè! … Caro nome” — Morley (6:40)"
+          ]
         },
         {
           "composer": "BIZET",
@@ -53,7 +56,10 @@
         },
         {
           "composer": "DELIBES",
-          "work": "from Lakmé — “D’où viens-tu? … C’est le dieu de la jeunesse” — Brownlee & Morley (7:00)"
+          "work": "from",
+          "movements": [
+            "Lakmé — “D’où viens-tu? … C’est le dieu de la jeunesse” — Brownlee & Morley (7:00)"
+          ]
         },
         {
           "kind": "intermission"
@@ -68,23 +74,33 @@
         },
         {
           "composer": "DELIBES",
-          "work": "from Lakmé — “Où va la jeune Indoue” — Morley (8:00)"
+          "work": "from",
+          "movements": [
+            "Lakmé — “Où va la jeune Indoue” — Morley (8:00)"
+          ]
         },
         {
           "composer": "DONIZETTI",
           "work": "from La Fille du Régiment — “Quoi? Vous m’aimez? … De cet aveu si tendre” — Brownlee & Morley (7:00)"
         },
         {
-          "composer": "DONIZETTI ENCORE — from",
-          "work": "Don Pasquale — “Tornami a dir che m’ami” (3:00)"
+          "composer": "DONIZETTI ENCORE",
+          "work": "— from",
+          "movements": [
+            "Don Pasquale — “Tornami a dir che m’ami” (3:00)"
+          ]
         }
       ],
       "sponsor": {
         "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
         "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
         "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
-        "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
-      }
+        "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you.",
+        "arrangements": [
+          "Sponsor"
+        ]
+      },
+      "runtimeNote": "Mgmt credit"
     },
     {
       "id": "performance-sponsor",
@@ -242,5 +258,5 @@
     ],
     "ensembleCount": 2
   },
-  "contentVersion": "2026-07-27f"
+  "contentVersion": "2026-07-28a"
 }

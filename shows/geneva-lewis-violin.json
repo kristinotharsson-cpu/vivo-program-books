@@ -42,6 +42,7 @@
         {
           "composer": "W. A. MOZART",
           "work": "Violin Sonata in G Major, K. 379",
+          "meta": "21 min",
           "movements": [
             "Adagio – Allegro",
             "Andantino cantabile [Theme and Variations]",
@@ -50,12 +51,10 @@
         },
         {
           "composer": "VALENTIN SILVESTROV",
-          "work": "Two pieces for violin and piano (2020)"
-        },
-        {
-          "composer": "MIECZYSŁAW WEINBERG",
-          "work": "Sonata No. 5 for violin and piano (1953)",
+          "work": "Two pieces for violin and piano (2020)",
+          "meta": "6 min",
           "movements": [
+            "27” MIECZYSŁAW WEINBERG Sonata No. 5 for violin and piano (1953)",
             "Andante con moto",
             "Allegro molto",
             "Allegro moderato",
@@ -65,6 +64,7 @@
         {
           "composer": "ANTON WEBERN",
           "work": "Four Pieces for violin and piano, Op. 7 (1910; rev. 1914)",
+          "meta": "5 min",
           "movements": [
             "Sehr langsam",
             "Rasch",
@@ -75,6 +75,7 @@
         {
           "composer": "RICHARD STRAUSS",
           "work": "Violin Sonata in E-flat Major, Op. 18",
+          "meta": "30 min",
           "movements": [
             "Allegro, ma non troppo",
             "Improvisation: Andante cantabile",
@@ -82,7 +83,7 @@
           ]
         }
       ],
-      "runtimeNote": "This afternoon’s program will run approximately one hour and 45 minutes, including intermission.",
+      "runtimeNote": "This afternoon’s program will run approximately one hour and 45 minutes, including intermission,",
       "sponsor": {
         "seasonSponsorsLabel": "2024 / 25 Season Sponsors",
         "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
@@ -238,5 +239,5 @@
     ],
     "ensembleCount": 1
   },
-  "contentVersion": "2026-07-27f"
+  "contentVersion": "2026-07-28a"
 }

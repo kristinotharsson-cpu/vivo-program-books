@@ -42,7 +42,8 @@
       "pieces": [
         {
           "composer": "LUDWIG VAN BEETHOVEN",
-          "work": "Sonata No. 23, Op. 57 “Appassionata",
+          "work": "Sonata No. 23, Op. 57 “Appassionata”",
+          "meta": "25 min",
           "movements": [
             "Allegro assai",
             "Andante con moto",
@@ -51,12 +52,15 @@
         },
         {
           "composer": "HENRY COWELL",
-          "work": "Aeolian Harp” (1923)"
+          "work": "“Aeolian Harp” (1923)",
+          "meta": "2:30 min"
         },
         {
-          "composer": "MAURICE RAVEL",
-          "work": "Gaspard de la nuit, M. 55",
+          "composer": "MAURICE",
+          "work": "RAVEL",
+          "meta": "22 min",
           "movements": [
+            "Gaspard de la nuit, M. 55",
             "Ondine. Lent",
             "Le Gibet. Très lent",
             "Scarbo. Modéré"
@@ -67,11 +71,13 @@
         },
         {
           "composer": "CAMILLE SAINT-SAËNS",
-          "work": "Prelude and Fugue in F minor, Op. 52, No. 3"
+          "work": "Prelude and Fugue in F minor, Op. 52, No. 3",
+          "meta": "4 min"
         },
         {
           "composer": "JOHANNES BRAHMS",
           "work": "Sonata No. 3 in F minor, Op. 5",
+          "meta": "37 min",
           "movements": [
             "Allegro maestoso",
             "Andante espressivo",
@@ -87,7 +93,8 @@
         "seasonSponsors": "Crescendo Donor Advised Fund and Susan & Michael Thonis",
         "publicSupport": "Celebrity Series of Boston is supported in part by the Mass Cultural Council, a state agency.",
         "closing": "And to the many individuals, corporations, foundations, and government agencies whose generosity helps fulfill our mission and vision — thank you."
-      }
+      },
+      "runtimeNote": "This evening's program will run approximately one hour and 45 minutes, including intermission."
     },
     {
       "id": "performance-sponsor",
@@ -237,5 +244,5 @@
     ],
     "ensembleCount": 1
   },
-  "contentVersion": "2026-07-27f"
+  "contentVersion": "2026-07-28a"
 }
