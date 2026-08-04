@@ -12,7 +12,13 @@ const PROGRAM_STANDARD = {
 // contract: pieces → text on the way in, text → pieces on the way out.
 const serializeProgram = (pieces) => (pieces || []).map(p => {
   if (p.kind === "intermission") return "INTERMISSION";
-  const head = [p.composer, p.work].filter(Boolean).join(" — ");
+  // When composer is absent and the work title contains " — ", prefix with "— " so
+  // parseProgram can round-trip it correctly (otherwise the parser splits the work
+  // title on the first dash and assigns part of it to composer).
+  const workHasDash = p.work && /\s[—–]\s/.test(p.work);
+  const head = (!p.composer && workHasDash)
+    ? "— " + p.work
+    : [p.composer, p.work].filter(Boolean).join(" — ");
   const lines = [head];
   if (p.meta) lines.push("(" + p.meta + ")");
   (p.movements || []).forEach(m => { if (m) lines.push(m); });
@@ -26,6 +32,10 @@ const parseProgram = (text) => {
       if (/^intermission$/i.test(ln)) { out.push({ kind: "intermission" }); return; }
       const cur = out.length ? out[out.length - 1] : null;
       if (i === 0 || !cur || cur.kind === "intermission") {
+        // Leading dash = no-composer marker emitted by serializeProgram for work
+        // titles that themselves contain " — " (avoids ambiguous round-trip).
+        const noComposerM = ln.match(/^[—–]\s+(.+)$/);
+        if (noComposerM) { out.push({ composer: "", work: noComposerM[1].trim(), movements: [] }); return; }
         const m = ln.match(/^(.+?)\s+[—–]\s+(.+)$/) || ln.match(/^(.+?)\s+-\s+(.+)$/);
         if (m) out.push({ composer: m[1].trim(), work: m[2].trim(), movements: [] });
         else out.push({ composer: ln, work: "", movements: [] });
