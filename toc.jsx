@@ -10,7 +10,7 @@ const TOC_STANDARD = {
   survey: {
     heading: "Leave Feedback",
     body: "Thank you for your feedback — it goes straight to our team.",
-    buttons: [{ label: "Take the survey", url: "https://www.vivoperformingarts.org/" }]
+    buttons: [{ label: "Take the survey", url: "" }]
   },
   promos: [
     { eyebrow: "10 or more", heading: "Group Sales", meta: "Bring a crowd and save", label: "Group tickets", url: "https://www.vivoperformingarts.org/live-performances/ticket-information/group-discounts/", accent: "blue" },
