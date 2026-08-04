@@ -2507,9 +2507,29 @@ li:hover .row-ctrls,
 .pdf-import-actions button{font-family:var(--font-body);font-weight:700;font-size:12px;padding:7px 12px;background:transparent;border:1px solid var(--border);color:var(--fg-muted);border-radius:7px;cursor:pointer}
 
 /* ---------- Shared-content notice (edit mode) ---------- */
-.shared-notice{display:flex;align-items:center;gap:8px;margin:0 0 16px;padding:9px 12px;font-family:var(--font-body);font-size:12px;font-weight:600;line-height:1.4;color:var(--vivo-sky-blue);background:rgba(57,189,255,.1);border:1px solid rgba(57,189,255,.3);border-radius:8px}
-.shared-notice-dot{font-size:10px}
+.shared-notice{display:flex;align-items:flex-start;gap:10px;margin:0 0 16px;padding:11px 14px;font-family:var(--font-body);font-size:12px;font-weight:600;line-height:1.5;color:#b45309;background:#fefce8;border:1.5px solid #fde68a;border-radius:8px}
+.shared-notice-icon{flex-shrink:0;font-size:14px;margin-top:1px}
 .shared-notice strong{font-weight:800}
+.shared-notice em{font-style:italic;font-weight:700}
+
+/* ---------- Survey URL warning (edit mode) ---------- */
+.survey-url-warn{margin:0 0 12px;padding:10px 13px;font-family:var(--font-body);font-size:12px;font-weight:600;line-height:1.5;color:#b45309;background:#fefce8;border:1.5px solid #fde68a;border-radius:8px}
+
+/* ---------- Export checklist modal ---------- */
+.export-gate-overlay{position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;padding:24px}
+.export-gate{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px 28px 24px;max-width:420px;width:100%;box-shadow:0 8px 32px rgba(0,0,0,.25)}
+.export-gate-title{font-family:var(--font-display);font-size:20px;font-weight:700;margin:0 0 6px}
+.export-gate-sub{font-family:var(--font-body);font-size:13px;color:var(--fg-muted);margin:0 0 18px}
+.export-gate-list{list-style:none;padding:0;margin:0 0 24px;display:flex;flex-direction:column;gap:12px}
+.export-gate-item{display:flex;align-items:flex-start;gap:10px;font-family:var(--font-body);font-size:13px;line-height:1.5}
+.export-gate-warn{flex-shrink:0;color:#b45309;font-size:15px;margin-top:1px}
+.export-gate-item strong{font-weight:700}
+.export-gate-detail{color:var(--fg-muted)}
+.export-gate-actions{display:flex;gap:10px;justify-content:flex-end}
+.export-gate-cancel{font-family:var(--font-body);font-size:13px;font-weight:600;padding:8px 16px;border:1px solid var(--border);border-radius:6px;background:transparent;color:var(--fg);cursor:pointer}
+.export-gate-cancel:hover{background:var(--surface-raised)}
+.export-gate-proceed{font-family:var(--font-body);font-size:13px;font-weight:700;padding:8px 18px;border:none;border-radius:6px;background:var(--vivo-plum);color:#fff;cursor:pointer}
+.export-gate-proceed:hover{opacity:.88}
 
 /* ---------- Program performance sponsor (bottom of Today's Program) ---------- */
 .prog-sponsor{margin:32px 0 0;padding-top:20px;border-top:1px solid var(--border);text-align:center;display:flex;flex-direction:column;align-items:center;gap:18px}

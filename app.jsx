@@ -158,12 +158,28 @@ const App = () => {
     setEditing(e => { window.__editMode = !e; return !e; }); // set flag synchronously so editables render immediately
   }, []);
 
+  // Press E anywhere (outside text fields) to toggle edit mode
+  useEffectA(() => {
+    if (window.VIVO_PROGRAM_DATA_SNAPSHOT) return;
+    const onKey = (e) => {
+      if (e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) return;
+      if (e.key !== 'e' && e.key !== 'E') return;
+      if (e.target && e.target.closest && e.target.closest('input, textarea, select, [contenteditable]')) return;
+      e.preventDefault();
+      if (editing) { clearTimeout(window.__vivoSaveT); if (window.__commitNow) window.__commitNow(); }
+      toggleEditing();
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [editing, toggleEditing]);
+
   const [storageMode, setStorageMode] = useStateA(null); // null | "blobs" | "local"
   useEffectA(() => { window.VivoStore && window.VivoStore.backend().then(setStorageMode).catch(() => {}); }, []);
 
   const [menuOpen, setMenuOpen] = useStateA(false);
   const [searchOpen, setSearchOpen] = useStateA(false);
   const [importOpen, setImportOpen] = useStateA(false);
+  const [exportIssues, setExportIssues] = useStateA(null); // null = no modal; array = show checklist
   // ?export=1 → auto-export once booted (library Export button)
   useEffectA(() => {
     if (new URLSearchParams(location.search).get("export") === "1") {
@@ -416,7 +432,14 @@ const App = () => {
   // Fetches the source HTML, inlines all linked CSS/JS/images/fonts, and bakes
   // current data + tweaks + theme as a snapshot so the published file boots
   // with everything as authored.
-  const exportHtml = useCallbackA(async () => {
+  const exportHtml = useCallbackA(async (skipChecklist = false) => {
+    if (!skipChecklist) {
+      const issues = [];
+      if (!data.cover?.photoSrc) issues.push({ id: "photo", label: "No cover photo", detail: "The cover will show a brushstroke placeholder instead of a photo." });
+      const surveyUrl = data.cover?.survey?.buttons?.[0]?.url;
+      if (!surveyUrl) issues.push({ id: "survey", label: "Survey link not set", detail: "The Take the survey button links to nowhere." });
+      if (issues.length) { setExportIssues(issues); return; }
+    }
     setToast("Bundling export…");
     try {
       const snapshot = { data, tweaks, theme: tweaks.exportTheme || theme, fontSize, exportedAt: new Date().toISOString() };
@@ -582,7 +605,7 @@ const App = () => {
             <button className={"edit-tool" + (devicePreview === "desktop" ? " is-on" : "")} title="Desktop preview" onClick={() => setDevicePreview("desktop")}><Icon name="monitor" size={16} /></button>
             <button className={"edit-tool" + (devicePreview === "mobile" ? " is-on" : "")} title="Mobile preview" onClick={() => setDevicePreview("mobile")}><Icon name="phone" size={16} /></button>
           </span>
-          <button className="edit-mode-done" onClick={() => { clearTimeout(window.__vivoSaveT); commitNow(); toggleEditing(); }}>Done</button>
+          <button className="edit-mode-done" title="Exit edit mode (E)" onClick={() => { clearTimeout(window.__vivoSaveT); commitNow(); toggleEditing(); }}>Done</button>
         </div>
       ) : null}
       {editing && showTip ? (
@@ -742,6 +765,30 @@ const App = () => {
       ) : null}
 
       <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} data={data} onGo={goTo} />
+
+      {exportIssues && (
+        <div className="export-gate-overlay" role="dialog" aria-modal="true" aria-label="Export checklist">
+          <div className="export-gate">
+            <h2 className="export-gate-title">Before you export</h2>
+            <p className="export-gate-sub">A few things to check:</p>
+            <ul className="export-gate-list">
+              {exportIssues.map(issue => (
+                <li key={issue.id} className="export-gate-item">
+                  <span className="export-gate-warn">⚠</span>
+                  <span>
+                    <strong>{issue.label}</strong>
+                    <span className="export-gate-detail"> — {issue.detail}</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <div className="export-gate-actions">
+              <button className="export-gate-cancel" onClick={() => setExportIssues(null)}>Go fix it</button>
+              <button className="export-gate-proceed" onClick={() => { setExportIssues(null); exportHtml(true); }}>Export anyway</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <Toast msg={toast} />
 

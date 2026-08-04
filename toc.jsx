@@ -27,9 +27,13 @@ const SurveyCard = ({ survey, update }) => {
   const buttons = (s.buttons && s.buttons.length) ? s.buttons : TOC_STANDARD.survey.buttons;
   const patch = (p) => update({ ...s, heading, body, buttons, ...p });
   const setBtn = (i, p) => patch({ buttons: buttons.map((b, j) => j === i ? { ...b, ...p } : b) });
+  const missingUrl = buttons.some(b => !b.url);
   if (editing) {
     return (
       <div className="toc-survey is-editing">
+        {missingUrl && (
+          <div className="survey-url-warn">⚠ Survey link not set — the button will go nowhere when published. Add the link below.</div>
+        )}
         <div className="pf-grid">
           <PlainField label="Survey card heading" value={heading} onChange={v => patch({ heading: v })} />
           <PlainField label="Thank-you line" value={body} onChange={v => patch({ body: v })} />

@@ -289,8 +289,8 @@ const SharedNotice = () => {
   const d = window.PROGRAM_DATA && window.PROGRAM_DATA.cover && window.PROGRAM_DATA.cover.date;
   return (
     <div className="shared-notice" contentEditable={false}>
-      <span className="shared-notice-dot">◆</span>
-      Shared content — edits apply to programs dated {d ? <strong>{d}</strong> : "today"} and later. Earlier books keep their saved version.
+      <span className="shared-notice-icon">⚠</span>
+      <span><strong>Shared content.</strong> Changes here update <em>all</em> program books dated {d ? <strong>{d}</strong> : "today"} and later — not just this one.</span>
     </div>
   );
 };
