@@ -2,7 +2,7 @@
   "name": "vivo-program-books",
   "private": true,
   "scripts": {
-    "build": "vite build && cp -r shows dist/shows",
+    "build": "vite build && cp -r shows dist/shows && cp -r assets/covers assets/illustrations assets/logos dist/assets/",
     "test": "playwright test",
     "test:ui": "playwright test --ui"
   },

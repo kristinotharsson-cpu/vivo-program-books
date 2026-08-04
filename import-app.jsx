@@ -1,5 +1,6 @@
+import React, { useState as useS, useRef as useR, useCallback as useC } from 'react';
+import ReactDOM from 'react-dom/client';
 // /import — single-PDF import (Stage 1: extract & review the structured text).
-const { useState: useS, useRef: useR, useCallback: useC } = React;
 
 const LEGEND = [
   ["# / ## / ###", "heading size (largest → smallest)"],

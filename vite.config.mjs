@@ -8,6 +8,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         'program-book': resolve(import.meta.dirname, 'Program Book.html'),
+        'index': resolve(import.meta.dirname, 'index.html'),
+        'import': resolve(import.meta.dirname, 'import.html'),
       },
     },
   },
