@@ -35,7 +35,7 @@
 .edit-tip-x:hover{opacity:1}
 .is-editing-mode.has-tip{padding-top:73px}
 /* The nav row (back arrow + Contents) stays pinned under whatever edit chrome is above it */
-.is-editing-mode.has-tip .topbar,.is-editing-mode.has-tip .reader-nav{top:73px}
+.app.is-editing-mode.has-tip .topbar,.app.is-editing-mode.has-tip .reader-nav{top:73px}
 .topbar,.reader-nav{position:sticky!important}
 .topbar-right{display:flex;align-items:center;gap:6px}
 @media (max-width:560px){.topbar .reader-nav-contents-btn span{display:none}}
@@ -52,7 +52,7 @@
 .app.device-mobile .page{max-width:400px!important;margin-left:auto;margin-right:auto}
 .app.device-mobile .reader-nav,.app.device-mobile .topbar{max-width:400px;margin-left:auto;margin-right:auto}
 .is-editing-mode { padding-top: 39px; }
-.is-editing-mode .topbar { top: 39px; }
+.app.is-editing-mode .topbar { top: 39px; }
 
 html, body {
   margin: 0;

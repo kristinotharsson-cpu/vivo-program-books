@@ -1,0 +1,15 @@
+{
+  "name": "vivo-program-books",
+  "private": true,
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^8.1.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.47.0",
+    "serve": "^14.2.0"
+  }
+}
