@@ -28,6 +28,8 @@ async function main() {
     if (m && m[1] !== 'index' && !m[1].endsWith('.html')) slug = m[1];
   }
 
+  await VivoStore.loadSharedFromBlobs();
+
   if (!slug) {
     const shared = await fetch('shows/_vivo-shared.json')
       .then(r => r.ok ? r.json() : null)

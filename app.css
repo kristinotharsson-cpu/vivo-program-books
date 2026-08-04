@@ -20,6 +20,8 @@
 .edit-save-btn:hover:not(:disabled){filter:brightness(.94)}
 .edit-save-btn.is-saving,.edit-save-btn:disabled{opacity:.6;cursor:default}
 .edit-last-saved{font-size:11px;font-weight:600;letter-spacing:.02em;opacity:.7;white-space:nowrap}
+.edit-storage-warn{font-size:11px;font-weight:700;letter-spacing:.03em;color:#FF9E1D;white-space:nowrap}
+.edit-storage-ok{font-size:11px;font-weight:600;letter-spacing:.02em;opacity:.6;white-space:nowrap}
 .save-pill i{width:7px;height:7px;border-radius:50%;background:var(--vivo-light-green);display:inline-block}
 .save-pill.is-saving i{background:var(--vivo-orange)}
 .edit-tools{display:inline-flex;align-items:center;gap:2px;margin-left:12px}

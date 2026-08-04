@@ -134,6 +134,24 @@ export const VivoStore: VivoStoreAPI = {
     },
     _readShared() { try { var v = localStorage.getItem(this.SHARED_KEY); return v ? JSON.parse(v) : {}; } catch (e) { return {}; } },
     _writeShared(o) { try { localStorage.setItem(this.SHARED_KEY, JSON.stringify(o)); } catch (e) {} },
+    // Pull shared-content versions from Blobs into localStorage — call once at boot.
+    async loadSharedFromBlobs() {
+      if ((await detect()) !== "blobs") return;
+      try {
+        const r = await fetch(FN + "?id=__shared");
+        if (r.ok) { const remote = await r.json(); this._writeShared(remote); }
+      } catch (e) {}
+    },
+    // Push the current shared-content object to Blobs — fire-and-forget after any saveVersion.
+    async flushSharedToBlobs() {
+      if ((await detect()) !== "blobs") return;
+      try {
+        await fetch(FN + "?id=__shared", {
+          method: "PUT", headers: { "content-type": "application/json" },
+          body: JSON.stringify(this._readShared())
+        });
+      } catch (e) {}
+    },
     // Generic date-versioned shared value under any key (e.g. "supporters", "staffBoard").
     getVersions(key) { var o = this._readShared(); var vk = key + "Versions"; return Array.isArray(o[vk]) ? o[vk] : []; },
     saveVersion(key, fromNum, value) {
@@ -143,6 +161,7 @@ export const VivoStore: VivoStoreAPI = {
       vers.push({ from: fromNum, value: value });
       vers.sort(function (a, b) { return a.from - b.from; });
       o[vk] = vers; this._writeShared(o);
+      this.flushSharedToBlobs(); // fire-and-forget cross-machine sync
     },
     resolveVersion(key, def, dateNum) {
       if (dateNum == null) return def;

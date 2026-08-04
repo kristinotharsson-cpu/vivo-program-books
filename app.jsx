@@ -158,6 +158,9 @@ const App = () => {
     setEditing(e => { window.__editMode = !e; return !e; }); // set flag synchronously so editables render immediately
   }, []);
 
+  const [storageMode, setStorageMode] = useStateA(null); // null | "blobs" | "local"
+  useEffectA(() => { window.VivoStore && window.VivoStore.backend().then(setStorageMode).catch(() => {}); }, []);
+
   const [menuOpen, setMenuOpen] = useStateA(false);
   const [searchOpen, setSearchOpen] = useStateA(false);
   const [importOpen, setImportOpen] = useStateA(false);
@@ -568,6 +571,8 @@ const App = () => {
             <Icon name="check" size={15} />{saveState === "saving" ? "Saving…" : "Save"}
           </button>
           <span className="edit-last-saved">{fmtLastSaved(lastSaved)}</span>
+          {storageMode === "local" && <span className="edit-storage-warn" title="Changes are saving to this device only. Cloud sync is unavailable.">⚠ Local only</span>}
+          {storageMode === "blobs" && <span className="edit-storage-ok" title="Changes sync across all devices via cloud storage.">☁ Cloud</span>}
           <span className="edit-tools">
             <button className="edit-tool" title="Undo (⌘Z)" disabled={!histState.canUndo} onClick={undo}><Icon name="undo" size={16} /></button>
             <button className="edit-tool" title="Redo (⌘⇧Z)" disabled={!histState.canRedo} onClick={redo}><Icon name="redo" size={16} /></button>
