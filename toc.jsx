@@ -13,8 +13,8 @@ const TOC_STANDARD = {
     buttons: [{ label: "Take the survey", url: "https://www.vivoperformingarts.org/" }]
   },
   promos: [
-    { eyebrow: "10 or more", heading: "Group Sales", meta: "Bring a crowd and save", label: "Group tickets", url: "https://www.vivoperformingarts.org/tickets/group-sales/", accent: "blue" },
-    { eyebrow: "35 & under", heading: "$20 Student Tickets", meta: "Every performance, all season", label: "Student tickets", url: "https://www.vivoperformingarts.org/tickets/student-tickets/", accent: "green" }
+    { eyebrow: "10 or more", heading: "Group Sales", meta: "Bring a crowd and save", label: "Group tickets", url: "https://www.vivoperformingarts.org/live-performances/ticket-information/group-discounts/", accent: "blue" },
+    { eyebrow: "35 & under", heading: "$20 Student Tickets", meta: "Every performance, all season", label: "Student tickets", url: "https://www.vivoperformingarts.org/live-performances/ticket-information/student-tickets/", accent: "green" }
   ]
 };
 
