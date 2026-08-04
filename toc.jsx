@@ -1,5 +1,6 @@
 import React, { useState as useStateA } from 'react';
 import { Editable, PlainField, Icon, PhotoSlot } from './components.jsx';
+import { useEditMode } from './edit-mode-context.jsx';
 import { SectionBody } from './sections.jsx';
 
 // ---- Standard TOC cards (present on every program) ----
@@ -19,7 +20,7 @@ const TOC_STANDARD = {
 
 // Survey card — standard on every table of contents. Supports a second survey link.
 const SurveyCard = ({ survey, update }) => {
-  const editing = window.__editMode;
+  const editing = useEditMode();
   const s = survey || {};
   const heading = s.heading != null && s.heading !== "" ? s.heading : TOC_STANDARD.survey.heading;
   const body = s.body != null ? s.body : TOC_STANDARD.survey.body;
@@ -63,7 +64,7 @@ const SurveyCard = ({ survey, update }) => {
 
 // Group sales + student tickets — a small carousel, standard on every table of contents.
 const TocPromoCarousel = ({ promos, update }) => {
-  const editing = window.__editMode;
+  const editing = useEditMode();
   const cards = (promos && promos.length) ? promos : TOC_STANDARD.promos;
   const trackRef = React.useRef(null);
   const page = (dir) => {
@@ -117,7 +118,7 @@ const TOC_BAR_PALETTE = [
   ["var(--vivo-blue)", "var(--vivo-cream)"]
 ];
 const TOC = ({ sections, onGo, variant, ads = [], highlightColor, photoSrc, onPhoto, onUpdateSection, cover = {}, updateCover }) => {
-  const editing = window.__editMode;
+  const editing = useEditMode();
   const [photoOpen, setPhotoOpen] = useStateA(false);
   const isBars = !variant || variant === "bars";
   const cls = "toc-list" + (variant === "minimal" ? " is-minimal" : isBars ? " is-bars" : "");
@@ -142,7 +143,7 @@ const TOC = ({ sections, onGo, variant, ads = [], highlightColor, photoSrc, onPh
   const items = [];
   sections.forEach((s, i) => {
     if (s.kind === "promo") { items.push({ kind: "promo", section: s }); return; }
-    if (s.kind === "events" && (s.layout === "carousel" || window.__editMode)) { items.push({ kind: "events-inline", section: s }); return; }
+    if (s.kind === "events" && (s.layout === "carousel" || editing)) { items.push({ kind: "events-inline", section: s }); return; }
     items.push({ kind: "section", section: s, idx: i });
     // After items 3 and 7, slot an ad if available
     if ((i === 2 || i === 6) && ads[Math.floor(i / 4)]) {

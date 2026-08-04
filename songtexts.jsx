@@ -1,5 +1,6 @@
 import React from 'react';
 import { Editable } from './components.jsx';
+import { useEditMode } from './edit-mode-context.jsx';
 
 // Song texts / vocal recital texts.
 // Per-song display mode (each song can differ — dual-language, original-only, etc.),
@@ -16,7 +17,7 @@ const MODES = [
 ];
 
 const SongTextsSection = ({ s, update, defaultMode }) => {
-  const editing = window.__editMode;
+  const editing = useEditMode();
   const songs = s.songs || [];
   // Per-song reader overrides (session only). Keyed by song index.
   const [overrides, setOverrides] = React.useState({});

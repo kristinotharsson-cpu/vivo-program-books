@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Editable, PlainField, PhotoSlot, RowControls, AddRowButton, SectionBottomNav } from '../components.jsx';
+import { useEditMode } from '../edit-mode-context.jsx';
 
 // ---- PROGRAM ----
 // Standard credit lines every Today's Program page carries.
@@ -39,7 +40,7 @@ const parseProgram = (text) => {
 };
 
 const ProgramSection = ({ s, update, displayStyle, allSections, onGoSection, cover, updateCover }) => {
-  const editing = window.__editMode;
+  const editing = useEditMode();
   const pieces = s.pieces || [];
   const raw = s.rawProgram != null ? s.rawProgram : serializeProgram(pieces);
   const setRaw = (text) => update({ rawProgram: text, pieces: parseProgram(text) });

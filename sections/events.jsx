@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Icon, PhotoSlot, Editable } from '../components.jsx';
+import { useEditMode } from '../edit-mode-context.jsx';
 
 // ---- SHARED COLOR CONSTANTS (used here and by promo.jsx / archive.jsx) ----
 const PROMO_BG_COLORS = ["plum", "tangerine", "orange", "blue", "sky-blue", "green", "light-green", "lavender", "cream", "black"];
@@ -62,7 +63,7 @@ const EventCarousel = ({ events, linkTo, editing, onColor, onThumb }) => {
 // Auto-populates from shows/manifest.json (the next few shows after this one),
 // each card linking to that show's program. Set s.auto = false to hand-curate.
 const EventsSection = ({ s, update }) => {
-  const editing = window.__editMode;
+  const editing = useEditMode();
   const [auto, setAuto] = React.useState([]);
   const isAuto = s.auto !== false;
   React.useEffect(() => {

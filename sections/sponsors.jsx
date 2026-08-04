@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Editable, PlainField, PhotoSlot } from '../components.jsx';
+import { useEditMode } from '../edit-mode-context.jsx';
 
 // ---- PERFORMANCE SPONSOR ----
 const PerformanceSponsorSection = ({ s, update }) => {
+  const editing = useEditMode();
   const blocks = s.blocks || [];
   const updateBlock = (i, patch) => {
     const next = blocks.map((b, j) => j === i ? { ...b, ...patch } : b);
@@ -19,7 +21,7 @@ const PerformanceSponsorSection = ({ s, update }) => {
   };
   return (
     <div className="perf-sponsor">
-      {(s.imageSrc || window.__editMode) ? (
+      {(s.imageSrc || editing) ? (
         <div className="perf-sponsor-image">
           <PhotoSlot
             fill
@@ -49,14 +51,14 @@ const PerformanceSponsorSection = ({ s, update }) => {
               {b.statement !== undefined ? (
                 <Editable as="p" className="perf-sponsor-statement" value={b.statement} onChange={v => updateBlock(i, { statement: v })} multiline />
               ) : null}
-              {window.__editMode ? (
+              {editing ? (
                 <button className="perf-sponsor-remove" onClick={() => removeBlock(i)} aria-label="Remove sponsor block">Remove</button>
               ) : null}
             </div>
           </div>
           );
         })}
-        {window.__editMode ? (
+        {editing ? (
           <div className="perf-sponsor-add-row">
             <button className="perf-sponsor-add" onClick={addBlock}>+ Add sponsor block</button>
             <button className="perf-sponsor-add" onClick={addImageBlock}>+ Add sponsor with image</button>

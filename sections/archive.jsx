@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Editable } from '../components.jsx';
 import { PROMO_BG_COLORS, VIVO_HEX, VIVO_ON_LIGHT } from './events.jsx';
+import { useEditMode } from '../edit-mode-context.jsx';
 
 // ---- FROM THE ARCHIVES (box above the artist bio, default-on) ----
 const ArchiveBox = ({ s, update }) => {
-  const editing = window.__editMode;
+  const editing = useEditMode();
   const [open, setOpen] = React.useState(false);
   const a = s.archive || {};
   const tag = a.tag != null ? a.tag : "Last with us";

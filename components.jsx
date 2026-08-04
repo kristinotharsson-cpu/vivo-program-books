@@ -1,6 +1,7 @@
 // Vivo Program Book — UI primitives & utility components
 
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
+import { useEditMode } from './edit-mode-context.jsx';
 
 // ---------- Icons (inline SVG, Lucide-style stroke) ----------
 const Icon = ({ name, size = 20 }) => {
@@ -66,7 +67,7 @@ const linkifyHtml = (t) => {
 const Editable = ({ value, onChange, multiline = false, rich = null, as = "span", ...rest }) => {
   value = (value == null) ? "" : value;
   const ref = useRef(null);
-  const editing = window.__editMode;
+  const editing = useEditMode();
   // Rich text (bold/italic/underline/color/highlight/links) is enabled on ALL editable
   // fields by default; pass rich={false} only where inline HTML would break structure.
   const isRich = rich === null ? true : rich;
@@ -251,7 +252,8 @@ const ReaderNav = ({ sections = [], onGo, onHome, onBack, onSearch, onMenu, them
 // A friendly "Import from PDF" affordance. The section supplies onImport(file) to append
 // parsed entries. Real extraction runs on deploy; preview appends a starter set.
 const PdfImport = ({ label = "Import from PDF", hint, onImport }) => {
-  if (!window.__editMode) return null;
+  const editing = useEditMode();
+  if (!editing) return null;
   const [open, setOpen] = useState(false);
   const [busy, setBusy] = useState("");
   const fileRef = useRef(null);
@@ -282,7 +284,8 @@ const PdfImport = ({ label = "Import from PDF", hint, onImport }) => {
 // Warns editors that changes to shared institutional content apply to programs from this
 // program's date forward — never to earlier-dated books.
 const SharedNotice = () => {
-  if (!window.__editMode) return null;
+  const editing = useEditMode();
+  if (!editing) return null;
   const d = window.PROGRAM_DATA && window.PROGRAM_DATA.cover && window.PROGRAM_DATA.cover.date;
   return (
     <div className="shared-notice" contentEditable={false}>
@@ -375,7 +378,8 @@ const SectionBottomNav = ({ prev, next, onGo }) => {
 
 // ---------- Row Controls (delete an item, edit-mode only) ----------
 const RowControls = ({ onDelete, onMoveUp, onMoveDown, label = "row" }) => {
-  if (!window.__editMode) return null;
+  const editing = useEditMode();
+  if (!editing) return null;
   return (
     <div className="row-ctrls" contentEditable={false}>
       {onMoveUp ? <button className="row-ctrl" onClick={onMoveUp} aria-label={"Move " + label + " up"}>↑</button> : null}
@@ -386,7 +390,8 @@ const RowControls = ({ onDelete, onMoveUp, onMoveDown, label = "row" }) => {
 };
 
 const AddRowButton = ({ onAdd, label = "Add row" }) => {
-  if (!window.__editMode) return null;
+  const editing = useEditMode();
+  if (!editing) return null;
   return (
     <button className="add-row-btn" onClick={onAdd}>
       <span aria-hidden="true">+</span>
@@ -398,7 +403,7 @@ const AddRowButton = ({ onAdd, label = "Add row" }) => {
 // ---------- Photo Slot (upload-on-click in edit mode) ----------
 const PhotoSlot = ({ src, initials = "", alt = "", className = "", onChange, onClear, size = 64, fill = false }) => {
   const fileRef = useRef(null);
-  const editing = window.__editMode;
+  const editing = useEditMode();
   const handleClick = (e) => {
     if (!editing) return;
     e.stopPropagation();

@@ -1,9 +1,11 @@
 import React, { useState as useStateS, useEffect as useEffectS } from 'react';
 import { Icon, Editable, PlainField, PhotoSlot, RowControls, AddRowButton, SectionBottomNav, PdfImport } from '../components.jsx';
+import { useEditMode } from '../edit-mode-context.jsx';
 import { ArchiveBox } from './archive.jsx';
 
 // ---- CAST & CREATIVE ----
 const CastRow = ({ c, i, rows, onRows, bios, onGoBio }) => {
+  const editing = useEditMode();
   const initials = (c.name || "").split(" ").map(n => n[0]).filter(Boolean).slice(0, 2).join("").toUpperCase();
   const setItem = (patch) => {
     const next = [...rows]; next[i] = { ...c, ...patch }; onRows(next);
@@ -28,14 +30,14 @@ const CastRow = ({ c, i, rows, onRows, bios, onGoBio }) => {
 
       <Editable as="span" className="role" value={c.role} onChange={v => setItem({ role: v })} />
       <span className="name">
-        {linkedBio && !window.__editMode ? (
+        {linkedBio && !editing ? (
           <button className="cast-name-link" onClick={() => onGoBio?.(linkedBio.id)}>{c.name}</button>
         ) : (
           <Editable as="span" value={c.name} onChange={v => setItem({ name: v })} />
         )}
         <RowControls onDelete={remove} label="row" />
       </span>
-      {(c.blurb || window.__editMode) ? (
+      {(c.blurb || editing) ? (
         <Editable as="p" className="cast-blurb" value={c.blurb || ""} data-placeholder="Optional bio blurb…" onChange={v => setItem({ blurb: v })} multiline />
       ) : null}
     </li>
@@ -43,7 +45,7 @@ const CastRow = ({ c, i, rows, onRows, bios, onGoBio }) => {
 };
 
 const CastSection = ({ s, update, bios, onGoBio }) => {
-  const editing = window.__editMode;
+  const editing = useEditMode();
   const groups = s.groups || [
     { id: "cast", h: s.castHeading || "The Performer", rows: s.cast || [] },
     { id: "creative", h: s.creativeHeading || "Creative & Production", rows: s.creative || [] }
@@ -144,7 +146,7 @@ const BiosSection = ({ s, update, expandedId, onClearExpanded }) => {
     res();
   }, 900));
   const layout = s.photoLayout || "thumbnail";
-  const editing = window.__editMode;
+  const editing = useEditMode();
   const layoutCtl = editing ? (
     <div className="bio-layout-ctl" contentEditable={false}>
       <span className="bio-layout-label">Photo layout</span>
@@ -171,7 +173,7 @@ const BiosSection = ({ s, update, expandedId, onClearExpanded }) => {
               <div className="bio-full-head">
                 <div className="bio-text">
                   <Editable as="div" className="bio-name" value={b.name} data-ph="Artist name…" onChange={v => { const bios = [...s.bios]; bios[i] = { ...b, name: v }; update({ bios }); }} />
-                  {(b.role || window.__editMode) ? <Editable as="div" className="bio-role" value={b.role || ""} data-ph="Role (optional)" onChange={v => { const bios = [...s.bios]; bios[i] = { ...b, role: v }; update({ bios }); }} /> : null}
+                  {(b.role || editing) ? <Editable as="div" className="bio-role" value={b.role || ""} data-ph="Role (optional)" onChange={v => { const bios = [...s.bios]; bios[i] = { ...b, role: v }; update({ bios }); }} /> : null}
                 </div>
                 <RowControls onDelete={() => removeBio(i)} label="entry" />
               </div>
@@ -219,7 +221,7 @@ const BiosSection = ({ s, update, expandedId, onClearExpanded }) => {
                   <Editable as="div" className="bio-name" value={b.name} data-ph="Artist name…" onChange={v => {
                     const bios = [...s.bios]; bios[i] = { ...b, name: v }; update({ bios });
                   }} />
-                  {(b.role || window.__editMode) ? (
+                  {(b.role || editing) ? (
                     <Editable as="div" className="bio-role" value={b.role || ""} data-ph="Role (optional)" onChange={v => {
                       const bios = [...s.bios]; bios[i] = { ...b, role: v }; update({ bios });
                     }} />

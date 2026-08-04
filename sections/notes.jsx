@@ -1,9 +1,10 @@
 import React from 'react';
 import { Editable, SectionBottomNav } from '../components.jsx';
+import { useEditMode } from '../edit-mode-context.jsx';
 
 // ---- NOTES (long-form) ----
 const NotesSection = ({ s, update }) => {
-  const editing = window.__editMode;
+  const editing = useEditMode();
   const slugify = (t, i) => "note-" + (t || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") + "-" + i;
   const jump = (id) => {
     const el = document.getElementById(id);

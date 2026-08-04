@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Editable, PlainField, PhotoSlot } from '../components.jsx';
+import { useEditMode } from '../edit-mode-context.jsx';
 import { VivoAccordion } from './shared-content.jsx';
 
 // ---- INFO (land ack, accessibility, safety, contact) ----
@@ -48,6 +49,7 @@ const venueUrlFor = (text) => {
   return null;
 };
 const InfoSection = ({ s, update }) => {
+  const editing = useEditMode();
   const audienceInfo = (s.audienceInfo && s.audienceInfo.length) ? s.audienceInfo : ((window.VIVO_SHARED && window.VIVO_SHARED.audienceInfo) || []);
   const isLandAck = (sec) => /land\s*acknowledge?ment/i.test((sec.h || "").trim());
   // Land Acknowledgment always closes the page.
@@ -60,7 +62,7 @@ const InfoSection = ({ s, update }) => {
         <Editable as="h3" value={sec.h} onChange={v => {
           const sections = [...s.sections]; sections[i] = { ...sec, h: v }; update({ sections });
         }} />
-        {isVenue && (sec.imageSrc || window.__editMode) ? (
+        {isVenue && (sec.imageSrc || editing) ? (
           <div className="venue-photo">
             <PhotoSlot fill src={sec.imageSrc || ""} alt="Venue" initials="VENUE PHOTO"
               onChange={(src) => { const sections = [...s.sections]; sections[i] = { ...sec, imageSrc: src }; update({ sections }); }}
@@ -68,7 +70,7 @@ const InfoSection = ({ s, update }) => {
           </div>
         ) : null}
         {sec.body.map((p, pi) => {
-          const vUrl = isVenue && !window.__editMode ? venueUrlFor(p) : null;
+          const vUrl = isVenue && !editing ? venueUrlFor(p) : null;
           if (vUrl) return <p key={pi} className="venue-link-wrap"><a className="venue-btn" href={vUrl} target="_blank" rel="noopener noreferrer">{(p || "").replace(/\.$/, "")}<span className="venue-btn-arrow" aria-hidden="true">↗</span></a></p>;
           return (
           <Editable key={pi} as="p" value={p} onChange={v => {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Editable, PlainField, PhotoSlot, SharedNotice, PdfImport } from '../components.jsx';
+import { useEditMode } from '../edit-mode-context.jsx';
 
 // ---- VIVO SHARED (audience info / staff / boards / supporters) ----
 // Pulls all content from window.VIVO_SHARED — same data on every show, edited once.
@@ -89,7 +90,7 @@ const VivoSection = ({ s }) => {
 
 // ---- STAFF & BOARD (standalone module, editable — date-scoped like supporters) ----
 const StaffBoardSection = ({ s }) => {
-  const editing = window.__editMode;
+  const editing = useEditMode();
   const shared = window.VIVO_SHARED || {};
   const [staff, setStaff] = React.useState(() => shared.staff || s.staff || { departments: [], credits: [] });
   const [boards, setBoards] = React.useState(() => shared.boards || s.boards || { directors: [], advisors: [] });
@@ -224,7 +225,7 @@ const parseDonorList = (text) => {
 const serializeDonorList = (donors) => (donors || []).filter(d => d && d.trim())
   .map(d => /,/.test(d) ? "(" + d.trim() + ")" : d.trim()).join(", ");
 const SupportersSection = ({ s }) => {
-  const editing = window.__editMode;
+  const editing = useEditMode();
   const shared = window.VIVO_SHARED || {};
   const [sup, setSup] = React.useState(() => (shared.supporters) || s.supporters || { categories: [] });
 

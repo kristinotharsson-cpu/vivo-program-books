@@ -1,8 +1,11 @@
 import React from 'react';
 import { Editable, SectionBottomNav } from '../components.jsx';
+import { useEditMode } from '../edit-mode-context.jsx';
 
 // ---- DONORS ----
-const DonorsSection = ({ s, update }) => (
+const DonorsSection = ({ s, update }) => {
+  const editing = useEditMode();
+  return (
   <div>
     {s.lead ? <Editable as="p" className="lead" value={s.lead} onChange={v => update({ lead: v })} multiline /> : null}
     {s.tiers.map((t, i) => (
@@ -10,7 +13,7 @@ const DonorsSection = ({ s, update }) => (
         <Editable as="h3" value={t.name} onChange={v => {
           const tiers = [...s.tiers]; tiers[i] = { ...t, name: v }; update({ tiers });
         }} />
-        {window.__editMode ? (
+        {editing ? (
           <div className="tier-color" contentEditable={false}>
             <span className="tier-color-label">Bar color</span>
             <div className="tier-swatches">
@@ -36,6 +39,7 @@ const DonorsSection = ({ s, update }) => (
       </div>
     ))}
   </div>
-);
+  );
+};
 
 export { DonorsSection };

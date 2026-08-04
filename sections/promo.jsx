@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Editable, PlainField, PhotoSlot, SectionBottomNav, Icon } from '../components.jsx';
+import { useEditMode } from '../edit-mode-context.jsx';
 import { PROMO_BG_COLORS, VIVO_HEX, VIVO_ON_LIGHT, PROMO_BTN_COLORS } from './events.jsx';
 
 // ---- PROMO / AD (editable ad element — row / cta / image / partner) ----
 const PromoCards = ({ s, update }) => {
-  const editing = window.__editMode;
+  const editing = useEditMode();
   const cards = s.cards && s.cards.length ? s.cards : [{ imageSrc: "", eyebrow: "", heading: "", meta: "", buttonLabel: "Learn More", buttonUrl: "", accent: "plum" }];
   const stacked = s.stack === true;
   const trackRef = React.useRef(null);
@@ -59,7 +60,7 @@ const PromoCards = ({ s, update }) => {
 };
 
 const PromoSection = ({ s, update }) => {
-  const editing = window.__editMode;
+  const editing = useEditMode();
   const layout = s.layout || "row";
   // Ad blocks carry an always-on background color so they read as distinct from content
   // sections. Undefined defaults to plum; "none" opts out. Editable per block, persisted.

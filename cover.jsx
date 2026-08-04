@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Editable, PlainField, Icon, PhotoSlot } from './components.jsx';
+import { useEditMode } from './edit-mode-context.jsx';
 
 // ---- Cover photo frame (16:9, brush watermark when empty) ----
 const CoverPhotoFrame = ({ src, alt, onChange, onClear }) => {
   const fileRef = React.useRef(null);
-  const editing = window.__editMode;
+  const editing = useEditMode();
   const handleClick = (e) => {
     if (!editing) return;
     e.stopPropagation();
@@ -52,6 +53,7 @@ const CoverPhotoFrame = ({ src, alt, onChange, onClear }) => {
 
 // ---- Cover ----
 const Cover = ({ cover, update, variant, brushColor, textColor, theme }) => {
+  const editing = useEditMode();
   // Map accent name to css var
   const accentMap = {
     plum: "var(--vivo-plum)",
@@ -90,11 +92,11 @@ const Cover = ({ cover, update, variant, brushColor, textColor, theme }) => {
           />
           {cover.heroBanner ? <div className="cover-photo-banner">{cover.heroBanner}</div> : null}
         </div>
-        {window.__editMode ? (
+        {editing ? (
           <PlainField className="cover-banner-field" label="Banner on the photo (optional)" value={cover.heroBanner || ""} placeholder="You're invited to Sound Bites — join us for a fun and relaxing gathering after the performance" onChange={v => update({ heroBanner: v })} multiline />
         ) : null}
         <div className="cover-meta cover-meta-stack">
-          {window.__editMode ? (
+          {editing ? (
             <div className="pf-grid">
               <PlainField label="Date" value={cover.date} placeholder="Sunday, February 28, 2027" onChange={v => update({ date: v })} />
               <PlainField label="Time" value={cover.time} placeholder="3 PM" onChange={v => update({ time: v })} />
@@ -143,7 +145,7 @@ const Cover = ({ cover, update, variant, brushColor, textColor, theme }) => {
         </div>
       ) : null}
       <div className="cover-meta">
-        {window.__editMode ? (
+        {editing ? (
           <div className="pf-grid">
             <PlainField label="Date" value={cover.date} onChange={v => update({ date: v })} />
             <PlainField label="Time" value={cover.time} onChange={v => update({ time: v })} />
@@ -195,7 +197,7 @@ const AppFooter = ({ theme }) => (
 
 const NoteCallout = ({ label, name, photoSrc, initials, onClick, onPhotoChange, onPhotoClear, onLabelChange, onNameChange }) => {
   const fileRef = React.useRef(null);
-  const editing = window.__editMode;
+  const editing = useEditMode();
   const handlePhotoClick = (e) => {
     if (!editing) return;
     e.stopPropagation();
