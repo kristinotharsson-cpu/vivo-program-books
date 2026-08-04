@@ -2,14 +2,19 @@
   "name": "vivo-program-books",
   "private": true,
   "scripts": {
+    "build": "vite build && cp -r shows dist/shows",
     "test": "playwright test",
     "test:ui": "playwright test --ui"
   },
   "dependencies": {
-    "@netlify/blobs": "^8.1.0"
+    "@netlify/blobs": "^8.1.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
   },
   "devDependencies": {
     "@playwright/test": "^1.47.0",
-    "serve": "^14.2.0"
+    "@vitejs/plugin-react": "^6.0.5",
+    "serve": "^14.2.0",
+    "vite": "^8.2.0"
   }
 }

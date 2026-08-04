@@ -1,6 +1,6 @@
 // Vivo Program Book — UI primitives & utility components
 
-const { useState, useEffect, useRef, useMemo, useCallback } = React;
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 
 // ---------- Icons (inline SVG, Lucide-style stroke) ----------
 const Icon = ({ name, size = 20 }) => {
@@ -443,5 +443,4 @@ const PhotoSlot = ({ src, initials = "", alt = "", className = "", onChange, onC
   );
 };
 
-// Expose globally for other Babel scripts
-Object.assign(window, { Icon, Editable, PlainField, IndexLink, ContentsMenu, TopBar, ReaderNav, PdfImport, SharedNotice, SettingsMenu, Toast, SectionBottomNav, RowControls, AddRowButton, PhotoSlot });
+export { Icon, Editable, PlainField, IndexLink, ContentsMenu, TopBar, ReaderNav, PdfImport, SharedNotice, SettingsMenu, Toast, SectionBottomNav, RowControls, AddRowButton, PhotoSlot };

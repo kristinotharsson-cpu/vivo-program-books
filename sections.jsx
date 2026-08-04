@@ -1,7 +1,9 @@
 // Vivo Program Book — Section page renderers
 // Each section.kind gets a dedicated renderer
 
-const { useState: useStateS, useEffect: useEffectS, useRef: useRefS } = React;
+import React, { useState as useStateS, useEffect as useEffectS, useRef as useRefS } from 'react';
+import { Icon, Editable, PlainField, SectionBottomNav, RowControls, AddRowButton, PhotoSlot, SharedNotice, PdfImport } from './components.jsx';
+import { SongTextsSection } from './songtexts.jsx';
 
 // ---- WELCOME ----
 const WelcomeSection = ({ s, update }) => (
@@ -521,7 +523,7 @@ const BiosSection = ({ s, update, expandedId, onClearExpanded }) => {
           ))}
         </ul>
         <AddRowButton label="Add artist" onAdd={addBio} />
-        {React.createElement(window.PdfImport, { label: "Import bios from PDF", hint: "Upload a bios PDF and we'll read each artist's name, role, and biography into the fields above.", onImport: importBios })}
+        {React.createElement(PdfImport, { label: "Import bios from PDF", hint: "Upload a bios PDF and we'll read each artist's name, role, and biography into the fields above.", onImport: importBios })}
       </div>
     );
   }
@@ -584,7 +586,7 @@ const BiosSection = ({ s, update, expandedId, onClearExpanded }) => {
         ))}
       </ul>
       <AddRowButton label="Add artist" onAdd={addBio} />
-      {React.createElement(window.PdfImport, { label: "Import bios from PDF", hint: "Upload a bios PDF and we'll read each artist's name, role, and biography into the fields above.", onImport: importBios })}
+      {React.createElement(PdfImport, { label: "Import bios from PDF", hint: "Upload a bios PDF and we'll read each artist's name, role, and biography into the fields above.", onImport: importBios })}
     </div>
   );
 };
@@ -1175,7 +1177,7 @@ const StaffBoardSection = ({ s }) => {
 
   return (
     <div className="vivo-shared sb-section">
-      {React.createElement(window.SharedNotice)}
+      {React.createElement(SharedNotice, null)}
       {editing ? (
         <p className="sup-scope-note">Edits apply to this program and every later-dated program; earlier programs keep their existing roster.</p>
       ) : null}
@@ -1232,7 +1234,7 @@ const StaffBoardSection = ({ s }) => {
         <MemberList list={boards.advisors || []} roles onEdit={(fn) => editBoards(n => fn(n.advisors))} />
         {boards.legend ? <p className="sb-board-legend">{boards.legend}</p> : null}
       </div>
-      {editing ? React.createElement(window.PdfImport, { label: "Import staff & board from PDF", hint: "Upload a staff/board PDF and we'll read names, titles, and departments into the lists above. Shared content — applies to this program and later.", onImport: () => new Promise((res) => setTimeout(() => { editStaff(n => (n.departments || (n.departments = [])).push({ name: "Imported Department", members: [{ name: "Imported Name", title: "Title" }] })); res(); }, 900)) }) : null}
+      {editing ? React.createElement(PdfImport, { label: "Import staff & board from PDF", hint: "Upload a staff/board PDF and we'll read names, titles, and departments into the lists above. Shared content — applies to this program and later.", onImport: () => new Promise((res) => setTimeout(() => { editStaff(n => (n.departments || (n.departments = [])).push({ name: "Imported Department", members: [{ name: "Imported Name", title: "Title" }] })); res(); }, 900)) }) : null}
     </div>
   );
 };
@@ -1277,7 +1279,7 @@ const SupportersSection = ({ s }) => {
         {editing ? (
           <p className="sup-scope-note">Edits here apply to this program and every later-dated program. Programs dated earlier keep their existing supporter list.</p>
         ) : null}
-        {React.createElement(window.SharedNotice)}
+        {React.createElement(SharedNotice, null)}
         <div className="sup-bars">
         {(sup.categories || []).map((cat, ci) => (
           <VivoAccordion
@@ -1643,7 +1645,7 @@ const SectionBody = ({ section, update, allSections, onGoSection, expandedBioId,
     case "performance-sponsor": return <PerformanceSponsorSection s={section} update={update} />;
     case "sponsors": return <SponsorsSection s={section} update={update} />;
     case "info": return <InfoSection s={section} update={update} />;
-    case "songtexts": return <window.SongTextsSection s={section} update={update} defaultMode={defaultTransMode} />;
+    case "songtexts": return <SongTextsSection s={section} update={update} defaultMode={defaultTransMode} />;
     case "vivo": return <VivoSection s={section} update={update} />;
     case "supporters-list": return <SupportersSection s={section} update={update} />;
     case "staff-board": return <StaffBoardSection s={section} update={update} />;
@@ -1652,4 +1654,4 @@ const SectionBody = ({ section, update, allSections, onGoSection, expandedBioId,
   }
 };
 
-Object.assign(window, { SectionBody });
+export { SectionBody };

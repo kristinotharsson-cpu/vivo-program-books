@@ -1,3 +1,6 @@
+import React from 'react';
+import { Editable } from './components.jsx';
+
 // Song texts / vocal recital texts.
 // Per-song display mode (each song can differ — dual-language, original-only, etc.),
 // a jump index so readers reach any piece fast, and mobile-first layout.
@@ -156,4 +159,4 @@ const SongTextsSection = ({ s, update, defaultMode }) => {
   );
 };
 
-window.SongTextsSection = SongTextsSection;
+export { SongTextsSection };

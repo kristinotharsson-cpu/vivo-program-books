@@ -1,7 +1,7 @@
 // In-shell PDF import overlay. Cover fields are preserved from the shell —
 // the parser may only fill sections. Stage 2 parsing goes through
 // /.netlify/functions/parse when deployed; otherwise shows extraction for review.
-const { useState: useSI, useRef: useRI } = React;
+import React, { useState as useSI, useRef as useRI } from 'react';
 
 function ensurePdfJs() {
   if (window.pdfjsLib) return Promise.resolve();
@@ -132,4 +132,4 @@ function ImportOverlay({ open, onClose, hasContent, onApplySections, setToast })
   );
 }
 
-window.ImportOverlay = ImportOverlay;
+export { ImportOverlay };

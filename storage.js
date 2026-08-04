@@ -3,8 +3,7 @@
 // Anywhere else (this preview, local file): falls back to localStorage.
 // API (all async): getProgram(id), saveProgram(id, record), listPrograms(), deleteProgram(id)
 // Record shape per how_this_app_works.md: { id, shellId, createdAt, updatedAt, status, lastExportedAt, data:{cover,sections} }
-(function () {
-  const FN = "/.netlify/functions/programs";
+const FN = "/.netlify/functions/programs";
   const LS_PREFIX = "vivo-program-";
   let mode = null; // "blobs" | "local"
 
@@ -108,7 +107,7 @@
     }
   };
 
-  window.VivoStore = {
+export const VivoStore = {
     async backend() { return detect(); },
     async getProgram(id) { return (await detect()) === "blobs" ? blobs.getProgram(id) : local.getProgram(id); },
     async saveProgram(id, rec) { return (await detect()) === "blobs" ? blobs.saveProgram(id, rec) : local.saveProgram(id, rec); },
@@ -154,4 +153,3 @@
     saveSupportersVersion(fromNum, supporters) { this.saveVersion("supporters", fromNum, supporters); },
     resolveSupporters(defaultSup, dateNum) { return this.resolveVersion("supporters", defaultSup, dateNum); }
   };
-})();

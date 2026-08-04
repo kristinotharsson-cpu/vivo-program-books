@@ -2,10 +2,7 @@
 // Plain-DOM controller (no React coupling): a floating formatting bar + link popover
 // that operate on any focused `.rich-editable` contentEditable field. Exposes
 // window.VivoRich.clean(html) for sanitized save. Auto-inits once on load.
-(function () {
-  if (window.VivoRich) return;
-
-  var PALETTE = [
+var PALETTE = [
     ["Cream", "#FFFBEB"], ["Plum", "#BD2691"], ["Tangerine", "#EF4C26"], ["Orange", "#FF9E1D"],
     ["Blue", "#007ACC"], ["Sky", "#39BDFF"], ["Green", "#1BC469"], ["Light green", "#CFFFA2"],
     ["Lavender", "#C4B1C9"], ["Black", "#0A0A0B"]
@@ -205,7 +202,6 @@
     window.addEventListener("resize", hideAll);
   }
 
-  window.VivoRich = { clean: clean, init: init, hide: hideAll };
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
-  else init();
-})();
+window.VivoRich = { clean: clean, init: init, hide: hideAll };
+if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+else init();

@@ -1,6 +1,10 @@
 // Vivo Program Book — App shell, cover, TOC, search, routing
 
-const { useState: useStateA, useEffect: useEffectA, useMemo: useMemoA, useCallback: useCallbackA } = React;
+import React, { useState as useStateA, useEffect as useEffectA, useMemo as useMemoA, useCallback as useCallbackA } from 'react';
+import { Editable, PlainField, Icon, PhotoSlot, TopBar, ReaderNav, Toast, SettingsMenu, SectionBottomNav } from './components.jsx';
+import { SectionBody } from './sections.jsx';
+import { ImportOverlay } from './import-overlay.jsx';
+import { TweaksPanel, TweakSection, TweakSelect, TweakSlider, TweakRadio, TweakToggle, TweakButton, useTweaks } from './tweaks-panel.jsx';
 
 // ---- Cover photo frame (16:9, brush watermark when empty) ----
 const CoverPhotoFrame = ({ src, alt, onChange, onClear }) => {
@@ -440,7 +444,7 @@ const TOC = ({ sections, onGo, variant, ads = [], highlightColor, photoSrc, onPh
           </li>
         ) : item.kind === "promo" ? (
           <li key={item.section.id} className="toc-promo-item">
-            {React.createElement(window.SectionBody, { section: item.section, update: (patch) => onUpdateSection && onUpdateSection(item.section.id, patch) })}
+            {React.createElement(SectionBody, { section: item.section, update: (patch) => onUpdateSection && onUpdateSection(item.section.id, patch) })}
           </li>
         ) : item.kind === "events-inline" ? (
           (() => {
@@ -453,7 +457,7 @@ const TOC = ({ sections, onGo, variant, ads = [], highlightColor, photoSrc, onPh
                   {item.section.eyebrow ? <p className="toc-events-eyebrow">{item.section.eyebrow}</p> : null}
                   <h2 className="toc-events-title">{item.section.title}</h2>
                 </div>
-                {React.createElement(window.SectionBody, { section: item.section, update: (patch) => onUpdateSection && onUpdateSection(item.section.id, patch) })}
+                {React.createElement(SectionBody, { section: item.section, update: (patch) => onUpdateSection && onUpdateSection(item.section.id, patch) })}
               </li>
             );
           })()
@@ -749,7 +753,7 @@ const App = () => {
   });
   // Listen for tweaks panel updates
   useEffectA(() => {
-    if (!window.useTweaks) return;
+    if (!useTweaks) return;
     // The TweaksPanel uses postMessage on parent — we read from current tweaks state. Wire up our own.
   }, []);
 
@@ -1272,8 +1276,8 @@ const App = () => {
         onExport={window.VIVO_PROGRAM_DATA_SNAPSHOT ? null : () => { setMenuOpen(false); exportHtml(); }}
         onDesign={window.VIVO_PROGRAM_DATA_SNAPSHOT ? null : () => { setMenuOpen(false); setShowTweaks(true); setTimeout(() => window.postMessage({ type: "__activate_edit_mode" }, "*"), 50); }}
       />
-      {window.ImportOverlay ? (
-        <window.ImportOverlay
+      {ImportOverlay ? (
+        <ImportOverlay
           open={importOpen}
           onClose={() => setImportOpen(false)}
           hasContent={data.sections && data.sections.some(s => (s.pieces && s.pieces.length) || (s.cast && s.cast.length) || (s.bios && s.bios.length))}
@@ -1289,10 +1293,10 @@ const App = () => {
       <Toast msg={toast} />
 
       {/* Tweaks panel */}
-      {showTweaks && window.TweaksPanel ? (
-        <window.TweaksPanel onClose={() => { setShowTweaks(false); window.parent.postMessage({ type: "__edit_mode_dismissed" }, "*"); }}>
-          <window.TweakSection label="Cover Layout">
-            <window.TweakSelect
+      {showTweaks && TweaksPanel ? (
+        <TweaksPanel onClose={() => { setShowTweaks(false); window.parent.postMessage({ type: "__edit_mode_dismissed" }, "*"); }}>
+          <TweakSection label="Cover Layout">
+            <TweakSelect
               label="Accent Color"
               value={tweaks.coverAccent}
               options={[
@@ -1308,13 +1312,13 @@ const App = () => {
               ]}
               onChange={v => setTweak("coverAccent", v)}
             />
-            <window.TweakSelect
+            <TweakSelect
               label="Brush Mark"
               value={tweaks.coverBrush}
               options={["harmony", "tempo", "rhythm", "pitch", "form", "dynamics", "jazz"].map(b => ({ value: b, label: b[0].toUpperCase() + b.slice(1) }))}
               onChange={v => setTweak("coverBrush", v)}
             />
-            <window.TweakSelect
+            <TweakSelect
               label="Brush Color"
               value={tweaks.brushColor}
               options={[
@@ -1331,11 +1335,11 @@ const App = () => {
               ]}
               onChange={v => setTweak("brushColor", v)}
             />
-            <window.TweakSlider label="Brush Left / Right" value={tweaks.brushX || 0} min={-40} max={40} step={1} unit="%" onChange={v => setTweak("brushX", v)} />
-            <window.TweakSlider label="Brush Up / Down" value={tweaks.brushY || 0} min={-40} max={40} step={1} unit="%" onChange={v => setTweak("brushY", v)} />
-            <window.TweakSlider label="Brush Size" value={tweaks.brushSize || 60} min={25} max={360} step={5} unit="%" onChange={v => setTweak("brushSize", v)} />
-            <window.TweakSlider label="Brush Rotation" value={tweaks.brushRotate == null ? 45 : tweaks.brushRotate} min={-180} max={180} step={5} unit="°" onChange={v => setTweak("brushRotate", v)} />
-            <window.TweakRadio
+            <TweakSlider label="Brush Left / Right" value={tweaks.brushX || 0} min={-40} max={40} step={1} unit="%" onChange={v => setTweak("brushX", v)} />
+            <TweakSlider label="Brush Up / Down" value={tweaks.brushY || 0} min={-40} max={40} step={1} unit="%" onChange={v => setTweak("brushY", v)} />
+            <TweakSlider label="Brush Size" value={tweaks.brushSize || 60} min={25} max={360} step={5} unit="%" onChange={v => setTweak("brushSize", v)} />
+            <TweakSlider label="Brush Rotation" value={tweaks.brushRotate == null ? 45 : tweaks.brushRotate} min={-180} max={180} step={5} unit="°" onChange={v => setTweak("brushRotate", v)} />
+            <TweakRadio
               label="Cover Text"
               value={tweaks.coverTextColor}
               options={[
@@ -1345,9 +1349,9 @@ const App = () => {
               ]}
               onChange={v => setTweak("coverTextColor", v)}
             />
-          </window.TweakSection>
-          <window.TweakSection label="Table of Contents">
-            <window.TweakRadio
+          </TweakSection>
+          <TweakSection label="Table of Contents">
+            <TweakRadio
               label="Layout"
               value={tweaks.tocVariant}
               options={[
@@ -1357,7 +1361,7 @@ const App = () => {
               ]}
               onChange={v => setTweak("tocVariant", v)}
             />
-            <window.TweakSelect
+            <TweakSelect
               label="Highlight Color"
               value={tweaks.tocHighlight}
               options={[
@@ -1373,9 +1377,9 @@ const App = () => {
               ]}
               onChange={v => setTweak("tocHighlight", v)}
             />
-          </window.TweakSection>
-          <window.TweakSection label="Program">
-            <window.TweakRadio
+          </TweakSection>
+          <TweakSection label="Program">
+            <TweakRadio
               label="Layout"
               value={tweaks.programStyle || "tabular"}
               options={[
@@ -1384,9 +1388,9 @@ const App = () => {
               ]}
               onChange={v => setTweak("programStyle", v)}
             />
-          </window.TweakSection>
-          <window.TweakSection label="Song Texts">
-            <window.TweakSelect
+          </TweakSection>
+          <TweakSection label="Song Texts">
+            <TweakSelect
               label="Default Translation Mode"
               value={tweaks.transMode || "side-by-side"}
               options={[
@@ -1399,16 +1403,16 @@ const App = () => {
               ]}
               onChange={v => { setTweak("transMode", v); try { localStorage.setItem("vivo-songtext-mode", v); } catch(e){} }}
             />
-          </window.TweakSection>
-          <window.TweakSection label="Content">
-            <window.TweakToggle
+          </TweakSection>
+          <TweakSection label="Content">
+            <TweakToggle
               label="Footer Sponsor Banner"
               value={tweaks.showFooterSponsor !== false}
               onChange={on => setTweak("showFooterSponsor", on)}
             />
-            <window.TweakButton label="Reset Sample Content" onClick={resetData} />
-          </window.TweakSection>
-          <window.TweakSection label="Sections">
+            <TweakButton label="Reset Sample Content" onClick={resetData} />
+          </TweakSection>
+          <TweakSection label="Sections">
             <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>Toggle off to hide a section from the table of contents and navigation. Use the arrows to reorder. Section content is preserved.</div>
             {data.sections.map((s, i) => (
               <div key={s.id} style={{ display: "flex", alignItems: "center", gap: 6 }}>
@@ -1434,9 +1438,9 @@ const App = () => {
                 </button>
               ))}
             </div>
-          </window.TweakSection>
-          <window.TweakSection label="Export">
-            <window.TweakRadio
+          </TweakSection>
+          <TweakSection label="Export">
+            <TweakRadio
               label="Exported Theme"
               value={tweaks.exportTheme || "dark"}
               options={[
@@ -1446,18 +1450,12 @@ const App = () => {
               onChange={v => setTweak("exportTheme", v)}
             />
             <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>Download a self-contained HTML file with all current content baked in. Upload to AWS S3 / CloudFront and host as your official program book.</div>
-            <window.TweakButton label="Download HTML" onClick={exportHtml} />
-          </window.TweakSection>
-        </window.TweaksPanel>
+            <TweakButton label="Download HTML" onClick={exportHtml} />
+          </TweakSection>
+        </TweaksPanel>
       ) : null}
     </div>
   );
 };
 
-// Mount — deferred if a per-show JSON is still loading
-window.__bootProgramApp = function () {
-  if (window.__bootProgramApp.done) return;
-  window.__bootProgramApp.done = true;
-  ReactDOM.createRoot(document.getElementById("app")).render(<App />);
-};
-if (!window.__PROGRAM_BOOT_DEFERRED) window.__bootProgramApp();
+export { App };
