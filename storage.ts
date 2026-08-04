@@ -1,3 +1,5 @@
+import type { ProgramRecord, VivoStoreAPI } from './types.js';
+
 // Storage adapter — one interface, two backends.
 // Deployed on Netlify: talks to /.netlify/functions/programs (Netlify Blobs).
 // Anywhere else (this preview, local file): falls back to localStorage.
@@ -107,12 +109,12 @@ const FN = "/.netlify/functions/programs";
     }
   };
 
-export const VivoStore = {
+export const VivoStore: VivoStoreAPI = {
     async backend() { return detect(); },
-    async getProgram(id) { return (await detect()) === "blobs" ? blobs.getProgram(id) : local.getProgram(id); },
-    async saveProgram(id, rec) { return (await detect()) === "blobs" ? blobs.saveProgram(id, rec) : local.saveProgram(id, rec); },
-    async listPrograms() { return (await detect()) === "blobs" ? blobs.listPrograms() : local.listPrograms(); },
-    async deleteProgram(id) { return (await detect()) === "blobs" ? blobs.deleteProgram(id) : local.deleteProgram(id); },
+    async getProgram(id: string): Promise<ProgramRecord | null> { return (await detect()) === "blobs" ? blobs.getProgram(id) : local.getProgram(id); },
+    async saveProgram(id: string, rec: ProgramRecord): Promise<ProgramRecord> { return (await detect()) === "blobs" ? blobs.saveProgram(id, rec) : local.saveProgram(id, rec); },
+    async listPrograms(): Promise<Record<string, { status: string; updatedAt: string; lastExportedAt?: string | null }>> { return (await detect()) === "blobs" ? blobs.listPrograms() : local.listPrograms(); },
+    async deleteProgram(id: string): Promise<void> { return (await detect()) === "blobs" ? blobs.deleteProgram(id) : local.deleteProgram(id); },
     newRecord(id, data, status) {
       const now = new Date().toISOString();
       return { id, shellId: id, createdAt: now, updatedAt: now, status: status || "draft", lastExportedAt: null, data };

@@ -2,6 +2,7 @@
 // Recreated from Víkingur Ólafsson's "From Afar" recital program
 // All text is editable in-page via contentEditable
 
+/** @type {import('./types.js').ProgramData} */
 export const PROGRAM_DATA = {
   contentVersion: "2026-08-04a",
   cover: {

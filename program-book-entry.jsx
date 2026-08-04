@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { App } from './app.jsx';
-import { VivoStore } from './storage.js';
+import { VivoStore } from './storage.ts';
 import { PROGRAM_DATA as SAMPLE_DATA } from './data.js';
 import './editor-suite.js';
 
