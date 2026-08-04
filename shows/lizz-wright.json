@@ -4,7 +4,7 @@
     "eyebrow": "Vivo Performing Arts presents",
     "title": "Lizz Wright",
     "date": "Saturday, Oct. 10, 2026",
-    "time": "8 p.m.",
+    "time": "8 PM",
     "venue": "Berklee Performance Center",
     "accent": "orange",
     "brush": "rhythm",
@@ -205,5 +205,5 @@
     ],
     "ensembleCount": 1
   },
-  "contentVersion": "2026-07-27g"
+  "contentVersion": "2026-08-04a"
 }

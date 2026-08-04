@@ -5,7 +5,7 @@
     "title": "Nadine Sierra",
     "subtitle": "soprano",
     "date": "Wednesday, June 2, 2027",
-    "time": "7:30 p.m.",
+    "time": "7:30 PM",
     "venue": "NEC's Jordan Hall",
     "accent": "purple",
     "brush": "voice",
@@ -264,5 +264,5 @@
     ],
     "ensembleCount": 2
   },
-  "contentVersion": "2026-07-27f"
+  "contentVersion": "2026-08-04a"
 }

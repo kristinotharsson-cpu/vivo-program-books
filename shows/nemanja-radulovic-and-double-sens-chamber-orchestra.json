@@ -4,7 +4,7 @@
     "eyebrow": "Vivo Performing Arts presents",
     "title": "Nemanja Radulović & Double Sens Chamber Orchestra",
     "date": "Friday, Nov. 13, 2026",
-    "time": "8 p.m.",
+    "time": "8 PM",
     "venue": "NEC's Jordan Hall",
     "accent": "green",
     "brush": "harmony",
@@ -255,5 +255,5 @@
     ],
     "ensembleCount": 2
   },
-  "contentVersion": "2026-07-28a"
+  "contentVersion": "2026-08-04a"
 }

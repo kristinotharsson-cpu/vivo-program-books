@@ -3,7 +3,7 @@
 // All text is editable in-page via contentEditable
 
 window.PROGRAM_DATA = {
-  contentVersion: "2026-07-27f",
+  contentVersion: "2026-08-04a",
   cover: {
     eyebrow: "Vivo Performing Arts",
     title: "Víkingur Ólafsson",

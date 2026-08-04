@@ -5,7 +5,7 @@
     "title": "London Symphony Orchestra",
     "subtitle": "Sir Antonio Pappano, chief conductor & Maxim Vengerov, violin soloist",
     "date": "Thursday, March 11, 2027",
-    "time": "7:30 p.m.",
+    "time": "7:30 PM",
     "venue": "Symphony Hall",
     "accent": "green",
     "brush": "harmony",
@@ -227,5 +227,5 @@
     ],
     "ensembleCount": 3
   },
-  "contentVersion": "2026-07-28a"
+  "contentVersion": "2026-08-04a"
 }

@@ -4,7 +4,7 @@
     "eyebrow": "Vivo Performing Arts presents",
     "title": "Seong-Jin Cho, piano",
     "date": "Sunday, March 7, 2027",
-    "time": "3 p.m.",
+    "time": "3 PM",
     "venue": "Symphony Hall",
     "accent": "green",
     "brush": "harmony",
@@ -243,5 +243,5 @@
     ],
     "ensembleCount": 1
   },
-  "contentVersion": "2026-07-28a"
+  "contentVersion": "2026-08-04a"
 }

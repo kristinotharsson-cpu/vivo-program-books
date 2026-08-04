@@ -4,7 +4,7 @@
     "eyebrow": "Vivo Performing Arts presents",
     "title": "Flor de Toloache",
     "date": "Saturday, Feb. 20, 2027",
-    "time": "8 p.m.",
+    "time": "8 PM",
     "venue": "Crystal Ballroom",
     "accent": "blue",
     "brush": "harmony",
@@ -209,5 +209,5 @@
     ],
     "ensembleCount": 1
   },
-  "contentVersion": "2026-07-27f"
+  "contentVersion": "2026-08-04a"
 }

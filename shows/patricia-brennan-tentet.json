@@ -5,7 +5,7 @@
     "title": "Patricia Brennan Tentet",
     "subtitle": "Of The Near And Far | Jazz Festival",
     "date": "Sunday, April 4, 2027",
-    "time": "3 p.m.",
+    "time": "3 PM",
     "venue": "Museum of Science's Public Science Common",
     "accent": "orange",
     "brush": "rhythm",
@@ -204,5 +204,5 @@
     ],
     "ensembleCount": 1
   },
-  "contentVersion": "2026-07-27f"
+  "contentVersion": "2026-08-04a"
 }

@@ -36,6 +36,33 @@
   (function () {
     var params = new URLSearchParams(location.search);
     var slug = params.get('show');
+    // Resolve date-versioned shared content (supporters, staff & board, about, audience info)
+    // for a given program date. Used by both the per-show path and the bundled sample.
+    function resolveShared(shared, dateStr) {
+      try {
+        if (!shared || !window.VivoStore || !window.VivoStore.resolveVersion) return shared;
+        var dnum = window.VivoStore.parseDate(dateStr);
+        if (shared.supporters) shared = Object.assign({}, shared, { supporters: window.VivoStore.resolveVersion("supporters", shared.supporters, dnum) });
+        var rsb = window.VivoStore.resolveVersion("staffBoard", { staff: shared.staff, boards: shared.boards }, dnum);
+        if (rsb) shared = Object.assign({}, shared, { staff: rsb.staff, boards: rsb.boards });
+        if (shared.about) shared = Object.assign({}, shared, { about: window.VivoStore.resolveVersion("about", shared.about, dnum) });
+        if (shared.audienceInfo) shared = Object.assign({}, shared, { audienceInfo: window.VivoStore.resolveVersion("audienceInfo", shared.audienceInfo, dnum) });
+      } catch (e) {}
+      return shared;
+    }
+    // The bundled sample book gets the same shared institutional content as a real show —
+    // all supporter categories, staff & board, about, and audience info.
+    if (!slug) {
+      window.__PROGRAM_BOOT_DEFERRED = true;
+      fetch('shows/_vivo-shared.json')
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .catch(function () { return null; })
+        .then(function (shared) {
+          if (shared) window.VIVO_SHARED = resolveShared(shared, window.PROGRAM_DATA && window.PROGRAM_DATA.cover && window.PROGRAM_DATA.cover.date);
+          window.__PROGRAM_BOOT_DEFERRED = false;
+          if (window.__bootProgramApp) window.__bootProgramApp();
+        });
+    }
     // Also accept a path like /<slug>/ (so CloudFront URL rewrites can drop the param)
     if (!slug) {
       var m = location.pathname.match(/\/([a-z0-9][a-z0-9-]+)\/?$/);
@@ -79,17 +106,7 @@
         } catch (e) {}
         // Resolve supporters for THIS program's date: an edit stamped on an earlier- or
         // same-dated program applies here; edits from later programs do not.
-        try {
-          if (shared && window.VivoStore && window.VivoStore.resolveVersion) {
-            var dnum = window.VivoStore.parseDate(data.cover && data.cover.date);
-            if (shared.supporters) shared = Object.assign({}, shared, { supporters: window.VivoStore.resolveVersion("supporters", shared.supporters, dnum) });
-            var sb = { staff: shared.staff, boards: shared.boards };
-            var rsb = window.VivoStore.resolveVersion("staffBoard", sb, dnum);
-            if (rsb) shared = Object.assign({}, shared, { staff: rsb.staff, boards: rsb.boards });
-            if (shared.about) shared = Object.assign({}, shared, { about: window.VivoStore.resolveVersion("about", shared.about, dnum) });
-            if (shared.audienceInfo) shared = Object.assign({}, shared, { audienceInfo: window.VivoStore.resolveVersion("audienceInfo", shared.audienceInfo, dnum) });
-          }
-        } catch (e) {}
+        shared = resolveShared(shared, data.cover && data.cover.date);
         if (shared) window.VIVO_SHARED = shared;
         window.PROGRAM_DATA = data;
         document.title = data.cover.title + ' — Vivo Performing Arts';

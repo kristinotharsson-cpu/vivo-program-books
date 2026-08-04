@@ -5,7 +5,7 @@
     "title": "Gil Shaham & Akira Eguchi",
     "subtitle": "Violin & Piano",
     "date": "Thursday, Jan. 14, 2027",
-    "time": "8 p.m.",
+    "time": "8 PM",
     "venue": "Concert Hall at Groton Hill Music Center",
     "accent": "green",
     "brush": "harmony",
@@ -239,5 +239,5 @@
     ],
     "ensembleCount": 2
   },
-  "contentVersion": "2026-07-28a"
+  "contentVersion": "2026-08-04a"
 }

@@ -4,7 +4,7 @@
     "eyebrow": "Vivo Performing Arts presents",
     "title": "Jazz at Lincoln Center Orchestra with Wynton Marsalis",
     "date": "Friday, April 16, 2027",
-    "time": "8 p.m.",
+    "time": "8 PM",
     "venue": "Symphony Hall",
     "accent": "orange",
     "brush": "rhythm",
@@ -203,5 +203,5 @@
     ],
     "ensembleCount": 2
   },
-  "contentVersion": "2026-07-27f"
+  "contentVersion": "2026-08-04a"
 }

@@ -4,7 +4,7 @@
     "eyebrow": "Vivo Performing Arts presents",
     "title": "Huang Yi & KUKA",
     "date": "Thursday–Saturday, Feb. 25–27, 2027",
-    "time": "8 p.m./8 p.m./2 p.m./8 p.m.",
+    "time": "8 PM/8 PM/2 PM/8 PM",
     "venue": "Museum of Science’s Public Science Common",
     "accent": "purple",
     "brush": "motion",
@@ -201,5 +201,5 @@
     ],
     "ensembleCount": 2
   },
-  "contentVersion": "2026-07-27f"
+  "contentVersion": "2026-08-04a"
 }

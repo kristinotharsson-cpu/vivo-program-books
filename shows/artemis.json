@@ -5,7 +5,7 @@
     "title": "Artemis",
     "subtitle": "Sketches of Miles",
     "date": "Thursday, March 25, 2027",
-    "time": "8 p.m.",
+    "time": "8 PM",
     "venue": "Berklee Performance Center",
     "accent": "orange",
     "brush": "rhythm",
@@ -200,5 +200,5 @@
     ],
     "ensembleCount": 6
   },
-  "contentVersion": "2026-07-27f"
+  "contentVersion": "2026-08-04a"
 }

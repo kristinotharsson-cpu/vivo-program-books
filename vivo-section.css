@@ -228,7 +228,7 @@
 }
 .vivo-tier-name { flex: 1; }
 /* Amount input in tier edit row */
-.sup-input-amount { flex: 0 0 92px; font-weight: 700; text-align: center; }
+.sup-input-amount { flex: 1 1 150px; min-width: 0; font-weight: 700; text-align: left; }
 .vivo-tier-donors {
   font-family: var(--font-body);
   font-size: 1rem;
@@ -307,3 +307,14 @@
 .sup-del-cat { border-style: solid; }
 .sup-del-cat:hover { border-color: var(--vivo-tangerine); color: var(--vivo-tangerine); }
 .vivo-staff-list.is-roles { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 20px; align-items: start; }
+
+/* Donor names as one comma-separated box (parentheses protect names with commas) */
+.sup-donor-box{width:100%;box-sizing:border-box;min-height:120px;font-family:var(--font-body);font-size:14px;line-height:1.6;color:var(--fg);background:var(--bg);border:1px solid var(--border);padding:12px 14px;resize:vertical}
+.sup-donor-box:focus{outline:none;border-color:var(--accent,var(--vivo-plum))}
+.sup-donor-edit{display:block}
+.sup-donor-hint{font-family:var(--font-body);font-size:11.5px;line-height:1.45;color:var(--fg-muted);margin:6px 0 0}
+.sup-input{width:100%;box-sizing:border-box}
+.sup-tier-head{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.sup-input-tier{flex:1 1 220px;min-width:0}
+.sb-edit-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.sb-in-name,.sb-in-title,.sb-in-email{flex:1 1 200px;min-width:0}

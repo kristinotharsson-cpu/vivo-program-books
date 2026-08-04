@@ -5,7 +5,7 @@
     "title": "Leonkoro Quartet",
     "subtitle": "Debut Series",
     "date": "Wednesday, April 14, 2027",
-    "time": "7:30 p.m.",
+    "time": "7:30 PM",
     "venue": "Longy's Pickman Hall",
     "accent": "green",
     "brush": "harmony",
@@ -207,5 +207,5 @@
     ],
     "ensembleCount": 5
   },
-  "contentVersion": "2026-07-28a"
+  "contentVersion": "2026-08-04a"
 }

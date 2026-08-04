@@ -5,7 +5,7 @@
     "title": "What Makes It Great? with Rob Kapilow",
     "subtitle": "Mozart's Clarinet Concerto",
     "date": "Sunday, Nov. 22, 2026",
-    "time": "3 p.m.",
+    "time": "3 PM",
     "venue": "NEC's Jordan Hall",
     "accent": "blue",
     "brush": "voice",
@@ -201,5 +201,5 @@
     ],
     "ensembleCount": 3
   },
-  "contentVersion": "2026-07-27f"
+  "contentVersion": "2026-08-04a"
 }

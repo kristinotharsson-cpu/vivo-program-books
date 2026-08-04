@@ -4,7 +4,7 @@
     "eyebrow": "Vivo Performing Arts presents",
     "title": "Zlata Chochieva, piano",
     "date": "Saturday, Feb. 20, 2027",
-    "time": "8 p.m.",
+    "time": "8 PM",
     "venue": "NEC’s Jordan Hall",
     "accent": "green",
     "brush": "harmony",
@@ -244,5 +244,5 @@
     ],
     "ensembleCount": 1
   },
-  "contentVersion": "2026-07-28a"
+  "contentVersion": "2026-08-04a"
 }

@@ -4,7 +4,7 @@
     "eyebrow": "Vivo Performing Arts presents",
     "title": "Alvin Ailey American Dance Theater",
     "date": "Friday, April 30",
-    "time": "8 p.m. / Saturday, May 1",
+    "time": "8 PM / Saturday, May 1",
     "venue": "Boch Center Wang Theatre",
     "accent": "purple",
     "brush": "motion",
@@ -210,5 +210,5 @@
     ],
     "ensembleCount": 3
   },
-  "contentVersion": "2026-07-27f"
+  "contentVersion": "2026-08-04a"
 }

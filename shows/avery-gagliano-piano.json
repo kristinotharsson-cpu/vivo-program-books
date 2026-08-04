@@ -5,7 +5,7 @@
     "title": "Avery Gagliano",
     "subtitle": "Piano | Debut Series",
     "date": "Thursday, Oct. 8, 2026",
-    "time": "7:30 p.m.",
+    "time": "7:30 PM",
     "venue": "Longy's Pickman Hall",
     "accent": "green",
     "brush": "harmony",
@@ -253,5 +253,5 @@
     ],
     "ensembleCount": 1
   },
-  "contentVersion": "2026-07-28a"
+  "contentVersion": "2026-08-04a"
 }

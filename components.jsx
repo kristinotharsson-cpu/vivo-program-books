@@ -22,6 +22,8 @@ const Icon = ({ name, size = 20 }) => {
     case "chev-left": return <svg viewBox="0 0 24 24" {...s}><polyline points="15,18 9,12 15,6"/></svg>;
     case "chev-right": return <svg viewBox="0 0 24 24" {...s}><polyline points="9,18 15,12 9,6"/></svg>;
     case "share": return <svg viewBox="0 0 24 24" {...s}><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg>;
+    case "grid": return <svg viewBox="0 0 24 24" {...s}><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>;
+    case "plus": return <svg viewBox="0 0 24 24" {...s}><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>;
     case "list": return <svg viewBox="0 0 24 24" {...s}><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg>;
     case "moon": return <svg viewBox="0 0 24 24" {...s}><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>;
     case "type": return <svg viewBox="0 0 24 24" {...s}><polyline points="4,7 4,4 20,4 20,7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>;
@@ -120,34 +122,34 @@ const Editable = ({ value, onChange, multiline = false, rich = null, as = "span"
   );
 };
 
-// ---------- Top Bar ----------
-const TopBar = ({ title, onBack, onMenu, onSearch, showLogo, logoSrc, home }) => (
-  <header className={"topbar" + (home ? " is-home" : "")}>
-    <div className="topbar-left">
-      {onBack ? (
-        <button className="topbar-back" onClick={onBack} aria-label="Back">
-          <Icon name="arrow-left" size={22} />
-        </button>
-      ) : null}
-      {showLogo && logoSrc ? (
-        <img src={logoSrc} alt="Vivo" className="topbar-logo" />
-      ) : home ? (
-        <span className="topbar-title sr-only">Vivo</span>
-      ) : (
-        <span className="topbar-title">{title}</span>
-      )}
-    </div>
-    <div className="topbar-right">
-      <button className="topbar-icon-btn" onClick={onSearch} aria-label="Search"><Icon name="search" /></button>
-      <button className="topbar-icon-btn" onClick={onMenu} aria-label="Menu"><Icon name="menu" /></button>
-    </div>
-  </header>
+// ---------- Plain field (label + real input) ----------
+// Used wherever the value is data, not prose — dates, times, venues, names, URLs.
+// A real <input> keeps every space, comma, and period the editor types; contentEditable
+// collapses whitespace, which is why these fields are not rich-text.
+const PlainField = ({ label, value, placeholder, onChange, multiline = false, className = "", hint }) => (
+  <label className={"plain-field" + (className ? " " + className : "")} contentEditable={false}>
+    {label ? <span className="plain-field-label">{label}</span> : null}
+    {multiline ? (
+      <textarea className="plain-field-input" value={value == null ? "" : value} placeholder={placeholder} onChange={(e) => onChange(e.target.value)} />
+    ) : (
+      <input type="text" className="plain-field-input" value={value == null ? "" : value} placeholder={placeholder} onChange={(e) => onChange(e.target.value)} />
+    )}
+    {hint ? <span className="plain-field-hint">{hint}</span> : null}
+  </label>
 );
 
-// ---------- Reader Nav (reader-facing only: preview + exported HTML) ----------
-// Sticky bar with a link back to the main Vivo site, a Contents jump menu, and search.
-// Never rendered while editing.
-const ReaderNav = ({ sections = [], onGo, onHome, onBack, onSearch, onMenu, theme, homeUrl = "https://vivoperformingarts.org", currentId, currentTitle }) => {
+// Link back to the season index (never shown in the exported, standalone book)
+const IndexLink = ({ compact }) => {
+  if (window.VIVO_PROGRAM_DATA_SNAPSHOT) return null;
+  return (
+    <a className={"index-link" + (compact ? " is-compact" : "")} href="index.html" aria-label="All programs">
+      <Icon name="grid" size={17} /><span>All programs</span>
+    </a>
+  );
+};
+
+// ---------- Contents dropdown (shared by the reader nav and the edit-mode bar) ----------
+const ContentsMenu = ({ sections = [], currentId, onGo, onHome, onSearch }) => {
   const [open, setOpen] = useState(false);
   const [filter, setFilter] = useState("");
   const wrapRef = useRef(null);
@@ -158,8 +160,71 @@ const ReaderNav = ({ sections = [], onGo, onHome, onBack, onSearch, onMenu, them
     document.addEventListener("mousedown", onDoc);
     return () => document.removeEventListener("mousedown", onDoc);
   }, [open]);
-  const logoSrc = theme === "light" ? "assets/logos/vivo-logo-black.png" : "assets/logos/vivo-logo-cream.png";
   const jump = (id) => { setOpen(false); if (id === "__home") onHome && onHome(); else onGo && onGo(id); };
+  return (
+    <div className="reader-nav-contents" ref={wrapRef}>
+      <button className="reader-nav-contents-btn" aria-expanded={open} onClick={() => setOpen(o => !o)}>
+        <Icon name="list" size={18} /><span>Contents</span><Icon name="chev-down" size={16} />
+      </button>
+      {open ? (
+        <div className="reader-nav-menu" role="menu">
+          <div className="reader-nav-filter">
+            <Icon name="search" size={15} />
+            <input value={filter} onChange={(e) => setFilter(e.target.value)} placeholder="Filter contents…" aria-label="Filter contents" />
+          </div>
+          {!filter ? (
+            <button className={"reader-nav-jump" + (!currentId ? " is-current" : "")} onClick={() => jump("__home")}>
+              <span className="num">00</span><span className="ttl">Cover</span>
+            </button>
+          ) : null}
+          {sections.filter(s => !filter || (s.title || "").toLowerCase().includes(filter.toLowerCase())).map((s) => {
+            const n = sections.indexOf(s) + 1;
+            return (
+              <button key={s.id} className={"reader-nav-jump" + (currentId === s.id ? " is-current" : "")} onClick={() => jump(s.id)}>
+                <span className="num">{String(n).padStart(2, "0")}</span><span className="ttl">{s.title}</span>
+              </button>
+            );
+          })}
+          {filter && !sections.some(s => (s.title || "").toLowerCase().includes(filter.toLowerCase())) ? (
+            <div className="reader-nav-empty">No section matches. <button className="reader-nav-fullsearch" onClick={() => { setOpen(false); onSearch && onSearch(); }}>Search full text →</button></div>
+          ) : null}
+        </div>
+      ) : null}
+    </div>
+  );
+};
+
+// ---------- Top Bar ----------
+const TopBar = ({ title, onBack, onMenu, onSearch, showLogo, logoSrc, home, sections, currentId, onGo, onHome }) => (
+  <header className={"topbar" + (home ? " is-home" : "")}>
+    <div className="topbar-left">
+      {onBack ? (
+        <button className="topbar-back" onClick={onBack} aria-label="Back">
+          <Icon name="arrow-left" size={22} />
+        </button>
+      ) : null}
+      <IndexLink compact />
+      {showLogo && logoSrc ? (
+        <img src={logoSrc} alt="Vivo" className="topbar-logo" />
+      ) : home ? (
+        <span className="topbar-title sr-only">Vivo</span>
+      ) : (
+        <span className="topbar-title">{title}</span>
+      )}
+    </div>
+    <div className="topbar-right">
+      <ContentsMenu sections={sections} currentId={currentId} onGo={onGo} onHome={onHome} onSearch={onSearch} />
+      <button className="topbar-icon-btn" onClick={onSearch} aria-label="Search"><Icon name="search" /></button>
+      <button className="topbar-icon-btn" onClick={onMenu} aria-label="Menu"><Icon name="menu" /></button>
+    </div>
+  </header>
+);
+
+// ---------- Reader Nav (reader-facing only: preview + exported HTML) ----------
+// Sticky bar with a link back to the main Vivo site, a Contents jump menu, and search.
+// Never rendered while editing.
+const ReaderNav = ({ sections = [], onGo, onHome, onBack, onSearch, onMenu, theme, homeUrl = "https://vivoperformingarts.org", currentId, currentTitle }) => {
+  const logoSrc = theme === "light" ? "assets/logos/vivo-logo-black.png" : "assets/logos/vivo-logo-cream.png";
   return (
     <header className="reader-nav">
       <div className="reader-nav-left">
@@ -170,38 +235,11 @@ const ReaderNav = ({ sections = [], onGo, onHome, onBack, onSearch, onMenu, them
           <img src={logoSrc} alt="Vivo Performing Arts" />
           <span className="reader-nav-ext" aria-hidden="true">↗</span>
         </a>
+        <IndexLink />
       </div>
       {currentTitle ? <div className="reader-nav-current" aria-hidden="true">{currentTitle}</div> : null}
       <div className="reader-nav-right">
-        <div className="reader-nav-contents" ref={wrapRef}>
-          <button className="reader-nav-contents-btn" aria-expanded={open} onClick={() => setOpen(o => !o)}>
-            <Icon name="list" size={18} /><span>Contents</span><Icon name="chev-down" size={16} />
-          </button>
-          {open ? (
-            <div className="reader-nav-menu" role="menu">
-              <div className="reader-nav-filter">
-                <Icon name="search" size={15} />
-                <input value={filter} onChange={(e) => setFilter(e.target.value)} placeholder="Filter contents…" aria-label="Filter contents" />
-              </div>
-              {!filter ? (
-                <button className={"reader-nav-jump" + (!currentId ? " is-current" : "")} onClick={() => jump("__home")}>
-                  <span className="num">00</span><span className="ttl">Cover</span>
-                </button>
-              ) : null}
-              {sections.filter(s => !filter || (s.title || "").toLowerCase().includes(filter.toLowerCase())).map((s) => {
-                const n = sections.indexOf(s) + 1;
-                return (
-                  <button key={s.id} className={"reader-nav-jump" + (currentId === s.id ? " is-current" : "")} onClick={() => jump(s.id)}>
-                    <span className="num">{String(n).padStart(2, "0")}</span><span className="ttl">{s.title}</span>
-                  </button>
-                );
-              })}
-              {filter && !sections.some(s => (s.title || "").toLowerCase().includes(filter.toLowerCase())) ? (
-                <div className="reader-nav-empty">No section matches. <button className="reader-nav-fullsearch" onClick={() => { setOpen(false); onSearch && onSearch(); }}>Search full text →</button></div>
-              ) : null}
-            </div>
-          ) : null}
-        </div>
+        <ContentsMenu sections={sections} currentId={currentId} onGo={onGo} onHome={onHome} onSearch={onSearch} />
         <button className="reader-nav-icon" onClick={onSearch} aria-label="Search this program"><Icon name="search" size={20} /></button>
         {onMenu ? <button className="reader-nav-icon" onClick={onMenu} aria-label="Menu"><Icon name="menu" size={20} /></button> : null}
       </div>
@@ -278,6 +316,12 @@ const SettingsMenu = ({ open, onClose, theme, onTheme, fontSize, onFontSize, onS
           <span className="label">{theme === "dark" ? "Switch to Cream" : "Switch to Black"}</span>
           <Icon name="moon" size={16} />
         </button>
+        {!window.VIVO_PROGRAM_DATA_SNAPSHOT ? (
+          <a className="menu-item" href="index.html">
+            <span className="label">All Programs</span>
+            <Icon name="grid" size={16} />
+          </a>
+        ) : null}
         <button className="menu-item" onClick={onShare}>
           <span className="label">Share Program</span>
           <Icon name="share" size={16} />
@@ -400,4 +444,4 @@ const PhotoSlot = ({ src, initials = "", alt = "", className = "", onChange, onC
 };
 
 // Expose globally for other Babel scripts
-Object.assign(window, { Icon, Editable, TopBar, ReaderNav, PdfImport, SharedNotice, SettingsMenu, Toast, SectionBottomNav, RowControls, AddRowButton, PhotoSlot });
+Object.assign(window, { Icon, Editable, PlainField, IndexLink, ContentsMenu, TopBar, ReaderNav, PdfImport, SharedNotice, SettingsMenu, Toast, SectionBottomNav, RowControls, AddRowButton, PhotoSlot });

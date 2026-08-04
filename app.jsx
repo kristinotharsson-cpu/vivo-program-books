@@ -89,20 +89,34 @@ const Cover = ({ cover, update, variant, brushColor, textColor, theme }) => {
             onChange={(src) => update({ photoSrc: src })}
             onClear={() => update({ photoSrc: "" })}
           />
+          {cover.heroBanner ? <div className="cover-photo-banner">{cover.heroBanner}</div> : null}
         </div>
+        {window.__editMode ? (
+          <PlainField className="cover-banner-field" label="Banner on the photo (optional)" value={cover.heroBanner || ""} placeholder="You’re invited to Sound Bites — join us for a fun and relaxing gathering after the performance" onChange={v => update({ heroBanner: v })} multiline />
+        ) : null}
         <div className="cover-meta cover-meta-stack">
-          <div className="cover-meta-row">
-            <span className="label">Date</span>
-            <Editable as="span" className="value" value={cover.date} onChange={v => update({ date: v })} />
-          </div>
-          <div className="cover-meta-row">
-            <span className="label">Time</span>
-            <Editable as="span" className="value" value={cover.time} onChange={v => update({ time: v })} />
-          </div>
-          <div className="cover-meta-row">
-            <span className="label">Venue</span>
-            <Editable as="span" className="value" value={cover.venue} onChange={v => update({ venue: v })} />
-          </div>
+          {window.__editMode ? (
+            <div className="pf-grid">
+              <PlainField label="Date" value={cover.date} placeholder="Sunday, February 28, 2027" onChange={v => update({ date: v })} />
+              <PlainField label="Time" value={cover.time} placeholder="3 PM" onChange={v => update({ time: v })} />
+              <PlainField label="Venue" value={cover.venue} placeholder="Symphony Hall" onChange={v => update({ venue: v })} />
+            </div>
+          ) : (
+            <React.Fragment>
+              <div className="cover-meta-row">
+                <span className="label">Date</span>
+                <span className="value">{cover.date}</span>
+              </div>
+              <div className="cover-meta-row">
+                <span className="label">Time</span>
+                <span className="value">{cover.time}</span>
+              </div>
+              <div className="cover-meta-row">
+                <span className="label">Venue</span>
+                <span className="value">{cover.venue}</span>
+              </div>
+            </React.Fragment>
+          )}
         </div>
       </section>
     );
@@ -130,18 +144,28 @@ const Cover = ({ cover, update, variant, brushColor, textColor, theme }) => {
         </div>
       ) : null}
       <div className="cover-meta">
-        <div>
-          <span className="label">Date</span>
-          <Editable as="div" value={cover.date} onChange={v => update({ date: v })} />
-        </div>
-        <div>
-          <span className="label">Time</span>
-          <Editable as="div" value={cover.time} onChange={v => update({ time: v })} />
-        </div>
-        <div>
-          <span className="label">Venue</span>
-          <Editable as="div" value={cover.venue} onChange={v => update({ venue: v })} />
-        </div>
+        {window.__editMode ? (
+          <div className="pf-grid">
+            <PlainField label="Date" value={cover.date} onChange={v => update({ date: v })} />
+            <PlainField label="Time" value={cover.time} onChange={v => update({ time: v })} />
+            <PlainField label="Venue" value={cover.venue} onChange={v => update({ venue: v })} />
+          </div>
+        ) : (
+          <React.Fragment>
+            <div>
+              <span className="label">Date</span>
+              <div>{cover.date}</div>
+            </div>
+            <div>
+              <span className="label">Time</span>
+              <div>{cover.time}</div>
+            </div>
+            <div>
+              <span className="label">Venue</span>
+              <div>{cover.venue}</div>
+            </div>
+          </React.Fragment>
+        )}
       </div>
     </section>
   );
@@ -237,6 +261,113 @@ const NoteCallout = ({ label, name, photoSrc, initials, onClick, onPhotoChange, 
   );
 };
 
+// ---- Standard TOC cards (present on every program) ----
+const TOC_HEX = { plum: "#BD2691", cream: "#FFFBEB", black: "#000000", tangerine: "#EF4C26", orange: "#FF9E1D", blue: "#007ACC", "sky-blue": "#39BDFF", green: "#1BC469", "light-green": "#CFFFA2", lavender: "#C4B1C9" };
+const TOC_ON_LIGHT = new Set(["cream", "light-green", "lavender", "sky-blue", "orange"]);
+const TOC_STANDARD = {
+  survey: {
+    heading: "Leave Feedback",
+    body: "Thank you for your feedback — it goes straight to our team.",
+    buttons: [{ label: "Take the survey", url: "https://www.vivoperformingarts.org/" }]
+  },
+  promos: [
+    { eyebrow: "10 or more", heading: "Group Sales", meta: "Bring a crowd and save", label: "Group tickets", url: "https://www.vivoperformingarts.org/tickets/group-sales/", accent: "blue" },
+    { eyebrow: "35 & under", heading: "$20 Student Tickets", meta: "Every performance, all season", label: "Student tickets", url: "https://www.vivoperformingarts.org/tickets/student-tickets/", accent: "green" }
+  ]
+};
+
+// Survey card — standard on every table of contents. Supports a second survey link.
+const SurveyCard = ({ survey, update }) => {
+  const editing = window.__editMode;
+  const s = survey || {};
+  const heading = s.heading != null && s.heading !== "" ? s.heading : TOC_STANDARD.survey.heading;
+  const body = s.body != null ? s.body : TOC_STANDARD.survey.body;
+  const buttons = (s.buttons && s.buttons.length) ? s.buttons : TOC_STANDARD.survey.buttons;
+  const patch = (p) => update({ ...s, heading, body, buttons, ...p });
+  const setBtn = (i, p) => patch({ buttons: buttons.map((b, j) => j === i ? { ...b, ...p } : b) });
+  if (editing) {
+    return (
+      <div className="toc-survey is-editing">
+        <div className="pf-grid">
+          <PlainField label="Survey card heading" value={heading} onChange={v => patch({ heading: v })} />
+          <PlainField label="Thank-you line" value={body} onChange={v => patch({ body: v })} />
+          {buttons.map((b, i) => (
+            <React.Fragment key={i}>
+              <PlainField label={"Button " + (i + 1) + " label"} value={b.label || ""} placeholder="Take the survey" onChange={v => setBtn(i, { label: v })} />
+              <PlainField label={"Button " + (i + 1) + " link"} value={b.url || ""} placeholder="https://…" onChange={v => setBtn(i, { url: v })} />
+            </React.Fragment>
+          ))}
+        </div>
+        <div className="prog-edit prog-edit-add">
+          {buttons.length < 2 ? <button onClick={() => patch({ buttons: [...buttons, { label: "Second survey", url: "https://" }] })}>+ Second survey link</button> : null}
+          {buttons.length > 1 ? <button onClick={() => patch({ buttons: buttons.slice(0, -1) })}>Remove second link</button> : null}
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div className="toc-survey">
+      <div className="toc-survey-text">
+        <div className="toc-survey-h">{heading}</div>
+        {body ? <div className="toc-survey-body">{body}</div> : null}
+      </div>
+      <div className="toc-survey-btns">
+        {buttons.filter(b => b.label).map((b, i) => (
+          <a key={i} className="toc-survey-btn" href={b.url || "#"} target="_blank" rel="noopener noreferrer">{b.label}<span aria-hidden="true">→</span></a>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// Group sales + student tickets — a small carousel, standard on every table of contents.
+const TocPromoCarousel = ({ promos, update }) => {
+  const editing = window.__editMode;
+  const cards = (promos && promos.length) ? promos : TOC_STANDARD.promos;
+  const trackRef = React.useRef(null);
+  const page = (dir) => {
+    const el = trackRef.current;
+    if (!el) return;
+    const c = el.querySelector(".toc-promo-card");
+    el.scrollBy({ left: dir * ((c ? c.offsetWidth : el.clientWidth * 0.8) + 12), behavior: "smooth" });
+  };
+  const setCard = (i, p) => update(cards.map((c, j) => j === i ? { ...c, ...p } : c));
+  if (editing) {
+    return (
+      <div className="toc-promo-edit">
+        <div className="toc-promo-edit-h">Standard cards — group sales & student tickets</div>
+        {cards.map((c, i) => (
+          <div key={i} className="pf-grid">
+            <PlainField label="Heading" value={c.heading || ""} onChange={v => setCard(i, { heading: v })} />
+            <PlainField label="Short line" value={c.meta || ""} onChange={v => setCard(i, { meta: v })} />
+            <PlainField className="pf-wide" label="Link" value={c.url || ""} placeholder="https://www.vivoperformingarts.org/…" onChange={v => setCard(i, { url: v })} />
+          </div>
+        ))}
+      </div>
+    );
+  }
+  return (
+    <div className="toc-promo-carousel">
+      <button className="event-slider-arrow prev" onClick={() => page(-1)} aria-label="Previous"><Icon name="chev-left" size={24} /></button>
+      <div className="toc-promo-track" ref={trackRef}>
+        {cards.map((c, i) => {
+          const bg = TOC_HEX[c.accent || "plum"];
+          const fg = TOC_ON_LIGHT.has(c.accent || "plum") ? TOC_HEX.black : TOC_HEX.cream;
+          return (
+            <a key={i} className="toc-promo-card" style={{ background: bg, color: fg }} href={c.url || "#"} target="_blank" rel="noopener noreferrer">
+              {c.eyebrow ? <span className="toc-promo-eyebrow">{c.eyebrow}</span> : null}
+              <span className="toc-promo-h">{c.heading}</span>
+              {c.meta ? <span className="toc-promo-meta">{c.meta}</span> : null}
+              <span className="toc-promo-cta">{c.label || "Learn more"} <span aria-hidden="true">→</span></span>
+            </a>
+          );
+        })}
+      </div>
+      <button className="event-slider-arrow next" onClick={() => page(1)} aria-label="Next"><Icon name="chev-right" size={24} /></button>
+    </div>
+  );
+};
+
 // ---- TOC ----
 const TOC_BAR_PALETTE = [
   ["var(--vivo-plum)", "var(--vivo-cream)"],
@@ -244,8 +375,9 @@ const TOC_BAR_PALETTE = [
   ["var(--vivo-green)", "var(--vivo-black)"],
   ["var(--vivo-blue)", "var(--vivo-cream)"]
 ];
-const TOC = ({ sections, onGo, variant, ads = [], highlightColor, photoSrc, onPhoto, onUpdateSection }) => {
+const TOC = ({ sections, onGo, variant, ads = [], highlightColor, photoSrc, onPhoto, onUpdateSection, cover = {}, updateCover }) => {
   const editing = window.__editMode;
+  const [photoOpen, setPhotoOpen] = useStateA(false);
   const isBars = !variant || variant === "bars";
   const cls = "toc-list" + (variant === "minimal" ? " is-minimal" : isBars ? " is-bars" : "");
   const highlightMap = {
@@ -279,6 +411,8 @@ const TOC = ({ sections, onGo, variant, ads = [], highlightColor, photoSrc, onPh
   if (isBars && (photoSrc || editing)) {
     items.splice(Math.min(3, items.length), 0, { kind: "photo" });
   }
+  items.push({ kind: "tickets" });
+  items.push({ kind: "survey" });
   return (
     <section className="toc-section" style={tocStyle}>
       <ol className={cls} style={{ marginTop: 0 }}>
@@ -287,8 +421,22 @@ const TOC = ({ sections, onGo, variant, ads = [], highlightColor, photoSrc, onPh
             <InlineAd ad={item.ad} />
           </li>
         ) : item.kind === "photo" ? (
-          <li key="toc-photo" className="toc-photo">
-            <PhotoSlot fill src={photoSrc || ""} alt="" initials="DROP A PHOTO" onChange={onPhoto} onClear={() => onPhoto && onPhoto("")} />
+          <li key="toc-photo" className={"toc-photo" + (!photoSrc && !photoOpen ? " is-empty" : "")}>
+            {photoSrc || photoOpen ? (
+              <PhotoSlot fill src={photoSrc || ""} alt="" initials="DROP A PHOTO" onChange={onPhoto} onClear={() => { if (onPhoto) onPhoto(""); setPhotoOpen(false); }} />
+            ) : (
+              <button className="toc-photo-add" onClick={() => setPhotoOpen(true)}>
+                <Icon name="image" size={16} /><span>Add a photo here</span>
+              </button>
+            )}
+          </li>
+        ) : item.kind === "tickets" ? (
+          <li key="toc-tickets" className="toc-standard-item">
+            <TocPromoCarousel promos={cover.tocPromos} update={(promos) => updateCover && updateCover({ tocPromos: promos })} />
+          </li>
+        ) : item.kind === "survey" ? (
+          <li key="toc-survey" className="toc-standard-item">
+            <SurveyCard survey={cover.survey} update={(survey) => updateCover && updateCover({ survey })} />
           </li>
         ) : item.kind === "promo" ? (
           <li key={item.section.id} className="toc-promo-item">
@@ -344,7 +492,8 @@ const useSearchIndex = (data) => useMemoA(() => {
     // Search intentionally excludes section title + eyebrow — only body content is indexed.
     if (sec.lead) collect(sec.lead, "Intro");
     if (sec.quote) collect(sec.quote, "Quote");
-    (sec.body || []).forEach(t => collect(t, "Welcome"));
+    if (Array.isArray(sec.body)) sec.body.forEach(t => collect(t, "Welcome"));
+    else if (typeof sec.body === "string") collect(sec.body, "Welcome");
     (sec.pieces || []).forEach(p => {
       if (p.kind === "intermission") return;
       collect(`${p.composer} — ${p.work}`, "Program");
@@ -496,6 +645,13 @@ const App = () => {
     // theme, and text size — see "Commit the FULL editable snapshot".
   }, [data]);
 
+  const ensureSupporters = useCallbackA(() => {
+    setData(d => {
+      if (!d || !d.sections) return d;
+      if (d.sections.some(s => s.kind === "supporters-list")) return d;
+      return { ...d, sections: [...d.sections, { id: "supporters", title: "Vivo Performing Arts Supporters", kind: "supporters-list", eyebrow: "With Gratitude" }] };
+    });
+  }, []);
   const [theme, setTheme] = useStateA(() => {
     if (window.VIVO_PROGRAM_DATA_SNAPSHOT && window.VIVO_PROGRAM_DATA_SNAPSHOT.theme) {
       return window.VIVO_PROGRAM_DATA_SNAPSHOT.theme;
@@ -654,6 +810,16 @@ const App = () => {
     clearTimeout(window.__vivoSaveT);
     window.__vivoSaveT = setTimeout(commitNow, 800);
   }, [data, tweaks, theme, fontSize]);
+
+  // Vivo Performing Arts Supporters is standard on every book — restore it if a show is
+  // missing the page or had it hidden.
+  useEffectA(() => {
+    ensureSupporters();
+    setTweaks(t => {
+      const hidden = (t.hiddenSections || []).filter(id => id !== "supporters");
+      return hidden.length === (t.hiddenSections || []).length ? t : { ...t, hiddenSections: hidden };
+    });
+  }, []);
 
   // Apply tweaks to cover data (without persisting into data — they're presentational)
   const cover = useMemoA(() => ({
@@ -977,6 +1143,10 @@ const App = () => {
           onMenu={() => setMenuOpen(true)}
           onSearch={() => setSearchOpen(true)}
           home={!currentSection}
+          sections={visibleSections}
+          currentId={currentSection ? currentSection.id : null}
+          onGo={goTo}
+          onHome={goHome}
         />
       ) : (
         <ReaderNav
@@ -1008,6 +1178,7 @@ const App = () => {
           />
           <TOC sections={visibleSections} onGo={goTo} variant={tweaks.tocVariant} highlightColor={tweaks.tocHighlight}
             photoSrc={data.cover.tocPhotoSrc} onPhoto={(src) => updateCover({ tocPhotoSrc: src })} onUpdateSection={updateSection}
+            cover={data.cover} updateCover={updateCover}
             ads={(data.sections.find(s => s.kind === "sponsors")?.ads || []).slice(0, 2).map(a => ({
               name: a.name,
               tagline: a.tagline,

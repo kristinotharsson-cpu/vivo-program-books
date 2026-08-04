@@ -5,7 +5,7 @@
     "title": "Junction Trio",
     "subtitle": "Stefan Jackiw, Jay Campbell, and Conrad Tao",
     "date": "Saturday, Feb. 13, 2027",
-    "time": "8 p.m.",
+    "time": "8 PM",
     "venue": "NEC’s Jordan Hall",
     "accent": "green",
     "brush": "harmony",
@@ -223,5 +223,5 @@
     ],
     "ensembleCount": 4
   },
-  "contentVersion": "2026-07-28a"
+  "contentVersion": "2026-08-04a"
 }

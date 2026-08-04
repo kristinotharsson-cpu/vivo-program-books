@@ -5,7 +5,7 @@
     "title": "Igor Levit",
     "subtitle": "Piano",
     "date": "Sunday, Nov. 8, 2026",
-    "time": "3 p.m.",
+    "time": "3 PM",
     "venue": "Symphony Hall",
     "accent": "green",
     "brush": "harmony",
@@ -245,5 +245,5 @@
     ],
     "ensembleCount": 1
   },
-  "contentVersion": "2026-07-28a"
+  "contentVersion": "2026-08-04a"
 }

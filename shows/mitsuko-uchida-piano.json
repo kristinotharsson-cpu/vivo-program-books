@@ -5,7 +5,7 @@
     "title": "Mitsuko Uchida",
     "subtitle": "Piano",
     "date": "Tuesday, Feb. 2, 2027",
-    "time": "7:30 p.m.",
+    "time": "7:30 PM",
     "venue": "Symphony Hall",
     "accent": "green",
     "brush": "harmony",
@@ -243,5 +243,5 @@
     ],
     "ensembleCount": 1
   },
-  "contentVersion": "2026-07-28a"
+  "contentVersion": "2026-08-04a"
 }

@@ -5,7 +5,7 @@
     "title": "Thibaut Garcia & Antoine Morinière, guitars",
     "subtitle": "Debut Series",
     "date": "Thursday, Feb. 25, 2027",
-    "time": "7:30 p.m.",
+    "time": "7:30 PM",
     "venue": "Longy’s Pickman Hall",
     "accent": "green",
     "brush": "harmony",
@@ -212,5 +212,5 @@
     ],
     "ensembleCount": 2
   },
-  "contentVersion": "2026-07-28a"
+  "contentVersion": "2026-08-04a"
 }

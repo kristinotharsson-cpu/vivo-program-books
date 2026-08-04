@@ -5,7 +5,7 @@
     "title": "Isidore String Quartet with Jeremy Denk",
     "subtitle": "Piano",
     "date": "Sunday, Feb. 7, 2027",
-    "time": "3 p.m.",
+    "time": "3 PM",
     "venue": "NEC's Jordan Hall",
     "accent": "green",
     "brush": "harmony",
@@ -236,5 +236,5 @@
     ],
     "ensembleCount": 6
   },
-  "contentVersion": "2026-07-28a"
+  "contentVersion": "2026-08-04a"
 }

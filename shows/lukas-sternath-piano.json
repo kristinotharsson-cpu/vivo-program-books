@@ -5,7 +5,7 @@
     "title": "Lukas Sternath, piano",
     "subtitle": "Debut Series",
     "date": "Thursday, Jan. 28, 2027",
-    "time": "7:30 p.m.",
+    "time": "7:30 PM",
     "venue": "Longy's Pickman Hall",
     "accent": "green",
     "brush": "harmony",
@@ -260,5 +260,5 @@
     ],
     "ensembleCount": 1
   },
-  "contentVersion": "2026-07-28a"
+  "contentVersion": "2026-08-04a"
 }

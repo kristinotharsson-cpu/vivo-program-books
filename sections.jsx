@@ -20,69 +20,57 @@ const WelcomeSection = ({ s, update }) => (
 );
 
 // ---- PROGRAM ----
+// Standard credit lines every Today's Program page carries.
+const PROGRAM_STANDARD = {
+  seasonSponsorsLabel: "Season Sponsors",
+  massCultural: "Vivo Performing Arts is supported in part by the Mass Cultural Council, a state agency."
+};
+// The program is edited as one plain-text window. These two functions are the whole
+// contract: pieces → text on the way in, text → pieces on the way out.
+const serializeProgram = (pieces) => (pieces || []).map(p => {
+  if (p.kind === "intermission") return "INTERMISSION";
+  const head = [p.composer, p.work].filter(Boolean).join(" — ");
+  const lines = [head];
+  if (p.meta) lines.push("(" + p.meta + ")");
+  (p.movements || []).forEach(m => { if (m) lines.push(m); });
+  return lines.join("\n");
+}).join("\n\n");
+const parseProgram = (text) => {
+  const out = [];
+  String(text || "").replace(/\r/g, "").split(/\n\s*\n/).forEach(block => {
+    const lines = block.split("\n").map(l => l.trim()).filter(Boolean);
+    lines.forEach((ln, i) => {
+      if (/^intermission$/i.test(ln)) { out.push({ kind: "intermission" }); return; }
+      const cur = out.length ? out[out.length - 1] : null;
+      if (i === 0 || !cur || cur.kind === "intermission") {
+        const m = ln.match(/^(.+?)\s+[—–]\s+(.+)$/) || ln.match(/^(.+?)\s+-\s+(.+)$/);
+        if (m) out.push({ composer: m[1].trim(), work: m[2].trim(), movements: [] });
+        else out.push({ composer: ln, work: "", movements: [] });
+        return;
+      }
+      if (/^\(.*\)$/.test(ln)) { cur.meta = ln.slice(1, -1).trim(); return; }
+      if (!cur.work) { cur.work = ln; return; }
+      cur.movements = [...(cur.movements || []), ln];
+    });
+  });
+  return out;
+};
+
 const ProgramSection = ({ s, update, displayStyle, allSections, onGoSection, cover, updateCover }) => {
   const editing = window.__editMode;
   const pieces = s.pieces || [];
-  const setPieces = (next) => update({ pieces: next });
-  const patchPiece = (i, patch) => { const n = [...pieces]; n[i] = { ...n[i], ...patch }; setPieces(n); };
-  const addPiece = () => setPieces([...pieces, { composer: "", work: "", movements: [] }]);
-  const addIntermission = () => setPieces([...pieces, { kind: "intermission" }]);
-  const removePiece = (i) => { const n = [...pieces]; n.splice(i, 1); setPieces(n); };
-  const movePiece = (i, dir) => { const n = [...pieces]; const j = i + dir; if (j < 0 || j >= n.length) return; [n[i], n[j]] = [n[j], n[i]]; setPieces(n); };
-  const addMovement = (i) => patchPiece(i, { movements: [...(pieces[i].movements || []), ""] });
-  const noteSections = (allSections || []).filter(x => x.kind === "notes" || x.kind === "info");
-  const [rawOpen, setRawOpen] = React.useState(false);
-  const [rawText, setRawText] = React.useState("");
-  const [pdfOpen, setPdfOpen] = React.useState(false);
-  const [pdfBusy, setPdfBusy] = React.useState("");
-  const pdfInputRef = React.useRef(null);
+  const raw = s.rawProgram != null ? s.rawProgram : serializeProgram(pieces);
+  const setRaw = (text) => update({ rawProgram: text, pieces: parseProgram(text) });
   const style = s.programStyle || (((s.displayStyle || displayStyle) === "centered") ? "dance" : "classical");
-  const setStyle = (ps) => {
-    const patch = { programStyle: ps };
-    patch.displayStyle = ps === "dance" ? "centered" : "";
-    update(patch);
-  };
-  // Import a printed program PDF → structured pieces. Real extraction runs server-side on
-  // deploy; in preview this reads the file name and appends a starter row to set up the flow.
-  const importPdf = (file) => {
-    if (!file) return;
-    setPdfBusy("Reading “" + file.name + "”…");
-    setTimeout(() => {
-      const demo = [
-        { composer: "Claude Debussy", work: "Suite bergamasque, L. 75", movements: ["Prélude", "Clair de lune"] },
-        { composer: "Maurice Ravel", work: "Gaspard de la nuit, M. 55", movements: ["Ondine", "Le gibet", "Scarbo"] }
-      ];
-      setPieces([...pieces, ...demo]);
-      setPdfBusy(""); setPdfOpen(false);
-      if (pdfInputRef.current) pdfInputRef.current.value = "";
-    }, 900);
-  };
-  const addTextBlock = () => update({ extras: [...(s.extras || []), ""] });
-  // Parse pasted raw program text into structured pieces (APPENDED to existing).
-  const autoFormat = () => {
-    const blocks = rawText.replace(/\r/g, "").split(/\n\s*\n/).map(b => b.trim()).filter(Boolean);
-    const out = [];
-    blocks.forEach(block => {
-      const lines = block.split("\n").map(l => l.trim()).filter(Boolean);
-      lines.forEach((ln, idx) => {
-        if (/^intermission$/i.test(ln)) { out.push({ kind: "intermission" }); return; }
-        if (idx === 0) {
-          const m = ln.match(/^(.+?)\s*[—–-]\s*(.+)$/) || ln.match(/^(.+?),\s*(.+)$/);
-          if (m) out.push({ composer: m[1].trim(), work: m[2].trim(), movements: [] });
-          else out.push({ composer: ln, work: "", movements: [] });
-        } else {
-          const cur = out[out.length - 1];
-          if (cur && !cur.kind) { if (!cur.work) cur.work = ln; else cur.movements.push(ln); }
-        }
-      });
-    });
-    if (out.length) { setPieces([...pieces, ...out]); setRawText(""); setRawOpen(false); }
-  };
-  const resetProgram = () => {
-    if (!confirm("Reset this Program page? Clears all pieces and freeform HTML.")) return;
-    update({ pieces: [], html: "" });
-    setRawOpen(false); setRawText("");
-  };
+  const setStyle = (ps) => update({ programStyle: ps, displayStyle: ps === "dance" ? "centered" : "" });
+  const sp = s.sponsor || {};
+  const setSp = (patch) => update({ sponsor: { ...sp, ...patch } });
+  // Legacy field name was "arrangements"; the line is a management credit.
+  const mgmt = (sp.mgmtCredits && sp.mgmtCredits.length ? sp.mgmtCredits : (sp.arrangements || [])).filter(x => x != null);
+  const setMgmt = (list) => setSp({ mgmtCredits: list, arrangements: undefined });
+  const seasonLabel = sp.seasonSponsorsLabel || sp.label || PROGRAM_STANDARD.seasonSponsorsLabel;
+  const seasonNames = sp.seasonSponsors != null ? sp.seasonSponsors : (sp.name || "");
+  const massLine = sp.closing != null && sp.closing !== "" ? sp.closing : PROGRAM_STANDARD.massCultural;
   return (
   <div>
     {cover ? (() => {
@@ -91,29 +79,26 @@ const ProgramSection = ({ s, update, displayStyle, allSections, onGoSection, cov
       const title = hd.title != null && hd.title !== "" ? hd.title : cover.title;
       const subtitle = hd.subtitle != null ? hd.subtitle : cover.subtitle;
       const setH = (patch) => update({ header: { ...hd, ...patch } });
+      if (editing) {
+        return (
+          <div className="program-perf-head is-editing">
+            <div className="pf-grid">
+              <PlainField label="Program name" value={title || ""} placeholder="Artist or program name" onChange={v => setH({ title: v })} />
+              <PlainField label="Instrument / subtitle" value={subtitle || ""} placeholder="piano" onChange={v => setH({ subtitle: v })} />
+              <PlainField label="Date" value={gt("date")} placeholder="Sunday, February 28, 2027" onChange={v => setH({ date: v })} />
+              <PlainField label="Time" value={gt("time")} placeholder="3 PM" onChange={v => setH({ time: v })} />
+              <PlainField label="Venue" value={gt("venue")} placeholder="Symphony Hall" onChange={v => setH({ venue: v })} />
+            </div>
+          </div>
+        );
+      }
       return (
-      <div className="program-perf-head">
-        {editing ? (
-          <React.Fragment>
-            <div className="program-perf-title">
-              <Editable as="span" value={title || ""} data-ph="Program name…" onChange={v => setH({ title: v })} />
-              <span className="program-perf-sub"> — <Editable as="span" value={subtitle || ""} data-ph="subtitle" onChange={v => setH({ subtitle: v })} /></span>
-            </div>
-            <div className="program-perf-meta">
-              <Editable as="span" value={gt("date")} data-ph="Date" onChange={v => setH({ date: v })} />{"\u00A0\u00A0\u00A0"}
-              <Editable as="span" value={gt("time")} data-ph="Time" onChange={v => setH({ time: v })} />{"\u00A0\u00A0\u00A0"}
-              <Editable as="span" value={gt("venue")} data-ph="Venue" onChange={v => setH({ venue: v })} />
-            </div>
-          </React.Fragment>
-        ) : (
-          <React.Fragment>
-            <div className="program-perf-title">{title}{subtitle ? <span className="program-perf-sub"> — {subtitle}</span> : null}</div>
-            <div className="program-perf-meta">
-              {[gt("date"), gt("time"), gt("venue")].filter(Boolean).join("\u00A0\u00A0\u00A0")}
-            </div>
-          </React.Fragment>
-        )}
-      </div>
+        <div className="program-perf-head">
+          <div className="program-perf-title">{title}{subtitle ? <span className="program-perf-sub">, {subtitle}</span> : null}</div>
+          <div className="program-perf-meta">
+            {[gt("date"), gt("time"), gt("venue")].filter(Boolean).join("\u00A0\u00A0\u00A0")}
+          </div>
+        </div>
       );
     })() : null}
     {(s.subtitle || editing) ? (
@@ -129,48 +114,45 @@ const ProgramSection = ({ s, update, displayStyle, allSections, onGoSection, cov
         </div>
       </div>
     ) : null}
+    {editing ? (
+      <div className="prog-raw" contentEditable={false}>
+        <div className="prog-help">
+          <strong>The program — one text box.</strong> Everything already on this page is below; edit it directly.
+          <ol className="prog-rules">
+            <li><strong>Blank line</strong> between pieces.</li>
+            <li>First line of a piece: <code>COMPOSER — Work title</code> (em dash or hyphen).</li>
+            <li>Each line after that is a <strong>movement</strong>.</li>
+            <li>A line in <strong>parentheses</strong> is a credit under the work: <code>(Arr. Kurtág)</code>.</li>
+            <li><code>INTERMISSION</code> on its own line.</li>
+          </ol>
+        </div>
+        <textarea
+          className="prog-html-input prog-raw-input"
+          value={raw}
+          placeholder={"LUDWIG VAN BEETHOVEN — Sonata No. 21 in C major, Op. 53 \u201cWaldstein\u201d\nAllegro con brio\nRondo: Allegretto moderato\n\nINTERMISSION\n\nFR\u00c9D\u00c9RIC CHOPIN — Ballade No. 4 in F minor, Op. 52\n(Arr. for two pianos)"}
+          onChange={(e) => setRaw(e.target.value)}
+        />
+        <div className="prog-raw-preview-label">Preview</div>
+      </div>
+    ) : null}
     <ol className={"program-list" + (style === "dance" ? " is-centered" : "") + (style === "jazz" ? " is-jazz" : "") + (style === "custom" ? " is-custom" : "")}>
       {pieces.map((p, i) => {
         if (p.kind === "intermission") {
-          return (
-            <li key={i} className="program-divider">— Intermission —
-              {editing ? <span className="prog-edit"><button onClick={() => movePiece(i, -1)}>↑</button><button onClick={() => movePiece(i, 1)}>↓</button><button onClick={() => removePiece(i)}>✕</button></span> : null}
-            </li>
-          );
+          return <li key={i} className="program-divider">Intermission</li>;
         }
         const noteHref = p.noteId ? "#/" + p.noteId : null;
         return (
           <li key={i} className="program-item">
-            <Editable as="div" className="composer" value={p.composer} onChange={v => patchPiece(i, { composer: v })} />
+            <div className="composer">{p.composer}</div>
             {noteHref && !editing ? (
               <a className="work work-link" href={noteHref} onClick={(e) => { e.preventDefault(); onGoSection && onGoSection(p.noteId); }}>{p.work}</a>
             ) : (
-              <Editable as="div" className="work" value={p.work} onChange={v => patchPiece(i, { work: v })} multiline />
+              <div className="work">{p.work}</div>
             )}
-            {(p.meta || editing) ? (
-              <Editable as="div" className="meta" value={p.meta || ""} onChange={v => patchPiece(i, { meta: v })} />
-            ) : null}
+            {p.meta ? <div className="meta">{p.meta}</div> : null}
             {p.movements && p.movements.length > 0 ? (
               <div className="movements">
-                {p.movements.map((m, mi) => (
-                  <Editable key={mi} as="span" className="mvt" value={m} onChange={v => {
-                    const movements = [...p.movements]; movements[mi] = v; patchPiece(i, { movements });
-                  }} />
-                ))}
-              </div>
-            ) : null}
-            {editing ? (
-              <div className="prog-edit">
-                <button onClick={() => addMovement(i)}>+ Movement</button>
-                <button onClick={() => movePiece(i, -1)}>↑</button>
-                <button onClick={() => movePiece(i, 1)}>↓</button>
-                <button onClick={() => removePiece(i)}>Delete</button>
-                <label className="prog-note-link">Link to note:
-                  <select value={p.noteId || ""} onChange={(e) => patchPiece(i, { noteId: e.target.value })}>
-                    <option value="">None</option>
-                    {noteSections.map(n => <option key={n.id} value={n.id}>{n.title}</option>)}
-                  </select>
-                </label>
+                {p.movements.map((m, mi) => <span key={mi} className="mvt">{m}</span>)}
               </div>
             ) : null}
           </li>
@@ -179,9 +161,9 @@ const ProgramSection = ({ s, update, displayStyle, allSections, onGoSection, cov
     </ol>
 
     {/* Runtime note renders BELOW the program list */}
-    {(s.runtimeNote || editing) ? (
-      <Editable as="p" className="program-runtime" value={s.runtimeNote || ""} onChange={v => update({ runtimeNote: v })} multiline />
-    ) : null}
+    {editing ? (
+      <PlainField className="prog-runtime-field" label="Run time note" value={s.runtimeNote || ""} placeholder="Approximately 1 hour 50 minutes, including intermission" onChange={v => update({ runtimeNote: v })} multiline />
+    ) : (s.runtimeNote ? <p className="program-runtime" dangerouslySetInnerHTML={{ __html: s.runtimeNote }} /> : null)}
 
     {/* Extra rich text blocks (full formatting) below the program */}
     {(s.extras || []).map((p, i) => (
@@ -189,8 +171,6 @@ const ProgramSection = ({ s, update, displayStyle, allSections, onGoSection, cov
         <Editable as="p" className="prog-extra-text" value={p} onChange={v => { const extras = [...(s.extras || [])]; extras[i] = v; update({ extras }); }} multiline />
         {editing ? (
           <div className="prog-edit">
-            <button onClick={() => { const extras = [...(s.extras || [])]; const j = i - 1; if (j < 0) return; [extras[i], extras[j]] = [extras[j], extras[i]]; update({ extras }); }}>↑</button>
-            <button onClick={() => { const extras = [...(s.extras || [])]; const j = i + 1; if (j >= extras.length) return; [extras[i], extras[j]] = [extras[j], extras[i]]; update({ extras }); }}>↓</button>
             <button onClick={() => { update({ extras: (s.extras || []).filter((_, j) => j !== i) }); window.__vivoToast && window.__vivoToast("Text block deleted · ⌘Z to undo"); }}>Delete</button>
           </div>
         ) : null}
@@ -201,90 +181,66 @@ const ProgramSection = ({ s, update, displayStyle, allSections, onGoSection, cov
     {editing ? (
       <details className="advanced-html">
         <summary>Advanced — add custom HTML below the program</summary>
-        <div className="prog-help">Optional. Renders below the list above — mix presets and custom HTML freely. For staff comfortable with HTML; most programs never need this.</div>
+        <div className="prog-help">Optional. Renders below the program above. For staff comfortable with HTML; most programs never need this.</div>
         <textarea className="prog-html-input" value={s.html || ""} placeholder="<p>Optional custom HTML…</p>" onChange={(e) => update({ html: e.target.value })} />
       </details>
     ) : (s.html ? <div className="prog-html" dangerouslySetInnerHTML={{ __html: s.html }} /> : null)}
 
-    {editing && rawOpen ? (
-      <div className="prog-html-edit">
-        <div className="prog-help">
-          <strong>Paste raw text — rules:</strong>
-          <ol className="prog-rules">
-            <li>Separate each piece with a <strong>blank line</strong>.</li>
-            <li>The <strong>first line</strong> of a piece is the composer and work. Split them with a <strong>dash (—)</strong> or a <strong>comma</strong>: <code>Beethoven — Sonata No. 21, Op. 53</code>.</li>
-            <li>Every <strong>following line</strong> in that piece becomes a <strong>movement</strong>.</li>
-            <li>Type <code>INTERMISSION</code> on its own line for a break.</li>
-            <li>Auto-format <strong>appends</strong> to what's already on the page (it won't erase your presets).</li>
-          </ol>
-        </div>
-        <textarea className="prog-html-input" value={rawText} placeholder={"Ludwig van Beethoven — Sonata No. 21 in C major, Op. 53 \u201cWaldstein\u201d\nAllegro con brio\nRondo: Allegretto moderato\n\nINTERMISSION\n\nFrédéric Chopin — Ballade No. 4 in F minor, Op. 52"} onChange={(e) => setRawText(e.target.value)} />
-        <div className="prog-edit prog-edit-add">
-          <button onClick={autoFormat}>Auto-format & append</button>
-          <button onClick={() => { setRawOpen(false); setRawText(""); }}>Cancel</button>
-        </div>
-      </div>
-    ) : null}
-
+    {/* Credits & supporters — season sponsors and the Mass Cultural Council line are
+        standard on every program page; performance and additional sponsors are optional. */}
     {editing ? (
-      <div className="prog-help">
-        <strong>Linking a piece to a note:</strong> use the <em>Link to note</em> dropdown on any piece to connect it to a Program Notes or Info page — the title becomes a "Read note →" link. Anywhere you type text, <code>[label](#/section-id)</code> also makes a link.
-      </div>
-    ) : null}
-    {/* Performance supporter block — renders at the bottom of the Today's Program page,
-        in the sample format: arrangement lines, season sponsors, public-support lines. */}
-    {(() => {
-      const sp = s.sponsor || {};
-      const arr = (sp.arrangements || []).filter(x => x && x.trim());
-      const hasContent = arr.length || sp.name || sp.line || sp.seasonSponsors || sp.publicSupport || sp.closing;
-      if (!hasContent && !editing) return null;
-      return (
-        <div className={"prog-sponsor" + (editing && !hasContent ? " is-empty-optional" : "")}>
-          {editing && !hasContent ? <div className="empty-optional-note" contentEditable={false}>Hidden from readers until filled</div> : null}
-          {(arr.length || editing) ? (
-            <div className="prog-sp-arrangements">
-              {(sp.arrangements && sp.arrangements.length ? sp.arrangements : [""]).map((line, i) => (
-                <Editable key={i} as="p" className="prog-sp-arrangement" value={line} data-ph="[Artist] appears by arrangement with […]" onChange={v => { const a = [...(sp.arrangements || [""])]; a[i] = v; update({ sponsor: { ...sp, arrangements: a } }); }} />
-              ))}
-              {editing ? <button className="prog-sp-addline" contentEditable={false} onClick={() => update({ sponsor: { ...sp, arrangements: [...(sp.arrangements || [""]), ""] } })}>+ Arrangement line</button> : null}
-            </div>
-          ) : null}
-          {(sp.name || sp.seasonSponsors || editing) ? (
-            <div className="prog-sp-season">
-              <Editable as="div" className="prog-sp-season-label" value={sp.seasonSponsorsLabel || sp.label || ""} data-ph="Season Sponsors label…" onChange={v => update({ sponsor: { ...sp, seasonSponsorsLabel: v } })} />
-              <Editable as="div" className="prog-sp-season-names" value={sp.seasonSponsors || sp.name || ""} data-ph="Season sponsor names…" onChange={v => update({ sponsor: { ...sp, seasonSponsors: v } })} multiline />
-            </div>
-          ) : null}
-          {(sp.publicSupport || editing) ? (
-            <Editable as="p" className="prog-sp-support" value={sp.publicSupport || ""} data-ph="Neighborhood Arts / other support statement…" onChange={v => update({ sponsor: { ...sp, publicSupport: v } })} multiline />
-          ) : null}
-          {(sp.closing || editing) ? (
-            <Editable as="p" className="prog-sp-closing" value={sp.closing || ""} data-ph="Public agency line (e.g. supported by the Mass Cultural Council)…" onChange={v => update({ sponsor: { ...sp, closing: v } })} multiline />
-          ) : null}
+      <div className="prog-sponsor-edit" contentEditable={false}>
+        <h3 className="prog-sponsor-edit-h">Credits & supporters</h3>
+        <div className="pf-grid">
+          {(mgmt.length ? mgmt : [""]).map((line, i) => (
+            <PlainField key={i} className="pf-wide" label={i === 0 ? "Management credit" : "Management credit " + (i + 1)}
+              value={line} placeholder="[Artist] appears by arrangement with […]"
+              onChange={v => { const a = mgmt.length ? [...mgmt] : [""]; a[i] = v; setMgmt(a); }} />
+          ))}
         </div>
-      );
-    })()}
-
-    {editing ? (
-      <div className="prog-edit prog-edit-add">
-        <button onClick={addPiece}>+ Add Piece</button>
-        <button onClick={addIntermission}>+ Intermission</button>
-        <button onClick={addTextBlock}>+ Text block</button>
-        <button onClick={() => { setRawOpen(true); setRawText(""); }}>Paste raw text</button>
-        <button onClick={() => setPdfOpen(true)}>⇪ Import from PDF</button>
-        <button onClick={resetProgram}>Reset page</button>
-      </div>
-    ) : null}
-    {editing && pdfOpen ? (
-      <div className="prog-pdf" contentEditable={false}>
-        <div className="prog-help"><strong>Import program from PDF.</strong> Upload a printed program and we'll read the pieces, composers, and movements into the structured list above — fine-tune anything after. Real extraction runs on import; this preview appends a starter set.</div>
-        <div className="prog-pdf-drop" onClick={() => pdfInputRef.current && pdfInputRef.current.click()}>
-          {pdfBusy || "Click to choose a PDF"}
+        <button className="prog-sp-addline" onClick={() => setMgmt([...(mgmt.length ? mgmt : [""]), ""])}>+ Management credit line</button>
+        <div className="pf-grid">
+          <PlainField label="Performance sponsor label" value={sp.perfSponsorLabel || ""} placeholder="Performance Sponsor" onChange={v => setSp({ perfSponsorLabel: v })} />
+          <PlainField label="Performance sponsor name(s)" value={sp.perfSponsors || ""} placeholder="Susan & Michael Thonis" onChange={v => setSp({ perfSponsors: v })} />
+          <PlainField label="Additional sponsor label" value={sp.additionalLabel || ""} placeholder="Additional support provided by" onChange={v => setSp({ additionalLabel: v })} />
+          <PlainField label="Additional sponsor name(s)" value={sp.additionalSponsors || ""} placeholder="Jeremy Silverman & Mary Sutherland" onChange={v => setSp({ additionalSponsors: v })} />
+          <PlainField label="Season sponsors label" value={seasonLabel} placeholder="Season Sponsors" onChange={v => setSp({ seasonSponsorsLabel: v })} />
+          <PlainField label="Season sponsor name(s)" value={seasonNames} placeholder="Crescendo Donor Advised Fund and Susan & Michael Thonis" onChange={v => setSp({ seasonSponsors: v })} />
+          <PlainField className="pf-wide" label="Other support statement (optional)" value={sp.publicSupport || ""} placeholder="Neighborhood Arts is supported by…" onChange={v => setSp({ publicSupport: v })} multiline />
+          <PlainField className="pf-wide" label="Public agency line" value={massLine} onChange={v => setSp({ closing: v })} multiline />
         </div>
-        <input ref={pdfInputRef} type="file" accept="application/pdf" style={{ display: "none" }} onChange={(e) => importPdf(e.target.files && e.target.files[0])} />
-        <div className="prog-edit prog-edit-add"><button onClick={() => { setPdfOpen(false); setPdfBusy(""); }}>Cancel</button></div>
       </div>
-    ) : null}
+    ) : (
+      <div className="prog-sponsor">
+        {mgmt.filter(x => x && x.trim()).length ? (
+          <div className="prog-sp-arrangements">
+            {mgmt.filter(x => x && x.trim()).map((line, i) => (
+              <p key={i} className="prog-sp-arrangement" dangerouslySetInnerHTML={{ __html: line }} />
+            ))}
+          </div>
+        ) : null}
+        {sp.perfSponsors ? (
+          <div className="prog-sp-season">
+            <div className="prog-sp-season-label">{sp.perfSponsorLabel || "Performance Sponsor"}</div>
+            <div className="prog-sp-season-names">{sp.perfSponsors}</div>
+          </div>
+        ) : null}
+        {sp.additionalSponsors ? (
+          <div className="prog-sp-season">
+            <div className="prog-sp-season-label">{sp.additionalLabel || "Additional support provided by"}</div>
+            <div className="prog-sp-season-names">{sp.additionalSponsors}</div>
+          </div>
+        ) : null}
+        {seasonNames ? (
+          <div className="prog-sp-season">
+            <div className="prog-sp-season-label">{seasonLabel}</div>
+            <div className="prog-sp-season-names">{seasonNames}</div>
+          </div>
+        ) : null}
+        {sp.publicSupport ? <p className="prog-sp-support">{sp.publicSupport}</p> : null}
+        <p className="prog-sp-closing">{massLine}</p>
+      </div>
+    )}
   </div>
   );
 };
@@ -493,7 +449,8 @@ const RosterSection = ({ s, update }) => (
 
 // ---- BIOS (expandable) ----
 const BiosSection = ({ s, update, expandedId, onClearExpanded }) => {
-  const [open, setOpen] = useStateS({ 0: true });
+  // Every bio starts collapsed — the page opens as a clean list of artists.
+  const [open, setOpen] = useStateS({});
   // If an expandedId is provided, scroll to and open that bio
   useEffectS(() => {
     if (!expandedId) return;
@@ -511,7 +468,8 @@ const BiosSection = ({ s, update, expandedId, onClearExpanded }) => {
   }, [expandedId]);
   const addBio = () => {
     const id = "bio-" + Date.now().toString(36);
-    update({ bios: [...s.bios, { id, name: "New Name", role: "Role", initials: "NN", photoSrc: "", body: ["Biography text…"] }] });
+    update({ bios: [...s.bios, { id, name: "", role: "", initials: "", photoSrc: "", body: [""] }] });
+    window.__vivoToast && window.__vivoToast("Artist added — scroll down to fill it in");
   };
   const removeBio = (i) => {
     update({ bios: s.bios.filter((_, j) => j !== i) });
@@ -549,8 +507,8 @@ const BiosSection = ({ s, update, expandedId, onClearExpanded }) => {
               </div>
               <div className="bio-full-head">
                 <div className="bio-text">
-                  <Editable as="div" className="bio-name" value={b.name} onChange={v => { const bios = [...s.bios]; bios[i] = { ...b, name: v }; update({ bios }); }} />
-                  <Editable as="div" className="bio-role" value={b.role} onChange={v => { const bios = [...s.bios]; bios[i] = { ...b, role: v }; update({ bios }); }} />
+                  <Editable as="div" className="bio-name" value={b.name} data-ph="Artist name…" onChange={v => { const bios = [...s.bios]; bios[i] = { ...b, name: v }; update({ bios }); }} />
+                  {(b.role || window.__editMode) ? <Editable as="div" className="bio-role" value={b.role || ""} data-ph="Role (optional)" onChange={v => { const bios = [...s.bios]; bios[i] = { ...b, role: v }; update({ bios }); }} /> : null}
                 </div>
                 <RowControls onDelete={() => removeBio(i)} label="entry" />
               </div>
@@ -562,7 +520,7 @@ const BiosSection = ({ s, update, expandedId, onClearExpanded }) => {
             </li>
           ))}
         </ul>
-        <AddRowButton label="Add entry" onAdd={addBio} />
+        <AddRowButton label="Add artist" onAdd={addBio} />
         {React.createElement(window.PdfImport, { label: "Import bios from PDF", hint: "Upload a bios PDF and we'll read each artist's name, role, and biography into the fields above.", onImport: importBios })}
       </div>
     );
@@ -580,7 +538,7 @@ const BiosSection = ({ s, update, expandedId, onClearExpanded }) => {
             data-bio-id={b.id || ""}
           >
             <div className="bio-toggle-row">
-              <button className="bio-toggle" onClick={() => setOpen({ ...open, [i]: !open[i] })}>
+              <button className="bio-toggle" onClick={() => setOpen({ ...open, [i]: !open[i] })} aria-expanded={!!open[i]}>
                 <PhotoSlot
                   src={b.photoSrc}
                   initials={b.initials}
@@ -595,14 +553,16 @@ const BiosSection = ({ s, update, expandedId, onClearExpanded }) => {
                   }}
                 />
                 <div className="bio-text">
-                  <Editable as="div" className="bio-name" value={b.name} onChange={v => {
+                  <Editable as="div" className="bio-name" value={b.name} data-ph="Artist name…" onChange={v => {
                     const bios = [...s.bios]; bios[i] = { ...b, name: v }; update({ bios });
                   }} />
-                  <Editable as="div" className="bio-role" value={b.role} onChange={v => {
-                    const bios = [...s.bios]; bios[i] = { ...b, role: v }; update({ bios });
-                  }} />
+                  {(b.role || window.__editMode) ? (
+                    <Editable as="div" className="bio-role" value={b.role || ""} data-ph="Role (optional)" onChange={v => {
+                      const bios = [...s.bios]; bios[i] = { ...b, role: v }; update({ bios });
+                    }} />
+                  ) : null}
                 </div>
-                <Icon name="chev-down" size={20} />
+                <span className="bio-chev-btn" aria-hidden="true"><Icon name="chev-down" size={26} /></span>
               </button>
               <RowControls onDelete={() => removeBio(i)} label="bio" />
             </div>
@@ -623,7 +583,7 @@ const BiosSection = ({ s, update, expandedId, onClearExpanded }) => {
           </li>
         ))}
       </ul>
-      <AddRowButton label="Add bio" onAdd={addBio} />
+      <AddRowButton label="Add artist" onAdd={addBio} />
       {React.createElement(window.PdfImport, { label: "Import bios from PDF", hint: "Upload a bios PDF and we'll read each artist's name, role, and biography into the fields above.", onImport: importBios })}
     </div>
   );
@@ -1020,12 +980,14 @@ const venueUrlFor = (text) => {
 };
 const InfoSection = ({ s, update }) => {
   const audienceInfo = (s.audienceInfo && s.audienceInfo.length) ? s.audienceInfo : ((window.VIVO_SHARED && window.VIVO_SHARED.audienceInfo) || []);
-  return (
-  <div>
-    {s.sections.map((sec, i) => {
+  const isLandAck = (sec) => /land\s*acknowledge?ment/i.test((sec.h || "").trim());
+  // Land Acknowledgment always closes the page.
+  const ordered = [...(s.sections || [])].map((sec, i) => ({ sec, i }))
+    .sort((a, b) => (isLandAck(a.sec) ? 1 : 0) - (isLandAck(b.sec) ? 1 : 0));
+  const renderBlock = ({ sec, i }) => {
       const isVenue = /^venue$/i.test((sec.h || "").trim());
       return (
-      <div key={i}>
+      <div key={i} className={isLandAck(sec) ? "info-land-ack" : undefined}>
         <Editable as="h3" value={sec.h} onChange={v => {
           const sections = [...s.sections]; sections[i] = { ...sec, h: v }; update({ sections });
         }} />
@@ -1050,7 +1012,10 @@ const InfoSection = ({ s, update }) => {
         })}
       </div>
       );
-    })}
+  };
+  return (
+  <div>
+    {ordered.filter(x => !isLandAck(x.sec)).map(renderBlock)}
     {audienceInfo.length ? (
       <div className="vivo-band" style={{ marginTop: 24 }}>
         <h3 className="vivo-band-title">Audience Information</h3>
@@ -1061,6 +1026,7 @@ const InfoSection = ({ s, update }) => {
         ))}
       </div>
     ) : null}
+    {ordered.filter(x => isLandAck(x.sec)).map(renderBlock)}
   </div>
   );
 };
@@ -1070,12 +1036,13 @@ const InfoSection = ({ s, update }) => {
 const VivoAccordion = ({ id, title, subtitle, accent, brush, brushColor, index, count, children, defaultOpen }) => {
   const [open, setOpen] = React.useState(!!defaultOpen);
   const accentMap = {
-    magenta: "var(--vivo-plum)", tangerine: "var(--vivo-tangerine)", orange: "var(--vivo-tangerine)", azure: "var(--vivo-blue)",
+    magenta: "var(--vivo-plum)", tangerine: "var(--vivo-tangerine)", orange: "var(--vivo-orange)", azure: "var(--vivo-blue)",
     violet: "var(--vivo-plum)", green: "var(--vivo-green)", plum: "var(--vivo-plum)"
   };
   const bg = accentMap[accent] || "var(--vivo-plum)";
-  // On tangerine bars the illustration switches to plum for contrast; elsewhere it stays tangerine.
+  // Orange bars take black text; the illustration switches to plum on orange/tangerine for contrast.
   const isTangerine = /tangerine|orange/.test(accent || "");
+  const darkText = /orange/.test(accent || "");
   const brushSrc = brush ? `assets/illustrations/${brush}-${isTangerine ? "plum" : "tangerine"}.png` : null;
   return (
     <div className={"vivo-accordion " + (open ? "is-open" : "")}>
@@ -1084,7 +1051,7 @@ const VivoAccordion = ({ id, title, subtitle, accent, brush, brushColor, index, 
         onClick={() => setOpen(o => !o)}
         aria-expanded={open}
         aria-controls={`vivo-panel-${id}`}
-        style={{ background: bg }}
+        style={{ background: bg, color: darkText ? "var(--vivo-black)" : undefined }}
       >
         {brushSrc ? (
           <img className="vivo-banner-stripe" src={brushSrc} alt="" aria-hidden="true" style={{ "--i": index || 0, "--n": count || 1 }} onError={(e) => e.target.style.display = "none"} />
@@ -1271,6 +1238,21 @@ const StaffBoardSection = ({ s }) => {
 };
 
 // ---- VIVO SUPPORTERS (standalone module, editable — updates every show) ----
+// Names are edited as one comma-separated list per tier. A name that itself contains a
+// comma or a title goes in parentheses: (Smith, Jr.), (The Hon. Inés Vargas, Chair).
+const parseDonorList = (text) => {
+  const out = []; let buf = ""; let depth = 0;
+  String(text == null ? "" : text).split("").forEach(ch => {
+    if (ch === "(") { depth++; if (depth === 1) return; }
+    if (ch === ")") { if (depth > 0) { depth--; if (depth === 0) return; } }
+    if ((ch === "," || ch === "\n") && depth === 0) { if (buf.trim()) out.push(buf.trim()); buf = ""; return; }
+    buf += ch;
+  });
+  if (buf.trim()) out.push(buf.trim());
+  return out;
+};
+const serializeDonorList = (donors) => (donors || []).filter(d => d && d.trim())
+  .map(d => /,/.test(d) ? "(" + d.trim() + ")" : d.trim()).join(", ");
 const SupportersSection = ({ s }) => {
   const editing = window.__editMode;
   const shared = window.VIVO_SHARED || {};
@@ -1334,14 +1316,16 @@ const SupportersSection = ({ s }) => {
                 )}
                 {editing ? (
                   <div className="sup-donor-edit">
-                    {(tier.donors || []).map((d, di) => (
-                      <span key={di} className="sup-chip">
-                        <input className="sup-chip-input" value={d} placeholder="Name"
-                          onChange={(e) => editCats(cs => { cs[ci].tiers[ti].donors[di] = e.target.value; })} />
-                        <button className="sup-chip-del" title="Remove name" onClick={() => editCats(cs => cs[ci].tiers[ti].donors.splice(di, 1))}>×</button>
-                      </span>
-                    ))}
-                    <button className="sup-add-name" onClick={() => editCats(cs => cs[ci].tiers[ti].donors.push(""))}>+ Add name</button>
+                    <textarea
+                      className="sup-donor-box"
+                      value={tier.donorsText != null ? tier.donorsText : serializeDonorList(tier.donors)}
+                      placeholder="Paste names separated by commas. Wrap a name that contains a comma in parentheses: (Smith, Jr.)"
+                      onChange={(e) => editCats(cs => {
+                        cs[ci].tiers[ti].donorsText = e.target.value;
+                        cs[ci].tiers[ti].donors = parseDonorList(e.target.value);
+                      })}
+                    />
+                    <p className="sup-donor-hint">{(tier.donors || []).filter(Boolean).length} names — they'll set in columns when you're done. Names with a comma or title go in parentheses.</p>
                   </div>
                 ) : (
                   <ul className="vivo-tier-donors">{(tier.donors || []).filter(Boolean).map((d, di) => <li key={di}>{d}</li>)}</ul>
@@ -1597,6 +1581,7 @@ const PromoSection = ({ s, update }) => {
 // ---- FROM THE ARCHIVES (box above the artist bio, default-on) ----
 const ArchiveBox = ({ s, update }) => {
   const editing = window.__editMode;
+  const [open, setOpen] = React.useState(false);
   const a = s.archive || {};
   const tag = a.tag != null ? a.tag : "Last with us";
   const hasContent = !!(a.when || a.work || a.venue || (a.body || []).some(x => x && x.trim()));
@@ -1609,10 +1594,12 @@ const ArchiveBox = ({ s, update }) => {
   const onLight = VIVO_ON_LIGHT.has(accentName);
   const headStyle = { background: accent, color: onLight ? VIVO_HEX.black : VIVO_HEX.cream };
   return (
-    <aside className="archive-box">
-      <div className="archive-box-head" style={headStyle}>
-        <div className="archive-box-when">From the Archives</div>
-      </div>
+    <aside className={"archive-box is-compact" + (open ? " is-open" : "")}>
+      <button className="archive-box-head" style={headStyle} onClick={() => setOpen(o => !o)} aria-expanded={open}>
+        <span className="archive-box-when">From the Archives</span>
+        <span className="archive-box-chev" aria-hidden="true">{open ? "−" : "+"}</span>
+      </button>
+      {open ? (
       <div className="archive-box-body">
         {body.map((p, i) => (
           <Editable key={i} as="p" className="archive-box-note" value={p} data-placeholder="Write about this artist's history with us…" onChange={v => { const next = [...body]; next[i] = v; patch({ body: next }); }} multiline />
@@ -1631,6 +1618,7 @@ const ArchiveBox = ({ s, update }) => {
           </div>
         ) : null}
       </div>
+      ) : null}
     </aside>
   );
 };

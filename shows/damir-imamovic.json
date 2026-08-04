@@ -4,7 +4,7 @@
     "eyebrow": "Vivo Performing Arts presents",
     "title": "/Billing:",
     "date": "Thursday, Feb. 18, 2027",
-    "time": "8 p.m.",
+    "time": "8 PM",
     "venue": "Crystal Ballroom",
     "accent": "orange",
     "brush": "rhythm",
@@ -201,5 +201,5 @@
     ],
     "ensembleCount": 3
   },
-  "contentVersion": "2026-07-27f"
+  "contentVersion": "2026-08-04a"
 }

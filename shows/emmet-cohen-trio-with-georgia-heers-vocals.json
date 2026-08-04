@@ -4,7 +4,7 @@
     "eyebrow": "Vivo Performing Arts presents",
     "title": "Emmet Cohen Trio with Georgia Heers",
     "date": "Friday, Feb. 12, 2027",
-    "time": "8 p.m.",
+    "time": "8 PM",
     "venue": "Berklee Performance Center",
     "accent": "orange",
     "brush": "rhythm",
@@ -202,5 +202,5 @@
     ],
     "ensembleCount": 3
   },
-  "contentVersion": "2026-07-27f"
+  "contentVersion": "2026-08-04a"
 }
