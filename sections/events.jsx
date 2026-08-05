@@ -11,7 +11,7 @@ const PROMO_BTN_COLORS = ["cream", "light-green", "lavender", "plum", "blue", "o
 // ---- EVENTS (upcoming) ----
 // Slide carousel of performance cards (like the website's Related Events slider):
 // prev/next arrows page through the track; scroll-snaps on touch.
-const EventCarousel = ({ events, linkTo, editing, onColor, onThumb }) => {
+const EventCarousel = ({ events, linkTo, editing, onColor, onThumb, onNote }) => {
   const trackRef = React.useRef(null);
   const [atStart, setAtStart] = React.useState(true);
   const [atEnd, setAtEnd] = React.useState(false);
@@ -40,15 +40,22 @@ const EventCarousel = ({ events, linkTo, editing, onColor, onThumb }) => {
             <a key={i} className={"event-promo accent-" + (e.accent || "plum")} href={editing ? undefined : dest} onClick={editing ? (ev => ev.preventDefault()) : undefined} {...(!editing && ext ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
               <div className={"event-promo-img accent-" + (e.accent || "plum")}>{editing ? <PhotoSlot fill src={e.thumb || ""} initials="ADD PHOTO" onChange={src => onThumb && onThumb(e, src)} onClear={() => onThumb && onThumb(e, "")} /> : (e.thumb ? <img src={e.thumb} alt="" /> : null)}</div>
               <div className="event-promo-body">
-                <div className="event-promo-date">{e.month}&nbsp;{e.day}</div>
+                <div className="event-promo-date" style={{ color: VIVO_HEX[e.accent || "plum"] }}>{e.month}&nbsp;{e.day}</div>
                 <div className="event-promo-title">{e.title}</div>
                 {e.meta ? <div className="event-promo-meta">{e.meta}</div> : null}
                 {editing ? (
                   <div className="promo-card-edit" contentEditable={false}>
-                    <span className="promo-ctl-label">Card color</span>
+                    <span className="promo-ctl-label">Date color</span>
                     <div className="promo-swatches">{PROMO_BG_COLORS.map(col => <button key={col} className={"promo-sw" + ((e.accent || "plum") === col ? " is-on" : "")} style={{ background: VIVO_HEX[col] }} onClick={() => onColor && onColor(e, col)} aria-label={col} />)}</div>
+                    <span className="promo-ctl-label">Caption</span>
+                    <input className="promo-note-input" value={e.note || ""} placeholder="Short line below Details →" onChange={ev => onNote && onNote(e, ev.target.value)} />
                   </div>
-                ) : <span className="event-promo-cta">Details &rarr;</span>}
+                ) : (
+                  <>
+                    <span className="event-promo-cta">Details &rarr;</span>
+                    {e.note ? <span className="event-promo-note">{e.note}</span> : null}
+                  </>
+                )}
               </div>
             </a>
           );
@@ -95,8 +102,13 @@ const EventsSection = ({ s, update }) => {
   }, [isAuto, s.count, s.thumbs, s.hiddenSlugs]);
 
   const cardColors = s.cardColors || {};
+  const cardNotes = s.notes || {};
   const extras = (s.extra || []).map((e, ei) => ({ ...e, manual: true, _ei: ei, accent: e.accent || "plum", websiteUrl: e.url || "#", programUrl: e.url || "#", href: e.url || "#" }));
-  const events = (isAuto ? [...auto, ...extras] : (s.events || [])).map(e => e.slug && cardColors[e.slug] ? { ...e, accent: cardColors[e.slug] } : e);
+  const events = (isAuto ? [...auto, ...extras] : (s.events || [])).map(e => {
+    let ev = e.slug && cardColors[e.slug] ? { ...e, accent: cardColors[e.slug] } : e;
+    if (e.slug && cardNotes[e.slug]) ev = { ...ev, note: cardNotes[e.slug] };
+    return ev;
+  });
   const setCardColor = (e, color) => {
     if (e.manual) { const extra = [...(s.extra || [])]; extra[e._ei] = { ...extra[e._ei], accent: color }; update({ extra }); }
     else if (e.slug) { update({ cardColors: { ...cardColors, [e.slug]: color } }); }
@@ -106,6 +118,11 @@ const EventsSection = ({ s, update }) => {
     if (e.manual) { const extra = [...(s.extra || [])]; extra[e._ei] = { ...extra[e._ei], thumb: src }; update({ extra }); }
     else if (e.slug) { update({ thumbs: { ...(s.thumbs || {}), [e.slug]: src } }); }
     else { const events2 = [...(s.events || [])]; const idx = events2.indexOf(e); if (idx >= 0) { events2[idx] = { ...e, thumb: src }; update({ events: events2 }); } }
+  };
+  const setCardNote = (e, note) => {
+    if (e.manual) { const extra = [...(s.extra || [])]; extra[e._ei] = { ...extra[e._ei], note }; update({ extra }); }
+    else if (e.slug) { update({ notes: { ...cardNotes, [e.slug]: note } }); }
+    else { const events2 = [...(s.events || [])]; const idx = events2.indexOf(e); if (idx >= 0) { events2[idx] = { ...e, note }; update({ events: events2 }); } }
   };
   const linkTo = s.linkTo || "website";
   const isCarousel = s.layout ? s.layout === "carousel" : isAuto;
@@ -129,19 +146,8 @@ const EventsSection = ({ s, update }) => {
           <button aria-pressed={isCarousel} onClick={() => update({ layout: "carousel" })}>Carousel</button>
         </div>
       ) : null}
-      {editing && isCarousel ? (
-        <div className="st-song-modes" role="group" aria-label="Background color">
-          <span className="st-song-modes-hint">Background:</span>
-          <div className="promo-swatches">
-            <button className={"promo-sw promo-sw-none" + (!s.bgColor || s.bgColor === "none" ? " is-on" : "")} onClick={() => update({ bgColor: "none" })} aria-label="No background" />
-            {PROMO_BG_COLORS.map(c => (
-              <button key={c} className={"promo-sw" + (s.bgColor === c ? " is-on" : "")} style={{ background: VIVO_HEX[c] }} onClick={() => update({ bgColor: c })} aria-label={c} />
-            ))}
-          </div>
-        </div>
-      ) : null}
       {isCarousel ? (
-        <EventCarousel events={events} linkTo={linkTo} editing={editing} onColor={setCardColor} onThumb={setCardThumb} />
+        <EventCarousel events={events} linkTo={linkTo} editing={editing} onColor={setCardColor} onThumb={setCardThumb} onNote={setCardNote} />
       ) : (
       <ul className="event-list">
         {events.map((e, i) => {

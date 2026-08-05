@@ -2365,12 +2365,13 @@ li:hover .row-ctrls,
 .event-promo-img.accent-tangerine { background: var(--vivo-tangerine); }
 .event-promo-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .event-promo-body { padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; }
-.event-promo-date { font-family: var(--font-display); font-weight: 600; text-transform: uppercase; font-size: 12px; letter-spacing: 0.05em; color: var(--vivo-plum); }
+.event-promo-date { font-family: var(--font-display); font-weight: 600; text-transform: uppercase; font-size: 12px; letter-spacing: 0.05em; }
 .event-promo-title { font-family: var(--font-display); font-weight: 600; text-transform: uppercase; font-size: 19px; line-height: 1.02; color: var(--vivo-cream); }
 [data-theme="dark"] .event-promo-title { color: var(--fg); }
 .event-promo-meta { font-family: var(--font-body); font-size: 12.5px; color: rgba(255,248,232,0.7); line-height: 1.4; }
 [data-theme="dark"] .event-promo-meta { color: var(--fg-muted); }
 .event-promo-cta { margin-top: 8px; font-family: var(--font-display); font-weight: 600; text-transform: uppercase; font-size: 13px; color: var(--vivo-cream); }
+.event-promo-note { font-family: var(--font-body); font-size: 11px; color: rgba(255,248,232,0.5); line-height: 1.35; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
 
 /* ===== Promo / Ad module ===== */
 .promo-wrap { margin: 4px 0; }
@@ -2689,6 +2690,8 @@ li:hover .row-ctrls,
 .promo-card-edit .promo-ctl-label { color: rgba(255,248,232,0.72); flex: 0 0 auto; }
 .promo-card-edit .promo-url { flex: 1 1 160px; background: rgba(255,248,232,0.08); color: var(--vivo-cream); border-color: rgba(255,248,232,0.28); }
 .promo-card-edit .promo-sw { width: 22px; height: 22px; border-color: rgba(255,248,232,0.3); }
+.promo-note-input { flex: 1 1 100%; background: rgba(255,248,232,0.08); color: var(--vivo-cream); border: 1px solid rgba(255,248,232,0.28); border-radius: 4px; padding: 5px 8px; font-family: var(--font-body); font-size: 12px; }
+.promo-note-input::placeholder { color: rgba(255,248,232,0.35); }
 .promo-card-del { font-family: var(--font-body); font-weight: 700; font-size: 11px; padding: 6px 10px; background: transparent; color: rgba(255,248,232,0.72); border: 1px solid rgba(255,248,232,0.28); cursor: pointer; }
 
 /* About Vivo — website link button */
