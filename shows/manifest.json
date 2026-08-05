@@ -92,7 +92,7 @@
       "Roxbury"
     ],
     "accent": "green",
-    "thumb": "assets/covers/hemenway-strings.jpg"
+    "thumb": "assets/covers/hemenway-strings.png"
   },
   {
     "slug": "lizz-wright",
@@ -120,7 +120,7 @@
     "tags": [],
     "accent": "green",
     "pdpUrl": "https://www.vivoperformingarts.org/productions/brentano-string-quartet-2026/",
-    "thumb": "assets/covers/brentano-string-quartet.jpg"
+    "thumb": "assets/covers/brentano-string-quartet.png"
   },
   {
     "slug": "castle-of-our-skins",
@@ -151,7 +151,8 @@
       "Piano"
     ],
     "accent": "green",
-    "pdpUrl": "https://www.vivoperformingarts.org/productions/bruce-liu-2026/"
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/bruce-liu-2026/",
+    "thumb": "assets/covers/bruce-liu-piano.png"
   },
   {
     "slug": "christian-mcbride-and-ursa-major",
@@ -164,7 +165,8 @@
     "genre": "Jazz",
     "tags": [],
     "accent": "orange",
-    "pdpUrl": "https://www.vivoperformingarts.org/productions/christian-mcbride-and-ursa-major/"
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/christian-mcbride-and-ursa-major/",
+    "thumb": "assets/covers/christian-mcbride-and-ursa-major.png"
   },
   {
     "slug": "gravity-and-other-myths",
@@ -179,7 +181,8 @@
       "Dance"
     ],
     "accent": "purple",
-    "pdpUrl": "https://www.vivoperformingarts.org/productions/gravity-and-other-myths/"
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/gravity-and-other-myths/",
+    "thumb": "assets/covers/gravity-and-other-myths.png"
   },
   {
     "slug": "geneva-lewis-violin",
@@ -192,7 +195,8 @@
     "genre": "Instrumentalist",
     "tags": [],
     "accent": "green",
-    "pdpUrl": "https://www.vivoperformingarts.org/productions/geneva-lewis/"
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/geneva-lewis/",
+    "thumb": "assets/covers/geneva-lewis-violin.png"
   },
   {
     "slug": "stringfest",
@@ -220,7 +224,8 @@
     "genre": "Jazz",
     "tags": [],
     "accent": "orange",
-    "pdpUrl": "https://www.vivoperformingarts.org/productions/lachanze/"
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/lachanze/",
+    "thumb": "assets/covers/lachanze.png"
   },
   {
     "slug": "igor-levit-piano",
@@ -236,7 +241,8 @@
       "Piano"
     ],
     "accent": "green",
-    "pdpUrl": "https://www.vivoperformingarts.org/productions/igor-levit-2026/"
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/igor-levit-2026/",
+    "thumb": "assets/covers/igor-levit-piano.png"
   },
   {
     "slug": "all-cello-orchestra",
@@ -295,7 +301,8 @@
     "genre": "Chamber",
     "tags": [],
     "accent": "green",
-    "pdpUrl": "https://www.vivoperformingarts.org/productions/dover-quartet-2026/"
+    "pdpUrl": "https://www.vivoperformingarts.org/productions/dover-quartet-2026/",
+    "thumb": "assets/covers/dover-quartet.png"
   },
   {
     "slug": "ballet-bc",
