@@ -585,7 +585,7 @@ const App = () => {
 
   return (
     <EditModeContext.Provider value={editing}>
-    <div className={"app" + (editing ? " is-editing-mode" : "") + (editing && showTip ? " has-tip" : "") + (devicePreview === "mobile" ? " device-mobile" : "")} style={{ "--accent": accentColor, "--accent-fg": accentFg, "--brush-x": (tweaks.brushX || 0) + "%", "--brush-y": (tweaks.brushY || 0) + "%", "--brush-size": (tweaks.brushSize || 60) + "%", "--brush-scale": (tweaks.brushSize || 60) / 60, "--brush-rotate": (tweaks.brushRotate == null ? 45 : tweaks.brushRotate) + "deg" }}>
+    <div className={"app" + (editing ? " is-editing-mode" : "") + (editing && showTip ? " has-tip" : "") + (editing && devicePreview === "mobile" ? " device-mobile" : "")} style={{ "--accent": accentColor, "--accent-fg": accentFg, "--brush-x": (tweaks.brushX || 0) + "%", "--brush-y": (tweaks.brushY || 0) + "%", "--brush-size": (tweaks.brushSize || 60) + "%", "--brush-scale": (tweaks.brushSize || 60) / 60, "--brush-rotate": (tweaks.brushRotate == null ? 45 : tweaks.brushRotate) + "deg" }}>
       {editing ? (
         <div className="edit-mode-bar">
           <span className="edit-mode-dot" />
@@ -639,8 +639,6 @@ const App = () => {
           onSearch={() => setSearchOpen(true)}
           onMenu={() => setMenuOpen(true)}
           theme={theme}
-          devicePreview={devicePreview}
-          onDevicePreview={setDevicePreview}
         />
       )}
 

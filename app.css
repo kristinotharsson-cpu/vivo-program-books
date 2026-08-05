@@ -2648,9 +2648,6 @@ li:hover .row-ctrls,
 .reader-nav-icon { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; background: transparent; border: 0; cursor: pointer; color: var(--vivo-cream); }
 [data-theme="light"] .reader-nav-icon { color: var(--vivo-black); }
 .reader-nav-icon:hover { color: var(--accent, var(--vivo-plum)); }
-.reader-nav-icon.is-on { color: var(--accent, var(--vivo-plum)); }
-.reader-nav-device-toggle { display: flex; align-items: center; gap: 0; border-right: 1px solid rgba(255,248,232,0.16); margin-right: 2px; padding-right: 4px; }
-[data-theme="light"] .reader-nav-device-toggle { border-right-color: rgba(0,0,0,0.14); }
 .reader-nav-current { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); max-width: 42%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: var(--font-display); font-weight: 600; text-transform: uppercase; font-size: 14px; letter-spacing: 0.02em; color: var(--vivo-cream); pointer-events: none; }
 [data-theme="light"] .reader-nav-current { color: var(--vivo-black); }
 @media (max-width: 560px) { .reader-nav-current { display: none; } }

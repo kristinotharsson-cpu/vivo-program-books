@@ -224,7 +224,7 @@ const TopBar = ({ title, onBack, onMenu, onSearch, showLogo, logoSrc, home, sect
 // ---------- Reader Nav (reader-facing only: preview + exported HTML) ----------
 // Sticky bar with a link back to the main Vivo site, a Contents jump menu, and search.
 // Never rendered while editing.
-const ReaderNav = ({ sections = [], onGo, onHome, onBack, onSearch, onMenu, theme, homeUrl = "https://vivoperformingarts.org", currentId, currentTitle, devicePreview, onDevicePreview }) => {
+const ReaderNav = ({ sections = [], onGo, onHome, onBack, onSearch, onMenu, theme, homeUrl = "https://vivoperformingarts.org", currentId, currentTitle }) => {
   const logoSrc = theme === "light" ? "assets/logos/vivo-logo-black.png" : "assets/logos/vivo-logo-cream.png";
   return (
     <header className="reader-nav">
@@ -240,12 +240,6 @@ const ReaderNav = ({ sections = [], onGo, onHome, onBack, onSearch, onMenu, them
       </div>
       {currentTitle ? <div className="reader-nav-current" aria-hidden="true">{currentTitle}</div> : null}
       <div className="reader-nav-right">
-        {onDevicePreview ? (
-          <span className="reader-nav-device-toggle">
-            <button className={"reader-nav-icon" + ((!devicePreview || devicePreview === "desktop") ? " is-on" : "")} title="Desktop view" onClick={() => onDevicePreview("desktop")} aria-label="Desktop view"><Icon name="monitor" size={18} /></button>
-            <button className={"reader-nav-icon" + (devicePreview === "mobile" ? " is-on" : "")} title="Mobile view" onClick={() => onDevicePreview("mobile")} aria-label="Mobile view"><Icon name="phone" size={18} /></button>
-          </span>
-        ) : null}
         <ContentsMenu sections={sections} currentId={currentId} onGo={onGo} onHome={onHome} onSearch={onSearch} />
         <button className="reader-nav-icon" onClick={onSearch} aria-label="Search this program"><Icon name="search" size={20} /></button>
         {onMenu ? <button className="reader-nav-icon" onClick={onMenu} aria-label="Menu"><Icon name="menu" size={20} /></button> : null}
