@@ -71,7 +71,7 @@ const InfoSection = ({ s, update }) => {
         ) : null}
         {sec.body.map((p, pi) => {
           const vUrl = isVenue && !editing ? venueUrlFor(p) : null;
-          if (vUrl) return <p key={pi} className="venue-link-wrap"><a className="venue-btn" href={vUrl} target="_blank" rel="noopener noreferrer">{(p || "").replace(/\.$/, "")}<span className="venue-btn-arrow" aria-hidden="true">↗</span></a></p>;
+          if (vUrl) return <p key={pi} className="venue-link-wrap"><a className="venue-btn" href={vUrl} target="_blank" rel="noopener noreferrer" onClick={e => { e.preventDefault(); window.open(vUrl, '_blank', 'noopener,noreferrer'); }}>{(p || "").replace(/\.$/, "")}<span className="venue-btn-arrow" aria-hidden="true">↗</span></a></p>;
           return (
           <Editable key={pi} as="p" value={p} onChange={v => {
             const sections = [...s.sections];
