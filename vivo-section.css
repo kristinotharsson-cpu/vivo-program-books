@@ -115,7 +115,7 @@
   opacity: 0.9;
 }
 .vivo-panel {
-  padding: 18px 4px 8px;
+  padding: 18px 20px 8px;
   display: flex;
   flex-direction: column;
   gap: 14px;
