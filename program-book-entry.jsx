@@ -53,7 +53,14 @@ async function main() {
       }
 
       if (usedRec && shell && shell.cover) {
-        data = { ...data, cover: { ...data.cover, venue: shell.cover.venue } };
+        data = { ...data, cover: {
+          ...data.cover,
+          venue: shell.cover.venue,
+          // File-based photo: if the record has no photo (or only an empty path),
+          // pull the current shell path so new covers appear without requiring a re-save.
+          // If the record has a data-URL (user uploaded via UI), that takes priority.
+          photoSrc: data.cover.photoSrc || shell.cover.photoSrc || "",
+        } };
         try {
           const shInfo = (shell.sections || []).find(s => s.kind === 'info');
           const dInfo = (data.sections || []).find(s => s.kind === 'info');
