@@ -40,13 +40,13 @@ const EventCarousel = ({ events, linkTo, editing, onColor, onThumb, onNote }) =>
             <a key={i} className={"event-promo accent-" + (e.accent || "plum")} href={editing ? undefined : dest} onClick={editing ? (ev => ev.preventDefault()) : undefined} {...(!editing && ext ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
               <div className={"event-promo-img accent-" + (e.accent || "plum")}>{editing ? <PhotoSlot fill src={e.thumb || ""} initials="ADD PHOTO" onChange={src => onThumb && onThumb(e, src)} onClear={() => onThumb && onThumb(e, "")} /> : (e.thumb ? <img src={e.thumb} alt="" /> : null)}</div>
               <div className="event-promo-body">
-                <div className="event-promo-date" style={{ color: VIVO_HEX[e.accent || "plum"] }}>{e.month}&nbsp;{e.day}</div>
+                <div className="event-promo-date" style={{ color: VIVO_HEX[e.dateColor || "plum"] }}>{e.month}&nbsp;{e.day}</div>
                 <div className="event-promo-title">{e.title}</div>
                 {e.meta ? <div className="event-promo-meta">{e.meta}</div> : null}
                 {editing ? (
                   <div className="promo-card-edit" contentEditable={false}>
                     <span className="promo-ctl-label">Date color</span>
-                    <div className="promo-swatches">{PROMO_BG_COLORS.map(col => <button key={col} className={"promo-sw" + ((e.accent || "plum") === col ? " is-on" : "")} style={{ background: VIVO_HEX[col] }} onClick={() => onColor && onColor(e, col)} aria-label={col} />)}</div>
+                    <div className="promo-swatches">{PROMO_BG_COLORS.map(col => <button key={col} className={"promo-sw" + ((e.dateColor || "plum") === col ? " is-on" : "")} style={{ background: VIVO_HEX[col] }} onClick={() => onColor && onColor(e, col)} aria-label={col} />)}</div>
                     <span className="promo-ctl-label">Caption</span>
                     <input className="promo-note-input" value={e.note || ""} placeholder="Short line below Details →" onChange={ev => onNote && onNote(e, ev.target.value)} />
                   </div>
@@ -105,8 +105,10 @@ const EventsSection = ({ s, update }) => {
   const cardNotes = s.notes || {};
   const extras = (s.extra || []).map((e, ei) => ({ ...e, manual: true, _ei: ei, accent: e.accent || "plum", websiteUrl: e.url || "#", programUrl: e.url || "#", href: e.url || "#" }));
   const events = (isAuto ? [...auto, ...extras] : (s.events || [])).map(e => {
-    let ev = e.slug && cardColors[e.slug] ? { ...e, accent: cardColors[e.slug] } : e;
-    if (e.slug && cardNotes[e.slug]) ev = { ...ev, note: cardNotes[e.slug] };
+    let ev = { ...e };
+    // dateColor: plum unless user explicitly picked one via the date color swatch
+    ev.dateColor = e.manual ? (e.accent || "plum") : (cardColors[e.slug] || "plum");
+    if (e.slug && cardNotes[e.slug]) ev.note = cardNotes[e.slug];
     return ev;
   });
   const setCardColor = (e, color) => {
