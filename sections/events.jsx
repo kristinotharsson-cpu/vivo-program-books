@@ -148,6 +148,17 @@ const EventsSection = ({ s, update }) => {
           <button aria-pressed={isCarousel} onClick={() => update({ layout: "carousel" })}>Carousel</button>
         </div>
       ) : null}
+      {editing && isCarousel ? (
+        <div className="st-song-modes" role="group" aria-label="Background color">
+          <span className="st-song-modes-hint">Background:</span>
+          <div className="promo-swatches">
+            <button className={"promo-sw promo-sw-none" + (!s.bgColor || s.bgColor === "none" ? " is-on" : "")} onClick={() => update({ bgColor: "none" })} aria-label="No background" />
+            {PROMO_BG_COLORS.map(c => (
+              <button key={c} className={"promo-sw" + (s.bgColor === c ? " is-on" : "")} style={{ background: VIVO_HEX[c] }} onClick={() => update({ bgColor: c })} aria-label={c} />
+            ))}
+          </div>
+        </div>
+      ) : null}
       {isCarousel ? (
         <EventCarousel events={events} linkTo={linkTo} editing={editing} onColor={setCardColor} onThumb={setCardThumb} onNote={setCardNote} />
       ) : (
