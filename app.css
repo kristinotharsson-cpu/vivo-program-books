@@ -983,7 +983,7 @@ button {
 
 /* ===== INNER PAGES ===== */
 .section-page {
-  padding: 24px 20px 96px;
+  padding: 24px 28px 96px;
   max-width: 720px;
   margin: 0 auto;
 }
@@ -1073,6 +1073,7 @@ button {
   color: var(--fg-muted);
   margin-top: 2px;
   padding-left: 0;
+  display: none;
 }
 .program-item .movements {
   grid-column: 2;
@@ -1093,7 +1094,10 @@ button {
 .program-item .work-link { padding-left: 0; }
 @media (max-width: 560px) {
   .program-item { grid-template-columns: 1fr; row-gap: 2px; }
-  .program-item .composer { margin-bottom: 4px; }
+  .program-item .composer { margin-bottom: 4px; grid-column: 1; }
+  .program-item .work,
+  .program-item .meta,
+  .program-item .movements { grid-column: 1; }
 }
 .program-divider {
   grid-column: 1 / -1;
