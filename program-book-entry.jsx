@@ -72,7 +72,7 @@ async function main() {
         } catch (e) {}
       }
 
-      if (usedRec) window.VIVO_PROGRAM_RECORD = usedRec;
+      if (usedRec) window.VIVO_PROGRAM_RECORD = { ...usedRec, data };
       window.VIVO_SHARED = resolveShared(shared, data.cover && data.cover.date);
       window.PROGRAM_DATA = data;
       document.title = data.cover.title + ' — Vivo Performing Arts';
