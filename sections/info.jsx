@@ -72,6 +72,10 @@ const InfoSection = ({ s, update }) => {
   // Land Acknowledgment always closes the page.
   const ordered = [...(s.sections || [])].map((sec, i) => ({ sec, i }))
     .sort((a, b) => (isLandAck(a.sec) ? 1 : 0) - (isLandAck(b.sec) ? 1 : 0));
+  const deleteSection = (i) => {
+    update({ sections: s.sections.filter((_, j) => j !== i) });
+    window.__vivoToast && window.__vivoToast("Section deleted · ⌘Z to undo");
+  };
   const renderBlock = ({ sec, i }) => {
       const isVenue = /^venue$/i.test((sec.h || "").trim());
       return (
@@ -98,6 +102,11 @@ const InfoSection = ({ s, update }) => {
           }} multiline />
           );
         })}
+        {editing ? (
+          <div className="prog-edit" style={{ marginTop: 6 }}>
+            <button onClick={() => deleteSection(i)}>Delete section</button>
+          </div>
+        ) : null}
       </div>
       );
   };
@@ -106,7 +115,6 @@ const InfoSection = ({ s, update }) => {
     {ordered.filter(x => !isLandAck(x.sec)).map(renderBlock)}
     {(audienceInfo.length || editing) ? (
       <div className="vivo-band" style={{ marginTop: 24 }}>
-        <h3 className="vivo-band-title">Audience Information</h3>
         {audienceInfo.map((item, idx) => editing ? (
           <div key={item.id || idx} className="info-accordion-edit">
             <input
