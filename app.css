@@ -2737,7 +2737,7 @@ li:hover .row-ctrls,
 [data-theme="dark"] .event-promo-title { color: var(--fg); }
 .event-promo-meta { font-family: var(--font-body); font-size: 12.5px; color: rgba(255,248,232,0.7); line-height: 1.4; }
 [data-theme="dark"] .event-promo-meta { color: var(--fg-muted); }
-.event-promo-cta { margin-top: 8px; font-family: var(--font-display); font-weight: 600; text-transform: uppercase; font-size: 13px; color: var(--vivo-cream); }
+.event-promo-cta { margin-top: 8px; font-family: var(--font-body); font-weight: 700; text-transform: uppercase; font-size: 13px; letter-spacing: 0.06em; color: var(--vivo-cream); }
 .event-promo-note { font-family: var(--font-body); font-size: 11px; color: rgba(255,248,232,0.5); line-height: 1.35; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
 
 /* ===== Promo / Ad module ===== */
