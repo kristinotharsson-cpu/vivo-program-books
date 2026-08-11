@@ -113,6 +113,14 @@ const TocPromoCarousel = ({ promos, update }) => {
                 {TOC_COLORS.map(col => <button key={col} className={"promo-sw" + ((c.accent || "plum") === col ? " is-on" : "")} style={{ background: TOC_HEX[col] }} onClick={() => setCard(i, { accent: col })} aria-label={col} />)}
               </div>
             </div>
+            <div className="toc-promo-edit-color">
+              <span className="promo-ctl-label">Text color</span>
+              <div className="promo-seg">
+                <button aria-pressed={!c.textColor || c.textColor === "auto"} onClick={() => setCard(i, { textColor: "auto" })}>Auto</button>
+                <button aria-pressed={c.textColor === "cream"} onClick={() => setCard(i, { textColor: "cream" })}>Cream</button>
+                <button aria-pressed={c.textColor === "black"} onClick={() => setCard(i, { textColor: "black" })}>Black</button>
+              </div>
+            </div>
             <div className="prog-edit" style={{ marginTop: 8 }}>
               <button onClick={() => deleteCard(i)}>Delete card</button>
             </div>
@@ -130,7 +138,8 @@ const TocPromoCarousel = ({ promos, update }) => {
       <div className="toc-promo-track" ref={trackRef}>
         {cards.map((c, i) => {
           const bg = TOC_HEX[c.accent || "plum"];
-          const fg = TOC_ON_LIGHT.has(c.accent || "plum") ? TOC_HEX.black : TOC_HEX.cream;
+          const autoFg = TOC_ON_LIGHT.has(c.accent || "plum") ? TOC_HEX.black : TOC_HEX.cream;
+          const fg = c.textColor && c.textColor !== "auto" ? TOC_HEX[c.textColor] : autoFg;
           return (
             <a key={i} className="toc-promo-card" style={{ background: bg, color: fg }} href={c.url || "#"} target="_blank" rel="noopener noreferrer">
               {c.eyebrow ? <span className="toc-promo-eyebrow">{c.eyebrow}</span> : null}
