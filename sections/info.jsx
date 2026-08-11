@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { Editable, PlainField, PhotoSlot } from '../components.jsx';
 import { useEditMode } from '../edit-mode-context.jsx';
 import { VivoAccordion } from './shared-content.jsx';
+import { ProgramEditor } from '../program-editor.jsx';
+
+const esc = (s) => (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const bodyToHtml = (body) => (body || []).filter(Boolean).map(p => `<p>${esc(p)}</p>`).join('');
 
 // ---- INFO (land ack, accessibility, safety, contact) ----
 const VENUE_LINKS = {
@@ -51,6 +55,19 @@ const venueUrlFor = (text) => {
 const InfoSection = ({ s, update }) => {
   const editing = useEditMode();
   const audienceInfo = (s.audienceInfo && s.audienceInfo.length) ? s.audienceInfo : ((window.VIVO_SHARED && window.VIVO_SHARED.audienceInfo) || []);
+
+  const updateAudienceItem = (i, patch) => {
+    const items = audienceInfo.map((item, j) => j === i ? { ...item, ...patch } : { ...item });
+    update({ audienceInfo: items });
+  };
+  const addAudienceItem = () => {
+    update({ audienceInfo: [...audienceInfo, { id: "ai-" + Date.now().toString(36), title: "New Section", bodyHtml: "" }] });
+  };
+  const removeAudienceItem = (i) => {
+    update({ audienceInfo: audienceInfo.filter((_, j) => j !== i) });
+    window.__vivoToast && window.__vivoToast("Section deleted · ⌘Z to undo");
+  };
+
   const isLandAck = (sec) => /land\s*acknowledge?ment/i.test((sec.h || "").trim());
   // Land Acknowledgment always closes the page.
   const ordered = [...(s.sections || [])].map((sec, i) => ({ sec, i }))
@@ -87,14 +104,35 @@ const InfoSection = ({ s, update }) => {
   return (
   <div>
     {ordered.filter(x => !isLandAck(x.sec)).map(renderBlock)}
-    {audienceInfo.length ? (
+    {(audienceInfo.length || editing) ? (
       <div className="vivo-band" style={{ marginTop: 24 }}>
         <h3 className="vivo-band-title">Audience Information</h3>
-        {audienceInfo.map((item) => (
+        {audienceInfo.map((item, idx) => editing ? (
+          <div key={item.id || idx} className="info-accordion-edit">
+            <input
+              className="info-accordion-title-input"
+              value={item.title || ""}
+              placeholder="Section title…"
+              onChange={e => updateAudienceItem(idx, { title: e.target.value })}
+            />
+            <ProgramEditor
+              value={item.bodyHtml != null ? item.bodyHtml : bodyToHtml(item.body)}
+              onChange={html => updateAudienceItem(idx, { bodyHtml: html })}
+            />
+            <div className="prog-edit">
+              <button onClick={() => removeAudienceItem(idx)}>Delete section</button>
+            </div>
+          </div>
+        ) : (
           <VivoAccordion key={item.id} id={item.id} title={item.title} accent="green" defaultOpen={false}>
-            {(item.body || []).map((p, pi) => <p key={pi}>{p}</p>)}
+            <div className="prog-html" dangerouslySetInnerHTML={{ __html: item.bodyHtml != null ? item.bodyHtml : bodyToHtml(item.body) }} />
           </VivoAccordion>
         ))}
+        {editing ? (
+          <div className="prog-edit prog-edit-add" style={{ marginTop: 8 }}>
+            <button onClick={addAudienceItem}>+ Add section</button>
+          </div>
+        ) : null}
       </div>
     ) : null}
     {ordered.filter(x => isLandAck(x.sec)).map(renderBlock)}
