@@ -18,6 +18,8 @@ const TOC_STANDARD = {
   ]
 };
 
+const SURVEY_COLORS = ["plum", "tangerine", "orange", "blue", "sky-blue", "green", "light-green", "lavender", "cream", "black"];
+
 // Survey card — standard on every table of contents. Supports a second survey link.
 const SurveyCard = ({ survey, update }) => {
   const editing = useEditMode();
@@ -28,6 +30,10 @@ const SurveyCard = ({ survey, update }) => {
   const patch = (p) => update({ ...s, heading, body, buttons, ...p });
   const setBtn = (i, p) => patch({ buttons: buttons.map((b, j) => j === i ? { ...b, ...p } : b) });
   const missingUrl = buttons.some(b => !b.url);
+  const bgColor = s.bgColor || null;
+  const bgHex = bgColor ? TOC_HEX[bgColor] : null;
+  const onLight = bgColor ? TOC_ON_LIGHT.has(bgColor) : false;
+  const cardStyle = bgHex ? { background: bgHex, color: onLight ? TOC_HEX.black : TOC_HEX.cream, border: "none" } : undefined;
   if (editing) {
     return (
       <div className="toc-survey is-editing">
@@ -44,6 +50,13 @@ const SurveyCard = ({ survey, update }) => {
             </React.Fragment>
           ))}
         </div>
+        <div className="toc-promo-edit-color">
+          <span className="promo-ctl-label">Card background</span>
+          <div className="promo-swatches">
+            <button className={"promo-sw promo-sw-none" + (!bgColor ? " is-on" : "")} onClick={() => patch({ bgColor: null })} aria-label="Default (no fill)" />
+            {SURVEY_COLORS.map(col => <button key={col} className={"promo-sw" + (bgColor === col ? " is-on" : "")} style={{ background: TOC_HEX[col] }} onClick={() => patch({ bgColor: col })} aria-label={col} />)}
+          </div>
+        </div>
         <div className="prog-edit prog-edit-add">
           {buttons.length < 2 ? <button onClick={() => patch({ buttons: [...buttons, { label: "Second survey", url: "https://" }] })}>+ Second survey link</button> : null}
           {buttons.length > 1 ? <button onClick={() => patch({ buttons: buttons.slice(0, -1) })}>Remove second link</button> : null}
@@ -52,10 +65,10 @@ const SurveyCard = ({ survey, update }) => {
     );
   }
   return (
-    <div className="toc-survey">
+    <div className="toc-survey" style={cardStyle}>
       <div className="toc-survey-text">
         <div className="toc-survey-h">{heading}</div>
-        {body ? <div className="toc-survey-body">{body}</div> : null}
+        {body ? <div className="toc-survey-body" style={bgHex ? { color: onLight ? "rgba(0,0,0,0.65)" : "rgba(255,251,235,0.8)" } : undefined}>{body}</div> : null}
       </div>
       <div className="toc-survey-btns">
         {buttons.filter(b => b.label).map((b, i) => (
@@ -67,6 +80,7 @@ const SurveyCard = ({ survey, update }) => {
 };
 
 // Group sales + student tickets — a small carousel, standard on every table of contents.
+const TOC_COLORS = ["plum", "tangerine", "orange", "blue", "sky-blue", "green", "light-green", "lavender", "cream", "black"];
 const TocPromoCarousel = ({ promos, update }) => {
   const editing = useEditMode();
   const cards = (promos && promos.length) ? promos : TOC_STANDARD.promos;
@@ -78,17 +92,35 @@ const TocPromoCarousel = ({ promos, update }) => {
     el.scrollBy({ left: dir * ((c ? c.offsetWidth : el.clientWidth * 0.8) + 12), behavior: "smooth" });
   };
   const setCard = (i, p) => update(cards.map((c, j) => j === i ? { ...c, ...p } : c));
+  const deleteCard = (i) => update(cards.filter((_, j) => j !== i));
+  const addCard = () => update([...cards, { eyebrow: "", heading: "New Card", meta: "", label: "Learn more", url: "", accent: "plum" }]);
   if (editing) {
     return (
       <div className="toc-promo-edit">
-        <div className="toc-promo-edit-h">Standard cards — group sales & student tickets</div>
+        <div className="toc-promo-edit-h">Promo cards</div>
         {cards.map((c, i) => (
-          <div key={i} className="pf-grid">
-            <PlainField label="Heading" value={c.heading || ""} onChange={v => setCard(i, { heading: v })} />
-            <PlainField label="Short line" value={c.meta || ""} onChange={v => setCard(i, { meta: v })} />
-            <PlainField className="pf-wide" label="Link" value={c.url || ""} placeholder="https://www.vivoperformingarts.org/…" onChange={v => setCard(i, { url: v })} />
+          <div key={i} className="toc-promo-edit-card">
+            <div className="pf-grid">
+              <PlainField label="Eyebrow" value={c.eyebrow || ""} onChange={v => setCard(i, { eyebrow: v })} />
+              <PlainField label="Heading" value={c.heading || ""} onChange={v => setCard(i, { heading: v })} />
+              <PlainField label="Short line" value={c.meta || ""} onChange={v => setCard(i, { meta: v })} />
+              <PlainField label="Button label" value={c.label || ""} placeholder="Learn more" onChange={v => setCard(i, { label: v })} />
+              <PlainField className="pf-wide" label="Link" value={c.url || ""} placeholder="https://www.vivoperformingarts.org/…" onChange={v => setCard(i, { url: v })} />
+            </div>
+            <div className="toc-promo-edit-color">
+              <span className="promo-ctl-label">Card color</span>
+              <div className="promo-swatches">
+                {TOC_COLORS.map(col => <button key={col} className={"promo-sw" + ((c.accent || "plum") === col ? " is-on" : "")} style={{ background: TOC_HEX[col] }} onClick={() => setCard(i, { accent: col })} aria-label={col} />)}
+              </div>
+            </div>
+            <div className="prog-edit" style={{ marginTop: 8 }}>
+              <button onClick={() => deleteCard(i)}>Delete card</button>
+            </div>
           </div>
         ))}
+        <div className="prog-edit prog-edit-add" style={{ marginTop: 8 }}>
+          <button onClick={addCard}>+ Add card</button>
+        </div>
       </div>
     );
   }

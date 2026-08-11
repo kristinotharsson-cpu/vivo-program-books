@@ -11,7 +11,7 @@ const PROMO_BTN_COLORS = ["cream", "light-green", "lavender", "plum", "blue", "o
 // ---- EVENTS (upcoming) ----
 // Slide carousel of performance cards (like the website's Related Events slider):
 // prev/next arrows page through the track; scroll-snaps on touch.
-const EventCarousel = ({ events, linkTo, editing, onColor, onThumb, onNote }) => {
+const EventCarousel = ({ events, linkTo, editing, onColor, onThumb, onNote, onRemove }) => {
   const trackRef = React.useRef(null);
   const [atStart, setAtStart] = React.useState(true);
   const [atEnd, setAtEnd] = React.useState(false);
@@ -49,6 +49,7 @@ const EventCarousel = ({ events, linkTo, editing, onColor, onThumb, onNote }) =>
                     <div className="promo-swatches">{PROMO_BG_COLORS.map(col => <button key={col} className={"promo-sw" + ((e.dateColor || "plum") === col ? " is-on" : "")} style={{ background: VIVO_HEX[col] }} onClick={() => onColor && onColor(e, col)} aria-label={col} />)}</div>
                     <span className="promo-ctl-label">Caption</span>
                     <input className="promo-note-input" value={e.note || ""} placeholder="Short line below Details →" onChange={ev => onNote && onNote(e, ev.target.value)} />
+                    <button className="promo-card-del" onClick={() => onRemove && onRemove(e)}>Remove listing</button>
                   </div>
                 ) : (
                   <>
@@ -160,7 +161,7 @@ const EventsSection = ({ s, update }) => {
         </div>
       ) : null}
       {isCarousel ? (
-        <EventCarousel events={events} linkTo={linkTo} editing={editing} onColor={setCardColor} onThumb={setCardThumb} onNote={setCardNote} />
+        <EventCarousel events={events} linkTo={linkTo} editing={editing} onColor={setCardColor} onThumb={setCardThumb} onNote={setCardNote} onRemove={e => e.manual ? removeExtra(e._ei) : hideSlug(e.slug)} />
       ) : (
       <ul className="event-list">
         {events.map((e, i) => {
