@@ -1140,6 +1140,118 @@ button {
 .prog-edit button { font-family: var(--font-body); font-weight: 700; font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; padding: 6px 10px; min-height: 34px; background: transparent; color: var(--fg-muted); border: 1px dashed var(--border); cursor: pointer; }
 .prog-edit button:hover { color: var(--fg); border-color: var(--fg-muted); }
 .prog-edit-add button { border-style: solid; }
+
+/* WYSIWYG program editor — inline editing controls */
+/* Placeholder text for empty contenteditable fields */
+[contenteditable][data-placeholder]:empty::before {
+  content: attr(data-placeholder);
+  color: var(--fg-muted);
+  opacity: 0.4;
+  pointer-events: none;
+}
+/* Subtle hover/focus ring on editable program fields */
+.program-item [contenteditable] { outline: none; border-radius: 2px; }
+.program-item [contenteditable]:hover { background: color-mix(in srgb, var(--accent, var(--vivo-plum)) 5%, transparent); }
+.program-item [contenteditable]:focus { background: color-mix(in srgb, var(--accent, var(--vivo-plum)) 8%, transparent); box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent, var(--vivo-plum)) 30%, transparent); }
+/* Per-piece move/delete control bar */
+.prog-item-ctrls {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+.prog-item-ctrls button {
+  font-family: var(--font-body);
+  font-size: 13px;
+  padding: 3px 8px;
+  min-height: 28px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--fg-muted);
+  cursor: pointer;
+  border-radius: 4px;
+  line-height: 1;
+}
+.prog-item-ctrls button:hover:not(:disabled) { border-color: var(--accent, var(--vivo-plum)); color: var(--accent, var(--vivo-plum)); }
+.prog-item-ctrls button:disabled { opacity: 0.25; cursor: default; }
+/* Small ✕ remove on intermission and piece controls */
+.prog-item-rm {
+  font-family: var(--font-body);
+  font-size: 13px;
+  padding: 2px 7px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--fg-muted);
+  cursor: pointer;
+  border-radius: 4px;
+  line-height: 1;
+  margin-left: auto;
+}
+.prog-item-rm:hover { border-color: var(--vivo-tangerine); color: var(--vivo-tangerine); }
+/* Remove on intermission divider */
+.program-divider .prog-item-rm { display: inline-flex; align-items: center; vertical-align: middle; margin-left: 12px; }
+/* Movement edit row */
+.prog-mvt-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+.prog-mvt-rm {
+  flex: none;
+  font-size: 11px;
+  padding: 2px 6px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--fg-muted);
+  cursor: pointer;
+  border-radius: 3px;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.prog-mvt-row:hover .prog-mvt-rm { opacity: 1; }
+.prog-mvt-rm:hover { border-color: var(--vivo-tangerine); color: var(--vivo-tangerine); opacity: 1; }
+/* + movement link */
+.prog-mvt-add {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--fg-muted);
+  background: transparent;
+  border: none;
+  padding: 4px 0;
+  cursor: pointer;
+  margin-top: 4px;
+}
+.prog-mvt-add:hover { color: var(--accent, var(--vivo-plum)); }
+/* Between-piece insert row */
+.prog-insert-row {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border);
+}
+.prog-insert-row button, .prog-append-row button {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  padding: 6px 12px;
+  min-height: 32px;
+  background: transparent;
+  border: 1px dashed var(--border);
+  color: var(--fg-muted);
+  cursor: pointer;
+  border-radius: 4px;
+}
+.prog-insert-row button:hover, .prog-append-row button:hover { border-color: var(--accent, var(--vivo-plum)); color: var(--accent, var(--vivo-plum)); }
+/* Bottom append row and empty state */
+.prog-append-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 16px; padding-top: 16px; border-top: 1px dashed var(--border); }
+.prog-empty-hint { width: 100%; font-family: var(--font-body); font-size: 13px; color: var(--fg-muted); margin: 0 0 6px; }
 .prog-note-link { font-family: var(--font-body); font-size: 11px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 4px; }
 .prog-note-link select { font-family: var(--font-body); font-size: 12px; padding: 4px; background: var(--bg); color: var(--fg); border: 1px solid var(--border); }
 .prog-help { font-family: var(--font-body); font-size: 13px; line-height: 1.5; color: var(--fg-muted); background: color-mix(in srgb, var(--accent, var(--vivo-plum)) 8%, transparent); border-left: 3px solid var(--accent, var(--vivo-plum)); padding: 12px 14px; margin: 0 0 18px; }
