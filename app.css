@@ -1314,19 +1314,20 @@ button {
 /* Intermission divider — styled HR */
 .prog-editor-area hr, .prog-html hr {
   border: none;
-  margin: 28px 0 32px;
+  margin: 36px 0 40px;
   display: flex;
   align-items: center;
-  gap: 14px;
-  color: var(--accent, var(--vivo-plum));
+  justify-content: center;
+  gap: 0;
+  color: var(--vivo-cream);
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 12px;
+  font-size: 24px;
   line-height: 1;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
-.prog-editor-area hr::before, .prog-html hr::before { content: ''; flex: 1; height: 1px; background: currentColor; opacity: 0.35; display: block; }
+.prog-editor-area hr::before, .prog-html hr::before { content: none; display: none; }
 .prog-editor-area hr::after, .prog-html hr::after { content: 'Intermission'; flex: none; }
 /* ProseMirror sets display:block on hr which breaks the flex above; override */
 .prog-editor-area hr { display: flex !important; }
