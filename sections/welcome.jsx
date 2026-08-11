@@ -1,20 +1,41 @@
 import React from 'react';
-import { Editable } from '../components.jsx';
+import { Editable, PlainField } from '../components.jsx';
+import { useEditMode } from '../edit-mode-context.jsx';
+import { ProgramEditor } from '../program-editor.jsx';
 
-// ---- WELCOME ----
-const WelcomeSection = ({ s, update }) => (
-  <div className="welcome-page">
-    <Editable as="div" className="welcome-quote" value={s.quote} onChange={v => update({ quote: v })} multiline />
-    {s.body.map((p, i) => (
-      <Editable key={i} as="p" value={p} onChange={v => {
-        const body = [...s.body]; body[i] = v; update({ body });
-      }} multiline />
-    ))}
-    <div className="signature">
-      <Editable as="div" className="name" value={s.signature.name} onChange={v => update({ signature: { ...s.signature, name: v } })} />
-      <Editable as="div" className="role" value={s.signature.role} onChange={v => update({ signature: { ...s.signature, role: v } })} />
+// Migrate legacy quote + body array to HTML on first load
+function welcomeToHtml(quote, body) {
+  const esc = (s) => (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const parts = [];
+  if (quote && quote.trim()) parts.push(`<blockquote><p>${esc(quote)}</p></blockquote>`);
+  (body || []).forEach(p => { if (p && p.trim()) parts.push(`<p>${esc(p)}</p>`); });
+  return parts.join('');
+}
+
+const WelcomeSection = ({ s, update }) => {
+  const editing = useEditMode();
+
+  const htmlContent = s.welcomeHtml != null
+    ? s.welcomeHtml
+    : welcomeToHtml(s.quote, s.body);
+
+  return (
+    <div className="welcome-page">
+      {editing ? (
+        <ProgramEditor
+          value={htmlContent}
+          onChange={html => update({ welcomeHtml: html })}
+        />
+      ) : (
+        <div className="prog-html welcome-html" dangerouslySetInnerHTML={{ __html: htmlContent }} />
+      )}
+
+      <div className="signature">
+        <Editable as="div" className="name" value={s.signature?.name || ''} onChange={v => update({ signature: { ...s.signature, name: v } })} />
+        <Editable as="div" className="role" value={s.signature?.role || ''} onChange={v => update({ signature: { ...s.signature, role: v } })} />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export { WelcomeSection };

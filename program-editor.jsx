@@ -239,8 +239,10 @@ const ProgramEditor = ({ value, onChange }) => {
         <Btn title="Indent" onClick={() => editor.chain().focus().sinkListItem('listItem').run()}><IcoIndent /></Btn>
         <Sep />
 
-        {/* Intermission divider */}
-        <Btn title="Insert intermission divider" onClick={insertIntermission}><IcoHr /></Btn>
+        {/* Intermission divider — inserts at cursor position */}
+        <Btn title="Insert intermission divider at cursor" onClick={insertIntermission}>
+          <span style={{ fontFamily: 'var(--font-body)', fontSize: 11, fontWeight: 700, letterSpacing: '0.06em', whiteSpace: 'nowrap' }}>— Intermission</span>
+        </Btn>
         <Sep />
 
         {/* Clear formatting */}
