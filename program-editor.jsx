@@ -76,35 +76,77 @@ const ColorFlyout = ({ onSelect, onClear, label, clearLabel }) => {
 // ---- Link popover ----
 const LinkPopover = ({ editor }) => {
   const [open, setOpen] = useState(false);
+  const [tab, setTab] = useState('ext');
   const [url, setUrl] = useState('');
+  const [secId, setSecId] = useState('');
   const ref = useRef(null);
+
   useEffect(() => {
     if (!open) return;
     const close = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
     document.addEventListener('mousedown', close);
     return () => document.removeEventListener('mousedown', close);
   }, [open]);
+
+  // Read section list from the live program data at open time
+  const getSections = () => {
+    const data = (window.VIVO_PROGRAM_RECORD && window.VIVO_PROGRAM_RECORD.data)
+      || window.PROGRAM_DATA || {};
+    return (data.sections || []).filter(s => s.id && (s.title || s.kind));
+  };
+
   const apply = () => {
-    if (!url.trim()) { editor.chain().focus().extendMarkToNextWord().unsetLink().run(); }
-    else { editor.chain().focus().setLink({ href: url.trim(), target: '_blank', rel: 'noopener noreferrer' }).run(); }
+    const href = tab === 'int'
+      ? (secId ? 'Program Book.html#/' + secId : '')
+      : url.trim();
+    if (!href) { editor.chain().focus().unsetLink().run(); }
+    else {
+      const attrs = tab === 'int'
+        ? { href }
+        : { href, target: '_blank', rel: 'noopener noreferrer' };
+      editor.chain().focus().setLink(attrs).run();
+    }
     setOpen(false);
   };
+
+  const sections = open ? getSections() : [];
+
   return (
     <span ref={ref} className="pe-color-wrap">
       <button className="pe-btn" title="Link" onMouseDown={e => {
         e.preventDefault();
         const existing = editor.getAttributes('link').href || '';
-        setUrl(existing);
+        if (existing.startsWith('Program Book.html#/')) {
+          setTab('int');
+          setSecId(existing.replace('Program Book.html#/', ''));
+        } else {
+          setTab('ext');
+          setUrl(existing);
+        }
         setOpen(v => !v);
       }}><IcoLink /></button>
       {open && (
         <div className="pe-flyout pe-link-flyout" onMouseDown={e => e.preventDefault()}>
-          <div className="pe-flyout-label">Link URL</div>
-          <input className="pe-link-input" type="url" value={url} placeholder="https://vivoperformingarts.org"
-            onChange={e => setUrl(e.target.value)}
-            onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); apply(); } if (e.key === 'Escape') setOpen(false); }}
-            onMouseDown={e => e.stopPropagation()}
-            autoFocus />
+          <div className="pe-link-tabs">
+            <button className={tab === 'ext' ? 'on' : ''} onMouseDown={e => { e.preventDefault(); setTab('ext'); }}>External URL</button>
+            <button className={tab === 'int' ? 'on' : ''} onMouseDown={e => { e.preventDefault(); setTab('int'); }}>In this book</button>
+          </div>
+          {tab === 'ext' ? (
+            <input className="pe-link-input" type="url" value={url} placeholder="https://vivoperformingarts.org"
+              onChange={e => setUrl(e.target.value)}
+              onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); apply(); } if (e.key === 'Escape') setOpen(false); }}
+              onMouseDown={e => e.stopPropagation()}
+              autoFocus />
+          ) : (
+            <select className="pe-link-input pe-section-select" value={secId}
+              onChange={e => setSecId(e.target.value)}
+              onMouseDown={e => e.stopPropagation()}>
+              <option value="">— pick a section —</option>
+              {sections.map(s => (
+                <option key={s.id} value={s.id}>{s.title || s.kind}</option>
+              ))}
+            </select>
+          )}
           <div className="pe-link-row">
             <button className="pe-link-rm" onClick={() => { editor.chain().focus().unsetLink().run(); setOpen(false); }}>Remove</button>
             <button className="pe-link-apply" onClick={apply}>Apply</button>

@@ -1236,6 +1236,10 @@ button {
 }
 .pe-link-input:focus { outline: none; border-color: var(--accent, var(--vivo-plum)); }
 .pe-link-row { display: flex; gap: 6px; justify-content: flex-end; }
+.pe-link-tabs { display: flex; gap: 2px; margin-bottom: 10px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+.pe-link-tabs button { font-family: var(--font-body); font-size: 12px; font-weight: 700; padding: 4px 10px; background: transparent; border: 1px solid var(--border); color: var(--fg-muted); border-radius: 3px; cursor: pointer; }
+.pe-link-tabs button.on { background: var(--accent, var(--vivo-plum)); color: var(--accent-fg, var(--vivo-cream)); border-color: transparent; }
+.pe-section-select { appearance: auto; }
 .pe-link-rm { font-family: var(--font-body); font-size: 12px; font-weight: 700; padding: 5px 10px; background: transparent; border: 1px solid var(--border); color: var(--fg-muted); border-radius: 3px; cursor: pointer; }
 .pe-link-apply { font-family: var(--font-body); font-size: 12px; font-weight: 700; padding: 5px 10px; background: var(--accent, var(--vivo-plum)); color: var(--accent-fg, var(--vivo-cream)); border: none; border-radius: 3px; cursor: pointer; }
 
@@ -1846,6 +1850,11 @@ button {
 }
 .welcome-html blockquote p { font-size: inherit; line-height: inherit; margin: 0; font-family: inherit; font-weight: inherit; }
 .welcome-html p { font-family: var(--font-body); font-size: 16px; line-height: 1.65; margin: 0 0 14px; color: var(--fg); }
+/* Note body HTML read mode — slightly more generous line height for long-form reading */
+.note-html p { font-size: 15px; line-height: 1.7; margin: 0 0 16px; }
+.note-html h1, .note-html h2, .note-html h3 { margin-top: 20px; }
+/* Note editor spacing */
+.note-block .prog-editor { margin-bottom: 8px; }
 /* Also style blockquote in the editor area for WYSIWYG accuracy */
 .prog-editor-area blockquote {
   border-left: 4px solid var(--accent, var(--vivo-plum));
