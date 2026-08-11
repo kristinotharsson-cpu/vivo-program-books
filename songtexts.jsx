@@ -1,13 +1,11 @@
 import React from 'react';
 import { Editable } from './components.jsx';
 import { useEditMode } from './edit-mode-context.jsx';
+import { ProgramEditor } from './program-editor.jsx';
 
 // Song texts / vocal recital texts.
-// Per-song display mode (each song can differ — dual-language, original-only, etc.),
-// a jump index so readers reach any piece fast, and mobile-first layout.
-// Works identically in the editor and the exported standalone HTML.
 // Schema: section.kind === "songtexts"
-// { kind, title, lead, songs: [{ id, title, composer, note, origLang, mode?, stanzas: [{ original:[lines], translation:[lines] }] }] }
+// { kind, title, lead, songs: [{ id, title, composer, noteHtml, origLang, mode?, stanzas: [{ origHtml, transHtml }] }] }
 const MODES = [
   ["side-by-side", "Side by side"],
   ["stacked", "Stacked"],
@@ -16,34 +14,70 @@ const MODES = [
   ["translation", "Translation"]
 ];
 
+const esc = (s) => (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const linesToHtml = (lines) => (lines || []).filter(l => l != null).map(l => `<p>${esc(l)}</p>`).join('');
+
+// Interlinear display: parse HTML into per-element pairs and interleave them.
+function InterleavedView({ origHtml, transHtml }) {
+  const pairs = React.useMemo(() => {
+    const parse = (html) => {
+      if (!html) return [];
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      return Array.from(doc.body.children).map(el => el.outerHTML);
+    };
+    const orig = parse(origHtml);
+    const trans = parse(transHtml);
+    const n = Math.max(orig.length, trans.length);
+    return Array.from({ length: n }, (_, i) => ({ orig: orig[i] || '', trans: trans[i] || '' }));
+  }, [origHtml, transHtml]);
+
+  return (
+    <div className="st-col">
+      {pairs.map(({ orig, trans }, i) => (
+        <React.Fragment key={i}>
+          {orig ? <div className="st-line st-orig" dangerouslySetInnerHTML={{ __html: orig }} /> : null}
+          {trans ? <div className="st-line st-trans" dangerouslySetInnerHTML={{ __html: trans }} /> : null}
+        </React.Fragment>
+      ))}
+    </div>
+  );
+}
+
 const SongTextsSection = ({ s, update, defaultMode }) => {
   const editing = useEditMode();
   const songs = s.songs || [];
-  // Per-song reader overrides (session only). Keyed by song index.
   const [overrides, setOverrides] = React.useState({});
   const slug = (song, i) => song.id || ("song-" + i);
 
   const updateSong = (i, patch) => {
     const next = [...songs]; next[i] = { ...next[i], ...patch }; update({ songs: next });
   };
-  const updateLine = (si, sti, which, li, v) => {
+  const updateStanza = (si, sti, patch) => {
     const next = [...songs];
     const song = { ...next[si] };
     const stanzas = [...(song.stanzas || [])];
-    const st = { ...stanzas[sti] };
-    const lines = [...(st[which] || [])]; lines[li] = v;
-    st[which] = lines; stanzas[sti] = st; song.stanzas = stanzas; next[si] = song;
+    stanzas[sti] = { ...stanzas[sti], ...patch };
+    song.stanzas = stanzas;
+    next[si] = song;
     update({ songs: next });
   };
-  const hasTranslation = (song) => (song.stanzas || []).some(st => (st.translation || []).length && (st.translation || []).some(l => (l || "").trim()));
 
-  const addSong = () => update({ songs: [...songs, { id: "piece-" + (songs.length + 1), title: "New Piece", composer: "", note: "", origLang: "", stanzas: [{ original: [""], translation: [""] }] }] });
+  const hasTranslation = (song) => (song.stanzas || []).some(st => {
+    if (st.transHtml != null) return st.transHtml.trim().length > 0;
+    return (st.translation || []).some(l => (l || "").trim());
+  });
+
+  const addSong = () => update({ songs: [...songs, { id: "piece-" + (songs.length + 1), title: "New Piece", composer: "", noteHtml: "", origLang: "", stanzas: [{ origHtml: "", transHtml: "" }] }] });
   const removeSong = (i) => { const n = [...songs]; n.splice(i, 1); update({ songs: n }); };
-  const addStanza = (si) => { const song = { ...songs[si], stanzas: [...(songs[si].stanzas || []), { original: [""], translation: [""] }] }; const n = [...songs]; n[si] = song; update({ songs: n }); };
-  const removeStanza = (si, sti) => { const stanzas = [...(songs[si].stanzas || [])]; stanzas.splice(sti, 1); const n = [...songs]; n[si] = { ...songs[si], stanzas }; update({ songs: n }); };
-  const addLine = (si, sti) => { const song = { ...songs[si] }; const stanzas = [...(song.stanzas || [])]; const st = { ...stanzas[sti] }; st.original = [...(st.original || []), ""]; st.translation = [...(st.translation || []), ""]; stanzas[sti] = st; song.stanzas = stanzas; const n = [...songs]; n[si] = song; update({ songs: n }); };
+  const addStanza = (si) => {
+    const song = { ...songs[si], stanzas: [...(songs[si].stanzas || []), { origHtml: "", transHtml: "" }] };
+    const n = [...songs]; n[si] = song; update({ songs: n });
+  };
+  const removeStanza = (si, sti) => {
+    const stanzas = [...(songs[si].stanzas || [])]; stanzas.splice(sti, 1);
+    const n = [...songs]; n[si] = { ...songs[si], stanzas }; update({ songs: n });
+  };
 
-  // Effective mode for a song: reader override → saved per-song mode → global default.
   const songMode = (song, i) => {
     if (!hasTranslation(song)) return "original";
     return overrides[i] || song.mode || defaultMode || "side-by-side";
@@ -58,40 +92,40 @@ const SongTextsSection = ({ s, update, defaultMode }) => {
   };
 
   const renderStanza = (song, st, sti, si, mode) => {
-    const orig = st.original || [];
-    const trans = st.translation || [];
-    const line = (which, arr, li) => editing
-      ? <Editable key={which + li} as="div" className="st-line" value={arr[li] || ""} onChange={v => updateLine(si, sti, which, li, v)} />
-      : <div key={which + li} className="st-line">{arr[li] || "\u00A0"}</div>;
+    const origHtml = st.origHtml != null ? st.origHtml : linesToHtml(st.original);
+    const transHtml = st.transHtml != null ? st.transHtml : linesToHtml(st.translation);
 
-    if (mode === "original") return <div className="st-col st-orig">{orig.map((_, i) => line("original", orig, i))}</div>;
-    if (mode === "translation") return <div className="st-col st-trans">{trans.map((_, i) => line("translation", trans, i))}</div>;
-    if (mode === "interlinear") {
-      const n = Math.max(orig.length, trans.length);
+    if (editing) {
       return (
-        <div className="st-col">
-          {Array.from({ length: n }).map((_, i) => (
-            <React.Fragment key={i}>
-              <div className="st-line st-orig">{editing ? <Editable as="span" value={orig[i] || ""} onChange={v => updateLine(si, sti, "original", i, v)} /> : (orig[i] || "\u00A0")}</div>
-              <div className="st-line st-trans">{editing ? <Editable as="span" value={trans[i] || ""} onChange={v => updateLine(si, sti, "translation", i, v)} /> : (trans[i] || "\u00A0")}</div>
-            </React.Fragment>
-          ))}
+        <div className="st-stanza-editors">
+          <div className="st-editor-col">
+            <div className="st-editor-label">Original</div>
+            <ProgramEditor value={origHtml} onChange={html => updateStanza(si, sti, { origHtml: html })} />
+          </div>
+          <div className="st-editor-col">
+            <div className="st-editor-label">Translation</div>
+            <ProgramEditor value={transHtml} onChange={html => updateStanza(si, sti, { transHtml: html })} />
+          </div>
         </div>
       );
     }
+
+    if (mode === "original") return <div className="st-col st-orig st-html" dangerouslySetInnerHTML={{ __html: origHtml }} />;
+    if (mode === "translation") return <div className="st-col st-trans st-html" dangerouslySetInnerHTML={{ __html: transHtml }} />;
     if (mode === "stacked") {
       return (
         <div className="st-col">
-          <div className="st-block st-orig">{orig.map((_, i) => line("original", orig, i))}</div>
-          <div className="st-block st-trans">{trans.map((_, i) => line("translation", trans, i))}</div>
+          <div className="st-block st-orig st-html" dangerouslySetInnerHTML={{ __html: origHtml }} />
+          <div className="st-block st-trans st-html" dangerouslySetInnerHTML={{ __html: transHtml }} />
         </div>
       );
     }
-    // side-by-side: two columns aligned per stanza
+    if (mode === "interlinear") return <InterleavedView origHtml={origHtml} transHtml={transHtml} />;
+    // side-by-side
     return (
       <div className="st-cols">
-        <div className="st-col st-orig">{orig.map((_, i) => line("original", orig, i))}</div>
-        <div className="st-col st-trans">{trans.map((_, i) => line("translation", trans, i))}</div>
+        <div className="st-col st-orig st-html" dangerouslySetInnerHTML={{ __html: origHtml }} />
+        <div className="st-col st-trans st-html" dangerouslySetInnerHTML={{ __html: transHtml }} />
       </div>
     );
   };
@@ -114,15 +148,20 @@ const SongTextsSection = ({ s, update, defaultMode }) => {
       {songs.map((song, si) => {
         const mode = songMode(song, si);
         const translated = hasTranslation(song);
+        const noteHtml = song.noteHtml != null ? song.noteHtml : (song.note ? `<p>${esc(song.note)}</p>` : '');
         return (
           <article key={song.id || si} id={"st-" + slug(song, si)} className="st-song">
             <header className="st-song-head">
               <Editable as="h3" className="st-song-title" value={song.title || ""} onChange={v => updateSong(si, { title: v })} />
               {(song.composer || editing) ? <Editable as="div" className="st-song-composer" value={song.composer || ""} onChange={v => updateSong(si, { composer: v })} /> : null}
-              {(song.note || editing) ? <Editable as="p" className="st-song-note" value={song.note || ""} onChange={v => updateSong(si, { note: v })} multiline /> : null}
+              {(noteHtml || editing) ? (
+                editing
+                  ? <ProgramEditor value={noteHtml} onChange={html => updateSong(si, { noteHtml: html })} />
+                  : <div className="st-song-note prog-html" dangerouslySetInnerHTML={{ __html: noteHtml }} />
+              ) : null}
             </header>
 
-            {translated ? (
+            {(translated || editing) ? (
               <div className="st-song-modes" role="group" aria-label="Display for this piece">
                 {MODES.map(([m, label]) => (
                   <button key={m} aria-pressed={mode === m}
@@ -140,7 +179,6 @@ const SongTextsSection = ({ s, update, defaultMode }) => {
                 {renderStanza(song, st, sti, si, mode)}
                 {editing ? (
                   <div className="st-edit-row">
-                    <button onClick={() => addLine(si, sti)}>+ Line</button>
                     <button onClick={() => removeStanza(si, sti)}>Delete stanza</button>
                   </div>
                 ) : null}

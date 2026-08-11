@@ -2527,13 +2527,24 @@ li:hover .row-ctrls,
 .st-stanza { margin-bottom: 18px; }
 .st-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
 .st-line { font-family: var(--font-body); font-size: 15px; line-height: 1.55; }
+.st-line p { margin: 0; font-family: inherit; font-size: inherit; line-height: inherit; }
 .st-orig .st-line, .st-line.st-orig { font-style: italic; }
 .st-trans .st-line, .st-line.st-trans { color: var(--fg-muted); }
 .st-block + .st-block { margin-top: 8px; }
+.st-html { font-family: var(--font-body); font-size: 15px; line-height: 1.55; }
+.st-html p { margin: 0 0 2px; }
+.st-orig.st-html { font-style: italic; }
+.st-trans.st-html { color: var(--fg-muted); }
+.st-stanza-editors { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; margin-bottom: 8px; }
+.st-editor-col { min-width: 0; }
+.st-editor-label { font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--fg-muted); margin-bottom: 4px; }
+.st-song-note.prog-html { font-family: var(--font-body); font-size: 14px; color: var(--fg-muted); margin: 8px 0 0; }
+.st-song-note.prog-html p { margin: 0 0 4px; }
 @media (max-width: 560px) {
   .st-cols:not(.st-facing) { grid-template-columns: 1fr; gap: 2px; }
   .st-cols:not(.st-facing) .st-trans { padding-top: 2px; }
   .st-song-title { font-size: 20px; }
+  .st-stanza-editors { grid-template-columns: 1fr; }
 }
 .program-runtime {
   font-family: var(--font-body);

@@ -2,6 +2,10 @@ import React, { useState as useStateS, useEffect as useEffectS } from 'react';
 import { Icon, Editable, PlainField, PhotoSlot, RowControls, AddRowButton, SectionBottomNav, PdfImport } from '../components.jsx';
 import { useEditMode } from '../edit-mode-context.jsx';
 import { ArchiveBox } from './archive.jsx';
+import { ProgramEditor } from '../program-editor.jsx';
+
+const esc = (s) => (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const bodyToHtml = (body) => (body || []).filter(Boolean).map(p => `<p>${esc(p)}</p>`).join('');
 
 // ---- CAST & CREATIVE ----
 const CastRow = ({ c, i, rows, onRows, bios, onGoBio }) => {
@@ -133,7 +137,7 @@ const BiosSection = ({ s, update, expandedId, onClearExpanded }) => {
   }, [expandedId]);
   const addBio = () => {
     const id = "bio-" + Date.now().toString(36);
-    update({ bios: [...s.bios, { id, name: "", role: "", initials: "", photoSrc: "", body: [""] }] });
+    update({ bios: [...s.bios, { id, name: "", role: "", initials: "", photoSrc: "", bodyHtml: "" }] });
     window.__vivoToast && window.__vivoToast("Artist added — scroll down to fill it in");
   };
   const removeBio = (i) => {
@@ -142,7 +146,7 @@ const BiosSection = ({ s, update, expandedId, onClearExpanded }) => {
   };
   const importBios = () => new Promise((res) => setTimeout(() => {
     const id = "bio-" + Date.now().toString(36);
-    update({ bios: [...s.bios, { id, name: "Imported Artist", role: "Role", initials: "IA", photoSrc: "", body: ["Biography imported from PDF — edit to finalize."] }] });
+    update({ bios: [...s.bios, { id, name: "Imported Artist", role: "Role", initials: "IA", photoSrc: "", bodyHtml: "<p>Biography imported from PDF — edit to finalize.</p>" }] });
     res();
   }, 900));
   const layout = s.photoLayout || "thumbnail";
@@ -178,9 +182,14 @@ const BiosSection = ({ s, update, expandedId, onClearExpanded }) => {
                 <RowControls onDelete={() => removeBio(i)} label="entry" />
               </div>
               <div className="bio-full-body">
-                {(b.body || []).map((p, pi) => (
-                  <Editable key={pi} as="p" value={p} onChange={v => { const bios = [...s.bios]; const body = [...b.body]; body[pi] = v; bios[i] = { ...b, body }; update({ bios }); }} multiline />
-                ))}
+                {editing ? (
+                  <ProgramEditor
+                    value={b.bodyHtml != null ? b.bodyHtml : bodyToHtml(b.body)}
+                    onChange={html => { const bios = [...s.bios]; bios[i] = { ...b, bodyHtml: html }; update({ bios }); }}
+                  />
+                ) : (
+                  <div className="prog-html" dangerouslySetInnerHTML={{ __html: b.bodyHtml != null ? b.bodyHtml : bodyToHtml(b.body) }} />
+                )}
               </div>
             </li>
           ))}
@@ -234,14 +243,14 @@ const BiosSection = ({ s, update, expandedId, onClearExpanded }) => {
             <div className="bio-body">
               <div className="inner">
                 <div className="inner-pad">
-                  {b.body.map((p, pi) => (
-                    <Editable key={pi} as="p" value={p} onChange={v => {
-                      const bios = [...s.bios];
-                      const body = [...b.body]; body[pi] = v;
-                      bios[i] = { ...b, body };
-                      update({ bios });
-                    }} multiline />
-                  ))}
+                  {editing ? (
+                    <ProgramEditor
+                      value={b.bodyHtml != null ? b.bodyHtml : bodyToHtml(b.body)}
+                      onChange={html => { const bios = [...s.bios]; bios[i] = { ...b, bodyHtml: html }; update({ bios }); }}
+                    />
+                  ) : (
+                    <div className="prog-html" dangerouslySetInnerHTML={{ __html: b.bodyHtml != null ? b.bodyHtml : bodyToHtml(b.body) }} />
+                  )}
                 </div>
               </div>
             </div>
